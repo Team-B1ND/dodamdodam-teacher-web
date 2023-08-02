@@ -1,25 +1,27 @@
 import React from "react";
-import styled from "styled-components";
+import * as S from "./style";
+import dgsw from "../../../assets/dgsw.svg";
+import { useNavigate } from "react-router-dom";
+import { useLogout } from "../../../hooks/auth/useLogout";
 
 const Header = () => {
-  return <HeaderContainer>Header</HeaderContainer>;
+  const navigate = useNavigate();
+  const { handleLogoutClick } = useLogout();
+  return (
+    <S.HeaderContainer>
+      <S.HeaderMain>
+        <S.HeaderLogo onClick={() => navigate("/")}>
+          <S.HeaderTitle>도담도담</S.HeaderTitle>
+          <S.HeaderText>Teacher</S.HeaderText>
+        </S.HeaderLogo>
+        <S.UserLogoutContainer>
+          <p>{"관리자"} 님</p>
+          <button onClick={handleLogoutClick}>로그아웃</button>
+        </S.UserLogoutContainer>
+      </S.HeaderMain>
+      <S.DgswImage src={dgsw} alt="이미지 없음" />
+    </S.HeaderContainer>
+  );
 };
 
 export default Header;
-
-const HeaderContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 80px;
-
-  background: #ffffff;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 50;
-`;
