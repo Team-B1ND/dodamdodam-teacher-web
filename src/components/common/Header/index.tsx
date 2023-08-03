@@ -1,8 +1,8 @@
 import React from "react";
 import * as S from "./style";
-import dgsw from "../../../assets/dgsw.svg";
+import dgsw from "@src/assets/dgsw.svg";
 import { useNavigate } from "react-router-dom";
-import { useLogout } from "../../../hooks/auth/useLogout";
+import { useLogout } from "@src/hooks/Auth/useLogout";
 
 const Header = () => {
   const navigate = useNavigate();
