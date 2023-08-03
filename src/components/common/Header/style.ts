@@ -38,7 +38,7 @@ export const HeaderLogo = styled.div`
   column-gap: 5px;
 `;
 
-export const UserLogoutContainer = styled.div`
+export const HeaderLogoutContainer = styled.div`
   display: flex;
   column-gap: 15px;
   align-items: center;

@@ -14,10 +14,10 @@ const Header = () => {
           <S.HeaderTitle>도담도담</S.HeaderTitle>
           <S.HeaderText>Teacher</S.HeaderText>
         </S.HeaderLogo>
-        <S.UserLogoutContainer>
+        <S.HeaderLogoutContainer>
           <p>{"관리자"} 님</p>
           <button onClick={handleLogoutClick}>로그아웃</button>
-        </S.UserLogoutContainer>
+        </S.HeaderLogoutContainer>
       </S.HeaderMain>
       <S.DgswImage src={dgsw} alt="이미지 없음" />
     </S.HeaderContainer>
