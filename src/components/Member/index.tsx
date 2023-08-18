@@ -21,7 +21,8 @@ function Member() {
             ))}
           </TR>
         </THead>
-        <TableScrollWrapper customStyle={{ height: "70vh" }}>
+
+        <TableScrollWrapper customStyle={{ height: "65vh" }}>
           <ErrorBoundary fallback={<>Error:)</>}>
             <Suspense fallback={<MemberSkeleton />}>
               <MemberItem />

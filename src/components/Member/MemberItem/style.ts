@@ -1,10 +1,9 @@
 import styled, { CSSObject } from "styled-components";
 
 export const MemberTBody: CSSObject = {
-  width: "100%",
   fontSize: "14px",
   fontWeight: "600",
-  marginTop: "10px",
+  marginTop: "5px",
   display: "flex",
   rowGap: "5px",
   flexDirection: "column",
