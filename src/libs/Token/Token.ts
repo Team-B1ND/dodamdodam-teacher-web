@@ -1,7 +1,7 @@
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
-} from "@src/constants/Token/Token.constant";
+} from "../../constants/Token/Token.constant";
 import Cookie from "../Storage/Cookie";
 import { Storage } from "../Storage/Storage";
 

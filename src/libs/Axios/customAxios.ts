@@ -1,9 +1,9 @@
 import axios, { AxiosRequestConfig } from "axios";
-import config from "@src/config/config.json";
+import config from "../../config/config.json";
 import {
   ACCESS_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
-} from "@src/constants/Token/Token.constant";
+} from "../../constants/Token/Token.constant";
 import Token from "../Token/Token";
 
 const createAxiosInstance = (config?: AxiosRequestConfig) => {
