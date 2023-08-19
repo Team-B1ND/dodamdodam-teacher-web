@@ -2,7 +2,7 @@ import { StudentType } from "@src/types/Member/member.type";
 import { searchName } from "../common/searchName";
 import { sortStudentGrade } from "./sortStudentGrade";
 
-export const SortAndFilterStudents = (
+export const sortAndFilterStudents = (
   studentsInfo: StudentType[],
   searchValue: string,
   selectValue: number

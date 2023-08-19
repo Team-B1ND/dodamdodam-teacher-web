@@ -3,7 +3,7 @@ import { StudentType } from "../../../../types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import { addPhoneHyphen } from "../../../../utils/Member/addPhoneHyphen";
 import profileImg from "../../../../assets/profileImg.svg";
-import { SortAndFilterStudents } from "../../../../utils/Member/SortAndFilterStudents";
+import { sortAndFilterStudents } from "@src/utils/Member/SortAndFilterStudents";
 
 interface Props {
   studentsInfo: StudentType[];
@@ -14,7 +14,7 @@ interface Props {
 const Student = ({ studentsInfo, searchValue, selectValue }: Props) => {
   return (
     <>
-      {SortAndFilterStudents(studentsInfo, searchValue, selectValue).map(
+      {sortAndFilterStudents(studentsInfo, searchValue, selectValue).map(
         (student) => (
           <TR key={student.id} customStyle={MemberItemTR}>
             <TD customStyle={MemberTD}>
