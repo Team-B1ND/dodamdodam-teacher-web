@@ -6,7 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import GlobalStyles from "../../../styles/GlobalStyles";
 import Layout from "../Layout";
 import Header from "../Header";
-import Nav from "../Nav";
+import Nav from "../SideBar";
+import SideBar from "../SideBar";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +29,7 @@ const Providers = ({ children }: ProvidersProps) => {
         <B1ndToastContainer />
         <BrowserRouter>
           <Header />
-          <Nav />
+          <SideBar />
           <Layout>{children}</Layout>
         </BrowserRouter>
       </RecoilRoot>

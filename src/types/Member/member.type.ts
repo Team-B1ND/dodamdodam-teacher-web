@@ -1,4 +1,4 @@
-import { Response } from "@src/types/util/response.type";
+import { Response } from "../util/response.type";
 
 export interface MemberListType extends Response {
   data: {
