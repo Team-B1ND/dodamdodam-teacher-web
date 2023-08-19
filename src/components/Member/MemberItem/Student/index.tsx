@@ -1,10 +1,9 @@
 import { Button, TD, TR } from "@b1nd/b1nd-dodam-ui";
 import { StudentType } from "../../../../types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
-import { searchName } from "../../../../utils/common/searchName";
-import { sortStudentGrade } from "../../../../utils/Member/sortStudentGrade";
 import { addPhoneHyphen } from "../../../../utils/Member/addPhoneHyphen";
 import profileImg from "../../../../assets/profileImg.svg";
+import { SortAndFilterStudents } from "../../../../utils/Member/SortAndFilterStudents";
 
 interface Props {
   studentsInfo: StudentType[];
@@ -12,28 +11,15 @@ interface Props {
   selectValue: number;
 }
 
-export default function Student({
-  studentsInfo,
-  searchValue,
-  selectValue,
-}: Props) {
+const Student = ({ studentsInfo, searchValue, selectValue }: Props) => {
   return (
     <>
-      {studentsInfo
-        .sort((student1, student2) => sortStudentGrade(student1, student2))
-        .filter(
-          (data) => data.classroom.grade === selectValue || selectValue === 0
-        )
-        .filter((data) => searchName(data.member.name, searchValue))
-        .map((student) => (
+      {SortAndFilterStudents(studentsInfo, searchValue, selectValue).map(
+        (student) => (
           <TR key={student.id} customStyle={MemberItemTR}>
             <TD customStyle={MemberTD}>
               <MemberImage
-                src={
-                  student.member.profileImage
-                    ? student.member.profileImage
-                    : profileImg
-                }
+                src={student.member.profileImage || profileImg}
                 alt="이미지 없음"
               />
             </TD>
@@ -47,11 +33,12 @@ export default function Student({
               <ScrollEmailText>{student.member.email}</ScrollEmailText>
             </TD>
             <TD customStyle={MemberTD}>{addPhoneHyphen(student.phone)}</TD>
-            <TD customStyle={MemberTD}>
-              <Button type="disagree">결석처리</Button>
-            </TD>
+            <TD customStyle={MemberTD}>{""}</TD>
           </TR>
-        ))}
+        )
+      )}
     </>
   );
-}
+};
+
+export default Student;

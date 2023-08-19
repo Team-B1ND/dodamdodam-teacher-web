@@ -11,11 +11,7 @@ interface Props {
   selectValue: number;
 }
 
-export default function Teacher({
-  teachersInfo,
-  searchValue,
-  selectValue,
-}: Props) {
+const Teacher = ({ teachersInfo, searchValue, selectValue }: Props) => {
   return (
     <>
       {(selectValue === 0 || selectValue === 4) &&
@@ -25,11 +21,7 @@ export default function Teacher({
             <TR key={teacher.id} customStyle={MemberItemTR}>
               <TD customStyle={MemberTD}>
                 <MemberImage
-                  src={
-                    teacher.member.profileImage
-                      ? teacher.member.profileImage
-                      : profileImg
-                  }
+                  src={teacher.member.profileImage || profileImg}
                   alt="이미지 없음"
                 />
               </TD>
@@ -45,4 +37,6 @@ export default function Teacher({
           ))}
     </>
   );
-}
+};
+
+export default Teacher;

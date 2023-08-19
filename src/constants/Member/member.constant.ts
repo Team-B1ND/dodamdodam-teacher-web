@@ -30,6 +30,6 @@ export const MEMBER_TABLE_ITEMS: Type[] = [
   },
   {
     id: 6,
-    title: "결석",
+    title: "담당직무",
   },
 ];

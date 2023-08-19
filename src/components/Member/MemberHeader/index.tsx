@@ -6,7 +6,7 @@ import {
   MemberSelectGrade,
 } from "../../../stores/Member/member.store";
 
-export default function MemberHeader() {
+const MemberHeader = () => {
   const [selectValue, setSelectValue] = useRecoilState(MemberSelectGrade);
   const [searchValue, setSearchValue] = useRecoilState(MemberSearch);
 
@@ -27,4 +27,6 @@ export default function MemberHeader() {
       </SelectSeachContainer>
     </>
   );
-}
+};
+
+export default MemberHeader;

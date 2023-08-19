@@ -1,5 +1,7 @@
 import Member from "../components/Member";
 
-export default function MemberPage() {
+const MemberPage = () => {
   return <Member />;
-}
+};
+
+export default MemberPage;

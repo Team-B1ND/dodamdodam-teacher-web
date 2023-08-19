@@ -1,6 +1,6 @@
 import * as S from "./style";
 
-export default function MemberSkeleton() {
+const MemberSkeleton = () => {
   return (
     <S.MemberSkeletonContainer>
       {Array.from({ length: 15 }).map((item, idx) => (
@@ -8,4 +8,6 @@ export default function MemberSkeleton() {
       ))}
     </S.MemberSkeletonContainer>
   );
-}
+};
+
+export default MemberSkeleton;
