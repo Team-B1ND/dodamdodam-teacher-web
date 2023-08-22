@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./style";
 import dgsw from "../../../assets/dgsw.svg";
 import { useNavigate } from "react-router-dom";
-import { useLogout } from "../../../hooks/Auth/useLogout";
+import { useLogout } from "../../../hooks/auth/useLogout";
 
 const Header = () => {
   const navigate = useNavigate();
