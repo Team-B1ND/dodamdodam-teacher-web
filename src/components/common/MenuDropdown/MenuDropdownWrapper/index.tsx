@@ -1,10 +1,5 @@
 import { Children, useState } from "react";
-import {
-  MenuDropdownWrapperChildWrap,
-  MenuDropdownWrapperContainer,
-  MenuDropdownWrapperTitleIcon,
-  MenuDropdownWrapperTitleWrap,
-} from "./style";
+import * as S from "./style";
 import { GoTriangleDown } from "react-icons/go";
 import { MenuDropdownWrapperProps } from "./types";
 
@@ -12,27 +7,29 @@ const MenuDropdownWrapper = ({ title, children }: MenuDropdownWrapperProps) => {
   const [close, setClose] = useState(true);
 
   return (
-    <MenuDropdownWrapperContainer
+    <S.MenuDropdownWrapperContainer
       style={{
         height: close
           ? 40
           : 40 * (Children.count(children) + 1) + 5 * Children.count(children),
       }}
     >
-      <MenuDropdownWrapperTitleWrap
+      <S.MenuDropdownWrapperTitleWrap
         onClick={() => {
           setClose((prev) => !prev);
         }}
       >
         {title}
-        <MenuDropdownWrapperTitleIcon close={close}>
+        <S.MenuDropdownWrapperTitleIcon close={close}>
           <GoTriangleDown />
-        </MenuDropdownWrapperTitleIcon>
-      </MenuDropdownWrapperTitleWrap>
+        </S.MenuDropdownWrapperTitleIcon>
+      </S.MenuDropdownWrapperTitleWrap>
       {children && (
-        <MenuDropdownWrapperChildWrap>{children}</MenuDropdownWrapperChildWrap>
+        <S.MenuDropdownWrapperChildWrap>
+          {children}
+        </S.MenuDropdownWrapperChildWrap>
       )}
-    </MenuDropdownWrapperContainer>
+    </S.MenuDropdownWrapperContainer>
   );
 };
 

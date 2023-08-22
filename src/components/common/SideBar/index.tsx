@@ -1,23 +1,17 @@
 import SideBarDropdown from "./SideBarDropdown";
-import {
-  SideBarContainer,
-  SideBarCorpText,
-  SideBarVersion,
-  SideBarVersionWrap,
-  SideBarWrap,
-} from "./style";
+import * as S from "./style";
 
 const SideBar = () => {
   return (
-    <SideBarContainer>
-      <SideBarWrap>
+    <S.SideBarContainer>
+      <S.SideBarWrap>
         <SideBarDropdown />
-        <SideBarVersionWrap>
-          <SideBarVersion>version: 7.0.0</SideBarVersion>
-          <SideBarCorpText>ⓒ B1ND Team Corp.</SideBarCorpText>
-        </SideBarVersionWrap>
-      </SideBarWrap>
-    </SideBarContainer>
+        <S.SideBarVersionWrap>
+          <S.SideBarVersion>version: 7.0.0</S.SideBarVersion>
+          <S.SideBarCorpText>ⓒ B1ND Team Corp.</S.SideBarCorpText>
+        </S.SideBarVersionWrap>
+      </S.SideBarWrap>
+    </S.SideBarContainer>
   );
 };
 
