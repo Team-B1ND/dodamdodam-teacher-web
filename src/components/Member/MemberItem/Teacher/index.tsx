@@ -1,5 +1,5 @@
 import { TD, TR } from "@b1nd/b1nd-dodam-ui";
-import { TeacherType } from "@src/types/Member/member.type";
+import { TeacherType } from "../../../../types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import profileImg from "../../../../assets/profileImg.svg";
 import { addPhoneHyphen } from "../../../../utils/Member/addPhoneHyphen";

@@ -1,4 +1,4 @@
-import Test from "../Test/Test";
+import Test from "../Test";
 import { Routes, Route } from "react-router-dom";
 import MemberPage from "../../pages/MemberPage";
 
