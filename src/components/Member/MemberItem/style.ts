@@ -5,7 +5,7 @@ export const MemberTBody: CSSObject = {
   fontWeight: "600",
   marginTop: "5px",
   display: "flex",
-  rowGap: "5px",
+  rowGap: "15px",
   flexDirection: "column",
 };
 

@@ -9,7 +9,7 @@ import {
   MemberSearch,
   MemberSelectGrade,
 } from "../../../stores/Member/member.store";
-import { changeSelectedValue } from "../../../utils/Member/changeSelectedValue";
+import { changeGrade } from "../../../utils/Member/changeGrade";
 
 function MemberItem() {
   const { data: studentsInfo } = useGetAllMemberListQuery({
@@ -22,12 +22,12 @@ function MemberItem() {
       <Student
         studentsInfo={studentsInfo?.data.students!!}
         searchValue={searchValue}
-        selectValue={changeSelectedValue(selectValue)}
+        selectValue={changeGrade(selectValue)}
       />
       <Teacher
         teachersInfo={studentsInfo?.data.teachers!!}
         searchValue={searchValue}
-        selectValue={changeSelectedValue(selectValue)}
+        selectValue={changeGrade(selectValue)}
       />
     </TBody>
   );
