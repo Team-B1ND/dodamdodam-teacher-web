@@ -24,3 +24,10 @@ export const dodamV6Axios = createAxiosInstance({
     [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
   },
 });
+
+export const dodamTeacherAxios = createAxiosInstance({
+  baseURL: config.DODAM_TEACHER_API,
+  headers: {
+    [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
+  },
+});
