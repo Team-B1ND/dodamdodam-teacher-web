@@ -1,9 +1,13 @@
-import useHideHeader from "../../hooks/common/Header/useHideHeader";
-import useHideSidebar from "../../hooks/common/Sidebar/useHideSidebar";
+import {
+  HideHeaderAtom,
+  HideSidebarAtom,
+} from "../../stores/common/common.store";
+import useHideComponent from "../../utils/Toggle/useBooleanToggle";
 
 const Auth = () => {
-  useHideHeader();
-  useHideSidebar();
+  useHideComponent(HideHeaderAtom, false);
+  useHideComponent(HideSidebarAtom, false);
+
   return (
     <>
       <div>dfdfdf</div>
