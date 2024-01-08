@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useSetRecoilState, RecoilState } from "recoil";
 
-const useHideComponent = <T>(recoilState: RecoilState<T>, value: T) => {
+const useHideComponent = (
+  recoilState: RecoilState<boolean>,
+  value: boolean
+) => {
   const setState = useSetRecoilState(recoilState);
 
   useEffect(() => {
     setState(value);
-    return () =>
-      setState((prev) => (typeof prev === "function" ? prev(value) : !value));
+    return () => setState(!value);
   }, [setState]);
 };
 
