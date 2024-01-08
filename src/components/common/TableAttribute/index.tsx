@@ -1,6 +1,12 @@
 import { ReactNode } from "react";
 import { CSSObject } from "styled-components";
-import { Table, THead, TH, TR, TableScrollWrapper } from "@b1nd/b1nd-dodam-ui";
+import {
+  Table,
+  THead,
+  TH,
+  TR,
+  TableScrollWrapper,
+} from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
 
 interface Props {

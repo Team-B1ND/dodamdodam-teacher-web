@@ -1,4 +1,4 @@
-import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodam-ui";
+import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
 import { useGetRegisteredBusQuery } from "../../../../queries/Bus/bus.query";
 import convertTime from "../../../../utils/Time/convertTime";
@@ -29,15 +29,15 @@ const BusManagementItem = ({ busName }: { busName: string }) => {
               {item.busMember.length} / {item.peopleLimit}명
             </TD>
             <TD customStyle={S.BusTD}>
-              <Button type="agree" style={S.PassengerStyle}>
+              <Button ButtonType="agree" style={S.PassengerStyle}>
                 탑승자
               </Button>
             </TD>
             <TD customStyle={S.ButtonContainerStyle}>
-              <Button type="agree" style={S.EditStyle}>
+              <Button ButtonType="agree" style={S.EditStyle}>
                 수정
               </Button>
-              <Button type="disagree" style={S.DelStyle}>
+              <Button ButtonType="disagree" style={S.DelStyle}>
                 삭제
               </Button>
             </TD>

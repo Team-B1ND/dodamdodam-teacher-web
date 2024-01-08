@@ -1,4 +1,4 @@
-import { TD, TR } from "@b1nd/b1nd-dodam-ui";
+import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { TeacherType } from "../../../../types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import profileImg from "../../../../assets/profileImg.svg";
