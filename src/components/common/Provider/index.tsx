@@ -28,7 +28,7 @@ const Providers = () => {
           <B1ndToastContainer />
           <BrowserRouter>
             <PageTemplate>
-              <Router></Router>
+              <Router />
             </PageTemplate>
           </BrowserRouter>
         </OverlayProvider>

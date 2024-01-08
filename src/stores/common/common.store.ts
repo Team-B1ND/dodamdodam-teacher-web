@@ -2,10 +2,10 @@ import { atom } from "recoil";
 
 export const HideHeaderAtom = atom<boolean>({
   key: "HideHeaderAtom",
-  default: true,
+  default: false,
 });
 
 export const HideSidebarAtom = atom<boolean>({
   key: "HideSidebarAtom",
-  default: true,
+  default: false,
 });
