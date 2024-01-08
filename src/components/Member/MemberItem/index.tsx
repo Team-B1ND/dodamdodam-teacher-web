@@ -15,19 +15,19 @@ function MemberItem() {
   const { data: studentsInfo } = useGetAllMemberListQuery({
     suspense: true,
   });
-  const selectValue = useRecoilValue(MemberSelectGrade);
+  const selectGrade = useRecoilValue(MemberSelectGrade);
   const searchValue = useRecoilValue(MemberSearch);
   return (
     <TBody customStyle={S.MemberTBody}>
       <Student
         studentsInfo={studentsInfo?.data.students!!}
         searchValue={searchValue}
-        selectValue={changeGrade(selectValue)}
+        selectGrade={changeGrade(selectGrade)}
       />
       <Teacher
         teachersInfo={studentsInfo?.data.teachers!!}
         searchValue={searchValue}
-        selectValue={changeGrade(selectValue)}
+        selectGrade={changeGrade(selectGrade)}
       />
     </TBody>
   );
