@@ -2,7 +2,7 @@ import { ProvidersProps } from "./types";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { B1ndToastContainer } from "@b1nd/b1nd-toastify";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import GlobalStyles from "../../../styles/GlobalStyles";
 import Layout from "../Layout";
 import Header from "../Header";
@@ -22,6 +22,7 @@ const queryClient = new QueryClient({
 });
 
 const Providers = ({ children }: ProvidersProps) => {
+  const pathname = window.location.pathname;
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
@@ -29,8 +30,8 @@ const Providers = ({ children }: ProvidersProps) => {
           <GlobalStyles />
           <B1ndToastContainer />
           <BrowserRouter>
-            <Header />
-            <SideBar />
+            {pathname !== "/" && <Header />}
+            {pathname !== "/" && <SideBar />}
             <Layout>{children}</Layout>
           </BrowserRouter>
         </OverlayProvider>
