@@ -1,4 +1,4 @@
-import { TD, TR } from "@b1nd/b1nd-dodam-ui";
+import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { StudentType } from "../../../../types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import { addPhoneHyphen } from "../../../../utils/Member/addPhoneHyphen";
@@ -8,13 +8,13 @@ import { sortAndFilterStudents } from "../../../../utils/Member/sortAndFilterStu
 interface Props {
   studentsInfo: StudentType[];
   searchValue: string;
-  selectValue: number;
+  selectGrade: number;
 }
 
-const Student = ({ studentsInfo, searchValue, selectValue }: Props) => {
+const Student = ({ studentsInfo, searchValue, selectGrade }: Props) => {
   return (
     <>
-      {sortAndFilterStudents(studentsInfo, searchValue, selectValue).map(
+      {sortAndFilterStudents(studentsInfo, searchValue, selectGrade).map(
         (student) => (
           <TR key={student.id} customStyle={MemberItemTR}>
             <TD customStyle={MemberTD}>
@@ -33,7 +33,7 @@ const Student = ({ studentsInfo, searchValue, selectValue }: Props) => {
               <ScrollEmailText>{student.member.email}</ScrollEmailText>
             </TD>
             <TD customStyle={MemberTD}>{addPhoneHyphen(student.phone)}</TD>
-            <TD customStyle={MemberTD}>{""}</TD>
+            <TD customStyle={MemberTD}>학생</TD>
           </TR>
         )
       )}

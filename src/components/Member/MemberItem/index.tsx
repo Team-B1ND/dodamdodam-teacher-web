@@ -1,5 +1,5 @@
 import React from "react";
-import { TBody } from "@b1nd/b1nd-dodam-ui";
+import { TBody } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetAllMemberListQuery } from "../../../queries/Member/member.query";
 import * as S from "./style";
 import Student from "./Student";
@@ -17,6 +17,7 @@ function MemberItem() {
   });
   const selectGrade = useRecoilValue(MemberSelectGrade);
   const searchValue = useRecoilValue(MemberSearch);
+
   return (
     <TBody customStyle={S.MemberTBody}>
       <Student

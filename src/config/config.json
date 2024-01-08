@@ -1,3 +1,4 @@
 {
-  "DODAM_SERVER_V6": "https://dodam.b1nd.com/api"
+  "DODAM_SERVER_V6": "https://dodam.b1nd.com/api",
+  "DODAM_TEACHER_API": "https://dodam.b1nd.com/api/v2"
 }

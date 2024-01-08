@@ -1,6 +1,7 @@
 import styled, { CSSObject } from "styled-components";
 
 export const MemberTBody: CSSObject = {
+  width: "100%",
   fontSize: "14px",
   fontWeight: "600",
   marginTop: "5px",
@@ -27,11 +28,13 @@ export const MemberImage = styled.img`
 `;
 
 export const MemberTD: CSSObject = {
-  width: "14%",
+  width: "10.5%",
 };
 
 export const ScrollEmailText = styled.p`
-  overflow-x: scroll;
+  width: 140px;
+  padding: 2px;
+  overflow-x: auto;
   ::-webkit-scrollbar {
     display: none;
   }

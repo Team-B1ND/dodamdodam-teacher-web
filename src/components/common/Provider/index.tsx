@@ -6,8 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import GlobalStyles from "../../../styles/GlobalStyles";
 import Layout from "../Layout";
 import Header from "../Header";
-import Nav from "../SideBar";
 import SideBar from "../SideBar";
+import { OverlayProvider } from "@toss/use-overlay";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,13 +25,15 @@ const Providers = ({ children }: ProvidersProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <GlobalStyles />
-        <B1ndToastContainer />
-        <BrowserRouter>
-          <Header />
-          <SideBar />
-          <Layout>{children}</Layout>
-        </BrowserRouter>
+        <OverlayProvider>
+          <GlobalStyles />
+          <B1ndToastContainer />
+          <BrowserRouter>
+            <Header />
+            <SideBar />
+            <Layout>{children}</Layout>
+          </BrowserRouter>
+        </OverlayProvider>
       </RecoilRoot>
     </QueryClientProvider>
   );

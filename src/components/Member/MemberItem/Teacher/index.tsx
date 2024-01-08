@@ -1,4 +1,4 @@
-import { TD, TR } from "@b1nd/b1nd-dodam-ui";
+import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { TeacherType } from "../../../../types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import profileImg from "../../../../assets/profileImg.svg";
@@ -8,13 +8,13 @@ import { searchName } from "../../../../utils/common/searchName";
 interface Props {
   teachersInfo: TeacherType[];
   searchValue: string;
-  selectValue: number;
+  selectGrade: number;
 }
 
-const Teacher = ({ teachersInfo, searchValue, selectValue }: Props) => {
+const Teacher = ({ teachersInfo, searchValue, selectGrade }: Props) => {
   return (
     <>
-      {(selectValue === 0 || selectValue === 4) &&
+      {(selectGrade === 0 || selectGrade === 4) &&
         teachersInfo
           .filter((data) => searchName(data.member.name, searchValue))
           .map((teacher) => (

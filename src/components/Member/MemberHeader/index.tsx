@@ -1,4 +1,4 @@
-import { SearchBar, SectionHeader, Select } from "@b1nd/b1nd-dodam-ui";
+import { SearchBar, SectionHeader, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { SelectSeachContainer } from "../style";
 import { useRecoilState } from "recoil";
 import {
@@ -7,7 +7,7 @@ import {
 } from "../../../stores/Member/member.store";
 
 const MemberHeader = () => {
-  const [selectValue, setSelectValue] = useRecoilState(MemberSelectGrade);
+  const [selectGrade, setSelectGrade] = useRecoilState(MemberSelectGrade);
   const [searchValue, setSearchValue] = useRecoilState(MemberSearch);
 
   return (
@@ -19,8 +19,8 @@ const MemberHeader = () => {
       <SelectSeachContainer>
         <Select
           items={["전체보기", "1학년", "2학년", "3학년", "선생님"]}
-          value={selectValue}
-          onChange={setSelectValue}
+          value={selectGrade}
+          onChange={setSelectGrade}
           zIndex={2}
         />
         <SearchBar onChange={setSearchValue} value={searchValue} />
