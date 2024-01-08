@@ -4,8 +4,6 @@ import BusPage from "../../pages/Bus/BusPage";
 import BusListPage from "../../pages/Bus/BusListPage";
 import BusDatePage from "../../pages/Bus/BusDatePage";
 import Auth from "../Auth";
-// import ScheduleMange from "../Schedule/ScheduleManage";
-// import ScheduleTimeTable from "../Schedule/ScheduleTimeTable";
 
 const Router = () => {
   return (
@@ -15,8 +13,6 @@ const Router = () => {
       <Route path="/bus" element={<BusPage />} />
       <Route path="/bus-list" element={<BusListPage />} />
       <Route path="/bus-date" element={<BusDatePage />} />
-      {/* <Route path="/schedule" element={<ScheduleMange />} />
-      <Route path="/schedule-time-table" element={<ScheduleTimeTable />} /> */}
     </Routes>
   );
 };
