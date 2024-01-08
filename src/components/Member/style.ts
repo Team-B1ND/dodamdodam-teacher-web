@@ -19,7 +19,6 @@ export const MemberTable: CSSObject = {
 
 export const MemberTR: CSSObject = {
   width: "100%",
-  height: "50px",
   fontSize: "15px",
   fontWeight: "bold",
   boxShadow: "0 4px 4px -2px rgba(0, 0, 0, 0.1)",

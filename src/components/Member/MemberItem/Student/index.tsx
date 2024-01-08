@@ -8,13 +8,13 @@ import { sortAndFilterStudents } from "../../../../utils/Member/SortAndFilterStu
 interface Props {
   studentsInfo: StudentType[];
   searchValue: string;
-  selectValue: number;
+  selectGrade: number;
 }
 
-const Student = ({ studentsInfo, searchValue, selectValue }: Props) => {
+const Student = ({ studentsInfo, searchValue, selectGrade }: Props) => {
   return (
     <>
-      {sortAndFilterStudents(studentsInfo, searchValue, selectValue).map(
+      {sortAndFilterStudents(studentsInfo, searchValue, selectGrade).map(
         (student) => (
           <TR key={student.id} customStyle={MemberItemTR}>
             <TD customStyle={MemberTD}>
@@ -33,7 +33,7 @@ const Student = ({ studentsInfo, searchValue, selectValue }: Props) => {
               <ScrollEmailText>{student.member.email}</ScrollEmailText>
             </TD>
             <TD customStyle={MemberTD}>{addPhoneHyphen(student.phone)}</TD>
-            <TD customStyle={MemberTD}>{""}</TD>
+            <TD customStyle={MemberTD}>학생</TD>
           </TR>
         )
       )}

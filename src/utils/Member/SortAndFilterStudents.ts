@@ -5,10 +5,10 @@ import { sortStudentGrade } from "./sortStudentGrade";
 export const sortAndFilterStudents = (
   studentsInfo: StudentType[],
   searchValue: string,
-  selectValue: number
+  selectGrade: number
 ) => {
   return studentsInfo
     .sort((student1, student2) => sortStudentGrade(student1, student2))
-    .filter((data) => data.classroom.grade === selectValue || selectValue === 0)
+    .filter((data) => data.classroom.grade === selectGrade || selectGrade === 0)
     .filter((data) => searchName(data.member.name, searchValue));
 };

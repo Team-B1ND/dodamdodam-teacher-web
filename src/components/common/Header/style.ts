@@ -14,7 +14,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 50;
+  z-index: 3;
 
   white-space: nowrap;
   padding: 1rem 2rem;

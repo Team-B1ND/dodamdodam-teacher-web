@@ -1,5 +1,5 @@
 import React from "react";
-import { TBody } from "@b1nd/b1nd-dodam-ui";
+import { TBody } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetAllMemberListQuery } from "../../../queries/Member/member.query";
 import * as S from "./style";
 import Student from "./Student";
@@ -17,17 +17,18 @@ function MemberItem() {
   });
   const selectValue = useRecoilValue(MemberSelectGrade);
   const searchValue = useRecoilValue(MemberSearch);
+
   return (
     <TBody customStyle={S.MemberTBody}>
       <Student
         studentsInfo={studentsInfo?.data.students!!}
         searchValue={searchValue}
-        selectValue={changeSelectedValue(selectValue)}
+        selectGrade={changeSelectedValue(selectValue)}
       />
       <Teacher
         teachersInfo={studentsInfo?.data.teachers!!}
         searchValue={searchValue}
-        selectValue={changeSelectedValue(selectValue)}
+        selectGrade={changeSelectedValue(selectValue)}
       />
     </TBody>
   );
