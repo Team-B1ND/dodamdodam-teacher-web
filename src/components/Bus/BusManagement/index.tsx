@@ -4,7 +4,6 @@ import { BUS_MANAGEMENT_ITEMS } from "../../../constants/Bus/bus.constant";
 import { useBus } from "../../../hooks/Bus/useBus";
 import ErrorBoundary from "../../common/ErrorBoundary";
 import TableAttribute from "../../common/TableAttribute";
-import BusProvider from "../BusProvider";
 import BusManagementItem from "./BusManagementItem";
 import * as S from "./style";
 
@@ -14,10 +13,7 @@ const BusManagement = () => {
   const [activeBusForm, setActiveBusForm] = useState(false);
 
   return (
-    <BusProvider
-      title="버스 관리"
-      subTitle="버스를 추가 / 수정 / 삭제하여 관리할 수 있습니다."
-    >
+    <>
       <S.SearchAndAddBus>
         <SearchBar value={busName} onChange={setBusName} />
         <Button ButtonType="agree" style={S.AddButtonStyle}>
@@ -35,7 +31,7 @@ const BusManagement = () => {
           </Suspense>
         </ErrorBoundary>
       </TableAttribute>
-    </BusProvider>
+    </>
   );
 };
 
