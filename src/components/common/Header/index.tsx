@@ -1,4 +1,3 @@
-import React from "react";
 import * as S from "./style";
 import dgsw from "../../../assets/dgsw.svg";
 import { useNavigate } from "react-router-dom";

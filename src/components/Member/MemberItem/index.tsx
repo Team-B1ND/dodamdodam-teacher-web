@@ -9,13 +9,13 @@ import {
   MemberSearch,
   MemberSelectGrade,
 } from "../../../stores/Member/member.store";
-import { changeSelectedValue } from "../../../utils/Member/changeSelectedValue";
+import { changeGrade } from "../../../utils/Member/changeGrade";
 
 function MemberItem() {
   const { data: studentsInfo } = useGetAllMemberListQuery({
     suspense: true,
   });
-  const selectValue = useRecoilValue(MemberSelectGrade);
+  const selectGrade = useRecoilValue(MemberSelectGrade);
   const searchValue = useRecoilValue(MemberSearch);
 
   return (
@@ -23,12 +23,12 @@ function MemberItem() {
       <Student
         studentsInfo={studentsInfo?.data.students!!}
         searchValue={searchValue}
-        selectGrade={changeSelectedValue(selectValue)}
+        selectGrade={changeGrade(selectGrade)}
       />
       <Teacher
         teachersInfo={studentsInfo?.data.teachers!!}
         searchValue={searchValue}
-        selectGrade={changeSelectedValue(selectValue)}
+        selectGrade={changeGrade(selectGrade)}
       />
     </TBody>
   );

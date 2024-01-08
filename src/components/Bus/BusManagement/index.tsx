@@ -23,7 +23,6 @@ const BusManagement = () => {
         <Button ButtonType="agree" style={S.AddButtonStyle}>
           추가하기
         </Button>
-        <div onClick={async () => await openRegistBusFormOverlay()}>gkdl</div>
       </S.SearchAndAddBus>
 
       <TableAttribute

@@ -1,4 +1,4 @@
-export const changeSelectedValue = (selectValue: string) => {
+export const changeGrade = (selectValue: string) => {
   switch (selectValue) {
     case "전체보기":
       return 0;
