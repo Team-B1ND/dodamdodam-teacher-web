@@ -1,16 +1,31 @@
+import { AuthButtonType } from "../Button/types";
 import { AuthButtonContainer } from "./style";
 
 interface AuthButtonProps {
   width: number;
-  top: number;
   children: React.ReactNode;
+  AuthButtonType: AuthButtonType;
+  top?: number;
   onClick?: () => void;
 }
 
-const AuthButton = ({ children, width, onClick, top }: AuthButtonProps) => {
+const AuthButton = ({
+  children,
+  width,
+  onClick,
+  top,
+  AuthButtonType,
+  ...props
+}: AuthButtonProps) => {
   return (
     <>
-      <AuthButtonContainer width={width} onClick={onClick} top={top}>
+      <AuthButtonContainer
+        {...props}
+        width={width}
+        onClick={onClick}
+        top={top}
+        AuthButtonType={AuthButtonType}
+      >
         {children}
       </AuthButtonContainer>
     </>

@@ -18,3 +18,5 @@ export type ButtonType =
   | "disagree"
   | "disagreed"
   | "cancel";
+
+export type AuthButtonType = "agree" | "cancel";

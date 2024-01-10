@@ -21,7 +21,7 @@ export const TextFieldContainer = styled.div`
 
     pointer-events: none;
 
-    color: #979ba0;
+    color: #a1a1a1;
   }
 
   input:is(:focus, :valid) ~ label {

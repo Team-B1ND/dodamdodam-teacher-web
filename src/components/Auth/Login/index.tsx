@@ -7,7 +7,7 @@ const Login = () => {
     <div>
       <TextField>ID</TextField>
       <TextField>비밀번호</TextField>
-      <AuthButton width={350} top={85}>
+      <AuthButton width={350} top={85} AuthButtonType="agree">
         Sign In
       </AuthButton>
       <S.AccountContainer>
