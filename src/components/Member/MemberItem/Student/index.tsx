@@ -3,7 +3,7 @@ import { StudentType } from "../../../../types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import { addPhoneHyphen } from "../../../../utils/Member/addPhoneHyphen";
 import profileImg from "../../../../assets/profileImg.svg";
-import { sortAndFilterStudents } from "../../../../utils/Member/sortAndFilterStudents";
+import { sortAndFilterStudents } from "../../../../utils/Member/SortAndFilterStudents";
 
 interface Props {
   studentsInfo: StudentType[];
