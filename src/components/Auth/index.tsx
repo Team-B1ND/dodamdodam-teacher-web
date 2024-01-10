@@ -1,6 +1,8 @@
 import * as S from "./style";
 import AuthPanelImg from "../../assets/Auth/panel.svg";
 import { useState } from "react";
+import Login from "./Login";
+import Signup from "./Signup";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,7 +19,13 @@ const Auth = () => {
             </S.TextBox>
             <S.Img src={AuthPanelImg} />
             <S.AuthInputBox>
-              <div></div>
+              <div>
+                {isLogin ? (
+                  <Login setIsLogin={setIsLogin} />
+                ) : (
+                  <Signup setIsLogin={setIsLogin} />
+                )}
+              </div>
             </S.AuthInputBox>
           </S.AuthImgBox>
         </S.AuthMain>

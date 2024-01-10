@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import AuthButton from "../../../common/AuthButton";
 import CheckBox from "../../../common/CheckBox";
 import TextField from "../../../common/TextField";
 import { AccountContainer } from "../style";
 import { IoIosArrowBack } from "react-icons/io";
-
 import * as S from "./style";
 
-const Email = () => {
+interface SignupEmailProps {
+  setSection: Dispatch<SetStateAction<string>>;
+  setIsLogin: Dispatch<SetStateAction<boolean>>;
+}
+
+const Email = ({ setSection, setIsLogin }: SignupEmailProps) => {
   const [test, setTest] = useState(true);
   const [test2, setTest2] = useState(true);
   return (
@@ -36,7 +40,12 @@ const Email = () => {
       </S.CheckBoxWrap>
 
       <S.AuthButtonWrap>
-        <AuthButton width={125} top={55} AuthButtonType="cancel">
+        <AuthButton
+          width={125}
+          top={55}
+          AuthButtonType="cancel"
+          onClick={() => setSection("id")}
+        >
           <IoIosArrowBack style={{ marginRight: "10px", fontSize: "15px" }} />
           이전
         </AuthButton>
@@ -46,7 +55,7 @@ const Email = () => {
       </S.AuthButtonWrap>
 
       <AccountContainer>
-        이미 계정이 있으신가요?<p>Sign In</p>
+        이미 계정이 있으신가요?<p onClick={() => setIsLogin(true)}>Sign In</p>
       </AccountContainer>
     </div>
   );

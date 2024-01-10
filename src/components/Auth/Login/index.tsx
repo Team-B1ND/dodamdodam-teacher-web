@@ -1,8 +1,13 @@
 import * as S from "./style";
 import AuthButton from "../../common/AuthButton";
 import TextField from "../../common/TextField";
+import { Dispatch, SetStateAction } from "react";
 
-const Login = () => {
+interface LoginProps {
+  setIsLogin: Dispatch<SetStateAction<boolean>>;
+}
+
+const Login = ({ setIsLogin }: LoginProps) => {
   return (
     <div>
       <TextField>ID</TextField>
@@ -11,7 +16,7 @@ const Login = () => {
         Sign In
       </AuthButton>
       <S.AccountContainer>
-        아직 계정이 없으신가요?<p>Sign Up</p>
+        아직 계정이 없으신가요?<p onClick={() => setIsLogin(false)}>Sign Up</p>
       </S.AccountContainer>
     </div>
   );
