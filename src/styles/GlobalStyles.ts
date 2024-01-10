@@ -1,13 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-// import "./font.css";
+import "./font.css";
 
 const GlobalStyles = createGlobalStyle`
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      /* font-family: 'Pretendard-Regular' ; */
+      font-family: 'Pretendard-Regular' ;
     }
 
     a {

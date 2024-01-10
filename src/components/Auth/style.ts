@@ -79,7 +79,7 @@ export const SubTitle = styled.span`
   color: #fff;
 
   font-size: 17px;
-  font-weight: 100;
+  font-weight: 200;
 `;
 
 export const AuthInputBox = styled.div`

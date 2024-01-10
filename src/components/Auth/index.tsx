@@ -1,7 +1,11 @@
 import * as S from "./style";
 import AuthPanelImg from "../../assets/Auth/panel.svg";
+import { useState } from "react";
+
+import Login from "./Login";
 
 const Auth = () => {
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <S.AuthContainer>
       <S.AuthBox>
@@ -15,7 +19,9 @@ const Auth = () => {
             </S.TextBox>
             <S.Img src={AuthPanelImg} />
             <S.AuthInputBox>
-              <div>dfddfddf</div>
+              {/* <div> */}
+              <Login />
+              {/* </div> */}
             </S.AuthInputBox>
           </S.AuthImgBox>
         </S.AuthMain>
