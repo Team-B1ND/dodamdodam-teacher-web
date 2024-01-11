@@ -1,8 +1,8 @@
 import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { TeacherType } from "../../../../types/Member/member.type";
+import { TeacherType } from "../../../../types/Member/Member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import profileImg from "../../../../assets/profileImg.svg";
-import { addPhoneHyphen } from "../../../../utils/Member/addPhoneHyphen";
+import { addPhoneHyphen } from "../../../../utils/common/addPhoneHyphen";
 import { searchName } from "../../../../utils/common/searchName";
 
 interface Props {
@@ -20,10 +20,7 @@ const Teacher = ({ teachersInfo, searchValue, selectGrade }: Props) => {
           .map((teacher) => (
             <TR key={teacher.id} customStyle={MemberItemTR}>
               <TD customStyle={MemberTD}>
-                <MemberImage
-                  src={teacher.member.profileImage || profileImg}
-                  alt="이미지 없음"
-                />
+                <MemberImage src={profileImg} alt="이미지 없음" />
               </TD>
               <TD customStyle={MemberTD}>{teacher.member.name}</TD>
               <TD customStyle={MemberTD}>선생님</TD>
