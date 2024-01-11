@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import config from "../../config/config.json";
 import {
   ACCESS_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
@@ -19,14 +18,14 @@ const createAxiosInstance = (config?: AxiosRequestConfig) => {
 };
 
 export const dodamV6Axios = createAxiosInstance({
-  baseURL: config.DODAM_SERVER_V6,
+  baseURL: process.env.REACT_APP_DODAM_SERVER_V6,
   headers: {
     [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
   },
 });
 
 export const dodamTeacherAxios = createAxiosInstance({
-  baseURL: config.DODAM_TEACHER_API,
+  baseURL: process.env.REACT_APP_DODAM_TEACHER_API,
   headers: {
     [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
   },
