@@ -5,7 +5,7 @@ export const useLogout = () => {
   const navigate = useNavigate();
   const handleLogoutClick = () => {
     Token.clearToken();
-    navigate("/signin");
+    navigate("/");
   };
 
   return { handleLogoutClick };

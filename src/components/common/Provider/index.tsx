@@ -8,6 +8,7 @@ import Layout from "../Layout";
 import Header from "../Header";
 import SideBar from "../SideBar";
 import { OverlayProvider } from "@toss/use-overlay";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,7 @@ const Providers = ({ children }: ProvidersProps) => {
           <BrowserRouter>
             {pathname !== "/" && <Header />}
             {pathname !== "/" && <SideBar />}
+
             <Layout>{children}</Layout>
           </BrowserRouter>
         </OverlayProvider>
