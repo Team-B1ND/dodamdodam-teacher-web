@@ -1,4 +1,4 @@
-import { BusListResponse, BusResponse } from "../../types/Bus/bus.type";
+import { BusListResponse, BusResponse } from "../../types/Bus/Bus.type";
 
 export interface BusRepository {
   getRegisteredBus(): Promise<BusResponse>;
@@ -16,6 +16,9 @@ export interface BusDateParam {
 }
 
 export interface BusUpdateParam {
+  // 추가된 버스 수정할 때 busIdx 사용함!!
+  busIdx?: number;
+
   busName: string;
   description: string;
   leaveTime: string;

@@ -1,4 +1,4 @@
-import { StudentType } from "../../types/Member/member.type";
+import { StudentType } from "../../types/Member/Member.type";
 import { searchName } from "../common/searchName";
 import { sortStudentGrade } from "./sortStudentGrade";
 

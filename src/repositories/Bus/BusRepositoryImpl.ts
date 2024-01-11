@@ -1,6 +1,6 @@
 import { dodamTeacherAxios, dodamV6Axios } from "../../libs/Axios/customAxios";
-import { BusResponse, BusListResponse } from "../../types/Bus/bus.type";
-import { BusDateParam, BusRepository, BusUpdateParam } from "./bus.repository";
+import { BusResponse, BusListResponse } from "../../types/Bus/Bus.type";
+import { BusDateParam, BusRepository, BusUpdateParam } from "./BusRepository";
 
 class BusRepositoryImpl implements BusRepository {
   public async getRegisteredBus(): Promise<BusResponse> {
@@ -26,11 +26,11 @@ class BusRepositoryImpl implements BusRepository {
   }
 
   public async createBus(param: BusUpdateParam): Promise<void> {
-    await dodamV6Axios.post("/bus", param);
+    await dodamTeacherAxios.post("/bus", param);
   }
 
   public async patchBus(param: BusUpdateParam): Promise<void> {
-    await dodamV6Axios.patch("/bus", param);
+    await dodamTeacherAxios.put("/bus", param);
   }
 
   public async deleteBus(id: number): Promise<void> {

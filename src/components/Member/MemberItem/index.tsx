@@ -1,6 +1,6 @@
 import React from "react";
 import { TBody } from "@b1nd/b1nd-dodamdodam-ui";
-import { useGetAllMemberListQuery } from "../../../queries/Member/member.query";
+import { useGetAllMemberListQuery } from "../../../queries/Member/Member.query";
 import * as S from "./style";
 import Student from "./Student";
 import Teacher from "./Teacher";

@@ -9,9 +9,9 @@ import {
 import {
   BusDateParam,
   BusUpdateParam,
-} from "../../repositories/Bus/bus.repository";
-import busRepositoryImpl from "../../repositories/Bus/bus.repositoryImpl";
-import { BusListResponse, BusResponse } from "../../types/Bus/bus.type";
+} from "../../repositories/Bus/BusRepository";
+import busRepositoryImpl from "../../repositories/Bus/BusRepositoryImpl";
+import { BusListResponse, BusResponse } from "../../types/Bus/Bus.type";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRegisteredBusQuery = (
