@@ -6,7 +6,6 @@ export const BusTBody: CSSObject = {
   fontWeight: "600",
   marginTop: "5px",
   display: "flex",
-  rowGap: "5px",
   flexDirection: "column",
   whiteSpace: "normal",
   tr: {
@@ -23,7 +22,7 @@ export const BusTR: CSSObject = {
   alignItems: "center",
   justifyContent: "space-between",
   columnGap: "10px",
-  borderTop: "1px solid #d9d9d9",
+  borderTop: "none",
   borderBottom: "1px solid #d9d9d9",
 };
 
@@ -42,11 +41,15 @@ export const BusLeaveTime: CSSObject = {
 
 export const PassengerStyle: CSSObject = {
   width: "65px",
-  height: "30px",
+  height: "33px",
   borderRadius: "7px",
   transition: "all 0.2s ease-in-out",
+  transform: "scale(1)",
   "&:hover": {
     boxShadow: "0 0 0 1px #fff, 0 0 0 3px rgba(50, 100, 150, 0.4)",
+  },
+  "&:active": {
+    transform: "scale(0.97)",
   },
 };
 
@@ -59,20 +62,28 @@ export const ButtonContainerStyle: CSSObject = {
 
 export const EditStyle: CSSObject = {
   width: "60px",
-  height: "30px",
+  height: "33px",
   borderRadius: "7px",
   transition: "all 0.2s ease-in-out",
+  transform: "scale(1)",
   "&:hover": {
     boxShadow: "0 0 0 1px #fff, 0 0 0 3px rgba(50, 100, 150, 0.4)",
+  },
+  "&:active": {
+    transform: "scale(0.97)",
   },
 };
 
 export const DelStyle: CSSObject = {
   width: "60px",
-  height: "30px",
+  height: "33px",
   borderRadius: "7px",
   transition: "all 0.2s ease-in-out",
+  transform: "scale(1)",
   "&:hover": {
     boxShadow: "0 0 0 1px #fff, 0 0 0 3px #ddd",
+  },
+  "&:active": {
+    transform: "scale(0.97)",
   },
 };

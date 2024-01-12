@@ -29,7 +29,7 @@ class BusRepositoryImpl implements BusRepository {
     await dodamTeacherAxios.post("/bus", param);
   }
 
-  public async patchBus(param: BusUpdateParam): Promise<void> {
+  public async modifyBus(param: BusUpdateParam): Promise<void> {
     await dodamTeacherAxios.put("/bus", param);
   }
 

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import * as S from "./style";
-import { MEMBER_TABLE_ITEMS } from "../../constants/Member/member.constant";
+import { MEMBER_TABLE_ITEMS } from "./constant";
 import ErrorBoundary from "../common/ErrorBoundary";
 import MemberItem from "./MemberItem";
 import MemberSkeleton from "../common/Skeleton/Member";

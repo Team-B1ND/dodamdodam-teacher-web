@@ -28,13 +28,21 @@ export interface BusMemberType {
   phone: string;
 }
 
-export interface BusInfoType {
+export interface BusPassengerType {
+  busName: string;
+  busMember: BusMemberType[];
+}
+
+export interface BusBasicInfoType {
   idx: number;
   busName: string;
   description: string;
   peopleLimit: number;
   leaveTime: string;
   timeRequired: string;
+}
+
+export interface BusInfoType extends BusBasicInfoType {
   busMemberlength: number;
   busMember: BusMemberType[];
 }

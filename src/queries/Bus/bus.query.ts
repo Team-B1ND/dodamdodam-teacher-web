@@ -64,9 +64,9 @@ export const useCreateBusMutation = () => {
   return mutation;
 };
 
-export const usePatchBusMutation = () => {
+export const useModifyBusMutation = () => {
   const mutation = useMutation((param: BusUpdateParam) =>
-    busRepositoryImpl.patchBus(param)
+    busRepositoryImpl.modifyBus(param)
   );
   return mutation;
 };

@@ -1,6 +1,6 @@
 import { SectionHeader } from "@b1nd/b1nd-dodamdodam-ui";
 import { ReactNode } from "react";
-import * as S from "./style";
+import styled from "styled-components";
 
 interface Props {
   title: string;
@@ -10,11 +10,18 @@ interface Props {
 
 const BusProvider = ({ title, subTitle, children }: Props) => {
   return (
-    <S.Container>
+    <Container>
       <SectionHeader title={title} subTitle={subTitle} />
       <>{children}</>
-    </S.Container>
+    </Container>
   );
 };
 
 export default BusProvider;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 1rem 2.5rem;
+  white-space: nowrap;
+`;
