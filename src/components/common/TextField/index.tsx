@@ -1,10 +1,11 @@
 import * as S from "./style";
 
 interface TextFieldProps {
+  id: string;
+  name: string;
   children: React.ReactNode;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  id?: string;
-  name?: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  type?: string;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -12,6 +13,7 @@ const TextField: React.FC<TextFieldProps> = ({
   onChange,
   id,
   name,
+  type,
 }) => {
   return (
     <>
@@ -24,6 +26,7 @@ const TextField: React.FC<TextFieldProps> = ({
           style={{
             borderBottom: "1px solid  #a1a1a1",
           }}
+          type={type}
         />
 
         <label>{children}</label>

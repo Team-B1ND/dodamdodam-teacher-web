@@ -20,3 +20,20 @@ export const AccountContainer = styled.div`
     color: rgb(0, 103, 188);
   }
 `;
+
+export const PasswordBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const PasswordViewBox = styled.div`
+  z-index: 10;
+
+  font-size: 20px;
+
+  margin-left: -16px;
+  margin-top: 45px;
+
+  color: gray;
+
+  user-select: none;
+`;

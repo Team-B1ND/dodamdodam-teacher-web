@@ -9,16 +9,29 @@ import * as S from "./style";
 interface SignupEmailProps {
   setSection: Dispatch<SetStateAction<string>>;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
+  handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSignup: () => void;
 }
 
-const Email = ({ setSection, setIsLogin }: SignupEmailProps) => {
+const Email = ({
+  setSection,
+  setIsLogin,
+  handleSignupChange,
+  onSignup,
+}: SignupEmailProps) => {
   const [test, setTest] = useState(true);
   const [test2, setTest2] = useState(true);
   return (
     <div>
-      <TextField>E-mail</TextField>
-      <TextField>전화번호 ex) 01012341234</TextField>
-      <TextField>이름 ex) 홍길동</TextField>
+      <TextField id="email" name="email" onChange={handleSignupChange}>
+        E-mail
+      </TextField>
+      <TextField id="phone" name="phone" onChange={handleSignupChange}>
+        전화번호 ex) 01012341234
+      </TextField>
+      <TextField id="name" name="name" onChange={handleSignupChange}>
+        이름 ex) 홍길동
+      </TextField>
       <S.CheckBoxWrap>
         <CheckBox isChecked={test} setIsChecked={setTest}>
           운영정책 동의
@@ -49,7 +62,12 @@ const Email = ({ setSection, setIsLogin }: SignupEmailProps) => {
           <IoIosArrowBack style={{ marginRight: "10px", fontSize: "15px" }} />
           이전
         </AuthButton>
-        <AuthButton width={125} top={55} AuthButtonType="agree">
+        <AuthButton
+          width={125}
+          top={55}
+          AuthButtonType="agree"
+          onClick={onSignup}
+        >
           Sign Up
         </AuthButton>
       </S.AuthButtonWrap>
