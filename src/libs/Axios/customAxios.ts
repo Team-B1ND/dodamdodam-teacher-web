@@ -4,6 +4,8 @@ import {
   REQUEST_TOKEN_KEY,
 } from "../../constants/Token/Token.constant";
 import Token from "../Token/Token";
+import { errorResponseHandler } from "./errorResponseHandler";
+import { requestHandler } from "./requestHandler";
 
 const createAxiosInstance = (config?: AxiosRequestConfig) => {
   const baseConfig: AxiosRequestConfig = {
@@ -30,3 +32,10 @@ export const dodamTeacherAxios = createAxiosInstance({
     [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
   },
 });
+
+export const dodamV6AxiosSetAccessToken = (token: string) => {
+  dodamV6Axios.defaults.headers.common[REQUEST_TOKEN_KEY] = `Bearer ${token}`;
+};
+
+dodamV6Axios.interceptors.request.use(requestHandler);
+dodamV6Axios.interceptors.response.use((res) => res, errorResponseHandler);

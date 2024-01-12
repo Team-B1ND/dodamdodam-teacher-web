@@ -37,7 +37,6 @@ export const useSignup = () => {
       tel,
     };
 
-    console.log(validSignupData);
     try {
       await signupRepositoryImpl.postSignup(validSignupData);
       console.log("회원가입성공");

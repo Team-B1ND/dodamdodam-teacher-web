@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from "axios";
+import { InternalAxiosRequestConfig } from "axios";
 import Token from "../Token/Token";
 import {
   ACCESS_TOKEN_KEY,
@@ -6,19 +6,17 @@ import {
   REQUEST_TOKEN_KEY,
 } from "../../constants/Token/Token.constant";
 
-const requestHandler = (config: AxiosRequestConfig) => {
+export const requestHandler = async (config: InternalAxiosRequestConfig) => {
   if (
-    Token.getToken(ACCESS_TOKEN_KEY) === undefined ||
-    Token.getToken(REFRESH_TOKEN_KEY) === undefined
+    Token.getToken(ACCESS_TOKEN_KEY) !== undefined &&
+    Token.getToken(REFRESH_TOKEN_KEY) !== undefined
   ) {
-    window.location.href = "/";
+    config.headers[REQUEST_TOKEN_KEY] = `Bearer ${Token.getToken(
+      ACCESS_TOKEN_KEY
+    )}`;
   } else {
-    config.headers = {
-      [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`,
-    };
+    console.log("토큰이 존재하지 않습니다.");
   }
 
   return config;
 };
-
-export default requestHandler;
