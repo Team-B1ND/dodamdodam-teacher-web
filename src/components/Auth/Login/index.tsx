@@ -3,21 +3,34 @@ import AuthButton from "../../common/AuthButton";
 import TextField from "../../common/TextField";
 import { Dispatch, SetStateAction } from "react";
 import { useLogin } from "../../../hooks/auth/useLogin";
+import { IoEyeSharp } from "react-icons/io5";
 
 interface LoginProps {
   setIsLogin: Dispatch<SetStateAction<boolean>>;
 }
 
 const Login = ({ setIsLogin }: LoginProps) => {
-  const { handleLoginChange, onLogin } = useLogin();
+  const { handleLoginChange, onLogin, handlePasswordView, passwordType } =
+    useLogin();
   return (
     <div>
       <TextField onChange={handleLoginChange} id="id" name="id">
         ID
       </TextField>
-      <TextField onChange={handleLoginChange} id="pw" name="pw">
-        비밀번호
-      </TextField>
+      <S.PasswordBox>
+        <TextField
+          onChange={handleLoginChange}
+          id="pw"
+          name="pw"
+          type={passwordType.type}
+        >
+          비밀번호
+        </TextField>
+        <S.PasswordViewBox onClick={() => handlePasswordView()}>
+          <IoEyeSharp />
+        </S.PasswordViewBox>
+      </S.PasswordBox>
+
       <AuthButton width={350} top={85} AuthButtonType="agree" onClick={onLogin}>
         Sign In
       </AuthButton>

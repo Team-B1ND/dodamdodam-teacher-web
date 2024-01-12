@@ -1,6 +1,9 @@
 import { sha512 } from "js-sha512";
 import { useCallback, useState } from "react";
-import { LoginParam } from "../../repositories/Auth/Login/login.repository";
+import {
+  LoginParam,
+  PasswordParm,
+} from "../../repositories/Auth/Login/login.repository";
 import LoginRepositoryImpl from "../../repositories/Auth/Login/login.repositoryImpl";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import Token from "../../libs/Token/Token";
@@ -12,6 +15,10 @@ import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const [passwordType, setPasswordType] = useState<PasswordParm>({
+    type: "password",
+    visible: false,
+  });
   const [loginData, setLoginData] = useState<LoginParam>({
     id: "",
     pw: "",
@@ -54,8 +61,18 @@ export const useLogin = () => {
     }
   }, [loginData]);
 
+  const handlePasswordView = () => {
+    setPasswordType(() => {
+      if (!passwordType.visible) {
+        return { type: "text", visible: true };
+      }
+      return { type: "password", visible: false };
+    });
+  };
   return {
     onLogin,
     handleLoginChange,
+    handlePasswordView,
+    passwordType,
   };
 };
