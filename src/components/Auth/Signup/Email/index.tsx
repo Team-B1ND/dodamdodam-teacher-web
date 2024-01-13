@@ -7,6 +7,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import * as S from "./style";
 
 interface SignupEmailProps {
+  policy: boolean;
+  personalInfo: boolean;
+  setPolicy: Dispatch<SetStateAction<boolean>>;
+  setPersonalInfo: Dispatch<SetStateAction<boolean>>;
   setSection: Dispatch<SetStateAction<string>>;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -18,22 +22,35 @@ const Email = ({
   setIsLogin,
   handleSignupChange,
   onSignup,
+
+  setPolicy,
+  policy,
+  setPersonalInfo,
+  personalInfo,
 }: SignupEmailProps) => {
-  const [test, setTest] = useState(true);
-  const [test2, setTest2] = useState(true);
   return (
     <div>
-      <TextField id="email" name="email" onChange={handleSignupChange}>
+      <TextField
+        id="email"
+        name="email"
+        functions="phone"
+        onChange={handleSignupChange}
+      >
         E-mail
       </TextField>
-      <TextField id="phone" name="phone" onChange={handleSignupChange}>
+      <TextField
+        id="phone"
+        name="phone"
+        functions="name"
+        onChange={handleSignupChange}
+      >
         전화번호 ex) 01012341234
       </TextField>
       <TextField id="name" name="name" onChange={handleSignupChange}>
         이름 ex) 홍길동
       </TextField>
       <S.CheckBoxWrap>
-        <CheckBox isChecked={test} setIsChecked={setTest}>
+        <CheckBox isChecked={policy} setIsChecked={setPolicy}>
           운영정책 동의
         </CheckBox>
         <S.CheckContent
@@ -44,7 +61,7 @@ const Email = ({
         </S.CheckContent>
       </S.CheckBoxWrap>
       <S.CheckBoxWrap>
-        <CheckBox isChecked={test2} setIsChecked={setTest2}>
+        <CheckBox isChecked={personalInfo} setIsChecked={setPersonalInfo}>
           개인정보 취급방침 동의
         </CheckBox>
         <S.CheckContent href="https://dodam.b1nd.com/detailed-information/personal-information">

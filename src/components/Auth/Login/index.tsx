@@ -13,13 +13,14 @@ const Login = ({ setIsLogin }: LoginProps) => {
   const { handleLoginChange, onLogin, handlePasswordView, passwordType } =
     useLogin();
   return (
-    <div>
-      <TextField onChange={handleLoginChange} id="id" name="id">
+    <S.LoginWrap>
+      <TextField onChange={handleLoginChange} id="id" name="id" functions="pw">
         ID
       </TextField>
       <S.PasswordBox>
         <TextField
           onChange={handleLoginChange}
+          functions={onLogin}
           id="pw"
           name="pw"
           type={passwordType.type}
@@ -37,7 +38,7 @@ const Login = ({ setIsLogin }: LoginProps) => {
       <S.AccountContainer>
         아직 계정이 없으신가요?<p onClick={() => setIsLogin(false)}>Sign Up</p>
       </S.AccountContainer>
-    </div>
+    </S.LoginWrap>
   );
 };
 

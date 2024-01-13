@@ -5,6 +5,8 @@ interface TextFieldProps {
   name: string;
   children: React.ReactNode;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  value?: string;
+  functions?: (() => void) | string;
   type?: string;
 }
 
@@ -14,6 +16,8 @@ const TextField: React.FC<TextFieldProps> = ({
   id,
   name,
   type,
+  functions,
+  value,
 }) => {
   return (
     <>
@@ -27,6 +31,17 @@ const TextField: React.FC<TextFieldProps> = ({
             borderBottom: "1px solid  #a1a1a1",
           }}
           type={type}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              if (typeof functions === "function") {
+                functions();
+              } else if (typeof functions === "string") {
+                const elementId = functions;
+                document.getElementById(elementId)?.focus();
+              }
+            }
+          }}
+          value={value}
         />
 
         <label>{children}</label>

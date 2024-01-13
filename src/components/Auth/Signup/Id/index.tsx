@@ -7,25 +7,35 @@ import { Dispatch, SetStateAction } from "react";
 import { PasswordBox, PasswordViewBox } from "../../Login/style";
 import { IoEyeSharp } from "react-icons/io5";
 import { PasswordParm } from "../../../../repositories/Auth/Login/login.repository";
+import { SignupParam } from "../../../../repositories/Auth/Signup/signup.repository";
 
 interface SignupIdProps {
+  passwordType: PasswordParm;
+  signupData: SignupParam;
   setSection: Dispatch<SetStateAction<string>>;
   setIsLogin: Dispatch<SetStateAction<boolean>>;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePasswordView: () => void;
-  passwordType: PasswordParm;
+  signupTypeCheck: () => void;
 }
 
 const Id = ({
-  setSection,
   setIsLogin,
   handleSignupChange,
   handlePasswordView,
   passwordType,
+  signupTypeCheck,
+  signupData,
 }: SignupIdProps) => {
   return (
     <div>
-      <TextField id="id" name="id" onChange={handleSignupChange}>
+      <TextField
+        id="id"
+        name="id"
+        onChange={handleSignupChange}
+        functions="pw"
+        value={signupData.id}
+      >
         ID
       </TextField>
       <PasswordBox>
@@ -34,6 +44,8 @@ const Id = ({
           name="pw"
           onChange={handleSignupChange}
           type={passwordType.type}
+          functions="position"
+          value={signupData.pw}
         >
           비밀번호
         </TextField>
@@ -41,10 +53,21 @@ const Id = ({
           <IoEyeSharp />
         </PasswordViewBox>
       </PasswordBox>
-      <TextField id="position" name="position" onChange={handleSignupChange}>
+      <TextField
+        id="position"
+        name="position"
+        onChange={handleSignupChange}
+        functions="tel"
+        value={signupData.position}
+      >
         직책 ex) 정보부장
       </TextField>
-      <TextField id="tel" name="tel" onChange={handleSignupChange}>
+      <TextField
+        id="tel"
+        name="tel"
+        onChange={handleSignupChange}
+        value={signupData.tel}
+      >
         내선번호 ex) 0532310000
       </TextField>
 
@@ -53,7 +76,7 @@ const Id = ({
           width={125}
           top={55}
           AuthButtonType="agree"
-          onClick={() => setSection("email")}
+          onClick={() => signupTypeCheck()}
         >
           다음
           <IoIosArrowForward style={{ marginLeft: "10px", fontSize: "15px" }} />

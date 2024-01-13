@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AuthPartFadeh } from "../style";
 
 export const AccountContainer = styled.div`
   display: flex;
@@ -20,4 +21,8 @@ export const AccountContainer = styled.div`
     font-weight: 600;
     color: rgb(0, 103, 188);
   }
+`;
+
+export const SignupWrap = styled.div`
+  animation: ${AuthPartFadeh} 1s;
 `;

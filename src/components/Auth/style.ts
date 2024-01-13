@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const AuthContainer = styled.div`
   width: 100vw;
@@ -91,4 +91,14 @@ export const AuthInputBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const AuthPartFadeh = keyframes`
+  from {
+    transform: translate3d(-50px, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 `;

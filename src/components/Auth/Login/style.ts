@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AuthPartFadeh } from "../style";
 
 export const AccountContainer = styled.div`
   display: flex;
@@ -36,4 +37,8 @@ export const PasswordViewBox = styled.div`
   color: gray;
 
   user-select: none;
+`;
+
+export const LoginWrap = styled.div`
+  animation: ${AuthPartFadeh} 1s;
 `;

@@ -52,6 +52,11 @@ export const useLogin = () => {
         data: { member, token: accessToken, refreshToken },
       } = await LoginRepositoryImpl.postLogin(validLoginData);
 
+      if (member.role !== "TEACHER" && member.role !== "ADMIN") {
+        B1ndToast.showInfo("선셍님 계정으로 로그인 해주세요.");
+        return;
+      }
+
       Token.setToken(ACCESS_TOKEN_KEY, accessToken);
       Token.setToken(REFRESH_TOKEN_KEY, refreshToken);
       navigate("/member");
