@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Container } from "./style";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   children: ReactNode;
