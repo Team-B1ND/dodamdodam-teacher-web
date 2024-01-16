@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SignupParam, SignupRepository } from "./signup.repository";
+import { SignupParam, SignupRepository } from "./SignupRepository";
 
 class SignupRepositoryImpl implements SignupRepository {
   public async postSignup(param: SignupParam): Promise<void> {

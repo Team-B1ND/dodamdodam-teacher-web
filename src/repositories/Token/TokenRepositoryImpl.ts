@@ -1,6 +1,6 @@
 import axios from "axios";
 import { RefreshResponse } from "../../types/Token/token.type";
-import { RefreshTokenParam, TokenRepository } from "./token.repository";
+import { RefreshTokenParam, TokenRepository } from "./TokenRepository";
 
 class TokenRepositoryImpl implements TokenRepository {
   public async getRefreshToken(

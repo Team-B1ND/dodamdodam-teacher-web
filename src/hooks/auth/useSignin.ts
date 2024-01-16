@@ -3,8 +3,8 @@ import { useCallback, useState } from "react";
 import {
   SigninParam,
   PasswordParm,
-} from "../../repositories/Auth/Signin/signin.repository";
-import signinRepositoryImpl from "../../repositories/Auth/Signin/signin.repositoryImpl";
+} from "../../repositories/Auth/Signin/SigninRepository";
+import signinRepositoryImpl from "../../repositories/Auth/Signin/SigninRepositoryImpl";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import Token from "../../libs/Token/Token";
 import {

@@ -5,7 +5,7 @@ import {
   REFRESH_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
 } from "../../constants/Token/Token.constant";
-import tokenRepositoryImpl from "../../repositories/Token/token.repositoryImpl";
+import tokenRepositoryImpl from "../../repositories/Token/TokenRepositoryImpl";
 import { dodamV6Axios } from "./customAxios";
 
 export const errorResponseHandler = async (error: AxiosError) => {

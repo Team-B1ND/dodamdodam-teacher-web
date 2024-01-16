@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SigninResponse } from "../../../types/Signin/signin.type";
-import { SigninParam, SigninRepository } from "./signin.repository";
+import { SigninParam, SigninRepository } from "./SigninRepository";
 
 class SigninRepositoryImpl implements SigninRepository {
   public async postSignin(param: SigninParam): Promise<SigninResponse> {
