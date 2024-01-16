@@ -9,19 +9,19 @@ import { useSignup } from "../../../hooks/auth/useSignup";
 import { SIGNUP_SECTION_NAME } from "../../../constants/Signup/signup.constant";
 import Id from "./Id";
 import Email from "./Email";
-import { useLogin } from "../../../hooks/auth/useLogin";
+import { useSignin } from "../../../hooks/auth/useSignin";
 import * as S from "./style";
 
 interface SignupProps {
-  setIsLogin: Dispatch<SetStateAction<boolean>>;
+  setIsSignin: Dispatch<SetStateAction<boolean>>;
 }
 
-const Signup = ({ setIsLogin }: SignupProps) => {
+const Signup = ({ setIsSignin }: SignupProps) => {
   const {
     section,
     setSection,
     handleSignupChange,
-    onSignup,
+    submitSignup,
     signupTypeCheck,
     signupData,
     personalInfo,
@@ -29,14 +29,14 @@ const Signup = ({ setIsLogin }: SignupProps) => {
     setPersonalInfo,
     setPolicy,
   } = useSignup();
-  const { handlePasswordView, passwordType } = useLogin();
+  const { handlePasswordView, passwordType } = useSignin();
   const [prevSection, setPrevSection] = useState(section);
   const AuthComponents: ReactNode[] = [
     <Id
       signupData={signupData}
       passwordType={passwordType}
       handlePasswordView={handlePasswordView}
-      setIsLogin={setIsLogin}
+      setIsSignin={setIsSignin}
       setSection={setSection}
       handleSignupChange={handleSignupChange}
       signupTypeCheck={signupTypeCheck}
@@ -46,8 +46,8 @@ const Signup = ({ setIsLogin }: SignupProps) => {
       policy={policy}
       setPersonalInfo={setPersonalInfo}
       setPolicy={setPolicy}
-      onSignup={onSignup}
-      setIsLogin={setIsLogin}
+      onSignup={submitSignup}
+      setIsSignin={setIsSignin}
       setSection={setSection}
       handleSignupChange={handleSignupChange}
     />,

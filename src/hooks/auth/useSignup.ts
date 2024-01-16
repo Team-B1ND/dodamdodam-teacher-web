@@ -8,7 +8,6 @@ import PatternCheck from "../../utils/Check/PatternCheck";
 export const useSignup = () => {
   const [section, setSection] = useState("id");
   const [policy, setPolicy] = useState<boolean>(true);
-  console.log(policy);
   const [personalInfo, setPersonalInfo] = useState(true);
 
   const [signupData, setSignupData] = useState<SignupParam>({
@@ -63,7 +62,7 @@ export const useSignup = () => {
     [setSignupData]
   );
 
-  const onSignup = useCallback(async () => {
+  const submitSignup = useCallback(async () => {
     const { id, pw, email, phone, position, name, tel } = signupData;
 
     if (email === "" || phone === "" || name === "") {
@@ -99,13 +98,8 @@ export const useSignup = () => {
     }
 
     const validSignupData: SignupParam = {
-      id,
+      ...signupData,
       pw: sha512(pw),
-      email,
-      phone,
-      position,
-      name,
-      tel,
     };
 
     try {
@@ -113,6 +107,7 @@ export const useSignup = () => {
       B1ndToast.showSuccess(
         "회원가입에 성공했습니다.(관리자 승인을 기다려주세요!)"
       );
+
       window.location.reload();
     } catch (e) {
       B1ndToast.showError("회원가입에 실패했습니다.");
@@ -122,7 +117,7 @@ export const useSignup = () => {
     section,
     setSection,
     handleSignupChange,
-    onSignup,
+    submitSignup,
     signupTypeCheck,
     signupData,
     policy,

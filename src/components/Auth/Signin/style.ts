@@ -39,6 +39,6 @@ export const PasswordViewBox = styled.div`
   user-select: none;
 `;
 
-export const LoginWrap = styled.div`
+export const SigninWrap = styled.div`
   animation: ${AuthPartFadeh} 1s;
 `;

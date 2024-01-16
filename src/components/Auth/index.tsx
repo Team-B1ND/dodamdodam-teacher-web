@@ -1,11 +1,11 @@
 import * as S from "./style";
 import AuthPanelImg from "../../assets/Auth/panel.svg";
 import { useState } from "react";
-import Login from "./Login";
+import Signin from "./Signin";
 import Signup from "./Signup";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isSignin, setIsSignin] = useState(true);
   return (
     <S.AuthContainer>
       <S.AuthBox>
@@ -20,10 +20,10 @@ const Auth = () => {
             <S.Img src={AuthPanelImg} />
             <S.AuthInputBox>
               <div>
-                {isLogin ? (
-                  <Login setIsLogin={setIsLogin} />
+                {isSignin ? (
+                  <Signin setIsSignin={setIsSignin} />
                 ) : (
-                  <Signup setIsLogin={setIsLogin} />
+                  <Signup setIsSignin={setIsSignin} />
                 )}
               </div>
             </S.AuthInputBox>

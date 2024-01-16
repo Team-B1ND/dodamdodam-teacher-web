@@ -1,6 +1,6 @@
 import { MemberType } from "../Member/member.type";
 
-export interface LoginResponse extends Response {
+export interface SigninResponse extends Response {
   data: {
     member: MemberType;
     refreshToken: string;

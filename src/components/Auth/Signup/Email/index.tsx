@@ -12,14 +12,14 @@ interface SignupEmailProps {
   setPolicy: Dispatch<SetStateAction<boolean>>;
   setPersonalInfo: Dispatch<SetStateAction<boolean>>;
   setSection: Dispatch<SetStateAction<string>>;
-  setIsLogin: Dispatch<SetStateAction<boolean>>;
+  setIsSignin: Dispatch<SetStateAction<boolean>>;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSignup: () => void;
 }
 
 const Email = ({
   setSection,
-  setIsLogin,
+  setIsSignin,
   handleSignupChange,
   onSignup,
 
@@ -90,7 +90,7 @@ const Email = ({
       </S.AuthButtonWrap>
 
       <AccountContainer>
-        이미 계정이 있으신가요?<p onClick={() => setIsLogin(true)}>Sign In</p>
+        이미 계정이 있으신가요?<p onClick={() => setIsSignin(true)}>Sign In</p>
       </AccountContainer>
     </div>
   );

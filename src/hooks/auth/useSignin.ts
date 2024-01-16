@@ -1,10 +1,10 @@
 import { sha512 } from "js-sha512";
 import { useCallback, useState } from "react";
 import {
-  LoginParam,
+  SigninParam,
   PasswordParm,
-} from "../../repositories/Auth/Login/login.repository";
-import LoginRepositoryImpl from "../../repositories/Auth/Login/login.repositoryImpl";
+} from "../../repositories/Auth/Signin/signin.repository";
+import signinRepositoryImpl from "../../repositories/Auth/Signin/signin.repositoryImpl";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import Token from "../../libs/Token/Token";
 import {
@@ -13,27 +13,27 @@ import {
 } from "../../constants/Token/Token.constant";
 import { useNavigate } from "react-router-dom";
 
-export const useLogin = () => {
+export const useSignin = () => {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState<PasswordParm>({
     type: "password",
     visible: false,
   });
-  const [loginData, setLoginData] = useState<LoginParam>({
+  const [signinData, setSigninData] = useState<SigninParam>({
     id: "",
     pw: "",
   });
 
-  const handleLoginChange = useCallback(
+  const handleSigninChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value, name } = e.target;
-      setLoginData((prev) => ({ ...prev, [name]: value }));
+      setSigninData((prev) => ({ ...prev, [name]: value }));
     },
-    [setLoginData]
+    [setSigninData]
   );
 
-  const onLogin = useCallback(async () => {
-    const { id, pw } = loginData;
+  const submitSignin = async () => {
+    const { id, pw } = signinData;
     if (id === "") {
       B1ndToast.showInfo("아이디를 입력해주세요");
       return;
@@ -43,14 +43,14 @@ export const useLogin = () => {
       return;
     }
 
-    const validLoginData: LoginParam = {
+    const validSigninData: SigninParam = {
       id,
       pw: sha512(pw),
     };
     try {
       const {
         data: { member, token: accessToken, refreshToken },
-      } = await LoginRepositoryImpl.postLogin(validLoginData);
+      } = await signinRepositoryImpl.postSignin(validSigninData);
 
       if (member.role !== "TEACHER" && member.role !== "ADMIN") {
         B1ndToast.showInfo("선셍님 계정으로 로그인 해주세요.");
@@ -64,7 +64,7 @@ export const useLogin = () => {
     } catch (e) {
       B1ndToast.showError("로그인 실패");
     }
-  }, [loginData]);
+  };
 
   const handlePasswordView = () => {
     setPasswordType(() => {
@@ -75,8 +75,8 @@ export const useLogin = () => {
     });
   };
   return {
-    onLogin,
-    handleLoginChange,
+    submitSignin,
+    handleSigninChange,
     handlePasswordView,
     passwordType,
   };

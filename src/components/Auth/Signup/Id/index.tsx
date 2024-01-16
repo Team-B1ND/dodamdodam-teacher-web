@@ -4,23 +4,23 @@ import { IoIosArrowForward } from "react-icons/io";
 import { ButtonContainer } from "./style";
 import { AccountContainer } from "../style";
 import { Dispatch, SetStateAction } from "react";
-import { PasswordBox, PasswordViewBox } from "../../Login/style";
+import { PasswordBox, PasswordViewBox } from "../../Signin/style";
 import { IoEyeSharp } from "react-icons/io5";
-import { PasswordParm } from "../../../../repositories/Auth/Login/login.repository";
+import { PasswordParm } from "../../../../repositories/Auth/Signin/signin.repository";
 import { SignupParam } from "../../../../repositories/Auth/Signup/signup.repository";
 
 interface SignupIdProps {
   passwordType: PasswordParm;
   signupData: SignupParam;
   setSection: Dispatch<SetStateAction<string>>;
-  setIsLogin: Dispatch<SetStateAction<boolean>>;
+  setIsSignin: Dispatch<SetStateAction<boolean>>;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePasswordView: () => void;
   signupTypeCheck: () => void;
 }
 
 const Id = ({
-  setIsLogin,
+  setIsSignin,
   handleSignupChange,
   handlePasswordView,
   passwordType,
@@ -83,7 +83,7 @@ const Id = ({
         </AuthButton>
       </ButtonContainer>
       <AccountContainer>
-        이미 계정이 있으신가요?<p onClick={() => setIsLogin(true)}>Sign In</p>
+        이미 계정이 있으신가요?<p onClick={() => setIsSignin(true)}>Sign In</p>
       </AccountContainer>
     </div>
   );
