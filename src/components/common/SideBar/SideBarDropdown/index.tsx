@@ -14,11 +14,11 @@ const SideBarDropdown = () => {
         <MenuDropdownChild title="날짜별 버스 조회" redirectUrl="/bus-date" />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="외출 / 외박">
-        <MenuDropdownChild title="외출" redirectUrl="/authority" />
-        <MenuDropdownChild title="외박" redirectUrl="/numberSetting" />
+        <MenuDropdownChild title="외출" redirectUrl="/offbase-pass" />
+        <MenuDropdownChild title="외박" redirectUrl="/offbase-leave" />
         <MenuDropdownChild
           title="외박 중인 학생"
-          redirectUrl="/numberSetting"
+          redirectUrl="/offbase-leave-ing"
         />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="상벌점">
