@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const BusPassengerWrap = styled.div`
   width: auto;
-  min-width: 560px;
-  height: 670px;
+  height: 540px;
 
   background-color: #fff;
   border-radius: 10px;

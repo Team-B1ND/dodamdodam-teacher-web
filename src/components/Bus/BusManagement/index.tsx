@@ -7,6 +7,7 @@ import BusSkeleton from "../../common/Skeleton/Bus";
 import TableAttribute from "../../common/TableAttribute";
 import BusManagementItem from "./BusManagementItem";
 import * as S from "./style";
+import { NoneDataText } from "../style";
 
 const BusManagement = () => {
   const [busName, setBusName] = useState("");
@@ -29,7 +30,9 @@ const BusManagement = () => {
         constant={BUS_MANAGEMENT_ITEMS}
         thStyle={{ width: "14%" }}
       >
-        <ErrorBoundary fallback={<>Error:)</>}>
+        <ErrorBoundary
+          fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
+        >
           <Suspense fallback={<BusSkeleton />}>
             <BusManagementItem busName={busName} />
           </Suspense>

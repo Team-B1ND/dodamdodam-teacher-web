@@ -34,4 +34,4 @@ function MemberItem() {
   );
 }
 
-export default React.memo(MemberItem);
+export default MemberItem;

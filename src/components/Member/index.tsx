@@ -16,7 +16,11 @@ function Member() {
         constant={MEMBER_TABLE_ITEMS}
         thStyle={{ width: "10.5%" }}
       >
-        <ErrorBoundary fallback={<>Error:)</>}>
+        <ErrorBoundary
+          fallback={
+            <S.NoneDataText>데이터를 불러오지 못했습니다.</S.NoneDataText>
+          }
+        >
           <Suspense fallback={<MemberSkeleton />}>
             <MemberItem />
           </Suspense>
