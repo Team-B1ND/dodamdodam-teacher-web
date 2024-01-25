@@ -1,6 +1,6 @@
 import { UseQueryOptions, UseQueryResult, useQuery } from "react-query";
 import { QUERY_KEYS } from "../queryKey";
-import memberRepositoryImpl from "../../repositories/Member/member.repositoryImpl";
+import memberRepositoryImpl from "../../repositories/Member/MemberRepositoryImpl";
 import { MemberListType } from "../../types/Member/Member.type";
 import { AxiosError } from "axios";
 
