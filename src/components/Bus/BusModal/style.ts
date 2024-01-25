@@ -17,7 +17,6 @@ export const BusModalContainer = styled.div`
   justify-content: center;
 
   padding: 20px 0;
-
   overflow: auto;
 `;
 

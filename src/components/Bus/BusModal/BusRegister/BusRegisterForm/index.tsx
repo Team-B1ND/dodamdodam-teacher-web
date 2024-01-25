@@ -1,22 +1,18 @@
 import { Button, Table, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { BUS_REGIST_TITLE_ITEMS } from "./constant";
-import { TextField } from "@mui/material";
 import * as S from "./style";
 import { useRegistBus } from "../../../../../hooks/Bus/useRegistBus";
 
 interface Props {
   closeBusRegister: () => void;
 }
-const BusRegisterForm = ({ closeBusRegister }: Props) => {
-  const {
-    handleBusContentChange,
-    busContent,
-    timeRequired,
-    handleBusContentBusSubmit,
-  } = useRegistBus();
 
+const BusRegisterForm = ({ closeBusRegister }: Props) => {
+  const { ...hooks } = useRegistBus();
   return (
-    <S.BusForm onSubmit={(e) => handleBusContentBusSubmit(e, closeBusRegister)}>
+    <S.BusForm
+      onSubmit={(e) => hooks.handleBusContentBusSubmit(e, closeBusRegister)}
+    >
       <Table customStyle={S.TableStyle}>
         <TR customStyle={S.TitleTRStyle}>
           {BUS_REGIST_TITLE_ITEMS.map((item, idx) => (
@@ -32,32 +28,30 @@ const BusRegisterForm = ({ closeBusRegister }: Props) => {
         <TR customStyle={S.InputTRStyle}>
           <TD customStyle={S.InputTDStyle}>
             <S.BusInput
-              value={busContent.busName}
+              value={hooks.busContent.busName}
               placeholder="버스 이름을 입력하세요"
               name="busName"
-              onChange={handleBusContentChange}
+              onChange={hooks.handleBusContentChange}
               autoComplete="off"
             />
           </TD>
 
           <TD customStyle={S.InputTDStyle}>
             <S.BusInput
-              value={busContent.description}
+              value={hooks.busContent.description}
               placeholder="버스 설명을 입력하세요"
               name="description"
-              onChange={handleBusContentChange}
+              onChange={hooks.handleBusContentChange}
               autoComplete="off"
             />
           </TD>
 
           <TD customStyle={S.InputTDStyle}>
-            <TextField
+            <S.DateTimePicker
               type="datetime-local"
               name="leaveTime"
-              value={busContent.leaveTime}
-              variant={"standard"}
-              onChange={handleBusContentChange}
-              style={S.DateTimePickerStyle}
+              value={hooks.busContent.leaveTime}
+              onChange={hooks.handleBusContentChange}
             />
           </TD>
 
@@ -65,8 +59,8 @@ const BusRegisterForm = ({ closeBusRegister }: Props) => {
             <div>
               <S.TimeRequiredInput
                 name="hour"
-                value={timeRequired.hour}
-                onChange={handleBusContentChange}
+                value={hooks.timeRequired.hour}
+                onChange={hooks.handleBusContentChange}
                 autoComplete="off"
               />
               시간
@@ -75,8 +69,8 @@ const BusRegisterForm = ({ closeBusRegister }: Props) => {
             <div>
               <S.TimeRequiredInput
                 name="minute"
-                value={timeRequired.minute}
-                onChange={handleBusContentChange}
+                value={hooks.timeRequired.minute}
+                onChange={hooks.handleBusContentChange}
                 autoComplete="off"
               />
               분
@@ -87,10 +81,10 @@ const BusRegisterForm = ({ closeBusRegister }: Props) => {
             <S.BusInput
               type="number"
               min={1}
-              value={busContent.peopleLimit}
+              value={hooks.busContent.peopleLimit}
               placeholder="인원 제한 수를 입력하세요"
               name="peopleLimit"
-              onChange={handleBusContentChange}
+              onChange={hooks.handleBusContentChange}
               autoComplete="off"
             />
           </TD>

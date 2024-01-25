@@ -113,12 +113,20 @@ export const BusInput = styled.input`
   }
 `;
 
-export const DateTimePickerStyle: CSSObject = {
-  width: "100%",
-  border: "none",
-  outline: "none",
-  transition: "all 0.2s ease-in-out",
-};
+export const DateTimePicker = styled.input`
+  width: 100%;
+  font-size: 17px;
+
+  outline: none;
+  border: none;
+  border-bottom: 1.5px solid #ddd;
+  padding-bottom: 5px;
+
+  transition: all 0.2s ease-in-out;
+  &:focus {
+    border-bottom: 2px solid ${palette.main};
+  }
+`;
 
 export const TimeRequiredInput = styled.input`
   width: 50px;

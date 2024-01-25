@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 class ConvertTime {
   public getDateTime = (date: Date, dateType: "date" | "time" | "both") => {
@@ -30,10 +29,7 @@ class ConvertTime {
     return time;
   };
 
-  public parseDesiredDateTime = (
-    time: string | Date | MaterialUiPickersDate,
-    format: string
-  ) => {
+  public parseDesiredDateTime = (time: string | Date, format: string) => {
     return dayjs(time).format(format);
   };
 }
