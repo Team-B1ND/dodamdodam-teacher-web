@@ -1,5 +1,9 @@
 import { dodamTeacherAxios, dodamV6Axios } from "../../libs/Axios/customAxios";
-import { BusResponse, BusListResponse } from "../../types/Bus/Bus.type";
+import {
+  BusResponse,
+  BusListResponse,
+  BusDateResponse,
+} from "../../types/Bus/Bus.type";
 import { BusDateParam, BusRepository, BusUpdateParam } from "./BusRepository";
 
 class BusRepositoryImpl implements BusRepository {
@@ -13,11 +17,13 @@ class BusRepositoryImpl implements BusRepository {
   }: {
     page: number;
   }): Promise<BusListResponse> {
-    const { data } = await dodamV6Axios.get(`/bus/list?page=${page}&limit=8`);
+    const { data } = await dodamTeacherAxios.get(
+      `/bus/list?page=${page}&limit=8`
+    );
     return { ...data, nextPage: page + 1 };
   }
 
-  public async getBusDate(param: BusDateParam): Promise<BusResponse> {
+  public async getBusDate(param: BusDateParam): Promise<BusDateResponse> {
     const { year, month, day } = param;
     const { data } = await dodamV6Axios.get(
       `/bus/date?year=${year}&month=${month}&day=${day}`
@@ -34,7 +40,7 @@ class BusRepositoryImpl implements BusRepository {
   }
 
   public async deleteBus(id: number): Promise<void> {
-    await dodamV6Axios.delete(`/bus/${id}`);
+    await dodamTeacherAxios.delete(`/bus/${id}`);
   }
 }
 

@@ -4,6 +4,22 @@ export interface BusResponse extends Response {
   data: BusDataType;
 }
 
+export interface BusDateResponse extends Response {
+  data: {
+    bus: {
+      applyCount: number;
+      busMember: BusMemberType[];
+      busName: string;
+      description: string;
+      id: number;
+      leaveTime: string;
+      peopleLimit: number;
+      timeRequired: string;
+    }[];
+    date: string;
+  };
+}
+
 export interface BusListResponse extends Response {
   data: BusDataType[];
   nextPage: number;

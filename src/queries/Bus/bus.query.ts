@@ -11,7 +11,11 @@ import {
   BusUpdateParam,
 } from "../../repositories/Bus/BusRepository";
 import busRepositoryImpl from "../../repositories/Bus/BusRepositoryImpl";
-import { BusListResponse, BusResponse } from "../../types/Bus/Bus.type";
+import {
+  BusDateResponse,
+  BusListResponse,
+  BusResponse,
+} from "../../types/Bus/Bus.type";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRegisteredBusQuery = (
@@ -49,13 +53,24 @@ export const useGetAllBusListQuery = (
 
 export const useGetBusDateQuery = (
   param: BusDateParam,
-  options?: UseQueryOptions<BusResponse, AxiosError, BusResponse, string>
-) =>
-  useQuery(QUERY_KEYS.bus.busDate, () => busRepositoryImpl.getBusDate(param), {
-    ...options,
-    staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60,
-  });
+  options?: UseQueryOptions<
+    BusDateResponse,
+    AxiosError,
+    BusDateResponse,
+    (string | BusDateParam)[]
+  >
+) => {
+  return useQuery(
+    QUERY_KEYS.bus.busDate(param),
+    () => busRepositoryImpl.getBusDate(param),
+    {
+      ...options,
+      enabled: !!param,
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
+};
 
 export const useCreateBusMutation = () => {
   const mutation = useMutation((param: BusUpdateParam) =>
