@@ -58,9 +58,7 @@ const BusListItem = ({ page }: { page: number }) => {
           </TR>
         ))
       ) : (
-        <NoneDataText>
-          선택하신 날짜에 해당하는 버스정보가 없습니다.
-        </NoneDataText>
+        <NoneDataText>조회할 버스정보가 없습니다</NoneDataText>
       )}
     </TBody>
   );
