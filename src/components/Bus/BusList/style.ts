@@ -3,8 +3,7 @@ import { palette } from "../../../styles/palette";
 
 export const PrevNextButtonWrap = styled.div`
   width: 100%;
-  height: auto;
-  padding-top: 10px;
+  padding-top: 15px;
 
   display: flex;
   align-items: center;

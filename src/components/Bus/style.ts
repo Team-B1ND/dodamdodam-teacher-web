@@ -30,7 +30,7 @@ export const CommonBusTBody: CSSObject = {
 
 export const CommonBusTR: CSSObject = {
   width: "100%",
-  height: "80px",
+  height: "70px",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
