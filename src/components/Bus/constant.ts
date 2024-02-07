@@ -1,4 +1,4 @@
-export const BUS_DATE_ITEMS = [
+export const BUS_ITEMS = [
   "버스",
   "버스 설명",
   "출발 시간",

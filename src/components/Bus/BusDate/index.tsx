@@ -5,7 +5,7 @@ import BusSkeleton from "../../common/Skeleton/Bus";
 import TableAttribute from "../../common/TableAttribute";
 import { NoneDataText } from "../style";
 import BusDateItem from "./BusDateItem";
-import { BUS_DATE_ITEMS } from "./constant";
+import { BUS_ITEMS } from "../constant";
 import * as S from "./style";
 
 const BusDate = () => {
@@ -25,7 +25,7 @@ const BusDate = () => {
         />
       </S.SelectBusDateToView>
 
-      <TableAttribute constant={BUS_DATE_ITEMS} thStyle={{ width: "16.5%" }}>
+      <TableAttribute constant={BUS_ITEMS} thStyle={{ width: "16.5%" }}>
         <ErrorBoundary
           fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
         >

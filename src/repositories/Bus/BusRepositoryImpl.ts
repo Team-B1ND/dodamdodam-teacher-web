@@ -12,15 +12,9 @@ class BusRepositoryImpl implements BusRepository {
     return data;
   }
 
-  public async getAllBusList({
-    page,
-  }: {
-    page: number;
-  }): Promise<BusListResponse> {
-    const { data } = await dodamTeacherAxios.get(
-      `/bus/list?page=${page}&limit=8`
-    );
-    return { ...data, nextPage: page + 1 };
+  public async getAllBusList(page: number): Promise<BusListResponse> {
+    const { data } = await dodamV6Axios.get(`/bus/list?page=${page}&limit=8`);
+    return data;
   }
 
   public async getBusDate(param: BusDateParam): Promise<BusDateResponse> {

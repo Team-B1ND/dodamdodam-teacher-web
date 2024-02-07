@@ -6,7 +6,7 @@ import {
 
 export interface BusRepository {
   getRegisteredBus(): Promise<BusResponse>;
-  getAllBusList({ page }: { page: number }): Promise<BusListResponse>;
+  getAllBusList(page: number): Promise<BusListResponse>;
   getBusDate(date: BusDateParam): Promise<BusDateResponse>;
   createBus(param: BusUpdateParam): Promise<void>;
   modifyBus(param: BusUpdateParam): Promise<void>;

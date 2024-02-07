@@ -1,11 +1,5 @@
 import { AxiosError } from "axios";
-import {
-  useInfiniteQuery,
-  UseInfiniteQueryOptions,
-  useMutation,
-  useQuery,
-  UseQueryOptions,
-} from "react-query";
+import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import {
   BusDateParam,
   BusUpdateParam,
@@ -25,29 +19,29 @@ export const useGetRegisteredBusQuery = (
     QUERY_KEYS.bus.registeredBus,
     () => busRepositoryImpl.getRegisteredBus(),
     {
-      ...options,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+      ...options,
     }
   );
 
 export const useGetAllBusListQuery = (
-  options: UseInfiniteQueryOptions<
+  page: number,
+  options: UseQueryOptions<
     BusListResponse,
     AxiosError,
     BusListResponse,
-    BusListResponse,
-    string
+    (string | number)[]
   >
 ) =>
-  useInfiniteQuery(
-    QUERY_KEYS.bus.bustList,
-    ({ pageParam = 1 }) => busRepositoryImpl.getAllBusList({ page: pageParam }),
+  useQuery(
+    QUERY_KEYS.bus.bustList(page),
+    () => busRepositoryImpl.getAllBusList(page),
     {
-      ...options,
+      enabled: !!page,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
-      getNextPageParam: (nextPage) => nextPage.nextPage,
+      ...options,
     }
   );
 
@@ -59,18 +53,17 @@ export const useGetBusDateQuery = (
     BusDateResponse,
     (string | BusDateParam)[]
   >
-) => {
-  return useQuery(
+) =>
+  useQuery(
     QUERY_KEYS.bus.busDate(param),
     () => busRepositoryImpl.getBusDate(param),
     {
-      ...options,
       enabled: !!param,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+      ...options,
     }
   );
-};
 
 export const useCreateBusMutation = () => {
   const mutation = useMutation((param: BusUpdateParam) =>

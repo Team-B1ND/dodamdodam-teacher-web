@@ -21,8 +21,7 @@ export interface BusDateResponse extends Response {
 }
 
 export interface BusListResponse extends Response {
-  data: BusDataType[];
-  nextPage: number;
+  data: BusListType;
 }
 
 export interface BusDataType {
