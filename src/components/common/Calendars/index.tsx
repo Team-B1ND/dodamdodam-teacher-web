@@ -23,6 +23,10 @@ const Calendars = ({
 }: CalendarProps) => {
   const [date, setDateChange] = useState<Value>(new Date());
 
+  useEffect(() => {
+    setUploadDate(moment().format("YYYY-MM-DD"));
+  }, []);
+
   const handleDateChange = (newValue: Value) => {
     if (newValue instanceof Date) {
       const formattedDate = new Date(
