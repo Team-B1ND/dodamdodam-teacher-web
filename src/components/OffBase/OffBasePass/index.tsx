@@ -12,6 +12,8 @@ import TableAttribute from "../../common/TableAttribute";
 import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
 import ErrorBoundary from "../../common/ErrorBoundary";
 import OffBasePassItem from "./OffBasePassItem";
+import { changeGrade } from "../../../utils/Member/changeGrade";
+import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
 
 const OffBasePass = () => {
   const [studentName, setStudentName] = useRecoilState<any>(StudentNameAtom);
@@ -56,6 +58,8 @@ const OffBasePass = () => {
         <ErrorBoundary fallback={<>에러:)</>}>
           <Suspense fallback={<>로딩중...</>}>
             <OffBasePassItem
+              selectApproval={changeApproval(selectApproval)}
+              selectGrade={changeGrade(selectGrade)}
               studentName={studentName}
               uploadDate={uploadDate}
             />

@@ -91,3 +91,14 @@ export const MemberImage = styled.img`
   object-fit: cover;
   border-radius: 4rem;
 `;
+
+export const NoneTile = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  font-size: 16px;
+  color: #212529;
+`;
