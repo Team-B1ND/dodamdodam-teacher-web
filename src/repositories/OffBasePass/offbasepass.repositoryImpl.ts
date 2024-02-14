@@ -1,8 +1,5 @@
 import { dodamV6Axios } from "../../libs/Axios/customAxios";
-import {
-  OffBasePassType,
-  OffBaseResponse,
-} from "../../types/OffBasePass/offbasepass.type";
+import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
 import { OffBasePassRepository } from "./offbasepass.repository";
 
 class OffBasePassRepositoryImpl implements OffBasePassRepository {

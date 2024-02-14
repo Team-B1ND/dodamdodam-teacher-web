@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import {
   SelectApprovalAtom,
   SelectGradeAtom,
+  StudentNameAtom,
 } from "../../../stores/OffBase/offbase.store";
 import TableAttribute from "../../common/TableAttribute";
 import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
@@ -13,7 +14,7 @@ import ErrorBoundary from "../../common/ErrorBoundary";
 import OffBasePassItem from "./OffBasePassItem";
 
 const OffBasePass = () => {
-  const [studentName, setStudentName] = useState("");
+  const [studentName, setStudentName] = useRecoilState<any>(StudentNameAtom);
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useState<string>("");
 
@@ -34,6 +35,7 @@ const OffBasePass = () => {
             setUploadDate={setUploadDate}
           />
         </div>
+
         <S.SelectContainer>
           <Select
             items={["전체보기", "대기중", "거절됨", "승인됨", "복귀 완료"]}
@@ -49,6 +51,7 @@ const OffBasePass = () => {
           />
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
+
       <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>에러:)</>}>
           <Suspense fallback={<>로딩중...</>}>

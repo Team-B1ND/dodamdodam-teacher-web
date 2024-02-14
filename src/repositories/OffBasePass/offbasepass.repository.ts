@@ -1,5 +1,5 @@
 import {
-  OffBasePassType,
+  // OffBasePassType,
   OffBaseResponse,
 } from "../../types/OffBasePass/offbasepass.type";
 

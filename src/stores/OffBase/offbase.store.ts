@@ -9,3 +9,8 @@ export const SelectApprovalAtom = atom<string>({
   key: "SelectApprovalAtom",
   default: "전체보기",
 });
+
+export const StudentNameAtom = atom<string>({
+  key: "StudentNameAtom",
+  default: "",
+});

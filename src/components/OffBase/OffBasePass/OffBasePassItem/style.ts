@@ -10,6 +10,7 @@ export const OffBaseTBody: CSSObject = {
   rowGap: "5px",
   flexDirection: "column",
   whiteSpace: "normal",
+
   tr: {
     "&:hover": {
       filter: "unset",

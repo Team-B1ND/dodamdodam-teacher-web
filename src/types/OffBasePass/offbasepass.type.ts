@@ -12,17 +12,7 @@ export interface OutListType {
   reason: string;
   status: string;
   student: StudentType;
-  teacher: {
-    idx: 0;
-    phone: string;
-    id: string;
-    name: string;
-    email: string;
-    accessLevel: number;
-    allowed: number;
-    joinDate: string;
-    profileImage: string;
-  };
+  teacher: TeacherType;
   startOutDate: string;
   endOutDate: string;
   arrivedDate: string;
@@ -59,4 +49,15 @@ export interface MemberType {
   profileImage: string;
   role: string;
   status: string;
+}
+
+export interface TeacherType {
+  phone: string;
+  id: string;
+  name: string;
+  email: string;
+  accessLevel: number;
+  allowed: number;
+  joinDate: string;
+  profileImage: string;
 }
