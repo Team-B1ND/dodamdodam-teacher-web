@@ -2,6 +2,7 @@ import * as S from "./style";
 import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
+import useOffBasePass from "../../../../hooks/OffBasePass/useOffBasePass";
 
 interface OffBasePassProps {
   studentName: string;
@@ -19,6 +20,8 @@ const OffBasePassItem = ({
   const { data: OffBaswPass } = useGetOffBasePassQuery({
     date: uploadDate,
   });
+
+  const { handleOffBaseApproval } = useOffBasePass();
 
   const filteredResults = OffBaswPass?.data.outgoingList
     .filter((pass) => pass.student.member.name.includes(studentName))
@@ -60,7 +63,11 @@ const OffBasePassItem = ({
               </TD>
               <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
               <TD customStyle={S.ButtonContainerStyle}>
-                <Button ButtonType="agree" style={S.EditStyle}>
+                <Button
+                  ButtonType="agree"
+                  style={S.EditStyle}
+                  onClick={() => handleOffBaseApproval(key.id)}
+                >
                   승인
                 </Button>
                 <Button ButtonType="disagree" style={S.DelStyle}>

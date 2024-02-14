@@ -11,6 +11,11 @@ class OffBasePassRepositoryImpl implements OffBasePassRepository {
     const { data } = await dodamV6Axios.get(`out/date?date=${date}`);
     return data;
   }
+
+  public async patchApprovals(outId: number[]): Promise<void> {
+    const { data } = await dodamV6Axios.patch("/out/outgoing/allow", { outId });
+    return data;
+  }
 }
 
 export default new OffBasePassRepositoryImpl();
