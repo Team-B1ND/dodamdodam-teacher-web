@@ -5,6 +5,7 @@ export interface OffBasePassRepository {
   patchApproval(outId: number[]): Promise<void>;
   patchApprovalCancel(outId: number[]): Promise<void>;
   patchCancel(outId: number[]): Promise<void>;
+  patchArrived(id: number): Promise<void>;
 }
 
 export interface OffBaseParam {

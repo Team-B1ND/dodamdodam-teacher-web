@@ -19,6 +19,10 @@ class OffBasePassRepositoryImpl implements OffBasePassRepository {
   public async patchCancel(outId: number[]): Promise<void> {
     await dodamV6Axios.patch("out/outgoing/deny", { outId });
   }
+
+  public async patchArrived(id: number): Promise<void> {
+    await dodamV6Axios.patch(`/outoutgoing/arrived/${id}`);
+  }
 }
 
 export default new OffBasePassRepositoryImpl();

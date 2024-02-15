@@ -43,3 +43,10 @@ export const usePatchCancel = () => {
   );
   return mutation;
 };
+
+export const usePatchArrived = () => {
+  const mutation = useMutation((id: number) =>
+    offbasepassRepositoryImpl.patchArrived(id)
+  );
+  return mutation;
+};
