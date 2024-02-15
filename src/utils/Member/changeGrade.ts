@@ -1,6 +1,7 @@
 export const changeGrade = (selectValue: string) => {
   switch (selectValue) {
-    case "전체보기" && "모든학년":
+    case "모든학년":
+    case "전체보기":
       return 0;
     case "1학년":
       return 1;

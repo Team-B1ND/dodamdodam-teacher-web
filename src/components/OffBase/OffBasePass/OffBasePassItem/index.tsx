@@ -7,6 +7,7 @@ import useOffBasePass from "../../../../hooks/OffBasePass/useOffBasePass";
 interface OffBasePassProps {
   studentName: string;
   uploadDate: string;
+
   selectGrade: number;
   selectApproval: string | undefined;
 }
@@ -17,8 +18,8 @@ const OffBasePassItem = ({
   selectGrade,
   selectApproval,
 }: OffBasePassProps) => {
-  const { data: OffBaswPass } = useGetOffBasePassQuery({
-    date: uploadDate,
+  const { data: OffBaswPass } = useGetOffBasePassQuery(uploadDate, {
+    suspense: true,
   });
 
   const { handleOffBaseApproval, handleOffBaseApprovalCancel } =
@@ -60,20 +61,33 @@ const OffBasePassItem = ({
               </TD>
               <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
               <TD customStyle={S.ButtonContainerStyle}>
-                <Button
-                  ButtonType="agree"
-                  style={S.EditStyle}
-                  onClick={() => handleOffBaseApproval(key.id)}
-                >
-                  승인
-                </Button>
-                <Button
-                  ButtonType="disagree"
-                  style={S.DelStyle}
-                  onClick={() => handleOffBaseApprovalCancel(key.id)}
-                >
-                  거절
-                </Button>
+                {key.status === "ALLOWED" ? (
+                  <>
+                    <Button ButtonType="agree" style={S.EditStyle}>
+                      복귀 처리
+                    </Button>
+                    <Button ButtonType="disagree" style={S.DelStyle}>
+                      승인 취소
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      ButtonType="agree"
+                      style={S.EditStyle}
+                      onClick={() => handleOffBaseApproval(key.id)}
+                    >
+                      승인
+                    </Button>
+                    <Button
+                      ButtonType="disagree"
+                      style={S.DelStyle}
+                      onClick={() => handleOffBaseApprovalCancel(key.id)}
+                    >
+                      거절
+                    </Button>
+                  </>
+                )}
               </TD>
             </TR>
           ))}
