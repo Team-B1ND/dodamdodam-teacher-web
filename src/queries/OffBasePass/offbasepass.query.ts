@@ -14,7 +14,14 @@ export const useGetOffBasePassQuery = ({
 
 export const usePatchApproval = () => {
   const mutation = useMutation((outId: number) =>
-    offbasepassRepositoryImpl.patchApprovals([outId])
+    offbasepassRepositoryImpl.patchApproval([outId])
+  );
+  return mutation;
+};
+
+export const usePatchApprovalCancel = () => {
+  const mutation = useMutation((outId: number) =>
+    offbasepassRepositoryImpl.patchApprovalCancel([outId])
   );
   return mutation;
 };

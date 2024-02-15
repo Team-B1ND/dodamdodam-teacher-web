@@ -21,7 +21,8 @@ const OffBasePassItem = ({
     date: uploadDate,
   });
 
-  const { handleOffBaseApproval } = useOffBasePass();
+  const { handleOffBaseApproval, handleOffBaseApprovalCancel } =
+    useOffBasePass();
 
   const filteredResults = OffBaswPass?.data.outgoingList
     .filter((pass) => pass.student.member.name.includes(studentName))
@@ -30,10 +31,6 @@ const OffBasePassItem = ({
         data.student.classroom.grade === selectGrade || selectGrade === 0
     )
     .filter((data) => data.status === selectApproval || selectApproval === "");
-
-  OffBaswPass?.data.outgoingList.filter((pass) =>
-    pass.student.member.name.includes(studentName)
-  );
 
   return (
     <>
@@ -70,7 +67,11 @@ const OffBasePassItem = ({
                 >
                   승인
                 </Button>
-                <Button ButtonType="disagree" style={S.DelStyle}>
+                <Button
+                  ButtonType="disagree"
+                  style={S.DelStyle}
+                  onClick={() => handleOffBaseApprovalCancel(key.id)}
+                >
                   거절
                 </Button>
               </TD>

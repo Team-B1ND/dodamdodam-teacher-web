@@ -12,9 +12,12 @@ class OffBasePassRepositoryImpl implements OffBasePassRepository {
     return data;
   }
 
-  public async patchApprovals(outId: number[]): Promise<void> {
-    const { data } = await dodamV6Axios.patch("/out/outgoing/allow", { outId });
-    return data;
+  public async patchApproval(outId: number[]): Promise<void> {
+    await dodamV6Axios.patch("/out/outgoing/allow", { outId });
+  }
+
+  public async patchApprovalCancel(outId: number[]): Promise<void> {
+    await dodamV6Axios.patch("out/outgoing/cancel-allow", { outId });
   }
 }
 
