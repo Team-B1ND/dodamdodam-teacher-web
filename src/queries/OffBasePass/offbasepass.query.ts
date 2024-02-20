@@ -1,14 +1,6 @@
-import {
-  UseQueryOptions,
-  UseQueryResult,
-  useMutation,
-  useQuery,
-} from "react-query";
+import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import offbasepassRepositoryImpl from "../../repositories/OffBasePass/offbasepass.repositoryImpl";
-import {
-  DateType,
-  OffBaseResponse,
-} from "../../types/OffBasePass/offbasepass.type";
+import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "../queryKey";
 
@@ -23,7 +15,7 @@ export const useGetOffBasePassQuery = (
 ) =>
   useQuery(
     QUERY_KEYS.offbasepass.getOffBasePass(date),
-    () => offbasepassRepositoryImpl.getOffBasePass(date),
+    () => offbasepassRepositoryImpl.getOffBase(date),
     {
       enabled: !!date,
       staleTime: 1000 * 60 * 60,

@@ -1,32 +1,25 @@
 import * as S from "./style";
-import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
+import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import profileImg from "../../../../assets/profileImg.svg";
-import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
+import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 
-interface OffBasePassProps {
+interface OffBaseLeaveProps {
   studentName: string;
   uploadDate: string;
   selectGrade: number;
   selectApproval: string | undefined;
 }
 
-const OffBasePassItem = ({
+const OffBaseLeaveItem = ({
+  selectApproval,
+  selectGrade,
   studentName,
   uploadDate,
-  selectGrade,
-  selectApproval,
-}: OffBasePassProps) => {
+}: OffBaseLeaveProps) => {
   const { data: OffBaswPass } = useGetOffBasePassQuery(uploadDate);
 
-  const {
-    handleOffBasePass,
-    patchApprovalCancel,
-    patchApprovals,
-    patchCancel,
-  } = useOffBasePass();
-
-  const filteredResults = OffBaswPass?.data.outgoingList
+  const filteredResults = OffBaswPass?.data.outsleepingList
     .filter((pass) => pass.student.member.name.includes(studentName))
     .filter(
       (data) =>
@@ -34,10 +27,17 @@ const OffBasePassItem = ({
     )
     .filter((data) => data.status === selectApproval || selectApproval === "");
 
+  const {
+    handleOffBaseLeave,
+    patchLeaveApproval,
+    patchLeaveApprovalCancel,
+    patchLeaveCancel,
+  } = useOffBaseLeave();
+
   return (
     <>
       {!filteredResults || filteredResults.length === 0 ? (
-        <S.NoneTile>현재 외출 중인 학생이 없습니다.</S.NoneTile>
+        <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
       ) : (
         <TBody customStyle={S.OffBaseTBody}>
           {filteredResults?.map((key) => (
@@ -68,7 +68,7 @@ const OffBasePassItem = ({
                       ButtonType="disagree"
                       style={S.DelStyle}
                       onClick={() =>
-                        handleOffBasePass(key.id, patchApprovalCancel)
+                        handleOffBaseLeave(key.id, patchLeaveApprovalCancel)
                       }
                     >
                       승인 취소
@@ -79,14 +79,18 @@ const OffBasePassItem = ({
                     <Button
                       ButtonType="agree"
                       style={S.EditStyle}
-                      onClick={() => handleOffBasePass(key.id, patchApprovals)}
+                      onClick={() =>
+                        handleOffBaseLeave(key.id, patchLeaveApproval)
+                      }
                     >
                       승인
                     </Button>
                     <Button
                       ButtonType="disagree"
                       style={S.DelStyle}
-                      onClick={() => handleOffBasePass(key.id, patchCancel)}
+                      onClick={() =>
+                        handleOffBaseLeave(key.id, patchLeaveCancel)
+                      }
                     >
                       거절
                     </Button>
@@ -101,4 +105,4 @@ const OffBasePassItem = ({
   );
 };
 
-export default OffBasePassItem;
+export default OffBaseLeaveItem;

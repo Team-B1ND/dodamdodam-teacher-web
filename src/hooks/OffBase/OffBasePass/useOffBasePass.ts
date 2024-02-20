@@ -3,18 +3,17 @@ import {
   usePatchApproval,
   usePatchApprovalCancel,
   usePatchCancel,
-} from "../../queries/OffBasePass/offbasepass.query";
+} from "../../../queries/OffBasePass/offbasepass.query";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from "../../queries/queryKey";
+import { QUERY_KEYS } from "../../../queries/queryKey";
 import { useRecoilState } from "recoil";
-import { UploadDateAtom } from "../../stores/OffBase/offbase.store";
+import { UploadDateAtom } from "../../../stores/OffBase/offbase.store";
 
 const useOffBasePass = () => {
+  const queryClient = useQueryClient();
   const patchApprovals = usePatchApproval();
   const patchApprovalCancel = usePatchApprovalCancel();
   const patchCancel = usePatchCancel();
-
-  const queryClient = useQueryClient();
 
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
 

@@ -3,7 +3,7 @@ import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
 import { OffBasePassRepository } from "./offbasepass.repository";
 
 class OffBasePassRepositoryImpl implements OffBasePassRepository {
-  public async getOffBasePass(date: string): Promise<OffBaseResponse> {
+  public async getOffBase(date: string): Promise<OffBaseResponse> {
     const { data } = await dodamV6Axios.get(`out/date?date=${date}`);
     return data;
   }
@@ -18,10 +18,6 @@ class OffBasePassRepositoryImpl implements OffBasePassRepository {
 
   public async patchCancel(outId: number[]): Promise<void> {
     await dodamV6Axios.patch("out/outgoing/deny", { outId });
-  }
-
-  public async patchArrived(id: number): Promise<void> {
-    await dodamV6Axios.patch(`/outoutgoing/arrived/${id}`);
   }
 }
 

@@ -1,7 +1,7 @@
 import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
+import * as S from "./style";
 import { Suspense, useState } from "react";
 import Calendars from "../../common/Calendars";
-import * as S from "./style";
 import { useRecoilState } from "recoil";
 import {
   SelectApprovalAtom,
@@ -9,13 +9,13 @@ import {
   UploadDateAtom,
 } from "../../../stores/OffBase/offbase.store";
 import TableAttribute from "../../common/TableAttribute";
-import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
 import ErrorBoundary from "../../common/ErrorBoundary";
-import OffBasePassItem from "./OffBasePassItem";
-import { changeGrade } from "../../../utils/Member/changeGrade";
+import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
+import OffBaseLeaveItem from "./OffBaseLeaveItem";
 import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
+import { changeGrade } from "../../../utils/Member/changeGrade";
 
-const OffBasePass = () => {
+const OffBaseLeave = () => {
   const [studentName, setStudentName] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
@@ -23,7 +23,6 @@ const OffBasePass = () => {
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] =
     useRecoilState(SelectApprovalAtom);
-
   return (
     <>
       <S.OffBaseHeaderContainer>
@@ -53,11 +52,10 @@ const OffBasePass = () => {
           />
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
-
       <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>에러:)</>}>
           <Suspense fallback={<>로딩중...</>}>
-            <OffBasePassItem
+            <OffBaseLeaveItem
               selectApproval={changeApproval(selectApproval)}
               selectGrade={changeGrade(selectGrade)}
               studentName={studentName}
@@ -69,5 +67,4 @@ const OffBasePass = () => {
     </>
   );
 };
-
-export default OffBasePass;
+export default OffBaseLeave;
