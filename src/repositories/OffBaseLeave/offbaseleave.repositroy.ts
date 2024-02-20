@@ -13,6 +13,11 @@ class OffBaseLeaveRepositoryImpl implements OffBaseLeaveRepository {
   public async patchLeaveApprovalCancel(outId: number[]): Promise<void> {
     await dodamV6Axios.patch("out/outsleeping/cancel-allow", { outId });
   }
+
+  public async getTodayLeave(): Promise<void> {
+    const { data } = await dodamV6Axios.get("/out/today");
+    return data;
+  }
 }
 
 export default new OffBaseLeaveRepositoryImpl();

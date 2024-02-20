@@ -1,5 +1,6 @@
-import { useMutation } from "react-query";
+import { UseQueryResult, useMutation, useQuery } from "react-query";
 import offbaseleaveRepositroy from "../../repositories/OffBaseLeave/offbaseleave.repositroy";
+import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
 
 export const usePatchLeaveApproval = () => {
   const mutation = useMutation((outId: number) =>
