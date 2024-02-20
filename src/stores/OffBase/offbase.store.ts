@@ -14,3 +14,8 @@ export const StudentNameAtom = atom<string>({
   key: "StudentNameAtom",
   default: "",
 });
+
+export const UploadDateAtom = atom<string>({
+  key: "UploadDateAtom",
+  default: "",
+});

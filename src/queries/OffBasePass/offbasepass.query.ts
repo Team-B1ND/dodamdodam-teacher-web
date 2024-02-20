@@ -1,6 +1,14 @@
-import { UseQueryOptions, useMutation, useQuery } from "react-query";
+import {
+  UseQueryOptions,
+  UseQueryResult,
+  useMutation,
+  useQuery,
+} from "react-query";
 import offbasepassRepositoryImpl from "../../repositories/OffBasePass/offbasepass.repositoryImpl";
-import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
+import {
+  DateType,
+  OffBaseResponse,
+} from "../../types/OffBasePass/offbasepass.type";
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "../queryKey";
 
@@ -17,9 +25,10 @@ export const useGetOffBasePassQuery = (
     QUERY_KEYS.offbasepass.getOffBasePass(date),
     () => offbasepassRepositoryImpl.getOffBasePass(date),
     {
-      ...options,
+      enabled: !!date,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+      ...options,
     }
   );
 
@@ -40,13 +49,6 @@ export const usePatchApprovalCancel = () => {
 export const usePatchCancel = () => {
   const mutation = useMutation((outId: number) =>
     offbasepassRepositoryImpl.patchCancel([outId])
-  );
-  return mutation;
-};
-
-export const usePatchArrived = () => {
-  const mutation = useMutation((id: number) =>
-    offbasepassRepositoryImpl.patchArrived(id)
   );
   return mutation;
 };

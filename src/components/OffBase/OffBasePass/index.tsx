@@ -7,6 +7,7 @@ import {
   SelectApprovalAtom,
   SelectGradeAtom,
   StudentNameAtom,
+  UploadDateAtom,
 } from "../../../stores/OffBase/offbase.store";
 import TableAttribute from "../../common/TableAttribute";
 import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
@@ -18,7 +19,7 @@ import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
 const OffBasePass = () => {
   const [studentName, setStudentName] = useRecoilState<any>(StudentNameAtom);
   const [isOpen, setIsOpen] = useState(false);
-  const [uploadDate, setUploadDate] = useState<string>("");
+  const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
 
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] =

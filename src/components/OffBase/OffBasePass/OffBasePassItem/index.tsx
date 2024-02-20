@@ -3,6 +3,7 @@ import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasep
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBasePass/useOffBasePass";
+import { useEffect, useState } from "react";
 
 interface OffBasePassProps {
   studentName: string;
@@ -17,16 +18,13 @@ const OffBasePassItem = ({
   selectGrade,
   selectApproval,
 }: OffBasePassProps) => {
-  const { data: OffBaswPass } = useGetOffBasePassQuery(uploadDate, {
-    suspense: true,
-  });
+  const { data: OffBaswPass } = useGetOffBasePassQuery(uploadDate);
 
   const {
     handleOffBasePass,
     patchApprovalCancel,
     patchApprovals,
     patchCancel,
-    handleOffBaseArrived,
   } = useOffBasePass();
 
   const filteredResults = OffBaswPass?.data.outgoingList
@@ -66,14 +64,7 @@ const OffBasePassItem = ({
               <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
               <TD customStyle={S.ButtonContainerStyle}>
                 {key.status === "ALLOWED" ? (
-                  <>
-                    <Button
-                      ButtonType="agree"
-                      style={S.EditStyle}
-                      onClick={() => handleOffBaseArrived(key.id)}
-                    >
-                      복귀 처리
-                    </Button>
+                  <div>
                     <Button
                       ButtonType="disagree"
                       style={S.DelStyle}
@@ -83,7 +74,7 @@ const OffBasePassItem = ({
                     >
                       승인 취소
                     </Button>
-                  </>
+                  </div>
                 ) : (
                   <>
                     <Button

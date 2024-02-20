@@ -61,3 +61,7 @@ export interface TeacherType {
   joinDate: string;
   profileImage: string;
 }
+
+export interface DateType {
+  date: string;
+}
