@@ -17,7 +17,7 @@ const useOffBasePass = () => {
 
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
 
-  const handleOffBasePass = (outId: number, query: any) => {
+  const handleOffBasePass = (outId: number[], query: any) => {
     query.mutate(outId, {
       onSuccess: () => {
         if (query == patchApprovals) {

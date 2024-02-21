@@ -1,14 +1,17 @@
 import * as S from "./style";
 import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
-import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
+import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
+import { useRecoilState } from "recoil";
+import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
+import { OffBaseDataFilter } from "../../../../utils/OffBasePass/OffBaseDateFilter";
 
 interface OffBasePassProps {
   studentName: string;
   uploadDate: string;
   selectGrade: number;
-  selectApproval: string | undefined;
+  selectApproval: any;
 }
 
 const OffBasePassItem = ({
@@ -18,6 +21,7 @@ const OffBasePassItem = ({
   selectApproval,
 }: OffBasePassProps) => {
   const { data: OffBaswPass } = useGetOffBasePassQuery(uploadDate);
+  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
 
   const {
     handleOffBasePass,
@@ -26,77 +30,108 @@ const OffBasePassItem = ({
     patchCancel,
   } = useOffBasePass();
 
-  const filteredResults = OffBaswPass?.data.outgoingList
-    .filter((pass) => pass.student.member.name.includes(studentName))
-    .filter(
-      (data) =>
-        data.student.classroom.grade === selectGrade || selectGrade === 0
-    )
-    .filter((data) => data.status === selectApproval || selectApproval === "");
+  const selectComponent = (Id: number) => {
+    const component = OffBaseDataFilter(
+      OffBaswPass,
+      studentName,
+      selectGrade,
+      selectApproval
+    )?.find((key) => key.id === Id)?.status;
+
+    if (component === "ALLOWED") {
+      return (
+        <div>
+          <Button
+            ButtonType="disagree"
+            style={S.DelStyle}
+            onClick={() => {
+              handleOffBasePass([Id], patchApprovalCancel);
+              setSelectedIds((prevIds) =>
+                prevIds.filter((id: any) => id !== Id)
+              );
+            }}
+          >
+            승인 취소
+          </Button>
+        </div>
+      );
+    } else if (component === "PENDING") {
+      return (
+        <>
+          <Button
+            ButtonType="agree"
+            style={S.EditStyle}
+            onClick={() => {
+              handleOffBasePass([Id], patchApprovals);
+            }}
+          >
+            승인
+          </Button>
+          <Button
+            ButtonType="disagree"
+            style={S.DelStyle}
+            onClick={() => handleOffBasePass([Id], patchCancel)}
+          >
+            거절
+          </Button>
+        </>
+      );
+    } else if (component === "DENIED") {
+      return (
+        <Button ButtonType="disagree" style={S.ClearStyle}>
+          거절됨
+        </Button>
+      );
+    }
+  };
 
   return (
     <>
-      {!filteredResults || filteredResults.length === 0 ? (
-        <S.NoneTile>현재 외출 중인 학생이 없습니다.</S.NoneTile>
-      ) : (
+      {OffBaseDataFilter(
+        OffBaswPass,
+        studentName,
+        selectGrade,
+        selectApproval
+      )?.map((key) => (
         <TBody customStyle={S.OffBaseTBody}>
-          {filteredResults?.map((key) => (
-            <TR customStyle={S.OffBaseTR}>
-              <TD customStyle={S.OffBaseTD}>
-                <S.MemberImage
-                  src={key.student.member.profileImage || profileImg}
-                />
-              </TD>
-              <TD customStyle={S.OffBaseTD}>{key.student.member.name}</TD>
-              <TD customStyle={S.OffBaseTD}>
-                {key.student.classroom.grade}학년{key.student.classroom.room}반
-                {key.student.classroom.room}번
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                {key.startOutDate.slice(0, 10)} {key.startOutDate.slice(11, 13)}
-                시{key.startOutDate.slice(14, 16)}분
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                {key.endOutDate.slice(0, 10)} {key.endOutDate.slice(11, 13)}시
-                {key.endOutDate.slice(14, 16)}분
-              </TD>
-              <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
-              <TD customStyle={S.ButtonContainerStyle}>
-                {key.status === "ALLOWED" ? (
-                  <div>
-                    <Button
-                      ButtonType="disagree"
-                      style={S.DelStyle}
-                      onClick={() =>
-                        handleOffBasePass(key.id, patchApprovalCancel)
-                      }
-                    >
-                      승인 취소
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <Button
-                      ButtonType="agree"
-                      style={S.EditStyle}
-                      onClick={() => handleOffBasePass(key.id, patchApprovals)}
-                    >
-                      승인
-                    </Button>
-                    <Button
-                      ButtonType="disagree"
-                      style={S.DelStyle}
-                      onClick={() => handleOffBasePass(key.id, patchCancel)}
-                    >
-                      거절
-                    </Button>
-                  </>
-                )}
-              </TD>
-            </TR>
-          ))}
+          <S.OffBaseTR
+            onClick={() => {
+              key.status === "PENDING" &&
+                setSelectedIds((prevIds) =>
+                  prevIds.includes(key.id)
+                    ? prevIds.filter((id) => id !== key.id)
+                    : [...prevIds, key.id]
+                );
+            }}
+            style={{
+              backgroundColor: selectedIds.includes(key.id) ? "#EEF3F9" : "",
+            }}
+          >
+            <TD customStyle={S.OffBaseTD}>
+              <S.MemberImage
+                src={key.student.member.profileImage || profileImg}
+              />
+            </TD>
+            <TD customStyle={S.OffBaseTD}>{key.student.member.name}</TD>
+            <TD customStyle={S.OffBaseTD}>
+              {key.student.classroom.grade}학년
+              {key.student.classroom.room}반{key.student.classroom.room}번
+            </TD>
+            <TD customStyle={S.OffBaseTD}>
+              {key.startOutDate.slice(0, 10)} {key.startOutDate.slice(11, 13)}시
+              {key.startOutDate.slice(14, 16)}분
+            </TD>
+            <TD customStyle={S.OffBaseTD}>
+              {key.endOutDate.slice(0, 10)} {key.endOutDate.slice(11, 13)}시
+              {key.endOutDate.slice(14, 16)}분
+            </TD>
+            <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
+            <TD customStyle={S.ButtonContainerStyle}>
+              {selectComponent(key.id)}
+            </TD>
+          </S.OffBaseTR>
         </TBody>
-      )}
+      ))}
     </>
   );
 };

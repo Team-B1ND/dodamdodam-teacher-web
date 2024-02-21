@@ -31,48 +31,53 @@ const TodayOffBaseItem = ({
 
   return (
     <>
-      <TBody customStyle={S.OffBaseTBody}>
-        {filteredResults?.map((key) =>
-          key.status === "ALLOWED" ? (
-            <TR customStyle={S.OffBaseTR}>
-              <TD customStyle={S.OffBaseTD}>
-                <S.MemberImage
-                  src={key.student.member.profileImage || profileImg}
-                />
-              </TD>
-              <TD customStyle={S.OffBaseTD}>{key.student.member.name}</TD>
-              <TD customStyle={S.OffBaseTD}>
-                {key.student.classroom.grade}학년
-                {key.student.classroom.room}반{key.student.classroom.room}번
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                {key.startOutDate.slice(0, 10)} {key.startOutDate.slice(11, 13)}
-                시{key.startOutDate.slice(14, 16)}분
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                {key.endOutDate.slice(0, 10)} {key.endOutDate.slice(11, 13)}시
-                {key.endOutDate.slice(14, 16)}분
-              </TD>
-              <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
-              <TD customStyle={S.ButtonContainerStyle}>
-                <div>
-                  <Button
-                    ButtonType="disagree"
-                    style={S.DelStyle}
-                    onClick={() =>
-                      handleOffBaseLeave(key.id, patchLeaveApprovalCancel)
-                    }
-                  >
-                    승인 취소
-                  </Button>
-                </div>
-              </TD>
-            </TR>
-          ) : (
-            <S.NoneTile>현재 외박중인 학생이 없습니다.</S.NoneTile>
-          )
-        )}
-      </TBody>
+      {!filteredResults || filteredResults.length === 0 ? (
+        <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
+      ) : (
+        <TBody customStyle={S.OffBaseTBody}>
+          {filteredResults?.map((key) =>
+            key.status === "ALLOWED" ? (
+              <TR customStyle={S.OffBaseTR}>
+                <TD customStyle={S.OffBaseTD}>
+                  <S.MemberImage
+                    src={key.student.member.profileImage || profileImg}
+                  />
+                </TD>
+                <TD customStyle={S.OffBaseTD}>{key.student.member.name}</TD>
+                <TD customStyle={S.OffBaseTD}>
+                  {key.student.classroom.grade}학년
+                  {key.student.classroom.room}반{key.student.classroom.room}번
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  {key.startOutDate.slice(0, 10)}{" "}
+                  {key.startOutDate.slice(11, 13)}시
+                  {key.startOutDate.slice(14, 16)}분
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  {key.endOutDate.slice(0, 10)} {key.endOutDate.slice(11, 13)}시
+                  {key.endOutDate.slice(14, 16)}분
+                </TD>
+                <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
+                <TD customStyle={S.ButtonContainerStyle}>
+                  <div>
+                    <Button
+                      ButtonType="disagree"
+                      style={S.DelStyle}
+                      onClick={() =>
+                        handleOffBaseLeave(key.id, patchLeaveApprovalCancel)
+                      }
+                    >
+                      승인 취소
+                    </Button>
+                  </div>
+                </TD>
+              </TR>
+            ) : (
+              <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
+            )
+          )}
+        </TBody>
+      )}
     </>
   );
 };
