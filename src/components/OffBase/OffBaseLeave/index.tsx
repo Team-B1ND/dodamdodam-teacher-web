@@ -53,7 +53,7 @@ const OffBaseLeave = () => {
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
       <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
-        <ErrorBoundary fallback={<>에러:)</>}>
+        <ErrorBoundary fallback={<>외박한 학생을 불러오지 못했습니다.</>}>
           <Suspense fallback={<>로딩중...</>}>
             <OffBaseLeaveItem
               selectApproval={changeApproval(selectApproval)}

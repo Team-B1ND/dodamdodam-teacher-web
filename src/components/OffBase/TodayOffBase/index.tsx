@@ -44,7 +44,7 @@ const TodayOffBase = () => {
       </S.OffBaseHeaderContainer>
 
       <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
-        <ErrorBoundary fallback={<>에러:)</>}>
+        <ErrorBoundary fallback={<>오늘의 외박자를 불러오지 못했습니다.</>}>
           <Suspense fallback={<>로딩중...</>}>
             <TodayOffBaseItem
               selectApproval={changeApproval(selectApproval)}
