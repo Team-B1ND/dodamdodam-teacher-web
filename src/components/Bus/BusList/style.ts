@@ -24,7 +24,7 @@ export const PrevNextButtonWrap = styled.div`
 `;
 
 const ButtonHover = css`
-  transition: all 0.3s ease-in-out;
+  transition: all 0.15s ease-in;
   &:hover {
     background-color: ${palette.main};
     color: #fff;
