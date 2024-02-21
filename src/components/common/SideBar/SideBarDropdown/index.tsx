@@ -42,14 +42,6 @@ const SideBarDropdown = () => {
           redirectUrl="/lateNight-allow"
         />
         <MenuDropdownChild title="심자중인 학생" redirectUrl="/PointReason" />
-        <MenuDropdownChild
-          title="학교 점수 관리"
-          redirectUrl="/pointSchoolScore"
-        />
-        <MenuDropdownChild
-          title="학교 점수 사유"
-          redirectUrl="/pointSchoolReason"
-        />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="학사일정">
         <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
