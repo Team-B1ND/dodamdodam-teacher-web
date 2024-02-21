@@ -16,27 +16,26 @@ export const useOpenBusModal = () => {
 
   // 버스 등록, 수정 모달 및 탑승자 모달 여는 함수
   const openBusModalOverlay = (
-    modalType: "reigster" | "passenger",
-    busId?: number // busId가 있다면 버스 수정, 없다면 등록
+    modal: { type: "register"; busId: number } | { type: "passenger" }
   ) => {
-    new Promise((resolve) => {
+    return new Promise((resolve) => {
       busFormOverlay.open(({ isOpen, close }) =>
-        modalType === "reigster" ? (
+        modal.type === "register" ? (
           <BusRegister
-            busId={busId!}
+            busId={modal.busId}
             isOpen={isOpen}
             close={() => {
-              resolve(true);
               close();
-              busId && setExistingBusData(null);
+              modal.busId && setExistingBusData(null);
+              resolve(true);
             }}
           />
         ) : (
           <BusPassenger
             isOpen={isOpen}
             close={() => {
-              resolve(true);
               close();
+              resolve(true);
             }}
           />
         )
@@ -46,7 +45,7 @@ export const useOpenBusModal = () => {
 
   // 버스 추가, 수정 모달을 여는 함수
   const handleOpenRegisterModal = (busId?: number) => {
-    openBusModalOverlay("reigster", busId);
+    openBusModalOverlay({ type: "register", busId: busId! });
   };
 
   // 버스탑승자 모달을 여는 함수
@@ -60,7 +59,7 @@ export const useOpenBusModal = () => {
         busName: busName,
         busMember: busMember,
       }));
-      openBusModalOverlay("passenger");
+      openBusModalOverlay({ type: "passenger" });
     } else {
       B1ndToast.showInfo("현재 버스 탑승 인원이 없습니다.");
     }
