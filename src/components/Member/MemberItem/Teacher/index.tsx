@@ -23,7 +23,9 @@ const Teacher = ({ teachersInfo, searchValue, selectGrade }: Props) => {
                 <MemberImage src={profileImg} alt="이미지 없음" />
               </TD>
               <TD customStyle={MemberTD}>{teacher.member.name}</TD>
-              <TD customStyle={MemberTD}>선생님</TD>
+              <TD customStyle={MemberTD}>
+                {teacher.member.role === "ADMIN" ? "관리자" : "선생님"}
+              </TD>
               <TD customStyle={MemberTD}>{teacher.member.id}</TD>
               <TD customStyle={MemberTD}>
                 <ScrollEmailText>{teacher.member.email}</ScrollEmailText>
