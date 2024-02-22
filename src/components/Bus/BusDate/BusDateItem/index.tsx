@@ -16,10 +16,10 @@ interface Props {
 }
 
 const BusDateItem = ({ handleConvertToBusParamFormat }: Props) => {
-  const { data } = useGetBusDateQuery(handleConvertToBusParamFormat(), {
+  const dateBusData = useGetBusDateQuery(handleConvertToBusParamFormat(), {
     suspense: true,
-  });
-  const dateBusData = data?.data.bus;
+  }).data?.data.bus;
+
   const { handleOpenPassengerModal } = useOpenBusModal();
 
   return (

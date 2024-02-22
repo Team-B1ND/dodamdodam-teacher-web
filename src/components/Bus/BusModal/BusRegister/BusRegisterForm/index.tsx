@@ -1,7 +1,7 @@
 import { Button, Table, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
+import { useRegistBus } from "hooks/Bus/useRegistBus";
 import { BUS_REGIST_TITLE_ITEMS } from "./constant";
 import * as S from "./style";
-import { useRegistBus } from "../../../../../hooks/Bus/useRegistBus";
 
 interface Props {
   closeBusRegister: () => void;

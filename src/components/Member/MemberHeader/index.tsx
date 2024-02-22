@@ -1,10 +1,7 @@
 import { SearchBar, SectionHeader, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { SelectSeachContainer } from "../style";
 import { useRecoilState } from "recoil";
-import {
-  MemberSearch,
-  MemberSelectGrade,
-} from "../../../stores/Member/member.store";
+import { MemberSearch, MemberSelectGrade } from "stores/Member/member.store";
 
 const MemberHeader = () => {
   const [selectGrade, setSelectGrade] = useRecoilState(MemberSelectGrade);

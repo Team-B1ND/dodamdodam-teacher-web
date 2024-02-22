@@ -1,5 +1,5 @@
-import BusManagement from "../../components/Bus/BusManagement";
-import BusProvider from "../../components/Bus/BusProvider";
+import BusManagement from "components/Bus/BusManagement";
+import BusProvider from "components/Bus/BusProvider";
 
 const BusPage = () => {
   return (

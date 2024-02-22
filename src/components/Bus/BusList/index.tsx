@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { useRecoilState } from "recoil";
-import { BusListPageAtom } from "../../../stores/Bus/bus.store";
-import ErrorBoundary from "../../common/ErrorBoundary";
-import BusSkeleton from "../../common/Skeleton/Bus";
-import TableAttribute from "../../common/TableAttribute";
+import { BusListPageAtom } from "stores/Bus/bus.store";
+import ErrorBoundary from "components/common/ErrorBoundary";
+import BusSkeleton from "components/common/Skeleton/Bus";
+import TableAttribute from "components/common/TableAttribute";
 import { BUS_ITEMS } from "../constant";
 import { NoneDataText } from "../style";
 import BusListItem from "./BusListItem";

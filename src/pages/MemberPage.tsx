@@ -1,4 +1,4 @@
-import Member from "../components/Member";
+import Member from "components/Member";
 
 const MemberPage = () => {
   return <Member />;

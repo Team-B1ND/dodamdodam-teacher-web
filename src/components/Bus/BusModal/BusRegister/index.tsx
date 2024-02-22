@@ -1,8 +1,8 @@
-import useEscCloseModal from "../../../../hooks/common/useEscCloseModal";
-import useLockScroll from "../../../../hooks/common/useLockScroll";
-import { Portal } from "../../../common/Portal";
+import useEscCloseModal from "hooks/common/useEscCloseModal";
+import useLockScroll from "hooks/common/useLockScroll";
+import { Portal } from "components/common/Portal";
 import BusRegisterForm from "./BusRegisterForm";
-import schoolBus from "../../../../assets/icons/Bus/schoolBus.svg";
+import schoolBus from "assets/icons/Bus/schoolBus.svg";
 import * as S from "../style";
 import styled from "styled-components";
 

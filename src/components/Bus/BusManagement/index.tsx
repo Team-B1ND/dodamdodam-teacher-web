@@ -1,10 +1,10 @@
 import { SearchBar, Button } from "@b1nd/b1nd-dodamdodam-ui";
 import { Suspense, useState } from "react";
 import { BUS_MANAGEMENT_ITEMS } from "./constant";
-import { useOpenBusModal } from "../../../hooks/Bus/useOpenBusModal";
-import ErrorBoundary from "../../common/ErrorBoundary";
-import BusSkeleton from "../../common/Skeleton/Bus";
-import TableAttribute from "../../common/TableAttribute";
+import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
+import ErrorBoundary from "components/common/ErrorBoundary";
+import BusSkeleton from "components/common/Skeleton/Bus";
+import TableAttribute from "components/common/TableAttribute";
 import BusManagementItem from "./BusManagementItem";
 import * as S from "./style";
 import { NoneDataText } from "../style";

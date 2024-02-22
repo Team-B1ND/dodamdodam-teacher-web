@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import { useSelectBusDate } from "../../../hooks/Bus/useSelectBusDate";
-import ErrorBoundary from "../../common/ErrorBoundary";
-import BusSkeleton from "../../common/Skeleton/Bus";
-import TableAttribute from "../../common/TableAttribute";
+import { useSelectBusDate } from "hooks/Bus/useSelectBusDate";
+import ErrorBoundary from "components/common/ErrorBoundary";
+import BusSkeleton from "components/common/Skeleton/Bus";
+import TableAttribute from "components/common/TableAttribute";
 import { NoneDataText } from "../style";
 import BusDateItem from "./BusDateItem";
 import { BUS_ITEMS } from "../constant";

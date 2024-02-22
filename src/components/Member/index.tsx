@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
 import * as S from "./style";
 import { MEMBER_TABLE_ITEMS } from "./constant";
-import ErrorBoundary from "../common/ErrorBoundary";
+import ErrorBoundary from "components/common/ErrorBoundary";
 import MemberItem from "./MemberItem";
-import MemberSkeleton from "../common/Skeleton/Member";
+import MemberSkeleton from "components/common/Skeleton/Member";
 import MemberHeader from "./MemberHeader";
-import TableAttribute from "../common/TableAttribute";
+import TableAttribute from "components/common/TableAttribute";
 
 function Member() {
   return (

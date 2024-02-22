@@ -1,7 +1,5 @@
-import useEscCloseModal from "../../../../hooks/common/useEscCloseModal";
-import useLockScroll from "../../../../hooks/common/useLockScroll";
-import { Portal } from "../../../common/Portal";
-import passengerList from "../../../../assets/icons/Bus/passengerList.svg";
+import { Portal } from "components/common/Portal";
+import passengerList from "assets/icons/Bus/passengerList.svg";
 import * as S from "../style";
 import {
   BusPassengerItemContainer,
@@ -9,11 +7,8 @@ import {
   CsvButtonContainer,
 } from "./style";
 import BusPassengerItem from "./BusPassengerItem";
-import { useRecoilValue } from "recoil";
-import { BusPassengerDataAtom } from "../../../../stores/Bus/bus.store";
-import { useEffect, useState } from "react";
-import { addPhoneHyphen } from "../../../../utils/common/addPhoneHyphen";
-import CsvButton from "../../../common/ExtractCsvData";
+import CsvButton from "components/common/ExtractCsvData";
+import { useBusPassenger } from "hooks/Bus/useBusPassenger";
 
 interface Props {
   isOpen: boolean;
@@ -21,31 +16,7 @@ interface Props {
 }
 
 const BusPassenger = ({ isOpen, close }: Props) => {
-  const busPassengerData = useRecoilValue(BusPassengerDataAtom);
-  const [busPassengerInfo, setBusPassengerInfo] = useState([
-    {
-      이름: "",
-      아이디: "",
-      전화번호: "",
-      탑승버스: "",
-      비고: "",
-    },
-  ]);
-
-  useLockScroll();
-  useEscCloseModal(close);
-
-  // csv에 보여질 데이터 값 담기
-  useEffect(() => {
-    const busPassengerCsvData = busPassengerData?.busMember.map((item) => ({
-      이름: item.name,
-      아이디: item.memberId,
-      전화번호: addPhoneHyphen(item.phone),
-      탑승버스: busPassengerData?.busName,
-      비고: "",
-    }));
-    setBusPassengerInfo(busPassengerCsvData!!);
-  }, [busPassengerData]);
+  const { busPassengerInfo, busPassengerData } = useBusPassenger(close);
 
   return (
     <Portal>

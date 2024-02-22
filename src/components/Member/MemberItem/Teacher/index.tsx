@@ -1,9 +1,9 @@
 import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { TeacherType } from "../../../../types/Member/Member.type";
+import { TeacherType } from "types/Member/Member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
-import profileImg from "../../../../assets/profileImg.svg";
-import { addPhoneHyphen } from "../../../../utils/common/addPhoneHyphen";
-import { searchName } from "../../../../utils/common/searchName";
+import profileImg from "assets/profileImg.svg";
+import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
+import { searchName } from "utils/common/searchName";
 
 interface Props {
   teachersInfo: TeacherType[];

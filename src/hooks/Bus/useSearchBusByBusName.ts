@@ -1,6 +1,6 @@
 import { BusResponse } from "../../types/Bus/Bus.type";
 
-export const useSearchBus = () => {
+export const useSearchBusByBusName = () => {
   const searchByBusName = (busData: BusResponse, busName: string) => {
     return busData?.data.busList.map((bus) => ({
       ...bus,

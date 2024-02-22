@@ -11,8 +11,8 @@ import {
 import * as S from "./style";
 
 const BusListItem = ({ page }: { page: number }) => {
-  const { data } = useGetAllBusListQuery(page, { suspense: true });
-  const busData = data?.data.bus;
+  const busData = useGetAllBusListQuery(page, { suspense: true }).data?.data
+    .bus;
   const { handleOpenPassengerModal } = useOpenBusModal();
 
   return (

@@ -1,4 +1,4 @@
-import { BusDateParam } from "../repositories/Bus/BusRepository";
+import { BusDateParam } from "repositories/Bus/BusRepository";
 
 export const QUERY_KEYS = Object.freeze({
   bus: {

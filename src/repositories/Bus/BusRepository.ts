@@ -2,7 +2,7 @@ import {
   BusDateResponse,
   BusListResponse,
   BusResponse,
-} from "../../types/Bus/Bus.type";
+} from "types/Bus/Bus.type";
 
 export interface BusRepository {
   getRegisteredBus(): Promise<BusResponse>;

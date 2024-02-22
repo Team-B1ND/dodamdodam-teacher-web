@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { BusBasicInfoType, BusPassengerType } from "../../types/Bus/Bus.type";
+import { BusBasicInfoType, BusPassengerType } from "types/Bus/Bus.type";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();

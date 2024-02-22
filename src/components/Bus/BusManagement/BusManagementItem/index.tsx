@@ -1,12 +1,12 @@
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
-import { useGetRegisteredBusQuery } from "../../../../queries/Bus/Bus.query";
-import convertTime from "../../../../utils/Time/convertTime";
+import { useGetRegisteredBusQuery } from "queries/Bus/Bus.query";
+import convertTime from "utils/Time/convertTime";
 import { useSetRecoilState } from "recoil";
-import { ExistingBusDataAtom } from "../../../../stores/Bus/bus.store";
-import { useDeleteBus } from "../../../../hooks/Bus/useDeleteBus";
-import { useSearchBus } from "../../../../hooks/Bus/useSearchBus";
-import { useOpenBusModal } from "../../../../hooks/Bus/useOpenBusModal";
+import { ExistingBusDataAtom } from "stores/Bus/bus.store";
+import { useSearchBusByBusName } from "hooks/Bus/useSearchBusByBusName";
+import { useDeleteBus } from "hooks/Bus/useDeleteBus";
+import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
 import {
   NoneDataText,
   CommonBusPassengerStyle,
@@ -16,13 +16,15 @@ import {
 
 const BusManagementItem = ({ busName }: { busName: string }) => {
   const { data: busData } = useGetRegisteredBusQuery({ suspense: true });
-  const { searchByBusName } = useSearchBus();
+
+  const { searchByBusName } = useSearchBusByBusName();
   const searchByBusNameData = searchByBusName(busData!, busName);
 
-  const setExistingBusData = useSetRecoilState(ExistingBusDataAtom);
+  const { handleDeleteBusClick } = useDeleteBus();
   const { handleOpenRegisterModal, handleOpenPassengerModal } =
     useOpenBusModal();
-  const { handleDeleteBusClick } = useDeleteBus();
+
+  const setExistingBusData = useSetRecoilState(ExistingBusDataAtom);
 
   return (
     <TBody customStyle={CommonBusTBody}>

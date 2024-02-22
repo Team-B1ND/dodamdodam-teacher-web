@@ -1,9 +1,9 @@
 import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { StudentType } from "../../../../types/Member/Member.type";
+import { StudentType } from "types/Member/Member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
-import { addPhoneHyphen } from "../../../../utils/common/addPhoneHyphen";
-import profileImg from "../../../../assets/profileImg.svg";
-import { sortAndFilterStudents } from "../../../../utils/Member/SortAndFilterStudents";
+import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
+import profileImg from "assets/profileImg.svg";
+import { sortAndFilterStudents } from "utils/Member/SortAndFilterStudents";
 
 interface Props {
   studentsInfo: StudentType[];

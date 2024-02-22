@@ -1,13 +1,13 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useOverlay } from "@toss/use-overlay";
 import { useSetRecoilState } from "recoil";
-import BusPassenger from "../../components/Bus/BusModal/BusPassenger";
-import BusRegister from "../../components/Bus/BusModal/BusRegister";
+import BusPassenger from "components/Bus/BusModal/BusPassenger";
+import BusRegister from "components/Bus/BusModal/BusRegister";
 import {
   BusPassengerDataAtom,
   ExistingBusDataAtom,
-} from "../../stores/Bus/bus.store";
-import { BusMemberType } from "../../types/Bus/Bus.type";
+} from "stores/Bus/bus.store";
+import { BusMemberType } from "types/Bus/Bus.type";
 
 export const useOpenBusModal = () => {
   const busFormOverlay = useOverlay();

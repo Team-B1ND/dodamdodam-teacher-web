@@ -1,5 +1,5 @@
-import BusDate from "../../components/Bus/BusDate";
-import BusProvider from "../../components/Bus/BusProvider";
+import BusDate from "components/Bus/BusDate";
+import BusProvider from "components/Bus/BusProvider";
 
 const BusDatePage = () => {
   return (

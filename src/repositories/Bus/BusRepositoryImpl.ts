@@ -1,9 +1,9 @@
-import { dodamTeacherAxios, dodamV6Axios } from "../../libs/Axios/customAxios";
+import { dodamTeacherAxios, dodamV6Axios } from "libs/Axios/customAxios";
 import {
   BusResponse,
   BusListResponse,
   BusDateResponse,
-} from "../../types/Bus/Bus.type";
+} from "types/Bus/Bus.type";
 import { BusDateParam, BusRepository, BusUpdateParam } from "./BusRepository";
 
 class BusRepositoryImpl implements BusRepository {

@@ -1,15 +1,12 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
-import {
-  BusDateParam,
-  BusUpdateParam,
-} from "../../repositories/Bus/BusRepository";
-import busRepositoryImpl from "../../repositories/Bus/BusRepositoryImpl";
+import { BusDateParam, BusUpdateParam } from "repositories/Bus/BusRepository";
+import busRepositoryImpl from "repositories/Bus/BusRepositoryImpl";
 import {
   BusDateResponse,
   BusListResponse,
   BusResponse,
-} from "../../types/Bus/Bus.type";
+} from "types/Bus/Bus.type";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRegisteredBusQuery = (
