@@ -43,9 +43,7 @@ const OffBasePass = () => {
             uploadDate={uploadDate}
             setUploadDate={setUploadDate}
           />
-          {selectedIds.length === 0 ? (
-            ""
-          ) : (
+          {selectedIds.length !== 0 && (
             <S.ButtonContainer>
               <Button
                 ButtonType="agree"

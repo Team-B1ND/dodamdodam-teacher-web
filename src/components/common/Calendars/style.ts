@@ -9,7 +9,6 @@ export const CalendarContainer = styled.div`
   cursor: pointer;
 
   .Calender {
-    /* border-radius: 15px; */
     background-color: #ffffff;
     color: black;
     border: 0;
@@ -25,8 +24,6 @@ export const CalendarContainer = styled.div`
   }
 `;
 
-export const CalendarBox = styled.div``;
-
 export const CalendarText = styled.div`
   font-size: 12px;
   color: #0000008a;
@@ -37,9 +34,4 @@ export const CalendarText = styled.div`
 export const Date = styled.div`
   width: 130px;
   border-bottom: 1px solid black;
-
-  &:hover {
-    transition: color 0.5s ease-in, border-color 0.1s ease-in;
-    /* border-bottom: 2px solid black; */
-  }
 `;

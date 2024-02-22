@@ -10,7 +10,7 @@ export const useGetOffBasePassQuery = (
     OffBaseResponse,
     AxiosError,
     OffBaseResponse,
-    string | any
+    string[]
   >
 ) =>
   useQuery(

@@ -5,13 +5,13 @@ import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
-import { OffBaseDataFilter } from "../../../../utils/OffBasePass/OffBaseDateFilter";
+import { offBaseDataFilter } from "../../../../utils/OffBasePass/offBaseDataFilter";
 
 interface OffBasePassProps {
   studentName: string;
   uploadDate: string;
   selectGrade: number;
-  selectApproval: any;
+  selectApproval: string | undefined;
 }
 
 const OffBasePassItem = ({
@@ -20,7 +20,7 @@ const OffBasePassItem = ({
   selectGrade,
   selectApproval,
 }: OffBasePassProps) => {
-  const { data: OffBaswPass } = useGetOffBasePassQuery(uploadDate);
+  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
   const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
 
   const {
@@ -31,8 +31,8 @@ const OffBasePassItem = ({
   } = useOffBasePass();
 
   const selectComponent = (Id: number) => {
-    const component = OffBaseDataFilter(
-      OffBaswPass,
+    const component = offBaseDataFilter(
+      offBasePass,
       studentName,
       selectGrade,
       selectApproval
@@ -87,8 +87,8 @@ const OffBasePassItem = ({
 
   return (
     <>
-      {OffBaseDataFilter(
-        OffBaswPass,
+      {offBaseDataFilter(
+        offBasePass,
         studentName,
         selectGrade,
         selectApproval

@@ -1,6 +1,6 @@
 import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
 
-export const OffBaseDataFilter = (
+export const offBaseDataFilter = (
   OffBasePass: OffBaseResponse | undefined,
   studentName: string,
   selectGrade: number,

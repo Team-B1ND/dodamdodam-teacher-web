@@ -1,6 +1,6 @@
 import Calendar from "react-calendar";
-import moment from "moment";
 import * as S from "./style";
+import dayjs from "dayjs";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 
@@ -24,7 +24,7 @@ const Calendars = ({
   const [date, setDateChange] = useState<Value>(new Date());
 
   useEffect(() => {
-    setUploadDate(moment().format("YYYY-MM-DD"));
+    setUploadDate(dayjs().format("YYYY-MM-DD"));
   }, []);
 
   const handleDateChange = (newValue: Value) => {
@@ -43,19 +43,19 @@ const Calendars = ({
 
   return (
     <S.CalendarContainer>
-      <S.CalendarBox onClick={() => setIsOpen(!isOpen)}>
+      <div onClick={() => setIsOpen(!isOpen)}>
         <S.CalendarText>조회할 날짜를 선택해주세요</S.CalendarText>
         <S.Date>
-          {uploadDate ? uploadDate : moment().format("YYYY-MM-DD")}
+          {uploadDate ? uploadDate : dayjs().format("YYYY-MM-DD")}
         </S.Date>
-      </S.CalendarBox>
+      </div>
 
       {isOpen && (
         <Calendar
           value={date}
           onChange={handleDateChange}
           className="Calender"
-          formatDay={(locale, date) => moment(date).format("DD")}
+          formatDay={(locale, date) => dayjs(date).format("DD")}
           minDetail="month"
           maxDetail="month"
           showNeighboringMonth={false}

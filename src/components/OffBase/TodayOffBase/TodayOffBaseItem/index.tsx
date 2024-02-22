@@ -1,9 +1,9 @@
+import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import profileImg from "../../../../assets/profileImg.svg";
-import * as S from "./style";
-import moment from "moment";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
+import dayjs from "dayjs";
 interface OffBasePassProps {
   studentName: string;
   selectGrade: number;
@@ -15,13 +15,13 @@ const TodayOffBaseItem = ({
   selectGrade,
   studentName,
 }: OffBasePassProps) => {
-  const { data: OffBaswPass } = useGetOffBasePassQuery(
-    moment().format("YYYY-MM-DD")
+  const { data: offBasePass } = useGetOffBasePassQuery(
+    dayjs().format("YYYY-MM-DD")
   );
 
   const { handleOffBaseLeave, patchLeaveApprovalCancel } = useOffBaseLeave();
 
-  const filteredResults = OffBaswPass?.data.outsleepingList
+  const filteredResults = offBasePass?.data.outsleepingList
     .filter((pass) => pass.student.member.name.includes(studentName))
     .filter(
       (data) =>

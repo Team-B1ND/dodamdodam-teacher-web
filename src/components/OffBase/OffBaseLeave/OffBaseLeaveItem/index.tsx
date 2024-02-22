@@ -17,9 +17,9 @@ const OffBaseLeaveItem = ({
   studentName,
   uploadDate,
 }: OffBaseLeaveProps) => {
-  const { data: OffBaswPass } = useGetOffBasePassQuery(uploadDate);
+  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
 
-  const filteredResults = OffBaswPass?.data.outsleepingList
+  const filteredResults = offBasePass?.data.outsleepingList
     .filter((pass) => pass.student.member.name.includes(studentName))
     .filter(
       (data) =>
