@@ -3,11 +3,11 @@ import { useRegistBus } from "hooks/Bus/useRegistBus";
 import { BUS_REGIST_TITLE_ITEMS } from "./constant";
 import * as S from "./style";
 
-interface Props {
+interface BusRegisterFormProps {
   closeBusRegister: () => void;
 }
 
-const BusRegisterForm = ({ closeBusRegister }: Props) => {
+const BusRegisterForm = ({ closeBusRegister }: BusRegisterFormProps) => {
   const { ...hooks } = useRegistBus();
   return (
     <S.BusForm

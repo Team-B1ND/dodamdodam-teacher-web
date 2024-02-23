@@ -6,13 +6,13 @@ import schoolBus from "assets/icons/Bus/schoolBus.svg";
 import * as S from "../style";
 import styled from "styled-components";
 
-interface Props {
+interface BusRegisterProps {
   busId: number;
   isOpen: boolean;
   close: () => void;
 }
 
-const BusRegister = ({ busId, isOpen, close }: Props) => {
+const BusRegister = ({ busId, isOpen, close }: BusRegisterProps) => {
   useLockScroll();
   useEscCloseModal(close);
 

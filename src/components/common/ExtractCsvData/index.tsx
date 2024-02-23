@@ -2,12 +2,12 @@ import { CSVLink } from "react-csv";
 import { RiFileExcel2Line } from "react-icons/ri";
 import styled from "styled-components";
 
-interface Props {
+interface ExtractCsvDataProps {
   csvData: object[];
   fileName: string;
 }
 
-const ExtractCsvData = ({ csvData, fileName }: Props) => {
+const ExtractCsvData = ({ csvData, fileName }: ExtractCsvDataProps) => {
   return (
     <CsvLinkButton data={csvData} filename={fileName.concat(".csv")}>
       <RiFileExcel2Line size={20} />

@@ -5,13 +5,13 @@ import profileImg from "assets/profileImg.svg";
 import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
 import { searchName } from "utils/common/searchName";
 
-interface Props {
+interface TeacherProps {
   teachersInfo: TeacherType[];
   searchValue: string;
   selectGrade: number;
 }
 
-const Teacher = ({ teachersInfo, searchValue, selectGrade }: Props) => {
+const Teacher = ({ teachersInfo, searchValue, selectGrade }: TeacherProps) => {
   return (
     <>
       {(selectGrade === 0 || selectGrade === 4) &&

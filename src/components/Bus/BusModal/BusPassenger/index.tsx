@@ -10,12 +10,12 @@ import BusPassengerItem from "./BusPassengerItem";
 import CsvButton from "components/common/ExtractCsvData";
 import { useBusPassenger } from "hooks/Bus/useBusPassenger";
 
-interface Props {
+interface BusPassengerProps {
   isOpen: boolean;
   close: () => void;
 }
 
-const BusPassenger = ({ isOpen, close }: Props) => {
+const BusPassenger = ({ isOpen, close }: BusPassengerProps) => {
   const { busPassengerInfo, busPassengerData } = useBusPassenger(close);
 
   return (

@@ -4,11 +4,11 @@ import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
 import { BUS_PASSENGER_TITLE_ITEMS } from "./constant";
 import * as S from "./style";
 
-interface Props {
+interface BusPassengerItemProps {
   busPassengerData: BusPassengerType;
 }
 
-const BusPassengerItem = ({ busPassengerData }: Props) => {
+const BusPassengerItem = ({ busPassengerData }: BusPassengerItemProps) => {
   return (
     <S.Container>
       <Table customStyle={S.TableStyle}>

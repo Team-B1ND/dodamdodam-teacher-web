@@ -5,13 +5,13 @@ import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
 import profileImg from "assets/profileImg.svg";
 import { sortAndFilterStudents } from "utils/Member/SortAndFilterStudents";
 
-interface Props {
+interface StudentProps {
   studentsInfo: StudentType[];
   searchValue: string;
   selectGrade: number;
 }
 
-const Student = ({ studentsInfo, searchValue, selectGrade }: Props) => {
+const Student = ({ studentsInfo, searchValue, selectGrade }: StudentProps) => {
   return (
     <>
       {sortAndFilterStudents(studentsInfo, searchValue, selectGrade).map(

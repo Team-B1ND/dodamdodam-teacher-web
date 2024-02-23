@@ -11,11 +11,11 @@ import {
   NoneDataText,
 } from "../../style";
 
-interface Props {
+interface BusDateItemProps {
   handleConvertToBusParamFormat: () => BusDateParam;
 }
 
-const BusDateItem = ({ handleConvertToBusParamFormat }: Props) => {
+const BusDateItem = ({ handleConvertToBusParamFormat }: BusDateItemProps) => {
   const dateBusData = useGetBusDateQuery(handleConvertToBusParamFormat(), {
     suspense: true,
   }).data?.data.bus;
