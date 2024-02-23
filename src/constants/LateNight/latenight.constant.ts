@@ -5,7 +5,7 @@ export const LATENIGHT_ALLOW_ITEMS = [
   "시작일",
   "종료일",
   "장소",
-  "휴배폰",
+  "휴대폰",
   "필요 이유",
   "승인 여부",
 ];

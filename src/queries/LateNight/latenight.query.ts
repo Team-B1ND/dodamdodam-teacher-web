@@ -1,4 +1,4 @@
-import { UseQueryOptions, useQuery } from "react-query";
+import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
 import { AxiosError } from "axios";
 import { LateNightResponse } from "../../types/LateNight/latenight.type";
@@ -22,3 +22,17 @@ export const useGetPendingLateNight = (
       ...options,
     }
   );
+
+export const usePatchLateNightAllow = () => {
+  const mutation = useMutation((id: number) =>
+    latenightRepositoryImpl.patchLateNightAllow(id)
+  );
+  return mutation;
+};
+
+export const usePatchLateNightCancel = () => {
+  const mutation = useMutation((id: number) =>
+    latenightRepositoryImpl.patchLateNightCancel(id)
+  );
+  return mutation;
+};
