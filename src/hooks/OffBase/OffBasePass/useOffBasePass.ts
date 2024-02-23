@@ -20,13 +20,13 @@ const useOffBasePass = () => {
   const handleOffBasePass = (outId: number[], query: any) => {
     query.mutate(outId, {
       onSuccess: () => {
-        if (query == patchApprovals) {
+        if (query === patchApprovals) {
           B1ndToast.showSuccess("외출 승인 성공");
         }
-        if (query == patchApprovalCancel) {
+        if (query === patchApprovalCancel) {
           B1ndToast.showSuccess("외출 승인 취소 성공");
         }
-        if (query == patchCancel) {
+        if (query === patchCancel) {
           B1ndToast.showSuccess("외출 거절 성공");
         }
 

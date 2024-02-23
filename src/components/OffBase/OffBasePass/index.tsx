@@ -18,7 +18,7 @@ import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
 import useOffBasePass from "../../../hooks/OffBase/OffBasePass/useOffBasePass";
 
 const OffBasePass = () => {
-  const [studentName, setStudentName] = useState<string>("");
+  const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
   const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);

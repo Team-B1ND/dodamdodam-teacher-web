@@ -20,14 +20,14 @@ const useOffBaseLeave = () => {
   const handleOffBaseLeave = (outId: number, query: any) => {
     query.mutate(outId, {
       onSuccess: () => {
-        if (query == patchLeaveApproval) {
+        if (query === patchLeaveApproval) {
           B1ndToast.showSuccess("외박 승인 성공");
         }
-        if (query == patchLeaveCancel) {
+        if (query === patchLeaveCancel) {
           B1ndToast.showSuccess("외박 거절 성공");
         }
 
-        if (query == patchLeaveApprovalCancel) {
+        if (query === patchLeaveApprovalCancel) {
           B1ndToast.showSuccess("외박 승인 취소 성공");
         }
 
