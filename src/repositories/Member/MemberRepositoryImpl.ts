@@ -1,6 +1,6 @@
-import { MemberRepository } from "./member.repository";
-import { dodamV6Axios } from "../../libs/Axios/customAxios";
-import { MemberListType } from "../../types/Member/member.type";
+import { MemberRepository } from "./MemberRepository";
+import { dodamV6Axios } from "libs/Axios/customAxios";
+import { MemberListType } from "types/Member/Member.type";
 
 class MemberRepositoryImpl implements MemberRepository {
   public async getAllMemberList(): Promise<MemberListType> {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SideBarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 80px;
   left: 0;
   min-width: 208px;

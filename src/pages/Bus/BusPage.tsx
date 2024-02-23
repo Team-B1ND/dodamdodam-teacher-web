@@ -1,5 +1,5 @@
-import BusManagement from "../../components/Bus/BusManagement";
-import SectionHeaderProvider from "../../components/common/SectionHeaderProvider";
+import BusManagement from "components/Bus/BusManagement";
+import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 const BusPage = () => {
   return (

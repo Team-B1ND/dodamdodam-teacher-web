@@ -26,3 +26,16 @@ export const MemberTR: CSSObject = {
   alignItems: "center",
   justifyContent: "space-between",
 };
+
+export const NoneDataText = styled.div`
+  width: 100%;
+  height: 100%;
+
+  font-size: 17px;
+  font-weight: 400;
+  padding-top: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

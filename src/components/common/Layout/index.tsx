@@ -1,13 +1,15 @@
 import { ReactNode } from "react";
-import { Container } from "./style";
 import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 
-interface Props {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: Props) => {
-  return <Container>{children}</Container>;
+const Layout = ({ children }: { children: ReactNode }) => {
+  const { pathname } = useLocation();
+  return <Container pathname={pathname}>{children}</Container>;
 };
 
 export default Layout;
+
+const Container = styled.div<{ pathname: string }>`
+  padding-top: ${({ pathname }) => pathname !== "/" && "80px"};
+  padding-left: ${({ pathname }) => pathname !== "/" && "208px"};
+`;
