@@ -102,3 +102,12 @@ export const NoneTile = styled.p`
   font-size: 16px;
   color: #212529;
 `;
+
+export const DateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Reason = styled.div`
+  margin-left: 2px;
+`;

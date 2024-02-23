@@ -9,13 +9,14 @@ import { useRecoilState } from "recoil";
 import {
   SelectApprovalAtom,
   SelectGradeAtom,
-  UploadDateAtom,
 } from "../../../stores/OffBase/offbase.store";
 import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
 import { changeGrade } from "../../../utils/Member/changeGrade";
+import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
+import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
 
 const TodayOffBase = () => {
-  const [studentName, setStudentName] = useState<string>("");
+  const [studentName, setStudentName] = useState("");
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] =
     useRecoilState(SelectApprovalAtom);
@@ -29,13 +30,13 @@ const TodayOffBase = () => {
 
         <S.SelectContainer>
           <Select
-            items={["전체보기", "대기중", "거절됨", "승인됨", "복귀 완료"]}
+            items={APPROVAL_ITEMS}
             value={selectApproval}
             onChange={setSelectApproval}
             zIndex={2}
           />
           <Select
-            items={["모든학년", "1학년", "2학년", "3학년"]}
+            items={GRADE_ITEMS}
             value={selectGrade}
             onChange={setSelectGrade}
             zIndex={2}

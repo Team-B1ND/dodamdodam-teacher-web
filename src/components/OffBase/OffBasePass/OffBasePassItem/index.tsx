@@ -6,6 +6,7 @@ import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
 import { offBaseDataFilter } from "../../../../utils/OffBasePass/offBaseDataFilter";
+import convertTime from "../../../../utils/Time/convertTime";
 
 interface OffBasePassProps {
   studentName: string;
@@ -92,42 +93,69 @@ const OffBasePassItem = ({
         studentName,
         selectGrade,
         selectApproval
-      )?.map((key) => (
+      )?.map((offbasepass) => (
         <TBody customStyle={S.OffBaseTBody}>
           <S.OffBaseTR
             onClick={() => {
-              key.status === "PENDING" &&
+              offbasepass.status === "PENDING" &&
                 setSelectedIds((prevIds) =>
-                  prevIds.includes(key.id)
-                    ? prevIds.filter((id) => id !== key.id)
-                    : [...prevIds, key.id]
+                  prevIds.includes(offbasepass.id)
+                    ? prevIds.filter((id) => id !== offbasepass.id)
+                    : [...prevIds, offbasepass.id]
                 );
             }}
             style={{
-              backgroundColor: selectedIds.includes(key.id) ? "#EEF3F9" : "",
+              backgroundColor: selectedIds.includes(offbasepass.id)
+                ? "#EEF3F9"
+                : "",
             }}
           >
             <TD customStyle={S.OffBaseTD}>
               <S.MemberImage
-                src={key.student.member.profileImage || profileImg}
+                src={offbasepass.student.member.profileImage || profileImg}
               />
             </TD>
-            <TD customStyle={S.OffBaseTD}>{key.student.member.name}</TD>
+            <TD customStyle={S.OffBaseTD}>{offbasepass.student.member.name}</TD>
             <TD customStyle={S.OffBaseTD}>
-              {key.student.classroom.grade}학년
-              {key.student.classroom.room}반{key.student.classroom.room}번
+              {offbasepass.student.classroom.grade}학년
+              {offbasepass.student.classroom.room}반
+              {offbasepass.student.classroom.room}번
             </TD>
             <TD customStyle={S.OffBaseTD}>
-              {key.startOutDate.slice(0, 10)} {key.startOutDate.slice(11, 13)}시
-              {key.startOutDate.slice(14, 16)}분
+              <S.DateContainer>
+                <div>
+                  {convertTime.getDateTime(
+                    new Date(offbasepass.startOutDate),
+                    "date"
+                  )}
+                </div>
+                <div>
+                  {convertTime.getDateTime(
+                    new Date(offbasepass.startOutDate),
+                    "time"
+                  )}
+                </div>
+              </S.DateContainer>
             </TD>
             <TD customStyle={S.OffBaseTD}>
-              {key.endOutDate.slice(0, 10)} {key.endOutDate.slice(11, 13)}시
-              {key.endOutDate.slice(14, 16)}분
+              <S.DateContainer>
+                <div>
+                  {convertTime.getDateTime(
+                    new Date(offbasepass.endOutDate),
+                    "date"
+                  )}
+                </div>
+                <div>
+                  {convertTime.getDateTime(
+                    new Date(offbasepass.endOutDate),
+                    "time"
+                  )}
+                </div>
+              </S.DateContainer>
             </TD>
-            <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
+            <TD customStyle={S.OffBaseTD}>{offbasepass.reason}</TD>
             <TD customStyle={S.ButtonContainerStyle}>
-              {selectComponent(key.id)}
+              {selectComponent(offbasepass.id)}
             </TD>
           </S.OffBaseTR>
         </TBody>

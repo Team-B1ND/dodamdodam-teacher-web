@@ -3,6 +3,7 @@ import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
+import convertTime from "../../../../utils/Time/convertTime";
 
 interface OffBaseLeaveProps {
   studentName: string;
@@ -40,35 +41,67 @@ const OffBaseLeaveItem = ({
         <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
       ) : (
         <TBody customStyle={S.OffBaseTBody}>
-          {filteredResults?.map((key) => (
+          {filteredResults?.map((offbaseleave) => (
             <TR customStyle={S.OffBaseTR}>
               <TD customStyle={S.OffBaseTD}>
                 <S.MemberImage
-                  src={key.student.member.profileImage || profileImg}
+                  src={offbaseleave.student.member.profileImage || profileImg}
                 />
               </TD>
-              <TD customStyle={S.OffBaseTD}>{key.student.member.name}</TD>
               <TD customStyle={S.OffBaseTD}>
-                {key.student.classroom.grade}학년{key.student.classroom.room}반
-                {key.student.classroom.room}번
+                {offbaseleave.student.member.name}
               </TD>
               <TD customStyle={S.OffBaseTD}>
-                {key.startOutDate.slice(0, 10)} {key.startOutDate.slice(11, 13)}
-                시{key.startOutDate.slice(14, 16)}분
+                {offbaseleave.student.classroom.grade}학년
+                {offbaseleave.student.classroom.room}반
+                {offbaseleave.student.classroom.room}번
               </TD>
               <TD customStyle={S.OffBaseTD}>
-                {key.endOutDate.slice(0, 10)} {key.endOutDate.slice(11, 13)}시
-                {key.endOutDate.slice(14, 16)}분
+                <S.DateContainer>
+                  <div>
+                    {convertTime.getDateTime(
+                      new Date(offbaseleave.startOutDate),
+                      "date"
+                    )}
+                  </div>
+                  <div>
+                    {convertTime.getDateTime(
+                      new Date(offbaseleave.startOutDate),
+                      "time"
+                    )}
+                  </div>
+                </S.DateContainer>
               </TD>
-              <TD customStyle={S.OffBaseTD}>{key.reason}</TD>
+              <TD customStyle={S.OffBaseTD}>
+                <S.DateContainer>
+                  <div>
+                    {convertTime.getDateTime(
+                      new Date(offbaseleave.endOutDate),
+                      "date"
+                    )}
+                  </div>
+                  <div>
+                    {convertTime.getDateTime(
+                      new Date(offbaseleave.endOutDate),
+                      "time"
+                    )}
+                  </div>
+                </S.DateContainer>
+              </TD>
+              <TD customStyle={S.OffBaseTD}>
+                <S.Reason>{offbaseleave.reason}</S.Reason>
+              </TD>
               <TD customStyle={S.ButtonContainerStyle}>
-                {key.status === "ALLOWED" ? (
+                {offbaseleave.status === "ALLOWED" ? (
                   <div>
                     <Button
                       ButtonType="disagree"
                       style={S.DelStyle}
                       onClick={() =>
-                        handleOffBaseLeave(key.id, patchLeaveApprovalCancel)
+                        handleOffBaseLeave(
+                          offbaseleave.id,
+                          patchLeaveApprovalCancel
+                        )
                       }
                     >
                       승인 취소
@@ -80,7 +113,7 @@ const OffBaseLeaveItem = ({
                       ButtonType="agree"
                       style={S.EditStyle}
                       onClick={() =>
-                        handleOffBaseLeave(key.id, patchLeaveApproval)
+                        handleOffBaseLeave(offbaseleave.id, patchLeaveApproval)
                       }
                     >
                       승인
@@ -89,7 +122,7 @@ const OffBaseLeaveItem = ({
                       ButtonType="disagree"
                       style={S.DelStyle}
                       onClick={() =>
-                        handleOffBaseLeave(key.id, patchLeaveCancel)
+                        handleOffBaseLeave(offbaseleave.id, patchLeaveCancel)
                       }
                     >
                       거절

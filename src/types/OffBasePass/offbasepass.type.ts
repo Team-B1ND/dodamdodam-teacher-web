@@ -30,15 +30,17 @@ export interface StudentType {
 export interface ClassRoomType {
   grade: number;
   id: number;
-  place: {
+  place: PlaceType;
+  room: number;
+}
+
+export interface PlaceType {
+  id: number;
+  name: string;
+  type: {
     id: number;
     name: string;
-    type: {
-      id: number;
-      name: string;
-    };
   };
-  room: number;
 }
 
 export interface MemberType {

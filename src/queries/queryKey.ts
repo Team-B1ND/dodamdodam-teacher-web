@@ -11,4 +11,7 @@ export const QUERY_KEYS = Object.freeze({
   offbasepass: {
     getOffBasePass: (date: string) => ["/out/date", date],
   },
+  latenight: {
+    getPendingLateNight: "/nightstudy/pending",
+  },
 });
