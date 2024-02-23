@@ -76,46 +76,48 @@ export const useRegistBus = () => {
     }
   };
 
-  // 버스 등록 및 수정
-  const handleBusContentBusSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-    closeBusRegister: () => void
-  ) => {
-    e.preventDefault();
-
+  const checkAndFilterBusEssentialInfo = () => {
     if (busContent.busName?.trim() === "") {
-      return B1ndToast.showInfo("버스 이름을 입력해 주세요!");
+      B1ndToast.showInfo("버스 이름을 입력해 주세요!");
+      return false;
     }
 
     if (busContent.description?.trim() === "") {
-      return B1ndToast.showInfo("버스 설명을 입력해 주세요!");
+      B1ndToast.showInfo("버스 설명을 입력해 주세요!");
+      return false;
     }
 
     if (busContent.leaveTime === "Invalid Date") {
-      return B1ndToast.showInfo("버스 출발시간을 입력해 주세요!");
+      B1ndToast.showInfo("버스 출발시간을 입력해 주세요!");
+      return false;
     }
 
     if (new Date(busContent.leaveTime!) < new Date()) {
-      return B1ndToast.showInfo("현재시간 이후로 입력해 주세요!");
+      B1ndToast.showInfo("현재시간 이후로 입력해 주세요!");
+      return false;
     }
 
     if (Number(busContent.peopleLimit) < 0) {
-      return B1ndToast.showInfo("버스 인원 제한 수를 입력해 주세요!");
+      B1ndToast.showInfo("버스 인원 제한 수를 입력해 주세요!");
+      return false;
     }
 
     // 소요시간 시간과 분이 둘다 0 이하일 떄
     if (timeRequired.hour <= 0 && timeRequired.minute <= 0) {
-      return B1ndToast.showInfo("소요시간이 올바르지 않습니다!");
+      B1ndToast.showInfo("소요시간이 올바르지 않습니다!");
+      return false;
     }
 
     // 소요시간 시간이 0 ~ 23 외의 값을 넣을 때
     if (timeRequired.hour > 23 || timeRequired.hour < 0) {
-      return B1ndToast.showInfo("0 ~ 23시간 사이로 입력해 주세요!");
+      B1ndToast.showInfo("0 ~ 23시간 사이로 입력해 주세요!");
+      return false;
     }
 
     // 소요시간 분이 0 ~ 59 외의 값을 넣을 때
     if (timeRequired.minute < 0 || timeRequired.minute > 59) {
-      return B1ndToast.showInfo("0 ~ 59분 사이로 입력해 주세요!");
+      B1ndToast.showInfo("0 ~ 59분 사이로 입력해 주세요!");
+      return false;
     }
 
     // 소요시간 시간 또는 분이 숫자가 아닐 때
@@ -123,79 +125,98 @@ export const useRegistBus = () => {
       !isNaN(timeRequired.hour) === false ||
       !isNaN(timeRequired.minute) === false
     ) {
-      return B1ndToast.showInfo("숫자 형식이 아닙니다!");
+      B1ndToast.showInfo("숫자 형식이 아닙니다!");
+      return false;
     }
 
-    let formattedTime: string = "";
+    return true;
+  };
+
+  const formatTimeRequired = () => {
+    let formatTime: string = "";
 
     if (timeRequired.hour < 10) {
-      formattedTime += `0${timeRequired.hour}`;
+      formatTime = `0${timeRequired.hour}`;
     } else {
-      formattedTime += `${timeRequired.hour}`;
+      formatTime = `${timeRequired.hour}`;
     }
 
     if (timeRequired.minute < 10) {
-      formattedTime += `:0${timeRequired.minute}`;
+      formatTime += `:0${timeRequired.minute}`;
     } else {
-      formattedTime += `:${timeRequired.minute}`;
+      formatTime += `:${timeRequired.minute}`;
     }
 
-    // existingBusData?.idx가 true이면 버스수정 아니면 버스등록
-    if (existingBusData?.idx) {
-      // 기존값과 수정값 비교
-      if (
-        JSON.stringify({
-          busName: existingBusData?.busName,
-          description: existingBusData?.description,
-          peopleLimit: existingBusData?.peopleLimit,
-          leaveTime: convertTime.parseDesiredDateTime(
-            existingBusData?.leaveTime,
-            "YYYY-MM-DD HH:mm"
-          ),
-          timeRequired: existingBusData?.timeRequired,
-        }) ===
-        JSON.stringify({
-          ...busContent,
-          timeRequired: formattedTime + ":00",
-        })
-      ) {
-        return B1ndToast.showInfo("버스 정보를 수정해주세요!");
-      }
+    return formatTime;
+  };
 
-      modifyBus.mutate(
-        {
-          ...busContent,
-          busIdx: existingBusData?.idx,
-          timeRequired: formattedTime,
-        } as BusUpdateParam,
-        {
-          onSuccess: () => {
-            B1ndToast.showSuccess("버스 정보를 수정하였습니다!");
-            queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
-            closeBusRegister();
-          },
-          onError: () => {
-            B1ndToast.showError("버스 정보를 수정하지 못했습니다!");
-          },
+  // 버스 등록 및 수정
+  const handleBusContentBusSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+    closeBusRegister: () => void
+  ) => {
+    e.preventDefault();
+
+    if (checkAndFilterBusEssentialInfo()) {
+      let timeRequired = formatTimeRequired();
+
+      // existingBusData?.idx가 true이면 버스수정 아니면 버스등록
+      if (existingBusData?.idx) {
+        // 기존값과 수정값 비교
+        if (
+          JSON.stringify({
+            busName: existingBusData?.busName,
+            description: existingBusData?.description,
+            peopleLimit: existingBusData?.peopleLimit,
+            leaveTime: convertTime.parseDesiredDateTime(
+              existingBusData?.leaveTime,
+              "YYYY-MM-DD HH:mm"
+            ),
+            timeRequired: existingBusData?.timeRequired,
+          }) ===
+          JSON.stringify({
+            ...busContent,
+            timeRequired: timeRequired + ":00",
+          })
+        ) {
+          return B1ndToast.showInfo("버스 정보를 수정해주세요!");
         }
-      );
-    } else {
-      createBus.mutate(
-        {
-          ...busContent,
-          timeRequired: formattedTime,
-        } as BusUpdateParam,
-        {
-          onSuccess: () => {
-            B1ndToast.showSuccess("버스를 추가하였습니다!");
-            queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
-            closeBusRegister();
-          },
-          onError: () => {
-            B1ndToast.showError("버스를 추가하지 못했습니다!");
-          },
-        }
-      );
+
+        modifyBus.mutate(
+          {
+            ...busContent,
+            busIdx: existingBusData?.idx,
+            timeRequired,
+          } as BusUpdateParam,
+          {
+            onSuccess: () => {
+              B1ndToast.showSuccess("버스 정보를 수정하였습니다!");
+              queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
+              closeBusRegister();
+            },
+            onError: () => {
+              B1ndToast.showError("버스 정보를 수정하지 못했습니다!");
+            },
+          }
+        );
+      } else {
+        createBus.mutate(
+          {
+            ...busContent,
+            timeRequired,
+          } as BusUpdateParam,
+          {
+            onSuccess: () => {
+              B1ndToast.showSuccess("버스를 추가하였습니다!");
+              queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
+              closeBusRegister();
+            },
+            onError: () => {
+              B1ndToast.showError("버스를 추가하지 못했습니다!");
+            },
+          }
+        );
+      }
     }
   };
 
