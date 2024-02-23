@@ -1,7 +1,8 @@
 import styled from "styled-components";
+
 import { CSSObject } from "styled-components";
 
-export const OffBaseTBody: CSSObject = {
+export const LateNightTBody: CSSObject = {
   width: "100%",
   fontSize: "14px",
   fontWeight: "600",
@@ -18,7 +19,7 @@ export const OffBaseTBody: CSSObject = {
   },
 };
 
-export const OffBaseTR: CSSObject = {
+export const LateNightTR: CSSObject = {
   width: "100%",
   height: "80px",
   display: "flex",
@@ -29,7 +30,7 @@ export const OffBaseTR: CSSObject = {
   borderBottom: "1px solid #d9d9d9",
 };
 
-export const OffBaseTD: CSSObject = {
+export const LateNightTD: CSSObject = {
   width: "14%",
   fontSize: "16px",
   lineHeight: "20px",
@@ -97,14 +98,8 @@ export const NoneTile = styled.p`
   justify-content: center;
   align-items: center;
 
-  height: 64vh;
+  height: 100%;
 
   font-size: 16px;
   color: #212529;
-`;
-
-export const DateContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-right: 60px;
 `;

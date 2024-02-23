@@ -117,3 +117,9 @@ export const ClearStyle: CSSObject = {
   color: "white",
   border: 0,
 };
+
+export const DateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 60px;
+`;

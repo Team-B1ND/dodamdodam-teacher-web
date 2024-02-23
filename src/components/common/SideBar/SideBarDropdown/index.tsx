@@ -41,7 +41,10 @@ const SideBarDropdown = () => {
           title="심자신청 수락/거절"
           redirectUrl="/lateNight-allow"
         />
-        <MenuDropdownChild title="심자중인 학생" redirectUrl="/PointReason" />
+        <MenuDropdownChild
+          title="심자중인 학생"
+          redirectUrl="/lateNight-today"
+        />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="학사일정">
         <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />

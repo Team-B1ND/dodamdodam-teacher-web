@@ -25,7 +25,7 @@ const Student = ({ studentsInfo, searchValue, selectGrade }: Props) => {
             </TD>
             <TD customStyle={MemberTD}>{student.member.name}</TD>
             <TD customStyle={MemberTD}>
-              {student.classroom.grade}학년 {student.classroom.room}반{" "}
+              {student.classroom.grade}학년 {student.classroom.room}반
               {student.number}번
             </TD>
             <TD customStyle={MemberTD}>{student.member.id}</TD>
