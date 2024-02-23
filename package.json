@@ -26,6 +26,7 @@
     "js-cookie": "^3.0.5",
     "js-sha512": "^0.8.0",
     "react": "^18.2.0",
+    "react-calendar": "^4.8.0",
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",

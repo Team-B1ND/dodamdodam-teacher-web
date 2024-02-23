@@ -14,11 +14,11 @@ const SideBarDropdown = () => {
         <MenuDropdownChild title="날짜별 버스 조회" redirectUrl="/bus-date" />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="외출 / 외박">
-        <MenuDropdownChild title="외출" redirectUrl="/authority" />
-        <MenuDropdownChild title="외박" redirectUrl="/numberSetting" />
+        <MenuDropdownChild title="외출" redirectUrl="/offbase-pass" />
+        <MenuDropdownChild title="외박" redirectUrl="/offbase-leave" />
         <MenuDropdownChild
           title="외박 중인 학생"
-          redirectUrl="/numberSetting"
+          redirectUrl="/offbase-leave-ing"
         />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="상벌점">
@@ -42,14 +42,6 @@ const SideBarDropdown = () => {
           redirectUrl="/lateNight-allow"
         />
         <MenuDropdownChild title="심자중인 학생" redirectUrl="/PointReason" />
-        <MenuDropdownChild
-          title="학교 점수 관리"
-          redirectUrl="/pointSchoolScore"
-        />
-        <MenuDropdownChild
-          title="학교 점수 사유"
-          redirectUrl="/pointSchoolReason"
-        />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="학사일정">
         <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
