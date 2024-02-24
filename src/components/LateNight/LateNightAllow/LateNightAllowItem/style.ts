@@ -12,6 +12,8 @@ export const LateNightTBody: CSSObject = {
   flexDirection: "column",
   whiteSpace: "normal",
 
+  userSelect: "none",
+
   tr: {
     "&:hover": {
       filter: "unset",

@@ -13,9 +13,7 @@ const BusRegistForm = ({ isOpen, close }: Props) => {
     <Portal>
       {isOpen && (
         <S.Container onClick={close}>
-          <S.Form onClick={(e) => e.stopPropagation()}>
-            
-          </S.Form>
+          <S.Form onClick={(e) => e.stopPropagation()}></S.Form>
         </S.Container>
       )}
     </Portal>

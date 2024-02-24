@@ -8,6 +8,7 @@ import OffBasePassPage from "../../pages/OffBase/OffBasePassPage";
 import OffBaseLeavePage from "../../pages/OffBase/OffBaseLeavePage";
 import TodayOffBaseLeavePage from "../../pages/OffBase/TodayOffBaseLeavePage";
 import { LateNightAllowPage } from "../../pages/LateNight/LateNightAllowPage";
+import { LateNightTodayPage } from "../../pages/LateNight/LateNightTodayPage";
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
       <Route path="/offbase-leave" element={<OffBaseLeavePage />} />
       <Route path="/offbase-leave-ing" element={<TodayOffBaseLeavePage />} />
       <Route path="/lateNight-allow" element={<LateNightAllowPage />} />
+      <Route path="/lateNight-today" element={<LateNightTodayPage />} />
     </Routes>
   );
 };
