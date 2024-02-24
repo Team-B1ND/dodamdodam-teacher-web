@@ -4,6 +4,9 @@ import { useGetPendingLateNight } from "../../../../queries/LateNight/latenight.
 import { truncateText } from "../../../../utils/common/truncate";
 import { LateNightAllowFilter } from "../../../../utils/LateNight/lateNightAllow";
 import useLateNightAllow from "../../../../hooks/LateNight/LateNightAllow/useLateNightAllow";
+import LateNightModal from "components/LateNight/LateNightModal";
+import { useState } from "react";
+import { LateNightType } from "types/LateNight/latenight.type";
 interface LateNightAllowProps {
   studentName: string;
   lateNightGrade: number;
@@ -16,6 +19,14 @@ const LateNightAllowItem = ({
   const { data: lateNightAllow } = useGetPendingLateNight();
   const { handleLateNightAllow, patchLateNightAllow, patchLateNightCancel } =
     useLateNightAllow();
+  const [isOpen, setIsOpen] = useState(false);
+  const [studyData, setStudyData] = useState<LateNightType>();
+
+  const handleModalClick = () => {
+    setIsOpen(!isOpen);
+    // setStudyData(data);
+  };
+
   return (
     <>
       <TBody customStyle={S.LateNightTBody}>
@@ -28,10 +39,20 @@ const LateNightAllowItem = ({
                 {latenight.student.room}번
               </TD>
               <TD customStyle={S.LateNightTD}>
-                {truncateText(latenight.content, 5)}
+                <div
+                  onClick={() => {
+                    handleModalClick();
+                    setStudyData(latenight);
+                  }}
+                >
+                  {truncateText(latenight.content, 5)}
+                </div>
               </TD>
               <TD customStyle={S.LateNightTD}>
-                <div style={{ marginLeft: "-5px" }}>
+                <div
+                  style={{ marginLeft: "-5px" }}
+                  onClick={() => setIsOpen(!isOpen)}
+                >
                   {latenight.startAt.slice(0, 4)}년
                   {latenight.startAt.slice(5, 7)}월
                   {latenight.startAt.slice(8, 10)}일
@@ -78,6 +99,11 @@ const LateNightAllowItem = ({
           )
         )}
       </TBody>
+      <LateNightModal
+        isOpen={isOpen}
+        data={studyData}
+        handleModalClick={handleModalClick}
+      />
     </>
   );
 };
