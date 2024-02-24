@@ -1,17 +1,12 @@
 import { AxiosError } from "axios";
+import { useMutation, useQuery, UseQueryOptions } from "react-query";
+import { BusDateParam, BusUpdateParam } from "repositories/Bus/BusRepository";
+import busRepositoryImpl from "repositories/Bus/BusRepositoryImpl";
 import {
-  useInfiniteQuery,
-  UseInfiniteQueryOptions,
-  useMutation,
-  useQuery,
-  UseQueryOptions,
-} from "react-query";
-import {
-  BusDateParam,
-  BusUpdateParam,
-} from "../../repositories/Bus/bus.repository";
-import busRepositoryImpl from "../../repositories/Bus/bus.repositoryImpl";
-import { BusListResponse, BusResponse } from "../../types/Bus/bus.type";
+  BusDateResponse,
+  BusListResponse,
+  BusResponse,
+} from "types/Bus/bus.type";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRegisteredBusQuery = (
@@ -21,41 +16,51 @@ export const useGetRegisteredBusQuery = (
     QUERY_KEYS.bus.registeredBus,
     () => busRepositoryImpl.getRegisteredBus(),
     {
-      ...options,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+      ...options,
     }
   );
 
 export const useGetAllBusListQuery = (
-  options: UseInfiniteQueryOptions<
+  page: number,
+  options: UseQueryOptions<
     BusListResponse,
     AxiosError,
     BusListResponse,
-    BusListResponse,
-    string
+    (string | number)[]
   >
 ) =>
-  useInfiniteQuery(
-    QUERY_KEYS.bus.bustList,
-    ({ pageParam = 1 }) => busRepositoryImpl.getAllBusList({ page: pageParam }),
+  useQuery(
+    QUERY_KEYS.bus.bustList(page),
+    () => busRepositoryImpl.getAllBusList(page),
     {
-      ...options,
+      enabled: !!page,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
-      getNextPageParam: (nextPage) => nextPage.nextPage,
+      ...options,
     }
   );
 
 export const useGetBusDateQuery = (
   param: BusDateParam,
-  options?: UseQueryOptions<BusResponse, AxiosError, BusResponse, string>
+  options?: UseQueryOptions<
+    BusDateResponse,
+    AxiosError,
+    BusDateResponse,
+    (string | BusDateParam)[]
+  >
 ) =>
-  useQuery(QUERY_KEYS.bus.busDate, () => busRepositoryImpl.getBusDate(param), {
-    ...options,
-    staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60,
-  });
+  useQuery(
+    QUERY_KEYS.bus.busDate(param),
+    () => busRepositoryImpl.getBusDate(param),
+    {
+      enabled: !!param,
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  );
 
 export const useCreateBusMutation = () => {
   const mutation = useMutation((param: BusUpdateParam) =>
@@ -64,9 +69,9 @@ export const useCreateBusMutation = () => {
   return mutation;
 };
 
-export const usePatchBusMutation = () => {
+export const useModifyBusMutation = () => {
   const mutation = useMutation((param: BusUpdateParam) =>
-    busRepositoryImpl.patchBus(param)
+    busRepositoryImpl.modifyBus(param)
   );
   return mutation;
 };

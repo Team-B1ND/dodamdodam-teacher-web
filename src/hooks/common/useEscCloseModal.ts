@@ -1,6 +1,6 @@
 import { useEffect, KeyboardEvent } from "react";
 
-export const useEscCloseModal = (close: () => void, question?: string) => {
+const useEscCloseModal = (close: () => void, question?: string) => {
   const handleKeyDown = (e: KeyboardEvent<Element>) => {
     if (e.key === "Escape") {
       if (question) {
@@ -24,3 +24,5 @@ export const useEscCloseModal = (close: () => void, question?: string) => {
     };
   }, []);
 };
+
+export default useEscCloseModal;

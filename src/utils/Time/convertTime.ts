@@ -28,6 +28,10 @@ class ConvertTime {
 
     return time;
   };
+
+  public parseDesiredDateTime = (time: string | Date, format: string) => {
+    return dayjs(time).format(format);
+  };
 }
 
 export default new ConvertTime();

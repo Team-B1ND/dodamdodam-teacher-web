@@ -6,7 +6,6 @@ export const MemberTBody: CSSObject = {
   fontWeight: "600",
   marginTop: "5px",
   display: "flex",
-  rowGap: "15px",
   flexDirection: "column",
 };
 
@@ -16,7 +15,7 @@ export const MemberItemTR: CSSObject = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  borderTop: "1px solid #d9d9d9",
+  borderTop: "none",
   borderBottom: "1px solid #d9d9d9",
 };
 

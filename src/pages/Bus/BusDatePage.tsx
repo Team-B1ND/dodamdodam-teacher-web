@@ -1,5 +1,5 @@
-import BusDate from "../../components/Bus/BusDate";
-import SectionHeaderProvider from "../../components/common/SectionHeaderProvider";
+import BusDate from "components/Bus/BusDate";
+import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 const BusDatePage = () => {
   return (

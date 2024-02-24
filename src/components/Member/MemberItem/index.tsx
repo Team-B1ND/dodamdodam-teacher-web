@@ -1,15 +1,11 @@
-import React from "react";
 import { TBody } from "@b1nd/b1nd-dodamdodam-ui";
-import { useGetAllMemberListQuery } from "../../../queries/Member/member.query";
+import { useGetAllMemberListQuery } from "queries/Member/member.query";
 import * as S from "./style";
 import Student from "./Student";
 import Teacher from "./Teacher";
 import { useRecoilValue } from "recoil";
-import {
-  MemberSearch,
-  MemberSelectGrade,
-} from "../../../stores/Member/member.store";
-import { changeGrade } from "../../../utils/Member/changeGrade";
+import { MemberSearch, MemberSelectGrade } from "stores/Member/member.store";
+import { changeGrade } from "utils/Member/changeGrade";
 
 function MemberItem() {
   const { data: studentsInfo } = useGetAllMemberListQuery({
@@ -34,4 +30,4 @@ function MemberItem() {
   );
 }
 
-export default React.memo(MemberItem);
+export default MemberItem;

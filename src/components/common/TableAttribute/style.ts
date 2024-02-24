@@ -5,12 +5,14 @@ export const TableStyle = {
 
 export const TrStyle = {
   width: "100%",
-  fontSize: "15px",
+  height: "50px",
+  fontSize: "17px",
   fontWeight: "bold",
-  boxShadow: "0 4px 4px -2px rgba(0, 0, 0, 0.1)",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  borderTop: "0.5px solid #dcddde",
+  borderBottom: "1px solid #dcddde",
 };
 
 export const ThStyle = {};

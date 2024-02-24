@@ -4,7 +4,7 @@ import { skeletonAnimtaion } from "@b1nd/b1nd-styled-components-util";
 export const MemberSkeletonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+  row-gap: 5px;
   margin-top: 14px;
 `;
 

@@ -1,27 +1,24 @@
 import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { StudentType } from "../../../../types/Member/member.type";
+import { StudentType } from "types/Member/member.type";
 import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
-import { addPhoneHyphen } from "../../../../utils/Member/addPhoneHyphen";
-import profileImg from "../../../../assets/profileImg.svg";
-import { sortAndFilterStudents } from "../../../../utils/Member/SortAndFilterStudents";
+import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
+import profileImg from "assets/profileImg.svg";
+import { sortAndFilterStudents } from "utils/Member/SortAndFilterStudents";
 
-interface Props {
+interface StudentProps {
   studentsInfo: StudentType[];
   searchValue: string;
   selectGrade: number;
 }
 
-const Student = ({ studentsInfo, searchValue, selectGrade }: Props) => {
+const Student = ({ studentsInfo, searchValue, selectGrade }: StudentProps) => {
   return (
     <>
       {sortAndFilterStudents(studentsInfo, searchValue, selectGrade).map(
         (student) => (
           <TR key={student.id} customStyle={MemberItemTR}>
             <TD customStyle={MemberTD}>
-              <MemberImage
-                src={student.member.profileImage || profileImg}
-                alt="이미지 없음"
-              />
+              <MemberImage src={profileImg} alt="이미지 없음" />
             </TD>
             <TD customStyle={MemberTD}>{student.member.name}</TD>
             <TD customStyle={MemberTD}>
