@@ -10,7 +10,7 @@ interface ExtractCsvDataProps {
 const ExtractCsvData = ({ csvData, fileName }: ExtractCsvDataProps) => {
   return (
     <CsvLinkButton data={csvData} filename={fileName.concat(".csv")}>
-      <RiFileExcel2Line size={20} />
+      <RiFileExcel2Line size={16} />
       <p>다운로드</p>
     </CsvLinkButton>
   );
@@ -20,11 +20,11 @@ export default ExtractCsvData;
 
 export const CsvLinkButton = styled(CSVLink)`
   width: 95px;
-  height: 43px;
+  height: 35px;
 
   border-radius: 5px;
   padding: 3px;
-  font-size: 16px;
+  font-size: 14px;
 
   color: #fff;
   background-color: #27ae60;

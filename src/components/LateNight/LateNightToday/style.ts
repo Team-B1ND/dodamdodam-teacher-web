@@ -3,12 +3,16 @@ import styled from "styled-components";
 export const LateNightHeaderContainer = styled.div`
   display: flex;
 
-  gap: 950px;
+  gap: 850px;
 `;
 export const SearchBarContainer = styled.div`
   display: flex;
 `;
-export const SelectContainer = styled.div``;
+export const SelectContainer = styled.div`
+  display: flex;
+
+  gap: 10px;
+`;
 export const InfoText = styled.p`
   font-size: 12px;
   color: red;
