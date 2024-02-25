@@ -78,8 +78,9 @@ export const TitleContainer = styled.div`
 export const TableStyle: CSSObject = {
   width: "94%",
   height: "auto",
+
   fontSize: "16px",
-  marginTop: "12px",
+  fontWeight: "bold",
 };
 
 export const TRStyle: CSSObject = {
@@ -92,6 +93,14 @@ export const TRStyle: CSSObject = {
 export const TRItemStyle: CSSObject = {
   width: "90%",
   height: "75px",
+  fontWeight: "bold",
+  borderTop: "2px solid #dcddde",
+  borderBottom: "2px solid #dcddde",
+};
+
+export const TRListStyle: CSSObject = {
+  width: "90%",
+  height: "110px",
   fontWeight: "bold",
   borderTop: "2px solid #dcddde",
   borderBottom: "2px solid #dcddde",

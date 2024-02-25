@@ -57,22 +57,24 @@ const LateNightModal = ({
                     </TD>
                   </TR>
                 )}
+              </Table>
+              <Table customStyle={S.TableStyle}>
+                <TH>심자 사유</TH>
 
-                <THead>
-                  <TR customStyle={S.TRStyle}>
-                    <TH>심자 사유</TH>
+                {data && (
+                  <TR customStyle={S.TRListStyle}>
+                    <TD>{data.content}</TD>
                   </TR>
-                </THead>
-                <S.Content>{data?.content}</S.Content>
-
+                )}
+              </Table>
+              <Table customStyle={S.TableStyle}>
                 {data?.isPhone && (
                   <>
-                    <THead>
-                      <TR customStyle={S.TRStyle}>
-                        <TH>휴대폰 필요 이유</TH>
-                      </TR>
-                    </THead>
-                    <S.Content>{data?.reason}</S.Content>
+                    <TH>휴대폰 필요 이유</TH>
+
+                    <TR customStyle={S.TRListStyle}>
+                      <TD>{data.reason}</TD>
+                    </TR>
                   </>
                 )}
               </Table>

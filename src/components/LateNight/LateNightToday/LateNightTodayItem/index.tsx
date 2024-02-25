@@ -1,24 +1,23 @@
 import * as S from "./style";
-import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { useGetPendingLateNight } from "../../../../queries/LateNight/latenight.query";
-import { truncateText } from "../../../../utils/common/truncate";
-import { LateNightAllowFilter } from "../../../../utils/LateNight/lateNightAllow";
-import useLateNightAllow from "../../../../hooks/LateNight/LateNightAllow/useLateNightAllow";
+import { TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import LateNightModal from "components/LateNight/LateNightModal";
+import { useGetLateNightList } from "queries/LateNight/latenight.query";
 import { useState } from "react";
 import { LateNightType } from "types/LateNight/latenight.type";
-interface LateNightAllowProps {
+import { LateNightAllowFilter } from "utils/LateNight/lateNightAllow";
+import { truncateText } from "utils/common/truncate";
+
+interface LateNightTodayProps {
   studentName: string;
   lateNightGrade: number;
 }
 
-const LateNightAllowItem = ({
+const LateNightTodayItem = ({
   studentName,
   lateNightGrade,
-}: LateNightAllowProps) => {
-  const { data: lateNightAllow } = useGetPendingLateNight();
-  const { handleLateNightAllow, patchLateNightAllow, patchLateNightCancel } =
-    useLateNightAllow();
+}: LateNightTodayProps) => {
+  const { data: lateNightToday } = useGetLateNightList();
+
   const [isOpen, setIsOpen] = useState(false);
   const [studyData, setStudyData] = useState<LateNightType>();
 
@@ -29,7 +28,7 @@ const LateNightAllowItem = ({
   return (
     <>
       <TBody customStyle={S.LateNightTBody}>
-        {LateNightAllowFilter(lateNightAllow, studentName, lateNightGrade)?.map(
+        {LateNightAllowFilter(lateNightToday, studentName, lateNightGrade)?.map(
           (latenight) => (
             <TR customStyle={S.LateNightTR}>
               <TD customStyle={S.LateNightTD}>{latenight.student.name}</TD>
@@ -50,7 +49,7 @@ const LateNightAllowItem = ({
               <TD customStyle={S.LateNightTD}>
                 <div
                   style={{ marginLeft: "-5px" }}
-                  onClick={() => setIsOpen(!isOpen)}
+                  //   onClick={() => setIsOpen(!isOpen)}
                 >
                   {latenight.startAt.slice(0, 4)}년
                   {latenight.startAt.slice(5, 7)}월
@@ -67,7 +66,7 @@ const LateNightAllowItem = ({
                 <div style={{ marginLeft: "-5px" }}>{latenight.place}</div>
               </TD>
               <TD customStyle={S.LateNightTD}>
-                <div style={{ marginLeft: "5px" }}>
+                <div style={{ marginLeft: "9px" }}>
                   {latenight.isPhone === true ? "O" : "X"}
                 </div>
               </TD>
@@ -75,24 +74,9 @@ const LateNightAllowItem = ({
                 {truncateText(latenight.reason, 5)}
               </TD>
               <TD customStyle={S.LateNightTD}>
-                <div style={{ marginLeft: "-20px" }}>
-                  <Button
-                    ButtonType="agree"
-                    onClick={() =>
-                      handleLateNightAllow(latenight.id, patchLateNightAllow)
-                    }
-                  >
-                    수락
-                  </Button>
-                  <Button
-                    ButtonType="disagree"
-                    onClick={() =>
-                      handleLateNightAllow(latenight.id, patchLateNightCancel)
-                    }
-                  >
-                    거절
-                  </Button>
-                </div>
+                <S.LateNightBox style={{ marginLeft: "-14px" }}>
+                  심자중
+                </S.LateNightBox>
               </TD>
             </TR>
           )
@@ -107,4 +91,4 @@ const LateNightAllowItem = ({
   );
 };
 
-export default LateNightAllowItem;
+export default LateNightTodayItem;

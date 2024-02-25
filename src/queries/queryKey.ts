@@ -15,5 +15,6 @@ export const QUERY_KEYS = Object.freeze({
   },
   latenight: {
     getPendingLateNight: "/nightstudy/pending",
+    getLateNightList: "/nightstudy",
   },
 });

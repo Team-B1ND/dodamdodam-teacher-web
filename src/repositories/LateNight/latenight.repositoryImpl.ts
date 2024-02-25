@@ -8,6 +8,11 @@ class LateNightRepositoryImpl implements LateNightRepository {
     return data;
   }
 
+  public async getLateNightList(): Promise<LateNightResponse> {
+    const { data } = await dodamV6Axios.get("/nightstudy");
+    return data;
+  }
+
   public async patchLateNightAllow(id: number): Promise<void> {
     await dodamV6Axios.patch("/nightstudy/allow", { id });
   }

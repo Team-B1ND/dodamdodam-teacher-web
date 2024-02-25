@@ -23,6 +23,24 @@ export const useGetPendingLateNight = (
     }
   );
 
+export const useGetLateNightList = (
+  options?: UseQueryOptions<
+    LateNightResponse,
+    AxiosError,
+    LateNightResponse,
+    string
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.latenight.getLateNightList,
+    () => latenightRepositoryImpl.getLateNightList(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  );
+
 export const usePatchLateNightAllow = () => {
   const mutation = useMutation((id: number) =>
     latenightRepositoryImpl.patchLateNightAllow(id)
