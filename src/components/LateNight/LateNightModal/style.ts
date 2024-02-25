@@ -69,8 +69,7 @@ export const TitleContainer = styled.div`
 
   width: 100%;
 
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0px 20px 10px 20px;
 
   margin-top: 18px;
 `;
