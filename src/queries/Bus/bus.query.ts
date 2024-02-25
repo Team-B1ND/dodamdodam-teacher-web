@@ -32,7 +32,7 @@ export const useGetAllBusListQuery = (
   >
 ) =>
   useQuery(
-    QUERY_KEYS.bus.bustList(page),
+    QUERY_KEYS.bus.busList(page),
     () => busRepositoryImpl.getAllBusList(page),
     {
       enabled: !!page,
