@@ -5,6 +5,7 @@ import { useGetLateNightList } from "queries/LateNight/latenight.query";
 import { useState } from "react";
 import { LateNightType } from "types/LateNight/latenight.type";
 import { LateNightAllowFilter } from "utils/LateNight/lateNightAllow";
+import convertTime from "utils/Time/convertTime";
 import { truncateText } from "utils/common/truncate";
 
 interface LateNightTodayProps {
@@ -47,19 +48,13 @@ const LateNightTodayItem = ({
                 </div>
               </TD>
               <TD customStyle={S.LateNightTD}>
-                <div
-                  style={{ marginLeft: "-5px" }}
-                  //   onClick={() => setIsOpen(!isOpen)}
-                >
-                  {latenight.startAt.slice(0, 4)}년
-                  {latenight.startAt.slice(5, 7)}월
-                  {latenight.startAt.slice(8, 10)}일
+                <div style={{ marginLeft: "-5px" }}>
+                  {convertTime.getDateTime(new Date(latenight.startAt), "date")}
                 </div>
               </TD>
               <TD customStyle={S.LateNightTD}>
                 <div style={{ marginLeft: "-5px" }}>
-                  {latenight.endAt.slice(0, 4)}년{latenight.endAt.slice(5, 7)}월
-                  {latenight.endAt.slice(8, 10)}일
+                  {convertTime.getDateTime(new Date(latenight.endAt), "date")}
                 </div>
               </TD>
               <TD customStyle={S.LateNightTD}>

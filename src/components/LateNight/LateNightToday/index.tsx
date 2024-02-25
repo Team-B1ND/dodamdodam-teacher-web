@@ -9,11 +9,17 @@ import { LATENIGHT_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import LateNightTodayItem from "./LateNightTodayItem";
 import { changeGrade } from "utils/Member/changeGrade";
+import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
+import CsvButton from "components/common/ExtractCsvData";
+import { useLateNightStudent } from "hooks/LateNight/useLateNightStudent";
+import dayjs from "dayjs";
 
 const LateNightToday = () => {
   const [studentName, setStudentName] = useState("");
   const [lateNightGrade, setlateNightGrade] = useRecoilState(LateNightGrade);
+  const { lateNightInfo } = useLateNightStudent();
 
+  console.log(lateNightInfo);
   return (
     <>
       <S.LateNightHeaderContainer>
@@ -30,6 +36,12 @@ const LateNightToday = () => {
             onChange={setlateNightGrade}
             zIndex={2}
           />
+          <CsvButtonContainer>
+            <CsvButton
+              csvData={lateNightInfo}
+              fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}
+            />
+          </CsvButtonContainer>
         </S.SelectContainer>
       </S.LateNightHeaderContainer>
       <TableAttribute
