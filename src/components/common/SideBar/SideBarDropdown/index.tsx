@@ -39,11 +39,11 @@ const SideBarDropdown = () => {
       <MenuDropdownWrapper title="2차 심자">
         <MenuDropdownChild
           title="심자신청 수락/거절"
-          redirectUrl="/lateNight-allow"
+          redirectUrl="/nightStudy-allow"
         />
         <MenuDropdownChild
           title="심자중인 학생"
-          redirectUrl="/lateNight-today"
+          redirectUrl="/nightStudy-today"
         />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="학사일정">

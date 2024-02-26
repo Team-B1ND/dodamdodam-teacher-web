@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { useRecoilState } from "recoil";
 import { BusListPageAtom } from "stores/Bus/bus.store";
 import ErrorBoundary from "components/common/ErrorBoundary";
-import BusSkeleton from "components/common/Skeleton/Bus";
+import SkeletonComponent from "components/common/Skeleton";
 import TableAttribute from "components/common/TableAttribute";
 import { BUS_ITEMS } from "../constant";
 import { NoneDataText } from "../style";
@@ -17,7 +17,7 @@ const BusList = () => {
         <ErrorBoundary
           fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
         >
-          <Suspense fallback={<BusSkeleton />}>
+          <Suspense fallback={<SkeletonComponent height={80} />}>
             <BusListItem page={page} />
           </Suspense>
         </ErrorBoundary>

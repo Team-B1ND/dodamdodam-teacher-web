@@ -1,4 +1,4 @@
-import { StudentType } from "types/Member/Member.type";
+import { StudentType } from "types/Member/member.type";
 
 export const sortStudentGrade = (
   student1: StudentType,

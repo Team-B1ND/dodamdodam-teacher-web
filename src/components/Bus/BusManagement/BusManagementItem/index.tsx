@@ -1,6 +1,6 @@
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
-import { useGetRegisteredBusQuery } from "queries/Bus/Bus.query";
+import { useGetRegisteredBusQuery } from "queries/Bus/bus.query";
 import convertTime from "utils/Time/convertTime";
 import { useSetRecoilState } from "recoil";
 import { ExistingBusDataAtom } from "stores/Bus/bus.store";

@@ -1,6 +1,6 @@
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { useOpenBusModal } from "../../../../hooks/Bus/useOpenBusModal";
-import { useGetAllBusListQuery } from "../../../../queries/Bus/Bus.query";
+import { useGetAllBusListQuery } from "../../../../queries/Bus/bus.query";
 import convertTime from "../../../../utils/Time/convertTime";
 import {
   CommonBusPassengerStyle,

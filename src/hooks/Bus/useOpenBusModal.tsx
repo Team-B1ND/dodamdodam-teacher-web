@@ -7,7 +7,7 @@ import {
   BusPassengerDataAtom,
   ExistingBusDataAtom,
 } from "stores/Bus/bus.store";
-import { BusMemberType } from "types/Bus/Bus.type";
+import { BusMemberType } from "types/Bus/bus.type";
 
 export const useOpenBusModal = () => {
   const busFormOverlay = useOverlay();

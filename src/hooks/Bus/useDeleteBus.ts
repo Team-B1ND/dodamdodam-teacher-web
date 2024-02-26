@@ -1,6 +1,6 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useQueryClient } from "react-query";
-import { useDeleteBusMutation } from "../../queries/Bus/Bus.query";
+import { useDeleteBusMutation } from "../../queries/Bus/bus.query";
 import { QUERY_KEYS } from "../../queries/queryKey";
 
 export const useDeleteBus = () => {

@@ -17,7 +17,8 @@ const TodayOffBaseItem = ({
   studentName,
 }: OffBasePassProps) => {
   const { data: offBasePass } = useGetOffBasePassQuery(
-    dayjs().format("YYYY-MM-DD")
+    dayjs().format("YYYY-MM-DD"),
+    { suspense: true }
   );
 
   const { handleOffBaseLeave, patchLeaveApprovalCancel } = useOffBaseLeave();

@@ -21,7 +21,9 @@ const OffBasePassItem = ({
   selectGrade,
   selectApproval,
 }: OffBasePassProps) => {
-  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
+  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
+    suspense: true,
+  });
   const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
 
   const {
@@ -88,78 +90,88 @@ const OffBasePassItem = ({
 
   return (
     <>
-      {offBaseDataFilter(
-        offBasePass,
-        studentName,
-        selectGrade,
-        selectApproval
-      )?.map((offbasepass) => (
-        <TBody customStyle={S.OffBaseTBody}>
-          <S.OffBaseTR
-            onClick={() => {
-              offbasepass.status === "PENDING" &&
-                setSelectedIds((prevIds) =>
-                  prevIds.includes(offbasepass.id)
-                    ? prevIds.filter((id) => id !== offbasepass.id)
-                    : [...prevIds, offbasepass.id]
-                );
-            }}
-            style={{
-              backgroundColor: selectedIds.includes(offbasepass.id)
-                ? "#EEF3F9"
-                : "",
-            }}
-          >
-            <TD customStyle={S.OffBaseTD}>
-              <S.MemberImage
-                src={offbasepass.student.member.profileImage || profileImg}
-              />
-            </TD>
-            <TD customStyle={S.OffBaseTD}>{offbasepass.student.member.name}</TD>
-            <TD customStyle={S.OffBaseTD}>
-              {offbasepass.student.classroom.grade}학년
-              {offbasepass.student.classroom.room}반
-              {offbasepass.student.classroom.room}번
-            </TD>
-            <TD customStyle={S.OffBaseTD}>
-              <S.DateContainer>
-                <div>
-                  {convertTime.getDateTime(
-                    new Date(offbasepass.startOutDate),
-                    "date"
-                  )}
-                </div>
-                <div>
-                  {convertTime.getDateTime(
-                    new Date(offbasepass.startOutDate),
-                    "time"
-                  )}
-                </div>
-              </S.DateContainer>
-            </TD>
-            <TD customStyle={S.OffBaseTD}>
-              <S.DateContainer>
-                <div>
-                  {convertTime.getDateTime(
-                    new Date(offbasepass.endOutDate),
-                    "date"
-                  )}
-                </div>
-                <div>
-                  {convertTime.getDateTime(
-                    new Date(offbasepass.endOutDate),
-                    "time"
-                  )}
-                </div>
-              </S.DateContainer>
-            </TD>
-            <TD customStyle={S.OffBaseTD}>{offbasepass.reason}</TD>
-            <TD customStyle={S.ButtonContainerStyle}>
-              {selectComponent(offbasepass.id)}
-            </TD>
-          </S.OffBaseTR>
-        </TBody>
-      ))}
+      {!offBaseDataFilter ||
+      offBaseDataFilter(offBasePass, studentName, selectGrade, selectApproval)
+        ?.length === 0 ? (
+        <S.NoneTile>현재 심자 신청한 학생이 없습니다.</S.NoneTile>
+      ) : (
+        <div>
+          {offBaseDataFilter(
+            offBasePass,
+            studentName,
+            selectGrade,
+            selectApproval
+          )?.map((offbasepass) => (
+            <TBody customStyle={S.OffBaseTBody}>
+              <S.OffBaseTR
+                onClick={() => {
+                  offbasepass.status === "PENDING" &&
+                    setSelectedIds((prevIds) =>
+                      prevIds.includes(offbasepass.id)
+                        ? prevIds.filter((id) => id !== offbasepass.id)
+                        : [...prevIds, offbasepass.id]
+                    );
+                }}
+                style={{
+                  backgroundColor: selectedIds.includes(offbasepass.id)
+                    ? "#EEF3F9"
+                    : "",
+                }}
+              >
+                <TD customStyle={S.OffBaseTD}>
+                  <S.MemberImage
+                    src={offbasepass.student.member.profileImage || profileImg}
+                  />
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  {offbasepass.student.member.name}
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  {offbasepass.student.classroom.grade}학년
+                  {offbasepass.student.classroom.room}반
+                  {offbasepass.student.classroom.room}번
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  <S.DateContainer>
+                    <div>
+                      {convertTime.getDateTime(
+                        new Date(offbasepass.startOutDate),
+                        "date"
+                      )}
+                    </div>
+                    <div>
+                      {convertTime.getDateTime(
+                        new Date(offbasepass.startOutDate),
+                        "time"
+                      )}
+                    </div>
+                  </S.DateContainer>
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  <S.DateContainer>
+                    <div>
+                      {convertTime.getDateTime(
+                        new Date(offbasepass.endOutDate),
+                        "date"
+                      )}
+                    </div>
+                    <div>
+                      {convertTime.getDateTime(
+                        new Date(offbasepass.endOutDate),
+                        "time"
+                      )}
+                    </div>
+                  </S.DateContainer>
+                </TD>
+                <TD customStyle={S.OffBaseTD}>{offbasepass.reason}</TD>
+                <TD customStyle={S.ButtonContainerStyle}>
+                  {selectComponent(offbasepass.id)}
+                </TD>
+              </S.OffBaseTR>
+            </TBody>
+          ))}
+        </div>
+      )}
     </>
   );
 };

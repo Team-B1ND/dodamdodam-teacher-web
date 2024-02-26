@@ -1,5 +1,5 @@
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { useGetBusDateQuery } from "../../../../queries/Bus/Bus.query";
+import { useGetBusDateQuery } from "../../../../queries/Bus/bus.query";
 import { BusDateParam } from "../../../../repositories/Bus/BusRepository";
 import convertTime from "../../../../utils/Time/convertTime";
 import { useOpenBusModal } from "../../../../hooks/Bus/useOpenBusModal";

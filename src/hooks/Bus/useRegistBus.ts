@@ -4,7 +4,7 @@ import { useQueryClient } from "react-query";
 import {
   useCreateBusMutation,
   useModifyBusMutation,
-} from "../../queries/Bus/Bus.query";
+} from "../../queries/Bus/bus.query";
 import { QUERY_KEYS } from "../../queries/queryKey";
 import convertTime from "../../utils/Time/convertTime";
 import { BusUpdateParam } from "../../repositories/Bus/BusRepository";

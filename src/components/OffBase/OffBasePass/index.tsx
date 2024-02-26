@@ -18,6 +18,7 @@ import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
 import useOffBasePass from "../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
+import SkeletonComponent from "components/common/Skeleton";
 
 const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
@@ -90,7 +91,7 @@ const OffBasePass = () => {
 
       <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>외출한 학생을 불러오지 못했습니다.</>}>
-          <Suspense fallback={<>로딩중...</>}>
+          <Suspense fallback={<SkeletonComponent height={60} />}>
             <OffBasePassItem
               selectApproval={changeApproval(selectApproval)}
               selectGrade={changeGrade(selectGrade)}

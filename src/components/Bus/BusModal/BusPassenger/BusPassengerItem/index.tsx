@@ -1,5 +1,5 @@
 import { Table, TBody, TD, TH, THead, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { BusPassengerType } from "types/Bus/Bus.type";
+import { BusPassengerType } from "types/Bus/bus.type";
 import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
 import { BUS_PASSENGER_TITLE_ITEMS } from "./constant";
 import * as S from "./style";

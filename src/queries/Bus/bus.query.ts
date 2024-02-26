@@ -6,7 +6,7 @@ import {
   BusDateResponse,
   BusListResponse,
   BusResponse,
-} from "types/Bus/Bus.type";
+} from "types/Bus/bus.type";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetRegisteredBusQuery = (

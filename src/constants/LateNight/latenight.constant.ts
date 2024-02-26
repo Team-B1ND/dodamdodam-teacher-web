@@ -1,4 +1,4 @@
-export const LATENIGHT_ALLOW_ITEMS = [
+export const NIGHTSTUDY_ALLOW_ITEMS = [
   "이름",
   "학반",
   "심자 사유",

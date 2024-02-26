@@ -3,7 +3,7 @@ import {
   BusResponse,
   BusListResponse,
   BusDateResponse,
-} from "types/Bus/Bus.type";
+} from "types/Bus/bus.type";
 import { BusDateParam, BusRepository, BusUpdateParam } from "./BusRepository";
 
 class BusRepositoryImpl implements BusRepository {

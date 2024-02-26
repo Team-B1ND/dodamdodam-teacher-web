@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { useSelectBusDate } from "hooks/Bus/useSelectBusDate";
 import ErrorBoundary from "components/common/ErrorBoundary";
-import BusSkeleton from "components/common/Skeleton/Bus";
+import SkeletonComponent from "components/common/Skeleton";
 import TableAttribute from "components/common/TableAttribute";
 import { NoneDataText } from "../style";
 import BusDateItem from "./BusDateItem";
@@ -29,7 +29,7 @@ const BusDate = () => {
         <ErrorBoundary
           fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
         >
-          <Suspense fallback={<BusSkeleton />}>
+          <Suspense fallback={<SkeletonComponent height={80} />}>
             <BusDateItem
               handleConvertToBusParamFormat={() =>
                 handleConvertToBusParamFormat(hooks.selectDate)
