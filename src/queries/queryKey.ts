@@ -17,4 +17,11 @@ export const QUERY_KEYS = Object.freeze({
     getPendingNightStudy: "/nightstudy/pending",
     getNightStudyList: "/nightstudy",
   },
+  schedule: {
+    getSchedules: (page: number) => ["schedule/getSchedule", page],
+    getSchedulesByPeriod: (startDate: string, endDate: string) => [
+      "schedule/getScheduleByPeriod",
+      `${startDate}~${endDate}`,
+    ],
+  },
 });
