@@ -21,7 +21,9 @@ const OffBasePassItem = ({
   selectGrade,
   selectApproval,
 }: OffBasePassProps) => {
-  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
+  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
+    suspense: true,
+  });
   const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
 
   const {

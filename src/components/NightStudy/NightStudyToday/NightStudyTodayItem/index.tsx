@@ -17,7 +17,7 @@ const NightStudyTodayItem = ({
   studentName,
   NightStudyGrade,
 }: NightStudyTodayProps) => {
-  const { data: NightStudyToday } = useGetNightStudyList();
+  const { data: NightStudyToday } = useGetNightStudyList({ suspense: true });
 
   const [isOpen, setIsOpen] = useState(false);
   const [studyData, setStudyData] = useState<NightStudyType>();

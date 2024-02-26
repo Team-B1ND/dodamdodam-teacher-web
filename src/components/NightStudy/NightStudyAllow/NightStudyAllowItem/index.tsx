@@ -17,7 +17,7 @@ const NightStudyAllowItem = ({
   studentName,
   NightStudyGrade,
 }: NightStudyAllowProps) => {
-  const { data: NightStudyAllow } = useGetPendingNightStudy();
+  const { data: NightStudyAllow } = useGetPendingNightStudy({ suspense: true });
   const { handleNightStudyAllow, patchNighStudytAllow, patchNightStudyCancel } =
     useNightStudyAllow();
   const [isOpen, setIsOpen] = useState(false);
