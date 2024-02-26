@@ -7,6 +7,7 @@ import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAl
 import NightStudyModal from "components/NightStudy/NightStudyModal";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
+import convertTime from "utils/Time/convertTime";
 
 interface NightStudyAllowProps {
   studentName: string;
@@ -24,7 +25,7 @@ const NightStudyAllowItem = ({
   const [studyData, setStudyData] = useState<NightStudyType>();
 
   const handleModalClick = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(true);
   };
 
   return (
@@ -52,19 +53,13 @@ const NightStudyAllowItem = ({
               </div>
             </TD>
             <TD customStyle={S.NightStudytTD}>
-              <div
-                style={{ marginLeft: "-5px" }}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {nightstudy.startAt.slice(0, 4)}년
-                {nightstudy.startAt.slice(5, 7)}월
-                {nightstudy.startAt.slice(8, 10)}일
+              <div style={{ marginLeft: "-5px" }}>
+                {convertTime.getDateTime(new Date(nightstudy.startAt), "date")}
               </div>
             </TD>
             <TD customStyle={S.NightStudytTD}>
               <div style={{ marginLeft: "-5px" }}>
-                {nightstudy.endAt.slice(0, 4)}년{nightstudy.endAt.slice(5, 7)}월
-                {nightstudy.endAt.slice(8, 10)}일
+                {convertTime.getDateTime(new Date(nightstudy.endAt), "date")}
               </div>
             </TD>
             <TD customStyle={S.NightStudytTD}>

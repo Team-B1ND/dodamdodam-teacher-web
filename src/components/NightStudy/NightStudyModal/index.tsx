@@ -1,8 +1,7 @@
 import * as S from "./style";
 import { Portal } from "components/common/Portal";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
-import NightStudyIcon from "assets/icons/NightStudy/NightStudy.svg";
-
+import NightStudyIcon from "assets/icons/NightStudy/LateNight.svg";
 import { TH, THead, TR, Table, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import convertTime from "utils/Time/convertTime";
 import { NIGHTSTUDY_MODAL_ITEMS } from "./constant";

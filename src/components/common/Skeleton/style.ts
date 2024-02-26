@@ -8,8 +8,8 @@ export const BusSkeletonContainer = styled.div`
   margin-top: 14px;
 `;
 
-export const BusSkeletonItem = styled.div`
+export const BusSkeletonItem = styled.div<{ height: number }>`
   width: 100%;
-  height: 80px;
+  height: ${(props) => props.height}px;
   ${skeletonAnimtaion};
 `;

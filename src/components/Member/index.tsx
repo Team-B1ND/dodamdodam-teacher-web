@@ -3,7 +3,7 @@ import * as S from "./style";
 import { MEMBER_TABLE_ITEMS } from "./constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import MemberItem from "./MemberItem";
-import MemberSkeleton from "components/common/Skeleton/Member";
+import SkeletonComponent from "components/common/Skeleton";
 import MemberHeader from "./MemberHeader";
 import TableAttribute from "components/common/TableAttribute";
 
@@ -21,7 +21,7 @@ function Member() {
             <S.NoneDataText>데이터를 불러오지 못했습니다.</S.NoneDataText>
           }
         >
-          <Suspense fallback={<MemberSkeleton />}>
+          <Suspense fallback={<SkeletonComponent height={60} />}>
             <MemberItem />
           </Suspense>
         </ErrorBoundary>

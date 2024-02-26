@@ -5,19 +5,19 @@ import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { useRecoilState } from "recoil";
 import { NightStudyGrade } from "stores/NightStudy/nightstudy.store";
 import TableAttribute from "components/common/TableAttribute";
-import { NIGHTSTUDY_ALLOW_ITEMS } from "constants/NightStudy/nightstudy.constant";
+import { NIGHTSTUDY_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import NightStudyTodayItem from "./NightStudyTodayItem";
 import { changeGrade } from "utils/Member/changeGrade";
 import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
 import CsvButton from "components/common/ExtractCsvData";
-import { useNightStudyStudent } from "hooks/NightStudy/useNightStudyStudent";
+import { useNightStudyStudentList } from "hooks/NightStudy/useNightStudyStudentList";
 import dayjs from "dayjs";
 
 const NightStudyToday = () => {
   const [studentName, setStudentName] = useState("");
   const [nightStudyGrade, setNightStudyGrade] = useRecoilState(NightStudyGrade);
-  const { NightStudyInfo } = useNightStudyStudent();
+  const { NightStudyInfo } = useNightStudyStudentList();
 
   return (
     <>

@@ -23,7 +23,7 @@ const NightStudyTodayItem = ({
   const [studyData, setStudyData] = useState<NightStudyType>();
 
   const handleModalClick = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(true);
   };
 
   return (

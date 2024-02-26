@@ -22,7 +22,6 @@ export const useBusPassenger = (closeModal: () => void) => {
 
   // csv에 보여질 데이터 값 담기
   useEffect(() => {
-    console.log(busPassengerData);
     const busPassengerCsvData = busPassengerData?.busMember.map((item) => ({
       이름: item.name,
       아이디: item.memberId,

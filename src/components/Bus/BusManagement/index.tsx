@@ -3,7 +3,7 @@ import { Suspense, useState } from "react";
 import { BUS_MANAGEMENT_ITEMS } from "./constant";
 import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
 import ErrorBoundary from "components/common/ErrorBoundary";
-import BusSkeleton from "components/common/Skeleton/Bus";
+import SkeletonComponent from "components/common/Skeleton";
 import TableAttribute from "components/common/TableAttribute";
 import BusManagementItem from "./BusManagementItem";
 import * as S from "./style";
@@ -33,7 +33,7 @@ const BusManagement = () => {
         <ErrorBoundary
           fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
         >
-          <Suspense fallback={<BusSkeleton />}>
+          <Suspense fallback={<SkeletonComponent height={80} />}>
             <BusManagementItem busName={busName} />
           </Suspense>
         </ErrorBoundary>

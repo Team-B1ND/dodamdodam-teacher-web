@@ -4,7 +4,7 @@ import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { useRecoilState } from "recoil";
 import { NightStudyGrade } from "stores/NightStudy/nightstudy.store";
 import TableAttribute from "../../common/TableAttribute";
-import { NIGHTSTUDY_ALLOW_ITEMS } from "../../../constants/NightStudy/nightstudy.constant";
+import { NIGHTSTUDY_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";
 import ErrorBoundary from "../../common/ErrorBoundary";
 import NightStudyAllowItem from "./NightStudyAllowItem";
 import { changeGrade } from "../../../utils/Member/changeGrade";

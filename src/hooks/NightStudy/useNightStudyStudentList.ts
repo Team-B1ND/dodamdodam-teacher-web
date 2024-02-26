@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { NightStudyDataAtom } from "stores/NightStudy/nightstudy.store";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
 
-export const useNightStudyStudent = () => {
+export const useNightStudyStudentList = () => {
   const { data: NightStudyToday } = useGetNightStudyList();
 
   const NightStudyData = useRecoilValue(NightStudyDataAtom);
