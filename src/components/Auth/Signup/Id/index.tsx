@@ -6,8 +6,8 @@ import { AccountContainer } from "../style";
 import { Dispatch, SetStateAction } from "react";
 import { PasswordBox, PasswordViewBox } from "../../Signin/style";
 import { IoEyeSharp } from "react-icons/io5";
-import { PasswordParm } from "../../../../repositories/Auth/Signin/SigninRepository";
 import { MemberSignUpParam } from "repositories/Member/MemberRepository";
+import { PasswordParm } from "repositories/Auth/AuthRepository";
 
 interface SignupIdProps {
   passwordType: PasswordParm;
