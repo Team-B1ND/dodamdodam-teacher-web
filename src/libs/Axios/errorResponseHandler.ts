@@ -5,8 +5,8 @@ import {
   REFRESH_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
 } from "../../constants/Token/Token.constant";
-import tokenRepositoryImpl from "../../repositories/Token/TokenRepositoryImpl";
 import { dodamV6Axios } from "./customAxios";
+import AuthRepositoryImpl from "repositories/Auth/AuthRepositoryImpl";
 
 export const errorResponseHandler = async (error: AxiosError) => {
   if (error.response) {
@@ -24,9 +24,7 @@ export const errorResponseHandler = async (error: AxiosError) => {
     ) {
       try {
         const { data: newAccessToken } =
-          await tokenRepositoryImpl.getRefreshToken({
-            token: usingRefreshToken,
-          });
+          await AuthRepositoryImpl.refreshAccessToken(usingRefreshToken);
 
         Token.setToken(ACCESS_TOKEN_KEY, newAccessToken);
         dodamV6Axios.defaults.headers.common[
