@@ -48,9 +48,8 @@ export const useSignin = () => {
       pw: sha512(pw),
     };
     try {
-      const {
-        data: { member, token: accessToken, refreshToken },
-      } = await signinRepositoryImpl.postSignin(validSigninData);
+      const { member, accessToken, refreshToken } =
+        await signinRepositoryImpl.postSignin(validSigninData);
 
       if (member.role !== "TEACHER" && member.role !== "ADMIN") {
         B1ndToast.showInfo("선셍님 계정으로 로그인 해주세요.");
