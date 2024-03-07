@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import { sha512 } from "js-sha512";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import PatternCheck from "../../utils/Check/PatternCheck";
 import MemberRepositoryImpl from "repositories/Member/MemberRepositoryImpl";
@@ -99,7 +98,7 @@ export const useSignup = () => {
 
     const validSignupData: MemberSignUpParam = {
       ...signupData,
-      pw: sha512(pw),
+      pw,
     };
 
     try {

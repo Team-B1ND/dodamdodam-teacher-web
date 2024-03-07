@@ -1,4 +1,3 @@
-import { sha512 } from "js-sha512";
 import { useCallback, useState } from "react";
 import {
   SigninParam,
@@ -45,7 +44,7 @@ export const useSignin = () => {
 
     const validSigninData: SigninParam = {
       id,
-      pw: sha512(pw),
+      pw,
     };
     try {
       const { member, accessToken, refreshToken } =
