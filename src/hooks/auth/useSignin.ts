@@ -1,10 +1,4 @@
-import { sha512 } from "js-sha512";
 import { useCallback, useState } from "react";
-import {
-  SigninParam,
-  PasswordParm,
-} from "../../repositories/Auth/Signin/SigninRepository";
-import signinRepositoryImpl from "../../repositories/Auth/Signin/SigninRepositoryImpl";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import Token from "../../libs/Token/Token";
 import {
@@ -12,6 +6,8 @@ import {
   ACCESS_TOKEN_KEY,
 } from "../../constants/Token/Token.constant";
 import { useNavigate } from "react-router-dom";
+import { PasswordParm, SignInParam } from "repositories/Auth/AuthRepository";
+import AuthRepositoryImpl from "repositories/Auth/AuthRepositoryImpl";
 
 export const useSignin = () => {
   const navigate = useNavigate();
@@ -19,7 +15,7 @@ export const useSignin = () => {
     type: "password",
     visible: false,
   });
-  const [signinData, setSigninData] = useState<SigninParam>({
+  const [signinData, setSigninData] = useState<SignInParam>({
     id: "",
     pw: "",
   });
@@ -43,14 +39,13 @@ export const useSignin = () => {
       return;
     }
 
-    const validSigninData: SigninParam = {
+    const validSigninData: SignInParam = {
       id,
-      pw: sha512(pw),
+      pw,
     };
     try {
-      const {
-        data: { member, token: accessToken, refreshToken },
-      } = await signinRepositoryImpl.postSignin(validSigninData);
+      const { member, accessToken, refreshToken } =
+        await AuthRepositoryImpl.signIn(validSigninData);
 
       if (member.role !== "TEACHER" && member.role !== "ADMIN") {
         B1ndToast.showInfo("선셍님 계정으로 로그인 해주세요.");

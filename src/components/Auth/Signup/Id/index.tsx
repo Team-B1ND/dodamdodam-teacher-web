@@ -6,12 +6,12 @@ import { AccountContainer } from "../style";
 import { Dispatch, SetStateAction } from "react";
 import { PasswordBox, PasswordViewBox } from "../../Signin/style";
 import { IoEyeSharp } from "react-icons/io5";
-import { PasswordParm } from "../../../../repositories/Auth/Signin/SigninRepository";
-import { SignupParam } from "../../../../repositories/Auth/Signup/SignupRepository";
+import { MemberSignUpParam } from "repositories/Member/MemberRepository";
+import { PasswordParm } from "repositories/Auth/AuthRepository";
 
 interface SignupIdProps {
   passwordType: PasswordParm;
-  signupData: SignupParam;
+  signupData: MemberSignUpParam;
   setSection: Dispatch<SetStateAction<string>>;
   setIsSignin: Dispatch<SetStateAction<boolean>>;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
