@@ -44,16 +44,16 @@ export const useSignin = () => {
       pw,
     };
     try {
-      const { member, accessToken, refreshToken } =
-        await AuthRepositoryImpl.signIn(validSigninData);
+      const { data } = await AuthRepositoryImpl.signIn(validSigninData);
 
-      if (member.role !== "TEACHER" && member.role !== "ADMIN") {
+      if (data.member.role !== "TEACHER" && data.member.role !== "ADMIN") {
         B1ndToast.showInfo("선셍님 계정으로 로그인 해주세요.");
         return;
       }
 
-      Token.setToken(ACCESS_TOKEN_KEY, accessToken);
-      Token.setToken(REFRESH_TOKEN_KEY, refreshToken);
+      Token.setToken(ACCESS_TOKEN_KEY, data.accessToken);
+      Token.setToken(REFRESH_TOKEN_KEY, data.refreshToken);
+
       navigate("/member");
       B1ndToast.showSuccess("로그인 성공");
     } catch (e) {
