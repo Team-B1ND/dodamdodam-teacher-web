@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import { BusBasicInfoType, BusPassengerType } from "types/Bus/bus.type";
 import { recoilPersist } from "recoil-persist";
+import convertTime from "utils/Time/convertTime";
 
 const { persistAtom } = recoilPersist();
 
@@ -18,4 +19,9 @@ export const BusListPageAtom = atom<number>({
   key: "busListPageAtom",
   default: 1,
   effects_UNSTABLE: [persistAtom],
+});
+
+export const SelectBusDateAtom = atom<string>({
+  key: "selectBusDateAtom",
+  default: convertTime.parseDesiredDateTime(new Date(), "YYYY-MM-DD"),
 });

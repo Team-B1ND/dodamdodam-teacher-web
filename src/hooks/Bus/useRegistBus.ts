@@ -8,8 +8,11 @@ import {
 import { QUERY_KEYS } from "../../queries/queryKey";
 import convertTime from "../../utils/Time/convertTime";
 import { BusUpdateParam } from "../../repositories/Bus/BusRepository";
-import { useRecoilValue } from "recoil";
-import { ExistingBusDataAtom } from "../../stores/Bus/bus.store";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  ExistingBusDataAtom,
+  SelectBusDateAtom,
+} from "../../stores/Bus/bus.store";
 
 export const useRegistBus = () => {
   const existingBusData = useRecoilValue(ExistingBusDataAtom);
@@ -47,6 +50,8 @@ export const useRegistBus = () => {
           minute: 0,
         }
   );
+
+  const [selectDate, setSelectDate] = useRecoilState(SelectBusDateAtom);
 
   const queryClient = useQueryClient();
   const createBus = useCreateBusMutation();
@@ -150,6 +155,15 @@ export const useRegistBus = () => {
     return formatTime;
   };
 
+  const successRegistAndModifyBus = (closeBusRegister: () => void) => {
+    queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
+    // 버스 등록일로 신청, 수정된 버스리스트를 볼 수 있게 한다.
+    setSelectDate(
+      convertTime.parseDesiredDateTime(busContent.leaveTime, "YYYY-MM-DD")
+    );
+    closeBusRegister();
+  };
+
   // 버스 등록 및 수정
   const handleBusContentBusSubmit = (
     e: React.FormEvent<HTMLFormElement>,
@@ -191,8 +205,7 @@ export const useRegistBus = () => {
           {
             onSuccess: () => {
               B1ndToast.showSuccess("버스 정보를 수정하였습니다!");
-              queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
-              closeBusRegister();
+              successRegistAndModifyBus(closeBusRegister);
             },
             onError: () => {
               B1ndToast.showError("버스 정보를 수정하지 못했습니다!");
@@ -208,8 +221,7 @@ export const useRegistBus = () => {
           {
             onSuccess: () => {
               B1ndToast.showSuccess("버스를 추가하였습니다!");
-              queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
-              closeBusRegister();
+              successRegistAndModifyBus(closeBusRegister);
             },
             onError: () => {
               B1ndToast.showError("버스를 추가하지 못했습니다!");
