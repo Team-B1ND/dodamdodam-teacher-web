@@ -1,4 +1,8 @@
-import { dodamTeacherAxios, dodamV6Axios } from "libs/Axios/customAxios";
+import {
+  dodamTeacherAxios,
+  dodamTestAxios,
+  dodamV6Axios,
+} from "libs/Axios/customAxios";
 import {
   BusResponse,
   BusListResponse,
@@ -13,13 +17,13 @@ class BusRepositoryImpl implements BusRepository {
   }
 
   public async getAllBusList(page: number): Promise<BusListResponse> {
-    const { data } = await dodamV6Axios.get(`/bus/list?page=${page}&limit=8`);
+    const { data } = await dodamTestAxios.get(`/bus/list?page=${page}&limit=8`);
     return data;
   }
 
   public async getBusDate(param: BusDateParam): Promise<BusDateResponse> {
     const { year, month, day } = param;
-    const { data } = await dodamV6Axios.get(
+    const { data } = await dodamTestAxios.get(
       `/bus/date?year=${year}&month=${month}&day=${day}`
     );
     return data;

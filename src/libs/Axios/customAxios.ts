@@ -26,6 +26,13 @@ export const dodamV6Axios = createAxiosInstance({
   },
 });
 
+export const dodamTestAxios = createAxiosInstance({
+  baseURL: process.env.REACT_APP_DODAM_SERVER_V6,
+  headers: {
+    [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
+  },
+});
+
 export const dodamTeacherAxios = createAxiosInstance({
   baseURL: process.env.REACT_APP_DODAM_TEACHER_API,
   headers: {
@@ -39,3 +46,6 @@ export const dodamV6AxiosSetAccessToken = (token: string) => {
 
 dodamV6Axios.interceptors.request.use(requestHandler);
 dodamV6Axios.interceptors.response.use((res) => res, errorResponseHandler);
+
+dodamTestAxios.interceptors.request.use(requestHandler);
+dodamTestAxios.interceptors.response.use((res) => res, errorResponseHandler);
