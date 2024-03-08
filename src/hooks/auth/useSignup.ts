@@ -103,10 +103,7 @@ export const useSignup = () => {
 
     try {
       await MemberRepositoryImpl.postMemberJoinTeacher(validSignupData);
-      B1ndToast.showSuccess(
-        "회원가입에 성공했습니다.(관리자 승인을 기다려주세요!)"
-      );
-
+      window.alert("회원가입에 성공했습니다.(관리자 승인을 기다려주세요!)");
       window.location.reload();
     } catch (e) {
       B1ndToast.showError("회원가입에 실패했습니다.");
