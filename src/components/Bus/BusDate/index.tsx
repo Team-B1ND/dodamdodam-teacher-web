@@ -7,23 +7,35 @@ import { NoneDataText } from "../style";
 import BusDateItem from "./BusDateItem";
 import { BUS_ITEMS } from "../constant";
 import * as S from "./style";
+import { Button } from "@b1nd/b1nd-dodamdodam-ui";
+import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
 
 const BusDate = () => {
+  const { handleOpenBusRegisterModal } = useOpenBusModal();
   const { handleSelectDateChange, handleConvertToBusParamFormat, ...hooks } =
     useSelectBusDate();
 
   return (
     <>
-      <S.SelectBusDateToView isFocus={hooks.isFoucs}>
-        <p>조회할 날짜를 선택하세요</p>
-        <input
-          type="date"
-          value={hooks.selectDate}
-          onChange={handleSelectDateChange}
-          onClick={() => hooks.setIsFoucs(true)}
-          onBlur={() => hooks.setIsFoucs(false)}
-        />
-      </S.SelectBusDateToView>
+      <S.SearchAndSelectDateBus>
+        <S.SelectBusDateToView isFocus={hooks.isFoucs}>
+          <p>조회할 날짜를 선택하세요</p>
+          <input
+            type="date"
+            value={hooks.selectDate}
+            onChange={handleSelectDateChange}
+            onClick={() => hooks.setIsFoucs(true)}
+            onBlur={() => hooks.setIsFoucs(false)}
+          />
+        </S.SelectBusDateToView>
+        <Button
+          ButtonType="agree"
+          style={S.AddButtonStyle}
+          onClick={() => handleOpenBusRegisterModal()}
+        >
+          버스 추가하기
+        </Button>
+      </S.SearchAndSelectDateBus>
 
       <TableAttribute constant={BUS_ITEMS} thStyle={{ width: "16.5%" }}>
         <ErrorBoundary
