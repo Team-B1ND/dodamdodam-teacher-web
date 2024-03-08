@@ -9,7 +9,7 @@ import {
 class AuthRepositoryImpl implements AuthRepository {
   public async signIn(param: SignInParam): Promise<SigninResponse> {
     const { data } = await axios.post(
-      `${process.env.REACT_APP_DODAM_SERVER_V6}/auth/login`,
+      `${process.env.REACT_APP_DODAM_TEST_SERVER_V6}/auth/login`,
       param
     );
     return data;
@@ -19,7 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
     refreshToken: string
   ): Promise<NewAccessTokenResponse> {
     const { data } = await axios.post<NewAccessTokenResponse>(
-      `${process.env.REACT_APP_DODAM_SERVER_V6}/auth/reissue`,
+      `${process.env.REACT_APP_DODAM_TEST_SERVER_V6}/auth/reissue`,
       {
         refreshToken,
       }
