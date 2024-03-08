@@ -5,10 +5,10 @@ import SkeletonComponent from "components/common/Skeleton";
 import TableAttribute from "components/common/TableAttribute";
 import { NoneDataText } from "../style";
 import BusDateItem from "./BusDateItem";
-import { BUS_ITEMS } from "../constant";
 import * as S from "./style";
 import { Button } from "@b1nd/b1nd-dodamdodam-ui";
 import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
+import { BUS_DATE_ITEMS } from "./constant";
 
 const BusDate = () => {
   const { handleOpenBusRegisterModal } = useOpenBusModal();
@@ -28,6 +28,7 @@ const BusDate = () => {
             onBlur={() => hooks.setIsFoucs(false)}
           />
         </S.SelectBusDateToView>
+
         <Button
           ButtonType="agree"
           style={S.AddButtonStyle}
@@ -37,7 +38,7 @@ const BusDate = () => {
         </Button>
       </S.SearchAndSelectDateBus>
 
-      <TableAttribute constant={BUS_ITEMS} thStyle={{ width: "16.5%" }}>
+      <TableAttribute constant={BUS_DATE_ITEMS} thStyle={{ width: "16.5%" }}>
         <ErrorBoundary
           fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
         >

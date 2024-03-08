@@ -2,32 +2,15 @@ import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import { BusDateParam, BusUpdateParam } from "repositories/Bus/BusRepository";
 import busRepositoryImpl from "repositories/Bus/BusRepositoryImpl";
-import {
-  BusDateResponse,
-  BusListResponse,
-  BusResponse,
-} from "types/Bus/bus.type";
+import { BusDateAndListResponse } from "types/Bus/bus.type";
 import { QUERY_KEYS } from "../queryKey";
-
-export const useGetRegisteredBusQuery = (
-  options?: UseQueryOptions<BusResponse, AxiosError, BusResponse, string>
-) =>
-  useQuery(
-    QUERY_KEYS.bus.registeredBus,
-    () => busRepositoryImpl.getRegisteredBus(),
-    {
-      staleTime: 1000 * 60 * 60,
-      cacheTime: 1000 * 60 * 60,
-      ...options,
-    }
-  );
 
 export const useGetAllBusListQuery = (
   page: number,
   options: UseQueryOptions<
-    BusListResponse,
+    BusDateAndListResponse,
     AxiosError,
-    BusListResponse,
+    BusDateAndListResponse,
     (string | number)[]
   >
 ) =>
@@ -45,9 +28,9 @@ export const useGetAllBusListQuery = (
 export const useGetBusDateQuery = (
   param: BusDateParam,
   options?: UseQueryOptions<
-    BusDateResponse,
+    BusDateAndListResponse,
     AxiosError,
-    BusDateResponse,
+    BusDateAndListResponse,
     (string | BusDateParam)[]
   >
 ) =>

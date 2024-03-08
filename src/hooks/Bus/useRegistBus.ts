@@ -8,7 +8,7 @@ import {
 import { QUERY_KEYS } from "../../queries/queryKey";
 import convertTime from "../../utils/Time/convertTime";
 import { BusUpdateParam } from "../../repositories/Bus/BusRepository";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   ExistingBusDataAtom,
   SelectBusDateAtom,
@@ -17,14 +17,14 @@ import {
 export const useRegistBus = () => {
   const existingBusData = useRecoilValue(ExistingBusDataAtom);
   const [busContent, setBusContent] = useState(
-    existingBusData?.idx
+    existingBusData?.id
       ? {
           busName: existingBusData?.busName,
           description: existingBusData?.description,
           peopleLimit: existingBusData?.peopleLimit,
           leaveTime: convertTime.parseDesiredDateTime(
             existingBusData?.leaveTime,
-            "YYYY-MM-DD HH:mm"
+            "YYYY-MM-DD HH:mm:ss"
           ),
           timeRequired: existingBusData?.timeRequired,
         }
@@ -34,13 +34,13 @@ export const useRegistBus = () => {
           peopleLimit: 0,
           leaveTime: convertTime.parseDesiredDateTime(
             new Date(),
-            "YYYY-MM-DD HH:mm"
+            "YYYY-MM-DD HH:mm:ss"
           ),
           timeRequired: "",
         }
   );
   const [timeRequired, setTimeRequired] = useState(
-    existingBusData?.idx
+    existingBusData?.id
       ? {
           hour: Number(existingBusData?.timeRequired.split(":")[0]),
           minute: Number(existingBusData?.timeRequired.split(":")[1]),
@@ -51,7 +51,7 @@ export const useRegistBus = () => {
         }
   );
 
-  const [selectDate, setSelectDate] = useRecoilState(SelectBusDateAtom);
+  const setSelectDate = useSetRecoilState(SelectBusDateAtom);
 
   const queryClient = useQueryClient();
   const createBus = useCreateBusMutation();
@@ -75,7 +75,7 @@ export const useRegistBus = () => {
         [name]: Number(value),
       }));
     } else if (name === "minute" || name === "hour") {
-      setTimeRequired((prev) => ({ ...prev, [name]: value }));
+      setTimeRequired((prev) => ({ ...prev, [name]: Number(value) }));
     } else {
       setBusContent((prev) => ({ ...prev, [name]: value }));
     }
@@ -174,8 +174,8 @@ export const useRegistBus = () => {
     if (checkAndFilterBusEssentialInfo()) {
       let timeRequired = formatTimeRequired();
 
-      // existingBusData?.idx가 true이면 버스수정 아니면 버스등록
-      if (existingBusData?.idx) {
+      // existingBusData?.id가 true이면 버스수정 아니면 버스등록
+      if (existingBusData?.id) {
         // 기존값과 수정값 비교
         if (
           JSON.stringify({
@@ -199,7 +199,7 @@ export const useRegistBus = () => {
         modifyBus.mutate(
           {
             ...busContent,
-            busIdx: existingBusData?.idx,
+            busId: existingBusData?.id,
             timeRequired,
           } as BusUpdateParam,
           {
@@ -216,7 +216,8 @@ export const useRegistBus = () => {
         createBus.mutate(
           {
             ...busContent,
-            timeRequired,
+            leaveTime: busContent.leaveTime + ":00",
+            timeRequired: timeRequired + ":00",
           } as BusUpdateParam,
           {
             onSuccess: () => {

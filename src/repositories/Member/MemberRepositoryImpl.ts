@@ -1,5 +1,5 @@
 import { MemberRepository, MemberSignUpParam } from "./MemberRepository";
-import { dodamV6Axios } from "libs/Axios/customAxios";
+import { dodamTestAxios, dodamV6Axios } from "libs/Axios/customAxios";
 import { MemberListType } from "types/Member/member.type";
 
 class MemberRepositoryImpl implements MemberRepository {
@@ -9,7 +9,7 @@ class MemberRepositoryImpl implements MemberRepository {
   }
 
   public async postMemberJoinTeacher(param: MemberSignUpParam): Promise<void> {
-    await dodamV6Axios.post("/member/join-teacher", param);
+    await dodamTestAxios.post("/member/join-teacher", param);
   }
 }
 

@@ -13,13 +13,17 @@ interface BusRegisterProps {
 }
 
 const BusRegister = ({ busId, isOpen, close }: BusRegisterProps) => {
+  const question = "버스 등록을 취소하시겠습니까?";
+
   useLockScroll();
-  useEscCloseModal(close);
+  useEscCloseModal(close, question);
 
   return (
     <Portal>
       {isOpen && (
-        <S.BusModalContainer onClick={close}>
+        <S.BusModalContainer
+          onClick={() => window.confirm(question) && close()}
+        >
           <BusWrap onClick={(e) => e.stopPropagation()}>
             <S.TitleContainer>
               <S.Title>
@@ -27,7 +31,10 @@ const BusRegister = ({ busId, isOpen, close }: BusRegisterProps) => {
                 <p>{busId ? "버스 수정하기" : "버스 추가하기"}</p>
               </S.Title>
 
-              <S.CloseIcon size={32} onClick={close} />
+              <S.CloseIcon
+                size={32}
+                onClick={() => window.confirm(question) && close()}
+              />
             </S.TitleContainer>
 
             <BusRegisterForm closeBusRegister={close} />

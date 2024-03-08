@@ -27,6 +27,7 @@ export const errorResponseHandler = async (error: AxiosError) => {
           await AuthRepositoryImpl.refreshAccessToken(usingRefreshToken);
 
         Token.setToken(ACCESS_TOKEN_KEY, newAccessToken);
+
         dodamV6Axios.defaults.headers.common[
           REQUEST_TOKEN_KEY
         ] = `Bearer ${newAccessToken}`;

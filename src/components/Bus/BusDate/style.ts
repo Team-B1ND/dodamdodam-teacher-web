@@ -10,6 +10,7 @@ export const SearchAndSelectDateBus = styled.div`
 
 export const SelectBusDateToView = styled.div<{ isFocus: boolean }>`
   padding-top: 2px;
+
   display: flex;
   flex-direction: column;
   row-gap: 6px;
