@@ -34,9 +34,7 @@ const OffBasePass = () => {
 
   return (
     <>
-      <S.OffBaseHeaderContainer
-        style={{ gap: selectedIds.length === 0 ? "910px" : "633px" }}
-      >
+      <S.OffBaseHeaderContainer>
         <div style={{ display: "flex" }}>
           <SearchBar value={studentName} onChange={setStudentName} />
 
@@ -62,11 +60,7 @@ const OffBasePass = () => {
               >
                 모두 거절
               </Button>
-              <Button
-                ButtonType="disagree"
-                style={S.ClearStyle}
-                // onClick={() => handleOffBasePass(key.id, patchCancel)}
-              >
+              <Button ButtonType="disagree" style={S.ClearStyle}>
                 선택 해제
               </Button>
             </S.ButtonContainer>

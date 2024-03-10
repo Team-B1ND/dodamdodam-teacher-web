@@ -1,8 +1,4 @@
-import {
-  dodamTeacherAxios,
-  dodamTestAxios,
-  dodamV6Axios,
-} from "../../libs/Axios/customAxios";
+import { dodamTestAxios, dodamV6Axios } from "../../libs/Axios/customAxios";
 import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
 

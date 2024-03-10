@@ -1,4 +1,4 @@
-import { dodamTestAxios, dodamV6Axios } from "../../libs/Axios/customAxios";
+import { dodamV6Axios, dodamTestAxios } from "../../libs/Axios/customAxios";
 import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
 import { OffBasePassRepository } from "./offbasepass.repository";
 
