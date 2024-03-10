@@ -15,7 +15,7 @@ export const useGetOffBasePassQuery = (
 ) =>
   useQuery(
     QUERY_KEYS.offbasepass.getOffBasePass(date),
-    () => offbasepassRepositoryImpl.getOffBase(date),
+    () => offbasepassRepositoryImpl.getOffBasePass(date),
     {
       enabled: !!date,
       staleTime: 1000 * 60 * 60,

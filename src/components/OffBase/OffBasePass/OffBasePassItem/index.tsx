@@ -93,7 +93,7 @@ const OffBasePassItem = ({
       {!offBaseDataFilter ||
       offBaseDataFilter(offBasePass, studentName, selectGrade, selectApproval)
         ?.length === 0 ? (
-        <S.NoneTile>현재 심자 신청한 학생이 없습니다.</S.NoneTile>
+        <S.NoneTile>현재 외출 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <div>
           {offBaseDataFilter(
@@ -119,29 +119,24 @@ const OffBasePassItem = ({
                 }}
               >
                 <TD customStyle={S.OffBaseTD}>
-                  <S.MemberImage
-                    src={offbasepass.student.member.profileImage || profileImg}
-                  />
+                  <S.MemberImage src={profileImg} />
                 </TD>
+                <TD customStyle={S.OffBaseTD}>{offbasepass.student.name}</TD>
                 <TD customStyle={S.OffBaseTD}>
-                  {offbasepass.student.member.name}
-                </TD>
-                <TD customStyle={S.OffBaseTD}>
-                  {offbasepass.student.classroom.grade}학년
-                  {offbasepass.student.classroom.room}반
-                  {offbasepass.student.classroom.room}번
+                  {offbasepass.student.grade}학년
+                  {offbasepass.student.room}반{offbasepass.student.room}번
                 </TD>
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
                       {convertTime.getDateTime(
-                        new Date(offbasepass.startOutDate),
+                        new Date(offbasepass.startAt),
                         "date"
                       )}
                     </div>
                     <div>
                       {convertTime.getDateTime(
-                        new Date(offbasepass.startOutDate),
+                        new Date(offbasepass.startAt),
                         "time"
                       )}
                     </div>
@@ -151,13 +146,13 @@ const OffBasePassItem = ({
                   <S.DateContainer>
                     <div>
                       {convertTime.getDateTime(
-                        new Date(offbasepass.endOutDate),
+                        new Date(offbasepass.endAt),
                         "date"
                       )}
                     </div>
                     <div>
                       {convertTime.getDateTime(
-                        new Date(offbasepass.endOutDate),
+                        new Date(offbasepass.endAt),
                         "time"
                       )}
                     </div>

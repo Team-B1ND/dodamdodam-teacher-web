@@ -1,9 +1,9 @@
 import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 import convertTime from "../../../../utils/Time/convertTime";
+import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 
 interface OffBaseLeaveProps {
   studentName: string;
@@ -18,16 +18,13 @@ const OffBaseLeaveItem = ({
   studentName,
   uploadDate,
 }: OffBaseLeaveProps) => {
-  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
+  const { data: offBaseLeave } = useGetOffBaseLeaveQuery(uploadDate, {
     suspense: true,
   });
 
-  const filteredResults = offBasePass?.data.outsleepingList
-    .filter((pass) => pass.student.member.name.includes(studentName))
-    .filter(
-      (data) =>
-        data.student.classroom.grade === selectGrade || selectGrade === 0
-    )
+  const filteredResults = offBaseLeave?.data
+    .filter((pass) => pass.student.name.includes(studentName))
+    .filter((data) => data.student.grade === selectGrade || selectGrade === 0)
     .filter((data) => data.status === selectApproval || selectApproval === "");
 
   const {
@@ -40,35 +37,30 @@ const OffBaseLeaveItem = ({
   return (
     <>
       {!filteredResults || filteredResults.length === 0 ? (
-        <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
+        <S.NoneTile>현재 외박 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <TBody customStyle={S.OffBaseTBody}>
           {filteredResults?.map((offbaseleave) => (
             <TR customStyle={S.OffBaseTR}>
               <TD customStyle={S.OffBaseTD}>
-                <S.MemberImage
-                  src={offbaseleave.student.member.profileImage || profileImg}
-                />
+                <S.MemberImage src={profileImg} />
               </TD>
+              <TD customStyle={S.OffBaseTD}>{offbaseleave.student.name}</TD>
               <TD customStyle={S.OffBaseTD}>
-                {offbaseleave.student.member.name}
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                {offbaseleave.student.classroom.grade}학년
-                {offbaseleave.student.classroom.room}반
-                {offbaseleave.student.classroom.room}번
+                {offbaseleave.student.grade}학년
+                {offbaseleave.student.room}반{offbaseleave.student.room}번
               </TD>
               <TD customStyle={S.OffBaseTD}>
                 <S.DateContainer>
                   <div>
                     {convertTime.getDateTime(
-                      new Date(offbaseleave.startOutDate),
+                      new Date(offbaseleave.startAt),
                       "date"
                     )}
                   </div>
                   <div>
                     {convertTime.getDateTime(
-                      new Date(offbaseleave.startOutDate),
+                      new Date(offbaseleave.startAt),
                       "time"
                     )}
                   </div>
@@ -78,13 +70,13 @@ const OffBaseLeaveItem = ({
                 <S.DateContainer>
                   <div>
                     {convertTime.getDateTime(
-                      new Date(offbaseleave.endOutDate),
+                      new Date(offbaseleave.endAt),
                       "date"
                     )}
                   </div>
                   <div>
                     {convertTime.getDateTime(
-                      new Date(offbaseleave.endOutDate),
+                      new Date(offbaseleave.endAt),
                       "time"
                     )}
                   </div>

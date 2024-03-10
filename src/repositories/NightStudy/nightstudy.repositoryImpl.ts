@@ -1,10 +1,14 @@
-import { dodamV6Axios } from "../../libs/Axios/customAxios";
+import {
+  dodamTeacherAxios,
+  dodamTestAxios,
+  dodamV6Axios,
+} from "../../libs/Axios/customAxios";
 import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
 
 class NightStudyRepositoryImpl implements NightStudyRepository {
   public async getPendingNightStudy(): Promise<NightStudyResponse> {
-    const { data } = await dodamV6Axios.get("/nightstudy/pending");
+    const { data } = await dodamTestAxios.get("/night-study/pending");
     return data;
   }
 

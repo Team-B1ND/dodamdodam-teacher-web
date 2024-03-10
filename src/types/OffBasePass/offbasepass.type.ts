@@ -1,30 +1,28 @@
 export interface OffBaseResponse extends Response {
-  data: OffBasePassType;
+  data: OutListType[];
 }
 
-export interface OffBasePassType {
-  outgoingList: OutListType[];
-  outsleepingList: OutListType[];
-}
+// export interface OffBasePassType {
+//   outgoingList: OutListType[];
+// }
 
 export interface OutListType {
   id: number;
   reason: string;
   status: string;
   student: StudentType;
-  teacher: TeacherType;
-  startOutDate: string;
-  endOutDate: string;
-  arrivedDate: string;
-  checkedDate: string;
+  startAt: string;
+  endAt: string;
+  createdAt: string;
+  modifiedAt: string;
 }
 
 export interface StudentType {
-  classroom: ClassRoomType;
   id: number;
-  member: MemberType;
+  name: string;
+  grade: number;
+  room: number;
   number: number;
-  phone: string;
 }
 
 export interface ClassRoomType {
