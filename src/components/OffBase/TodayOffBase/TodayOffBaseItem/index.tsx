@@ -4,7 +4,7 @@ import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasep
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 import dayjs from "dayjs";
-import convertTime from "../../../../utils/Time/convertTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 interface OffBasePassProps {
   studentName: string;
   selectGrade: number;
@@ -56,13 +56,13 @@ const TodayOffBaseItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(todayleave.startOutDate),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(todayleave.startOutDate),
                         "time"
                       )}
@@ -72,13 +72,13 @@ const TodayOffBaseItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(todayleave.startOutDate),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(todayleave.startOutDate),
                         "time"
                       )}

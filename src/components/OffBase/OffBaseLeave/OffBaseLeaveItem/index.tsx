@@ -3,7 +3,7 @@ import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import convertTime from "../../../../utils/Time/convertTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 
 interface OffBaseLeaveProps {
   studentName: string;
@@ -61,13 +61,13 @@ const OffBaseLeaveItem = ({
               <TD customStyle={S.OffBaseTD}>
                 <S.DateContainer>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.startOutDate),
                       "date"
                     )}
                   </div>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.startOutDate),
                       "time"
                     )}
@@ -77,13 +77,13 @@ const OffBaseLeaveItem = ({
               <TD customStyle={S.OffBaseTD}>
                 <S.DateContainer>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.endOutDate),
                       "date"
                     )}
                   </div>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.endOutDate),
                       "time"
                     )}

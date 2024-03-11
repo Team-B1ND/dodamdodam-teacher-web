@@ -6,7 +6,7 @@ import {
   useModifyBusMutation,
 } from "../../queries/Bus/bus.query";
 import { QUERY_KEYS } from "../../queries/queryKey";
-import convertTime from "../../utils/Time/convertTime";
+import convertDateTime from "../../utils/Time/ConvertDateTime";
 import { BusUpdateParam } from "../../repositories/Bus/BusRepository";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
@@ -22,9 +22,9 @@ export const useRegistBus = () => {
           busName: existingBusData?.busName,
           description: existingBusData?.description,
           peopleLimit: existingBusData?.peopleLimit,
-          leaveTime: convertTime.parseDesiredDateTime(
+          leaveTime: convertDateTime.parseDesiredDateTime(
             existingBusData?.leaveTime,
-            "YYYY-MM-DD HH:mm:ss"
+            "YYYY-MM-DD HH:mm"
           ),
           timeRequired: existingBusData?.timeRequired,
         }
@@ -32,9 +32,9 @@ export const useRegistBus = () => {
           busName: "",
           description: "",
           peopleLimit: 0,
-          leaveTime: convertTime.parseDesiredDateTime(
+          leaveTime: convertDateTime.parseDesiredDateTime(
             new Date(),
-            "YYYY-MM-DD HH:mm:ss"
+            "YYYY-MM-DD HH:mm"
           ),
           timeRequired: "",
         }
@@ -64,7 +64,7 @@ export const useRegistBus = () => {
     if (name === "leaveTime") {
       setBusContent((prev) => ({
         ...prev,
-        [name]: convertTime.parseDesiredDateTime(
+        [name]: convertDateTime.parseDesiredDateTime(
           new Date(value),
           "YYYY-MM-DD HH:mm"
         ),
@@ -155,12 +155,21 @@ export const useRegistBus = () => {
     return formatTime;
   };
 
-  const successRegistAndModifyBus = (closeBusRegister: () => void) => {
-    queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
-    // 버스 등록일로 신청, 수정된 버스리스트를 볼 수 있게 한다.
-    setSelectDate(
-      convertTime.parseDesiredDateTime(busContent.leaveTime, "YYYY-MM-DD")
+  const successRegistAndModifyBus = (
+    leaveTime: string,
+    closeBusRegister: () => void
+  ) => {
+    const parseDate = convertDateTime.parseDesiredDateTime(
+      leaveTime,
+      "YYYY-MM-DD"
     );
+
+    queryClient.invalidateQueries(
+      QUERY_KEYS.bus.busDate(convertDateTime.splitConvertDateFormat(parseDate))
+    );
+
+    // 버스 등록일로 신청, 수정된 버스리스트를 볼 수 있게 한다.
+    setSelectDate(parseDate);
     closeBusRegister();
   };
 
@@ -182,7 +191,7 @@ export const useRegistBus = () => {
             busName: existingBusData?.busName,
             description: existingBusData?.description,
             peopleLimit: existingBusData?.peopleLimit,
-            leaveTime: convertTime.parseDesiredDateTime(
+            leaveTime: convertDateTime.parseDesiredDateTime(
               existingBusData?.leaveTime,
               "YYYY-MM-DD HH:mm"
             ),
@@ -200,12 +209,13 @@ export const useRegistBus = () => {
           {
             ...busContent,
             busId: existingBusData?.id,
-            timeRequired,
+            leaveTime: busContent.leaveTime.replace(" ", "T") + ":00",
+            timeRequired: timeRequired + ":00",
           } as BusUpdateParam,
           {
             onSuccess: () => {
               B1ndToast.showSuccess("버스 정보를 수정하였습니다!");
-              successRegistAndModifyBus(closeBusRegister);
+              successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
             },
             onError: () => {
               B1ndToast.showError("버스 정보를 수정하지 못했습니다!");
@@ -216,13 +226,13 @@ export const useRegistBus = () => {
         createBus.mutate(
           {
             ...busContent,
-            leaveTime: busContent.leaveTime + ":00",
+            leaveTime: busContent.leaveTime.replace(" ", "T") + ":00",
             timeRequired: timeRequired + ":00",
           } as BusUpdateParam,
           {
             onSuccess: () => {
               B1ndToast.showSuccess("버스를 추가하였습니다!");
-              successRegistAndModifyBus(closeBusRegister);
+              successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
             },
             onError: () => {
               B1ndToast.showError("버스를 추가하지 못했습니다!");

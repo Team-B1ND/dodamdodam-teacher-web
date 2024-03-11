@@ -6,7 +6,7 @@ import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
 import { offBaseDataFilter } from "../../../../utils/OffBasePass/offBaseDataFilter";
-import convertTime from "../../../../utils/Time/convertTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 
 interface OffBasePassProps {
   studentName: string;
@@ -134,13 +134,13 @@ const OffBasePassItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.startOutDate),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.startOutDate),
                         "time"
                       )}
@@ -150,13 +150,13 @@ const OffBasePassItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.endOutDate),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.endOutDate),
                         "time"
                       )}

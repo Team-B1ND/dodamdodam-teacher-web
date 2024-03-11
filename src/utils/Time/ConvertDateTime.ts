@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-class ConvertTime {
+class ConvertDateTime {
   public getDateTime = (date: Date, dateType: "date" | "time" | "both") => {
     if (dateType === "date") {
       return dayjs(date).format("YYYY년 MM월 DD일");
@@ -32,6 +32,11 @@ class ConvertTime {
   public parseDesiredDateTime = (time: string | Date, format: string) => {
     return dayjs(time).format(format);
   };
+
+  public splitConvertDateFormat = (selectedDate: string) => {
+    const [year, month, day] = selectedDate.split("-").map(Number);
+    return { year, month, day };
+  };
 }
 
-export default new ConvertTime();
+export default new ConvertDateTime();

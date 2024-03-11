@@ -9,11 +9,11 @@ import * as S from "./style";
 import { Button } from "@b1nd/b1nd-dodamdodam-ui";
 import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
 import { BUS_DATE_ITEMS } from "./constant";
+import convertDateTime from "utils/Time/ConvertDateTime";
 
 const BusDate = () => {
   const { handleOpenBusRegisterModal } = useOpenBusModal();
-  const { handleSelectDateChange, handleConvertToBusParamFormat, ...hooks } =
-    useSelectBusDate();
+  const { handleSelectDateChange, ...hooks } = useSelectBusDate();
 
   return (
     <>
@@ -44,8 +44,8 @@ const BusDate = () => {
         >
           <Suspense fallback={<SkeletonComponent height={80} />}>
             <BusDateItem
-              handleConvertToBusParamFormat={() =>
-                handleConvertToBusParamFormat(hooks.selectDate)
+              busParamFormat={() =>
+                convertDateTime.splitConvertDateFormat(hooks.selectDate)
               }
             />
           </Suspense>
