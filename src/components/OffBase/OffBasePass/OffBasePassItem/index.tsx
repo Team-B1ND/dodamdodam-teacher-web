@@ -24,7 +24,7 @@ const OffBasePassItem = ({
   const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
     suspense: true,
   });
-  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number>(SelectIdAtom);
 
   const {
     handleOffBasePass,
@@ -48,10 +48,8 @@ const OffBasePassItem = ({
             ButtonType="disagree"
             style={S.DelStyle}
             onClick={() => {
-              handleOffBasePass([Id], patchApprovalCancel);
-              setSelectedIds((prevIds) =>
-                prevIds.filter((id: any) => id !== Id)
-              );
+              handleOffBasePass(Id, patchApprovalCancel);
+              setSelectedIds(Id);
             }}
           >
             승인 취소
@@ -65,7 +63,7 @@ const OffBasePassItem = ({
             ButtonType="agree"
             style={S.EditStyle}
             onClick={() => {
-              handleOffBasePass([Id], patchApprovals);
+              handleOffBasePass(Id, patchApprovals);
             }}
           >
             승인
@@ -73,13 +71,13 @@ const OffBasePassItem = ({
           <Button
             ButtonType="disagree"
             style={S.DelStyle}
-            onClick={() => handleOffBasePass([Id], patchCancel)}
+            onClick={() => handleOffBasePass(Id, patchCancel)}
           >
             거절
           </Button>
         </>
       );
-    } else if (component === "DENIED") {
+    } else if (component === "REJECTED") {
       return (
         <Button ButtonType="disagree" style={S.ClearStyle}>
           거절됨
@@ -106,16 +104,11 @@ const OffBasePassItem = ({
               <S.OffBaseTR
                 onClick={() => {
                   offbasepass.status === "PENDING" &&
-                    setSelectedIds((prevIds) =>
-                      prevIds.includes(offbasepass.id)
-                        ? prevIds.filter((id) => id !== offbasepass.id)
-                        : [...prevIds, offbasepass.id]
-                    );
+                    setSelectedIds(offbasepass.id);
                 }}
                 style={{
-                  backgroundColor: selectedIds.includes(offbasepass.id)
-                    ? "#EEF3F9"
-                    : "",
+                  backgroundColor:
+                    selectedIds === offbasepass.id ? "#EEF3F9" : "",
                 }}
               >
                 <TD customStyle={S.OffBaseTD}>

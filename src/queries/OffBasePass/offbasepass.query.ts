@@ -25,22 +25,22 @@ export const useGetOffBasePassQuery = (
   );
 
 export const usePatchApproval = () => {
-  const mutation = useMutation((outId: number[]) =>
-    offbasepassRepositoryImpl.patchApproval(outId)
+  const mutation = useMutation((id: number) =>
+    offbasepassRepositoryImpl.patchApproval(id)
   );
   return mutation;
 };
 
 export const usePatchApprovalCancel = () => {
-  const mutation = useMutation((outId: number[]) =>
-    offbasepassRepositoryImpl.patchApprovalCancel(outId)
+  const mutation = useMutation((id: number) =>
+    offbasepassRepositoryImpl.patchApprovalCancel(id)
   );
   return mutation;
 };
 
 export const usePatchCancel = () => {
-  const mutation = useMutation((outId: number[]) =>
-    offbasepassRepositoryImpl.patchCancel(outId)
+  const mutation = useMutation((id: number) =>
+    offbasepassRepositoryImpl.patchCancel(id)
   );
   return mutation;
 };
