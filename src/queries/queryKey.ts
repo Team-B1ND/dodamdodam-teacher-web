@@ -18,7 +18,7 @@ export const QUERY_KEYS = Object.freeze({
     getOffBaseTodayLeave: "/out-sleeping/valid",
   },
   nightstudy: {
-    getPendingNightStudy: "/nightstudy/pending",
-    getNightStudyList: "/nightstudy",
+    getPendingNightStudy: "/night-study/pending",
+    getNightStudyList: "/night-study",
   },
 });

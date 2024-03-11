@@ -9,15 +9,15 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   }
 
   public async getNighStudytList(): Promise<NightStudyResponse> {
-    const { data } = await dodamV6Axios.get("/nightstudy");
+    const { data } = await dodamTestAxios.get("/night-study");
     return data;
   }
 
   public async patchNightStudyAllow(id: number): Promise<void> {
-    await dodamV6Axios.patch("/nightstudy/allow", { id });
+    await dodamTestAxios.patch(`/night-study/${id}/allow`);
   }
   public async patchNightStudyCancel(id: number): Promise<void> {
-    await dodamV6Axios.patch("/nightstudy/deny", { id });
+    await dodamTestAxios.patch(`/night-study/${id}/reject`);
   }
 }
 
