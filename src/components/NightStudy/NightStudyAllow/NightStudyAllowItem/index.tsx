@@ -30,72 +30,84 @@ const NightStudyAllowItem = ({
 
   return (
     <>
-      <TBody customStyle={S.NightStudyTBody}>
-        {NightStudyAllowFilter(
-          NightStudyAllow,
-          studentName,
-          NightStudyGrade
-        )?.map((nightstudy) => (
-          <TR customStyle={S.NightStudyTR}>
-            <TD customStyle={S.NightStudytTD}>{nightstudy.student.name}</TD>
-            <TD customStyle={S.NightStudytTD}>
-              {nightstudy.student.grade}학년{nightstudy.student.room}반
-              {nightstudy.student.room}번
-            </TD>
-            <TD customStyle={S.NightStudytTD}>
-              <div
-                onClick={() => {
-                  handleModalClick();
-                  setStudyData(nightstudy);
-                }}
-              >
-                {truncateText(nightstudy.content, 5)}
-              </div>
-            </TD>
-            <TD customStyle={S.NightStudytTD}>
-              <div style={{ marginLeft: "-5px" }}>
-                {convertTime.getDateTime(new Date(nightstudy.startAt), "date")}
-              </div>
-            </TD>
-            <TD customStyle={S.NightStudytTD}>
-              <div style={{ marginLeft: "-5px" }}>
-                {convertTime.getDateTime(new Date(nightstudy.endAt), "date")}
-              </div>
-            </TD>
-            <TD customStyle={S.NightStudytTD}>
-              <div style={{ marginLeft: "-5px" }}>{nightstudy.place}</div>
-            </TD>
-            <TD customStyle={S.NightStudytTD}>
-              <div style={{ marginLeft: "5px" }}>
-                {nightstudy.isPhone === true ? "O" : "X"}
-              </div>
-            </TD>
-            <TD customStyle={S.NightStudytTD}>
-              {truncateText(nightstudy.reason, 5)}
-            </TD>
-            <TD customStyle={S.NightStudytTD}>
-              <div style={{ marginLeft: "-20px" }}>
-                <Button
-                  ButtonType="agree"
-                  onClick={() =>
-                    handleNightStudyAllow(nightstudy.id, patchNighStudytAllow)
-                  }
+      {!NightStudyAllowFilter || NightStudyAllowFilter.length === 0 ? (
+        <S.NoneTile>dfdfdfdff</S.NoneTile>
+      ) : (
+        <TBody customStyle={S.NightStudyTBody}>
+          {NightStudyAllowFilter(
+            NightStudyAllow,
+            studentName,
+            NightStudyGrade
+          )?.map((nightstudy) => (
+            <TR customStyle={S.NightStudyTR}>
+              <TD customStyle={S.NightStudytTD}>{nightstudy.student.name}</TD>
+              <TD customStyle={S.NightStudytTD}>
+                {nightstudy.student.grade}학년{nightstudy.student.room}반
+                {nightstudy.student.room}번
+              </TD>
+              <TD customStyle={S.NightStudytTD}>
+                <div
+                  onClick={() => {
+                    handleModalClick();
+                    setStudyData(nightstudy);
+                  }}
                 >
-                  수락
-                </Button>
-                <Button
-                  ButtonType="disagree"
-                  onClick={() =>
-                    handleNightStudyAllow(nightstudy.id, patchNightStudyCancel)
-                  }
-                >
-                  거절
-                </Button>
-              </div>
-            </TD>
-          </TR>
-        ))}
-      </TBody>
+                  {truncateText(nightstudy.content, 5)}
+                </div>
+              </TD>
+              <TD customStyle={S.NightStudytTD}>
+                <div style={{ marginLeft: "-5px" }}>
+                  {convertTime.getDateTime(
+                    new Date(nightstudy.startAt),
+                    "date"
+                  )}
+                </div>
+              </TD>
+              <TD customStyle={S.NightStudytTD}>
+                <div style={{ marginLeft: "-5px" }}>
+                  {convertTime.getDateTime(new Date(nightstudy.endAt), "date")}
+                </div>
+              </TD>
+              <TD customStyle={S.NightStudytTD}>
+                <div style={{ marginLeft: "-5px" }}>{nightstudy.place}</div>
+              </TD>
+              <TD customStyle={S.NightStudytTD}>
+                <div style={{ marginLeft: "5px" }}>
+                  {nightstudy.doNeedPhone === true ? "O" : "X"}
+                </div>
+              </TD>
+              <TD customStyle={S.NightStudytTD}>
+                {truncateText(nightstudy.reasonForPhone, 5)}
+              </TD>
+              <TD customStyle={S.NightStudytTD}>
+                <div style={{ marginLeft: "-20px" }}>
+                  <Button
+                    ButtonType="agree"
+                    onClick={() =>
+                      // handleNightStudyAllow(nightstudy.id, patchNighStudytAllow)
+                      handleNightStudyAllow(nightstudy.id, patchNighStudytAllow)
+                    }
+                  >
+                    수락
+                  </Button>
+                  <Button
+                    ButtonType="disagree"
+                    onClick={() =>
+                      handleNightStudyAllow(
+                        nightstudy.id,
+                        patchNightStudyCancel
+                      )
+                    }
+                  >
+                    거절
+                  </Button>
+                </div>
+              </TD>
+            </TR>
+          ))}
+        </TBody>
+      )}
+
       <NightStudyModal
         isOpen={isOpen}
         data={studyData}

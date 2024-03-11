@@ -15,7 +15,7 @@ export const UploadDateAtom = atom<string>({
   default: "",
 });
 
-export const SelectIdAtom = atom<number[]>({
-  key: "SelectId",
-  default: [],
+export const SelectIdAtom = atom<number>({
+  key: "SelectIdAtom",
+  default: 0,
 });
