@@ -2,9 +2,9 @@ import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import dayjs from "dayjs";
 import convertTime from "../../../../utils/Time/convertTime";
-import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 interface OffBasePassProps {
   studentName: string;
   selectGrade: number;
@@ -16,25 +16,28 @@ const TodayOffBaseItem = ({
   selectGrade,
   studentName,
 }: OffBasePassProps) => {
-  const { data: offBaseLeave } = useGetOffBaseLeaveQuery(
-    dayjs().format("YYYY-MM-DD"),
-    { suspense: true }
-  );
+  const { data: offBaseLeave } = useGetTodayLeaveQuery({ suspense: true });
 
   const { handleOffBaseLeave, patchLeaveApprovalCancel } = useOffBaseLeave();
 
-  const filteredResults = offBaseLeave?.data
-    .filter((pass) => pass.student.name.includes(studentName))
-    .filter((data) => data.student.grade === selectGrade || selectGrade === 0)
-    .filter((data) => data.status === selectApproval || selectApproval === "");
-
   return (
     <>
-      {!filteredResults || filteredResults.length === 0 ? (
+      {!offBaseLeaveDataFilter ||
+      offBaseLeaveDataFilter(
+        offBaseLeave,
+        studentName,
+        selectGrade,
+        selectApproval
+      )?.length === 0 ? (
         <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
       ) : (
         <TBody customStyle={S.OffBaseTBody}>
-          {filteredResults?.map((todayleave) =>
+          {offBaseLeaveDataFilter(
+            offBaseLeave,
+            studentName,
+            selectGrade,
+            selectApproval
+          )?.map((todayleave) =>
             todayleave.status === "ALLOWED" ? (
               <TR customStyle={S.OffBaseTR}>
                 <TD customStyle={S.OffBaseTD}>

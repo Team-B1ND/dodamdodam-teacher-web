@@ -4,6 +4,7 @@ import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 import convertTime from "../../../../utils/Time/convertTime";
 import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 
 interface OffBaseLeaveProps {
   studentName: string;
@@ -22,11 +23,6 @@ const OffBaseLeaveItem = ({
     suspense: true,
   });
 
-  const filteredResults = offBaseLeave?.data
-    .filter((pass) => pass.student.name.includes(studentName))
-    .filter((data) => data.student.grade === selectGrade || selectGrade === 0)
-    .filter((data) => data.status === selectApproval || selectApproval === "");
-
   const {
     handleOffBaseLeave,
     patchLeaveApproval,
@@ -34,13 +30,72 @@ const OffBaseLeaveItem = ({
     patchLeaveCancel,
   } = useOffBaseLeave();
 
+  const selectComponent = (Id: number) => {
+    const component = offBaseLeaveDataFilter(
+      offBaseLeave,
+      studentName,
+      selectGrade,
+      selectApproval
+    )?.find((key) => key.id === Id)?.status;
+
+    if (component === "ALLOWED") {
+      return (
+        <div>
+          <Button
+            ButtonType="disagree"
+            style={S.DelStyle}
+            onClick={() => handleOffBaseLeave(Id, patchLeaveApprovalCancel)}
+          >
+            승인 취소
+          </Button>
+        </div>
+      );
+    } else if (component === "PENDING") {
+      return (
+        <>
+          <Button
+            ButtonType="agree"
+            style={S.EditStyle}
+            onClick={() => handleOffBaseLeave(Id, patchLeaveApproval)}
+          >
+            승인
+          </Button>
+          <Button
+            ButtonType="disagree"
+            style={S.DelStyle}
+            onClick={() => handleOffBaseLeave(Id, patchLeaveCancel)}
+          >
+            거절
+          </Button>
+        </>
+      );
+    } else if (component === "REJECTED") {
+      return (
+        <Button ButtonType="disagree" style={S.ClearStyle}>
+          거절됨
+        </Button>
+      );
+    }
+  };
+
   return (
     <>
-      {!filteredResults || filteredResults.length === 0 ? (
+      {!offBaseLeaveDataFilter ||
+      offBaseLeaveDataFilter(
+        offBaseLeave,
+        studentName,
+        selectGrade,
+        selectApproval
+      )?.length === 0 ? (
         <S.NoneTile>현재 외박 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <TBody customStyle={S.OffBaseTBody}>
-          {filteredResults?.map((offbaseleave) => (
+          {offBaseLeaveDataFilter(
+            offBaseLeave,
+            studentName,
+            selectGrade,
+            selectApproval
+          )?.map((offbaseleave) => (
             <TR customStyle={S.OffBaseTR}>
               <TD customStyle={S.OffBaseTD}>
                 <S.MemberImage src={profileImg} />
@@ -86,43 +141,7 @@ const OffBaseLeaveItem = ({
                 <S.Reason>{offbaseleave.reason}</S.Reason>
               </TD>
               <TD customStyle={S.ButtonContainerStyle}>
-                {offbaseleave.status === "ALLOWED" ? (
-                  <div>
-                    <Button
-                      ButtonType="disagree"
-                      style={S.DelStyle}
-                      onClick={() =>
-                        handleOffBaseLeave(
-                          offbaseleave.id,
-                          patchLeaveApprovalCancel
-                        )
-                      }
-                    >
-                      승인 취소
-                    </Button>
-                  </div>
-                ) : (
-                  <>
-                    <Button
-                      ButtonType="agree"
-                      style={S.EditStyle}
-                      onClick={() =>
-                        handleOffBaseLeave(offbaseleave.id, patchLeaveApproval)
-                      }
-                    >
-                      승인
-                    </Button>
-                    <Button
-                      ButtonType="disagree"
-                      style={S.DelStyle}
-                      onClick={() =>
-                        handleOffBaseLeave(offbaseleave.id, patchLeaveCancel)
-                      }
-                    >
-                      거절
-                    </Button>
-                  </>
-                )}
+                {selectComponent(offbaseleave.id)}
               </TD>
             </TR>
           ))}

@@ -5,7 +5,7 @@ import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
-import { offBaseDataFilter } from "../../../../utils/OffBasePass/offBaseDataFilter";
+import { offBaseDataFilter } from "../../../../utils/OffBase/offBasePassDataFilter";
 import convertTime from "../../../../utils/Time/convertTime";
 
 interface OffBasePassProps {

@@ -14,7 +14,7 @@ import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant"
 import ErrorBoundary from "../../common/ErrorBoundary";
 import OffBasePassItem from "./OffBasePassItem";
 import { changeGrade } from "../../../utils/Member/changeGrade";
-import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
+import { changeApproval } from "../../../utils/OffBase/changeApproval";
 import useOffBasePass from "../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";

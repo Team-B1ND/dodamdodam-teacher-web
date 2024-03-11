@@ -10,7 +10,7 @@ import {
   SelectApprovalAtom,
   SelectGradeAtom,
 } from "../../../stores/OffBase/offbase.store";
-import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
+import { changeApproval } from "../../../utils/OffBase/changeApproval";
 import { changeGrade } from "../../../utils/Member/changeGrade";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";

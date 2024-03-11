@@ -24,23 +24,41 @@ export const useGetOffBaseLeaveQuery = (
     }
   );
 
+export const useGetTodayLeaveQuery = (
+  options?: UseQueryOptions<
+    OffBaseResponse,
+    AxiosError,
+    OffBaseResponse,
+    string
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.offbaseleave.getOffBaseTodayLeave,
+    () => offbaseleaveRepositroy.getTodayLeave(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  );
+
 export const usePatchLeaveApproval = () => {
-  const mutation = useMutation((outId: number) =>
-    offbaseleaveRepositroy.patchLeaveApproval([outId])
+  const mutation = useMutation((id: number) =>
+    offbaseleaveRepositroy.patchLeaveApproval(id)
   );
   return mutation;
 };
 
 export const usePatchLeaveCancel = () => {
-  const mutation = useMutation((outId: number) =>
-    offbaseleaveRepositroy.patchLeaveCancel([outId])
+  const mutation = useMutation((id: number) =>
+    offbaseleaveRepositroy.patchLeaveCancel(id)
   );
   return mutation;
 };
 
 export const usePatchLeaveApprovalCancel = () => {
-  const mutation = useMutation((outId: number) =>
-    offbaseleaveRepositroy.patchLeaveApprovalCancel([outId])
+  const mutation = useMutation((id: number) =>
+    offbaseleaveRepositroy.patchLeaveApprovalCancel(id)
   );
   return mutation;
 };
