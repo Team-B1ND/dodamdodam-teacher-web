@@ -27,7 +27,7 @@ class BusRepositoryImpl implements BusRepository {
   }
 
   public async modifyBus(param: BusUpdateParam): Promise<void> {
-    await dodamTestAxios.put("/bus", param);
+    await dodamTestAxios.patch("/bus", param);
   }
 
   public async deleteBus(id: number): Promise<void> {

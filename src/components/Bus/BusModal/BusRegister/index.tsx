@@ -1,4 +1,3 @@
-import useEscCloseModal from "hooks/common/useEscCloseModal";
 import useLockScroll from "hooks/common/useLockScroll";
 import { Portal } from "components/common/Portal";
 import BusRegisterForm from "./BusRegisterForm";
@@ -14,9 +13,7 @@ interface BusRegisterProps {
 
 const BusRegister = ({ busId, isOpen, close }: BusRegisterProps) => {
   const question = "버스 등록을 취소하시겠습니까?";
-
   useLockScroll();
-  useEscCloseModal(close, question);
 
   return (
     <Portal>

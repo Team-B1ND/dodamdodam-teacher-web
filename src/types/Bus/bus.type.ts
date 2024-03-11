@@ -4,16 +4,15 @@ export interface BusDateAndListResponse extends Response {
   data: {
     bus: {
       applyCount: number;
-      busMember: BusMemberType[];
       busName: string;
       description: string;
       id: number;
       leaveTime: string;
       peopleLimit: number;
       timeRequired: string;
-    }[];
-    date: string;
-  };
+    };
+    members: BusMemberType[];
+  }[];
 }
 
 export interface BusMemberType {
