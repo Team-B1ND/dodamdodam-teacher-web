@@ -1,51 +1,36 @@
 import { Response } from "../util/response.type";
 
-export interface MemberListType extends Response {
-  data: {
-    parents: ParentType[];
-    students: StudentType[];
-    teachers: TeacherType[];
-  };
-}
-
-export interface ParentType {}
-
-export interface StudentType {
-  classroom: ClassRoomType;
-  id: number;
-  member: MemberType;
-  number: number;
-  phone: string;
-}
-
-export interface ClassRoomType {
-  grade: number;
-  id: number;
-  place: {
-    id: number;
-    name: string;
-    type: {
-      id: number;
-      name: string;
-    };
-  };
-  room: number;
-}
-
-export interface MemberType {
-  email: string;
+export interface Member {
   id: string;
-  joinDate: string;
   name: string;
-  profileImage: string;
-  role: string;
-  status: string;
+  email: string;
+  readonly role: "STUDENT" | "TEACHER" | "ADMIN";
+  readonly status: "ACTIVE" | "DEACTIVATED";
+  profileImage: null | string;
+  phone: string;
+  readonly createdAt: string;
+  readonly modifiedAt: string;
 }
 
-export interface TeacherType {
+export interface Student {
   id: number;
-  member: MemberType;
-  phone: string;
-  position: string;
+  name: string;
+  grade: number;
+  room: number;
+  number: number;
+}
+
+export interface Teacher {
+  id: number;
   tel: string;
+  position: string;
+}
+
+export interface StudentAndTeacher extends Member {
+  student: Student | null;
+  teacher: Teacher | null;
+}
+
+export interface MemberResponse extends Response {
+  data: StudentAndTeacher[];
 }

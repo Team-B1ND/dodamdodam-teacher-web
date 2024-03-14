@@ -1,9 +1,9 @@
-import { MemberType } from "types/Member/member.type";
+import { Member } from "types/Member/member.type";
 
 export interface SigninResponse extends Response {
   data: {
-    member: MemberType;
+    member: Member;
     refreshToken: string;
-    token: string;
+    accessToken: string;
   };
 }

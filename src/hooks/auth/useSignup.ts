@@ -1,16 +1,15 @@
 import { useCallback, useState } from "react";
-import { SignupParam } from "../../repositories/Auth/Signup/SignupRepository";
-import { sha512 } from "js-sha512";
-import signupRepositoryImpl from "../../repositories/Auth/Signup/SignupRepositoryImpl";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import PatternCheck from "../../utils/Check/PatternCheck";
+import MemberRepositoryImpl from "repositories/Member/MemberRepositoryImpl";
+import { MemberSignUpParam } from "repositories/Member/MemberRepository";
 
 export const useSignup = () => {
   const [section, setSection] = useState("id");
   const [policy, setPolicy] = useState<boolean>(true);
   const [personalInfo, setPersonalInfo] = useState(true);
 
-  const [signupData, setSignupData] = useState<SignupParam>({
+  const [signupData, setSignupData] = useState<MemberSignUpParam>({
     id: "",
     email: "",
     name: "",
@@ -97,17 +96,14 @@ export const useSignup = () => {
       return;
     }
 
-    const validSignupData: SignupParam = {
+    const validSignupData: MemberSignUpParam = {
       ...signupData,
-      pw: sha512(pw),
+      pw,
     };
 
     try {
-      await signupRepositoryImpl.postSignup(validSignupData);
-      B1ndToast.showSuccess(
-        "회원가입에 성공했습니다.(관리자 승인을 기다려주세요!)"
-      );
-
+      await MemberRepositoryImpl.postMemberJoinTeacher(validSignupData);
+      window.alert("회원가입에 성공했습니다.(관리자 승인을 기다려주세요!)");
       window.location.reload();
     } catch (e) {
       B1ndToast.showError("회원가입에 실패했습니다.");

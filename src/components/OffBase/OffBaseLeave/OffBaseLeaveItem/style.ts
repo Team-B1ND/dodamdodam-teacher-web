@@ -85,6 +85,19 @@ export const DelStyle: CSSObject = {
   },
 };
 
+export const ClearStyle: CSSObject = {
+  width: "5rem",
+  height: "2rem",
+
+  fontSize: "18px",
+  borderRadius: "5px",
+  transition: "all 0.2s ease-in-out",
+
+  backgroundColor: "#EC9788",
+  color: "white",
+  border: 0,
+};
+
 export const MemberImage = styled.img`
   width: 38px;
   height: 38px;

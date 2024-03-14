@@ -1,12 +1,11 @@
 import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { TeacherType } from "types/Member/member.type";
-import { MemberImage, MemberItemTR, MemberTD, ScrollEmailText } from "../style";
-import profileImg from "assets/profileImg.svg";
+import { StudentAndTeacher } from "types/Member/member.type";
+import { MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
 import { searchName } from "utils/common/searchName";
 
 interface TeacherProps {
-  teachersInfo: TeacherType[];
+  teachersInfo: StudentAndTeacher[];
   searchValue: string;
   selectGrade: number;
 }
@@ -16,24 +15,24 @@ const Teacher = ({ teachersInfo, searchValue, selectGrade }: TeacherProps) => {
     <>
       {(selectGrade === 0 || selectGrade === 4) &&
         teachersInfo
-          .filter((data) => searchName(data.member.name, searchValue))
-          .map((teacher) => (
-            <TR key={teacher.id} customStyle={MemberItemTR}>
-              <TD customStyle={MemberTD}>
-                <MemberImage src={profileImg} alt="이미지 없음" />
-              </TD>
-              <TD customStyle={MemberTD}>{teacher.member.name}</TD>
-              <TD customStyle={MemberTD}>
-                {teacher.member.role === "ADMIN" ? "관리자" : "선생님"}
-              </TD>
-              <TD customStyle={MemberTD}>{teacher.member.id}</TD>
-              <TD customStyle={MemberTD}>
-                <ScrollEmailText>{teacher.member.email}</ScrollEmailText>
-              </TD>
-              <TD customStyle={MemberTD}>{addPhoneHyphen(teacher.phone)}</TD>
-              <TD customStyle={MemberTD}>{teacher.position}</TD>
-            </TR>
-          ))}
+          .filter((data) => searchName(data.name, searchValue))
+          .map(
+            (item) =>
+              (item.role === "TEACHER" || item.role === "ADMIN") && (
+                <TR key={item.id} customStyle={MemberItemTR}>
+                  <TD customStyle={MemberTD}>{item.name}</TD>
+                  <TD customStyle={MemberTD}>
+                    {item.role === "ADMIN" ? "관리자" : "선생님"}
+                  </TD>
+                  <TD customStyle={MemberTD}>{item.id}</TD>
+                  <TD customStyle={MemberTD}>
+                    <ScrollEmailText>{item.email}</ScrollEmailText>
+                  </TD>
+                  <TD customStyle={MemberTD}>{addPhoneHyphen(item.phone)}</TD>
+                  <TD customStyle={MemberTD}>{item.teacher?.position}</TD>
+                </TR>
+              )
+          )}
     </>
   );
 };

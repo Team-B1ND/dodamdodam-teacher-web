@@ -11,10 +11,14 @@ export const QUERY_KEYS = Object.freeze({
     getTeachers: "/members/teacher",
   },
   offbasepass: {
-    getOffBasePass: (date: string) => ["/out/date", date],
+    getOffBasePass: (date: string) => ["/out-going", date],
+  },
+  offbaseleave: {
+    getOffBaseLeave: (date: string) => ["/out-sleeping", date],
+    getOffBaseTodayLeave: "/out-sleeping/valid",
   },
   nightstudy: {
-    getPendingNightStudy: "/nightstudy/pending",
-    getNightStudyList: "/nightstudy",
+    getPendingNightStudy: "/night-study/pending",
+    getNightStudyList: "/night-study",
   },
 });

@@ -14,7 +14,7 @@ import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant"
 import ErrorBoundary from "../../common/ErrorBoundary";
 import OffBasePassItem from "./OffBasePassItem";
 import { changeGrade } from "../../../utils/Member/changeGrade";
-import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
+import { changeApproval } from "../../../utils/OffBase/changeApproval";
 import useOffBasePass from "../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
@@ -24,7 +24,7 @@ const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
-  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number>(SelectIdAtom);
 
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] =
@@ -34,9 +34,7 @@ const OffBasePass = () => {
 
   return (
     <>
-      <S.OffBaseHeaderContainer
-        style={{ gap: selectedIds.length === 0 ? "910px" : "633px" }}
-      >
+      <S.OffBaseHeaderContainer>
         <div style={{ display: "flex" }}>
           <SearchBar value={studentName} onChange={setStudentName} />
 
@@ -46,7 +44,7 @@ const OffBasePass = () => {
             uploadDate={uploadDate}
             setUploadDate={setUploadDate}
           />
-          {selectedIds.length !== 0 && (
+          {selectedIds !== 0 && (
             <S.ButtonContainer>
               <Button
                 ButtonType="agree"
@@ -65,7 +63,7 @@ const OffBasePass = () => {
               <Button
                 ButtonType="disagree"
                 style={S.ClearStyle}
-                // onClick={() => handleOffBasePass(key.id, patchCancel)}
+                onClick={() => setSelectedIds(0)}
               >
                 선택 해제
               </Button>

@@ -24,7 +24,6 @@
     "axios": "^1.4.0",
     "dayjs": "^1.11.10",
     "js-cookie": "^3.0.5",
-    "js-sha512": "^0.8.0",
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
     "react-csv": "^2.2.2",

@@ -4,16 +4,16 @@ import { BusListPageAtom } from "stores/Bus/bus.store";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import SkeletonComponent from "components/common/Skeleton";
 import TableAttribute from "components/common/TableAttribute";
-import { BUS_ITEMS } from "../constant";
 import { NoneDataText } from "../style";
 import BusListItem from "./BusListItem";
 import * as S from "./style";
+import { BUS_LIST_ITEMS } from "./constant";
 
 const BusList = () => {
   const [page, setPage] = useRecoilState(BusListPageAtom);
   return (
     <>
-      <TableAttribute constant={BUS_ITEMS} thStyle={{ width: "16.5%" }}>
+      <TableAttribute constant={BUS_LIST_ITEMS} thStyle={{ width: "16.5%" }}>
         <ErrorBoundary
           fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
         >

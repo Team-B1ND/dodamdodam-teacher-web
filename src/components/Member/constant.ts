@@ -1,5 +1,4 @@
 export const MEMBER_TABLE_ITEMS = [
-  "사진",
   "이름",
   "학반",
   "아이디",

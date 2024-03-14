@@ -2,11 +2,13 @@ import styled, { CSSObject } from "styled-components";
 
 export const SelectContainer = styled.div`
   display: flex;
+
   column-gap: 10px;
 `;
 
 export const OffBaseHeaderContainer = styled.div`
   display: flex;
+  justify-content: space-between;
 
   z-index: 900;
 `;

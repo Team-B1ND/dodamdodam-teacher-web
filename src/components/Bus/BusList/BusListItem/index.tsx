@@ -1,7 +1,7 @@
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { useOpenBusModal } from "../../../../hooks/Bus/useOpenBusModal";
-import { useGetAllBusListQuery } from "../../../../queries/Bus/bus.query";
-import convertTime from "../../../../utils/Time/convertTime";
+import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
+import { useGetAllBusListQuery } from "queries/Bus/bus.query";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import {
   CommonBusPassengerStyle,
   CommonBusTBody,
@@ -11,8 +11,7 @@ import {
 import * as S from "./style";
 
 const BusListItem = ({ page }: { page: number }) => {
-  const busData = useGetAllBusListQuery(page, { suspense: true }).data?.data
-    .bus;
+  const busData = useGetAllBusListQuery(page, { suspense: true }).data?.data;
   const { handleOpenPassengerModal } = useOpenBusModal();
 
   return (
@@ -20,21 +19,31 @@ const BusListItem = ({ page }: { page: number }) => {
       {busData?.length! > 0 ? (
         busData?.map((item) => (
           <TR customStyle={CommonBusTR}>
-            <TD customStyle={S.BusTD}>{item.busName}</TD>
+            <TD customStyle={S.BusTD}>{item.bus.busName}</TD>
 
-            <TD customStyle={S.BusTD}>{item.description}</TD>
+            <TD customStyle={S.BusTD}>{item.bus.description}</TD>
 
             <TD customStyle={S.BusLeaveTime}>
-              <p>{convertTime.getDateTime(new Date(item.leaveTime), "date")}</p>
-              <p>{convertTime.getDateTime(new Date(item.leaveTime), "time")}</p>
+              <p>
+                {convertDateTime.getDateTime(
+                  new Date(item.bus.leaveTime),
+                  "date"
+                )}
+              </p>
+              <p>
+                {convertDateTime.getDateTime(
+                  new Date(item.bus.leaveTime),
+                  "time"
+                )}
+              </p>
             </TD>
 
             <TD customStyle={S.BusTD}>
-              {convertTime.getTimeRequired(item.timeRequired)}
+              {convertDateTime.getTimeRequired(item.bus.timeRequired)}
             </TD>
 
             <TD customStyle={S.BusTD}>
-              {item.busMember.length} / {item.peopleLimit}명
+              {item.members.length} / {item.bus.peopleLimit}명
             </TD>
 
             <TD customStyle={S.BusTD}>
@@ -43,12 +52,12 @@ const BusListItem = ({ page }: { page: number }) => {
                 style={CommonBusPassengerStyle}
                 onClick={() =>
                   handleOpenPassengerModal(
-                    `${convertTime.getDateTime(
-                      new Date(item.leaveTime),
+                    `${convertDateTime.getDateTime(
+                      new Date(item.bus.leaveTime),
                       "date"
                     )}
-                ${item.busName}`,
-                    item.busMember
+                ${item.bus.busName}`,
+                    item.members
                   )
                 }
               >

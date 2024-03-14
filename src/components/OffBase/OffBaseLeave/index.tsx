@@ -12,7 +12,7 @@ import TableAttribute from "../../common/TableAttribute";
 import ErrorBoundary from "../../common/ErrorBoundary";
 import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
 import OffBaseLeaveItem from "./OffBaseLeaveItem";
-import { changeApproval } from "../../../utils/OffBasePass/changeApproval";
+import { changeApproval } from "../../../utils/OffBase/changeApproval";
 import { changeGrade } from "../../../utils/Member/changeGrade";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";

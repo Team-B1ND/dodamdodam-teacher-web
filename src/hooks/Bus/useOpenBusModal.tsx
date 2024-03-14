@@ -44,7 +44,7 @@ export const useOpenBusModal = () => {
   };
 
   // 버스 추가, 수정 모달을 여는 함수
-  const handleOpenRegisterModal = (busId?: number) => {
+  const handleOpenBusRegisterModal = (busId?: number) => {
     openBusModalOverlay({ type: "register", busId: busId! });
   };
 
@@ -68,7 +68,7 @@ export const useOpenBusModal = () => {
   return {
     openBusModalOverlay,
 
-    handleOpenRegisterModal,
+    handleOpenBusRegisterModal,
     handleOpenPassengerModal,
   };
 };

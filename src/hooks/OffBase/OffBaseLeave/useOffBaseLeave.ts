@@ -29,7 +29,7 @@ const useOffBaseLeave = () => {
           B1ndToast.showSuccess("외박 승인 취소 성공");
 
         queryClient.invalidateQueries(
-          QUERY_KEYS.offbasepass.getOffBasePass(uploadDate)
+          QUERY_KEYS.offbaseleave.getOffBaseLeave(uploadDate)
         );
       },
       onError: () => {

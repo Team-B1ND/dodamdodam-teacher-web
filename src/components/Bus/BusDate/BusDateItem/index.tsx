@@ -1,8 +1,8 @@
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { useGetBusDateQuery } from "../../../../queries/Bus/bus.query";
-import { BusDateParam } from "../../../../repositories/Bus/BusRepository";
-import convertTime from "../../../../utils/Time/convertTime";
-import { useOpenBusModal } from "../../../../hooks/Bus/useOpenBusModal";
+import { useGetBusDateQuery } from "queries/Bus/bus.query";
+import { BusDateParam } from "repositories/Bus/BusRepository";
+import convertDateTime from "utils/Time/ConvertDateTime";
+import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
 import * as S from "./style";
 import {
   CommonBusPassengerStyle,
@@ -10,38 +10,54 @@ import {
   CommonBusTR,
   NoneDataText,
 } from "../../style";
+import { ExistingBusDataAtom } from "stores/Bus/bus.store";
+import { useSetRecoilState } from "recoil";
+import { useDeleteBus } from "hooks/Bus/useDeleteBus";
 
 interface BusDateItemProps {
-  handleConvertToBusParamFormat: () => BusDateParam;
+  busParamFormat: () => BusDateParam;
 }
 
-const BusDateItem = ({ handleConvertToBusParamFormat }: BusDateItemProps) => {
-  const dateBusData = useGetBusDateQuery(handleConvertToBusParamFormat(), {
+const BusDateItem = ({ busParamFormat }: BusDateItemProps) => {
+  const dateBusData = useGetBusDateQuery(busParamFormat(), {
     suspense: true,
-  }).data?.data.bus;
+  }).data?.data;
 
-  const { handleOpenPassengerModal } = useOpenBusModal();
+  const setExistingBusData = useSetRecoilState(ExistingBusDataAtom);
+  const { handleOpenPassengerModal, handleOpenBusRegisterModal } =
+    useOpenBusModal();
+  const { handleDeleteBusClick } = useDeleteBus();
 
   return (
     <TBody customStyle={CommonBusTBody}>
       {dateBusData?.length! > 0 ? (
         dateBusData?.map((item) => (
           <TR customStyle={CommonBusTR}>
-            <TD customStyle={S.BusTD}>{item.busName}</TD>
+            <TD customStyle={S.BusTD}>{item.bus.busName}</TD>
 
-            <TD customStyle={S.BusTD}>{item.description}</TD>
+            <TD customStyle={S.BusTD}>{item.bus.description}</TD>
 
             <TD customStyle={S.BusLeaveTime}>
-              <p>{convertTime.getDateTime(new Date(item.leaveTime), "date")}</p>
-              <p>{convertTime.getDateTime(new Date(item.leaveTime), "time")}</p>
+              <p>
+                {convertDateTime.getDateTime(
+                  new Date(item.bus.leaveTime),
+                  "date"
+                )}
+              </p>
+              <p>
+                {convertDateTime.getDateTime(
+                  new Date(item.bus.leaveTime),
+                  "time"
+                )}
+              </p>
             </TD>
 
             <TD customStyle={S.BusTD}>
-              {convertTime.getTimeRequired(item.timeRequired)}
+              {convertDateTime.getTimeRequired(item.bus.timeRequired)}
             </TD>
 
             <TD customStyle={S.BusTD}>
-              {item.applyCount} / {item.peopleLimit}명
+              {item.bus.applyCount} / {item.bus.peopleLimit}명
             </TD>
 
             <TD customStyle={S.BusTD}>
@@ -50,16 +66,48 @@ const BusDateItem = ({ handleConvertToBusParamFormat }: BusDateItemProps) => {
                 style={CommonBusPassengerStyle}
                 onClick={() =>
                   handleOpenPassengerModal(
-                    `${convertTime.getDateTime(
-                      new Date(item.leaveTime),
+                    `${convertDateTime.getDateTime(
+                      new Date(item.bus.leaveTime),
                       "date"
                     )}
-                    ${item.busName}`,
-                    item.busMember
+                    ${item.bus.busName}`,
+                    item.members
                   )
                 }
               >
                 탑승자
+              </Button>
+            </TD>
+
+            <TD customStyle={S.ButtonContainerStyle}>
+              {new Date() < new Date(item.bus.leaveTime) && (
+                <Button
+                  ButtonType="agree"
+                  style={S.EditStyle}
+                  onClick={() => {
+                    setExistingBusData(item.bus);
+                    handleOpenBusRegisterModal(item.bus.id);
+                  }}
+                >
+                  수정
+                </Button>
+              )}
+              <Button
+                ButtonType="disagree"
+                style={S.DelStyle}
+                onClick={(e) =>
+                  handleDeleteBusClick(e, {
+                    busId: item.bus.id,
+                    busDate: convertDateTime.splitConvertDateFormat(
+                      convertDateTime.parseDesiredDateTime(
+                        item.bus.leaveTime,
+                        "YYYY-MM-DD"
+                      )
+                    ),
+                  })
+                }
+              >
+                삭제
               </Button>
             </TD>
           </TR>
