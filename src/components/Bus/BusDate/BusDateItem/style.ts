@@ -8,7 +8,7 @@ export const BusTD: CSSObject = {
 
 export const BusLeaveTime: CSSObject = {
   width: "13%",
-  fontSize: "16px",
+  fontSize: "15px",
   lineHeight: "20px",
   whiteSpace: "nowrap",
 };
