@@ -60,7 +60,7 @@ const NightStudyModal = ({
                     </TD>
                     <TD>{data.place}</TD>
                     <TD>
-                      <S.PhoneItem>{data.isPhone ? "O" : "X"}</S.PhoneItem>
+                      <S.PhoneItem>{data.doNeedPhone ? "O" : "X"}</S.PhoneItem>
                     </TD>
                   </TR>
                 )}
@@ -75,12 +75,12 @@ const NightStudyModal = ({
                 )}
               </Table>
               <Table customStyle={S.TableStyle}>
-                {data?.isPhone && (
+                {data?.doNeedPhone && (
                   <>
                     <TH>휴대폰 필요 이유</TH>
 
                     <TR customStyle={S.TRListStyle}>
-                      <TD>{data.reason}</TD>
+                      <TD>{data.reasonForPhone}</TD>
                     </TR>
                   </>
                 )}

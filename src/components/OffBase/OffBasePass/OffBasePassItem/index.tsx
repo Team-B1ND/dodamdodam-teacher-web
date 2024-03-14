@@ -5,8 +5,8 @@ import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
-import { offBaseDataFilter } from "../../../../utils/OffBasePass/offBaseDataFilter";
 import convertDateTime from "../../../../utils/Time/ConvertDateTime";
+import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 
 interface OffBasePassProps {
   studentName: string;
@@ -24,7 +24,7 @@ const OffBasePassItem = ({
   const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
     suspense: true,
   });
-  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number>(SelectIdAtom);
 
   const {
     handleOffBasePass,
@@ -48,10 +48,8 @@ const OffBasePassItem = ({
             ButtonType="disagree"
             style={S.DelStyle}
             onClick={() => {
-              handleOffBasePass([Id], patchApprovalCancel);
-              setSelectedIds((prevIds) =>
-                prevIds.filter((id: any) => id !== Id)
-              );
+              handleOffBasePass(Id, patchApprovalCancel);
+              setSelectedIds(Id);
             }}
           >
             승인 취소
@@ -65,7 +63,7 @@ const OffBasePassItem = ({
             ButtonType="agree"
             style={S.EditStyle}
             onClick={() => {
-              handleOffBasePass([Id], patchApprovals);
+              handleOffBasePass(Id, patchApprovals);
             }}
           >
             승인
@@ -73,13 +71,13 @@ const OffBasePassItem = ({
           <Button
             ButtonType="disagree"
             style={S.DelStyle}
-            onClick={() => handleOffBasePass([Id], patchCancel)}
+            onClick={() => handleOffBasePass(Id, patchCancel)}
           >
             거절
           </Button>
         </>
       );
-    } else if (component === "DENIED") {
+    } else if (component === "REJECTED") {
       return (
         <Button ButtonType="disagree" style={S.ClearStyle}>
           거절됨
@@ -93,7 +91,7 @@ const OffBasePassItem = ({
       {!offBaseDataFilter ||
       offBaseDataFilter(offBasePass, studentName, selectGrade, selectApproval)
         ?.length === 0 ? (
-        <S.NoneTile>현재 심자 신청한 학생이 없습니다.</S.NoneTile>
+        <S.NoneTile>현재 외출 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <div>
           {offBaseDataFilter(
@@ -106,42 +104,32 @@ const OffBasePassItem = ({
               <S.OffBaseTR
                 onClick={() => {
                   offbasepass.status === "PENDING" &&
-                    setSelectedIds((prevIds) =>
-                      prevIds.includes(offbasepass.id)
-                        ? prevIds.filter((id) => id !== offbasepass.id)
-                        : [...prevIds, offbasepass.id]
-                    );
+                    setSelectedIds(offbasepass.id);
                 }}
                 style={{
-                  backgroundColor: selectedIds.includes(offbasepass.id)
-                    ? "#EEF3F9"
-                    : "",
+                  backgroundColor:
+                    selectedIds === offbasepass.id ? "#EEF3F9" : "",
                 }}
               >
                 <TD customStyle={S.OffBaseTD}>
-                  <S.MemberImage
-                    src={offbasepass.student.member.profileImage || profileImg}
-                  />
+                  <S.MemberImage src={profileImg} />
                 </TD>
+                <TD customStyle={S.OffBaseTD}>{offbasepass.student.name}</TD>
                 <TD customStyle={S.OffBaseTD}>
-                  {offbasepass.student.member.name}
-                </TD>
-                <TD customStyle={S.OffBaseTD}>
-                  {offbasepass.student.classroom.grade}학년
-                  {offbasepass.student.classroom.room}반
-                  {offbasepass.student.classroom.room}번
+                  {offbasepass.student.grade}학년
+                  {offbasepass.student.room}반{offbasepass.student.room}번
                 </TD>
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
                       {convertDateTime.getDateTime(
-                        new Date(offbasepass.startOutDate),
+                        new Date(offbasepass.startAt),
                         "date"
                       )}
                     </div>
                     <div>
                       {convertDateTime.getDateTime(
-                        new Date(offbasepass.startOutDate),
+                        new Date(offbasepass.startAt),
                         "time"
                       )}
                     </div>
@@ -151,13 +139,13 @@ const OffBasePassItem = ({
                   <S.DateContainer>
                     <div>
                       {convertDateTime.getDateTime(
-                        new Date(offbasepass.endOutDate),
+                        new Date(offbasepass.endAt),
                         "date"
                       )}
                     </div>
                     <div>
                       {convertDateTime.getDateTime(
-                        new Date(offbasepass.endOutDate),
+                        new Date(offbasepass.endAt),
                         "time"
                       )}
                     </div>

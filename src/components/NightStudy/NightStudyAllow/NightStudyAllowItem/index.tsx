@@ -73,11 +73,11 @@ const NightStudyAllowItem = ({
             </TD>
             <TD customStyle={S.NightStudytTD}>
               <div style={{ marginLeft: "5px" }}>
-                {nightstudy.isPhone === true ? "O" : "X"}
+                {nightstudy.doNeedPhone === true ? "O" : "X"}
               </div>
             </TD>
             <TD customStyle={S.NightStudytTD}>
-              {truncateText(nightstudy.reason, 5)}
+              {truncateText(nightstudy.reasonForPhone, 5)}
             </TD>
             <TD customStyle={S.NightStudytTD}>
               <div style={{ marginLeft: "-20px" }}>

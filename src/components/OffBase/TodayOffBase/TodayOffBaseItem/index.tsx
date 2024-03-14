@@ -1,10 +1,11 @@
 import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import dayjs from "dayjs";
-import convertDateTime from "../../../../utils/Time/ConvertDateTime";
+
+import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
+import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import ConvertDateTime from "utils/Time/ConvertDateTime";
 interface OffBasePassProps {
   studentName: string;
   selectGrade: number;
@@ -16,54 +17,49 @@ const TodayOffBaseItem = ({
   selectGrade,
   studentName,
 }: OffBasePassProps) => {
-  const { data: offBasePass } = useGetOffBasePassQuery(
-    dayjs().format("YYYY-MM-DD"),
-    { suspense: true }
-  );
+  const { data: offBaseLeave } = useGetTodayLeaveQuery({ suspense: true });
 
   const { handleOffBaseLeave, patchLeaveApprovalCancel } = useOffBaseLeave();
 
-  const filteredResults = offBasePass?.data.outsleepingList
-    .filter((pass) => pass.student.member.name.includes(studentName))
-    .filter(
-      (data) =>
-        data.student.classroom.grade === selectGrade || selectGrade === 0
-    )
-    .filter((data) => data.status === selectApproval || selectApproval === "");
-
   return (
     <>
-      {!filteredResults || filteredResults.length === 0 ? (
+      {!offBaseLeaveDataFilter ||
+      offBaseLeaveDataFilter(
+        offBaseLeave,
+        studentName,
+        selectGrade,
+        selectApproval
+      )?.length === 0 ? (
         <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
       ) : (
         <TBody customStyle={S.OffBaseTBody}>
-          {filteredResults?.map((todayleave) =>
+          {offBaseLeaveDataFilter(
+            offBaseLeave,
+            studentName,
+            selectGrade,
+            selectApproval
+          )?.map((todayleave) =>
             todayleave.status === "ALLOWED" ? (
               <TR customStyle={S.OffBaseTR}>
                 <TD customStyle={S.OffBaseTD}>
-                  <S.MemberImage
-                    src={todayleave.student.member.profileImage || profileImg}
-                  />
+                  <S.MemberImage src={profileImg} />
                 </TD>
+                <TD customStyle={S.OffBaseTD}>{todayleave.student.name}</TD>
                 <TD customStyle={S.OffBaseTD}>
-                  {todayleave.student.member.name}
-                </TD>
-                <TD customStyle={S.OffBaseTD}>
-                  {todayleave.student.classroom.grade}학년
-                  {todayleave.student.classroom.room}반
-                  {todayleave.student.classroom.room}번
+                  {todayleave.student.grade}학년
+                  {todayleave.student.room}반{todayleave.student.room}번
                 </TD>
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertDateTime.getDateTime(
-                        new Date(todayleave.startOutDate),
+                      {ConvertDateTime.getDateTime(
+                        new Date(todayleave.startAt),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertDateTime.getDateTime(
-                        new Date(todayleave.startOutDate),
+                      {ConvertDateTime.getDateTime(
+                        new Date(todayleave.startAt),
                         "time"
                       )}
                     </div>
@@ -72,14 +68,14 @@ const TodayOffBaseItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertDateTime.getDateTime(
-                        new Date(todayleave.startOutDate),
+                      {ConvertDateTime.getDateTime(
+                        new Date(todayleave.endAt),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertDateTime.getDateTime(
-                        new Date(todayleave.startOutDate),
+                      {ConvertDateTime.getDateTime(
+                        new Date(todayleave.endAt),
                         "time"
                       )}
                     </div>

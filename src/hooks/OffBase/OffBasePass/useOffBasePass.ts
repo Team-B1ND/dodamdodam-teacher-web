@@ -17,8 +17,8 @@ const useOffBasePass = () => {
 
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
 
-  const handleOffBasePass = (outId: number[], query: any) => {
-    query.mutate(outId, {
+  const handleOffBasePass = (id: number, query: any) => {
+    query.mutate(id, {
       onSuccess: () => {
         if (query === patchApprovals) B1ndToast.showSuccess("외출 승인 성공");
 
