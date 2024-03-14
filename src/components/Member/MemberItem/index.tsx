@@ -17,12 +17,12 @@ function MemberItem() {
   return (
     <TBody customStyle={S.MemberTBody}>
       <Student
-        studentsInfo={studentsInfo?.data.students!!}
+        studentsInfo={studentsInfo?.data!!}
         searchValue={searchValue}
         selectGrade={changeGrade(selectGrade)}
       />
       <Teacher
-        teachersInfo={studentsInfo?.data.teachers!!}
+        teachersInfo={studentsInfo?.data!!}
         searchValue={searchValue}
         selectGrade={changeGrade(selectGrade)}
       />

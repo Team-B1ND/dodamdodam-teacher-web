@@ -7,7 +7,6 @@ import {
 } from "../../queries/Bus/bus.query";
 import { QUERY_KEYS } from "../../queries/queryKey";
 import convertDateTime from "../../utils/Time/ConvertDateTime";
-import { BusUpdateParam } from "../../repositories/Bus/BusRepository";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   ExistingBusDataAtom,
@@ -183,6 +182,12 @@ export const useRegistBus = () => {
     if (checkAndFilterBusEssentialInfo()) {
       let timeRequired = formatTimeRequired();
 
+      const param = {
+        ...busContent,
+        leaveTime: busContent.leaveTime.replace(" ", "T") + ":00",
+        timeRequired: timeRequired + ":00",
+      };
+
       // existingBusData?.id가 true이면 버스수정 아니면 버스등록
       if (existingBusData?.id) {
         // 기존값과 수정값 비교
@@ -207,11 +212,9 @@ export const useRegistBus = () => {
 
         modifyBus.mutate(
           {
-            ...busContent,
-            busId: existingBusData?.id,
-            leaveTime: busContent.leaveTime.replace(" ", "T") + ":00",
-            timeRequired: timeRequired + ":00",
-          } as BusUpdateParam,
+            busId: existingBusData.id,
+            param,
+          },
           {
             onSuccess: () => {
               B1ndToast.showSuccess("버스 정보를 수정하였습니다!");
@@ -223,22 +226,15 @@ export const useRegistBus = () => {
           }
         );
       } else {
-        createBus.mutate(
-          {
-            ...busContent,
-            leaveTime: busContent.leaveTime.replace(" ", "T") + ":00",
-            timeRequired: timeRequired + ":00",
-          } as BusUpdateParam,
-          {
-            onSuccess: () => {
-              B1ndToast.showSuccess("버스를 추가하였습니다!");
-              successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
-            },
-            onError: () => {
-              B1ndToast.showError("버스를 추가하지 못했습니다!");
-            },
-          }
-        );
+        createBus.mutate(param, {
+          onSuccess: () => {
+            B1ndToast.showSuccess("버스를 추가하였습니다!");
+            successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
+          },
+          onError: () => {
+            B1ndToast.showError("버스를 추가하지 못했습니다!");
+          },
+        });
       }
     }
   };

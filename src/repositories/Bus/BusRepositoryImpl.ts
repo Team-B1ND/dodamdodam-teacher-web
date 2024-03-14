@@ -4,7 +4,12 @@ import {
   dodamV6Axios,
 } from "libs/Axios/customAxios";
 import { BusDateAndListResponse } from "types/Bus/bus.type";
-import { BusDateParam, BusRepository, BusUpdateParam } from "./BusRepository";
+import {
+  BusDateParam,
+  BusModifyParam,
+  BusRepository,
+  BusUpdateParam,
+} from "./BusRepository";
 
 class BusRepositoryImpl implements BusRepository {
   public async getAllBusList(page: number): Promise<BusDateAndListResponse> {
@@ -26,8 +31,8 @@ class BusRepositoryImpl implements BusRepository {
     await dodamTestAxios.post("/bus", param);
   }
 
-  public async modifyBus(param: BusUpdateParam): Promise<void> {
-    await dodamTestAxios.patch("/bus", param);
+  public async modifyBus({ busId, param }: BusModifyParam): Promise<void> {
+    await dodamTestAxios.patch(`/bus/${busId}`, param);
   }
 
   public async deleteBus(id: number): Promise<void> {

@@ -1,6 +1,10 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
-import { BusDateParam, BusUpdateParam } from "repositories/Bus/BusRepository";
+import {
+  BusDateParam,
+  BusModifyParam,
+  BusUpdateParam,
+} from "repositories/Bus/BusRepository";
 import busRepositoryImpl from "repositories/Bus/BusRepositoryImpl";
 import { BusDateAndListResponse } from "types/Bus/bus.type";
 import { QUERY_KEYS } from "../queryKey";
@@ -53,8 +57,8 @@ export const useCreateBusMutation = () => {
 };
 
 export const useModifyBusMutation = () => {
-  const mutation = useMutation((param: BusUpdateParam) =>
-    busRepositoryImpl.modifyBus(param)
+  const mutation = useMutation(({ busId, param }: BusModifyParam) =>
+    busRepositoryImpl.modifyBus({ busId, param })
   );
   return mutation;
 };
