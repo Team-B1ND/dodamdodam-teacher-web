@@ -5,8 +5,8 @@ import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
-import { offBaseDataFilter } from "../../../../utils/OffBase/offBasePassDataFilter";
-import convertTime from "../../../../utils/Time/convertTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
+import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 
 interface OffBasePassProps {
   studentName: string;
@@ -122,13 +122,13 @@ const OffBasePassItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.startAt),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.startAt),
                         "time"
                       )}
@@ -138,13 +138,13 @@ const OffBasePassItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.endAt),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
+                      {convertDateTime.getDateTime(
                         new Date(offbasepass.endAt),
                         "time"
                       )}

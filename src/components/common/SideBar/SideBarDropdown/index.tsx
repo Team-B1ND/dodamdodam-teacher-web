@@ -9,9 +9,8 @@ const SideBarDropdown = () => {
       <MenuItem title="구성원" redirectUrl="/member" />
       <MenuItem title="결석" redirectUrl="/absent" />
       <MenuDropdownWrapper title="버스">
-        <MenuDropdownChild title="버스 관리" redirectUrl="/bus" />
-        <MenuDropdownChild title="버스 전체기록 조회" redirectUrl="/bus-list" />
         <MenuDropdownChild title="날짜별 버스 조회" redirectUrl="/bus-date" />
+        <MenuDropdownChild title="버스 전체기록 조회" redirectUrl="/bus-list" />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="외출 / 외박">
         <MenuDropdownChild title="외출" redirectUrl="/offbase-pass" />

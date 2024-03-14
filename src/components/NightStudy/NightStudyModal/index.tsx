@@ -3,7 +3,7 @@ import { Portal } from "components/common/Portal";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
 import NightStudyIcon from "assets/icons/NightStudy/LateNight.svg";
 import { TH, THead, TR, Table, TD } from "@b1nd/b1nd-dodamdodam-ui";
-import convertTime from "utils/Time/convertTime";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import { NIGHTSTUDY_MODAL_ITEMS } from "./constant";
 
 interface NightStudyModalProps {
@@ -47,10 +47,16 @@ const NightStudyModal = ({
                       {data.student.room}번
                     </TD>
                     <TD>
-                      {convertTime.getDateTime(new Date(data?.startAt), "date")}
+                      {convertDateTime.getDateTime(
+                        new Date(data?.startAt),
+                        "date"
+                      )}
                     </TD>
                     <TD>
-                      {convertTime.getDateTime(new Date(data?.endAt), "date")}
+                      {convertDateTime.getDateTime(
+                        new Date(data?.endAt),
+                        "date"
+                      )}
                     </TD>
                     <TD>{data.place}</TD>
                     <TD>

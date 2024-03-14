@@ -1,15 +1,10 @@
-import {
-  BusDateResponse,
-  BusListResponse,
-  BusResponse,
-} from "types/Bus/bus.type";
+import { BusDateAndListResponse } from "types/Bus/bus.type";
 
 export interface BusRepository {
-  getRegisteredBus(): Promise<BusResponse>;
-  getAllBusList(page: number): Promise<BusListResponse>;
-  getBusDate(date: BusDateParam): Promise<BusDateResponse>;
+  getAllBusList(page: number): Promise<BusDateAndListResponse>;
+  getBusDate(date: BusDateParam): Promise<BusDateAndListResponse>;
   createBus(param: BusUpdateParam): Promise<void>;
-  modifyBus(param: BusUpdateParam): Promise<void>;
+  modifyBus({ busId, param }: BusModifyParam): Promise<void>;
   deleteBus(id: number): Promise<void>;
 }
 
@@ -20,12 +15,14 @@ export interface BusDateParam {
 }
 
 export interface BusUpdateParam {
-  // 추가된 버스 수정할 때 busIdx 사용함!!
-  busIdx?: number;
-
   busName: string;
   description: string;
   leaveTime: string;
   peopleLimit: number;
   timeRequired: string;
+}
+
+export interface BusModifyParam {
+  busId: number;
+  param: BusUpdateParam;
 }

@@ -2,9 +2,10 @@ import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import convertTime from "../../../../utils/Time/convertTime";
-import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
+import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import ConvertDateTime from "utils/Time/ConvertDateTime";
 interface OffBasePassProps {
   studentName: string;
   selectGrade: number;
@@ -51,13 +52,13 @@ const TodayOffBaseItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
+                      {ConvertDateTime.getDateTime(
                         new Date(todayleave.startAt),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
+                      {ConvertDateTime.getDateTime(
                         new Date(todayleave.startAt),
                         "time"
                       )}
@@ -67,14 +68,14 @@ const TodayOffBaseItem = ({
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
                     <div>
-                      {convertTime.getDateTime(
-                        new Date(todayleave.startAt),
+                      {ConvertDateTime.getDateTime(
+                        new Date(todayleave.endAt),
                         "date"
                       )}
                     </div>
                     <div>
-                      {convertTime.getDateTime(
-                        new Date(todayleave.startAt),
+                      {ConvertDateTime.getDateTime(
+                        new Date(todayleave.endAt),
                         "time"
                       )}
                     </div>

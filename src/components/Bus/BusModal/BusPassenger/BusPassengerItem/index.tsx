@@ -22,7 +22,7 @@ const BusPassengerItem = ({ busPassengerData }: BusPassengerItemProps) => {
 
         <TBody customStyle={S.TBodyStyle}>
           {busPassengerData?.busMember.map((item) => (
-            <TR customStyle={S.PassengerItemTRStyle} key={item.idx}>
+            <TR customStyle={S.PassengerItemTRStyle} key={item.memberId}>
               <TD>{item.name}</TD>
               <TD>{item.memberId}</TD>
               <TD>{addPhoneHyphen(item.phone)}</TD>

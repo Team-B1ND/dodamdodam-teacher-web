@@ -6,20 +6,22 @@ import {
   useModifyBusMutation,
 } from "../../queries/Bus/bus.query";
 import { QUERY_KEYS } from "../../queries/queryKey";
-import convertTime from "../../utils/Time/convertTime";
-import { BusUpdateParam } from "../../repositories/Bus/BusRepository";
-import { useRecoilValue } from "recoil";
-import { ExistingBusDataAtom } from "../../stores/Bus/bus.store";
+import convertDateTime from "../../utils/Time/ConvertDateTime";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  ExistingBusDataAtom,
+  SelectBusDateAtom,
+} from "../../stores/Bus/bus.store";
 
 export const useRegistBus = () => {
   const existingBusData = useRecoilValue(ExistingBusDataAtom);
   const [busContent, setBusContent] = useState(
-    existingBusData?.idx
+    existingBusData?.id
       ? {
           busName: existingBusData?.busName,
           description: existingBusData?.description,
           peopleLimit: existingBusData?.peopleLimit,
-          leaveTime: convertTime.parseDesiredDateTime(
+          leaveTime: convertDateTime.parseDesiredDateTime(
             existingBusData?.leaveTime,
             "YYYY-MM-DD HH:mm"
           ),
@@ -29,7 +31,7 @@ export const useRegistBus = () => {
           busName: "",
           description: "",
           peopleLimit: 0,
-          leaveTime: convertTime.parseDesiredDateTime(
+          leaveTime: convertDateTime.parseDesiredDateTime(
             new Date(),
             "YYYY-MM-DD HH:mm"
           ),
@@ -37,7 +39,7 @@ export const useRegistBus = () => {
         }
   );
   const [timeRequired, setTimeRequired] = useState(
-    existingBusData?.idx
+    existingBusData?.id
       ? {
           hour: Number(existingBusData?.timeRequired.split(":")[0]),
           minute: Number(existingBusData?.timeRequired.split(":")[1]),
@@ -47,6 +49,8 @@ export const useRegistBus = () => {
           minute: 0,
         }
   );
+
+  const setSelectDate = useSetRecoilState(SelectBusDateAtom);
 
   const queryClient = useQueryClient();
   const createBus = useCreateBusMutation();
@@ -59,7 +63,7 @@ export const useRegistBus = () => {
     if (name === "leaveTime") {
       setBusContent((prev) => ({
         ...prev,
-        [name]: convertTime.parseDesiredDateTime(
+        [name]: convertDateTime.parseDesiredDateTime(
           new Date(value),
           "YYYY-MM-DD HH:mm"
         ),
@@ -70,7 +74,7 @@ export const useRegistBus = () => {
         [name]: Number(value),
       }));
     } else if (name === "minute" || name === "hour") {
-      setTimeRequired((prev) => ({ ...prev, [name]: value }));
+      setTimeRequired((prev) => ({ ...prev, [name]: Number(value) }));
     } else {
       setBusContent((prev) => ({ ...prev, [name]: value }));
     }
@@ -150,6 +154,24 @@ export const useRegistBus = () => {
     return formatTime;
   };
 
+  const successRegistAndModifyBus = (
+    leaveTime: string,
+    closeBusRegister: () => void
+  ) => {
+    const parseDate = convertDateTime.parseDesiredDateTime(
+      leaveTime,
+      "YYYY-MM-DD"
+    );
+
+    queryClient.invalidateQueries(
+      QUERY_KEYS.bus.busDate(convertDateTime.splitConvertDateFormat(parseDate))
+    );
+
+    // 버스 등록일로 신청, 수정된 버스리스트를 볼 수 있게 한다.
+    setSelectDate(parseDate);
+    closeBusRegister();
+  };
+
   // 버스 등록 및 수정
   const handleBusContentBusSubmit = (
     e: React.FormEvent<HTMLFormElement>,
@@ -160,15 +182,21 @@ export const useRegistBus = () => {
     if (checkAndFilterBusEssentialInfo()) {
       let timeRequired = formatTimeRequired();
 
-      // existingBusData?.idx가 true이면 버스수정 아니면 버스등록
-      if (existingBusData?.idx) {
+      const param = {
+        ...busContent,
+        leaveTime: busContent.leaveTime.replace(" ", "T") + ":00",
+        timeRequired: timeRequired + ":00",
+      };
+
+      // existingBusData?.id가 true이면 버스수정 아니면 버스등록
+      if (existingBusData?.id) {
         // 기존값과 수정값 비교
         if (
           JSON.stringify({
             busName: existingBusData?.busName,
             description: existingBusData?.description,
             peopleLimit: existingBusData?.peopleLimit,
-            leaveTime: convertTime.parseDesiredDateTime(
+            leaveTime: convertDateTime.parseDesiredDateTime(
               existingBusData?.leaveTime,
               "YYYY-MM-DD HH:mm"
             ),
@@ -184,15 +212,13 @@ export const useRegistBus = () => {
 
         modifyBus.mutate(
           {
-            ...busContent,
-            busIdx: existingBusData?.idx,
-            timeRequired,
-          } as BusUpdateParam,
+            busId: existingBusData.id,
+            param,
+          },
           {
             onSuccess: () => {
               B1ndToast.showSuccess("버스 정보를 수정하였습니다!");
-              queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
-              closeBusRegister();
+              successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
             },
             onError: () => {
               B1ndToast.showError("버스 정보를 수정하지 못했습니다!");
@@ -200,22 +226,15 @@ export const useRegistBus = () => {
           }
         );
       } else {
-        createBus.mutate(
-          {
-            ...busContent,
-            timeRequired,
-          } as BusUpdateParam,
-          {
-            onSuccess: () => {
-              B1ndToast.showSuccess("버스를 추가하였습니다!");
-              queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus);
-              closeBusRegister();
-            },
-            onError: () => {
-              B1ndToast.showError("버스를 추가하지 못했습니다!");
-            },
-          }
-        );
+        createBus.mutate(param, {
+          onSuccess: () => {
+            B1ndToast.showSuccess("버스를 추가하였습니다!");
+            successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
+          },
+          onError: () => {
+            B1ndToast.showError("버스를 추가하지 못했습니다!");
+          },
+        });
       }
     }
   };

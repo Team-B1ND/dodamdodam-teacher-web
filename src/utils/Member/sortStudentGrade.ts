@@ -1,25 +1,22 @@
-import { StudentType } from "types/Member/member.type";
+import { Student } from "types/Member/member.type";
 
-export const sortStudentGrade = (
-  student1: StudentType,
-  student2: StudentType
-) => {
-  if (student1.classroom.grade > student2.classroom.grade) {
+export const sortStudentGrade = (student1: Student, student2: Student) => {
+  if (student1?.grade > student2?.grade) {
     return 1;
   }
-  if (student1.classroom.grade < student2.classroom.grade) {
+  if (student1?.grade < student2?.grade) {
     return -1;
   }
-  if (student1.classroom.room > student2.classroom.room) {
+  if (student1?.room > student2?.room) {
     return 1;
   }
-  if (student1.classroom.room < student2.classroom.room) {
+  if (student1?.room < student2?.room) {
     return -1;
   }
-  if (student1.number > student2.number) {
+  if (student1?.number > student2?.number) {
     return 1;
   }
-  if (student1.number < student2.number) {
+  if (student1?.number < student2?.number) {
     return -1;
   }
   return 0;

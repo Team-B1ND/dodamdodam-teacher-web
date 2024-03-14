@@ -1,23 +1,20 @@
 import { useState } from "react";
-import { BusDateParam } from "../../repositories/Bus/BusRepository";
-import convertTime from "../../utils/Time/convertTime";
+import { useRecoilState } from "recoil";
+import { SelectBusDateAtom } from "stores/Bus/bus.store";
+import convertDateTime from "../../utils/Time/ConvertDateTime";
 
 export const useSelectBusDate = () => {
   const [isFoucs, setIsFoucs] = useState(false);
-  const [selectDate, setSelectDate] = useState(
-    convertTime.parseDesiredDateTime(new Date(), "YYYY-MM-DD")
-  );
+  const [selectDate, setSelectDate] = useRecoilState(SelectBusDateAtom);
 
   const handleSelectDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsFoucs(false);
     setSelectDate(
-      convertTime.parseDesiredDateTime(new Date(e.target.value), "YYYY-MM-DD")
+      convertDateTime.parseDesiredDateTime(
+        new Date(e.target.value),
+        "YYYY-MM-DD"
+      )
     );
-  };
-
-  const handleConvertToBusParamFormat = (selectDate: string): BusDateParam => {
-    const [year, month, day] = selectDate.split("-").map(Number);
-    return { year, month, day };
   };
 
   return {
@@ -25,6 +22,5 @@ export const useSelectBusDate = () => {
     isFoucs,
     setIsFoucs,
     handleSelectDateChange,
-    handleConvertToBusParamFormat,
   };
 };

@@ -2,7 +2,7 @@ import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import convertTime from "../../../../utils/Time/convertTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 
@@ -108,13 +108,13 @@ const OffBaseLeaveItem = ({
               <TD customStyle={S.OffBaseTD}>
                 <S.DateContainer>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.startAt),
                       "date"
                     )}
                   </div>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.startAt),
                       "time"
                     )}
@@ -124,13 +124,13 @@ const OffBaseLeaveItem = ({
               <TD customStyle={S.OffBaseTD}>
                 <S.DateContainer>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.endAt),
                       "date"
                     )}
                   </div>
                   <div>
-                    {convertTime.getDateTime(
+                    {convertDateTime.getDateTime(
                       new Date(offbaseleave.endAt),
                       "time"
                     )}

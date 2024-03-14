@@ -59,6 +59,7 @@ const BusRegisterForm = ({ closeBusRegister }: BusRegisterFormProps) => {
             <div>
               <S.TimeRequiredInput
                 name="hour"
+                type="number"
                 value={hooks.timeRequired.hour}
                 onChange={hooks.handleBusContentChange}
                 autoComplete="off"
@@ -69,6 +70,7 @@ const BusRegisterForm = ({ closeBusRegister }: BusRegisterFormProps) => {
             <div>
               <S.TimeRequiredInput
                 name="minute"
+                type="number"
                 value={hooks.timeRequired.minute}
                 onChange={hooks.handleBusContentChange}
                 autoComplete="off"

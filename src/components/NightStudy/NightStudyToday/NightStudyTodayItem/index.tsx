@@ -5,7 +5,7 @@ import { useGetNightStudyList } from "queries/NightStudy/nightstudy.query";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
 import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
-import convertTime from "utils/Time/convertTime";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import { truncateText } from "utils/common/truncate";
 
 interface NightStudyTodayProps {
@@ -52,12 +52,18 @@ const NightStudyTodayItem = ({
             </TD>
             <TD customStyle={S.NightStudyTD}>
               <div style={{ marginLeft: "-5px" }}>
-                {convertTime.getDateTime(new Date(nightstudy.startAt), "date")}
+                {convertDateTime.getDateTime(
+                  new Date(nightstudy.startAt),
+                  "date"
+                )}
               </div>
             </TD>
             <TD customStyle={S.NightStudyTD}>
               <div style={{ marginLeft: "-5px" }}>
-                {convertTime.getDateTime(new Date(nightstudy.endAt), "date")}
+                {convertDateTime.getDateTime(
+                  new Date(nightstudy.endAt),
+                  "date"
+                )}
               </div>
             </TD>
             <TD customStyle={S.NightStudyTD}>
