@@ -1,13 +1,15 @@
 import dayjs from "dayjs";
 import { useGetSchedulesByPeriodQuery } from "queries/Schedule/query";
 import { useCallback, useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { scheduleDateAtom } from "stores/Schedule/store";
 import { Schedule } from "types/Schedule/types";
 import dataTransform from "utils/Transform/dataTransform";
 import dateTransform from "utils/Transform/dateTransform";
 
 const useCalendarSchedule = () => {
   const [schedules, setSchedules] = useState<any[]>([]);
-  const date = `${dateTransform.hyphen().slice(0, 8)}01`;
+  const date = useRecoilValue(scheduleDateAtom);
   const { data: schedulesData } = useGetSchedulesByPeriodQuery({
     startDate: date,
     endDate: `${date.slice(0, 8)}${dayjs(date).daysInMonth()}`,

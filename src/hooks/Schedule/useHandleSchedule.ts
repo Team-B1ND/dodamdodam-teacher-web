@@ -1,12 +1,13 @@
 import ToastUIReactCalendar from "@toast-ui/react-calendar/*";
 import dayjs from "dayjs";
-import { createRef, useCallback, useState } from "react";
-import dateTransform from "utils/Transform/dateTransform";
+import { createRef, useCallback } from "react";
+import { useRecoilState } from "recoil";
+import { scheduleDateAtom } from "stores/Schedule/store";
 
 const useHandleSchedule = () => {
   const calendarRef = createRef<ToastUIReactCalendar>();
 
-  const [date, setDate] = useState(dateTransform.hyphen());
+  const [date, setDate] = useRecoilState(scheduleDateAtom);
 
   const nextMonth = useCallback(() => {
     const calendarInstance = calendarRef!.current!.getInstance();

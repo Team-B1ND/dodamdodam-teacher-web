@@ -1,15 +1,15 @@
-import { dodamV6Axios } from "libs/Axios/customAxios";
+import { dodamTestAxios, dodamV6Axios } from "libs/Axios/customAxios";
 import {
   GetScheduleByPeriodParam,
   GetSchedulesParam,
   ScheduleParam,
   ScheduleRepository,
 } from "./ScheduleRepository";
-import { Schedule, ScheduleResponse } from "types/Schedule/types";
+import { ScheduleResponse } from "types/Schedule/types";
 
 class ScheduleRepositoryImpl implements ScheduleRepository {
   public async createSchedule(param: ScheduleParam): Promise<Response> {
-    const { data } = await dodamV6Axios.post("/schedule", param);
+    const { data } = await dodamTestAxios.post("/schedule", param);
     return data;
   }
 

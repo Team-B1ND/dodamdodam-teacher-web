@@ -1,4 +1,4 @@
-import { Schedule, ScheduleResponse } from "types/Schedule/types";
+import { ScheduleResponse } from "types/Schedule/types";
 
 export interface ScheduleRepository {
   createSchedule(param: ScheduleParam): Promise<Response>;

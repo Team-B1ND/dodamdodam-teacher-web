@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "queries/queryKey";
-import { UseQueryOptions, useQuery } from "react-query";
+import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import {
   GetScheduleByPeriodParam,
   GetSchedulesParam,
@@ -29,3 +29,8 @@ export const useGetSchedulesByPeriodQuery = (
       ...options,
     }
   );
+
+export const useCreateScheduleMutation = () => {
+  const mutation = useMutation(ScheduleRepositoryImpl.createSchedule);
+  return mutation;
+};
