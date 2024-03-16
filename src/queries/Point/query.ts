@@ -1,19 +1,19 @@
 import { AxiosError } from "axios";
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import PointRepositoryImpl from "repositories/Point/PointRepositoryImpl";
-import { PointReasonResponse, PointResponse } from "types/Point/types";
+import {
+  PointReasonResponse,
+  PointResponse,
+  PointType,
+} from "types/Point/types";
 
 export const useGetPointAllMemberQuery = (
-  options?: UseQueryOptions<
-    PointResponse,
-    AxiosError,
-    PointResponse,
-    "point/getAllMemberPoint"
-  >
+  type: string,
+  options?: UseQueryOptions<PointResponse, AxiosError, PointResponse, string[]>
 ) =>
   useQuery(
-    "point/getAllMemberPoint",
-    () => PointRepositoryImpl.getPointAllMember(),
+    ["point/getAllMemberPoint", type],
+    () => PointRepositoryImpl.getPointAllMember(type),
     {
       ...options,
     }
@@ -30,7 +30,7 @@ export const useGetPointReasonQuery = (
 ) =>
   useQuery(
     ["point/getPointReason", type],
-    () => PointRepositoryImpl.getPointReason(type),
+    () => PointRepositoryImpl.getPointReason(type as PointType),
     {
       ...options,
     }
@@ -43,5 +43,10 @@ export const useCreatePointReasonMutation = () => {
 
 export const useDeletePointReasonMutation = () => {
   const mutation = useMutation(PointRepositoryImpl.deletePointReason);
+  return mutation;
+};
+
+export const useGivePointStudentQuery = () => {
+  const mutation = useMutation(PointRepositoryImpl.givePoint);
   return mutation;
 };

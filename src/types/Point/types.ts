@@ -1,67 +1,59 @@
 import { Response } from "types/util/response.type";
+
+//type
+
+export type PointValueType = "BONUS" | "MINUS" | "OFFSET";
+
+export type PointType = "DORMITORY" | "SCHOOl";
+
+export interface Point {
+  id: number;
+  bonus: number;
+  minus: number;
+  offset: number;
+  type: PointType;
+  student: {
+    id: number;
+    name: string;
+    grade: number;
+    room: number;
+    number: number;
+  };
+}
+
+//response
+
 export interface PointReasonResponse extends Response {
   data: {
-    pointReason: {
-      idx: number;
-      name: string;
-      point: number;
-      type: number;
-      target: number;
-    }[];
-  };
+    id: number;
+    reason: string;
+    score: number;
+    type: PointValueType;
+    place: PointType;
+  }[];
 }
 
 export interface PointResponse extends Response {
   data: Point[];
 }
 
-export interface Point {
-  id: number;
-  type: "BONUS" | "MINUS" | "OFFSET";
-  place: "DORMITORY" | "SCHOOl";
-  reason: string;
-  score: number;
-  student: {
+export interface PointScoreForStudentResonse extends Response {
+  data: {
     id: number;
-    member: {
-      id: string;
-      name: string;
-      email: string;
-      role: string;
-      status: string;
-      joinDate: string;
-      profileImage: string;
-    };
-    classroom: {
+    student: {
       id: number;
+      name: string;
       grade: number;
       room: number;
-      place: {
-        id: number;
-        name: string;
-        type: {
-          id: number;
-          name: string;
-        };
-      };
+      number: number;
     };
-    number: number;
-    phone: string;
-  };
-  teacher: {
-    id: number;
-    member: {
-      id: string;
-      name: string;
-      email: string;
-      role: string;
-      status: string;
-      joinDate: string;
-      profileImage: string;
+    reason: {
+      id: number;
+      reason: string;
+      score: number;
+      scoreType: PointValueType;
+      pointType: PointType;
     };
-    tel: string;
-    position: string;
-    phone: string;
+    issueAt: string;
   };
-  given_date: string;
 }

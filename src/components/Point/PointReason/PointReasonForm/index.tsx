@@ -5,11 +5,11 @@ import { PointReasonFormInput, PointReasonFormTD } from "./style";
 
 const PointReasonForm = () => {
   const {
-    pointType,
+    scoreType,
+    setScoreType,
     onChangePointReasonData,
     onSubmitPointReasonData,
     pointReasonData,
-    setPointType,
   } = useCreatePointReason();
 
   return (
@@ -44,8 +44,8 @@ const PointReasonForm = () => {
             <Select
               customStyle={{ width: "160px" }}
               items={["상점", "벌점"]}
-              onChange={setPointType}
-              value={pointType === "" ? "타입을 선택해주세요" : pointType}
+              onChange={setScoreType}
+              value={scoreType === "" ? "타입을 선택해주세요" : scoreType}
             />
           </TD>
         </TR>

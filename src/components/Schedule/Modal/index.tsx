@@ -1,13 +1,12 @@
 import * as Schedule from "./style";
 import { Flex } from "components/common/Flex/Flex";
-import { Button, TD, TR, Table } from "@b1nd/b1nd-dodamdodam-ui";
+import { Button, TD, TR, Table, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import {
   HOME_SCHEDULE_HEADER_COLORSET_LIST,
   SCHEDULE_PLACE_ITEMS,
   SCHEDULE_REGIST_TITLE_ITEMS,
 } from "../constant";
 import useCreateSchedule from "hooks/Schedule/useCreateSchedule";
-import { Select } from "components/common/Select";
 
 const ScheduleCreateModal = () => {
   const {

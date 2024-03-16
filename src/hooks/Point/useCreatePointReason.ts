@@ -1,15 +1,18 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useCreatePointReasonMutation } from "queries/Point/query";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { CreatePointReasonParam } from "repositories/Point/PointRepository";
 
 const useCreatePointReason = () => {
   const createPointReasonMutation = useCreatePointReasonMutation();
-  const [pointReasonData, setPointReasonData] = useState({
-    pointPlace: "DORMITORY",
+  const [pointReasonData, setPointReasonData] = useState<
+    Omit<CreatePointReasonParam, "scoreType">
+  >({
+    pointType: "DORMITORY",
     reason: "",
-    score: "",
+    score: 0,
   });
-  const [pointType, setPointType] = useState("");
+  const [scoreType, setScoreType] = useState("");
 
   const onChangePointReasonData = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,8 +20,15 @@ const useCreatePointReason = () => {
   };
 
   const onSubmitPointReasonData = () => {
+    const { pointType, reason, score } = pointReasonData;
+
     createPointReasonMutation.mutate(
-      { pointPlace: "DORMITORY", reason: "", score: "", type: "BONUS" },
+      {
+        pointType,
+        reason,
+        score: Number(score),
+        scoreType: scoreType === "상점" ? "BONUS" : "벌점" ? "MINUS" : "OFFSET",
+      },
       {
         onSuccess: () => {
           B1ndToast.showSuccess("상벌점 사유 생성");
@@ -27,8 +37,8 @@ const useCreatePointReason = () => {
     );
   };
   return {
-    setPointType,
-    pointType,
+    scoreType,
+    setScoreType,
     pointReasonData,
     onChangePointReasonData,
     onSubmitPointReasonData,

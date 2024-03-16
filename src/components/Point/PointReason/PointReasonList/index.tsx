@@ -11,12 +11,13 @@ import TableAttribute from "../../../common/TableAttribute";
 import { POINT_REASON_ITEMS } from "../constant";
 import { useGetPointReasonQuery } from "queries/Point/query";
 import { PointReasonTR } from "./style";
+import useDeletePointReason from "hooks/Point/useDeletePointReason";
 
 const PointReasonList = () => {
   const [pointType, setPointType] = useState("전체보기");
   const [pointTypeName, setPointTypeName] = useState("BONUS");
   const { data } = useGetPointReasonQuery(pointTypeName);
-
+  const { onDeletePointReason } = useDeletePointReason();
   useEffect(() => {
     switch (pointType) {
       case "전체보기":
@@ -37,7 +38,7 @@ const PointReasonList = () => {
   }, [pointType]);
 
   return (
-    <Flex customStyle={{ width: "60%" }} direction="column" gap={15}>
+    <Flex direction="column" gap={15}>
       <Select
         items={["전체보기", "상점", "벌점"]}
         onChange={setPointType}
@@ -47,7 +48,7 @@ const PointReasonList = () => {
         tableStyle={{ width: "95%" }}
         constant={POINT_REASON_ITEMS}
       >
-        {data?.data ? (
+        {/* {data?.data ? (
           data.data.pointReason.map((data) => (
             <TR customStyle={PointReasonTR}>
               <TD customStyle={{ width: "15%" }}>{data.name}</TD>
@@ -58,14 +59,19 @@ const PointReasonList = () => {
               <TD>
                 <ButtonWrapper>
                   <Button ButtonType="agree">수정</Button>
-                  <Button ButtonType="disagree">삭제</Button>
+                  <Button
+                    ButtonType="disagree"
+                    onClick={() => onDeletePointReason(data.idx, data.name)}
+                  >
+                    삭제
+                  </Button>
                 </ButtonWrapper>
               </TD>
             </TR>
           ))
         ) : (
           <div>error</div>
-        )}
+        )} */}
       </TableAttribute>
     </Flex>
   );

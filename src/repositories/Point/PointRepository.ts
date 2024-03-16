@@ -1,25 +1,35 @@
-import { PointReasonResponse, PointResponse } from "types/Point/types";
+import {
+  PointReasonResponse,
+  PointResponse,
+  PointScoreForStudentResonse,
+  PointType,
+} from "types/Point/types";
 
 export interface PointRepository {
-  getPointAllMember(): Promise<PointResponse>;
+  getPointAllMember(type: string): Promise<PointResponse>;
   getPointReason(type: string): Promise<PointReasonResponse>;
   createPointReason(param: CreatePointReasonParam): Promise<void>;
   deletePointReason(id: number): Promise<void>;
   givePoint(param: GivePointParam): Promise<void>;
+  getPointByStudentId(
+    param: GetPointByStudentIdParam
+  ): Promise<PointScoreForStudentResonse>;
 }
 
 export interface CreatePointReasonParam {
-  pointPlace: "DORMITORY" | "SCHOOL";
+  pointType: PointType;
   reason: string;
-  score: string;
-  type: "BONUS" | "MINUS" | "OFFSET";
+  score: number;
+  scoreType: "BONUS" | "MINUS" | "OFFSET" | string;
 }
 
 export interface GivePointParam {
-  givenDate: string;
-  place: "DORMITORY" | "SCHOOL";
-  reason: string;
-  score: number;
-  studentId: number[];
-  type: "BONUS" | "MINUS" | "OFFSET";
+  issueAt: string;
+  reasonId: number;
+  studentIds: number[];
+}
+
+export interface GetPointByStudentIdParam {
+  studentId: number;
+  type: PointType;
 }
