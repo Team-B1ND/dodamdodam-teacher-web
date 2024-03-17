@@ -5,7 +5,7 @@ import { SigninParam, SigninRepository } from "./SigninRepository";
 class SigninRepositoryImpl implements SigninRepository {
   public async postSignin(param: SigninParam): Promise<SigninResponse> {
     const { data } = await axios.post(
-      `${process.env.REACT_APP_DODAM_TEST}/auth/login`,
+      `${process.env.REACT_APP_DODAM_SERVER_V6}/auth/login`,
       param
     );
 
