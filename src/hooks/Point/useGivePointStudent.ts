@@ -32,7 +32,7 @@ const useGivePointStudent = () => {
       },
       {
         onSuccess: () => {
-          console.log("부여가 되었습니다");
+          B1ndToast.showSuccess("부여가 되었습니다");
         },
         onError: () => {
           B1ndToast.showError("서버에러...");

@@ -23,12 +23,12 @@ const PointScoreHeader = ({ pointQueryParam, studentList }: Props) => {
         <Flex>
           <Select
             items={["전체보기", "1학년", "2학년", "3학년"]}
-            value={grade === "" ? "학년을 선택해주세요" : grade}
+            value={grade || "학년을 선택해주세요"}
             onChange={setGrade}
           />
           <Select
             items={["전체보기", "1반", "2반", "3반", "4반"]}
-            value={room === "" ? "학반을 선택해주세요" : room}
+            value={room || "학반을 선택해주세요"}
             onChange={setRoom}
           />
         </Flex>

@@ -45,7 +45,7 @@ const PointReasonForm = () => {
               customStyle={{ width: "160px" }}
               items={["상점", "벌점"]}
               onChange={setScoreType}
-              value={scoreType === "" ? "타입을 선택해주세요" : scoreType}
+              value={scoreType || "타입을 선택해주세요"}
             />
           </TD>
         </TR>

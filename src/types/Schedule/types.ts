@@ -10,6 +10,19 @@ export interface Schedule {
   targetGrades: ScheduleTargetGrade[];
 }
 
+export interface CalendarScheduleType {
+  id: number;
+  title: string;
+  target: ScheduleTargetGrade[];
+  attendees: ScheduleTargetGrade[];
+  location: string;
+  category: string;
+  isReadOnly: boolean;
+  borderColor: string;
+  backgroundColor: string;
+  start: string;
+  end: string;
+}
 export interface ScheduleResponse extends Response {
   data: Schedule[];
 }
@@ -18,7 +31,7 @@ export type ScheduleType = "ACADEMIC" | "HOLIDAY";
 
 export type ScheduleTargetGrade =
   | "GRADE_1"
-  | "Grade_2"
-  | "Grade_3"
-  | "Grade_ALL"
-  | "Grade_ETC";
+  | "GRADE_2"
+  | "GRADE_3"
+  | "GRADE_3"
+  | "GRADE_ETC";

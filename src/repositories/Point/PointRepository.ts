@@ -3,6 +3,7 @@ import {
   PointResponse,
   PointScoreForStudentResonse,
   PointType,
+  PointValueType,
 } from "types/Point/types";
 
 export interface PointRepository {
@@ -20,7 +21,7 @@ export interface CreatePointReasonParam {
   pointType: PointType;
   reason: string;
   score: number;
-  scoreType: "BONUS" | "MINUS" | "OFFSET" | string;
+  scoreType: PointValueType;
 }
 
 export interface GivePointParam {

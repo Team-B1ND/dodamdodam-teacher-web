@@ -3,12 +3,11 @@ import { useGetSchedulesByPeriodQuery } from "queries/Schedule/query";
 import { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { scheduleDateAtom } from "stores/Schedule/store";
-import { Schedule } from "types/Schedule/types";
+import { CalendarScheduleType, Schedule } from "types/Schedule/types";
 import dataTransform from "utils/Transform/dataTransform";
-import dateTransform from "utils/Transform/dateTransform";
 
 const useCalendarSchedule = () => {
-  const [schedules, setSchedules] = useState<any[]>([]);
+  const [schedules, setSchedules] = useState<CalendarScheduleType[]>([]);
   const date = useRecoilValue(scheduleDateAtom);
   const { data: schedulesData } = useGetSchedulesByPeriodQuery({
     startDate: date,
@@ -32,7 +31,7 @@ const useCalendarSchedule = () => {
       id: schedule.id,
       title: schedule.name,
       target: schedule.targetGrades,
-      attendees: [schedule.targetGrades],
+      attendees: schedule.targetGrades,
       location: schedule.place || "장소 없음",
       category: "time",
       isReadOnly: true,
@@ -40,7 +39,6 @@ const useCalendarSchedule = () => {
       backgroundColor: scheduleColor,
       start: schedule.startDate,
       end: schedule.endDate,
-      state: null,
     };
 
     return newHandleSchedule;

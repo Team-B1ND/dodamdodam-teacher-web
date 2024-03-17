@@ -70,15 +70,8 @@ export default PointScoreTable;
 const TR = styled.tr<{ customStyle?: CSSObject; isClicked: Boolean }>`
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  background-color: ${({ isClicked }) =>
+    isClicked ? "rgba(0, 103, 188, 0.08)" : "#fff"};
 
   ${({ customStyle }) => customStyle}
-
-  ${({ isClicked }) =>
-    isClicked
-      ? css`
-          background-color: rgba(0, 103, 188, 0.08);
-        `
-      : css`
-          background-color: white;
-        `}
 `;

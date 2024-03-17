@@ -15,6 +15,8 @@ export const useGetPointAllMemberQuery = (
     ["point/getAllMemberPoint", type],
     () => PointRepositoryImpl.getPointAllMember(type),
     {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
       ...options,
     }
   );
@@ -32,6 +34,8 @@ export const useGetPointReasonQuery = (
     ["point/getPointReason", type],
     () => PointRepositoryImpl.getPointReason(type as PointType),
     {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
       ...options,
     }
   );
