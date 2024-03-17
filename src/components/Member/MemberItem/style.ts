@@ -17,6 +17,7 @@ export const MemberItemTR: CSSObject = {
   justifyContent: "space-between",
   borderTop: "none",
   borderBottom: "1px solid #d9d9d9",
+  backgroundColor: "white",
 };
 
 export const MemberImage = styled.img`
