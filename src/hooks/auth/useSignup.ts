@@ -3,7 +3,7 @@ import { SignupParam } from "../../repositories/Auth/Signup/SignupRepository";
 import { sha512 } from "js-sha512";
 import signupRepositoryImpl from "../../repositories/Auth/Signup/SignupRepositoryImpl";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import PatternCheck from "../../utils/Check/patternCheck";
+import PatternCheck from "../../utils/Check/PatternCheck";
 
 export const useSignup = () => {
   const [section, setSection] = useState("id");
