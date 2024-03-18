@@ -2,7 +2,7 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useCreateScheduleMutation } from "queries/Schedule/query";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
-import convertTime from "utils/Time/convertTime";
+import convertDateTime from "utils/Time/convertDateTime";
 
 const useCreateSchedule = () => {
   const queryClinet = useQueryClient();
@@ -14,8 +14,14 @@ const useCreateSchedule = () => {
   );
   const [scheduleData, setScheduleData] = useState({
     scheduleName: "",
-    startDate: convertTime.parseDesiredDateTime(new Date(), "YYYY-MM-DD HH:mm"),
-    endDate: convertTime.parseDesiredDateTime(new Date(), "YYYY-MM-DD HH:mm"),
+    startDate: convertDateTime.parseDesiredDateTime(
+      new Date(),
+      "YYYY-MM-DD HH:mm"
+    ),
+    endDate: convertDateTime.parseDesiredDateTime(
+      new Date(),
+      "YYYY-MM-DD HH:mm"
+    ),
   });
 
   const onChangeScheduleData = (e: ChangeEvent<HTMLInputElement>) => {
