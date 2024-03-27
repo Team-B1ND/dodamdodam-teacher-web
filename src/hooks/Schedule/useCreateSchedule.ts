@@ -1,5 +1,6 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useCreateScheduleMutation } from "queries/Schedule/query";
+import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
 import convertDateTime from "utils/Time/convertDateTime";
@@ -51,6 +52,10 @@ const useCreateSchedule = () => {
       },
       {
         onSuccess: () => {
+          queryClinet.invalidateQueries(
+            QUERY_KEYS.schedule.getSchedulesByPeriod(startDate, endDate)
+          );
+
           B1ndToast.showSuccess("일정이 생성 되었습니다");
         },
         onError: () => {

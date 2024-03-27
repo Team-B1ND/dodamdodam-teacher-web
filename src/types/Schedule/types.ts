@@ -5,8 +5,7 @@ export interface Schedule {
   name: string;
   place: string;
   type: ScheduleType;
-  startDate: string;
-  endDate: string;
+  date: string[];
   targetGrades: ScheduleTargetGrade[];
 }
 
@@ -14,7 +13,7 @@ export interface CalendarScheduleType {
   id: number;
   title: string;
   target: ScheduleTargetGrade[];
-  attendees: ScheduleTargetGrade[];
+  attendees: ("1학년" | "2학년" | "3학년" | "전교생" | "기타")[];
   location: string;
   category: string;
   isReadOnly: boolean;
@@ -33,5 +32,5 @@ export type ScheduleTargetGrade =
   | "GRADE_1"
   | "GRADE_2"
   | "GRADE_3"
-  | "GRADE_3"
+  | "GRADE_ALL"
   | "GRADE_ETC";
