@@ -1,4 +1,5 @@
 import { BusDateParam } from "repositories/Bus/BusRepository";
+import { PointType } from "types/Point/types";
 
 export const QUERY_KEYS = Object.freeze({
   bus: {
@@ -27,5 +28,8 @@ export const QUERY_KEYS = Object.freeze({
       "schedule/getScheduleByPeriod",
       `${startDate}~${endDate}`,
     ],
+  },
+  point: {
+    getReasons: (type: PointType) => ["point/getPointReasons", type],
   },
 });

@@ -16,7 +16,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   public async getSchedulesByKeyword(
     keyword: string
   ): Promise<ScheduleResponse> {
-    const { data } = await dodamV6Axios.get(
+    const { data } = await dodamTestAxios.get(
       `/schedule/search?keyword=${keyword}`
     );
     return data;
@@ -26,7 +26,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
     endDate,
     startDate,
   }: GetScheduleByPeriodParam): Promise<ScheduleResponse> {
-    const { data } = await dodamV6Axios.get(
+    const { data } = await dodamTestAxios.get(
       `/schedule/search?startDate=${startDate}&endDate=${endDate}`
     );
     return data;
@@ -36,7 +36,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
     page,
     limit,
   }: GetSchedulesParam): Promise<ScheduleResponse> {
-    const { data } = await dodamV6Axios.get(
+    const { data } = await dodamTestAxios.get(
       `/schedule?limit=${limit}&page=${page}`
     );
     return data;

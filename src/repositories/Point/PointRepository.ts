@@ -32,5 +32,5 @@ export interface GivePointParam {
 
 export interface GetPointByStudentIdParam {
   studentId: number;
-  type: PointType;
+  type: PointType | null;
 }
