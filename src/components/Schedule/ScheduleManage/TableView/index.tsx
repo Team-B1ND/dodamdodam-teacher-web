@@ -9,8 +9,6 @@ import {
 } from "@b1nd/b1nd-dodamdodam-ui";
 import { SCHEDULE_TABLE_ITEMS } from "components/Schedule/constant";
 import TableAttribute from "components/common/TableAttribute";
-import React from "react";
-import { TRStyle } from "./stlye";
 import { useGetSchedulesQuery } from "queries/Schedule/query";
 
 const TableView = () => {
@@ -19,7 +17,7 @@ const TableView = () => {
   return (
     <TableAttribute constant={SCHEDULE_TABLE_ITEMS}>
       <TBody>
-        <TR customStyle={TRStyle}>
+        <TR customStyle={{ width: "100%" }}>
           <TD>
             <Button ButtonType="agree">학사일정</Button>
           </TD>

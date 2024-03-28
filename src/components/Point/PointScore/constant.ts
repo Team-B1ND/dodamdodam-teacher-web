@@ -5,6 +5,5 @@ export const POINT_SCORE_ITEMS = [
   "상점",
   "벌점",
   "상쇄점",
-  "계",
   "상세정보 보기",
 ];

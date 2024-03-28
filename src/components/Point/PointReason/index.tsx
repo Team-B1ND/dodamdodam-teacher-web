@@ -11,15 +11,15 @@ const PointReason = () => {
   return (
     <PointProvider
       title={
-        pointQueryParam === "domitory"
+        pointQueryParam === "DORMITORY"
           ? "기숙사 상벌점 사유"
           : "학교 상벌점 사유"
       }
       subTitle="사유 추가 등록 및 수정, 삭제가 가능합니다"
     >
       <Flex customStyle={{ width: "100%" }} gap={50}>
-        <PointReasonList />
-        <PointReasonForm />
+        <PointReasonList pointQueryParam={pointQueryParam} />
+        <PointReasonForm pointQueryParam={pointQueryParam} />
       </Flex>
     </PointProvider>
   );
