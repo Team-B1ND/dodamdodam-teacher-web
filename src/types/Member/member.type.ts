@@ -1,4 +1,4 @@
-import { Response } from "../util/response.type";
+import { Response } from "types/util/response.type";
 
 export interface Member {
   id: string;

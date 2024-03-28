@@ -12,8 +12,8 @@ class AuthRepositoryImpl implements AuthRepository {
       `${process.env.REACT_APP_DODAM_TEST_SERVER_V6}/auth/login`,
       param
     );
-    console.log(data);
-    return data;
+ 
+     return data;
   }
 
   public async refreshAccessToken(

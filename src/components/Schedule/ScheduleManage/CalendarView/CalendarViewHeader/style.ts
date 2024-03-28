@@ -55,3 +55,16 @@ export const ColorSetWrap = styled.div`
   margin-left: auto;
   column-gap: 10px;
 `;
+
+export const TodayButton = styled.button`
+  width: 80px;
+  height: 35px;
+
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid gray;
+  }
+`;

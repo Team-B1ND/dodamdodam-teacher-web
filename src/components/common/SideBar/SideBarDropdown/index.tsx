@@ -21,18 +21,21 @@ const SideBarDropdown = () => {
         />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="상벌점">
-        <MenuDropdownChild title="기숙사 점수 관리" redirectUrl="/PointScore" />
+        <MenuDropdownChild
+          title="기숙사 점수 관리"
+          redirectUrl="/PointScore?type=DORMITORY"
+        />
         <MenuDropdownChild
           title="기숙사 상벌점 사유"
-          redirectUrl="/PointReason"
+          redirectUrl="/PointReason?type=DORMITORY"
         />
         <MenuDropdownChild
           title="학교 점수 관리"
-          redirectUrl="/pointSchoolScore"
+          redirectUrl="/PointScore?type=SCHOOL"
         />
         <MenuDropdownChild
           title="학교 점수 사유"
-          redirectUrl="/pointSchoolReason"
+          redirectUrl="/PointReason?type=SCHOOL"
         />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="2차 심자">
@@ -45,14 +48,7 @@ const SideBarDropdown = () => {
           redirectUrl="/nightStudy-today"
         />
       </MenuDropdownWrapper>
-      <MenuDropdownWrapper title="학사일정">
-        <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
-        <MenuDropdownChild
-          title="학사 시정표"
-          redirectUrl="/schedule-time-table"
-        />
-        <MenuDropdownChild title="날짜별 버스 조회" redirectUrl="/bus-date" />
-      </MenuDropdownWrapper>
+      <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
       <MenuItem title="문자보내기" redirectUrl="/sms" />
     </SideBarDropdownContainer>
   );

@@ -4,7 +4,6 @@ export const MemberTBody: CSSObject = {
   width: "100%",
   fontSize: "14px",
   fontWeight: "600",
-  marginTop: "5px",
   display: "flex",
   flexDirection: "column",
 };

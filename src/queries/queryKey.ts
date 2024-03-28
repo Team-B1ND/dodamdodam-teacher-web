@@ -1,4 +1,5 @@
 import { BusDateParam } from "repositories/Bus/BusRepository";
+import { PointType } from "types/Point/types";
 
 export const QUERY_KEYS = Object.freeze({
   bus: {
@@ -20,5 +21,15 @@ export const QUERY_KEYS = Object.freeze({
   nightstudy: {
     getPendingNightStudy: "/night-study/pending",
     getNightStudyList: "/night-study",
+   },
+  schedule: {
+    getSchedules: (page: number) => ["schedule/getSchedule", page],
+    getSchedulesByPeriod: (startDate: string, endDate: string) => [
+      "schedule/getScheduleByPeriod",
+      `${startDate}~${endDate}`,
+    ],
   },
+  point: {
+    getReasons: (type: PointType) => ["point/getPointReasons", type],
+   },
 });
