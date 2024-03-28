@@ -7,7 +7,6 @@ import {
 } from "../../queries/Bus/bus.query";
 import { QUERY_KEYS } from "../../queries/queryKey";
 import convertDateTime from "../../utils/Time/convertDateTime";
-  main
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   ExistingBusDataAtom,

@@ -6,7 +6,6 @@ import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
 import convertDateTime from "../../../../utils/Time/convertDateTime";
-  main
 import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 
 interface OffBasePassProps {
