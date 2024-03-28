@@ -1,14 +1,17 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useCreatePointReasonMutation } from "queries/Point/query";
+import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
+import { useQueryClient } from "react-query";
 import { CreatePointReasonParam } from "repositories/Point/PointRepository";
+import { PointType } from "types/Point/types";
 
 const useCreatePointReason = () => {
+  const queryClinet = useQueryClient();
   const createPointReasonMutation = useCreatePointReasonMutation();
   const [pointReasonData, setPointReasonData] = useState<
-    Omit<CreatePointReasonParam, "scoreType">
+    Omit<CreatePointReasonParam, "scoreType" | "pointType">
   >({
-    pointType: "DORMITORY",
     reason: "",
     score: 0,
   });
@@ -19,8 +22,8 @@ const useCreatePointReason = () => {
     setPointReasonData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSubmitPointReasonData = () => {
-    const { pointType, reason, score } = pointReasonData;
+  const onSubmitPointReasonData = (pointType: PointType) => {
+    const { reason, score } = pointReasonData;
 
     createPointReasonMutation.mutate(
       {
@@ -32,6 +35,7 @@ const useCreatePointReason = () => {
       {
         onSuccess: () => {
           B1ndToast.showSuccess("상벌점 사유 생성");
+          queryClinet.invalidateQueries(QUERY_KEYS.point.getReasons(pointType));
         },
       }
     );

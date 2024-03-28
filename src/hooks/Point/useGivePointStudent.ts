@@ -4,45 +4,39 @@ import { useGivePointStudentQuery } from "queries/Point/query";
 
 const useGivePointStudent = () => {
   const mutation = useGivePointStudentQuery();
-  const [givePointData, setGivePointData] = useState({
-    giveDate: "",
-    place: "",
-    reason: "",
-    score: 0,
-    type: "",
-  });
-  const [studentList, setStudentList] = useState<number[]>([]);
 
-  const onChangeGivePointData = () => {};
+  const [studentIds, setStudentIds] = useState<number[]>([]);
 
   const onSetStudentList = (id: number) => {
-    if (studentList.includes(id)) {
-      setStudentList(studentList.filter((item) => item !== id));
+    if (studentIds.includes(id)) {
+      setStudentIds(studentIds.filter((item) => item !== id));
     } else {
-      setStudentList((prev) => [...prev, id]);
+      setStudentIds((prev) => [...prev, id]);
     }
   };
 
-  const onSubmitGivePointStudent = () => {
-    mutation.mutate(
-      {
-        issueAt: "",
-        reasonId: 0,
-        studentIds: [0],
-      },
-      {
-        onSuccess: () => {
-          B1ndToast.showSuccess("부여가 되었습니다");
+  const onSubmitGivePointStudent = (reasonId: number) => {
+    const issueAt = window.prompt("빌급할 날짜를 입력해주세요 ex)2024-12-12")!;
+    if (issueAt) {
+      mutation.mutate(
+        {
+          issueAt,
+          reasonId,
+          studentIds,
         },
-        onError: () => {
-          B1ndToast.showError("서버에러...");
-        },
-      }
-    );
+        {
+          onSuccess: () => {
+            B1ndToast.showSuccess("부여가 되었습니다");
+          },
+          onError: () => {
+            B1ndToast.showError("서버에러...");
+          },
+        }
+      );
+    } else return;
   };
   return {
-    givePointData,
-    studentList,
+    studentIds,
     onSetStudentList,
     onSubmitGivePointStudent,
   };
