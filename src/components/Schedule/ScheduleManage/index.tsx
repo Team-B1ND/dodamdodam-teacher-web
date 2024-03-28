@@ -6,7 +6,7 @@ import TableView from "./TableView";
 
 export type viewingType = "calendar" | "table";
 
-const ScheduleMange = () => {
+const ScheduleManage = () => {
   const [viewingPoint, setViewingPoint] = useState<viewingType>("calendar");
 
   return (
@@ -20,4 +20,4 @@ const ScheduleMange = () => {
   );
 };
 
-export default ScheduleMange;
+export default ScheduleManage;

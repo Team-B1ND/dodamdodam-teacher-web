@@ -1,7 +1,6 @@
 import { ModalProps } from "./types";
 import { Portal } from "../Portal";
-import { Background, CloseIcon, ModalHeaderWrap } from "./style";
-import { Title } from "components/Bus/BusModal/style";
+import { Background } from "./style";
 
 const Modal = ({
   width,

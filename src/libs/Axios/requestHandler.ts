@@ -15,7 +15,6 @@ export const requestHandler = async (config: InternalAxiosRequestConfig) => {
       ACCESS_TOKEN_KEY
     )}`;
   } else {
-    console.log("토큰이 존재하지 않습니다.");
   }
 
   return config;

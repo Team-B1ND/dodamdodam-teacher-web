@@ -9,7 +9,7 @@ export const useOpenScheduleModal = () => {
     return new Promise((resolve) => {
       ScheduleModalOverlay.open(({ isOpen, close }) => (
         <Modal isOpen={isOpen} close={close}>
-          <ScheduleCreateModal />
+          <ScheduleCreateModal close={close} />
         </Modal>
       ));
     });

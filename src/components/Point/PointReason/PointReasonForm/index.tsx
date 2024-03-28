@@ -2,8 +2,13 @@ import { Button, Select, TD, TR, Table } from "@b1nd/b1nd-dodamdodam-ui";
 import { Flex } from "components/common/Flex/Flex";
 import useCreatePointReason from "hooks/Point/useCreatePointReason";
 import { PointReasonFormInput, PointReasonFormTD } from "./style";
+import { PointType } from "types/Point/types";
 
-const PointReasonForm = () => {
+interface Props {
+  pointQueryParam: string | null;
+}
+
+const PointReasonForm = ({ pointQueryParam }: Props) => {
   const {
     scoreType,
     setScoreType,
@@ -51,7 +56,10 @@ const PointReasonForm = () => {
         </TR>
       </Table>
       <Flex customStyle={{ width: "100%" }} justify="end">
-        <Button onClick={onSubmitPointReasonData} ButtonType="agree">
+        <Button
+          onClick={() => onSubmitPointReasonData(pointQueryParam as PointType)}
+          ButtonType="agree"
+        >
           추가하기
         </Button>
       </Flex>

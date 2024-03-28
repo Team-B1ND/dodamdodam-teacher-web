@@ -1,3 +1,5 @@
+import { ScheduleTargetGrade } from "types/Schedule/types";
+
 class DataTransform {
   public scheduleTargetTransform(target: string): string {
     switch (target) {
@@ -14,6 +16,27 @@ class DataTransform {
 
       default:
         return "#f97e6d";
+    }
+  }
+  public schedulePlaceTransform(place: string) {
+    switch (place) {
+      case "PROGRAMMING_1":
+        return "프로그래밍1실";
+    }
+  }
+
+  public scheduleTargetGradesTransform(grade: ScheduleTargetGrade) {
+    switch (grade) {
+      case "GRADE_1":
+        return "1학년";
+      case "GRADE_2":
+        return "2학년";
+      case "GRADE_3":
+        return "3학년";
+      case "GRADE_ALL":
+        return "전교생";
+      case "GRADE_ETC":
+        return "기타";
     }
   }
 }

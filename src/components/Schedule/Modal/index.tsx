@@ -7,8 +7,13 @@ import {
   SCHEDULE_REGIST_TITLE_ITEMS,
 } from "../constant";
 import useCreateSchedule from "hooks/Schedule/useCreateSchedule";
+import ModalHeader from "components/common/Modal/ModalHeader";
 
-const ScheduleCreateModal = () => {
+interface Props {
+  close: () => void;
+}
+
+const ScheduleCreateModal = ({ close }: Props) => {
   const {
     onChangeScheduleData,
     onChangeScheduleTargetGrades,
@@ -18,13 +23,9 @@ const ScheduleCreateModal = () => {
     place,
     scheduleTargetGrades,
   } = useCreateSchedule();
-
   return (
     <Schedule.Container onClick={(e) => e.stopPropagation()}>
-      <Flex align="center" justify="between">
-        <Schedule.CloseIcon size={32} />
-      </Flex>
-      <Schedule.UnderLine />
+      <ModalHeader close={close} title="일정 생성하기" />
       <Table customStyle={Schedule.TableStyle}>
         <TR customStyle={Schedule.TRStyle}>
           {SCHEDULE_REGIST_TITLE_ITEMS.map((item, idx) => (

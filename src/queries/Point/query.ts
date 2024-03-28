@@ -1,9 +1,12 @@
 import { AxiosError } from "axios";
+import { QUERY_KEYS } from "queries/queryKey";
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
+import { GetPointByStudentIdParam } from "repositories/Point/PointRepository";
 import PointRepositoryImpl from "repositories/Point/PointRepositoryImpl";
 import {
   PointReasonResponse,
   PointResponse,
+  PointScoreForStudentResonse,
   PointType,
 } from "types/Point/types";
 
@@ -21,8 +24,27 @@ export const useGetPointAllMemberQuery = (
     }
   );
 
+export const useGetPointScoreByStudentIdQuery = (
+  { studentId, type }: GetPointByStudentIdParam,
+  options?: UseQueryOptions<
+    PointScoreForStudentResonse,
+    AxiosError,
+    PointScoreForStudentResonse,
+    string[]
+  >
+) =>
+  useQuery(
+    ["point/getPointScoreByStudnetId"],
+    () => PointRepositoryImpl.getPointByStudentId({ studentId, type }),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  );
+
 export const useGetPointReasonQuery = (
-  type: string,
+  type: PointType,
   options?: UseQueryOptions<
     PointReasonResponse,
     AxiosError,
@@ -31,7 +53,7 @@ export const useGetPointReasonQuery = (
   >
 ) =>
   useQuery(
-    ["point/getPointReason", type],
+    QUERY_KEYS.point.getReasons(type),
     () => PointRepositoryImpl.getPointReason(type as PointType),
     {
       staleTime: 1000 * 60 * 60,

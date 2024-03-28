@@ -4,7 +4,6 @@ export const MemberTBody: CSSObject = {
   width: "100%",
   fontSize: "14px",
   fontWeight: "600",
-  marginTop: "5px",
   display: "flex",
   flexDirection: "column",
 };
@@ -17,7 +16,6 @@ export const MemberItemTR: CSSObject = {
   justifyContent: "space-between",
   borderTop: "none",
   borderBottom: "1px solid #d9d9d9",
-  backgroundColor: "white",
 };
 
 export const MemberImage = styled.img`

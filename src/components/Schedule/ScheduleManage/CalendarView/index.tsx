@@ -24,7 +24,6 @@ const CalendarView = () => {
         height="73vh"
         ref={calendarRef}
         useDetailPopup
-        useFormPopup
         view="month"
         events={schedules}
         month={{

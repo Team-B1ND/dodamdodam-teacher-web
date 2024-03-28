@@ -28,12 +28,6 @@ export const CloseIcon = styled(CgClose)`
   }
 `;
 
-export const UnderLine = styled.div`
-  outline: none;
-  border-bottom: 1px solid #c8cdd1;
-  margin-top: 5px;
-`;
-
 export const TableStyle: CSSObject = {
   width: "100%",
 
@@ -43,7 +37,7 @@ export const TableStyle: CSSObject = {
 
   border: "1px solid #ddd",
   borderRadius: "5px",
-  marginTop: "50px",
+  marginTop: "20px",
 };
 
 export const ScheduleNameInput = styled.input`

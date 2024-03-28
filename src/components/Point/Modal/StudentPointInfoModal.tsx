@@ -7,64 +7,30 @@ import {
   OFFSET_INFO_COLUMS,
 } from "./constant";
 import ModalHeader from "components/common/Modal/ModalHeader";
+import { useGetPointScoreByStudentIdQuery } from "queries/Point/query";
+import { PointType } from "types/Point/types";
 
-interface Props {
+interface StudentPointInfoModalProps {
   close: () => void;
+  studentId: number;
+  pointType: PointType;
 }
 
-const StudentPointInfoModal = ({ close }: Props) => {
+const StudentPointInfoModal = ({
+  close,
+  studentId,
+  pointType,
+}: StudentPointInfoModalProps) => {
+  const { data: studentPointScoreData } = useGetPointScoreByStudentIdQuery({
+    studentId,
+    type: pointType,
+  });
+
   return (
     <S.Container onClick={(e) => e.stopPropagation()}>
-      <ModalHeader close={close} title="백승하님의 상벌점 정보입니다" />
+      <ModalHeader close={close} title={`님의 상벌점 정보입니다.`} />
       <Flex direction="column" gap={30} customStyle={{ marginTop: "15px" }}>
-        <Table customStyle={S.TableStyle}>
-          <THead>
-            <TR customStyle={S.TitleTRStyle}>
-              {BONUS_INFO_COLUMS.map((data) => (
-                <TH>{data}</TH>
-              ))}
-            </TR>
-          </THead>
-          <TBody customStyle={S.TBodyStyle}>
-            <TR customStyle={S.PassengerItemTRStyle}>
-              <TD>5점</TD>
-              <TD>백승하</TD>
-              <TD>2024-03-06</TD>
-            </TR>
-          </TBody>
-        </Table>
-        <Table customStyle={S.TableStyle}>
-          <THead>
-            <TR customStyle={S.TitleTRStyle}>
-              {MINUS_INFO_COLUMS.map((data) => (
-                <TH>{data}</TH>
-              ))}
-            </TR>
-          </THead>
-          <TBody customStyle={S.TBodyStyle}>
-            <TR customStyle={S.PassengerItemTRStyle}>
-              <TD>5점</TD>
-              <TD>백승하</TD>
-              <TD>2024-03-06</TD>
-            </TR>
-          </TBody>
-        </Table>
-        <Table customStyle={S.TableStyle}>
-          <THead>
-            <TR customStyle={S.TitleTRStyle}>
-              {OFFSET_INFO_COLUMS.map((data) => (
-                <TH>{data}</TH>
-              ))}
-            </TR>
-          </THead>
-          <TBody customStyle={S.TBodyStyle}>
-            <TR customStyle={S.PassengerItemTRStyle}>
-              <TD>5점</TD>
-              <TD>백승하</TD>
-              <TD>2024-03-06</TD>
-            </TR>
-          </TBody>
-        </Table>
+        <>{/* api 변경시 수정 필요 */}</>
       </Flex>
     </S.Container>
   );

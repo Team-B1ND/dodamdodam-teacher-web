@@ -1,3 +1,4 @@
+import { Student } from "types/Member/member.type";
 import { Response } from "types/util/response.type";
 
 //type
@@ -12,25 +13,21 @@ export interface Point {
   minus: number;
   offset: number;
   type: PointType;
-  student: {
-    id: number;
-    name: string;
-    grade: number;
-    room: number;
-    number: number;
-  };
+  student: Student;
+}
+
+export interface PointReason {
+  id: number;
+  reason: string;
+  score: number;
+  scoreType: PointValueType;
+  pointType: PointType;
 }
 
 //response
 
 export interface PointReasonResponse extends Response {
-  data: {
-    id: number;
-    reason: string;
-    score: number;
-    type: PointValueType;
-    place: PointType;
-  }[];
+  data: PointReason[];
 }
 
 export interface PointResponse extends Response {
@@ -40,20 +37,8 @@ export interface PointResponse extends Response {
 export interface PointScoreForStudentResonse extends Response {
   data: {
     id: number;
-    student: {
-      id: number;
-      name: string;
-      grade: number;
-      room: number;
-      number: number;
-    };
-    reason: {
-      id: number;
-      reason: string;
-      score: number;
-      scoreType: PointValueType;
-      pointType: PointType;
-    };
+    student: Student;
+    reason: PointReason;
     issueAt: string;
-  };
+  }[];
 }

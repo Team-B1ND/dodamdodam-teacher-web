@@ -18,6 +18,8 @@ export const changeGrade = (selectValue: string) => {
 
 export const changeRoom = (room: string) => {
   switch (room) {
+    case "전체보기":
+      return 0;
     case "1반":
       return 1;
     case "2반":

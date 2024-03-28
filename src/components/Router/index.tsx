@@ -10,7 +10,7 @@ import { NightStudyAllowPage } from "pages/NightStudy/NightStudyAllowPage";
 import { NightStudyTodayPage } from "pages/NightStudy/NightStudyTodayPage";
 import PointScore from "components/Point/PointScore";
 import PointReason from "components/Point/PointReason";
-import ScheduleMange from "components/Schedule/ScheduleManage";
+import ScheduleManage from "components/Schedule/ScheduleManage";
 
 const Router = () => {
   return (
@@ -26,7 +26,7 @@ const Router = () => {
       <Route path="/nightStudy-today" element={<NightStudyTodayPage />} />
       <Route path="/PointScore" element={<PointScore />} />
       <Route path="/PointReason" element={<PointReason />} />
-      <Route path="/Schedule" element={<ScheduleMange />} />
+      <Route path="/Schedule" element={<ScheduleManage />} />
     </Routes>
   );
 };

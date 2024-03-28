@@ -31,14 +31,16 @@ const useCalendarSchedule = () => {
       id: schedule.id,
       title: schedule.name,
       target: schedule.targetGrades,
-      attendees: schedule.targetGrades,
+      attendees: schedule.targetGrades.map((grade) => {
+        return dataTransform.scheduleTargetGradesTransform(grade);
+      }),
       location: schedule.place || "장소 없음",
       category: "time",
       isReadOnly: true,
       borderColor: scheduleColor,
       backgroundColor: scheduleColor,
-      start: schedule.startDate,
-      end: schedule.endDate,
+      start: schedule.date[0],
+      end: schedule.date[1],
     };
 
     return newHandleSchedule;

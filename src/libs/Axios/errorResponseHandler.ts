@@ -31,9 +31,7 @@ export const errorResponseHandler = async (error: AxiosError) => {
         dodamV6Axios.defaults.headers.common[
           REQUEST_TOKEN_KEY
         ] = `Bearer ${newAccessToken}`;
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   }
   return Promise.reject(error);

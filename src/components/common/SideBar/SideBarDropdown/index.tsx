@@ -23,19 +23,19 @@ const SideBarDropdown = () => {
       <MenuDropdownWrapper title="상벌점">
         <MenuDropdownChild
           title="기숙사 점수 관리"
-          redirectUrl="/PointScore?type=domitory"
+          redirectUrl="/PointScore?type=DORMITORY"
         />
         <MenuDropdownChild
           title="기숙사 상벌점 사유"
-          redirectUrl="/PointReason?type=domitory"
+          redirectUrl="/PointReason?type=DORMITORY"
         />
         <MenuDropdownChild
           title="학교 점수 관리"
-          redirectUrl="/PointScore?type=school"
+          redirectUrl="/PointScore?type=SCHOOL"
         />
         <MenuDropdownChild
           title="학교 점수 사유"
-          redirectUrl="/PointReason?type=school"
+          redirectUrl="/PointReason?type=SCHOOL"
         />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="2차 심자">
