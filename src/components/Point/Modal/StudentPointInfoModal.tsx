@@ -10,13 +10,17 @@ import ModalHeader from "components/common/Modal/ModalHeader";
 import { useGetPointScoreByStudentIdQuery } from "queries/Point/query";
 import { PointType } from "types/Point/types";
 
-interface Props {
+interface StudentPointInfoModalProps {
   close: () => void;
   studentId: number;
   pointType: PointType;
 }
 
-const StudentPointInfoModal = ({ close, studentId, pointType }: Props) => {
+const StudentPointInfoModal = ({
+  close,
+  studentId,
+  pointType,
+}: StudentPointInfoModalProps) => {
   const { data: studentPointScoreData } = useGetPointScoreByStudentIdQuery({
     studentId,
     type: pointType,

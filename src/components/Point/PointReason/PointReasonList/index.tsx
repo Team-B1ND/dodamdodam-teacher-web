@@ -14,13 +14,12 @@ import { PointReasonTR } from "./style";
 import useDeletePointReason from "hooks/Point/useDeletePointReason";
 import { PointType } from "types/Point/types";
 
-interface Props {
+interface PointReasonListProps {
   pointQueryParam: string | null;
 }
 
-const PointReasonList = ({ pointQueryParam }: Props) => {
+const PointReasonList = ({ pointQueryParam }: PointReasonListProps) => {
   const [pointType, setPointType] = useState("전체보기");
-  const [pointTypeName, setPointTypeName] = useState("BONUS");
   const { data: pointReasonDatas } = useGetPointReasonQuery(
     pointQueryParam as PointType
   );
@@ -38,7 +37,7 @@ const PointReasonList = ({ pointQueryParam }: Props) => {
         constant={POINT_REASON_ITEMS}
       >
         {pointReasonDatas?.data.map((data) => (
-          <TR customStyle={PointReasonTR}>
+          <TR customStyle={PointReasonTR} key={data.id}>
             <TD customStyle={{ width: "15%" }}>{data.reason}</TD>
             <TD customStyle={{ width: "15%" }}>
               {data.scoreType === "BONUS"

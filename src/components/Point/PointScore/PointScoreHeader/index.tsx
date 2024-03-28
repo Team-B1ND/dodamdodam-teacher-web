@@ -1,10 +1,10 @@
 import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Container } from "./style";
 import { Flex } from "../../../common/Flex/Flex";
 import { CiCircleCheck } from "react-icons/ci";
 import { useGetPointReasonQuery } from "queries/Point/query";
-import { PointType } from "types/Point/types";
+import { PointType, PointValueType } from "types/Point/types";
 import {
   PointSelectGrade,
   PointSelectRoom,
@@ -15,7 +15,11 @@ import { useRecoilState } from "recoil";
 interface Props {
   pointQueryParam: string | null;
   studentList: number[];
-  onSubmitGivePointStudent: (reasonId: number) => void;
+  onSubmitGivePointStudent: (
+    reasonId: number,
+    reasonType: PointValueType,
+    reason: string
+  ) => void;
 }
 
 const PointScoreHeader = ({
@@ -33,6 +37,10 @@ const PointScoreHeader = ({
   const reasonId = data?.data.find(
     (pointReason) => pointReason.reason === reason
   )?.id;
+
+  const reasonType = data?.data.find(
+    (pointReason) => pointReason.reason === reason
+  )?.scoreType;
 
   return (
     <Container>
@@ -75,7 +83,9 @@ const PointScoreHeader = ({
         />
         <Button
           ButtonType="agree"
-          onClick={() => onSubmitGivePointStudent(reasonId!)}
+          onClick={() =>
+            onSubmitGivePointStudent(reasonId!, reasonType!, reason!)
+          }
         >
           점수발급
         </Button>
