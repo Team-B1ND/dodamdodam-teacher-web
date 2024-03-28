@@ -4,7 +4,7 @@ import { NightStudyType } from "types/NightStudy/nightstudy.type";
 import NightStudyIcon from "assets/icons/NightStudy/LateNight.svg";
 import { TH, THead, TR, Table, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import convertDateTime from "utils/Time/convertDateTime";
-import { NIGHTSTUDY_MODAL_ITEMS } from "./constant";
+ import { NIGHTSTUDY_MODAL_ITEMS } from "./constant";
 
 interface NightStudyModalProps {
   isOpen: boolean;

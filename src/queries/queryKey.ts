@@ -21,7 +21,7 @@ export const QUERY_KEYS = Object.freeze({
   nightstudy: {
     getPendingNightStudy: "/night-study/pending",
     getNightStudyList: "/night-study",
-  },
+   },
   schedule: {
     getSchedules: (page: number) => ["schedule/getSchedule", page],
     getSchedulesByPeriod: (startDate: string, endDate: string) => [
@@ -31,5 +31,5 @@ export const QUERY_KEYS = Object.freeze({
   },
   point: {
     getReasons: (type: PointType) => ["point/getPointReasons", type],
-  },
+   },
 });

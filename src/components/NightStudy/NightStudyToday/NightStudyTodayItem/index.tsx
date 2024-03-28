@@ -6,7 +6,7 @@ import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
 import { NightStudyAllowFilter } from "utils/NightStudy/nightStudyAllow";
 import convertDateTime from "utils/Time/convertDateTime";
-import { truncateText } from "utils/common/truncate";
+ import { truncateText } from "utils/common/truncate";
 
 interface NightStudyTodayProps {
   studentName: string;

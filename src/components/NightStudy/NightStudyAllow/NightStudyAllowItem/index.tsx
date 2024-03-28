@@ -7,8 +7,9 @@ import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAl
 import NightStudyModal from "components/NightStudy/NightStudyModal";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
+ 
 import convertDateTime from "utils/Time/convertDateTime";
-
+ 
 interface NightStudyAllowProps {
   studentName: string;
   NightStudyGrade: number;

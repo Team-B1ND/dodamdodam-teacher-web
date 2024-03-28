@@ -40,6 +40,14 @@ export const dodamTeacherAxios = createAxiosInstance({
   },
 });
 
+ export const dodamTestAxios = createAxiosInstance({
+  baseURL: process.env.REACT_APP_DODAM_TEST_SERVER_V6,
+  headers: {
+    [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
+  },
+});
+
+ 
 // export const dodamV6AxiosSetAccessToken = (token: string) => {
 //   dodamV6Axios.defaults.headers.common[REQUEST_TOKEN_KEY] = `Bearer ${token}`;
 // };

@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 import { BusBasicInfoType, BusPassengerType } from "types/Bus/bus.type";
 import { recoilPersist } from "recoil-persist";
-import converDateTime from "utils/Time/convertDateTime";
-
+import  convertDateTime from "utils/Time/convertDateTime";
+ 
 const { persistAtom } = recoilPersist();
 
 export const BusPassengerDataAtom = atom<BusPassengerType | null>({
