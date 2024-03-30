@@ -102,6 +102,7 @@ const NightStudyAllowItem = ({
           </TR>
         ))}
       </TBody>
+
       <NightStudyModal
         isOpen={isOpen}
         data={studyData}

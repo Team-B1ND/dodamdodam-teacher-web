@@ -38,6 +38,7 @@ export const ModalTitle = styled.p`
 
   gap: 5px;
 
+  user-select: none;
   img {
     width: 23px;
     height: 23px;
