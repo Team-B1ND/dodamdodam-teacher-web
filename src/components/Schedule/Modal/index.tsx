@@ -1,6 +1,13 @@
 import * as Schedule from "./style";
 import { Flex } from "components/common/Flex/Flex";
-import { Button, TD, TR, Table, Select } from "@b1nd/b1nd-dodamdodam-ui";
+import {
+  Button,
+  TD,
+  TR,
+  Table,
+  Select,
+  ButtonWrapper,
+} from "@b1nd/b1nd-dodamdodam-ui";
 import {
   HOME_SCHEDULE_HEADER_COLORSET_LIST,
   SCHEDULE_PLACE_ITEMS,
@@ -62,7 +69,11 @@ const ScheduleCreateModal = ({ close }: Props) => {
           <TD customStyle={Schedule.FormInputTDStyle}>
             <Select
               items={SCHEDULE_PLACE_ITEMS}
-              customStyle={{ position: "absolute", zIndex: "5" }}
+              customStyle={{
+                position: "absolute",
+                zIndex: "5",
+                minWidth: "120px",
+              }}
               zIndex={10}
               onChange={setPlace}
               value={place === "" ? "장소를 선택해주세요" : place}
@@ -90,11 +101,13 @@ const ScheduleCreateModal = ({ close }: Props) => {
           </TD>
         </TR>
       </Table>
-      <Flex justify="center" customStyle={{ marginTop: "30px" }}>
+      <Flex gap={10} justify="center" customStyle={{ marginTop: "30px" }}>
         <Button ButtonType="agree" onClick={onSubmitScheduleData}>
           확인
         </Button>
-        <Button ButtonType="disagreed">취소</Button>
+        <Button ButtonType="disagreed" onClick={close}>
+          취소
+        </Button>
       </Flex>
     </Schedule.Container>
   );

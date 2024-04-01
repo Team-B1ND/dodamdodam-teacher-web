@@ -9,6 +9,7 @@ export const Container = styled.div`
   background-color: #fff;
   position: fixed;
   padding: 1.5rem;
+  border-radius: 10px;
 `;
 
 export const CloseIcon = styled(CgClose)`
