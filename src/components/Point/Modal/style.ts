@@ -1,5 +1,7 @@
-import styled, { CSSObject } from "styled-components";
+import styled, { CSSObject, css } from "styled-components";
 import { CgClose } from "react-icons/cg";
+import { PointValueType } from "types/Point/types";
+import dataTransform from "utils/Transform/dataTransform";
 
 export const CloseIcon = styled(CgClose)`
   cursor: pointer;
@@ -26,6 +28,7 @@ export const Container = styled.div`
   background-color: #fff;
   position: fixed;
   padding: 1.5rem;
+  border-radius: 10px;
 `;
 
 export const UnderLine = styled.div`
@@ -44,6 +47,7 @@ export const TableStyle: CSSObject = {
   width: "100%",
   height: "auto",
   fontSize: "17px",
+  marginTop: "14px",
 };
 
 export const TitleTRStyle: CSSObject = {
@@ -58,8 +62,7 @@ export const TBodyStyle: CSSObject = {
   height: "auto",
 };
 
-export const PassengerItemTRStyle: CSSObject = {
-  width: "100%",
-  height: "60px",
-  borderBottom: "1px solid #ddd",
-};
+export const ScoreTypeText = styled.span<{ scoreType: PointValueType }>`
+  color: ${({ scoreType }) =>
+    dataTransform.pointScoreTypeTransform(scoreType).color};
+`;

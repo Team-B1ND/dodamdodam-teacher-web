@@ -6,4 +6,6 @@ export const PointReasonTR: CSSObject = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  borderTop: "none",
+  borderBottom: "1px solid #d9d9d9",
 };

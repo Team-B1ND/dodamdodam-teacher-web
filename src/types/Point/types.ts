@@ -38,6 +38,11 @@ export interface PointScoreForStudentResonse extends Response {
   data: {
     id: number;
     student: Student;
+    teacher: {
+      name: string;
+      position: string;
+      tel: string;
+    };
     reason: PointReason;
     issueAt: string;
   }[];

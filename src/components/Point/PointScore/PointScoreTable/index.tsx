@@ -84,6 +84,7 @@ const PointScoreTable = ({
                   ButtonType="disagree"
                   onClick={() =>
                     openStudentPointInfoModalOverlay({
+                      studentName: data.student.name,
                       type: "studentInfo",
                       studentId: data.student.id,
                       pointType: pointQueryParam as PointType,
