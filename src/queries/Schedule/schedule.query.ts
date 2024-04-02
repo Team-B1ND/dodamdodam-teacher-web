@@ -5,7 +5,7 @@ import {
   GetScheduleByPeriodParam,
   GetSchedulesParam,
 } from "repositories/Schedule/schedule.repository";
-import ScheduleRepositoryImpl from "repositories/Schedule/ScheduleRepositoryImpl";
+import ScheduleRepositoryImpl from "repositories/Schedule/schedule.repositoryImpl";
 import { ScheduleResponse } from "types/Schedule/types";
 
 export const useGetSchedulesQuery = ({ limit, page }: GetSchedulesParam) =>

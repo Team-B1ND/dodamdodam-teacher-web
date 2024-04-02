@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { QUERY_KEYS } from "queries/queryKey";
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import { GetPointByStudentIdParam } from "repositories/Point/point.repository";
-import PointRepositoryImpl from "repositories/Point/PointRepositoryImpl";
+import PointRepositoryImpl from "repositories/Point/point.repositoryImpl";
 import {
   PointReasonResponse,
   PointResponse,
