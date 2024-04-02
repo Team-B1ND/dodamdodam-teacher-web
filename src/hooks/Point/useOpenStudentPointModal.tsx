@@ -8,7 +8,12 @@ export const useOpenStudentPointInfoModal = () => {
 
   const openStudentPointInfoModalOverlay = (
     modal:
-      | { type: "studentInfo"; studentId: number; pointType: PointType }
+      | {
+          type: "studentInfo";
+          studentId: number;
+          pointType: PointType;
+          studentName: string;
+        }
       | { type: "modify"; pointReasonId: number }
   ) => {
     return new Promise((resolve) => {
@@ -20,6 +25,7 @@ export const useOpenStudentPointInfoModal = () => {
         ) : (
           <Modal title="학생 상벌점 정보" isOpen={isOpen} close={close}>
             <StudentPointInfoModal
+              studentName={modal.studentName}
               pointType={modal.pointType}
               studentId={modal.studentId}
               close={close}

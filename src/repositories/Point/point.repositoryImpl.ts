@@ -9,7 +9,7 @@ import {
   GetPointByStudentIdParam,
   GivePointParam,
   PointRepository,
-} from "./PointRepository";
+} from "./point.repository";
 import {
   dodamTeacherAxios,
   dodamTestAxios,

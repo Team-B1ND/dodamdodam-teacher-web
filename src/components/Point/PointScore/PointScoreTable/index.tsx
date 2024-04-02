@@ -7,7 +7,7 @@ import {
   MemberItemTR,
   MemberTD,
 } from "components/Member/MemberItem/style";
-import { useGetPointAllMemberQuery } from "queries/Point/query";
+import { useGetPointAllMemberQuery } from "queries/Point/point.query";
 import styled, { CSSObject } from "styled-components";
 import { useOpenStudentPointInfoModal } from "hooks/Point/useOpenStudentPointModal";
 import { PointType } from "types/Point/types";
@@ -84,6 +84,7 @@ const PointScoreTable = ({
                   ButtonType="disagree"
                   onClick={() =>
                     openStudentPointInfoModalOverlay({
+                      studentName: data.student.name,
                       type: "studentInfo",
                       studentId: data.student.id,
                       pointType: pointQueryParam as PointType,

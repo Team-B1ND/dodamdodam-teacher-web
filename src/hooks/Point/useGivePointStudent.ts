@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { useGivePointStudentQuery } from "queries/Point/query";
+import { useGivePointStudentQuery } from "queries/Point/point.query";
 import { PointValueType } from "types/Point/types";
 
 const useGivePointStudent = () => {

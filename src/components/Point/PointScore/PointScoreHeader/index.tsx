@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Container } from "./style";
 import { Flex } from "../../../common/Flex/Flex";
 import { CiCircleCheck } from "react-icons/ci";
-import { useGetPointReasonQuery } from "queries/Point/query";
+import { useGetPointReasonQuery } from "queries/Point/point.query";
 import { PointType, PointValueType } from "types/Point/types";
 import {
   PointSelectGrade,

@@ -3,7 +3,7 @@ import styled, { CSSObject } from "styled-components";
 
 export const Background = styled.div<{ customStyle?: CSSObject }>`
   width: 100%;
-  height: 100vh;
+  min-height: 100%;
 
   position: fixed;
   top: 0;

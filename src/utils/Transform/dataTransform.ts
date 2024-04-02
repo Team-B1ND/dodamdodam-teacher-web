@@ -1,3 +1,4 @@
+import { PointValueType } from "types/Point/types";
 import { ScheduleTargetGrade } from "types/Schedule/types";
 
 class DataTransform {
@@ -37,6 +38,26 @@ class DataTransform {
         return "전교생";
       case "GRADE_ETC":
         return "기타";
+    }
+  }
+
+  public pointScoreTypeTransform(scoreType: PointValueType) {
+    switch (scoreType) {
+      case "BONUS":
+        return {
+          name: "상점",
+          color: "#0083F0",
+        };
+      case "MINUS":
+        return {
+          name: "벌점",
+          color: "#EF2B2A",
+        };
+      case "OFFSET":
+        return {
+          name: "상쇄점",
+          color: "#00C265",
+        };
     }
   }
 }

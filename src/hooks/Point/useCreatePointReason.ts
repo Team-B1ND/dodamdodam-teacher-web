@@ -1,9 +1,9 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { useCreatePointReasonMutation } from "queries/Point/query";
+import { useCreatePointReasonMutation } from "queries/Point/point.query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
-import { CreatePointReasonParam } from "repositories/Point/PointRepository";
+import { CreatePointReasonParam } from "repositories/Point/point.repository";
 import { PointType } from "types/Point/types";
 
 const useCreatePointReason = () => {
