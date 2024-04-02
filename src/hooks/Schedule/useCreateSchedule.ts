@@ -1,5 +1,5 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { useCreateScheduleMutation } from "queries/Schedule/query";
+import { useCreateScheduleMutation } from "queries/Schedule/schedule.query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";

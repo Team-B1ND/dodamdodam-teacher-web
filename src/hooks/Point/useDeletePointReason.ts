@@ -1,5 +1,5 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { useDeletePointReasonMutation } from "queries/Point/query";
+import { useDeletePointReasonMutation } from "queries/Point/point.query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useQueryClient } from "react-query";
 import { PointType } from "types/Point/types";

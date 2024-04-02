@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useGetSchedulesByPeriodQuery } from "queries/Schedule/query";
+import { useGetSchedulesByPeriodQuery } from "queries/Schedule/schedule.query";
 import { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { scheduleDateAtom } from "stores/Schedule/store";

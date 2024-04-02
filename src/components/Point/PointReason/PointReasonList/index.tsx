@@ -9,7 +9,7 @@ import {
 } from "@b1nd/b1nd-dodamdodam-ui";
 import TableAttribute from "../../../common/TableAttribute";
 import { POINT_REASON_ITEMS } from "../constant";
-import { useGetPointReasonQuery } from "queries/Point/query";
+import { useGetPointReasonQuery } from "queries/Point/point.query";
 import { PointReasonTR } from "./style";
 import useDeletePointReason from "hooks/Point/useDeletePointReason";
 import { PointType } from "types/Point/types";

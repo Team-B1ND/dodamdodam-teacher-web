@@ -10,7 +10,7 @@ import {
 import * as S from "./style";
 import { POINT_TABLE_ITEMS } from "./constant";
 import ModalHeader from "components/common/Modal/ModalHeader";
-import { useGetPointScoreByStudentIdQuery } from "queries/Point/query";
+import { useGetPointScoreByStudentIdQuery } from "queries/Point/point.query";
 import { PointType } from "types/Point/types";
 import dataTransform from "utils/Transform/dataTransform";
 

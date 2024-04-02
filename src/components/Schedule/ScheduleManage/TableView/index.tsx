@@ -9,7 +9,7 @@ import {
 } from "@b1nd/b1nd-dodamdodam-ui";
 import { SCHEDULE_TABLE_ITEMS } from "components/Schedule/constant";
 import TableAttribute from "components/common/TableAttribute";
-import { useGetSchedulesQuery } from "queries/Schedule/query";
+import { useGetSchedulesQuery } from "queries/Schedule/schedule.query";
 
 const TableView = () => {
   const { data } = useGetSchedulesQuery({ limit: 10, page: 1 });

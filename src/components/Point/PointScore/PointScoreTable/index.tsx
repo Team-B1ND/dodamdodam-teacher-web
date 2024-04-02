@@ -7,7 +7,7 @@ import {
   MemberItemTR,
   MemberTD,
 } from "components/Member/MemberItem/style";
-import { useGetPointAllMemberQuery } from "queries/Point/query";
+import { useGetPointAllMemberQuery } from "queries/Point/point.query";
 import styled, { CSSObject } from "styled-components";
 import { useOpenStudentPointInfoModal } from "hooks/Point/useOpenStudentPointModal";
 import { PointType } from "types/Point/types";

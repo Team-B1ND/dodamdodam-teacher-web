@@ -4,7 +4,7 @@ import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import {
   GetScheduleByPeriodParam,
   GetSchedulesParam,
-} from "repositories/Schedule/ScheduleRepository";
+} from "repositories/Schedule/schedule.repository";
 import ScheduleRepositoryImpl from "repositories/Schedule/ScheduleRepositoryImpl";
 import { ScheduleResponse } from "types/Schedule/types";
 
