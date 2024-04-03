@@ -34,3 +34,7 @@ export interface StudentAndTeacher extends Member {
 export interface MemberResponse extends Response {
   data: StudentAndTeacher[];
 }
+
+export interface MyMemberResponse extends Response {
+  data: StudentAndTeacher;
+}

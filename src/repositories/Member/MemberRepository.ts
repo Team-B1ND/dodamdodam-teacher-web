@@ -1,8 +1,9 @@
-import { MemberResponse } from "types/Member/member.type";
+import { MemberResponse, MyMemberResponse } from "types/Member/member.type";
 
 export interface MemberRepository {
   getAllMemberList(): Promise<MemberResponse>;
   postMemberJoinTeacher(param: MemberSignUpParam): Promise<void>;
+  getMyMember(): Promise<MyMemberResponse>;
 }
 
 export interface MemberSignUpParam {

@@ -10,6 +10,7 @@ export const QUERY_KEYS = Object.freeze({
   member: {
     getAllMember: "/members",
     getTeachers: "/members/teacher",
+    getMyMember: "/member/my",
   },
   offbasepass: {
     getOffBasePass: (date: string) => ["/out-going", date],

@@ -2,10 +2,13 @@ import * as S from "./style";
 import dgsw from "../../../assets/dgsw.svg";
 import { useNavigate } from "react-router-dom";
 import { useLogout } from "../../../hooks/auth/useLogout";
+import { useGetMyMemberQuery } from "queries/Member/member.query";
 
 const Header = () => {
   const navigate = useNavigate();
   const { handleLogoutClick } = useLogout();
+  const { data: myInfo } = useGetMyMemberQuery();
+
   return (
     <S.HeaderContainer>
       <S.HeaderMain>
@@ -14,7 +17,7 @@ const Header = () => {
           <S.HeaderText>Teacher</S.HeaderText>
         </S.HeaderLogo>
         <S.HeaderLogoutContainer>
-          <p>{"관리자"} 님</p>
+          <p>{myInfo?.data.name} 님</p>
           <button onClick={handleLogoutClick}>로그아웃</button>
         </S.HeaderLogoutContainer>
       </S.HeaderMain>
