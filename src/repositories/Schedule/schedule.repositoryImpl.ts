@@ -34,10 +34,9 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
 
   public async getSchedules({
     page,
-    limit,
   }: GetSchedulesParam): Promise<ScheduleResponse> {
     const { data } = await dodamTestAxios.get(
-      `/schedule?limit=${limit}&page=${page}`
+      `/schedule?limit=${10}&page=${page}`
     );
     return data;
   }

@@ -1,40 +1,61 @@
-import {
-  Button,
-  ButtonWrapper,
-  TBody,
-  TD,
-  TH,
-  TR,
-  Table,
-} from "@b1nd/b1nd-dodamdodam-ui";
+import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { SCHEDULE_TABLE_ITEMS } from "components/Schedule/constant";
 import TableAttribute from "components/common/TableAttribute";
 import { useGetSchedulesQuery } from "queries/Schedule/schedule.query";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+import dataTransform from "utils/Transform/dataTransform";
 
 const TableView = () => {
-  const { data } = useGetSchedulesQuery({ limit: 10, page: 1 });
+  const { data: scheduleData, fetchNextPage } = useGetSchedulesQuery();
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   return (
-    <TableAttribute constant={SCHEDULE_TABLE_ITEMS}>
+    <TableAttribute
+      constant={SCHEDULE_TABLE_ITEMS}
+      thStyle={{ width: "10.5%" }}
+    >
       <TBody>
-        <TR customStyle={{ width: "100%" }}>
-          <TD>
-            <Button ButtonType="agree">학사일정</Button>
-          </TD>
-          <TD>기능 경기 대회</TD>
-          <TD>1학년</TD>
-          <TD>장소가 없습니다.</TD>
+        {scheduleData?.pages.map((page) =>
+          page.data.map((schedule) => (
+            <TR customStyle={{ width: "100%" }}>
+              <TD customStyle={{ width: "11.5%" }}>
+                <Button ButtonType="agree">
+                  {schedule.type === "ACADEMIC" ? "학사 일정" : "휴일"}
+                </Button>
+              </TD>
+              <TD customStyle={{ width: "11%" }}>{schedule.name}</TD>
+              <TD customStyle={{ width: "10.5%" }}>
+                {schedule.targetGrades.map((grade, idx) => (
+                  <>
+                    {dataTransform.scheduleTargetGradesTransform(grade)}
+                    {idx !== schedule.targetGrades.length - 1 && ", "}
+                  </>
+                ))}
+              </TD>
+              <TD customStyle={{ width: "10.5%" }}>{schedule.place}</TD>
 
-          <TD>2024년 02월 21일 00시 00분</TD>
-          <TD>2024년 02월 21일 00시 00분</TD>
-          <TD>
-            <ButtonWrapper>
-              <Button ButtonType="agree">수정</Button>
-              <Button ButtonType="disagreed">삭제</Button>
-            </ButtonWrapper>
-          </TD>
-        </TR>
+              <TD customStyle={{ width: "10.5%" }}>{schedule.date[0]} </TD>
+              <TD customStyle={{ width: "10.5%" }}>{schedule.date[1]} </TD>
+              <TD customStyle={{ width: "8.5%" }}>
+                <Button
+                  ButtonType="disagreed"
+                  onClick={() => window.alert("개발중입니다.")}
+                >
+                  삭제
+                </Button>
+              </TD>
+            </TR>
+          ))
+        )}
       </TBody>
+      <div ref={ref}></div>
     </TableAttribute>
   );
 };

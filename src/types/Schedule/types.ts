@@ -24,6 +24,7 @@ export interface CalendarScheduleType {
 }
 export interface ScheduleResponse extends Response {
   data: Schedule[];
+  nextPage: number;
 }
 
 export type ScheduleType = "ACADEMIC" | "HOLIDAY";

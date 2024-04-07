@@ -25,7 +25,6 @@ const ScheduleManageHeader = ({ viewingPoint, setViewingPoint }: Props) => {
         title="학사일정 관리"
         subTitle="학사 일정을 관리 할 수 있습니다."
       >
-        <Button ButtonType="agree">추가하기</Button>
         {viewingPoint === "calendar" ? (
           <ChangeViewBox onClick={() => setViewingPoint("table")}>
             <BsTable />

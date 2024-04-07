@@ -1,16 +1,35 @@
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "queries/queryKey";
-import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import {
-  GetScheduleByPeriodParam,
-  GetSchedulesParam,
-} from "repositories/Schedule/schedule.repository";
+  UseInfiniteQueryOptions,
+  UseQueryOptions,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+} from "react-query";
+import { GetScheduleByPeriodParam } from "repositories/Schedule/schedule.repository";
 import ScheduleRepositoryImpl from "repositories/Schedule/schedule.repositoryImpl";
 import { ScheduleResponse } from "types/Schedule/types";
 
-export const useGetSchedulesQuery = ({ limit, page }: GetSchedulesParam) =>
-  useQuery(QUERY_KEYS.schedule.getSchedules(page), () =>
-    ScheduleRepositoryImpl.getSchedules({ limit, page })
+export const useGetSchedulesQuery = (
+  options?: UseInfiniteQueryOptions<
+    ScheduleResponse,
+    AxiosError,
+    ScheduleResponse,
+    ScheduleResponse,
+    string[]
+  >
+) =>
+  useInfiniteQuery(
+    QUERY_KEYS.schedule.getSchedules,
+    ({ pageParam = 1 }) =>
+      ScheduleRepositoryImpl.getSchedules({ page: pageParam }),
+    {
+      ...options,
+      cacheTime: 1000 * 60,
+      staleTime: 1000 * 60 * 60,
+      getNextPageParam: (nextPage) => nextPage.nextPage,
+    }
   );
 
 export const useGetSchedulesByPeriodQuery = (

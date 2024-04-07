@@ -24,7 +24,7 @@ export const QUERY_KEYS = Object.freeze({
     getNightStudyList: "/night-study",
   },
   schedule: {
-    getSchedules: (page: number) => ["schedule/getSchedule", page],
+    getSchedules: ["schedule/getSchedule"],
     getSchedulesByPeriod: (startDate: string, endDate: string) => [
       "schedule/getScheduleByPeriod",
       `${startDate}~${endDate}`,
