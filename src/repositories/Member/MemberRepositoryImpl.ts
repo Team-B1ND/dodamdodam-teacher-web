@@ -11,7 +11,7 @@ class MemberRepositoryImpl implements MemberRepository {
 
   public async postMemberJoinTeacher(param: MemberSignUpParam): Promise<void> {
     await axios.post(
-      `${process.env.REACT_APP_DODAM_TEST_SERVER_V6}/member/join-teacher`,
+      `${process.env.REACT_APP_DODAM_SERVER}/member/join-teacher`,
       param
     );
   }
