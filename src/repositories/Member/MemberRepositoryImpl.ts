@@ -1,11 +1,11 @@
 import axios from "axios";
 import { MemberRepository, MemberSignUpParam } from "./MemberRepository";
-import { dodamTestAxios, dodamV6Axios } from "libs/Axios/customAxios";
+import { dodamAxios } from "libs/Axios/customAxios";
 import { MemberResponse, MyMemberResponse } from "types/Member/member.type";
 
 class MemberRepositoryImpl implements MemberRepository {
   public async getAllMemberList(): Promise<MemberResponse> {
-    const { data } = await dodamTestAxios.get("/member/all");
+    const { data } = await dodamAxios.get("/member/all");
     return data;
   }
 
@@ -17,7 +17,7 @@ class MemberRepositoryImpl implements MemberRepository {
   }
 
   public async getMyMember(): Promise<MyMemberResponse> {
-    const { data } = await dodamTestAxios.get("/member/my");
+    const { data } = await dodamAxios.get("/member/my");
     return data;
   }
 }
