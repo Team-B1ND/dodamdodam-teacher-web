@@ -10,7 +10,11 @@ const MenuItem = ({ title, redirectUrl }: MenuItemProps) => {
   return (
     <MenuItemContainer
       isArrival={redirectUrl === pathname}
-      onClick={() => navigate(redirectUrl)}
+      onClick={() =>
+        redirectUrl === "/cms"
+          ? (window.location.href = "https://dodam.b1nd.com/cms")
+          : navigate(redirectUrl)
+      }
     >
       {title}
     </MenuItemContainer>

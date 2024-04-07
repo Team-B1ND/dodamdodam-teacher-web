@@ -48,7 +48,7 @@ const SideBarDropdown = () => {
         />
       </MenuDropdownWrapper>
       <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
-      <MenuItem title="문자보내기" redirectUrl="/sms" />
+      <MenuItem title="채용공고" redirectUrl="/cms" />
     </SideBarDropdownContainer>
   );
 };
