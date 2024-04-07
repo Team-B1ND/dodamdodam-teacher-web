@@ -3,7 +3,6 @@ import PointScoreTable from "./PointScoreTable";
 import PointProvider from "../PointProvider";
 import { useSearchParams } from "react-router-dom";
 import useGivePointStudent from "hooks/Point/useGivePointStudent";
-import { useState } from "react";
 
 const PointScore = () => {
   const [searchParam] = useSearchParams();

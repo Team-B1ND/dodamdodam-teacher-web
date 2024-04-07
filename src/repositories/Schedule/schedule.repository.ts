@@ -6,7 +6,7 @@ export interface ScheduleRepository {
     param: GetScheduleByPeriodParam
   ): Promise<ScheduleResponse>;
   getSchedulesByKeyword(keyword: string): Promise<ScheduleResponse>;
-  getSchedules({ page, limit }: GetSchedulesParam): Promise<ScheduleResponse>;
+  getSchedules({ page }: GetSchedulesParam): Promise<ScheduleResponse>;
 }
 
 export interface ScheduleParam {
@@ -23,6 +23,5 @@ export interface GetScheduleByPeriodParam {
 }
 
 export interface GetSchedulesParam {
-  limit: number;
   page: number;
 }

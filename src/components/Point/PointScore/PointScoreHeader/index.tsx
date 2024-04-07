@@ -1,8 +1,9 @@
-import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { useState } from "react";
-import { Container } from "./style";
-import { Flex } from "../../../common/Flex/Flex";
+import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { CiCircleCheck } from "react-icons/ci";
+import { useRecoilState } from "recoil";
+import { Container } from "./style";
+import { Flex } from "components/common/Flex/Flex";
 import { useGetPointReasonQuery } from "queries/Point/point.query";
 import { PointType, PointValueType } from "types/Point/types";
 import {
@@ -10,7 +11,6 @@ import {
   PointSelectRoom,
   PointStduentSearch,
 } from "stores/Point/point.store";
-import { useRecoilState } from "recoil";
 
 interface Props {
   pointQueryParam: string | null;
@@ -18,7 +18,8 @@ interface Props {
   onSubmitGivePointStudent: (
     reasonId: number,
     reasonType: PointValueType,
-    reason: string
+    reason: string,
+    pointType: PointType
   ) => void;
 }
 
@@ -32,13 +33,15 @@ const PointScoreHeader = ({
   const [room, setRoom] = useRecoilState(PointSelectRoom);
   const [reason, setReason] = useState("");
 
-  const { data } = useGetPointReasonQuery(pointQueryParam as PointType);
+  const { data: pointReasonsData } = useGetPointReasonQuery(
+    pointQueryParam as PointType
+  );
 
-  const reasonId = data?.data.find(
+  const reasonId = pointReasonsData?.data.find(
     (pointReason) => pointReason.reason === reason
   )?.id;
 
-  const reasonType = data?.data.find(
+  const reasonType = pointReasonsData?.data.find(
     (pointReason) => pointReason.reason === reason
   )?.scoreType;
 
@@ -77,14 +80,35 @@ const PointScoreHeader = ({
 
         <Select
           customStyle={{ width: "500px" }}
-          items={data ? data.data!.map((data) => data.reason) : []}
+          items={
+            pointReasonsData
+              ? pointReasonsData.data!.map(
+                  (data) =>
+                    data.reason +
+                    ":" +
+                    ` ${
+                      data.scoreType === "BONUS"
+                        ? "상점"
+                        : data.scoreType === "MINUS"
+                        ? "벌점"
+                        : "상쇄점"
+                    }` +
+                    `${data.score}점`
+                )
+              : []
+          }
           value={reason || "사유를 선택해주세요"}
           onChange={setReason}
         />
         <Button
           ButtonType="agree"
           onClick={() =>
-            onSubmitGivePointStudent(reasonId!, reasonType!, reason!)
+            onSubmitGivePointStudent(
+              reasonId!,
+              reasonType!,
+              reason!,
+              pointQueryParam as PointType
+            )
           }
         >
           점수발급

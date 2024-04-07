@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useGivePointStudentQuery } from "queries/Point/point.query";
-import { PointValueType } from "types/Point/types";
+import { PointType, PointValueType } from "types/Point/types";
+import { useQueryClient } from "react-query";
+import { QUERY_KEYS } from "queries/queryKey";
 
 const useGivePointStudent = () => {
+  const queryClient = useQueryClient();
   const mutation = useGivePointStudentQuery();
 
   const [studentIds, setStudentIds] = useState<number[]>([]);
@@ -19,7 +22,8 @@ const useGivePointStudent = () => {
   const onSubmitGivePointStudent = (
     reasonId: number,
     reasonType: PointValueType,
-    reason: string
+    reason: string,
+    pointType: PointType
   ) => {
     const issueAt = window.prompt("빌급할 날짜를 입력해주세요 ex)2024-12-12")!;
     if (issueAt) {
@@ -31,6 +35,9 @@ const useGivePointStudent = () => {
         },
         {
           onSuccess: () => {
+            queryClient.invalidateQueries(
+              QUERY_KEYS.point.getAllMemberPoint(pointType)
+            );
             B1ndToast.showSuccess(
               `${reason} 사유로 ${
                 reasonType === "BONUS"
