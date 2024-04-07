@@ -83,7 +83,17 @@ const PointScoreHeader = ({
           items={
             pointReasonsData
               ? pointReasonsData.data!.map(
-                  (data) => data.reason + data.scoreType
+                  (data) =>
+                    data.reason +
+                    ":" +
+                    ` ${
+                      data.scoreType === "BONUS"
+                        ? "상점"
+                        : data.scoreType === "MINUS"
+                        ? "벌점"
+                        : "상쇄점"
+                    }` +
+                    `${data.score}점`
                 )
               : []
           }
