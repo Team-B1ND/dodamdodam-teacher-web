@@ -5,6 +5,7 @@ import { useGetSchedulesQuery } from "queries/Schedule/schedule.query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import dataTransform from "utils/Transform/dataTransform";
+import { TRStyle } from "./style";
 
 const TableView = () => {
   const { data: scheduleData, fetchNextPage } = useGetSchedulesQuery();
@@ -24,7 +25,7 @@ const TableView = () => {
       <TBody>
         {scheduleData?.pages.map((page) =>
           page.data.map((schedule) => (
-            <TR customStyle={{ width: "100%" }}>
+            <TR customStyle={TRStyle}>
               <TD customStyle={{ width: "11.5%" }}>
                 <Button ButtonType="agree">
                   {schedule.type === "ACADEMIC" ? "학사 일정" : "휴일"}
