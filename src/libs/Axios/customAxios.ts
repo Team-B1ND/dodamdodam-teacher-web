@@ -19,37 +19,16 @@ const createAxiosInstance = (config?: AxiosRequestConfig) => {
   });
 };
 
-export const dodamV6Axios = createAxiosInstance({
-  baseURL: process.env.REACT_APP_DODAM_SERVER_V6,
+export const dodamAxios = createAxiosInstance({
+  baseURL: process.env.REACT_APP_DODAM_SERVER,
   headers: {
     [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
   },
 });
 
-export const dodamTestAxios = createAxiosInstance({
-  baseURL: process.env.REACT_APP_DODAM_TEST_SERVER_V6,
-  headers: {
-    [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`,
-  },
-});
-
-export const dodamTeacherAxios = createAxiosInstance({
-  baseURL: process.env.REACT_APP_DODAM_TEACHER_API,
-  headers: {
-    [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
-  },
-});
-
-// export const dodamV6AxiosSetAccessToken = (token: string) => {
-//   dodamV6Axios.defaults.headers.common[REQUEST_TOKEN_KEY] = `Bearer ${token}`;
-// };
-
-// dodamV6Axios.interceptors.request.use(requestHandler);
-// dodamV6Axios.interceptors.response.use((res) => res, errorResponseHandler);
-
-export const dodamV6AxiosSetAccessToken = (token: string) => {
-  dodamTestAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = `Bearer ${token}`;
+export const dodamAxiosSetAccessToken = (token: string) => {
+  dodamAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = `Bearer ${token}`;
 };
 
-dodamTestAxios.interceptors.request.use(requestHandler);
-dodamTestAxios.interceptors.response.use((res) => res, errorResponseHandler);
+dodamAxios.interceptors.request.use(requestHandler);
+dodamAxios.interceptors.response.use((res) => res, errorResponseHandler);

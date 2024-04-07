@@ -7,7 +7,6 @@ const SideBarDropdown = () => {
   return (
     <SideBarDropdownContainer>
       <MenuItem title="구성원" redirectUrl="/member" />
-      <MenuItem title="결석" redirectUrl="/absent" />
       <MenuDropdownWrapper title="버스">
         <MenuDropdownChild title="날짜별 버스 조회" redirectUrl="/bus-date" />
         <MenuDropdownChild title="버스 전체기록 조회" redirectUrl="/bus-list" />
@@ -49,7 +48,7 @@ const SideBarDropdown = () => {
         />
       </MenuDropdownWrapper>
       <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
-      <MenuItem title="문자보내기" redirectUrl="/sms" />
+      <MenuItem title="채용공고" redirectUrl="/cms" />
     </SideBarDropdownContainer>
   );
 };

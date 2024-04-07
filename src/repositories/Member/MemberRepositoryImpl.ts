@@ -1,23 +1,23 @@
 import axios from "axios";
 import { MemberRepository, MemberSignUpParam } from "./MemberRepository";
-import { dodamTestAxios, dodamV6Axios } from "libs/Axios/customAxios";
+import { dodamAxios } from "libs/Axios/customAxios";
 import { MemberResponse, MyMemberResponse } from "types/Member/member.type";
 
 class MemberRepositoryImpl implements MemberRepository {
   public async getAllMemberList(): Promise<MemberResponse> {
-    const { data } = await dodamTestAxios.get("/member/all");
+    const { data } = await dodamAxios.get("/member/all");
     return data;
   }
 
   public async postMemberJoinTeacher(param: MemberSignUpParam): Promise<void> {
     await axios.post(
-      `${process.env.REACT_APP_DODAM_TEST_SERVER_V6}/member/join-teacher`,
+      `${process.env.REACT_APP_DODAM_SERVER}/member/join-teacher`,
       param
     );
   }
 
   public async getMyMember(): Promise<MyMemberResponse> {
-    const { data } = await dodamTestAxios.get("/member/my");
+    const { data } = await dodamAxios.get("/member/my");
     return data;
   }
 }

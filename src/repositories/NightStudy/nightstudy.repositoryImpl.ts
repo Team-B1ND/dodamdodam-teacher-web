@@ -1,23 +1,23 @@
-import { dodamTestAxios, dodamV6Axios } from "../../libs/Axios/customAxios";
+import { dodamAxios } from "../../libs/Axios/customAxios";
 import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
 
 class NightStudyRepositoryImpl implements NightStudyRepository {
   public async getPendingNightStudy(): Promise<NightStudyResponse> {
-    const { data } = await dodamTestAxios.get("/night-study/pending");
+    const { data } = await dodamAxios.get("/night-study/pending");
     return data;
   }
 
   public async getNighStudytList(): Promise<NightStudyResponse> {
-    const { data } = await dodamTestAxios.get("/night-study");
+    const { data } = await dodamAxios.get("/night-study");
     return data;
   }
 
   public async patchNightStudyAllow(id: number): Promise<void> {
-    await dodamTestAxios.patch(`/night-study/${id}/allow`);
+    await dodamAxios.patch(`/night-study/${id}/allow`);
   }
   public async patchNightStudyCancel(id: number): Promise<void> {
-    await dodamTestAxios.patch(`/night-study/${id}/reject`);
+    await dodamAxios.patch(`/night-study/${id}/reject`);
   }
 }
 

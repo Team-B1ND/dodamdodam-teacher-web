@@ -1,4 +1,4 @@
-import { dodamTestAxios, dodamV6Axios } from "libs/Axios/customAxios";
+import { dodamAxios } from "libs/Axios/customAxios";
 import {
   GetScheduleByPeriodParam,
   GetSchedulesParam,
@@ -9,14 +9,14 @@ import { ScheduleResponse } from "types/Schedule/types";
 
 class ScheduleRepositoryImpl implements ScheduleRepository {
   public async createSchedule(param: ScheduleParam): Promise<Response> {
-    const { data } = await dodamTestAxios.post("/schedule", param);
+    const { data } = await dodamAxios.post("/schedule", param);
     return data;
   }
 
   public async getSchedulesByKeyword(
     keyword: string
   ): Promise<ScheduleResponse> {
-    const { data } = await dodamTestAxios.get(
+    const { data } = await dodamAxios.get(
       `/schedule/search?keyword=${keyword}`
     );
     return data;
@@ -26,7 +26,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
     endDate,
     startDate,
   }: GetScheduleByPeriodParam): Promise<ScheduleResponse> {
-    const { data } = await dodamTestAxios.get(
+    const { data } = await dodamAxios.get(
       `/schedule/search?startDate=${startDate}&endDate=${endDate}`
     );
     return data;
@@ -35,8 +35,8 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   public async getSchedules({
     page,
   }: GetSchedulesParam): Promise<ScheduleResponse> {
-    const { data } = await dodamTestAxios.get(
-      `/schedule?limit=${10}&page=${page}`
+    const { data } = await dodamAxios.get(
+      `/schedule?limit=${limit}&page=${page}`
     );
     return data;
   }
