@@ -1,7 +1,7 @@
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetBusDateQuery } from "queries/Bus/bus.query";
 import { BusDateParam } from "repositories/Bus/BusRepository";
-import convertDateTime from "utils/Time/convertDateTime";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
 import * as S from "./style";
 import {

@@ -1,5 +1,6 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import {
+  useGetTodayLeaveQuery,
   usePatchLeaveApproval,
   usePatchLeaveApprovalCancel,
   usePatchLeaveCancel,
@@ -8,12 +9,15 @@ import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "../../../queries/queryKey";
 import { useRecoilState } from "recoil";
 import { UploadDateAtom } from "../../../stores/OffBase/offbase.store";
+import { useEffect, useState } from "react";
+import { OutListType } from "types/OffBasePass/offbasepass.type";
 
 const useOffBaseLeave = () => {
   const queryClient = useQueryClient();
   const patchLeaveApproval = usePatchLeaveApproval();
   const patchLeaveCancel = usePatchLeaveCancel();
   const patchLeaveApprovalCancel = usePatchLeaveApprovalCancel();
+  const { data: offBaseLeave } = useGetTodayLeaveQuery();
 
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
 
@@ -38,11 +42,33 @@ const useOffBaseLeave = () => {
     });
   };
 
+  const [leaveStudentList, setLeaveStudentList] = useState([
+    {
+      이름: "",
+      반번호: "",
+      사유: "",
+      비고: "",
+    },
+  ]);
+
+  useEffect(() => {
+    if (offBaseLeave?.data) {
+      const newData = offBaseLeave.data.map((data: OutListType) => ({
+        이름: data.student.name,
+        반번호: `${data.student.grade}학년 ${data.student.room}반 ${data.student.number}번`,
+        사유: data.reason,
+        비고: "",
+      }));
+      setLeaveStudentList(newData);
+    }
+  }, [offBaseLeave]);
+
   return {
     handleOffBaseLeave,
     patchLeaveApproval,
     patchLeaveCancel,
     patchLeaveApprovalCancel,
+    leaveStudentList,
   };
 };
 export default useOffBaseLeave;

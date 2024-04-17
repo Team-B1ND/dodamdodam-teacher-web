@@ -2,14 +2,14 @@ import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetPendingNightStudy } from "queries/NightStudy/nightstudy.query";
 import { truncateText } from "../../../../utils/common/truncate";
-import { NightStudyAllowFilter } from "utils/NightStudy/nightStudyAllow";
+import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
 import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAllow";
 import NightStudyModal from "components/NightStudy/NightStudyModal";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
- 
-import convertDateTime from "utils/Time/convertDateTime";
- 
+
+import convertDateTime from "utils/Time/ConvertDateTime";
+
 interface NightStudyAllowProps {
   studentName: string;
   NightStudyGrade: number;
@@ -41,7 +41,7 @@ const NightStudyAllowItem = ({
             <TD customStyle={S.NightStudytTD}>{nightstudy.student.name}</TD>
             <TD customStyle={S.NightStudytTD}>
               {nightstudy.student.grade}학년{nightstudy.student.room}반
-              {nightstudy.student.room}번
+              {nightstudy.student.number}번
             </TD>
             <TD customStyle={S.NightStudytTD}>
               <div

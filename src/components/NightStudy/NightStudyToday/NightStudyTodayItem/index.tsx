@@ -4,9 +4,9 @@ import NightStudyModal from "components/NightStudy/NightStudyModal";
 import { useGetNightStudyList } from "queries/NightStudy/nightstudy.query";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
-import { NightStudyAllowFilter } from "utils/NightStudy/nightStudyAllow";
-import convertDateTime from "utils/Time/convertDateTime";
- import { truncateText } from "utils/common/truncate";
+import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
+import convertDateTime from "utils/Time/ConvertDateTime";
+import { truncateText } from "utils/common/truncate";
 
 interface NightStudyTodayProps {
   studentName: string;
@@ -38,7 +38,7 @@ const NightStudyTodayItem = ({
             <TD customStyle={S.NightStudyTD}>{nightstudy.student.name}</TD>
             <TD customStyle={S.NightStudyTD}>
               {nightstudy.student.grade}학년{nightstudy.student.room}반
-              {nightstudy.student.room}번
+              {nightstudy.student.number}번
             </TD>
             <TD customStyle={S.NightStudyTD}>
               <div

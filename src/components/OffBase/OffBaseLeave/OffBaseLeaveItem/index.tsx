@@ -2,7 +2,7 @@ import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import convertDateTime from "../../../../utils/Time/convertDateTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 
@@ -103,7 +103,7 @@ const OffBaseLeaveItem = ({
               <TD customStyle={S.OffBaseTD}>{offbaseleave.student.name}</TD>
               <TD customStyle={S.OffBaseTD}>
                 {offbaseleave.student.grade}학년
-                {offbaseleave.student.room}반{offbaseleave.student.room}번
+                {offbaseleave.student.room}반{offbaseleave.student.number}번
               </TD>
               <TD customStyle={S.OffBaseTD}>
                 <S.DateContainer>

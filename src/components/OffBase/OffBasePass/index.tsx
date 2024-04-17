@@ -19,6 +19,9 @@ import useOffBasePass from "../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
 import SkeletonComponent from "components/common/Skeleton";
+import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
+import CsvButton from "components/common/ExtractCsvData";
+import dayjs from "dayjs";
 
 const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
@@ -30,7 +33,8 @@ const OffBasePass = () => {
   const [selectApproval, setSelectApproval] =
     useRecoilState(SelectApprovalAtom);
 
-  const { handleOffBasePass, patchApprovals, patchCancel } = useOffBasePass();
+  const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } =
+    useOffBasePass();
 
   return (
     <>
@@ -72,6 +76,19 @@ const OffBasePass = () => {
         </div>
 
         <S.SelectContainer>
+          <CsvButtonContainer>
+            <CsvButton
+              csvData={[
+                ...offbaseInfo.data,
+                {
+                  이름: "인원수",
+                  반번호: offbaseInfo.length.toString(),
+                  비고: "",
+                },
+              ]}
+              fileName={dayjs().format("YYYY-MM-DD") + "외출 중인 학생"}
+            />
+          </CsvButtonContainer>
           <Select
             items={APPROVAL_ITEMS}
             value={selectApproval}

@@ -5,9 +5,9 @@ import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLe
 
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
- 
-import ConvertDateTime from "utils/Time/convertDateTime";
- 
+
+import ConvertDateTime from "utils/Time/ConvertDateTime";
+
 interface OffBasePassProps {
   studentName: string;
   selectGrade: number;
@@ -49,7 +49,7 @@ const TodayOffBaseItem = ({
                 <TD customStyle={S.OffBaseTD}>{todayleave.student.name}</TD>
                 <TD customStyle={S.OffBaseTD}>
                   {todayleave.student.grade}학년
-                  {todayleave.student.room}반{todayleave.student.room}번
+                  {todayleave.student.room}반{todayleave.student.number}번
                 </TD>
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>

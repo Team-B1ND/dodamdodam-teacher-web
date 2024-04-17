@@ -2,9 +2,9 @@ import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { StudentAndTeacher } from "types/Member/member.type";
 import { MemberItemTR, MemberTD, ScrollEmailText } from "../style";
 import { addPhoneHyphen } from "utils/common/addPhoneHyphen";
- 
-import { sortAndFilterStudents } from "utils/Member/sortAndFilterStudents";
- 
+
+import { sortAndFilterStudents } from "utils/Member/SortAndFilterStudents";
+
 interface StudentProps {
   studentsInfo: StudentAndTeacher[];
   searchValue: string;

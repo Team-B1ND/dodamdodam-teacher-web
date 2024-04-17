@@ -14,6 +14,10 @@ import { changeApproval } from "../../../utils/OffBase/changeApproval";
 import { changeGrade } from "../../../utils/Member/changeGrade";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
+import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
+import CsvButton from "components/common/ExtractCsvData";
+import dayjs from "dayjs";
+import useOffBaseLeave from "hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 
 const TodayOffBase = () => {
   const [studentName, setStudentName] = useState("");
@@ -21,6 +25,7 @@ const TodayOffBase = () => {
   const [selectApproval, setSelectApproval] =
     useRecoilState(SelectApprovalAtom);
 
+  const { leaveStudentList } = useOffBaseLeave();
   return (
     <>
       <S.OffBaseHeaderContainer>
@@ -29,6 +34,12 @@ const TodayOffBase = () => {
         </div>
 
         <S.SelectContainer>
+          <CsvButtonContainer>
+            <CsvButton
+              csvData={leaveStudentList}
+              fileName={dayjs().format("YYYY-MM-DD") + "외박 중인 학생"}
+            />
+          </CsvButtonContainer>
           <Select
             items={APPROVAL_ITEMS}
             value={selectApproval}

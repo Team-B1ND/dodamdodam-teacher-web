@@ -59,3 +59,10 @@ export const ClearStyle: CSSObject = {
     boxShadow: "0 0 0 1px #fff, 0 0 0 3px #ddd",
   },
 };
+
+export const CsvButtonContainer = styled.div`
+  width: 100%;
+  heigth: 60px;
+  display: flex;
+  justify-content: flex-end;
+`;

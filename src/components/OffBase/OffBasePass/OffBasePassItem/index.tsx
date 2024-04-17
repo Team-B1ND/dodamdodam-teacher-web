@@ -5,7 +5,7 @@ import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
-import convertDateTime from "../../../../utils/Time/convertDateTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 
 interface OffBasePassProps {
@@ -24,6 +24,7 @@ const OffBasePassItem = ({
   const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
     suspense: true,
   });
+
   const [selectedIds, setSelectedIds] = useRecoilState<number>(SelectIdAtom);
 
   const {
@@ -117,7 +118,7 @@ const OffBasePassItem = ({
                 <TD customStyle={S.OffBaseTD}>{offbasepass.student.name}</TD>
                 <TD customStyle={S.OffBaseTD}>
                   {offbasepass.student.grade}학년
-                  {offbasepass.student.room}반{offbasepass.student.room}번
+                  {offbasepass.student.room}반{offbasepass.student.number}번
                 </TD>
                 <TD customStyle={S.OffBaseTD}>
                   <S.DateContainer>
