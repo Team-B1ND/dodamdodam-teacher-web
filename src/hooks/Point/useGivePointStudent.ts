@@ -35,6 +35,7 @@ const useGivePointStudent = () => {
         },
         {
           onSuccess: () => {
+            setStudentIds([]);
             queryClient.invalidateQueries(
               QUERY_KEYS.point.getAllMemberPoint(pointType)
             );
