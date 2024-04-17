@@ -37,9 +37,10 @@ const PointScoreHeader = ({
     pointQueryParam as PointType
   );
 
-  const reasonId = pointReasonsData?.data.find(
-    (pointReason) => pointReason.reason === reason
-  )?.id;
+  const reasonId = pointReasonsData?.data.find((pointReason) => {
+    const handleReason = reason.split(":")[0];
+    return pointReason.reason === handleReason;
+  })?.id;
 
   const reasonType = pointReasonsData?.data.find(
     (pointReason) => pointReason.reason === reason
