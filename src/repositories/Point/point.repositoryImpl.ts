@@ -14,7 +14,7 @@ import { dodamAxios } from "libs/Axios/customAxios";
 
 class PointRepositoryImpl implements PointRepository {
   public async getPointAllMember(type: string): Promise<PointResponse> {
-    const { data } = await dodamAxios.get(`/point/score/all?type=DORMITORY`);
+    const { data } = await dodamAxios.get(`/point/score/all?type=${type}`);
     return data;
   }
 
@@ -42,6 +42,11 @@ class PointRepositoryImpl implements PointRepository {
     const { data } = await dodamAxios.get(
       `/point/student/${studentId}?type=${type}`
     );
+    return data;
+  }
+
+  public async deletePointScore(id: number): Promise<Response> {
+    const { data } = await dodamAxios.delete(`/point/${id}`);
     return data;
   }
 }
