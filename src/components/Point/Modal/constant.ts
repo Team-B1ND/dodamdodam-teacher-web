@@ -10,4 +10,5 @@ export const POINT_TABLE_ITEMS = [
   "사유",
   "부여자",
   "부여 날짜",
+  "수정 삭제",
 ];

@@ -73,12 +73,16 @@ const PointScoreTable = ({
               </TD>
               <TD customStyle={MemberTD}>{data.student.name}</TD>
               <TD customStyle={MemberTD}>
-                {data.student.grade}학년 {data.student.room}반{" "}
+                {data.student.grade}학년 {data.student.room}반
                 {data.student.number}번
               </TD>
               <TD customStyle={MemberTD}>{data.bonus}점</TD>
               <TD customStyle={MemberTD}>{data.minus}점</TD>
               <TD customStyle={MemberTD}>{data.offset}점 </TD>
+              <TD customStyle={MemberTD}>
+                {data.bonus - data.minus + data.offset}점
+              </TD>
+
               <TD>
                 <Button
                   ButtonType="disagree"
@@ -88,6 +92,7 @@ const PointScoreTable = ({
                       type: "studentInfo",
                       studentId: data.student.id,
                       pointType: pointQueryParam as PointType,
+                      pointId: data.id,
                     })
                   }
                 >

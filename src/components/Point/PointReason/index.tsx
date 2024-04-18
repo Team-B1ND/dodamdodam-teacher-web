@@ -17,7 +17,7 @@ const PointReason = () => {
       }
       subTitle="사유 추가 등록 및 수정, 삭제가 가능합니다"
     >
-      <Flex customStyle={{ width: "100%" }} gap={50}>
+      <Flex customStyle={{ gap: "7%" }}>
         <PointReasonList pointQueryParam={pointQueryParam} />
         <PointReasonForm pointQueryParam={pointQueryParam} />
       </Flex>

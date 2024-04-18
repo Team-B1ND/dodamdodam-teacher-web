@@ -53,7 +53,7 @@ export const useSignin = () => {
 
       Token.setToken(ACCESS_TOKEN_KEY, data.accessToken);
       Token.setToken(REFRESH_TOKEN_KEY, data.refreshToken);
-      navigate("/member");
+      navigate("/offbase-pass");
       B1ndToast.showSuccess("로그인 성공");
     } catch (e) {
       B1ndToast.showError("로그인 실패");

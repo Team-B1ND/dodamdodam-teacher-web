@@ -76,3 +76,8 @@ export const useGivePointStudentQuery = () => {
   const mutation = useMutation(PointRepositoryImpl.givePoint);
   return mutation;
 };
+
+export const useDeleteStudentPointScoreMutation = () => {
+  const mutation = useMutation(PointRepositoryImpl.deletePointScore);
+  return mutation;
+};

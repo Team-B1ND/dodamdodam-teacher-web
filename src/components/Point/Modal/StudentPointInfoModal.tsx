@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonWrapper,
   TBody,
   TD,
   TH,
@@ -10,15 +11,22 @@ import {
 import * as S from "./style";
 import { POINT_TABLE_ITEMS } from "./constant";
 import ModalHeader from "components/common/Modal/ModalHeader";
-import { useGetPointScoreByStudentIdQuery } from "queries/Point/point.query";
+import {
+  useDeleteStudentPointScoreMutation,
+  useGetPointScoreByStudentIdQuery,
+} from "queries/Point/point.query";
 import { PointType } from "types/Point/types";
 import dataTransform from "utils/Transform/dataTransform";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { useQueryClient } from "react-query";
+import { QUERY_KEYS } from "queries/queryKey";
 
 interface StudentPointInfoModalProps {
   close: () => void;
   studentId: number;
   pointType: PointType;
   studentName: string;
+  pointId: number;
 }
 
 const StudentPointInfoModal = ({
@@ -26,11 +34,14 @@ const StudentPointInfoModal = ({
   studentId,
   pointType,
   studentName,
+  pointId,
 }: StudentPointInfoModalProps) => {
   const { data: studentPointScoreData } = useGetPointScoreByStudentIdQuery({
     studentId,
     type: pointType,
   });
+  const queryClient = useQueryClient();
+  const mutation = useDeleteStudentPointScoreMutation();
 
   return (
     <S.Container onClick={(e) => e.stopPropagation()}>
@@ -67,6 +78,33 @@ const StudentPointInfoModal = ({
               <TD>{data.reason.reason}</TD>
               <TD>{data.teacher.name}</TD>
               <TD>{data.issueAt}</TD>
+              <TD>
+                <ButtonWrapper>
+                  <Button
+                    ButtonType="agree"
+                    onClick={() => window.alert("열심히 개발중입니다")}
+                  >
+                    수정
+                  </Button>
+                  <Button
+                    ButtonType="cancel"
+                    onClick={() =>
+                      mutation.mutate(pointId, {
+                        onSuccess: () => {
+                          queryClient.invalidateQueries(
+                            QUERY_KEYS.point.getPointScoreByStudentId(studentId)
+                          );
+                          B1ndToast.showSuccess(
+                            "상벌점 기록이 삭제 되었습니다"
+                          );
+                        },
+                      })
+                    }
+                  >
+                    삭제
+                  </Button>
+                </ButtonWrapper>
+              </TD>
             </TR>
           ))}
         </TBody>
