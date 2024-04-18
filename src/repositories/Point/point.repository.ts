@@ -11,6 +11,7 @@ export interface PointRepository {
   getPointReason(type: string): Promise<PointReasonResponse>;
   createPointReason(param: CreatePointReasonParam): Promise<void>;
   deletePointReason(id: number): Promise<void>;
+  deletePointScore(id: number): Promise<Response>;
   givePoint(param: GivePointParam): Promise<void>;
   getPointByStudentId(
     param: GetPointByStudentIdParam
