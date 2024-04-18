@@ -4,8 +4,8 @@ import NightStudyModal from "components/NightStudy/NightStudyModal";
 import { useGetNightStudyList } from "queries/NightStudy/nightstudy.query";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
-import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
-import convertDateTime from "utils/Time/ConvertDateTime";
+import { NightStudyAllowFilter } from "utils/NightStudy/nightStudyAllow";
+import convertDateTime from "utils/Time/convertDateTime";
 import { truncateText } from "utils/common/truncate";
 
 interface NightStudyTodayProps {

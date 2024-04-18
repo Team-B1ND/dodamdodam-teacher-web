@@ -6,7 +6,7 @@ import {
   useModifyBusMutation,
 } from "../../queries/Bus/bus.query";
 import { QUERY_KEYS } from "../../queries/queryKey";
-import convertDateTime from "../../utils/Time/ConvertDateTime";
+import convertDateTime from "../../utils/Time/convertDateTime";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   ExistingBusDataAtom,

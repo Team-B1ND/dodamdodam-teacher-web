@@ -3,7 +3,7 @@ import { useCreateScheduleMutation } from "queries/Schedule/schedule.query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
-import convertDateTime from "utils/Time/ConvertDateTime";
+import convertDateTime from "utils/Time/convertDateTime";
 
 const useCreateSchedule = () => {
   const queryClinet = useQueryClient();

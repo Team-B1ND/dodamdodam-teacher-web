@@ -6,7 +6,7 @@ import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLe
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 
-import ConvertDateTime from "utils/Time/ConvertDateTime";
+import ConvertDateTime from "utils/Time/convertDateTime";
 
 interface OffBasePassProps {
   studentName: string;
