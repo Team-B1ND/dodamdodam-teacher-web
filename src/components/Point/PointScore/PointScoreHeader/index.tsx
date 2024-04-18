@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { CiCircleCheck } from "react-icons/ci";
 import { useRecoilState } from "recoil";
@@ -21,12 +21,14 @@ interface Props {
     reason: string,
     pointType: PointType
   ) => void;
+  setStudentIds: Dispatch<React.SetStateAction<number[]>>;
 }
 
 const PointScoreHeader = ({
   pointQueryParam,
   studentList,
   onSubmitGivePointStudent,
+  setStudentIds,
 }: Props) => {
   const [searchValue, setSearchValue] = useRecoilState(PointStduentSearch);
   const [grade, setGrade] = useRecoilState(PointSelectGrade);
@@ -69,10 +71,12 @@ const PointScoreHeader = ({
         {studentList.length > 0 && (
           <>
             <CiCircleCheck
+              onClick={() => setStudentIds([])}
               style={{
                 width: "30px",
                 height: "30px",
                 color: "rgba(0, 103, 188, 0.8)",
+                cursor: "pointer",
               }}
             />
             <p>{studentList.length} 명 선택됨</p>

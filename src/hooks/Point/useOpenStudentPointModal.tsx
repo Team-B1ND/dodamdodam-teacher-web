@@ -13,7 +13,6 @@ export const useOpenStudentPointInfoModal = () => {
           studentId: number;
           pointType: PointType;
           studentName: string;
-          pointId: number;
         }
       | { type: "modify"; pointReasonId: number }
   ) => {
@@ -29,7 +28,6 @@ export const useOpenStudentPointInfoModal = () => {
               studentName={modal.studentName}
               pointType={modal.pointType}
               studentId={modal.studentId}
-              pointId={modal.pointId}
               close={close}
             />
           </Modal>

@@ -8,8 +8,12 @@ const PointScore = () => {
   const [searchParam] = useSearchParams();
   const pointQueryParam = searchParam.get("type");
 
-  const { onSetStudentList, onSubmitGivePointStudent, studentIds } =
-    useGivePointStudent();
+  const {
+    onSetStudentList,
+    setStudentIds,
+    onSubmitGivePointStudent,
+    studentIds,
+  } = useGivePointStudent();
 
   return (
     <PointProvider
@@ -20,6 +24,7 @@ const PointScore = () => {
         studentList={studentIds}
         pointQueryParam={pointQueryParam}
         onSubmitGivePointStudent={onSubmitGivePointStudent}
+        setStudentIds={setStudentIds}
       />
       <PointScoreTable
         studentList={studentIds}

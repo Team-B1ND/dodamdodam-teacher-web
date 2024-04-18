@@ -58,6 +58,7 @@ const useGivePointStudent = () => {
   };
   return {
     studentIds,
+    setStudentIds,
     onSetStudentList,
     onSubmitGivePointStudent,
   };
