@@ -26,7 +26,6 @@ interface StudentPointInfoModalProps {
   studentId: number;
   pointType: PointType;
   studentName: string;
-  pointId: number;
 }
 
 const StudentPointInfoModal = ({
@@ -34,7 +33,6 @@ const StudentPointInfoModal = ({
   studentId,
   pointType,
   studentName,
-  pointId,
 }: StudentPointInfoModalProps) => {
   const { data: studentPointScoreData } = useGetPointScoreByStudentIdQuery({
     studentId,
@@ -89,7 +87,7 @@ const StudentPointInfoModal = ({
                   <Button
                     ButtonType="cancel"
                     onClick={() =>
-                      mutation.mutate(pointId, {
+                      mutation.mutate(data.id, {
                         onSuccess: () => {
                           queryClient.invalidateQueries(
                             QUERY_KEYS.point.getPointScoreByStudentId(studentId)

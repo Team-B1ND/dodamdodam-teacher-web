@@ -92,7 +92,6 @@ const PointScoreTable = ({
                       type: "studentInfo",
                       studentId: data.student.id,
                       pointType: pointQueryParam as PointType,
-                      pointId: data.id,
                     })
                   }
                 >
