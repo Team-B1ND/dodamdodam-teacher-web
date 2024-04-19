@@ -2,7 +2,7 @@ import { Dispatch, useState } from "react";
 import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { CiCircleCheck } from "react-icons/ci";
 import { useRecoilState } from "recoil";
-import { Container } from "./style";
+import { Container, DateInput } from "./style";
 import { Flex } from "components/common/Flex/Flex";
 import { useGetPointReasonQuery } from "queries/Point/point.query";
 import { PointType, PointValueType } from "types/Point/types";
@@ -13,22 +13,27 @@ import {
 } from "stores/Point/point.store";
 
 interface Props {
+  issueAt: string;
   pointQueryParam: string | null;
   studentList: number[];
   onSubmitGivePointStudent: (
     reasonId: number,
     reasonType: PointValueType,
     reason: string,
-    pointType: PointType
+    pointType: PointType,
+    score: number
   ) => void;
   setStudentIds: Dispatch<React.SetStateAction<number[]>>;
+  onChangeIssueAt: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PointScoreHeader = ({
+  issueAt,
   pointQueryParam,
   studentList,
   onSubmitGivePointStudent,
   setStudentIds,
+  onChangeIssueAt,
 }: Props) => {
   const [searchValue, setSearchValue] = useRecoilState(PointStduentSearch);
   const [grade, setGrade] = useRecoilState(PointSelectGrade);
@@ -47,6 +52,11 @@ const PointScoreHeader = ({
   const reasonType = pointReasonsData?.data.find(
     (pointReason) => pointReason.reason === reason
   )?.scoreType;
+
+  const score = pointReasonsData?.data.find((pointReason) => {
+    const handleReason = reason.split(":")[0];
+    return pointReason.reason === handleReason;
+  })?.score;
 
   return (
     <Container>
@@ -67,7 +77,7 @@ const PointScoreHeader = ({
         </Flex>
         <SearchBar value={searchValue} onChange={setSearchValue} />
       </Flex>
-      <Flex gap={5} align="center">
+      <Flex gap={7} align="center">
         {studentList.length > 0 && (
           <>
             <CiCircleCheck
@@ -84,7 +94,7 @@ const PointScoreHeader = ({
         )}
 
         <Select
-          customStyle={{ width: "500px" }}
+          customStyle={{ width: "400px" }}
           items={
             pointReasonsData
               ? pointReasonsData.data!.map(
@@ -105,16 +115,25 @@ const PointScoreHeader = ({
           value={reason || "사유를 선택해주세요"}
           onChange={setReason}
         />
+        <DateInput
+          type="date"
+          value={issueAt}
+          isFocus={false}
+          onChange={onChangeIssueAt}
+        />
+
         <Button
           ButtonType="agree"
-          onClick={() =>
+          onClick={() => {
             onSubmitGivePointStudent(
               reasonId!,
               reasonType!,
               reason!,
-              pointQueryParam as PointType
-            )
-          }
+              pointQueryParam as PointType,
+              score!
+            );
+            setReason("");
+          }}
         >
           점수발급
         </Button>

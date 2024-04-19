@@ -13,6 +13,8 @@ const PointScore = () => {
     setStudentIds,
     onSubmitGivePointStudent,
     studentIds,
+    onChangeIssueAt,
+    issueAt,
   } = useGivePointStudent();
 
   return (
@@ -21,6 +23,8 @@ const PointScore = () => {
       subTitle="학생 상벌점 조회, 발급, 삭제가 가능합니다."
     >
       <PointScoreHeader
+        issueAt={issueAt}
+        onChangeIssueAt={onChangeIssueAt}
         studentList={studentIds}
         pointQueryParam={pointQueryParam}
         onSubmitGivePointStudent={onSubmitGivePointStudent}
