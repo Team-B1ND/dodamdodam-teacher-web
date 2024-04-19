@@ -13,11 +13,13 @@ import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
 import CsvButton from "components/common/ExtractCsvData";
 import { useNightStudyStudentList } from "hooks/NightStudy/useNightStudyStudentList";
 import dayjs from "dayjs";
+import { PointSelectRoom } from "stores/Point/point.store";
 
 const NightStudyToday = () => {
   const [studentName, setStudentName] = useState("");
   const [nightStudyGrade, setNightStudyGrade] = useRecoilState(NightStudyGrade);
   const { NightStudyInfo } = useNightStudyStudentList();
+  const [room, setRoom] = useRecoilState(PointSelectRoom);
 
   return (
     <>
@@ -35,6 +37,12 @@ const NightStudyToday = () => {
             onChange={setNightStudyGrade}
             zIndex={2}
           />
+          <Select
+            items={["모든 학반", "1반", "2반", "3반", "4반"]}
+            value={room || "학반을 선택해주세요"}
+            onChange={setRoom}
+            zIndex={2}
+          />
           <CsvButtonContainer>
             <CsvButton
               csvData={NightStudyInfo}
@@ -50,6 +58,7 @@ const NightStudyToday = () => {
         <ErrorBoundary fallback={<>심자 중인 학생을 불러오지 못했습니다.</>}>
           <Suspense fallback={<>로딩중...</>}>
             <NightStudyTodayItem
+              selectRoom={room}
               studentName={studentName}
               NightStudyGrade={changeGrade(nightStudyGrade)}
             />

@@ -2,7 +2,7 @@ import * as S from "./style";
 import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import convertDateTime from "../../../../utils/Time/convertDateTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 
@@ -11,6 +11,7 @@ interface OffBaseLeaveProps {
   uploadDate: string;
   selectGrade: number;
   selectApproval: string | undefined;
+  selectRoom: string;
 }
 
 const OffBaseLeaveItem = ({
@@ -18,6 +19,7 @@ const OffBaseLeaveItem = ({
   selectGrade,
   studentName,
   uploadDate,
+  selectRoom,
 }: OffBaseLeaveProps) => {
   const { data: offBaseLeave } = useGetOffBaseLeaveQuery(uploadDate, {
     suspense: true,
@@ -35,7 +37,8 @@ const OffBaseLeaveItem = ({
       offBaseLeave,
       studentName,
       selectGrade,
-      selectApproval
+      selectApproval,
+      selectRoom
     )?.find((key) => key.id === Id)?.status;
 
     if (component === "ALLOWED") {
@@ -85,7 +88,8 @@ const OffBaseLeaveItem = ({
         offBaseLeave,
         studentName,
         selectGrade,
-        selectApproval
+        selectApproval,
+        selectRoom
       )?.length === 0 ? (
         <S.NoneTile>현재 외박 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
@@ -94,7 +98,8 @@ const OffBaseLeaveItem = ({
             offBaseLeave,
             studentName,
             selectGrade,
-            selectApproval
+            selectApproval,
+            selectRoom
           )?.map((offbaseleave) => (
             <TR customStyle={S.OffBaseTR}>
               <TD customStyle={S.OffBaseTD}>

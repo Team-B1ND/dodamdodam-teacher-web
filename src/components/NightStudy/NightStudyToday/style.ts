@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NightStudyHeaderContainer = styled.div`
   display: flex;
 
-  gap: 850px;
+  gap: 730px;
 `;
 export const SearchBarContainer = styled.div`
   display: flex;

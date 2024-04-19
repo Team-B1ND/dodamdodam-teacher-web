@@ -9,10 +9,13 @@ import ErrorBoundary from "../../common/ErrorBoundary";
 import NightStudyAllowItem from "./NightStudyAllowItem";
 import { changeGrade } from "../../../utils/Member/changeGrade";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
+import { PointSelectRoom } from "stores/Point/point.store";
 
 const NightStudyAllow = () => {
   const [studentName, setStudentName] = useState("");
   const [nightStudyGrade, setNightStudyGrade] = useRecoilState(NightStudyGrade);
+  const [room, setRoom] = useRecoilState(PointSelectRoom);
+
   return (
     <>
       <S.NightStudyHeaderContainer>
@@ -29,6 +32,13 @@ const NightStudyAllow = () => {
             onChange={setNightStudyGrade}
             zIndex={2}
           />
+
+          <Select
+            items={["모든 학반", "1반", "2반", "3반", "4반"]}
+            value={room || "학반을 선택해주세요"}
+            onChange={setRoom}
+            zIndex={2}
+          />
         </S.SelectContainer>
       </S.NightStudyHeaderContainer>
       <TableAttribute
@@ -40,6 +50,7 @@ const NightStudyAllow = () => {
         >
           <Suspense fallback={<>로딩중...</>}>
             <NightStudyAllowItem
+              selectRoom={room}
               NightStudyGrade={changeGrade(nightStudyGrade)}
               studentName={studentName}
             />

@@ -6,18 +6,20 @@ import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLe
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 
-import ConvertDateTime from "utils/Time/convertDateTime";
+import ConvertDateTime from "utils/Time/ConvertDateTime";
 
 interface OffBasePassProps {
   studentName: string;
   selectGrade: number;
   selectApproval: string | undefined;
+  selectRoom: string;
 }
 
 const TodayOffBaseItem = ({
   selectApproval,
   selectGrade,
   studentName,
+  selectRoom,
 }: OffBasePassProps) => {
   const { data: offBaseLeave } = useGetTodayLeaveQuery({ suspense: true });
 
@@ -30,7 +32,8 @@ const TodayOffBaseItem = ({
         offBaseLeave,
         studentName,
         selectGrade,
-        selectApproval
+        selectApproval,
+        selectRoom
       )?.length === 0 ? (
         <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
       ) : (
@@ -39,7 +42,8 @@ const TodayOffBaseItem = ({
             offBaseLeave,
             studentName,
             selectGrade,
-            selectApproval
+            selectApproval,
+            selectRoom
           )?.map((todayleave) =>
             todayleave.status === "ALLOWED" ? (
               <TR customStyle={S.OffBaseTR}>

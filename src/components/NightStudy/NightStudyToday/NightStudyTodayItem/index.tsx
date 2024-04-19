@@ -4,18 +4,20 @@ import NightStudyModal from "components/NightStudy/NightStudyModal";
 import { useGetNightStudyList } from "queries/NightStudy/nightstudy.query";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
-import { NightStudyAllowFilter } from "utils/NightStudy/nightStudyAllow";
-import convertDateTime from "utils/Time/convertDateTime";
+import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import { truncateText } from "utils/common/truncate";
 
 interface NightStudyTodayProps {
   studentName: string;
   NightStudyGrade: number;
+  selectRoom: string;
 }
 
 const NightStudyTodayItem = ({
   studentName,
   NightStudyGrade,
+  selectRoom,
 }: NightStudyTodayProps) => {
   const { data: NightStudyToday } = useGetNightStudyList({ suspense: true });
 
@@ -32,7 +34,8 @@ const NightStudyTodayItem = ({
         {NightStudyAllowFilter(
           NightStudyToday,
           studentName,
-          NightStudyGrade
+          NightStudyGrade,
+          selectRoom
         )?.map((nightstudy) => (
           <TR customStyle={S.NightStudyTR}>
             <TD customStyle={S.NightStudyTD}>{nightstudy.student.name}</TD>

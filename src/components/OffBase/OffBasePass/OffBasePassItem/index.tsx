@@ -5,7 +5,7 @@ import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
 import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
-import convertDateTime from "../../../../utils/Time/convertDateTime";
+import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 
 interface OffBasePassProps {
@@ -13,6 +13,7 @@ interface OffBasePassProps {
   uploadDate: string;
   selectGrade: number;
   selectApproval: string | undefined;
+  selectRoom: string;
 }
 
 const OffBasePassItem = ({
@@ -20,6 +21,7 @@ const OffBasePassItem = ({
   uploadDate,
   selectGrade,
   selectApproval,
+  selectRoom,
 }: OffBasePassProps) => {
   const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
     suspense: true,
@@ -39,7 +41,8 @@ const OffBasePassItem = ({
       offBasePass,
       studentName,
       selectGrade,
-      selectApproval
+      selectApproval,
+      selectRoom
     )?.find((key) => key.id === Id)?.status;
 
     if (component === "ALLOWED") {
@@ -90,8 +93,13 @@ const OffBasePassItem = ({
   return (
     <>
       {!offBaseDataFilter ||
-      offBaseDataFilter(offBasePass, studentName, selectGrade, selectApproval)
-        ?.length === 0 ? (
+      offBaseDataFilter(
+        offBasePass,
+        studentName,
+        selectGrade,
+        selectApproval,
+        selectRoom
+      )?.length === 0 ? (
         <S.NoneTile>현재 외출 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <div>
@@ -99,7 +107,8 @@ const OffBasePassItem = ({
             offBasePass,
             studentName,
             selectGrade,
-            selectApproval
+            selectApproval,
+            selectRoom
           )?.map((offbasepass) => (
             <TBody customStyle={S.OffBaseTBody}>
               <S.OffBaseTR

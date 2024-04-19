@@ -7,7 +7,7 @@ export const SelectContainer = styled.div`
 
 export const OffBaseHeaderContainer = styled.div`
   display: flex;
-  gap: 910px;
+  gap: 800px;
 
   z-index: 900;
 `;

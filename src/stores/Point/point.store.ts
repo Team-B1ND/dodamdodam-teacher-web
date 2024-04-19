@@ -7,7 +7,7 @@ export const PointSelectGrade = atom<string>({
 
 export const PointSelectRoom = atom<string>({
   key: "pointSelectRoomAtom",
-  default: "전체보기",
+  default: "모든 학반",
 });
 
 export const PointStduentSearch = atom<string>({
