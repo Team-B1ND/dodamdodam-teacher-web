@@ -3,6 +3,9 @@ import PointScoreTable from "./PointScoreTable";
 import PointProvider from "../PointProvider";
 import { useSearchParams } from "react-router-dom";
 import useGivePointStudent from "hooks/Point/useGivePointStudent";
+import ErrorBoundary from "components/common/ErrorBoundary";
+import { Suspense } from "react";
+import SkeletonComponent from "components/common/Skeleton";
 
 const PointScore = () => {
   const [searchParam] = useSearchParams();
@@ -15,6 +18,7 @@ const PointScore = () => {
     studentIds,
     onChangeIssueAt,
     issueAt,
+    studentName,
   } = useGivePointStudent();
 
   return (
@@ -23,6 +27,7 @@ const PointScore = () => {
       subTitle="학생 상벌점 조회, 발급, 삭제가 가능합니다."
     >
       <PointScoreHeader
+        studentName={studentName}
         issueAt={issueAt}
         onChangeIssueAt={onChangeIssueAt}
         studentList={studentIds}
@@ -30,11 +35,15 @@ const PointScore = () => {
         onSubmitGivePointStudent={onSubmitGivePointStudent}
         setStudentIds={setStudentIds}
       />
-      <PointScoreTable
-        studentList={studentIds}
-        onSetStudentList={onSetStudentList}
-        pointQueryParam={pointQueryParam}
-      />
+      <ErrorBoundary fallback={<>error</>}>
+        <Suspense fallback={<SkeletonComponent height={60} />}>
+          <PointScoreTable
+            studentList={studentIds}
+            onSetStudentList={onSetStudentList}
+            pointQueryParam={pointQueryParam}
+          />
+        </Suspense>
+      </ErrorBoundary>
     </PointProvider>
   );
 };

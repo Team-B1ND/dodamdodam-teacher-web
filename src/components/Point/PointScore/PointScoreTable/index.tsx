@@ -37,7 +37,8 @@ const PointScoreTable = ({
   const selectRoom = useRecoilValue(PointSelectRoom);
 
   const { data: studentPointScoreData } = useGetPointAllMemberQuery(
-    pointQueryParam!
+    pointQueryParam!,
+    { suspense: true }
   );
 
   const { openStudentPointInfoModalOverlay } = useOpenStudentPointInfoModal();
