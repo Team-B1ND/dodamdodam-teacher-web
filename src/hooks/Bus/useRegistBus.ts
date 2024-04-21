@@ -12,6 +12,7 @@ import {
   ExistingBusDataAtom,
   SelectBusDateAtom,
 } from "../../stores/Bus/bus.store";
+import { AxiosError } from "axios";
 
 export const useRegistBus = () => {
   const existingBusData = useRecoilValue(ExistingBusDataAtom);
@@ -220,8 +221,9 @@ export const useRegistBus = () => {
               B1ndToast.showSuccess("버스 정보를 수정하였습니다!");
               successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
             },
-            onError: () => {
-              B1ndToast.showError("버스 정보를 수정하지 못했습니다!");
+            onError: (error) => {
+              const errorResponse = (error as AxiosError).response;
+              B1ndToast.showError((errorResponse?.data as AxiosError).message);
             },
           }
         );
@@ -231,8 +233,9 @@ export const useRegistBus = () => {
             B1ndToast.showSuccess("버스를 추가하였습니다!");
             successRegistAndModifyBus(busContent.leaveTime, closeBusRegister);
           },
-          onError: () => {
-            B1ndToast.showError("버스를 추가하지 못했습니다!");
+          onError: (error) => {
+            const errorResponse = (error as AxiosError).response;
+            B1ndToast.showError((errorResponse?.data as AxiosError).message);
           },
         });
       }

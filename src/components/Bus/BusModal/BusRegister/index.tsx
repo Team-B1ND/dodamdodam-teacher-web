@@ -12,7 +12,7 @@ interface BusRegisterProps {
 }
 
 const BusRegister = ({ busId, isOpen, close }: BusRegisterProps) => {
-  const question = "버스 등록을 취소하시겠습니까?";
+  const question = `버스 ${busId ? "수정" : "등록"}을 취소하시겠습니까?`;
   useLockScroll();
 
   return (
