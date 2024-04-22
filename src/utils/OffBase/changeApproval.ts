@@ -1,6 +1,6 @@
 export const changeApproval = (selectApproval: string) => {
   switch (selectApproval) {
-    case "전체보기":
+    case "승인여부":
       return "";
     case "대기중":
       return "PENDING";

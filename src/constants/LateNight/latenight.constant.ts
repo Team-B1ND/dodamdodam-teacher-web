@@ -7,5 +7,5 @@ export const NIGHTSTUDY_ALLOW_ITEMS = [
   "장소",
   "휴대폰",
   "필요 이유",
-  "승인 여부",
+  "승인여부",
 ];

@@ -1,5 +1,5 @@
 export const APPROVAL_ITEMS = [
-  "승인 여부",
+  "승인여부",
   "대기중",
   "거절됨",
   "승인됨",

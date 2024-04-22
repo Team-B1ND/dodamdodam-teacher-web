@@ -7,7 +7,7 @@ export const SelectGradeAtom = atom<string>({
 
 export const SelectApprovalAtom = atom<string>({
   key: "SelectApprovalAtom",
-  default: "승인 여부",
+  default: "승인여부",
 });
 
 export const UploadDateAtom = atom<string>({
