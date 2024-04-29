@@ -11,6 +11,8 @@ import { useRecoilState } from "recoil";
 import { UploadDateAtom } from "../../../stores/OffBase/offbase.store";
 import { useEffect, useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
+import ConvertDateTime from "utils/Time/ConvertDateTime";
+// import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 
 const useOffBasePass = () => {
   const queryClient = useQueryClient();
@@ -46,6 +48,7 @@ const useOffBasePass = () => {
       {
         이름: "",
         반번호: "",
+        도착시간: "",
         비고: "",
       },
     ],
@@ -57,6 +60,10 @@ const useOffBasePass = () => {
       const newData = OffBasePass.data.map((data: OutListType) => ({
         이름: data.student.name,
         반번호: `${data.student.grade}학년 ${data.student.room}반 ${data.student.number}번`,
+        도착시간: `${ConvertDateTime.getDateTime(
+          new Date(data.endAt),
+          "time"
+        )}`,
         비고: "",
       }));
       setOffBaseInfo({ data: newData, length: OffBasePass.data.length });
