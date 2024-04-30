@@ -20,25 +20,23 @@ import {
   PointStduentSearch,
 } from "stores/Point/point.store";
 import { changeGrade, changeRoom } from "utils/Member/changeGrade";
+import useSetPointStudentIds from "hooks/Point/useSetPointStudentIds";
 
 interface Props {
   pointQueryParam: string | null;
-  onSetStudentList: (id: number) => void;
-  studentList: number[];
 }
 
-const PointScoreTable = ({
-  pointQueryParam,
-  onSetStudentList,
-  studentList,
-}: Props) => {
+const PointScoreTable = ({ pointQueryParam }: Props) => {
   const searchValue = useRecoilValue(PointStduentSearch);
   const selectGrade = useRecoilValue(PointSelectGrade);
   const selectRoom = useRecoilValue(PointSelectRoom);
 
   const { data: studentPointScoreData } = useGetPointAllMemberQuery(
-    pointQueryParam!
+    pointQueryParam!,
+    { suspense: true }
   );
+
+  const { onSetStudentList, studentIds } = useSetPointStudentIds();
 
   const { openStudentPointInfoModalOverlay } = useOpenStudentPointInfoModal();
 
@@ -63,9 +61,12 @@ const PointScoreTable = ({
           .map((data) => (
             <TR
               customStyle={MemberItemTR}
-              isClicked={studentList.includes(data.student.id) ? true : false}
+              isClicked={studentIds.includes(data.student.id) ? true : false}
               onClick={() => {
-                onSetStudentList(data.student.id);
+                onSetStudentList(
+                  data.student.id,
+                  `${data.student.grade}학년 ${data.student.room}반 ${data.student.number}번 ${data.student.name}`
+                );
               }}
             >
               <TD customStyle={MemberTD}>

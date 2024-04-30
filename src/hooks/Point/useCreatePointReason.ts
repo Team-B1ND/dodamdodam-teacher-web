@@ -30,11 +30,21 @@ const useCreatePointReason = () => {
         pointType,
         reason,
         score: Number(score),
-        scoreType: scoreType === "상점" ? "BONUS" : "벌점" ? "MINUS" : "OFFSET",
+        scoreType:
+          scoreType === "상점"
+            ? "BONUS"
+            : scoreType === "벌점"
+            ? "MINUS"
+            : "OFFSET",
       },
       {
         onSuccess: () => {
           B1ndToast.showSuccess("상벌점 사유 생성");
+          setPointReasonData({
+            reason: "",
+            score: 0,
+          });
+          setScoreType("");
           queryClinet.invalidateQueries(QUERY_KEYS.point.getReasons(pointType));
         },
       }

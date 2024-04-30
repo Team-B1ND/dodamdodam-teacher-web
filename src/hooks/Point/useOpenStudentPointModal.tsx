@@ -1,4 +1,5 @@
 import { useOverlay } from "@toss/use-overlay";
+import GivePointStudentModal from "components/Point/Modal/GivePointStudentModal";
 import StudentPointInfoModal from "components/Point/Modal/StudentPointInfoModal";
 import Modal from "components/common/Modal";
 import { PointType } from "types/Point/types";
@@ -15,24 +16,42 @@ export const useOpenStudentPointInfoModal = () => {
           studentName: string;
         }
       | { type: "modify"; pointReasonId: number }
+      | { type: "givePoint"; pointType: PointType }
   ) => {
     return new Promise((resolve) => {
-      StudnetPointInfoOverlay.open(({ isOpen, close }) =>
-        modal.type === "modify" ? (
-          <Modal title="학생 상벌점 정보" isOpen={isOpen} close={close}>
-            <></>
-          </Modal>
-        ) : (
-          <Modal title="학생 상벌점 정보" isOpen={isOpen} close={close}>
-            <StudentPointInfoModal
-              studentName={modal.studentName}
-              pointType={modal.pointType}
-              studentId={modal.studentId}
-              close={close}
-            />
-          </Modal>
-        )
-      );
+      StudnetPointInfoOverlay.open(({ isOpen, close }) => {
+        switch (modal.type) {
+          case "modify":
+            return (
+              <Modal isOpen={isOpen} close={close}>
+                <></>
+              </Modal>
+            );
+          case "studentInfo":
+            return (
+              <Modal isOpen={isOpen} close={close}>
+                <StudentPointInfoModal
+                  studentName={modal.studentName}
+                  pointType={modal.pointType}
+                  studentId={modal.studentId}
+                  close={close}
+                />
+              </Modal>
+            );
+          case "givePoint":
+            return (
+              <Modal isOpen={isOpen} close={close}>
+                <GivePointStudentModal
+                  pointQueryParam={modal.pointType}
+                  close={close}
+                  title="학생 상벌점 부여"
+                />
+              </Modal>
+            );
+          default:
+            return <></>;
+        }
+      });
     });
   };
 
