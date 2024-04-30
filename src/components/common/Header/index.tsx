@@ -12,8 +12,12 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       <S.HeaderMain>
-        <S.HeaderLogo onClick={() => navigate("/")}>
-          <S.HeaderTitle>도담도담</S.HeaderTitle>
+        <S.HeaderLogo>
+          <S.HeaderTitle
+            onClick={() => (window.location.href = "https://dodam.b1nd.com")}
+          >
+            도담도담
+          </S.HeaderTitle>
           <S.HeaderText>Teacher</S.HeaderText>
         </S.HeaderLogo>
         <S.HeaderLogoutContainer>
