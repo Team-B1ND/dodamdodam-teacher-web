@@ -11,37 +11,15 @@ const PointScore = () => {
   const [searchParam] = useSearchParams();
   const pointQueryParam = searchParam.get("type");
 
-  const {
-    onSetStudentList,
-    setStudentIds,
-    onSubmitGivePointStudent,
-    studentIds,
-    onChangeIssueAt,
-    issueAt,
-    studentName,
-  } = useGivePointStudent();
-
   return (
     <PointProvider
       title={pointQueryParam === "DORMITORY" ? " 기숙사 상벌점" : "학교 상벌점"}
       subTitle="학생 상벌점 조회, 발급, 삭제가 가능합니다."
     >
-      <PointScoreHeader
-        studentName={studentName}
-        issueAt={issueAt}
-        onChangeIssueAt={onChangeIssueAt}
-        studentList={studentIds}
-        pointQueryParam={pointQueryParam}
-        onSubmitGivePointStudent={onSubmitGivePointStudent}
-        setStudentIds={setStudentIds}
-      />
+      <PointScoreHeader pointQueryParam={pointQueryParam} />
       <ErrorBoundary fallback={<>error</>}>
         <Suspense fallback={<SkeletonComponent height={60} />}>
-          <PointScoreTable
-            studentList={studentIds}
-            onSetStudentList={onSetStudentList}
-            pointQueryParam={pointQueryParam}
-          />
+          <PointScoreTable pointQueryParam={pointQueryParam} />
         </Suspense>
       </ErrorBoundary>
     </PointProvider>

@@ -1,62 +1,29 @@
-import { Dispatch, useState } from "react";
 import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { CiCircleCheck } from "react-icons/ci";
-import { useRecoilState } from "recoil";
-import { Container, DateInput } from "./style";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { Container } from "./style";
 import { Flex } from "components/common/Flex/Flex";
-import { useGetPointReasonQuery } from "queries/Point/point.query";
-import { PointType, PointValueType } from "types/Point/types";
 import {
   PointSelectGrade,
   PointSelectRoom,
+  PointSelectedStudentInfoAtom,
   PointStduentSearch,
+  PointStudentIdsAtom,
 } from "stores/Point/point.store";
+import { useOpenStudentPointInfoModal } from "hooks/Point/useOpenStudentPointModal";
+import { PointType } from "types/Point/types";
 
 interface Props {
-  issueAt: string;
   pointQueryParam: string | null;
-  studentList: number[];
-  onSubmitGivePointStudent: (
-    reasonId: number,
-    reasonType: PointValueType,
-    reason: string,
-    pointType: PointType,
-    score: number
-  ) => void;
-  setStudentIds: Dispatch<React.SetStateAction<number[]>>;
-  onChangeIssueAt: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PointScoreHeader = ({
-  issueAt,
-  pointQueryParam,
-  studentList,
-  onSubmitGivePointStudent,
-  setStudentIds,
-  onChangeIssueAt,
-}: Props) => {
+const PointScoreHeader = ({ pointQueryParam }: Props) => {
   const [searchValue, setSearchValue] = useRecoilState(PointStduentSearch);
   const [grade, setGrade] = useRecoilState(PointSelectGrade);
   const [room, setRoom] = useRecoilState(PointSelectRoom);
-  const [reason, setReason] = useState("");
-
-  const { data: pointReasonsData } = useGetPointReasonQuery(
-    pointQueryParam as PointType
-  );
-
-  const reasonId = pointReasonsData?.data.find((pointReason) => {
-    const handleReason = reason.split(":")[0];
-    return pointReason.reason === handleReason;
-  })?.id;
-
-  const reasonType = pointReasonsData?.data.find(
-    (pointReason) => pointReason.reason === reason
-  )?.scoreType;
-
-  const score = pointReasonsData?.data.find((pointReason) => {
-    const handleReason = reason.split(":")[0];
-    return pointReason.reason === handleReason;
-  })?.score;
+  const [studentList, setStudentList] = useRecoilState(PointStudentIdsAtom);
+  const setSelectedStudent = useSetRecoilState(PointSelectedStudentInfoAtom);
+  const { openStudentPointInfoModalOverlay } = useOpenStudentPointInfoModal();
 
   return (
     <Container>
@@ -76,66 +43,36 @@ const PointScoreHeader = ({
           />
         </Flex>
         <SearchBar value={searchValue} onChange={setSearchValue} />
-      </Flex>
-      <Flex gap={7} align="center">
-        {studentList.length > 0 && (
-          <>
-            <CiCircleCheck
-              onClick={() => setStudentIds([])}
-              style={{
-                width: "30px",
-                height: "30px",
-                color: "rgba(0, 103, 188, 0.8)",
-                cursor: "pointer",
-              }}
-            />
-            <p>{studentList.length} 명 선택됨</p>
-          </>
-        )}
-
-        <Select
-          customStyle={{ width: "400px" }}
-          items={
-            pointReasonsData
-              ? pointReasonsData.data!.map(
-                  (data) =>
-                    data.reason +
-                    ":" +
-                    ` ${
-                      data.scoreType === "BONUS"
-                        ? "상점"
-                        : data.scoreType === "MINUS"
-                        ? "벌점"
-                        : "상쇄점"
-                    }` +
-                    `${data.score}점`
-                )
-              : []
-          }
-          value={reason || "사유를 선택해주세요"}
-          onChange={setReason}
-        />
-        <DateInput
-          type="date"
-          value={issueAt}
-          isFocus={false}
-          onChange={onChangeIssueAt}
-        />
-
+        <Flex gap={7} align="center">
+          {studentList.length > 0 && (
+            <>
+              <CiCircleCheck
+                onClick={() => {
+                  setStudentList([]);
+                  setSelectedStudent([]);
+                }}
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  color: "rgba(0, 103, 188, 0.8)",
+                  cursor: "pointer",
+                }}
+              />
+              <p>{studentList.length} 명 선택됨</p>
+            </>
+          )}
+        </Flex>
         <Button
           ButtonType="agree"
+          style={{ width: "120px" }}
           onClick={() => {
-            onSubmitGivePointStudent(
-              reasonId!,
-              reasonType!,
-              reason!,
-              pointQueryParam as PointType,
-              score!
-            );
-            setReason("");
+            openStudentPointInfoModalOverlay({
+              type: "givePoint",
+              pointType: pointQueryParam as PointType,
+            });
           }}
         >
-          점수발급
+          점수발급하기
         </Button>
       </Flex>
     </Container>

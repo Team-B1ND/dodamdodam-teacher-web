@@ -1,7 +1,8 @@
-import styled, { CSSObject, css } from "styled-components";
+import styled, { CSSObject } from "styled-components";
 import { CgClose } from "react-icons/cg";
 import { PointValueType } from "types/Point/types";
 import dataTransform from "utils/Transform/dataTransform";
+import { palette } from "styles/palette";
 
 export const CloseIcon = styled(CgClose)`
   cursor: pointer;
@@ -29,9 +30,15 @@ export const Container = styled.div`
   position: fixed;
   padding: 1.5rem;
   border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 30px;
 `;
 
 export const UnderLine = styled.div`
+  width: 100%;
   outline: none;
   border-bottom: 1px solid #c8cdd1;
   margin-top: 5px;
@@ -65,4 +72,17 @@ export const TBodyStyle: CSSObject = {
 export const ScoreTypeText = styled.span<{ scoreType: PointValueType }>`
   color: ${({ scoreType }) =>
     dataTransform.pointScoreTypeTransform(scoreType).color};
+`;
+
+export const DateInput = styled.input<{ isFocus: boolean }>`
+  width: 180px;
+  font-size: 17px;
+
+  border: none;
+  outline: none;
+  padding-bottom: 5px;
+
+  transition: all ease-in-out ${({ isFocus }) => (isFocus ? "0.13s" : "0.3s")};
+  border-bottom: 1.5px solid
+    ${({ isFocus }) => (isFocus ? `${palette.main}` : "#ddd")};
 `;
