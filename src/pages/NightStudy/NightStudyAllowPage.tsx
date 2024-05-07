@@ -1,5 +1,5 @@
 import NightStudyAllow from "components/NightStudy/NightStudyAllow";
-import SectionHeaderProvider from "../../components/common/SectionHeaderProvider";
+import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 export const NightStudyAllowPage = () => {
   return (

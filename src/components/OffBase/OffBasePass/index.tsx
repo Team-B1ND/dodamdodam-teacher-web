@@ -1,6 +1,6 @@
 import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { Suspense, useState } from "react";
-import Calendars from "../../common/Calendars";
+import Calendars from "components/common/Calendars";
 import * as S from "./style";
 import { useRecoilState } from "recoil";
 import {
@@ -8,16 +8,16 @@ import {
   SelectGradeAtom,
   PassSelectIdAtom,
   UploadDateAtom,
-} from "../../../stores/OffBase/offbase.store";
-import TableAttribute from "../../common/TableAttribute";
-import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
-import ErrorBoundary from "../../common/ErrorBoundary";
+} from "stores/OffBase/offbase.store";
+import TableAttribute from "components/common/TableAttribute";
+import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
+import ErrorBoundary from "components/common/ErrorBoundary";
 import OffBasePassItem from "./OffBasePassItem";
-import { changeGrade } from "../../../utils/Member/changeGrade";
-import { changeApproval } from "../../../utils/OffBase/changeApproval";
-import useOffBasePass from "../../../hooks/OffBase/OffBasePass/useOffBasePass";
-import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
-import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
+import { changeGrade } from "utils/Member/changeGrade";
+import { changeApproval } from "utils/OffBase/changeApproval";
+import useOffBasePass from "hooks/OffBase/OffBasePass/useOffBasePass";
+import { GRADE_ITEMS } from "constants/Grade/grade.constant";
+import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
 import SkeletonComponent from "components/common/Skeleton";
 import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
 import CsvButton from "components/common/ExtractCsvData";

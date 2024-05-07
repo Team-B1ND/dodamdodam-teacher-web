@@ -1,8 +1,8 @@
 import * as S from "./style";
-import AuthButton from "../../common/AuthButton";
-import TextField from "../../common/TextField";
+import AuthButton from "components/common/AuthButton";
+import TextField from "components/common/TextField";
 import { Dispatch, SetStateAction } from "react";
-import { useSignin } from "../../../hooks/auth/useSignin";
+import { useSignin } from "hooks/auth/useSignin";
 import { IoEyeSharp } from "react-icons/io5";
 
 interface SigninProps {

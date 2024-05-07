@@ -1,5 +1,5 @@
 import * as S from "./style";
-import AuthPanelImg from "../../assets/Auth/panel.svg";
+import AuthPanelImg from "assets/Auth/panel.svg";
 import { useState } from "react";
 import Signin from "./Signin";
 import Signup from "./Signup";

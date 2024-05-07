@@ -1,5 +1,5 @@
 import styled, { CSSObject } from "styled-components";
-import { palette } from "../../../styles/palette";
+import { palette } from "styles/palette";
 
 export const SearchAndSelectDateBus = styled.div`
   width: 100%;

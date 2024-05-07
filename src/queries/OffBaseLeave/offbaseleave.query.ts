@@ -1,6 +1,6 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import offbaseleaveRepositroy from "../../repositories/OffBaseLeave/offbaseleave.repositroy";
-import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
+import offbaseleaveRepositroy from "repositories/OffBaseLeave/offbaseleave.repositroy";
+import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "queries/queryKey";
 

@@ -1,8 +1,8 @@
 import * as S from "./style";
 import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
-import profileImg from "../../../../assets/profileImg.svg";
-import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
-import convertDateTime from "../../../../utils/Time/ConvertDateTime";
+import profileImg from "assets/profileImg.svg";
+import useOffBaseLeave from "hooks/OffBase/OffBaseLeave/useOffBaseLeave";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 import { useRecoilState } from "recoil";

@@ -1,19 +1,19 @@
 import * as S from "./style";
 import { Suspense, useState } from "react";
-import ErrorBoundary from "../../common/ErrorBoundary";
-import TableAttribute from "../../common/TableAttribute";
+import ErrorBoundary from "components/common/ErrorBoundary";
+import TableAttribute from "components/common/TableAttribute";
 import TodayOffBaseItem from "./TodayOffBaseItem";
-import { OFFBASE_PASS_ITEMS } from "../../../constants/OffBase/offbase.constant";
+import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
 import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { useRecoilState } from "recoil";
 import {
   SelectApprovalAtom,
   SelectGradeAtom,
-} from "../../../stores/OffBase/offbase.store";
-import { changeApproval } from "../../../utils/OffBase/changeApproval";
-import { changeGrade } from "../../../utils/Member/changeGrade";
-import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
-import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
+} from "stores/OffBase/offbase.store";
+import { changeApproval } from "utils/OffBase/changeApproval";
+import { changeGrade } from "utils/Member/changeGrade";
+import { GRADE_ITEMS } from "constants/Grade/grade.constant";
+import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
 import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
 import CsvButton from "components/common/ExtractCsvData";
 import dayjs from "dayjs";

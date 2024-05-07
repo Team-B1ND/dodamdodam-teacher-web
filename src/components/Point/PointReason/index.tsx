@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { Flex } from "../../common/Flex/Flex";
+import { Flex } from "components/common/Flex/Flex";
 import PointProvider from "../PointProvider";
 import PointReasonForm from "./PointReasonForm";
 import PointReasonList from "./PointReasonList";

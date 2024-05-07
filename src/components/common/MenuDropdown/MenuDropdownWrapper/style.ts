@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { palette } from "../../../../styles/palette";
+import { palette } from "styles/palette";
 
 export const MenuDropdownWrapperContainer = styled.div`
   display: flex;

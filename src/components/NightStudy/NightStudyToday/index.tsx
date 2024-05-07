@@ -1,7 +1,7 @@
 import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
 import { Suspense, useState } from "react";
-import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
+import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { useRecoilState } from "recoil";
 import { NightStudyGrade } from "stores/NightStudy/nightstudy.store";
 import TableAttribute from "components/common/TableAttribute";

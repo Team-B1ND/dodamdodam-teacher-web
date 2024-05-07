@@ -1,10 +1,10 @@
 import { UseQueryOptions, UseQueryResult, useQuery } from "react-query";
 import { QUERY_KEYS } from "../queryKey";
-import memberRepositoryImpl from "../../repositories/Member/MemberRepositoryImpl";
+import memberRepositoryImpl from "repositories/Member/MemberRepositoryImpl";
 import {
   MemberResponse,
   MyMemberResponse,
-} from "../../types/Member/member.type";
+} from "types/Member/member.type";
 import { AxiosError } from "axios";
 
 export const useGetAllMemberListQuery = (

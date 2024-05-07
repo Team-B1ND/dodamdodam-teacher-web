@@ -5,7 +5,7 @@ import {
   usePatchNightStudyCancel,
 } from "queries/NightStudy/nightstudy.query";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from "../../../queries/queryKey";
+import { QUERY_KEYS } from "queries/queryKey";
 
 const useNightStudyAllow = () => {
   const patchNighStudytAllow = usePatchNightStudyAllow();

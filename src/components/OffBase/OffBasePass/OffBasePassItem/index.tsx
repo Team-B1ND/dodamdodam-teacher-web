@@ -1,11 +1,11 @@
 import * as S from "./style";
-import { useGetOffBasePassQuery } from "../../../../queries/OffBasePass/offbasepass.query";
+import { useGetOffBasePassQuery } from "queries/OffBasePass/offbasepass.query";
 import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
-import profileImg from "../../../../assets/profileImg.svg";
-import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
+import profileImg from "assets/profileImg.svg";
+import useOffBasePass from "hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
-import { PassSelectIdAtom } from "../../../../stores/OffBase/offbase.store";
-import convertDateTime from "../../../../utils/Time/ConvertDateTime";
+import { PassSelectIdAtom } from "stores/OffBase/offbase.store";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 
 interface OffBasePassProps {

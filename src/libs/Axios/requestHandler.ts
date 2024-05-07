@@ -4,7 +4,7 @@ import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
-} from "../../constants/Token/Token.constant";
+} from "constants/Token/Token.constant";
 
 export const requestHandler = async (config: InternalAxiosRequestConfig) => {
   if (

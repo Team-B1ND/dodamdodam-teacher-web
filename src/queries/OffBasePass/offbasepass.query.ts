@@ -1,6 +1,6 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import offbasepassRepositoryImpl from "../../repositories/OffBasePass/offbasepass.repositoryImpl";
-import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
+import offbasepassRepositoryImpl from "repositories/OffBasePass/offbasepass.repositoryImpl";
+import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "../queryKey";
 

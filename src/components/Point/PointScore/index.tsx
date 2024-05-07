@@ -2,7 +2,6 @@ import PointScoreHeader from "./PointScoreHeader";
 import PointScoreTable from "./PointScoreTable";
 import PointProvider from "../PointProvider";
 import { useSearchParams } from "react-router-dom";
-import useGivePointStudent from "hooks/Point/useGivePointStudent";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import { Suspense } from "react";
 import SkeletonComponent from "components/common/Skeleton";
