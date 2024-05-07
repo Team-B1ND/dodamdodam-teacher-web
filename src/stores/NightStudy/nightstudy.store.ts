@@ -10,3 +10,8 @@ export const NightStudyDataAtom = atom<NightStudyType | null>({
   key: "NightStudyDataAtom",
   default: null,
 });
+
+export const NightStudySelectIdAtom = atom<number[]>({
+  key: "NightStudySelectIdAtom",
+  default: [],
+});

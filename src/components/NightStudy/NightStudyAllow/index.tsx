@@ -1,8 +1,11 @@
 import * as S from "./style";
 import { Suspense, useState } from "react";
-import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
+import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { useRecoilState } from "recoil";
-import { NightStudyGrade } from "stores/NightStudy/nightstudy.store";
+import {
+  NightStudyGrade,
+  NightStudySelectIdAtom,
+} from "stores/NightStudy/nightstudy.store";
 import TableAttribute from "../../common/TableAttribute";
 import { NIGHTSTUDY_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";
 import ErrorBoundary from "../../common/ErrorBoundary";
@@ -10,11 +13,17 @@ import NightStudyAllowItem from "./NightStudyAllowItem";
 import { changeGrade } from "../../../utils/Member/changeGrade";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { PointSelectRoom } from "stores/Point/point.store";
+import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAllow";
 
 const NightStudyAllow = () => {
   const [studentName, setStudentName] = useState("");
   const [nightStudyGrade, setNightStudyGrade] = useRecoilState(NightStudyGrade);
   const [room, setRoom] = useRecoilState(PointSelectRoom);
+  const [studySelectedIds, setStudySelectedIds] = useRecoilState(
+    NightStudySelectIdAtom
+  );
+  const { handleNightStudyAllow, patchNighStudytAllow, patchNightStudyCancel } =
+    useNightStudyAllow();
 
   return (
     <>
@@ -24,6 +33,40 @@ const NightStudyAllow = () => {
           <S.InfoText>
             <span>*</span>심자 사유를 눌러 상세보기가 가능합니다.
           </S.InfoText>
+
+          {studySelectedIds.length !== 0 && (
+            <S.ButtonContainer>
+              <Button
+                ButtonType="agree"
+                style={S.EditStyle}
+                onClick={() => {
+                  studySelectedIds.forEach((id) => {
+                    handleNightStudyAllow(id, patchNighStudytAllow);
+                  });
+                }}
+              >
+                모두 승인
+              </Button>
+              <Button
+                ButtonType="disagree"
+                style={S.DelStyle}
+                onClick={() => {
+                  studySelectedIds.forEach((id) => {
+                    handleNightStudyAllow(id, patchNightStudyCancel);
+                  });
+                }}
+              >
+                모두 거절
+              </Button>
+              <Button
+                ButtonType="disagree"
+                style={S.ClearStyle}
+                onClick={() => setStudySelectedIds([])}
+              >
+                선택 해제
+              </Button>
+            </S.ButtonContainer>
+          )}
         </S.SearchBarContainer>
         <S.SelectContainer>
           <Select

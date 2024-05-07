@@ -21,16 +21,16 @@ export const NightStudyTBody: CSSObject = {
   },
 };
 
-export const NightStudyTR: CSSObject = {
-  width: "100%",
-  height: "80px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  columnGap: "10px",
-  borderTop: "1px solid #d9d9d9",
-  borderBottom: "1px solid #d9d9d9",
-};
+export const NightStudyTR = styled.tr`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 10px;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+`;
 
 export const NightStudytTD: CSSObject = {
   width: "14%",

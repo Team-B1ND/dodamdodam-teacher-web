@@ -12,14 +12,13 @@ import { UploadDateAtom } from "../../../stores/OffBase/offbase.store";
 import { useEffect, useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
 import ConvertDateTime from "utils/Time/ConvertDateTime";
-// import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 
 const useOffBasePass = () => {
   const queryClient = useQueryClient();
   const patchApprovals = usePatchApproval();
   const patchApprovalCancel = usePatchApprovalCancel();
   const patchCancel = usePatchCancel();
-  const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
+  const [uploadDate] = useRecoilState<string>(UploadDateAtom);
 
   const { data: OffBasePass } = useGetOffBasePassQuery(uploadDate);
 

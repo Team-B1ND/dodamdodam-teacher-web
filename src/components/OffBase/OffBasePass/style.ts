@@ -62,7 +62,8 @@ export const ClearStyle: CSSObject = {
 
 export const CsvButtonContainer = styled.div`
   width: 100%;
-  heigth: 60px;
+  height: 60px;
+  /* heigth: 60px; */
   display: flex;
   justify-content: flex-end;
 `;

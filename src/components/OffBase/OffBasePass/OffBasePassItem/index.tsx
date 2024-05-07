@@ -4,7 +4,7 @@ import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBasePass from "../../../../hooks/OffBase/OffBasePass/useOffBasePass";
 import { useRecoilState } from "recoil";
-import { SelectIdAtom } from "../../../../stores/OffBase/offbase.store";
+import { PassSelectIdAtom } from "../../../../stores/OffBase/offbase.store";
 import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 
@@ -27,7 +27,8 @@ const OffBasePassItem = ({
     suspense: true,
   });
 
-  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
+  const [selectedIds, setSelectedIds] =
+    useRecoilState<number[]>(PassSelectIdAtom);
 
   const {
     handleOffBasePass,

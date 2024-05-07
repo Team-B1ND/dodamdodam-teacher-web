@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import {
   SelectApprovalAtom,
   SelectGradeAtom,
-  SelectIdAtom,
+  PassSelectIdAtom,
   UploadDateAtom,
 } from "../../../stores/OffBase/offbase.store";
 import TableAttribute from "../../common/TableAttribute";
@@ -28,7 +28,8 @@ const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
-  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
+  const [selectedIds, setSelectedIds] =
+    useRecoilState<number[]>(PassSelectIdAtom);
 
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] =

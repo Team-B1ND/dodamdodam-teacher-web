@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
+import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetPendingNightStudy } from "queries/NightStudy/nightstudy.query";
 import { truncateText } from "../../../../utils/common/truncate";
 import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
@@ -9,6 +9,8 @@ import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
 
 import convertDateTime from "utils/Time/ConvertDateTime";
+import { useRecoilState } from "recoil";
+import { NightStudySelectIdAtom } from "stores/NightStudy/nightstudy.store";
 
 interface NightStudyAllowProps {
   studentName: string;
@@ -26,7 +28,9 @@ const NightStudyAllowItem = ({
     useNightStudyAllow();
   const [isOpen, setIsOpen] = useState(false);
   const [studyData, setStudyData] = useState<NightStudyType>();
-
+  const [studySelectedIds, setStudySelectedIds] = useRecoilState(
+    NightStudySelectIdAtom
+  );
   const handleModalClick = () => {
     setIsOpen(!isOpen);
   };
@@ -40,7 +44,24 @@ const NightStudyAllowItem = ({
           NightStudyGrade,
           selectRoom
         )?.map((nightstudy) => (
-          <TR customStyle={S.NightStudyTR}>
+          <S.NightStudyTR
+            onClick={() => {
+              if (nightstudy.status === "PENDING") {
+                if (studySelectedIds.includes(nightstudy.id)) {
+                  setStudySelectedIds((prevIds) =>
+                    prevIds.filter((id) => id !== nightstudy.id)
+                  );
+                } else {
+                  setStudySelectedIds([...studySelectedIds, nightstudy.id]);
+                }
+              }
+            }}
+            style={{
+              backgroundColor: studySelectedIds.includes(nightstudy.id)
+                ? "#EEF3F9"
+                : "",
+            }}
+          >
             <TD customStyle={S.NightStudytTD}>{nightstudy.student.name}</TD>
             <TD customStyle={S.NightStudytTD}>
               {nightstudy.student.grade}학년{nightstudy.student.room}반
@@ -103,7 +124,7 @@ const NightStudyAllowItem = ({
                 </Button>
               </div>
             </TD>
-          </TR>
+          </S.NightStudyTR>
         ))}
       </TBody>
       <NightStudyModal

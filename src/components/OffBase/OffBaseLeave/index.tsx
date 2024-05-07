@@ -1,9 +1,10 @@
-import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
+import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
 import { Suspense, useState } from "react";
 import Calendars from "../../common/Calendars";
 import { useRecoilState } from "recoil";
 import {
+  LeaveSelectIdAtom,
   SelectApprovalAtom,
   SelectGradeAtom,
   UploadDateAtom,
@@ -17,6 +18,7 @@ import { changeGrade } from "../../../utils/Member/changeGrade";
 import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "../../../constants/Approval/approval.constant";
 import { PointSelectRoom } from "stores/Point/point.store";
+import useOffBaseLeave from "hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 
 const OffBaseLeave = () => {
   const [studentName, setStudentName] = useState("");
@@ -26,6 +28,11 @@ const OffBaseLeave = () => {
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] =
     useRecoilState(SelectApprovalAtom);
+  const [leaveSelectedIds, setLeaveSelectedIds] =
+    useRecoilState<number[]>(LeaveSelectIdAtom);
+  const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel } =
+    useOffBaseLeave();
+
   return (
     <>
       <S.OffBaseHeaderContainer>
@@ -38,6 +45,40 @@ const OffBaseLeave = () => {
             uploadDate={uploadDate}
             setUploadDate={setUploadDate}
           />
+
+          {leaveSelectedIds.length !== 0 && (
+            <S.ButtonContainer>
+              <Button
+                ButtonType="agree"
+                style={S.EditStyle}
+                onClick={() => {
+                  leaveSelectedIds.forEach((id) => {
+                    handleOffBaseLeave(id, patchLeaveApproval);
+                  });
+                }}
+              >
+                모두 승인
+              </Button>
+              <Button
+                ButtonType="disagree"
+                style={S.DelStyle}
+                onClick={() => {
+                  leaveSelectedIds.forEach((id) => {
+                    handleOffBaseLeave(id, patchLeaveApprovalCancel);
+                  });
+                }}
+              >
+                모두 거절
+              </Button>
+              <Button
+                ButtonType="disagree"
+                style={S.ClearStyle}
+                onClick={() => setLeaveSelectedIds([])}
+              >
+                선택 해제
+              </Button>
+            </S.ButtonContainer>
+          )}
         </div>
 
         <S.SelectContainer>

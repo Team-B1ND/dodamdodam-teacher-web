@@ -15,7 +15,12 @@ export const UploadDateAtom = atom<string>({
   default: "",
 });
 
-export const SelectIdAtom = atom<number[]>({
+export const PassSelectIdAtom = atom<number[]>({
   key: "SelectIdAtom",
+  default: [],
+});
+
+export const LeaveSelectIdAtom = atom<number[]>({
+  key: "LeaveSelectIdAtom",
   default: [],
 });

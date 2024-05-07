@@ -1,10 +1,12 @@
 import * as S from "./style";
-import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
+import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "../../../../assets/profileImg.svg";
 import useOffBaseLeave from "../../../../hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 import convertDateTime from "../../../../utils/Time/ConvertDateTime";
 import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
+import { useRecoilState } from "recoil";
+import { LeaveSelectIdAtom } from "stores/OffBase/offbase.store";
 
 interface OffBaseLeaveProps {
   studentName: string;
@@ -24,7 +26,8 @@ const OffBaseLeaveItem = ({
   const { data: offBaseLeave } = useGetOffBaseLeaveQuery(uploadDate, {
     suspense: true,
   });
-
+  const [leaveSelectedIds, setLeaveSelectedIds] =
+    useRecoilState<number[]>(LeaveSelectIdAtom);
   const {
     handleOffBaseLeave,
     patchLeaveApproval,
@@ -101,7 +104,24 @@ const OffBaseLeaveItem = ({
             selectApproval,
             selectRoom
           )?.map((offbaseleave) => (
-            <TR customStyle={S.OffBaseTR}>
+            <S.OffBaseTR
+              onClick={() => {
+                if (offbaseleave.status === "PENDING") {
+                  if (leaveSelectedIds.includes(offbaseleave.id)) {
+                    setLeaveSelectedIds((prevIds) =>
+                      prevIds.filter((id) => id !== offbaseleave.id)
+                    );
+                  } else {
+                    setLeaveSelectedIds([...leaveSelectedIds, offbaseleave.id]);
+                  }
+                }
+              }}
+              style={{
+                backgroundColor: leaveSelectedIds.includes(offbaseleave.id)
+                  ? "#EEF3F9"
+                  : "",
+              }}
+            >
               <TD customStyle={S.OffBaseTD}>
                 <S.MemberImage src={profileImg} />
               </TD>
@@ -148,7 +168,7 @@ const OffBaseLeaveItem = ({
               <TD customStyle={S.ButtonContainerStyle}>
                 {selectComponent(offbaseleave.id)}
               </TD>
-            </TR>
+            </S.OffBaseTR>
           ))}
         </TBody>
       )}
