@@ -27,7 +27,7 @@ const OffBasePassItem = ({
     suspense: true,
   });
 
-  const [selectedIds, setSelectedIds] = useRecoilState<number>(SelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
 
   const {
     handleOffBasePass,
@@ -53,7 +53,7 @@ const OffBasePassItem = ({
             style={S.DelStyle}
             onClick={() => {
               handleOffBasePass(Id, patchApprovalCancel);
-              setSelectedIds(Id);
+              setSelectedIds([...selectedIds, Id]);
             }}
           >
             승인 취소
@@ -113,12 +113,20 @@ const OffBasePassItem = ({
             <TBody customStyle={S.OffBaseTBody}>
               <S.OffBaseTR
                 onClick={() => {
-                  offbasepass.status === "PENDING" &&
-                    setSelectedIds(offbasepass.id);
+                  if (offbasepass.status === "PENDING") {
+                    if (selectedIds.includes(offbasepass.id)) {
+                      setSelectedIds((prevIds) =>
+                        prevIds.filter((id) => id !== offbasepass.id)
+                      );
+                    } else {
+                      setSelectedIds([...selectedIds, offbasepass.id]);
+                    }
+                  }
                 }}
                 style={{
-                  backgroundColor:
-                    selectedIds === offbasepass.id ? "#EEF3F9" : "",
+                  backgroundColor: selectedIds.includes(offbasepass.id)
+                    ? "#EEF3F9"
+                    : "",
                 }}
               >
                 <TD customStyle={S.OffBaseTD}>

@@ -28,7 +28,7 @@ const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
-  const [selectedIds, setSelectedIds] = useRecoilState<number>(SelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(SelectIdAtom);
 
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] =
@@ -50,26 +50,35 @@ const OffBasePass = () => {
             uploadDate={uploadDate}
             setUploadDate={setUploadDate}
           />
-          {selectedIds !== 0 && (
+
+          {selectedIds.length !== 0 && (
             <S.ButtonContainer>
               <Button
                 ButtonType="agree"
                 style={S.EditStyle}
-                onClick={() => handleOffBasePass(selectedIds, patchApprovals)}
+                onClick={() => {
+                  selectedIds.forEach((id) => {
+                    handleOffBasePass(id, patchApprovals);
+                  });
+                }}
               >
                 모두 승인
               </Button>
               <Button
                 ButtonType="disagree"
                 style={S.DelStyle}
-                onClick={() => handleOffBasePass(selectedIds, patchCancel)}
+                onClick={() => {
+                  selectedIds.forEach((id) => {
+                    handleOffBasePass(id, patchCancel);
+                  });
+                }}
               >
                 모두 거절
               </Button>
               <Button
                 ButtonType="disagree"
                 style={S.ClearStyle}
-                onClick={() => setSelectedIds(0)}
+                onClick={() => setSelectedIds([])}
               >
                 선택 해제
               </Button>
