@@ -27,7 +27,7 @@ export const BusPassengerItemContainer = styled.div`
 
 export const CsvButtonContainer = styled.div`
   width: 100%;
-  heigth: 60px;
+  height: 60px;
   display: flex;
   justify-content: flex-end;
 `;

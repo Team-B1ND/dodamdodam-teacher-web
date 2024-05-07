@@ -15,7 +15,7 @@ const TableView = () => {
     if (inView) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, fetchNextPage]);
 
   return (
     <TableAttribute

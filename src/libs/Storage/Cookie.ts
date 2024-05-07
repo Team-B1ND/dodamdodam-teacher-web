@@ -13,4 +13,5 @@ class Cookie implements Storage {
   }
 }
 
-export default new Cookie();
+const cookieInstance = new Cookie();
+export default cookieInstance;

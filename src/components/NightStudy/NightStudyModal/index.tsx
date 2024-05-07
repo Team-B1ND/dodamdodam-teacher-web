@@ -24,7 +24,7 @@ const NightStudyModal = ({
           <S.ModalWrap onClick={(e) => e.stopPropagation()}>
             <S.TitleContainer>
               <S.ModalTitle>
-                <img src={NightStudyIcon} />
+                <img src={NightStudyIcon} alt="NightStudyIcon"/>
                 심자 상세보기
               </S.ModalTitle>
               <S.CloseIcon size={32} onClick={handleModalClick} />

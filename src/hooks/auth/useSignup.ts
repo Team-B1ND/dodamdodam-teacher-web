@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import PatternCheck from "../../utils/Check/PatternCheck";
+import PatternCheck from "utils/Check/PatternCheck";
 
 import MemberRepositoryImpl from "repositories/Member/MemberRepositoryImpl";
 import { MemberSignUpParam } from "repositories/Member/MemberRepository";
@@ -63,7 +63,7 @@ export const useSignup = () => {
   );
 
   const submitSignup = useCallback(async () => {
-    const { id, pw, email, phone, position, name, tel } = signupData;
+    const { pw, email, phone, name } = signupData;
 
     if (email === "" || phone === "" || name === "") {
       B1ndToast.showInfo("형식이 비었습니다");

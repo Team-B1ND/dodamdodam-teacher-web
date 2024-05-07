@@ -22,4 +22,5 @@ class MemberRepositoryImpl implements MemberRepository {
   }
 }
 
-export default new MemberRepositoryImpl();
+const memberRepositoryImpl = new MemberRepositoryImpl();
+export default memberRepositoryImpl;

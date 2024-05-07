@@ -1,7 +1,7 @@
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
-} from "../../constants/Token/Token.constant";
+} from "constants/Token/Token.constant";
 import Cookie from "../Storage/Cookie";
 import { Storage } from "../Storage/Storage";
 
@@ -37,4 +37,5 @@ class Token {
   }
 }
 
-export default new Token(Cookie);
+const tokenInstance = new Token(Cookie);
+export default tokenInstance;

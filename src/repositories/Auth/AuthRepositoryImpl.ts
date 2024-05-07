@@ -29,4 +29,5 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 }
 
-export default new AuthRepositoryImpl();
+const authRepositoryImpl = new AuthRepositoryImpl();
+export default authRepositoryImpl;

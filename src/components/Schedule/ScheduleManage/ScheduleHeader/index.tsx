@@ -1,9 +1,4 @@
-import { Button, SectionHeader } from "@b1nd/b1nd-dodamdodam-ui";
-import { useRecoilState } from "recoil";
-import {
-  MemberSearch,
-  MemberSelectGrade,
-} from "../../../../stores/Member/member.store";
+import { SectionHeader } from "@b1nd/b1nd-dodamdodam-ui";
 import { BsTable } from "react-icons/bs";
 import { FcCalendar } from "react-icons/fc";
 import styled from "styled-components";
@@ -16,9 +11,6 @@ interface Props {
 }
 
 const ScheduleManageHeader = ({ viewingPoint, setViewingPoint }: Props) => {
-  const [selectValue, setSelectValue] = useRecoilState(MemberSelectGrade);
-  const [searchValue, setSearchValue] = useRecoilState(MemberSearch);
-
   return (
     <>
       <SectionHeader

@@ -18,4 +18,5 @@ class DateTransform {
   }
 }
 
-export default new DateTransform();
+const dateTransform = new DateTransform();
+export default dateTransform;

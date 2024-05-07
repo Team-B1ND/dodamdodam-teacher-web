@@ -51,4 +51,5 @@ class PointRepositoryImpl implements PointRepository {
   }
 }
 
-export default new PointRepositoryImpl();
+const pointRepositoryImpl = new PointRepositoryImpl();
+export default pointRepositoryImpl;

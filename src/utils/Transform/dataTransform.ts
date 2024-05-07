@@ -62,4 +62,5 @@ class DataTransform {
   }
 }
 
-export default new DataTransform();
+const dataTransform = new DataTransform();
+export default dataTransform;
