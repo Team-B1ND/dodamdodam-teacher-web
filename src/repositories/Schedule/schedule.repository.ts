@@ -1,4 +1,5 @@
 import { ScheduleResponse } from "types/Schedule/types";
+import { Response } from "types/util/response.type";
 
 export interface ScheduleRepository {
   createSchedule(param: ScheduleParam): Promise<Response>;
@@ -7,6 +8,7 @@ export interface ScheduleRepository {
   ): Promise<ScheduleResponse>;
   getSchedulesByKeyword(keyword: string): Promise<ScheduleResponse>;
   getSchedules({ page }: GetSchedulesParam): Promise<ScheduleResponse>;
+  deleteSchedulesById(id: number): Promise<Response>;
 }
 
 export interface ScheduleParam {

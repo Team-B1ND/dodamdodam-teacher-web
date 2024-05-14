@@ -53,3 +53,8 @@ export const useCreateScheduleMutation = () => {
   const mutation = useMutation(ScheduleRepositoryImpl.createSchedule);
   return mutation;
 };
+
+export const useDeleteSchedulesMutation = () => {
+  const mutation = useMutation(ScheduleRepositoryImpl.deleteSchedulesById);
+  return mutation;
+};
