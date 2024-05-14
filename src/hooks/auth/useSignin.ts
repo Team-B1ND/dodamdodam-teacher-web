@@ -4,7 +4,7 @@ import Token from "../../libs/Token/Token";
 import {
   REFRESH_TOKEN_KEY,
   ACCESS_TOKEN_KEY,
-} from "../../constants/Token/Token.constant";
+} from "constants/Token/Token.constant";
 import { useNavigate } from "react-router-dom";
 import { PasswordParm, SignInParam } from "repositories/Auth/AuthRepository";
 import AuthRepositoryImpl from "repositories/Auth/AuthRepositoryImpl";

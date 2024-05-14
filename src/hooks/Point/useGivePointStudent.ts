@@ -14,6 +14,8 @@ import {
   PointStudentIdsAtom,
 } from "stores/Point/point.store";
 import dateTransform from "utils/Transform/dateTransform";
+import { PointTypeFormatToKorean } from "utils/Point/pointPoerator";
+import { AxiosError } from "axios";
 
 const useGivePointStudent = (pointQueryParam: PointType) => {
   const { data: pointMemberData } = useGetPointAllMemberQuery(pointQueryParam);
@@ -79,18 +81,15 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
           );
 
           B1ndToast.showSuccess(
-            `${handleReason} 사유로 ${
-              reasonType === "BONUS"
-                ? "상점"
-                : reasonType === "MINUS"
-                ? "벌점"
-                : "상쇄점"
-            }이  ${score}점이 부여 되었습니다`
+            `${handleReason} 사유로 ${PointTypeFormatToKorean(
+              reasonType
+            )}이  ${score}점이 부여 되었습니다`
           );
           close();
         },
-        onError: () => {
-          B1ndToast.showError("서버에러...");
+        onError: (error) => {
+          const errorResponse = (error as AxiosError).response;
+          B1ndToast.showError((errorResponse?.data as AxiosError).message);
         },
       }
     );

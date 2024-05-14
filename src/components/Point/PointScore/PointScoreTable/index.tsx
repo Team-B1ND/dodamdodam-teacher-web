@@ -23,7 +23,7 @@ import { changeGrade, changeRoom } from "utils/Member/changeGrade";
 import useSetPointStudentIds from "hooks/Point/useSetPointStudentIds";
 
 interface Props {
-  pointQueryParam: string | null;
+  pointQueryParam: string;
 }
 
 const PointScoreTable = ({ pointQueryParam }: Props) => {
@@ -83,7 +83,6 @@ const PointScoreTable = ({ pointQueryParam }: Props) => {
               <TD customStyle={MemberTD}>
                 {data.bonus - data.minus + data.offset}점
               </TD>
-
               <TD>
                 <Button
                   ButtonType="disagree"
