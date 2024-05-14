@@ -20,6 +20,7 @@ import dataTransform from "utils/Transform/dataTransform";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "queries/queryKey";
+import { AxiosError } from "axios";
 
 interface StudentPointInfoModalProps {
   close: () => void;
@@ -94,6 +95,12 @@ const StudentPointInfoModal = ({
                           );
                           B1ndToast.showSuccess(
                             "상벌점 기록이 삭제 되었습니다"
+                          );
+                        },
+                        onError: (error) => {
+                          const errorResponse = (error as AxiosError).response;
+                          B1ndToast.showError(
+                            (errorResponse?.data as AxiosError).message
                           );
                         },
                       })

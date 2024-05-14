@@ -8,6 +8,7 @@ import { useGetPointReasonQuery } from "queries/Point/point.query";
 import { PointType } from "types/Point/types";
 import { useRecoilValue } from "recoil";
 import { PointSelectedStudentInfoAtom } from "stores/Point/point.store";
+import { PointTypeFormatToKorean } from "utils/Point/pointPoerator";
 
 interface StudentPointInfoModalProps {
   close: () => void;
@@ -87,13 +88,7 @@ const GivePointStudentModal = ({
                     (data) =>
                       data.reason +
                       ":" +
-                      ` ${
-                        data.scoreType === "BONUS"
-                          ? "상점"
-                          : data.scoreType === "MINUS"
-                          ? "벌점"
-                          : "상쇄점"
-                      }` +
+                      ` ${PointTypeFormatToKorean(data.scoreType)}` +
                       `${data.score}점`
                   )
                 : []
