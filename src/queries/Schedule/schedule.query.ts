@@ -9,7 +9,7 @@ import {
 } from "react-query";
 import { GetScheduleByPeriodParam } from "repositories/Schedule/schedule.repository";
 import ScheduleRepositoryImpl from "repositories/Schedule/schedule.repositoryImpl";
-import { ScheduleResponse } from "types/Schedule/types";
+import { ScheduleResponse } from "types/Schedule/schedule.type";
 
 export const useGetSchedulesQuery = (
   options?: UseInfiniteQueryOptions<

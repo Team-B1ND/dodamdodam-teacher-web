@@ -1,5 +1,5 @@
-import { PointValueType } from "types/Point/types";
-import { ScheduleTargetGrade } from "types/Schedule/types";
+import { PointValueEnglishType } from "types/Point/point.type";
+import { ScheduleTargetGrade } from "types/Schedule/schedule.type";
 
 class DataTransform {
   public scheduleTargetTransform(target: string): string {
@@ -41,7 +41,7 @@ class DataTransform {
     }
   }
 
-  public pointScoreTypeTransform(scoreType: PointValueType) {
+  public pointScoreTypeTransform(scoreType: PointValueEnglishType) {
     switch (scoreType) {
       case "BONUS":
         return {

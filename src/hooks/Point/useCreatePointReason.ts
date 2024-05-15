@@ -5,8 +5,8 @@ import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
 import { CreatePointReasonParam } from "repositories/Point/point.repository";
-import { PointType } from "types/Point/types";
-import { PointTypeFormatToEnglish } from "utils/Point/pointPoerator";
+import { PointType, PointValueKoreanType } from "types/Point/point.type";
+import { pointTypeFormatToEnglish } from "utils/Point/pointFormat";
 
 const useCreatePointReason = () => {
   const queryClinet = useQueryClient();
@@ -32,7 +32,7 @@ const useCreatePointReason = () => {
         pointType,
         reason,
         score: Number(score),
-        scoreType: PointTypeFormatToEnglish(scoreType),
+        scoreType: pointTypeFormatToEnglish(scoreType as PointValueKoreanType)!,
       },
       {
         onSuccess: () => {

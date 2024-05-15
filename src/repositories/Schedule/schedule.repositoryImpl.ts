@@ -5,7 +5,7 @@ import {
   ScheduleParam,
   ScheduleRepository,
 } from "./schedule.repository";
-import { ScheduleResponse } from "types/Schedule/types";
+import { ScheduleResponse } from "types/Schedule/schedule.type";
 import { Response } from "types/util/response.type";
 
 class ScheduleRepositoryImpl implements ScheduleRepository {

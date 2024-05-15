@@ -4,7 +4,7 @@ import {
   useGetPointAllMemberQuery,
   useGivePointStudentQuery,
 } from "queries/Point/point.query";
-import { PointType, PointValueType } from "types/Point/types";
+import { PointType, PointValueEnglishType } from "types/Point/point.type";
 import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -14,7 +14,7 @@ import {
   PointStudentIdsAtom,
 } from "stores/Point/point.store";
 import dateTransform from "utils/Transform/dateTransform";
-import { PointTypeFormatToKorean } from "utils/Point/pointPoerator";
+import { pointTypeFormatToKorean } from "utils/Point/pointFormat";
 import { AxiosError } from "axios";
 
 const useGivePointStudent = (pointQueryParam: PointType) => {
@@ -57,7 +57,7 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
 
   const onSubmitGivePointStudent = (
     reasonId: number,
-    reasonType: PointValueType,
+    reasonType: PointValueEnglishType,
     reason: string,
     pointType: PointType,
     score: number,
@@ -81,7 +81,7 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
           );
 
           B1ndToast.showSuccess(
-            `${handleReason} 사유로 ${PointTypeFormatToKorean(
+            `${handleReason} 사유로 ${pointTypeFormatToKorean(
               reasonType
             )}이  ${score}점이 부여 되었습니다`
           );

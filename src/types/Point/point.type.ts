@@ -3,7 +3,9 @@ import { Response } from "types/util/response.type";
 
 //type
 
-export type PointValueType = "BONUS" | "MINUS" | "OFFSET";
+export type PointValueEnglishType = "BONUS" | "MINUS" | "OFFSET";
+
+export type PointValueKoreanType = "상점" | "벌점" | "상쇄점";
 
 export type PointType = "DORMITORY" | "SCHOOl";
 
@@ -20,7 +22,7 @@ export interface PointReason {
   id: number;
   reason: string;
   score: number;
-  scoreType: PointValueType;
+  scoreType: PointValueEnglishType;
   pointType: PointType;
 }
 

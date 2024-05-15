@@ -10,7 +10,7 @@ import {
 import { useGetPointAllMemberQuery } from "queries/Point/point.query";
 import styled, { CSSObject } from "styled-components";
 import { useOpenStudentPointInfoModal } from "hooks/Point/useOpenStudentPointModal";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 import { sortStudentGrade } from "utils/Member/sortStudentGrade";
 import { searchName } from "utils/common/searchName";
 import { useRecoilValue } from "recoil";

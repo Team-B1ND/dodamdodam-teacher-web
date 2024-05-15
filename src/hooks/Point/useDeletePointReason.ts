@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { useDeletePointReasonMutation } from "queries/Point/point.query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useQueryClient } from "react-query";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 
 const useDeletePointReason = () => {
   const queryClient = useQueryClient();

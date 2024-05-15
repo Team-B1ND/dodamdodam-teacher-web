@@ -1,6 +1,6 @@
 import styled, { CSSObject } from "styled-components";
 import { CgClose } from "react-icons/cg";
-import { PointValueType } from "types/Point/types";
+import { PointValueEnglishType } from "types/Point/point.type";
 import dataTransform from "utils/Transform/dataTransform";
 import { palette } from "styles/palette";
 
@@ -69,7 +69,7 @@ export const TBodyStyle: CSSObject = {
   height: "auto",
 };
 
-export const ScoreTypeText = styled.span<{ scoreType: PointValueType }>`
+export const ScoreTypeText = styled.span<{ scoreType: PointValueEnglishType }>`
   color: ${({ scoreType }) =>
     dataTransform.pointScoreTypeTransform(scoreType).color};
 `;

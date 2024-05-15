@@ -2,7 +2,7 @@ import { Button, Select, TD, TR, Table } from "@b1nd/b1nd-dodamdodam-ui";
 import { Flex } from "components/common/Flex/Flex";
 import useCreatePointReason from "hooks/Point/useCreatePointReason";
 import { PointReasonFormInput, PointReasonFormTD } from "./style";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 
 interface Props {
   pointQueryParam: string | null;

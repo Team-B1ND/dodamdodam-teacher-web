@@ -3,7 +3,7 @@ import {
   PointResponse,
   PointScoreForStudentResonse,
   PointType,
-} from "types/Point/types";
+} from "types/Point/point.type";
 import {
   CreatePointReasonParam,
   GetPointByStudentIdParam,

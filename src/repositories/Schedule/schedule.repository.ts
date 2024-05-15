@@ -1,4 +1,4 @@
-import { ScheduleResponse } from "types/Schedule/types";
+import { ScheduleResponse } from "types/Schedule/schedule.type";
 import { Response } from "types/util/response.type";
 
 export interface ScheduleRepository {

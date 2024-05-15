@@ -15,7 +15,7 @@ import {
   useDeleteStudentPointScoreMutation,
   useGetPointScoreByStudentIdQuery,
 } from "queries/Point/point.query";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 import dataTransform from "utils/Transform/dataTransform";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useQueryClient } from "react-query";
