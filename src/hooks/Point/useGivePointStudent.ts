@@ -14,7 +14,7 @@ import {
   PointStudentIdsAtom,
 } from "stores/Point/point.store";
 import dateTransform from "utils/Transform/dateTransform";
-import { pointTypeFormatToKorean } from "utils/Point/pointFormat";
+import { coverPointTypeToKorean } from "utils/Point/coverPointType";
 import { AxiosError } from "axios";
 
 const useGivePointStudent = (pointQueryParam: PointType) => {
@@ -81,7 +81,7 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
           );
 
           B1ndToast.showSuccess(
-            `${handleReason} 사유로 ${pointTypeFormatToKorean(
+            `${handleReason} 사유로 ${coverPointTypeToKorean(
               reasonType
             )}이  ${score}점이 부여 되었습니다`
           );

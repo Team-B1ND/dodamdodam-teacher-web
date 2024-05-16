@@ -3,7 +3,7 @@ import {
   PointValueKoreanType,
 } from "types/Point/point.type";
 
-export const pointTypeFormatToKorean = (scoreType: PointValueEnglishType) => {
+export const coverPointTypeToKorean = (scoreType: PointValueEnglishType) => {
   switch (scoreType) {
     case "BONUS":
       return "상점";
@@ -13,7 +13,7 @@ export const pointTypeFormatToKorean = (scoreType: PointValueEnglishType) => {
       return "상쇄점";
   }
 };
-export const pointTypeFormatToEnglish = (scoreType: PointValueKoreanType) => {
+export const coverPointTypeToEnglish = (scoreType: PointValueKoreanType) => {
   switch (scoreType) {
     case "상점":
       return "BONUS";
