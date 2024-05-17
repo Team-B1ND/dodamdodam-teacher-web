@@ -1,8 +1,8 @@
 import { useOverlay } from "@toss/use-overlay";
-import GivePointStudentModal from "components/Point/Modal/GivePointStudentModal";
-import StudentPointInfoModal from "components/Point/Modal/StudentPointInfoModal";
+import GivePointStudentModal from "components/Point/PointModal/GivePointStudentModal";
+import StudentPointInfoModal from "components/Point/PointModal/StudentPointInfoModal";
 import Modal from "components/common/Modal";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 
 export const useOpenStudentPointInfoModal = () => {
   const StudnetPointInfoOverlay = useOverlay();

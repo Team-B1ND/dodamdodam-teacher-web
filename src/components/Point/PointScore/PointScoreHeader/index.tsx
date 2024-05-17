@@ -11,7 +11,7 @@ import {
   PointStudentIdsAtom,
 } from "stores/Point/point.store";
 import { useOpenStudentPointInfoModal } from "hooks/Point/useOpenStudentPointModal";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 
 interface Props {
   pointQueryParam: string | null;

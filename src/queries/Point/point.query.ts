@@ -8,7 +8,7 @@ import {
   PointResponse,
   PointScoreForStudentResonse,
   PointType,
-} from "types/Point/types";
+} from "types/Point/point.type";
 
 export const useGetPointAllMemberQuery = (
   type: string,

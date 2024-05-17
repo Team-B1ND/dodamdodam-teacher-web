@@ -1,5 +1,5 @@
 import { BusDateParam } from "repositories/Bus/BusRepository";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 
 export const QUERY_KEYS = Object.freeze({
   bus: {

@@ -4,7 +4,7 @@ import {
   useGetPointAllMemberQuery,
   useGivePointStudentQuery,
 } from "queries/Point/point.query";
-import { PointType, PointValueType } from "types/Point/types";
+import { PointType, PointValueEnglishType } from "types/Point/point.type";
 import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -14,6 +14,8 @@ import {
   PointStudentIdsAtom,
 } from "stores/Point/point.store";
 import dateTransform from "utils/Transform/dateTransform";
+import { coverPointTypeToKorean } from "utils/Point/coverPointType";
+import { AxiosError } from "axios";
 
 const useGivePointStudent = (pointQueryParam: PointType) => {
   const { data: pointMemberData } = useGetPointAllMemberQuery(pointQueryParam);
@@ -55,7 +57,7 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
 
   const onSubmitGivePointStudent = (
     reasonId: number,
-    reasonType: PointValueType,
+    reasonType: PointValueEnglishType,
     reason: string,
     pointType: PointType,
     score: number,
@@ -79,18 +81,15 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
           );
 
           B1ndToast.showSuccess(
-            `${handleReason} 사유로 ${
-              reasonType === "BONUS"
-                ? "상점"
-                : reasonType === "MINUS"
-                ? "벌점"
-                : "상쇄점"
-            }이  ${score}점이 부여 되었습니다`
+            `${handleReason} 사유로 ${coverPointTypeToKorean(
+              reasonType
+            )}이  ${score}점이 부여 되었습니다`
           );
           close();
         },
-        onError: () => {
-          B1ndToast.showError("서버에러...");
+        onError: (error) => {
+          const errorResponse = (error as AxiosError).response;
+          B1ndToast.showError((errorResponse?.data as AxiosError).message);
         },
       }
     );

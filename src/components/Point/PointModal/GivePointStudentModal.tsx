@@ -5,9 +5,10 @@ import ModalHeader from "components/common/Modal/ModalHeader";
 import { Flex } from "components/common/Flex/Flex";
 import useGivePointStudent from "hooks/Point/useGivePointStudent";
 import { useGetPointReasonQuery } from "queries/Point/point.query";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 import { useRecoilValue } from "recoil";
 import { PointSelectedStudentInfoAtom } from "stores/Point/point.store";
+import { coverPointTypeToKorean } from "utils/Point/coverPointType";
 
 interface StudentPointInfoModalProps {
   close: () => void;
@@ -87,13 +88,7 @@ const GivePointStudentModal = ({
                     (data) =>
                       data.reason +
                       ":" +
-                      ` ${
-                        data.scoreType === "BONUS"
-                          ? "상점"
-                          : data.scoreType === "MINUS"
-                          ? "벌점"
-                          : "상쇄점"
-                      }` +
+                      ` ${coverPointTypeToKorean(data.scoreType)}` +
                       `${data.score}점`
                   )
                 : []

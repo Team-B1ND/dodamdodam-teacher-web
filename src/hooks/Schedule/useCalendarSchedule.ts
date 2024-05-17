@@ -3,7 +3,7 @@ import { useGetSchedulesByPeriodQuery } from "queries/Schedule/schedule.query";
 import { useCallback, useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { scheduleDateAtom } from "stores/Schedule/store";
-import { CalendarScheduleType, Schedule } from "types/Schedule/types";
+import { CalendarScheduleType, Schedule } from "types/Schedule/schedule.type";
 import dataTransform from "utils/Transform/dataTransform";
 
 const useCalendarSchedule = () => {

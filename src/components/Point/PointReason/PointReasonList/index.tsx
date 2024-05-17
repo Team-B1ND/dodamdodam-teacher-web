@@ -12,8 +12,9 @@ import { POINT_REASON_ITEMS } from "../constant";
 import { useGetPointReasonQuery } from "queries/Point/point.query";
 import { PointReasonTR } from "./style";
 import useDeletePointReason from "hooks/Point/useDeletePointReason";
-import { PointType } from "types/Point/types";
+import { PointType } from "types/Point/point.type";
 import { truncateText } from "utils/common/truncate";
+import { coverPointTypeToKorean } from "utils/Point/coverPointType";
 
 interface PointReasonListProps {
   pointQueryParam: string | null;
@@ -43,11 +44,7 @@ const PointReasonList = ({ pointQueryParam }: PointReasonListProps) => {
               {truncateText(data.reason, 25)}
             </TD>
             <TD customStyle={{ width: "15%" }}>
-              {data.scoreType === "BONUS"
-                ? "상점"
-                : data.scoreType === "MINUS"
-                ? "벌점"
-                : "상쇄점"}
+              {coverPointTypeToKorean(data.scoreType)}
             </TD>
             <TD>{data.score}점</TD>
             <TD>

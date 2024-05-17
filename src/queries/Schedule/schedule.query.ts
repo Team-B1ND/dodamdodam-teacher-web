@@ -9,7 +9,7 @@ import {
 } from "react-query";
 import { GetScheduleByPeriodParam } from "repositories/Schedule/schedule.repository";
 import ScheduleRepositoryImpl from "repositories/Schedule/schedule.repositoryImpl";
-import { ScheduleResponse } from "types/Schedule/types";
+import { ScheduleResponse } from "types/Schedule/schedule.type";
 
 export const useGetSchedulesQuery = (
   options?: UseInfiniteQueryOptions<
@@ -51,5 +51,10 @@ export const useGetSchedulesByPeriodQuery = (
 
 export const useCreateScheduleMutation = () => {
   const mutation = useMutation(ScheduleRepositoryImpl.createSchedule);
+  return mutation;
+};
+
+export const useDeleteSchedulesMutation = () => {
+  const mutation = useMutation(ScheduleRepositoryImpl.deleteSchedulesById);
   return mutation;
 };

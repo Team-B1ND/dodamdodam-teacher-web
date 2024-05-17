@@ -1,10 +1,12 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { AxiosError } from "axios";
 import { useCreatePointReasonMutation } from "queries/Point/point.query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
 import { CreatePointReasonParam } from "repositories/Point/point.repository";
-import { PointType } from "types/Point/types";
+import { PointType, PointValueKoreanType } from "types/Point/point.type";
+import { coverPointTypeToEnglish } from "utils/Point/coverPointType";
 
 const useCreatePointReason = () => {
   const queryClinet = useQueryClient();
@@ -30,12 +32,7 @@ const useCreatePointReason = () => {
         pointType,
         reason,
         score: Number(score),
-        scoreType:
-          scoreType === "상점"
-            ? "BONUS"
-            : scoreType === "벌점"
-            ? "MINUS"
-            : "OFFSET",
+        scoreType: coverPointTypeToEnglish(scoreType as PointValueKoreanType)!,
       },
       {
         onSuccess: () => {
@@ -46,6 +43,10 @@ const useCreatePointReason = () => {
           });
           setScoreType("");
           queryClinet.invalidateQueries(QUERY_KEYS.point.getReasons(pointType));
+        },
+        onError: (error) => {
+          const errorResponse = (error as AxiosError).response;
+          B1ndToast.showError((errorResponse?.data as AxiosError).message);
         },
       }
     );

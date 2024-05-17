@@ -1,4 +1,5 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { AxiosError } from "axios";
 import { useCreateScheduleMutation } from "queries/Schedule/schedule.query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { ChangeEvent, useState } from "react";
@@ -58,8 +59,9 @@ const useCreateSchedule = () => {
 
           B1ndToast.showSuccess("일정이 생성 되었습니다");
         },
-        onError: () => {
-          B1ndToast.showError("서버 에러 바인드 팀에 문의해주세요");
+        onError: (error) => {
+          const errorResponse = (error as AxiosError).response;
+          B1ndToast.showError((errorResponse?.data as AxiosError).message);
         },
       }
     );

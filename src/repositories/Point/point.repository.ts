@@ -3,8 +3,8 @@ import {
   PointResponse,
   PointScoreForStudentResonse,
   PointType,
-  PointValueType,
-} from "types/Point/types";
+  PointValueEnglishType,
+} from "types/Point/point.type";
 
 export interface PointRepository {
   getPointAllMember(type: string): Promise<PointResponse>;
@@ -22,7 +22,7 @@ export interface CreatePointReasonParam {
   pointType: PointType;
   reason: string;
   score: number;
-  scoreType: PointValueType;
+  scoreType: PointValueEnglishType;
 }
 
 export interface GivePointParam {

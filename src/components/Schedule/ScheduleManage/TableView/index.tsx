@@ -6,10 +6,12 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import dataTransform from "utils/Transform/dataTransform";
 import { TRStyle } from "./style";
+import useDeleteSchedule from "hooks/Schedule/useDeleteSchedule";
 
 const TableView = () => {
   const { data: scheduleData, fetchNextPage } = useGetSchedulesQuery();
   const { ref, inView } = useInView();
+  const { onDeleteSchedule } = useDeleteSchedule();
 
   useEffect(() => {
     if (inView) {
@@ -41,13 +43,12 @@ const TableView = () => {
                 ))}
               </TD>
               <TD customStyle={{ width: "10.5%" }}>{schedule.place}</TD>
-
               <TD customStyle={{ width: "10.5%" }}>{schedule.date[0]} </TD>
               <TD customStyle={{ width: "10.5%" }}>{schedule.date[1]} </TD>
               <TD customStyle={{ width: "8.5%" }}>
                 <Button
                   ButtonType="disagreed"
-                  onClick={() => window.alert("개발중입니다.")}
+                  onClick={() => onDeleteSchedule(schedule.id)}
                 >
                   삭제
                 </Button>
