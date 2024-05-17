@@ -1,5 +1,5 @@
-import OffBasePass from "../../components/OffBase/OffBasePass";
-import SectionHeaderProvider from "../../components/common/SectionHeaderProvider";
+import OffBasePass from "components/OffBase/OffBasePass";
+import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 const OffBasePassPage = () => {
   return (

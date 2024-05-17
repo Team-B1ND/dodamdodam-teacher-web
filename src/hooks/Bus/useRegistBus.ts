@@ -4,14 +4,14 @@ import { useQueryClient } from "react-query";
 import {
   useCreateBusMutation,
   useModifyBusMutation,
-} from "../../queries/Bus/bus.query";
-import { QUERY_KEYS } from "../../queries/queryKey";
-import convertDateTime from "../../utils/Time/ConvertDateTime";
+} from "queries/Bus/bus.query";
+import { QUERY_KEYS } from "queries/queryKey";
+import convertDateTime from "utils/Time/ConvertDateTime";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   ExistingBusDataAtom,
   SelectBusDateAtom,
-} from "../../stores/Bus/bus.store";
+} from "stores/Bus/bus.store";
 import { AxiosError } from "axios";
 
 export const useRegistBus = () => {

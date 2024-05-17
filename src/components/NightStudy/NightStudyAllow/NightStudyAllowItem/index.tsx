@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import { useGetPendingNightStudy } from "queries/NightStudy/nightstudy.query";
-import { truncateText } from "../../../../utils/common/truncate";
+import { truncateText } from "utils/common/truncate";
 import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
 import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAllow";
 import NightStudyModal from "components/NightStudy/NightStudyModal";

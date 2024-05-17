@@ -6,7 +6,6 @@ import {
   TR,
   Table,
   Select,
-  ButtonWrapper,
 } from "@b1nd/b1nd-dodamdodam-ui";
 import {
   HOME_SCHEDULE_HEADER_COLORSET_LIST,

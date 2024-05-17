@@ -53,4 +53,5 @@ class PatternCheck {
   }
 }
 
-export default new PatternCheck();
+const patternCheck = new PatternCheck();
+export default patternCheck;

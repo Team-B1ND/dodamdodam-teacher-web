@@ -2,7 +2,7 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useQueryClient } from "react-query";
 import { BusDateParam } from "repositories/Bus/BusRepository";
-import { useDeleteBusMutation } from "../../queries/Bus/bus.query";
+import { useDeleteBusMutation } from "queries/Bus/bus.query";
 import { AxiosError } from "axios";
 
 export const useDeleteBus = () => {

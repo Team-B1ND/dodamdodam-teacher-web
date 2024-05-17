@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import Token from "../../libs/Token/Token";
+import Token from "libs/Token/Token";
 import {
   REFRESH_TOKEN_KEY,
   ACCESS_TOKEN_KEY,

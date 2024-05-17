@@ -1,5 +1,5 @@
-import { dodamAxios } from "../../libs/Axios/customAxios";
-import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
+import { dodamAxios } from "libs/Axios/customAxios";
+import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 import { OffBasePassRepository } from "./offbasepass.repository";
 
 class OffBasePassRepositoryImpl implements OffBasePassRepository {
@@ -21,4 +21,5 @@ class OffBasePassRepositoryImpl implements OffBasePassRepository {
   }
 }
 
-export default new OffBasePassRepositoryImpl();
+const offbasepassRepositoryImpl = new OffBasePassRepositoryImpl();
+export default offbasepassRepositoryImpl;

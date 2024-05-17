@@ -1,5 +1,5 @@
 import { changeRoom } from "utils/Member/changeGrade";
-import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
+import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 
 export const offBaseDataFilter = (
   OffBasePass: OffBaseResponse | undefined,

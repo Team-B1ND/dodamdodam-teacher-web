@@ -1,5 +1,5 @@
 import NightStudyToday from "components/NightStudy/NightStudyToday";
-import SectionHeaderProvider from "../../components/common/SectionHeaderProvider";
+import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 export const NightStudyTodayPage = () => {
   return (

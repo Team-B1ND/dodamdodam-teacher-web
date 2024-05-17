@@ -25,7 +25,8 @@ const Calendars = ({
 
   useEffect(() => {
     setUploadDate(dayjs().format("YYYY-MM-DD"));
-  }, []);
+  }, [setUploadDate]);
+  // eslint react Hook worning : line 28
 
   const handleDateChange = (newValue: Value) => {
     if (newValue instanceof Date) {

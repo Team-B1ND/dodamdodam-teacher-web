@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import {
-  useGetPointAllMemberQuery,
   useGivePointStudentQuery,
 } from "queries/Point/point.query";
 import { PointType, PointValueEnglishType } from "types/Point/point.type";
@@ -18,7 +17,6 @@ import { coverPointTypeToKorean } from "utils/Point/coverPointType";
 import { AxiosError } from "axios";
 
 const useGivePointStudent = (pointQueryParam: PointType) => {
-  const { data: pointMemberData } = useGetPointAllMemberQuery(pointQueryParam);
 
   const queryClient = useQueryClient();
   const mutation = useGivePointStudentQuery();
@@ -36,24 +34,6 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
     const { value } = e.target;
     setIssueAt(value);
   };
-
-  const studentGrade = pointMemberData?.data
-    .filter((data) => studentIds.includes(data.student.id))
-    .map((data) => data.student.grade);
-
-  const studentNumber = pointMemberData?.data
-    .filter((data) => studentIds.includes(data.student.id))
-    .map((data) => data.student.number);
-
-  const studentRoom = pointMemberData?.data
-    .filter((data) => studentIds.includes(data.student.id))
-    .map((data) => data.student.room);
-
-  const studentName = pointMemberData?.data
-    .filter((data) => studentIds.includes(data.student.id))
-    .map((data) => data.student.name);
-
-  const selectedStudentInfo = `${studentGrade}학년 ${studentRoom}반 ${studentNumber}번 ${studentName}`;
 
   const onSubmitGivePointStudent = (
     reasonId: number,

@@ -5,11 +5,11 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useSignup } from "../../../hooks/auth/useSignup";
-import { SIGNUP_SECTION_NAME } from "../../../constants/Signup/signup.constant";
+import { useSignup } from "hooks/auth/useSignup";
+import { SIGNUP_SECTION_NAME } from "constants/Signup/signup.constant";
 import Id from "./Id";
 import Email from "./Email";
-import { useSignin } from "../../../hooks/auth/useSignin";
+import { useSignin } from "hooks/auth/useSignin";
 import * as S from "./style";
 
 interface SignupProps {
@@ -31,6 +31,8 @@ const Signup = ({ setIsSignin }: SignupProps) => {
   } = useSignup();
   const { handlePasswordView, passwordType } = useSignin();
   const [prevSection, setPrevSection] = useState(section);
+  // WHAT IS THIS?
+  // WHAT IS THIS?
   const AuthComponents: ReactNode[] = [
     <Id
       signupData={signupData}

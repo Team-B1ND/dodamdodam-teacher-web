@@ -1,5 +1,5 @@
-import OffBaseLeave from "../../components/OffBase/OffBaseLeave";
-import SectionHeaderProvider from "../../components/common/SectionHeaderProvider";
+import OffBaseLeave from "components/OffBase/OffBaseLeave";
+import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 const OffBaseLeavePage = () => {
   return (

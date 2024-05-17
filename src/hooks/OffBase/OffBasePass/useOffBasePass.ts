@@ -4,11 +4,11 @@ import {
   usePatchApproval,
   usePatchApprovalCancel,
   usePatchCancel,
-} from "../../../queries/OffBasePass/offbasepass.query";
+} from "queries/OffBasePass/offbasepass.query";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from "../../../queries/queryKey";
+import { QUERY_KEYS } from "queries/queryKey";
 import { useRecoilState } from "recoil";
-import { UploadDateAtom } from "../../../stores/OffBase/offbase.store";
+import { UploadDateAtom } from "stores/OffBase/offbase.store";
 import { useEffect, useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
 import ConvertDateTime from "utils/Time/ConvertDateTime";
@@ -25,12 +25,19 @@ const useOffBasePass = () => {
   const handleOffBasePass = (id: number, query: any) => {
     query.mutate(id, {
       onSuccess: () => {
-        if (query === patchApprovals) B1ndToast.showSuccess("외출 승인 성공");
-
-        if (query === patchApprovalCancel)
-          B1ndToast.showSuccess("외출 승인 취소 성공");
-
-        if (query === patchCancel) B1ndToast.showSuccess("외출 거절 성공");
+        switch (query) {
+          case patchApprovals:
+            B1ndToast.showSuccess("외출 승인 성공");
+            break;
+          case patchApprovalCancel:
+            B1ndToast.showSuccess("외출 승인 취소 성공");
+            break;
+          case patchCancel:
+            B1ndToast.showSuccess("외출 거절 성공");
+            break;
+          default:
+            break;
+        }
 
         queryClient.invalidateQueries(
           QUERY_KEYS.offbasepass.getOffBasePass(uploadDate)

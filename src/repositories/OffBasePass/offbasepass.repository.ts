@@ -1,4 +1,4 @@
-import { OffBaseResponse } from "../../types/OffBasePass/offbasepass.type";
+import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 
 export interface OffBasePassRepository {
   getOffBasePass(date: string): Promise<OffBaseResponse>;

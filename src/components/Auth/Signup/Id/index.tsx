@@ -1,10 +1,10 @@
-import AuthButton from "../../../common/AuthButton";
-import TextField from "../../../common/TextField";
+import AuthButton from "components/common/AuthButton";
+import TextField from "components/common/TextField";
 import { IoIosArrowForward } from "react-icons/io";
 import { ButtonContainer } from "./style";
 import { AccountContainer } from "../style";
 import { Dispatch, SetStateAction } from "react";
-import { PasswordBox, PasswordViewBox } from "../../Signin/style";
+import { PasswordBox, PasswordViewBox } from "components/Auth/Signin/style";
 import { IoEyeSharp } from "react-icons/io5";
 import { MemberSignUpParam } from "repositories/Member/MemberRepository";
 import { PasswordParm } from "repositories/Auth/AuthRepository";

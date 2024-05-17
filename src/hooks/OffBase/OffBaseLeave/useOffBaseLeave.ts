@@ -4,11 +4,11 @@ import {
   usePatchLeaveApproval,
   usePatchLeaveApprovalCancel,
   usePatchLeaveCancel,
-} from "../../../queries/OffBaseLeave/offbaseleave.query";
+} from "queries/OffBaseLeave/offbaseleave.query";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from "../../../queries/queryKey";
+import { QUERY_KEYS } from "queries/queryKey";
 import { useRecoilState } from "recoil";
-import { UploadDateAtom } from "../../../stores/OffBase/offbase.store";
+import { UploadDateAtom } from "stores/OffBase/offbase.store";
 import { useEffect, useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
 
@@ -19,7 +19,7 @@ const useOffBaseLeave = () => {
   const patchLeaveApprovalCancel = usePatchLeaveApprovalCancel();
   const { data: offBaseLeave } = useGetTodayLeaveQuery();
 
-  const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
+  const [uploadDate] = useRecoilState<string>(UploadDateAtom);
 
   const handleOffBaseLeave = (outId: number, query: any) => {
     query.mutate(outId, {

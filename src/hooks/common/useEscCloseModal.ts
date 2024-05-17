@@ -1,7 +1,7 @@
-import { useEffect, KeyboardEvent } from "react";
+import { useEffect, KeyboardEvent, useCallback } from "react";
 
 const useEscCloseModal = (close: () => void, question?: string) => {
-  const handleKeyDown = (e: KeyboardEvent<Element>) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent<Element>) => {
     if (e.key === "Escape") {
       if (question) {
         const answer = window.confirm(question);
@@ -12,7 +12,7 @@ const useEscCloseModal = (close: () => void, question?: string) => {
         close();
       }
     }
-  };
+  }, [close, question]);
 
   useEffect(() => {
     const eventListener: EventListener = (e: Event) =>
@@ -22,7 +22,7 @@ const useEscCloseModal = (close: () => void, question?: string) => {
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", eventListener);
     };
-  }, []);
+  }, [handleKeyDown]);
 };
 
 export default useEscCloseModal;

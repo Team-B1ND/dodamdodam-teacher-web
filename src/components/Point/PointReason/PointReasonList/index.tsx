@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flex } from "../../../common/Flex/Flex";
+import { Flex } from "components/common/Flex/Flex";
 import {
   Button,
   ButtonWrapper,
@@ -7,7 +7,7 @@ import {
   TD,
   TR,
 } from "@b1nd/b1nd-dodamdodam-ui";
-import TableAttribute from "../../../common/TableAttribute";
+import TableAttribute from "components/common/TableAttribute";
 import { POINT_REASON_ITEMS } from "../constant";
 import { useGetPointReasonQuery } from "queries/Point/point.query";
 import { PointReasonTR } from "./style";

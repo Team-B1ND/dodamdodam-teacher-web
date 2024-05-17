@@ -39,4 +39,5 @@ class ConvertDateTime {
   };
 }
 
-export default new ConvertDateTime();
+const convertDateTime = new ConvertDateTime();
+export default convertDateTime;

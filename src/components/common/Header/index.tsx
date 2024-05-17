@@ -1,11 +1,9 @@
 import * as S from "./style";
-import dgsw from "../../../assets/dgsw.svg";
-import { useNavigate } from "react-router-dom";
-import { useLogout } from "../../../hooks/auth/useLogout";
+import dgsw from "assets/dgsw.svg";
+import { useLogout } from "hooks/auth/useLogout";
 import { useGetMyMemberQuery } from "queries/Member/member.query";
 
 const Header = () => {
-  const navigate = useNavigate();
   const { handleLogoutClick } = useLogout();
   const { data: myInfo } = useGetMyMemberQuery();
 

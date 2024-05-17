@@ -1,4 +1,4 @@
-import { dodamAxios } from "../../libs/Axios/customAxios";
+import { dodamAxios } from "libs/Axios/customAxios";
 import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
 
@@ -21,4 +21,5 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   }
 }
 
-export default new NightStudyRepositoryImpl();
+const nightStudyRepositoryImpl = new NightStudyRepositoryImpl();
+export default nightStudyRepositoryImpl;

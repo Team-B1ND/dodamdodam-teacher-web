@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import {
   ACCESS_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
-} from "../../constants/Token/Token.constant";
+} from "constants/Token/Token.constant";
 import Token from "../Token/Token";
 import { errorResponseHandler } from "./errorResponseHandler";
 import { requestHandler } from "./requestHandler";

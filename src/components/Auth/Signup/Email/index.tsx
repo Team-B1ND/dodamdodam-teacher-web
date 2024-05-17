@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import AuthButton from "../../../common/AuthButton";
-import CheckBox from "../../../common/CheckBox";
-import TextField from "../../../common/TextField";
+import { Dispatch, SetStateAction } from "react";
+import AuthButton from "components/common/AuthButton";
+import CheckBox from "components/common/CheckBox";
+import TextField from "components/common/TextField";
 import { AccountContainer } from "../style";
 import { IoIosArrowBack } from "react-icons/io";
 import * as S from "./style";

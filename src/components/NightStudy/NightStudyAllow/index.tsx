@@ -6,12 +6,12 @@ import {
   NightStudyGrade,
   NightStudySelectIdAtom,
 } from "stores/NightStudy/nightstudy.store";
-import TableAttribute from "../../common/TableAttribute";
+import TableAttribute from "components/common/TableAttribute";
 import { NIGHTSTUDY_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";
-import ErrorBoundary from "../../common/ErrorBoundary";
+import ErrorBoundary from "components/common/ErrorBoundary";
 import NightStudyAllowItem from "./NightStudyAllowItem";
-import { changeGrade } from "../../../utils/Member/changeGrade";
-import { GRADE_ITEMS } from "../../../constants/Grade/grade.constant";
+import { changeGrade } from "utils/Member/changeGrade";
+import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { PointSelectRoom } from "stores/Point/point.store";
 import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAllow";
 

@@ -44,4 +44,6 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
     return data;
   }
 }
-export default new ScheduleRepositoryImpl();
+
+const scheduleRepositoryImpl = new ScheduleRepositoryImpl();
+export default scheduleRepositoryImpl;

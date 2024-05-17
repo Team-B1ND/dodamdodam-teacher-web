@@ -36,4 +36,5 @@ class BusRepositoryImpl implements BusRepository {
   }
 }
 
-export default new BusRepositoryImpl();
+const busRepositoryImpl = new BusRepositoryImpl();
+export default busRepositoryImpl;
