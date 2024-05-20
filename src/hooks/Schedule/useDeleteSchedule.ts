@@ -12,7 +12,7 @@ const useDeleteSchedule = () => {
     deleteSchedulesMutation.mutate(id, {
       onSuccess: () => {
         queryClient.invalidateQueries(QUERY_KEYS.schedule.getSchedules);
-        B1ndToast.showSuccess("");
+        B1ndToast.showSuccess("일정이 삭제 되었습니다.");
       },
       onError: (error) => {
         const errorResponse = (error as AxiosError).response;
