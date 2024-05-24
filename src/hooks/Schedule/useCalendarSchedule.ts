@@ -20,19 +20,19 @@ const useCalendarSchedule = () => {
       setSchedules((prev) => {
         const newHandleCalendarSchedule = calendarScheduleTransform(schedule);
         return [...prev, newHandleCalendarSchedule];
-      })
+      }),
     );
   }, [schedulesData]);
 
   const calendarScheduleTransform = (schedule: Schedule) => {
-    const scheduleColor = dataTransform.scheduleTargetTransform("1학년"); //todo : api 수정시 변경 필요
+    const scheduleColor = dataTransform.convertGradeToColor("1학년"); //todo : api 수정시 변경 필요
 
     const newHandleSchedule = {
       id: schedule.id,
       title: schedule.name,
       target: schedule.targetGrades,
       attendees: schedule.targetGrades.map((grade) => {
-        return dataTransform.scheduleTargetGradesTransform(grade);
+        return dataTransform.convertGrade(grade);
       }),
       location: schedule.place || "장소 없음",
       category: "time",

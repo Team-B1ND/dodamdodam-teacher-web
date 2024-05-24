@@ -2,7 +2,7 @@ import { PointValueEnglishType } from "types/Point/point.type";
 import { ScheduleTargetGrade } from "types/Schedule/schedule.type";
 
 class DataTransform {
-  public scheduleTargetTransform(target: string): string {
+  public convertGradeToColor(target: string): string {
     switch (target) {
       case "1학년":
         return "#fca800";
@@ -19,7 +19,7 @@ class DataTransform {
         return "#f97e6d";
     }
   }
-  public schedulePlaceTransform(place: string) {
+  public convertPlaceName(place: string) {
     switch (place) {
       case "PROGRAMMING_1":
         return "프로그래밍1실";
@@ -44,7 +44,7 @@ class DataTransform {
     }
   }
 
-  public scheduleTargetGradesTransform(grade: ScheduleTargetGrade) {
+  public convertGrade(grade: ScheduleTargetGrade) {
     switch (grade) {
       case "GRADE_1":
         return "1학년";

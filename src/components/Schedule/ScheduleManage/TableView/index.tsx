@@ -32,12 +32,12 @@ const TableView = () => {
               <TD customStyle={{ width: "10.5%" }}>
                 {schedule.targetGrades.map((grade, idx) => (
                   <>
-                    {dataTransform.scheduleTargetGradesTransform(grade)}
+                    {dataTransform.convertGrade(grade)}
                     {idx !== schedule.targetGrades.length - 1 && ", "}
                   </>
                 ))}
               </TD>
-              <TD customStyle={{ width: "10.5%" }}>{dataTransform.schedulePlaceTransform(schedule.place)}</TD>
+              <TD customStyle={{ width: "10.5%" }}>{dataTransform.convertPlaceName(schedule.place)}</TD>
               <TD customStyle={{ width: "10.5%" }}>{schedule.date[0]} </TD>
               <TD customStyle={{ width: "10.5%" }}>{schedule.date[1]} </TD>
               <TD customStyle={{ width: "10.5%" }}>
