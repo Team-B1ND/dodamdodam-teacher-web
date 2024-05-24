@@ -23,6 +23,24 @@ class DataTransform {
     switch (place) {
       case "PROGRAMMING_1":
         return "프로그래밍1실";
+      case "PROGRAMMING_2":
+        return "프로그래밍2실";
+      case "PROGRAMMING_3":
+        return "프로그래밍3실";
+      case "KOREAN":
+        return "국어실";
+      case "MATH":
+        return "수학실";
+      case "SOCIETY":
+        return "사회실";
+      case "HALL":
+        return "강당";
+      case "AUDIOVISUAL_ROOM":
+        return "시청각실";
+      case "NONE":
+        return "장소없음";
+      case "ETC":
+        return "기타";
     }
   }
 

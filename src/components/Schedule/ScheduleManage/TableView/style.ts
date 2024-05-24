@@ -9,6 +9,7 @@ export const TRStyle: CSSObject = {
   fontWeight: "600",
   display: "flex",
   justifyContent: "space-between",
+  alignItems: "center",
 };
 
 export const TBodyStyle: CSSObject = {

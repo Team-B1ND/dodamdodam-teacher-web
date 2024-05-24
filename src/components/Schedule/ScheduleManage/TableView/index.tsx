@@ -37,7 +37,7 @@ const TableView = () => {
                   </>
                 ))}
               </TD>
-              <TD customStyle={{ width: "10.5%" }}>{schedule.place}</TD>
+              <TD customStyle={{ width: "10.5%" }}>{dataTransform.schedulePlaceTransform(schedule.place)}</TD>
               <TD customStyle={{ width: "10.5%" }}>{schedule.date[0]} </TD>
               <TD customStyle={{ width: "10.5%" }}>{schedule.date[1]} </TD>
               <TD customStyle={{ width: "10.5%" }}>
