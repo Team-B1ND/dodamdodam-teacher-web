@@ -25,7 +25,7 @@ const useCalendarSchedule = () => {
   }, [schedulesData]);
 
   const calendarScheduleTransform = (schedule: Schedule) => {
-    const scheduleColor = dataTransform.convertGradeToColor("1학년"); //todo : api 수정시 변경 필요
+    const scheduleColor = dataTransform.convertGradeToColor(dataTransform.convertGrade(schedule.targetGrades[0])); //todo : api 수정시 변경 필요
 
     const newHandleSchedule = {
       id: schedule.id,

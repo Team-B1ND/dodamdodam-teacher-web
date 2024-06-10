@@ -29,9 +29,4 @@ export interface ScheduleResponse extends Response {
 
 export type ScheduleType = "ACADEMIC" | "HOLIDAY";
 
-export type ScheduleTargetGrade =
-  | "GRADE_1"
-  | "GRADE_2"
-  | "GRADE_3"
-  | "GRADE_ALL"
-  | "GRADE_ETC";
+export type ScheduleTargetGrade = "GRADE_1" | "GRADE_2" | "GRADE_3" | "GRADE_ALL" | "GRADE_ETC";
