@@ -34,7 +34,7 @@ const GivePointStudentModal = ({ pointQueryParam, close, title }: StudentPointIn
 
   const reasonType = pointReasonsData?.data.find((pointReason) => pointReason.reason !== reason)?.scoreType;
   const score = pointReasonsData?.data.find((pointReason) => {
-    const handleReason = reason.split(":")[0];
+    const handleReason = textTransform.splitText(reason);
     return pointReason.reason === handleReason;
   })?.score;
 
