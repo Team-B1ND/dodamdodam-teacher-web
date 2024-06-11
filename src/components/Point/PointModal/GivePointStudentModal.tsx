@@ -9,6 +9,7 @@ import { PointType } from "types/Point/point.type";
 import { useRecoilValue } from "recoil";
 import { PointSelectedStudentInfoAtom } from "stores/Point/point.store";
 import { coverPointTypeToKorean } from "utils/Point/coverPointType";
+import textTransform from "utils/Transform/textTransform";
 
 interface StudentPointInfoModalProps {
   close: () => void;
@@ -16,37 +17,24 @@ interface StudentPointInfoModalProps {
   pointQueryParam: PointType;
 }
 
-const GivePointStudentModal = ({
-  pointQueryParam,
-  close,
-  title,
-}: StudentPointInfoModalProps) => {
-  const {
-    issueAt,
-    onChangeIssueAt,
-    onSubmitGivePointStudent,
-    isFocused,
-    setIsFocused,
-  } = useGivePointStudent(pointQueryParam as PointType);
+const GivePointStudentModal = ({ pointQueryParam, close, title }: StudentPointInfoModalProps) => {
+  const { issueAt, onChangeIssueAt, onSubmitGivePointStudent, isFocused, setIsFocused } = useGivePointStudent(
+    pointQueryParam as PointType,
+  );
   const [reason, setReason] = useState("");
 
-  const { data: pointReasonsData } = useGetPointReasonQuery(
-    pointQueryParam as PointType
-  );
+  const { data: pointReasonsData } = useGetPointReasonQuery(pointQueryParam as PointType);
 
   const selectedStudentList = useRecoilValue(PointSelectedStudentInfoAtom);
 
   const reasonId = pointReasonsData?.data.find((pointReason) => {
-    const handleReason = reason.split(":")[0];
+    const handleReason = textTransform.splitText(reason);
     return pointReason.reason === handleReason;
   })?.id;
 
-  const reasonType = pointReasonsData?.data.find(
-    (pointReason) => pointReason.reason === reason
-  )?.scoreType;
-
+  const reasonType = pointReasonsData?.data.find((pointReason) => pointReason.reason !== reason)?.scoreType;
   const score = pointReasonsData?.data.find((pointReason) => {
-    const handleReason = reason.split(":")[0];
+    const handleReason = textTransform.splitText(reason);
     return pointReason.reason === handleReason;
   })?.score;
 
@@ -54,11 +42,7 @@ const GivePointStudentModal = ({
     <S.Container onClick={(e) => e.stopPropagation()}>
       <ModalHeader close={close} title={title} />
       <Flex direction="column" gap={50}>
-        <Flex
-          direction="column"
-          gap={5}
-          customStyle={{ width: "100%", lineHeight: "20px" }}
-        >
+        <Flex direction="column" gap={5} customStyle={{ width: "100%", lineHeight: "20px" }}>
           부여 학생
           <S.UnderLine />
           {selectedStudentList.map((name) => (
@@ -85,11 +69,7 @@ const GivePointStudentModal = ({
             items={
               pointReasonsData
                 ? pointReasonsData.data!.map(
-                    (data) =>
-                      data.reason +
-                      ":" +
-                      ` ${coverPointTypeToKorean(data.scoreType)}` +
-                      `${data.score}점`
+                    (data) => data.reason + ":" + ` ${coverPointTypeToKorean(data.scoreType)}` + `${data.score}점`,
                   )
                 : []
             }
@@ -102,14 +82,7 @@ const GivePointStudentModal = ({
             <Button
               ButtonType="agree"
               onClick={() => {
-                onSubmitGivePointStudent(
-                  reasonId!,
-                  reasonType!,
-                  reason,
-                  pointQueryParam,
-                  score!,
-                  close
-                );
+                onSubmitGivePointStudent(reasonId!, reasonType!, reason, pointQueryParam, score!, close);
               }}
             >
               발급하기
