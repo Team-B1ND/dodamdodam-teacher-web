@@ -60,7 +60,6 @@ const useGivePointStudent = (pointQueryParam: PointType) => {
         },
       },
     );
-    console.log(coverPointTypeToKorean(reasonType));
   };
   return {
     issueAt,
