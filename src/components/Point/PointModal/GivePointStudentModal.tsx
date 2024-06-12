@@ -32,7 +32,11 @@ const GivePointStudentModal = ({ pointQueryParam, close, title }: StudentPointIn
     return pointReason.reason === handleReason;
   })?.id;
 
-  const reasonType = pointReasonsData?.data.find((pointReason) => pointReason.reason !== reason)?.scoreType;
+  const reasonType = pointReasonsData?.data.find((pointReason) => {
+    const handleReason = textTransform.splitText(reason);
+    return pointReason.reason === handleReason;
+  })?.scoreType;
+
   const score = pointReasonsData?.data.find((pointReason) => {
     const handleReason = textTransform.splitText(reason);
     return pointReason.reason === handleReason;
