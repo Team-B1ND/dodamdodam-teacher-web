@@ -1,7 +1,7 @@
 import Calendar from "react-calendar";
 import * as S from "./style";
 import dayjs from "dayjs";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 
 type ValuePiece = Date | null;
@@ -15,12 +15,7 @@ interface CalendarProps {
   isOpen: boolean;
 }
 
-const Calendars = ({
-  uploadDate,
-  setUploadDate,
-  setIsOpen,
-  isOpen,
-}: CalendarProps) => {
+const Calendars: React.FC<CalendarProps> = ({ uploadDate, setUploadDate, isOpen, setIsOpen }) => {
   const [date, setDateChange] = useState<Value>(new Date());
 
   useEffect(() => {
@@ -30,9 +25,7 @@ const Calendars = ({
 
   const handleDateChange = (newValue: Value) => {
     if (newValue instanceof Date) {
-      const formattedDate = new Date(
-        newValue.getTime() - newValue.getTimezoneOffset() * 60000
-      )
+      const formattedDate = new Date(newValue.getTime() - newValue.getTimezoneOffset() * 60000)
         .toISOString()
         .split("T")[0];
 
@@ -46,9 +39,7 @@ const Calendars = ({
     <S.CalendarContainer>
       <div onClick={() => setIsOpen(!isOpen)}>
         <S.CalendarText>조회할 날짜를 선택해주세요</S.CalendarText>
-        <S.Date>
-          {uploadDate ? uploadDate : dayjs().format("YYYY-MM-DD")}
-        </S.Date>
+        <S.Date>{uploadDate ? uploadDate : dayjs().format("YYYY-MM-DD")}</S.Date>
       </div>
 
       {isOpen && (

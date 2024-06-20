@@ -3,12 +3,7 @@ import * as S from "./style";
 import { Suspense, useState } from "react";
 import Calendars from "components/common/Calendars";
 import { useRecoilState } from "recoil";
-import {
-  LeaveSelectIdAtom,
-  SelectApprovalAtom,
-  SelectGradeAtom,
-  UploadDateAtom,
-} from "stores/OffBase/offbase.store";
+import { LeaveSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom } from "stores/OffBase/offbase.store";
 import TableAttribute from "components/common/TableAttribute";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
@@ -26,12 +21,9 @@ const OffBaseLeave = () => {
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
   const [room, setRoom] = useRecoilState(PointSelectRoom);
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
-  const [selectApproval, setSelectApproval] =
-    useRecoilState(SelectApprovalAtom);
-  const [leaveSelectedIds, setLeaveSelectedIds] =
-    useRecoilState<number[]>(LeaveSelectIdAtom);
-  const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel } =
-    useOffBaseLeave();
+  const [selectApproval, setSelectApproval] = useRecoilState(SelectApprovalAtom);
+  const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
+  const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel } = useOffBaseLeave();
 
   return (
     <>
@@ -39,12 +31,7 @@ const OffBaseLeave = () => {
         <div style={{ display: "flex" }}>
           <SearchBar value={studentName} onChange={setStudentName} />
 
-          <Calendars
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            uploadDate={uploadDate}
-            setUploadDate={setUploadDate}
-          />
+          <Calendars isOpen={isOpen} setIsOpen={() => false} uploadDate={uploadDate} setUploadDate={setUploadDate} />
 
           {leaveSelectedIds.length !== 0 && (
             <S.ButtonContainer>
@@ -70,11 +57,7 @@ const OffBaseLeave = () => {
               >
                 모두 거절
               </Button>
-              <Button
-                ButtonType="disagree"
-                style={S.ClearStyle}
-                onClick={() => setLeaveSelectedIds([])}
-              >
+              <Button ButtonType="disagree" style={S.ClearStyle} onClick={() => setLeaveSelectedIds([])}>
                 선택 해제
               </Button>
             </S.ButtonContainer>
@@ -82,18 +65,8 @@ const OffBaseLeave = () => {
         </div>
 
         <S.SelectContainer>
-          <Select
-            items={APPROVAL_ITEMS}
-            value={selectApproval}
-            onChange={setSelectApproval}
-            zIndex={2}
-          />
-          <Select
-            items={GRADE_ITEMS}
-            value={selectGrade}
-            onChange={setSelectGrade}
-            zIndex={2}
-          />
+          <Select items={APPROVAL_ITEMS} value={selectApproval} onChange={setSelectApproval} zIndex={2} />
+          <Select items={GRADE_ITEMS} value={selectGrade} onChange={setSelectGrade} zIndex={2} />
           <Select
             items={["모든 학반", "1반", "2반", "3반", "4반"]}
             value={room || "학반을 선택해주세요"}

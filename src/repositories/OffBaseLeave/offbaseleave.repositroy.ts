@@ -3,8 +3,8 @@ import { dodamAxios } from "libs/Axios/customAxios";
 import { OffBaseLeaveRepository } from "./offbaseleave.repositoryImpl";
 
 class OffBaseLeaveRepositoryImpl implements OffBaseLeaveRepository {
-  public async getOffBaseLeave(date: string): Promise<OffBaseResponse> {
-    const { data } = await dodamAxios.get(`/out-sleeping?date=${date}`);
+  public async getOffBaseLeave(endAt: string): Promise<OffBaseResponse> {
+    const { data } = await dodamAxios.get(`/out-sleeping?endAt=${endAt}`);
     return data;
   }
   public async patchLeaveApproval(id: number): Promise<void> {
