@@ -16,7 +16,7 @@ export const QUERY_KEYS = Object.freeze({
     getOffBasePass: (date: string) => ["/out-going", date],
   },
   offbaseleave: {
-    getOffBaseLeave: (date: string) => ["/out-sleeping", date],
+    getOffBaseLeave: (endAt: string) => ["/out-sleeping", endAt],
     getOffBaseTodayLeave: "/out-sleeping/valid",
   },
   nightstudy: {
