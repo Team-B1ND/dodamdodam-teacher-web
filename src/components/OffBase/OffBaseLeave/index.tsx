@@ -29,9 +29,11 @@ const OffBaseLeave = () => {
     <>
       <S.OffBaseHeaderContainer>
         <div style={{ display: "flex" }}>
-          <SearchBar value={studentName} onChange={setStudentName} />
+          <div>
+            <SearchBar value={studentName} onChange={setStudentName} />
+          </div>
 
-          <Calendars isOpen={isOpen} setIsOpen={() => false} uploadDate={uploadDate} setUploadDate={setUploadDate} />
+          {/* <Calendars isOpen={false} setIsOpen={() => false} uploadDate={uploadDate} setUploadDate={setUploadDate} /> */}
 
           {leaveSelectedIds.length !== 0 && (
             <S.ButtonContainer>
@@ -84,6 +86,7 @@ const OffBaseLeave = () => {
               selectGrade={changeGrade(selectGrade)}
               studentName={studentName}
               uploadDate={uploadDate}
+              setUploadData={setUploadDate}
             />
           </Suspense>
         </ErrorBoundary>
