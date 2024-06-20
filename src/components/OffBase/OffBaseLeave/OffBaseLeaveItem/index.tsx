@@ -7,10 +7,13 @@ import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 import { useRecoilState } from "recoil";
 import { LeaveSelectIdAtom } from "stores/OffBase/offbase.store";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import dayjs from "dayjs";
 
 interface OffBaseLeaveProps {
   studentName: string;
   uploadDate: string;
+  setUploadData: Dispatch<SetStateAction<string>>;
   selectGrade: number;
   selectApproval: string | undefined;
   selectRoom: string;
@@ -22,27 +25,22 @@ const OffBaseLeaveItem = ({
   studentName,
   uploadDate,
   selectRoom,
+  setUploadData,
 }: OffBaseLeaveProps) => {
   const { data: offBaseLeave } = useGetOffBaseLeaveQuery(uploadDate, {
     suspense: true,
   });
-  const [leaveSelectedIds, setLeaveSelectedIds] =
-    useRecoilState<number[]>(LeaveSelectIdAtom);
-  const {
-    handleOffBaseLeave,
-    patchLeaveApproval,
-    patchLeaveApprovalCancel,
-    patchLeaveCancel,
-  } = useOffBaseLeave();
+  const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
+  const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel, patchLeaveCancel } = useOffBaseLeave();
+
+  useEffect(() => {
+    setUploadData(dayjs().format("YYYY-MM-DD"));
+  }, [setUploadData]);
 
   const selectComponent = (Id: number) => {
-    const component = offBaseLeaveDataFilter(
-      offBaseLeave,
-      studentName,
-      selectGrade,
-      selectApproval,
-      selectRoom
-    )?.find((key) => key.id === Id)?.status;
+    const component = offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.find(
+      (key) => key.id === Id,
+    )?.status;
 
     if (component === "ALLOWED") {
       return (
@@ -59,18 +57,10 @@ const OffBaseLeaveItem = ({
     } else if (component === "PENDING") {
       return (
         <>
-          <Button
-            ButtonType="agree"
-            style={S.EditStyle}
-            onClick={() => handleOffBaseLeave(Id, patchLeaveApproval)}
-          >
+          <Button ButtonType="agree" style={S.EditStyle} onClick={() => handleOffBaseLeave(Id, patchLeaveApproval)}>
             승인
           </Button>
-          <Button
-            ButtonType="disagree"
-            style={S.DelStyle}
-            onClick={() => handleOffBaseLeave(Id, patchLeaveCancel)}
-          >
+          <Button ButtonType="disagree" style={S.DelStyle} onClick={() => handleOffBaseLeave(Id, patchLeaveCancel)}>
             거절
           </Button>
         </>
@@ -87,89 +77,53 @@ const OffBaseLeaveItem = ({
   return (
     <>
       {!offBaseLeaveDataFilter ||
-      offBaseLeaveDataFilter(
-        offBaseLeave,
-        studentName,
-        selectGrade,
-        selectApproval,
-        selectRoom
-      )?.length === 0 ? (
+      offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.length === 0 ? (
         <S.NoneTile>현재 외박 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <TBody customStyle={S.OffBaseTBody}>
-          {offBaseLeaveDataFilter(
-            offBaseLeave,
-            studentName,
-            selectGrade,
-            selectApproval,
-            selectRoom
-          )?.map((offbaseleave) => (
-            <S.OffBaseTR
-              onClick={() => {
-                if (offbaseleave.status === "PENDING") {
-                  if (leaveSelectedIds.includes(offbaseleave.id)) {
-                    setLeaveSelectedIds((prevIds) =>
-                      prevIds.filter((id) => id !== offbaseleave.id)
-                    );
-                  } else {
-                    setLeaveSelectedIds([...leaveSelectedIds, offbaseleave.id]);
+          {offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
+            (offbaseleave) => (
+              <S.OffBaseTR
+                onClick={() => {
+                  if (offbaseleave.status === "PENDING") {
+                    if (leaveSelectedIds.includes(offbaseleave.id)) {
+                      setLeaveSelectedIds((prevIds) => prevIds.filter((id) => id !== offbaseleave.id));
+                    } else {
+                      setLeaveSelectedIds([...leaveSelectedIds, offbaseleave.id]);
+                    }
                   }
-                }
-              }}
-              style={{
-                backgroundColor: leaveSelectedIds.includes(offbaseleave.id)
-                  ? "#EEF3F9"
-                  : "",
-              }}
-            >
-              <TD customStyle={S.OffBaseTD}>
-                <S.MemberImage src={profileImg} />
-              </TD>
-              <TD customStyle={S.OffBaseTD}>{offbaseleave.student.name}</TD>
-              <TD customStyle={S.OffBaseTD}>
-                {offbaseleave.student.grade}학년
-                {offbaseleave.student.room}반{offbaseleave.student.number}번
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                <S.DateContainer>
-                  <div>
-                    {convertDateTime.getDateTime(
-                      new Date(offbaseleave.startAt),
-                      "date"
-                    )}
-                  </div>
-                  <div>
-                    {convertDateTime.getDateTime(
-                      new Date(offbaseleave.startAt),
-                      "time"
-                    )}
-                  </div>
-                </S.DateContainer>
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                <S.DateContainer>
-                  <div>
-                    {convertDateTime.getDateTime(
-                      new Date(offbaseleave.endAt),
-                      "date"
-                    )}
-                  </div>
-                  <div>
-                    {convertDateTime.getDateTime(
-                      new Date(offbaseleave.endAt),
-                      "time"
-                    )}
-                  </div>
-                </S.DateContainer>
-              </TD>
-              <TD customStyle={S.OffBaseTD}>
-                <S.Reason>{offbaseleave.reason}</S.Reason>
-              </TD>
-              <TD customStyle={S.ButtonContainerStyle}>
-                {selectComponent(offbaseleave.id)}
-              </TD>
-            </S.OffBaseTR>
-          ))}
+                }}
+                style={{
+                  backgroundColor: leaveSelectedIds.includes(offbaseleave.id) ? "#EEF3F9" : "",
+                }}
+              >
+                <TD customStyle={S.OffBaseTD}>
+                  <S.MemberImage src={profileImg} />
+                </TD>
+                <TD customStyle={S.OffBaseTD}>{offbaseleave.student.name}</TD>
+                <TD customStyle={S.OffBaseTD}>
+                  {offbaseleave.student.grade}학년
+                  {offbaseleave.student.room}반{offbaseleave.student.number}번
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  <S.DateContainer>
+                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.startAt), "date")}</div>
+                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.startAt), "time")}</div>
+                  </S.DateContainer>
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  <S.DateContainer>
+                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.endAt), "date")}</div>
+                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.endAt), "time")}</div>
+                  </S.DateContainer>
+                </TD>
+                <TD customStyle={S.OffBaseTD}>
+                  <S.Reason>{offbaseleave.reason}</S.Reason>
+                </TD>
+                <TD customStyle={S.ButtonContainerStyle}>{selectComponent(offbaseleave.id)}</TD>
+              </S.OffBaseTR>
+            ),
+          )}
         </TBody>
       )}
     </>
