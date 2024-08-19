@@ -33,7 +33,7 @@ export const useGetSchedulesQuery = (
   );
 
 export const useGetSchedulesByPeriodQuery = (
-  { endDate, startDate }: GetScheduleByPeriodParam,
+  { endAt, startAt }: GetScheduleByPeriodParam,
   options?: UseQueryOptions<
     ScheduleResponse,
     AxiosError,
@@ -42,8 +42,8 @@ export const useGetSchedulesByPeriodQuery = (
   >
 ) =>
   useQuery(
-    QUERY_KEYS.schedule.getSchedulesByPeriod(endDate, startDate),
-    () => ScheduleRepositoryImpl.getScheduleByPeriod({ endDate, startDate }),
+    QUERY_KEYS.schedule.getSchedulesByPeriod(endAt, startAt),
+    () => ScheduleRepositoryImpl.getScheduleByPeriod({ endAt, startAt }),
     {
       ...options,
     }
