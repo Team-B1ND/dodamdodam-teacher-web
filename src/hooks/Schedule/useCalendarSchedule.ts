@@ -10,8 +10,8 @@ const useCalendarSchedule = () => {
   const [schedules, setSchedules] = useState<CalendarScheduleType[]>([]);
   const date = useRecoilValue(scheduleDateAtom);
   const { data: schedulesData } = useGetSchedulesByPeriodQuery({
-    startDate: date,
-    endDate: `${date.slice(0, 8)}${dayjs(date).daysInMonth()}`,
+    startAt: date,
+    endAt: `${date.slice(0, 8)}${dayjs(date).daysInMonth()}`,
   });
 
   const loadCalendarSchedule = useCallback(() => {

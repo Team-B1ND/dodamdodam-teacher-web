@@ -20,8 +20,8 @@ export interface ScheduleParam {
 }
 
 export interface GetScheduleByPeriodParam {
-  startDate: string;
-  endDate: string;
+  startAt: string;
+  endAt: string;
 }
 
 export interface GetSchedulesParam {

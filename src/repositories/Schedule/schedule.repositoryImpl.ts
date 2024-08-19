@@ -24,11 +24,11 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   }
 
   public async getScheduleByPeriod({
-    endDate,
-    startDate,
+    endAt,
+    startAt,
   }: GetScheduleByPeriodParam): Promise<ScheduleResponse> {
     const { data } = await dodamAxios.get(
-      `/schedule/search?startDate=${startDate}&endDate=${endDate}`
+      `/schedule/search?startAt=${startAt}&endAt=${endAt}`
     );
     return data;
   }
