@@ -1,11 +1,9 @@
 import axios, { AxiosRequestConfig } from "axios";
-import {
-  ACCESS_TOKEN_KEY,
-  REQUEST_TOKEN_KEY,
-} from "constants/Token/Token.constant";
+import { ACCESS_TOKEN_KEY, REQUEST_TOKEN_KEY } from "constants/Token/Token.constant";
 import Token from "../Token/Token";
 import { errorResponseHandler } from "./errorResponseHandler";
 import { requestHandler } from "./requestHandler";
+import CONFIG from "../../config/config.json";
 
 const createAxiosInstance = (config?: AxiosRequestConfig) => {
   const baseConfig: AxiosRequestConfig = {
@@ -20,7 +18,7 @@ const createAxiosInstance = (config?: AxiosRequestConfig) => {
 };
 
 export const dodamAxios = createAxiosInstance({
-  baseURL: process.env.REACT_APP_DODAM_SERVER,
+  baseURL: CONFIG.SERVER,
   headers: {
     [REQUEST_TOKEN_KEY]: `Bearer ${Token.getToken(ACCESS_TOKEN_KEY)}`!,
   },

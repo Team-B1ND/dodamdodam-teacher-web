@@ -5,11 +5,12 @@ import {
   NewAccessTokenResponse,
   SignInParam,
 } from "./AuthRepository";
+import CONFIG from "../../config/config.json";
 
 class AuthRepositoryImpl implements AuthRepository {
   public async signIn(param: SignInParam): Promise<SigninResponse> {
     const { data } = await axios.post(
-      `${process.env.REACT_APP_DODAM_SERVER}/auth/login`,
+      `${CONFIG.SERVER}/auth/login`,
       param
     );
 
@@ -20,7 +21,7 @@ class AuthRepositoryImpl implements AuthRepository {
     refreshToken: string
   ): Promise<NewAccessTokenResponse> {
     const { data } = await axios.post<NewAccessTokenResponse>(
-      `${process.env.REACT_APP_DODAM_SERVER}/auth/reissue`,
+      `${CONFIG.SERVER}/auth/reissue`,
       {
         refreshToken,
       }

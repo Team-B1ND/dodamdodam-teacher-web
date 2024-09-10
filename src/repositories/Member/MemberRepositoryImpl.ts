@@ -2,6 +2,7 @@ import axios from "axios";
 import { MemberRepository, MemberSignUpParam } from "./MemberRepository";
 import { dodamAxios } from "libs/Axios/customAxios";
 import { MemberResponse, MyMemberResponse } from "types/Member/member.type";
+import CONFIG from "../../config/config.json"
 
 class MemberRepositoryImpl implements MemberRepository {
   public async getAllMemberList(): Promise<MemberResponse> {
@@ -11,7 +12,7 @@ class MemberRepositoryImpl implements MemberRepository {
 
   public async postMemberJoinTeacher(param: MemberSignUpParam): Promise<void> {
     await axios.post(
-      `${process.env.REACT_APP_DODAM_SERVER}/member/join-teacher`,
+      `${CONFIG.SERVER}/member/join-teacher`,
       param
     );
   }
