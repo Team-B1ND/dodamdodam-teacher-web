@@ -3,6 +3,7 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import {
   usePatchNightStudyAllow,
   usePatchNightStudyCancel,
+  useDeleteNightStudyAllow
 } from "queries/NightStudy/nightstudy.query";
 import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "queries/queryKey";
@@ -10,7 +11,9 @@ import { QUERY_KEYS } from "queries/queryKey";
 const useNightStudyAllow = () => {
   const patchNighStudytAllow = usePatchNightStudyAllow();
   const patchNightStudyCancel = usePatchNightStudyCancel();
+  const deleteNightStudyAllow = useDeleteNightStudyAllow();
   const queryClient = useQueryClient();
+
 
   const handleNightStudyAllow = (id: number, query: any) => {
     query.mutate(id, {
@@ -30,8 +33,17 @@ const useNightStudyAllow = () => {
       },
     });
   };
+  const handleDeleteNightStudyAllow=(id:number)=>{
+   
+    deleteNightStudyAllow.mutate(id, {
+      onSuccess:()=>{
+        B1ndToast.showSuccess("승인 취소 성공");
+        queryClient.invalidateQueries(QUERY_KEYS.nightstudy.getNightStudyList);
+      }
+    })
+  }
 
-  return { handleNightStudyAllow, patchNighStudytAllow, patchNightStudyCancel };
+  return { handleDeleteNightStudyAllow, handleNightStudyAllow, patchNighStudytAllow, patchNightStudyCancel };
 };
 
 export default useNightStudyAllow;

@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { QUERY_KEYS } from "../queryKey";
 import nightstudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
+import nightStudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
 
 export const useGetPendingNightStudy = (
   options?: UseQueryOptions<
@@ -53,3 +54,9 @@ export const usePatchNightStudyCancel = () => {
   );
   return mutation;
 };
+export const useDeleteNightStudyAllow = ()=>{
+  const mutation = useMutation((id: number)=>
+    nightStudyRepositoryImpl.deleteNightStudyAllow(id)
+  )
+  return mutation
+}

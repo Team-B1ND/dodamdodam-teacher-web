@@ -19,6 +19,9 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   public async patchNightStudyCancel(id: number): Promise<void> {
     await dodamAxios.patch(`/night-study/${id}/reject`);
   }
+  public async deleteNightStudyAllow(id: number):Promise<void>{
+    await dodamAxios.patch(`/night-study/${id}/revert`);
+  }
 }
 
 const nightStudyRepositoryImpl = new NightStudyRepositoryImpl();

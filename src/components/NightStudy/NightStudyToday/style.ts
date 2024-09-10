@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const NightStudyHeaderContainer = styled.div`
   display: flex;
-
-  gap: 730px;
+width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `;
 export const SearchBarContainer = styled.div`
   display: flex;
