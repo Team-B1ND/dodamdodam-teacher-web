@@ -5,4 +5,5 @@ export interface NightStudyRepository {
   getNighStudytList(): Promise<NightStudyResponse>;
   patchNightStudyAllow(id: number): Promise<void>;
   patchNightStudyCancel(id: number): Promise<void>;
+  deleteNightStudyAllow(id: number): Promise<void>;
 }

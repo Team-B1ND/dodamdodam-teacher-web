@@ -2,8 +2,9 @@ import styled, { CSSObject } from "styled-components";
 
 export const NightStudyHeaderContainer = styled.div`
   display: flex;
-
-  gap: 850px;
+width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `;
 export const SearchBarContainer = styled.div`
   display: flex;

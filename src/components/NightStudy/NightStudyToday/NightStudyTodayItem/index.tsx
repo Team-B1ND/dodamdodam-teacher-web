@@ -7,6 +7,7 @@ import { NightStudyType } from "types/NightStudy/nightstudy.type";
 import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
 import convertDateTime from "utils/Time/ConvertDateTime";
 import { truncateText } from "utils/common/truncate";
+import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAllow";
 
 interface NightStudyTodayProps {
   studentName: string;
@@ -20,9 +21,9 @@ const NightStudyTodayItem = ({
   selectRoom,
 }: NightStudyTodayProps) => {
   const { data: NightStudyToday } = useGetNightStudyList({ suspense: true });
-
   const [isOpen, setIsOpen] = useState(false);
   const [studyData, setStudyData] = useState<NightStudyType>();
+  const {handleDeleteNightStudyAllow}= useNightStudyAllow();
 
   const handleModalClick = () => {
     setIsOpen(!isOpen);
@@ -80,8 +81,8 @@ const NightStudyTodayItem = ({
               {truncateText(nightstudy.reasonForPhone, 5)}
             </TD>
             <TD customStyle={S.NightStudyTD}>
-              <S.NightStudyBox style={{ marginLeft: "-14px" }}>
-                심자중
+              <S.NightStudyBox style={{ marginLeft: "-14px" }} onClick={()=>handleDeleteNightStudyAllow(nightstudy.id)}>
+                승인취소
               </S.NightStudyBox>
             </TD>
           </TR>
