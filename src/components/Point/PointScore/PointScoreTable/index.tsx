@@ -16,7 +16,7 @@ interface Props {
 
 const PointScoreTable = ({ pointQueryParam }: Props) => {
   const { onSetStudentList, studentIds } = useSetPointStudentIds();
-  const { pointData } = PointDataToCsvData(pointQueryParam);
+  const { pointData } = PointDataToCsvData(pointQueryParam as PointType);
   const { openStudentPointInfoModalOverlay } = useOpenStudentPointInfoModal();
 
   return (
