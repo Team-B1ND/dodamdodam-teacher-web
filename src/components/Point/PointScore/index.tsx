@@ -4,7 +4,6 @@ import PointProvider from "../PointProvider";
 import { useSearchParams } from "react-router-dom";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import { Suspense } from "react";
-import SkeletonComponent from "components/common/Skeleton";
 
 const PointScore = () => {
   const [searchParam] = useSearchParams();
@@ -15,9 +14,13 @@ const PointScore = () => {
       title={pointQueryParam === "DORMITORY" ? " 기숙사 상벌점" : "학교 상벌점"}
       subTitle="학생 상벌점 조회, 발급, 삭제가 가능합니다."
     >
-      <PointScoreHeader pointQueryParam={pointQueryParam} />
-      <ErrorBoundary fallback={<>error</>}>
-        <Suspense fallback={<SkeletonComponent height={60} />}>
+      <ErrorBoundary fallback={<>...loading</>}>
+        <Suspense>
+          <PointScoreHeader pointQueryParam={pointQueryParam!} />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary fallback={<>...loading</>}>
+        <Suspense fallback={<>...loading</>}>
           <PointScoreTable pointQueryParam={pointQueryParam!} />
         </Suspense>
       </ErrorBoundary>
