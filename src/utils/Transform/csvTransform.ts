@@ -34,7 +34,7 @@ export const PointDataToCsvData = (pointQueryParams: string) => {
       상쇄점: item.offset,
     }));
     setCsvData(parsedCsvData!);
-  }, [pointQueryParams]);
+  }, [searchName, searchValue, pointQueryParams]);
 
   return { csvData, pointData };
 };
