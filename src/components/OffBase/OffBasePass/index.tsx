@@ -32,9 +32,9 @@ const OffBasePass = () => {
   const [room, setRoom] = useRecoilState(PointSelectRoom);
 
   const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } = useOffBasePass();
-  const { data: OffBasePass } = useGetOffBasePassQuery(uploadDate);
+  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
 
-  const isAllowed = OffBasePass?.data.find((offbasepass) => offbasepass.status === "ALLOWED");
+  const isAllowed = offBasePass?.data.find((offBasePass) => offBasePass.status === "ALLOWED");
   let allowedStudent = [];
 
   if (isAllowed) {
