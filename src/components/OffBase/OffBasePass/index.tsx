@@ -3,12 +3,7 @@ import { Suspense, useState } from "react";
 import Calendars from "components/common/Calendars";
 import * as S from "./style";
 import { useRecoilState } from "recoil";
-import {
-  SelectApprovalAtom,
-  SelectGradeAtom,
-  PassSelectIdAtom,
-  UploadDateAtom,
-} from "stores/OffBase/offbase.store";
+import { SelectApprovalAtom, SelectGradeAtom, PassSelectIdAtom, UploadDateAtom } from "stores/OffBase/offbase.store";
 import TableAttribute from "components/common/TableAttribute";
 import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
@@ -23,21 +18,28 @@ import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
 import CsvButton from "components/common/ExtractCsvData";
 import dayjs from "dayjs";
 import { PointSelectRoom } from "stores/Point/point.store";
+import { Flex } from "components/common/Flex/Flex";
+import { useGetOffBasePassQuery } from "queries/OffBasePass/offbasepass.query";
 
 const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
-  const [selectedIds, setSelectedIds] =
-    useRecoilState<number[]>(PassSelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(PassSelectIdAtom);
 
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
-  const [selectApproval, setSelectApproval] =
-    useRecoilState(SelectApprovalAtom);
+  const [selectApproval, setSelectApproval] = useRecoilState(SelectApprovalAtom);
   const [room, setRoom] = useRecoilState(PointSelectRoom);
 
-  const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } =
-    useOffBasePass();
+  const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } = useOffBasePass();
+  const { data: OffBasePass } = useGetOffBasePassQuery(uploadDate);
+
+  const isAllowed = OffBasePass?.data.find((offbasepass) => offbasepass.status === "ALLOWED");
+  let allowedStudent = [];
+
+  if (isAllowed) {
+    allowedStudent.push(isAllowed.student.name);
+  }
 
   return (
     <>
@@ -45,13 +47,10 @@ const OffBasePass = () => {
         <div style={{ display: "flex" }}>
           <SearchBar value={studentName} onChange={setStudentName} />
 
-          <Calendars
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            uploadDate={uploadDate}
-            setUploadDate={setUploadDate}
-          />
-
+          <Calendars isOpen={isOpen} setIsOpen={setIsOpen} uploadDate={uploadDate} setUploadDate={setUploadDate} />
+          <Flex customStyle={{ alignItems: "center", marginLeft: 10 }}>
+            <span>현재 외출한 학생 수 : {allowedStudent.length}명</span>
+          </Flex>
           {selectedIds.length !== 0 && (
             <S.ButtonContainer>
               <Button
@@ -76,11 +75,7 @@ const OffBasePass = () => {
               >
                 모두 거절
               </Button>
-              <Button
-                ButtonType="disagree"
-                style={S.ClearStyle}
-                onClick={() => setSelectedIds([])}
-              >
+              <Button ButtonType="disagree" style={S.ClearStyle} onClick={() => setSelectedIds([])}>
                 선택 해제
               </Button>
             </S.ButtonContainer>
@@ -101,18 +96,8 @@ const OffBasePass = () => {
               fileName={dayjs().format("YYYY-MM-DD") + "외출 중인 학생"}
             />
           </CsvButtonContainer>
-          <Select
-            items={APPROVAL_ITEMS}
-            value={selectApproval}
-            onChange={setSelectApproval}
-            zIndex={2}
-          />
-          <Select
-            items={GRADE_ITEMS}
-            value={selectGrade}
-            onChange={setSelectGrade}
-            zIndex={2}
-          />
+          <Select items={APPROVAL_ITEMS} value={selectApproval} onChange={setSelectApproval} zIndex={2} />
+          <Select items={GRADE_ITEMS} value={selectGrade} onChange={setSelectGrade} zIndex={2} />
           <Select
             items={["모든 학반", "1반", "2반", "3반", "4반"]}
             value={room || "학반을 선택해주세요"}
