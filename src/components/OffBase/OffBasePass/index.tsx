@@ -49,7 +49,11 @@ const OffBasePass = () => {
 
           <Calendars isOpen={isOpen} setIsOpen={setIsOpen} uploadDate={uploadDate} setUploadDate={setUploadDate} />
           <Flex customStyle={{ alignItems: "center", marginLeft: 10 }}>
-            <span>현재 외출한 학생 수 : {allowedStudent.length}명</span>
+            <span>
+              {allowedStudent.length === 0
+                ? "현재 외출한 학생이 존재하지 않습니다."
+                : `현재 외출자 수 : ${allowedStudent.length}명`}
+            </span>
           </Flex>
           {selectedIds.length !== 0 && (
             <S.ButtonContainer>
