@@ -88,7 +88,7 @@ const TodayOffBaseItem = ({ selectApproval, selectGrade, studentName, selectRoom
                 ),
             )}
           </TBody>
-          <OffBaseLeaveModal isOpen={isOpen} data={leaveData} handleModalClick={handleModalClick} where="PASS"/>
+          <OffBaseLeaveModal isOpen={isOpen} data={leaveData} handleModalClick={handleModalClick} where="PASS" />
         </>
       )}
     </>
