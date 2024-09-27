@@ -92,7 +92,7 @@ const OffBaseLeaveItem = ({
         <>
           <TBody customStyle={S.OffBaseTBody}>
             {offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
-              (offbaseleave) => (
+              (offbaseleave, key) => (
                 <S.OffBaseTR
                   onClick={() => {
                     if (offbaseleave.status === "PENDING") {
@@ -103,6 +103,7 @@ const OffBaseLeaveItem = ({
                       }
                     }
                   }}
+                  key={key}
                   style={{
                     backgroundColor: leaveSelectedIds.includes(offbaseleave.id) ? "#EEF3F9" : "",
                   }}
