@@ -6,14 +6,16 @@ import { TD, TH, THead, TR, Table } from "@b1nd/b1nd-dodamdodam-ui";
 import { OFFBASELEAVE_MODAL_ITEMS } from "./constant";
 import convertDateTime from "utils/Time/ConvertDateTime";
 import OffBaseLeaveIcon from "assets/icons/OffBaseLeave/Tent.svg";
+import OffBasePassIcon from "assets/icons/OffBasePass/Convenience store.svg";
 
 interface Props {
   isOpen: boolean;
   data: OutListType | undefined;
+  where: string;
   handleModalClick: () => void;
 }
 
-const OffBaseModal = ({ isOpen, data, handleModalClick }: Props) => {
+const OffBaseModal = ({ isOpen, data, where, handleModalClick }: Props) => {
   return (
     <Portal>
       {isOpen && (
@@ -21,8 +23,8 @@ const OffBaseModal = ({ isOpen, data, handleModalClick }: Props) => {
           <S.ModalWrap onClick={(e) => e.stopPropagation()}>
             <S.TitleContainer>
               <S.ModalTitle>
-                <img src={OffBaseLeaveIcon} alt="OffBaseLeaveIcon" />
-                외박 상세보기
+                <img src={where === "PASS" ? OffBasePassIcon : OffBaseLeaveIcon} alt={where === "PASS" ? "외출 아이콘" : "외박 아이콘"} />
+                {where === "PASS" ? "외출 상세보기" : "외박 상세보기"}
               </S.ModalTitle>
               <S.CloseIcon size={32} onClick={handleModalClick} />
             </S.TitleContainer>

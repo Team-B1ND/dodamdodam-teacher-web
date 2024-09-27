@@ -141,7 +141,7 @@ const OffBaseLeaveItem = ({
               ),
             )}
           </TBody>
-          <OffBaseModal isOpen={isOPen} data={leaveData} handleModalClick={handleModalClick} />
+          <OffBaseModal isOpen={isOPen} data={leaveData} handleModalClick={handleModalClick} where="LEAVE"/>
         </>
       )}
     </>

@@ -138,7 +138,7 @@ const OffBasePassItem = ({ studentName, uploadDate, selectGrade, selectApproval,
               ),
             )}
           </div>
-          <OffBaseModal isOpen={isOpen} data={passData} handleModalClick={handleModalClick}/>
+          <OffBaseModal isOpen={isOpen} data={passData} handleModalClick={handleModalClick} where="PASS"/>
         </>
       )}
     </>
