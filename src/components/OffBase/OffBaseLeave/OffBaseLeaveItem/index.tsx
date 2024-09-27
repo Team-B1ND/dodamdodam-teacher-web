@@ -7,8 +7,11 @@ import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 import { useRecoilState } from "recoil";
 import { LeaveSelectIdAtom } from "stores/OffBase/offbase.store";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { truncateText } from "utils/common/truncate";
+import { OutListType } from "types/OffBasePass/offbasepass.type";
+import OffBaseModal from "../OffBaseLeaveModal";
 
 interface OffBaseLeaveProps {
   studentName: string;
@@ -32,6 +35,12 @@ const OffBaseLeaveItem = ({
   });
   const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
   const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel, patchLeaveCancel } = useOffBaseLeave();
+  const [isOPen, setIsOpen] = useState<boolean>(false);
+  const [leaveData, setLeaveData] = useState<OutListType>();
+
+  const handleModalClick = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     setUploadData(dayjs().format("YYYY-MM-DD"));
@@ -80,51 +89,59 @@ const OffBaseLeaveItem = ({
       offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.length === 0 ? (
         <S.NoneTile>현재 외박 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
-        <TBody customStyle={S.OffBaseTBody}>
-          {offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
-            (offbaseleave) => (
-              <S.OffBaseTR
-                onClick={() => {
-                  if (offbaseleave.status === "PENDING") {
-                    if (leaveSelectedIds.includes(offbaseleave.id)) {
-                      setLeaveSelectedIds((prevIds) => prevIds.filter((id) => id !== offbaseleave.id));
-                    } else {
-                      setLeaveSelectedIds([...leaveSelectedIds, offbaseleave.id]);
+        <>
+          <TBody customStyle={S.OffBaseTBody}>
+            {offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
+              (offbaseleave) => (
+                <S.OffBaseTR
+                  onClick={() => {
+                    if (offbaseleave.status === "PENDING") {
+                      if (leaveSelectedIds.includes(offbaseleave.id)) {
+                        setLeaveSelectedIds((prevIds) => prevIds.filter((id) => id !== offbaseleave.id));
+                      } else {
+                        setLeaveSelectedIds([...leaveSelectedIds, offbaseleave.id]);
+                      }
                     }
-                  }
-                }}
-                style={{
-                  backgroundColor: leaveSelectedIds.includes(offbaseleave.id) ? "#EEF3F9" : "",
-                }}
-              >
-                <TD customStyle={S.OffBaseTD}>
-                  <S.MemberImage src={profileImg} />
-                </TD>
-                <TD customStyle={S.OffBaseTD}>{offbaseleave.student.name}</TD>
-                <TD customStyle={S.OffBaseTD}>
-                  {offbaseleave.student.grade}학년
-                  {offbaseleave.student.room}반{offbaseleave.student.number}번
-                </TD>
-                <TD customStyle={S.OffBaseTD}>
-                  <S.DateContainer>
-                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.startAt), "date")}</div>
-                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.startAt), "time")}</div>
-                  </S.DateContainer>
-                </TD>
-                <TD customStyle={S.OffBaseTD}>
-                  <S.DateContainer>
-                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.endAt), "date")}</div>
-                    <div>{convertDateTime.getDateTime(new Date(offbaseleave.endAt), "time")}</div>
-                  </S.DateContainer>
-                </TD>
-                <TD customStyle={S.OffBaseTD}>
-                  <S.Reason>{offbaseleave.reason}</S.Reason>
-                </TD>
-                <TD customStyle={S.ButtonContainerStyle}>{selectComponent(offbaseleave.id)}</TD>
-              </S.OffBaseTR>
-            ),
-          )}
-        </TBody>
+                  }}
+                  style={{
+                    backgroundColor: leaveSelectedIds.includes(offbaseleave.id) ? "#EEF3F9" : "",
+                  }}
+                >
+                  <TD customStyle={S.OffBaseTD}>
+                    <S.MemberImage src={profileImg} />
+                  </TD>
+                  <TD customStyle={S.OffBaseTD}>{offbaseleave.student.name}</TD>
+                  <TD customStyle={S.OffBaseTD}>
+                    {offbaseleave.student.grade}학년
+                    {offbaseleave.student.room}반{offbaseleave.student.number}번
+                  </TD>
+                  <TD customStyle={S.OffBaseTD}>
+                    <S.DateContainer>
+                      <div>{convertDateTime.getDateTime(new Date(offbaseleave.startAt), "date")}</div>
+                      <div>{convertDateTime.getDateTime(new Date(offbaseleave.startAt), "time")}</div>
+                    </S.DateContainer>
+                  </TD>
+                  <TD customStyle={S.OffBaseTD}>
+                    <S.DateContainer>
+                      <div>{convertDateTime.getDateTime(new Date(offbaseleave.endAt), "date")}</div>
+                      <div>{convertDateTime.getDateTime(new Date(offbaseleave.endAt), "time")}</div>
+                    </S.DateContainer>
+                  </TD>
+                  <TD customStyle={S.OffBaseTD}>
+                    <S.Reason>
+                      <div onClick={() => {
+                        handleModalClick();
+                        setLeaveData(offbaseleave);
+                      }}>{truncateText(offbaseleave.reason, 7)}</div>
+                    </S.Reason>
+                  </TD>
+                  <TD customStyle={S.ButtonContainerStyle}>{selectComponent(offbaseleave.id)}</TD>
+                </S.OffBaseTR>
+              ),
+            )}
+          </TBody>
+          <OffBaseModal isOpen={isOPen} data={leaveData} handleModalClick={handleModalClick} />
+        </>
       )}
     </>
   );
