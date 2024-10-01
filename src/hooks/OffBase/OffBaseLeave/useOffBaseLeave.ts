@@ -56,7 +56,7 @@ const useOffBaseLeave = () => {
       const newData = offBaseLeave.data.map((data: OutListType) => ({
         이름: data.student.name,
         반번호: `${data.student.grade}학년 ${data.student.room}반 ${data.student.number}번`,
-        사유: data.reason,
+        사유: data.reason.substring(0, 11),
         비고: "",
       }));
       setLeaveStudentList(newData);
