@@ -34,12 +34,9 @@ const OffBasePass = () => {
   const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } = useOffBasePass();
   const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
 
-  const isAllowed = offBasePass?.data.find((offBasePass) => offBasePass.status === "ALLOWED");
-  let allowedStudent = [];
-
-  if (isAllowed) {
-    allowedStudent.push(isAllowed.student.name);
-  }
+const allowedStudents = offBasePass?.data
+  .filter((offBasePass) => offBasePass.status === "ALLOWED")
+  .map((offBasePass) => offBasePass.student.name) || [];
 
   return (
     <>
@@ -50,9 +47,9 @@ const OffBasePass = () => {
           <Calendars isOpen={isOpen} setIsOpen={setIsOpen} uploadDate={uploadDate} setUploadDate={setUploadDate} />
           <Flex customStyle={{ alignItems: "center", marginLeft: 10 }}>
             <span>
-              {allowedStudent.length === 0
+              {allowedStudents.length === 0
                 ? "현재 외출한 학생이 존재하지 않습니다."
-                : `현재 외출자 수 : ${allowedStudent.length}명`}
+                : `현재 외출자 수 : ${allowedStudents.length}명`}
             </span>
           </Flex>
           {selectedIds.length !== 0 && (
