@@ -14,38 +14,18 @@ const SideBarDropdown = () => {
       <MenuDropdownWrapper title="외출 / 외박">
         <MenuDropdownChild title="외출" redirectUrl="/offbase-pass" />
         <MenuDropdownChild title="외박" redirectUrl="/offbase-leave" />
-        <MenuDropdownChild
-          title="외박 중인 학생"
-          redirectUrl="/offbase-leave-ing"
-        />
+        <MenuDropdownChild title="외박 중인 학생" redirectUrl="/offbase-leave-ing" />
+        <MenuDropdownChild title="석식 희망 학생" redirectUrl="/offbase-leave-meal-deamnd" />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="상벌점">
-        <MenuDropdownChild
-          title="기숙사 점수 관리"
-          redirectUrl="/PointScore?type=DORMITORY"
-        />
-        <MenuDropdownChild
-          title="기숙사 상벌점 사유"
-          redirectUrl="/PointReason?type=DORMITORY"
-        />
-        <MenuDropdownChild
-          title="학교 점수 관리"
-          redirectUrl="/PointScore?type=SCHOOL"
-        />
-        <MenuDropdownChild
-          title="학교 점수 사유"
-          redirectUrl="/PointReason?type=SCHOOL"
-        />
+        <MenuDropdownChild title="기숙사 점수 관리" redirectUrl="/PointScore?type=DORMITORY" />
+        <MenuDropdownChild title="기숙사 상벌점 사유" redirectUrl="/PointReason?type=DORMITORY" />
+        <MenuDropdownChild title="학교 점수 관리" redirectUrl="/PointScore?type=SCHOOL" />
+        <MenuDropdownChild title="학교 점수 사유" redirectUrl="/PointReason?type=SCHOOL" />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="2차 심자">
-        <MenuDropdownChild
-          title="심자신청 수락/거절"
-          redirectUrl="/nightStudy-allow"
-        />
-        <MenuDropdownChild
-          title="심자중인 학생"
-          redirectUrl="/nightStudy-today"
-        />
+        <MenuDropdownChild title="심자신청 수락/거절" redirectUrl="/nightStudy-allow" />
+        <MenuDropdownChild title="심자중인 학생" redirectUrl="/nightStudy-today" />
       </MenuDropdownWrapper>
       <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
       <MenuItem title="채용공고" redirectUrl="/cms" />

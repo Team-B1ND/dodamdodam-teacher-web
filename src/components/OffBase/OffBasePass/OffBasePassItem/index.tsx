@@ -106,7 +106,7 @@ const OffBasePassItem = ({ studentName, uploadDate, selectGrade, selectApproval,
                       backgroundColor: selectedIds.includes(offbasepass.id) ? "#EEF3F9" : "",
                     }}
                   >
-                    <TD customStyle={S.OffBaseTD}>
+                    <TD customStyle={S.OffBaseProfileImg}>
                       <S.MemberImage src={profileImg} />
                     </TD>
                     <TD customStyle={S.OffBaseTD}>{offbasepass.student.name}</TD>
@@ -127,10 +127,17 @@ const OffBasePassItem = ({ studentName, uploadDate, selectGrade, selectApproval,
                       </S.DateContainer>
                     </TD>
                     <TD customStyle={S.OffBaseTD}>
-                      <div onClick={() => {
-                        handleModalClick();
-                        setPassData(offbasepass)
-                      }}>{truncateText(offbasepass.reason, 7)}</div>
+                      <div
+                        onClick={() => {
+                          handleModalClick();
+                          setPassData(offbasepass);
+                        }}
+                      >
+                        {truncateText(offbasepass.reason, 7)}
+                      </div>
+                    </TD>
+                    <TD customStyle={{ width: "14%", fontSize: "16px", lineHeight: "20px", userSelect: "none", marginRight: "-3%" }}>
+                      {offbasepass.dinnerOrNot ? "O" : "X"}
                     </TD>
                     <TD customStyle={S.ButtonContainerStyle}>{selectComponent(offbasepass.id)}</TD>
                   </S.OffBaseTR>
@@ -138,7 +145,7 @@ const OffBasePassItem = ({ studentName, uploadDate, selectGrade, selectApproval,
               ),
             )}
           </div>
-          <OffBaseModal isOpen={isOpen} data={passData} handleModalClick={handleModalClick} where="PASS"/>
+          <OffBaseModal isOpen={isOpen} data={passData} handleModalClick={handleModalClick} where="PASS" />
         </>
       )}
     </>
