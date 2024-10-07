@@ -37,7 +37,7 @@ const TodayOffBase = () => {
   return (
     <>
       <S.OffBaseHeaderContainer>
-        <div style={{ display: "flex", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <SearchBar value={studentName} onChange={setStudentName} />
           <span style={{ marginLeft: 10 }}>
             {allowedStudents.length === 0

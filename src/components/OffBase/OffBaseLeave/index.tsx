@@ -41,7 +41,7 @@ const OffBaseLeave = () => {
           <div>
             <SearchBar value={studentName} onChange={setStudentName} />
           </div>
-          <Flex customStyle={{ alignItems: "flex-end", marginLeft: 10 }}>
+          <Flex customStyle={{ alignItems: "center", marginLeft: 10 }}>
             <span>
               {allowedStudents.length === 0
                 ? "현재 외박한 학생이 존재하지 않습니다."
