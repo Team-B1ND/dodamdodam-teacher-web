@@ -1,6 +1,6 @@
 import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Calendars from "components/common/Calendars";
 import { useRecoilState } from "recoil";
 import { LeaveSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom } from "stores/OffBase/offbase.store";
@@ -14,6 +14,9 @@ import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
 import { PointSelectRoom } from "stores/Point/point.store";
 import useOffBaseLeave from "hooks/OffBase/OffBaseLeave/useOffBaseLeave";
+import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { Flex } from "components/common/Flex/Flex";
+import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 
 const OffBaseLeave = () => {
   const [studentName, setStudentName] = useState("");
@@ -25,6 +28,8 @@ const OffBaseLeave = () => {
   const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
   const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel } = useOffBaseLeave();
 
+  const { data: offBaseLeave } = useGetOffBaseLeaveQuery(uploadDate);
+
   return (
     <>
       <S.OffBaseHeaderContainer>
@@ -32,9 +37,13 @@ const OffBaseLeave = () => {
           <div>
             <SearchBar value={studentName} onChange={setStudentName} />
           </div>
-
-          {/* <Calendars isOpen={false} setIsOpen={() => false} uploadDate={uploadDate} setUploadDate={setUploadDate} /> */}
-
+          <Flex customStyle={{ alignItems: "center", marginLeft: 10 }}>
+            <span>
+              {offBaseMemberCalc(offBaseLeave?.data!).length === 0
+                ? "현재 외박한 학생이 존재하지 않습니다."
+                : `현재 외뱍자 수 : ${offBaseMemberCalc(offBaseLeave?.data!).length}명`}
+            </span>
+          </Flex>
           {leaveSelectedIds.length !== 0 && (
             <S.ButtonContainer>
               <Button
