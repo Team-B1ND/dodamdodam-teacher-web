@@ -20,6 +20,7 @@ import dayjs from "dayjs";
 import { PointSelectRoom } from "stores/Point/point.store";
 import { Flex } from "components/common/Flex/Flex";
 import { useGetOffBasePassQuery } from "queries/OffBasePass/offbasepass.query";
+import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 
 const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
@@ -34,10 +35,6 @@ const OffBasePass = () => {
   const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } = useOffBasePass();
   const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
 
-const allowedStudents = offBasePass?.data
-  .filter((offBasePass) => offBasePass.status === "ALLOWED")
-  .map((offBasePass) => offBasePass.student.name) || [];
-
   return (
     <>
       <S.OffBaseHeaderContainer>
@@ -47,9 +44,9 @@ const allowedStudents = offBasePass?.data
           <Calendars isOpen={isOpen} setIsOpen={setIsOpen} uploadDate={uploadDate} setUploadDate={setUploadDate} />
           <Flex customStyle={{ alignItems: "center", marginLeft: 10 }}>
             <span>
-              {allowedStudents.length === 0
+              {offBaseMemberCalc(offBasePass?.data!).length === 0
                 ? "현재 외출한 학생이 존재하지 않습니다."
-                : `현재 외출자 수 : ${allowedStudents.length}명`}
+                : `현재 외출자 수 : ${offBaseMemberCalc(offBasePass?.data!).length}명`}
             </span>
           </Flex>
           {selectedIds.length !== 0 && (

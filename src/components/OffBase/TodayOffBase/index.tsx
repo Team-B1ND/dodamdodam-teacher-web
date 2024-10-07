@@ -17,7 +17,8 @@ import dayjs from "dayjs";
 import useOffBaseLeave from "hooks/OffBase/OffBaseLeave/useOffBaseLeave";
 import { PointSelectRoom } from "stores/Point/point.store";
 import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
-import { Flex } from "components/common/Flex/Flex";
+import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
+import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 
 const TodayOffBase = () => {
   const [studentName, setStudentName] = useState("");
@@ -29,20 +30,15 @@ const TodayOffBase = () => {
 
   const { data: todayOffBaseLeave } = useGetTodayLeaveQuery();
 
-  const allowedStudents =
-    todayOffBaseLeave?.data
-      .filter((todayOffBaseLeave) => todayOffBaseLeave.status === "ALLOWED")
-      .map((todayOffBaseLeave) => todayOffBaseLeave.student.name) || [];
-
   return (
     <>
       <S.OffBaseHeaderContainer>
         <div style={{ display: "flex", alignItems: "center" }}>
           <SearchBar value={studentName} onChange={setStudentName} />
           <span style={{ marginLeft: 10 }}>
-            {allowedStudents.length === 0
+            {offBaseMemberCalc(todayOffBaseLeave?.data!).length === 0
               ? "오늘은 외박한 학생이 없습니다."
-              : `오늘의 외박자 수 : ${allowedStudents.length}명`}
+              : `오늘의 외박자 수 : ${offBaseMemberCalc(todayOffBaseLeave?.data!).length}명`}
           </span>
         </div>
 
