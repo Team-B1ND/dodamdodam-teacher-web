@@ -3,7 +3,7 @@ import { Suspense, useState } from "react";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import TableAttribute from "components/common/TableAttribute";
 import TodayOffBaseItem from "./TodayOffBaseItem";
-import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
+import { OFFBASE_LEAVE_ITEMS } from "constants/OffBase/offbase.constant";
 import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { useRecoilState } from "recoil";
 import { SelectApprovalAtom, SelectGradeAtom } from "stores/OffBase/offbase.store";
@@ -57,7 +57,7 @@ const TodayOffBase = () => {
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
 
-      <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
+      <TableAttribute constant={OFFBASE_LEAVE_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>오늘의 외박자를 불러오지 못했습니다.</>}>
           <Suspense fallback={<>로딩중...</>}>
             <TodayOffBaseItem

@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import { LeaveSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom } from "stores/OffBase/offbase.store";
 import TableAttribute from "components/common/TableAttribute";
 import ErrorBoundary from "components/common/ErrorBoundary";
-import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
+import { OFFBASE_LEAVE_ITEMS } from "constants/OffBase/offbase.constant";
 import OffBaseLeaveItem from "./OffBaseLeaveItem";
 import { changeApproval } from "utils/OffBase/changeApproval";
 import { changeGrade } from "utils/Member/changeGrade";
@@ -86,7 +86,7 @@ const OffBaseLeave = () => {
           />
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
-      <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
+      <TableAttribute constant={OFFBASE_LEAVE_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>외박한 학생을 불러오지 못했습니다.</>}>
           <Suspense fallback={<>로딩중...</>}>
             <OffBaseLeaveItem
