@@ -9,6 +9,7 @@ export interface OutListType {
   student: StudentType;
   startAt: string;
   endAt: string;
+  dinnerOrNot: boolean;
   createdAt: string;
   modifiedAt: string;
 }

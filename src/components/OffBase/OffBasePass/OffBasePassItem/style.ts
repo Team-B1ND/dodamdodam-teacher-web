@@ -30,11 +30,19 @@ export const OffBaseTR = styled.tr`
   cursor: pointer;
 `;
 
+export const OffBaseProfileImg: CSSObject = {
+  width: "14%",
+  fontSize: "16px",
+  lineHeight: "20px",
+  userSelect: "none",
+}
+
 export const OffBaseTD: CSSObject = {
   width: "14%",
   fontSize: "16px",
   lineHeight: "20px",
   userSelect: "none",
+  marginLeft: "-1%"
 };
 
 export const BusLeaveTime: CSSObject = {
