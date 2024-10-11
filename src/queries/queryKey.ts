@@ -19,6 +19,9 @@ export const QUERY_KEYS = Object.freeze({
     getOffBaseLeave: (endAt: string) => ["/out-sleeping", endAt],
     getOffBaseTodayLeave: "/out-sleeping/valid",
   },
+  offbasemeal: {
+    getMealDemand: (date: string) => ["/out-going/meal-demand", date]
+  },
   nightstudy: {
     getPendingNightStudy: "/night-study/pending",
     getNightStudyList: "/night-study",
