@@ -41,7 +41,7 @@ const OffBaseLeave = () => {
             <span>
               {offBaseMemberCalc(offBaseLeave?.data!).length === 0
                 ? "현재 외박한 학생이 존재하지 않습니다."
-                : `현재 외뱍자 수 : ${offBaseMemberCalc(offBaseLeave?.data!).length}명`}
+                : `현재 외박자 수 : ${offBaseMemberCalc(offBaseLeave?.data!).length}명`}
             </span>
           </Flex>
           {leaveSelectedIds.length !== 0 && (
