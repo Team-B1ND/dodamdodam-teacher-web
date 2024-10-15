@@ -115,13 +115,13 @@ const OffBasePassItem = ({ studentName, uploadDate, selectGrade, selectApproval,
                       {offbasepass.student.room}반{offbasepass.student.number}번
                     </TD>
                     <TD customStyle={S.OffBaseTD}>
-                      <S.DateContainer>
+                      <S.DateContainer style={{ width: "80%" }}>
                         <div>{convertDateTime.getDateTime(new Date(offbasepass.startAt), "date")}</div>
                         <div>{convertDateTime.getDateTime(new Date(offbasepass.startAt), "time")}</div>
                       </S.DateContainer>
                     </TD>
                     <TD customStyle={S.OffBaseTD}>
-                      <S.DateContainer>
+                      <S.DateContainer style={{ width: "80%" }}>
                         <div>{convertDateTime.getDateTime(new Date(offbasepass.endAt), "date")}</div>
                         <div>{convertDateTime.getDateTime(new Date(offbasepass.endAt), "time")}</div>
                       </S.DateContainer>
@@ -136,7 +136,15 @@ const OffBasePassItem = ({ studentName, uploadDate, selectGrade, selectApproval,
                         {truncateText(offbasepass.reason, 7)}
                       </div>
                     </TD>
-                    <TD customStyle={{ width: "14%", fontSize: "16px", lineHeight: "20px", userSelect: "none", marginRight: "-3%" }}>
+                    <TD
+                      customStyle={{
+                        width: "14%",
+                        fontSize: "16px",
+                        lineHeight: "20px",
+                        userSelect: "none",
+                        marginRight: "-3%",
+                      }}
+                    >
                       {offbasepass.dinnerOrNot ? "O" : "X"}
                     </TD>
                     <TD customStyle={S.ButtonContainerStyle}>{selectComponent(offbasepass.id)}</TD>
