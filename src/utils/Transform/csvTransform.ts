@@ -24,6 +24,7 @@ export const PointDataToCsvData = (pointQueryParams: string) => {
       .filter((data) => data.student?.room === changeRoom(selectRoom) || changeRoom(selectRoom) === 0)
       .filter((data) => searchName(data.student.name, searchValue));
     setPointData(filteredData!);
+
     const parsedCsvData = filteredData?.map((item) => ({
       이름: item.student.name,
       학년: item.student.grade,
@@ -34,7 +35,7 @@ export const PointDataToCsvData = (pointQueryParams: string) => {
       상쇄점: item.offset,
     }));
     setCsvData(parsedCsvData!);
-  }, [searchName, searchValue, pointQueryParams]);
+  }, [selectGrade, selectRoom, searchValue, pointQueryParams]);
 
   return { csvData, pointData };
 };
