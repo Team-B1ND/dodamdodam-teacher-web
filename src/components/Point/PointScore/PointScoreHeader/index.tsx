@@ -43,7 +43,7 @@ const PointScoreHeader = ({ pointQueryParam }: Props) => {
             />
             <Select
               customStyle={{ minWidth: "95px" }}
-              items={["전체보기", "1반", "2반", "3반", "4반"]}
+              items={["모든 학반", "1반", "2반", "3반", "4반"]}
               value={room || "학반을 선택해주세요"}
               onChange={setRoom}
             />
