@@ -1,0 +1,48 @@
+name: Trigger Web Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  trigger-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      PR_TITLE: ${{ github.event.pull_request.title || '' }}
+      COMMIT_MESSAGE: ${{ github.event.head_commit.message || '' }}
+      FINAL_TITLE: ${{ github.event.pull_request.title || github.event.head_commit.message }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Clean Commit Message
+        id: clean-message
+        run: |
+          CLEAN_TITLE=$(echo "${{ env.FINAL_TITLE }}" | tr -d '\000-\031')
+          echo "CLEAN_TITLE=$CLEAN_TITLE" >> $GITHUB_ENV
+
+      - name: Trigger Deploy
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+          repository: team-b1nd/web-deploy-config
+          event-type: trigger-deploy
+          client-payload: |
+            {
+              "repo_name": "${{ github.repository }}",
+              "branch": "${{ github.ref }}",
+              "source_directory": "./build",
+              "project_name": "dodam",
+              "destination_directory": "/",
+              "config_secret": "${{ secrets.CONFIG_JSON }}",
+              "title": "${{ env.CLEAN_TITLE }}",
+              "package_manager": "npm",
+              "build_command": "npm config set registry=https://npm.pkg.github.com/Team-B1ND && npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GIT_ACCESS_TOKEN }} && npm config set //registry.npmjs.org/:_authToken=${{ secrets.GIT_ACCESS_TOKEN }} && npm install"
+            }
