@@ -10,6 +10,11 @@ export const SelectApprovalAtom = atom<string>({
   default: "승인여부",
 });
 
+export const SelectMealDemand = atom<string>({
+  key: "SelectMealDemand",
+  default: "석식희망여부",
+});
+
 export const UploadDateAtom = atom<string>({
   key: "UploadDateAtom",
   default: "",

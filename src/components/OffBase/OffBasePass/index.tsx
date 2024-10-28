@@ -3,7 +3,13 @@ import { Suspense, useState } from "react";
 import Calendars from "components/common/Calendars";
 import * as S from "./style";
 import { useRecoilState } from "recoil";
-import { SelectApprovalAtom, SelectGradeAtom, PassSelectIdAtom, UploadDateAtom } from "stores/OffBase/offbase.store";
+import {
+  SelectApprovalAtom,
+  SelectGradeAtom,
+  PassSelectIdAtom,
+  UploadDateAtom,
+  SelectMealDemand,
+} from "stores/OffBase/offbase.store";
 import TableAttribute from "components/common/TableAttribute";
 import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
@@ -22,6 +28,7 @@ import { Flex } from "components/common/Flex/Flex";
 import { useGetOffBasePassQuery } from "queries/OffBasePass/offbasepass.query";
 import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 import { useGetMealDemandQuery } from "queries/OffBaseMeal/offbasemeal.query";
+import { changeMealDemand } from "utils/OffBase/changeMealDemand";
 
 const OffBasePass = () => {
   const [studentName, setStudentName] = useState("");
@@ -31,6 +38,7 @@ const OffBasePass = () => {
 
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] = useRecoilState(SelectApprovalAtom);
+  const [selectMealDemand, setSelectMealDemand] = useRecoilState(SelectMealDemand);
   const [room, setRoom] = useRecoilState(PointSelectRoom);
 
   const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } = useOffBasePass();
@@ -108,6 +116,12 @@ const OffBasePass = () => {
               fileName={dayjs().format("YYYY-MM-DD") + "외출 중인 학생"}
             />
           </CsvButtonContainer>
+          <Select
+            items={["석식희망여부", "석식 희망", "석식 비희망"]}
+            value={selectMealDemand}
+            onChange={setSelectMealDemand}
+            zIndex={2}
+          />
           <Select items={APPROVAL_ITEMS} value={selectApproval} onChange={setSelectApproval} zIndex={2} />
           <Select items={GRADE_ITEMS} value={selectGrade} onChange={setSelectGrade} zIndex={2} />
           <Select
@@ -124,6 +138,7 @@ const OffBasePass = () => {
           <Suspense fallback={<SkeletonComponent height={60} />}>
             <OffBasePassItem
               selectRoom={room}
+              selectMealDemand={changeMealDemand(selectMealDemand)}
               selectApproval={changeApproval(selectApproval)}
               selectGrade={changeGrade(selectGrade)}
               studentName={studentName}
