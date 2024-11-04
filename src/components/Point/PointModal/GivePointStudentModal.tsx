@@ -73,7 +73,7 @@ const GivePointStudentModal = ({ pointQueryParam, close, title }: StudentPointIn
             items={
               pointReasonsData
                 ? pointReasonsData.data!.map(
-                    (data) => data.reason + ":" + ` ${coverPointTypeToKorean(data.scoreType)}` + `${data.score}점`,
+                  (data) => `${data.reason}: ${coverPointTypeToKorean(data.scoreType)}${data.score}점`,
                   )
                 : []
             }

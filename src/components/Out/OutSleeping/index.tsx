@@ -1,7 +1,6 @@
 import { Button, SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import * as S from "./style";
-import { Suspense, useEffect, useState } from "react";
-import Calendars from "components/common/Calendars";
+import { Suspense, useState } from "react";
 import { useRecoilState } from "recoil";
 import { OutSleepingSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom } from "stores/Out/out.store";
 import TableAttribute from "components/common/TableAttribute";
@@ -20,7 +19,6 @@ import { offBaseMemberCalc } from "utils/Out/offbaseMemberCalc";
 
 const OutSleeping = () => {
   const [studentName, setStudentName] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
   const [room, setRoom] = useRecoilState(PointSelectRoom);
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);

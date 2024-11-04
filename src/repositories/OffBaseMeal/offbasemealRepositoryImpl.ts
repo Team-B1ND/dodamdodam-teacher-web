@@ -9,4 +9,5 @@ class OffBaseMealRepositoryImpl implements OffBaseMealRepository {
   }
 }
 
-export default new OffBaseMealRepositoryImpl();
+const offbaseMealRepository = new OffBaseMealRepositoryImpl();
+export default offbaseMealRepository

@@ -3,7 +3,7 @@ import { useGetPointAllMemberQuery } from "queries/Point/point.query";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { PointSelectGrade, PointSelectRoom, PointStduentSearch } from "stores/Point/point.store";
-import { Point, PointType } from "types/Point/point.type";
+import { Point } from "types/Point/point.type";
 import { changeGrade, changeRoom } from "utils/Member/changeGrade";
 import { sortStudentGrade } from "utils/Member/sortStudentGrade";
 import { searchName } from "utils/common/searchName";
@@ -35,7 +35,7 @@ export const PointDataToCsvData = (pointQueryParams: string) => {
       상쇄점: item.offset,
     }));
     setCsvData(parsedCsvData!);
-  }, [selectGrade, selectRoom, searchValue, pointQueryParams]);
+  }, [selectGrade, selectRoom, searchValue, pointQueryParams, studentPointData?.data]);
 
   return { csvData, pointData };
 };
