@@ -1,7 +1,7 @@
 import OffBaseLeave from "components/Out/OutSleeping";
 import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
-const OffBaseLeavePage = () => {
+const OutSleepingPage = () => {
   return (
     <SectionHeaderProvider
       title="외박"
@@ -12,4 +12,4 @@ const OffBaseLeavePage = () => {
   );
 };
 
-export default OffBaseLeavePage;
+export default OutSleepingPage;
