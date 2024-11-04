@@ -12,12 +12,12 @@ export const QUERY_KEYS = Object.freeze({
     getTeachers: "/members/teacher",
     getMyMember: "/member/my",
   },
-  offbasepass: {
-    getOffBasePass: (date: string) => ["/out-going", date],
+  outgoing: {
+    getOutGOing: (date: string) => ["/out-going", date],
   },
-  offbaseleave: {
-    getOffBaseLeave: (endAt: string) => ["/out-sleeping", endAt],
-    getOffBaseTodayLeave: "/out-sleeping/valid",
+  outsleeping: {
+    getOutSleeping: (endAt: string) => ["/out-sleeping", endAt],
+    getTodayOutSleeping: "/out-sleeping/valid",
   },
   offbasemeal: {
     getMealDemand: (date: string) => ["/out-going/meal-demand", date]

@@ -4,7 +4,7 @@ import profileImg from "assets/profileImg.svg";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
-import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { useGetTodayOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
 
 import ConvertDateTime from "utils/Time/ConvertDateTime";
 import { truncateText } from "utils/common/truncate";
@@ -20,7 +20,7 @@ interface OffBasePassProps {
 }
 
 const TodayOutSleepingItem = ({ selectApproval, selectGrade, studentName, selectRoom }: OffBasePassProps) => {
-  const { data: offBaseLeave } = useGetTodayLeaveQuery({ suspense: true });
+  const { data: offBaseLeave } = useGetTodayOutSleepingQuery({ suspense: true });
   const [leaveData, setLeaveData] = useState<OutListType>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { handleOffBaseLeave, patchLeaveApprovalCancel } = useOffBaseLeave();

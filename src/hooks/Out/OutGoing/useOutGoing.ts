@@ -1,10 +1,10 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import {
-  useGetOffBasePassQuery,
+  useGetOutGoingQuery,
   usePatchApproval,
   usePatchApprovalCancel,
   usePatchCancel,
-} from "queries/OffBasePass/offbasepass.query";
+} from "queries/OutGoing/outgoing.query";
 import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useRecoilState } from "recoil";
@@ -20,7 +20,7 @@ const useOutGoing = () => {
   const patchCancel = usePatchCancel();
   const [uploadDate] = useRecoilState<string>(UploadDateAtom);
 
-  const { data: OffBasePass } = useGetOffBasePassQuery(uploadDate);
+  const { data: OffBasePass } = useGetOutGoingQuery(uploadDate);
 
   const handleOffBasePass = (id: number, query: any) => {
     query.mutate(id, {
@@ -39,9 +39,7 @@ const useOutGoing = () => {
             break;
         }
 
-        queryClient.invalidateQueries(
-          QUERY_KEYS.offbasepass.getOffBasePass(uploadDate)
-        );
+        queryClient.invalidateQueries(QUERY_KEYS.outgoing.getOutGOing(uploadDate));
       },
       onError: () => {
         B1ndToast.showError("실패");
@@ -66,17 +64,12 @@ const useOutGoing = () => {
       const newData = OffBasePass.data.map((data: OutListType) => ({
         이름: data.student.name,
         반번호: `${data.student.grade}학년 ${data.student.room}반 ${data.student.number}번`,
-        도착시간: `${ConvertDateTime.getDateTime(
-          new Date(data.endAt),
-          "time"
-        )}`,
+        도착시간: `${ConvertDateTime.getDateTime(new Date(data.endAt), "time")}`,
         비고: "",
       }));
       setOffBaseInfo({ data: newData, length: OffBasePass.data.length });
     }
   }, [OffBasePass]);
-
-  
 
   return {
     handleOffBasePass,

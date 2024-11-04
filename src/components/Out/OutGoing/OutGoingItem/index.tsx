@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { useGetOffBasePassQuery } from "queries/OffBasePass/offbasepass.query";
+import { useGetOutGoingQuery } from "queries/OutGoing/outgoing.query";
 import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "assets/profileImg.svg";
 import useOffBasePass from "hooks/Out/OutGoing/useOutGoing";
@@ -29,7 +29,7 @@ const OutGoingItem = ({
   selectMealDemand,
   selectRoom,
 }: OffBasePassProps) => {
-  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate, {
+  const { data: offBasePass } = useGetOutGoingQuery(uploadDate, {
     suspense: true,
   });
 

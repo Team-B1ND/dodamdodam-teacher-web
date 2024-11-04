@@ -11,7 +11,7 @@ import {
   SelectMealDemand,
 } from "stores/OffBase/offbase.store";
 import TableAttribute from "components/common/TableAttribute";
-import { OFFBASE_PASS_ITEMS } from "constants/Out/offbase.constant";
+import { OUT_GOING_ITEMS } from "constants/Out/offbase.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import OffBasePassItem from "./OutGoingItem";
 import { changeGrade } from "utils/Member/changeGrade";
@@ -25,7 +25,7 @@ import CsvButton from "components/common/ExtractCsvData";
 import dayjs from "dayjs";
 import { PointSelectRoom } from "stores/Point/point.store";
 import { Flex } from "components/common/Flex/Flex";
-import { useGetOffBasePassQuery } from "queries/OffBasePass/offbasepass.query";
+import { useGetOutGoingQuery } from "queries/OutGoing/outgoing.query";
 import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 import { useGetMealDemandQuery } from "queries/OffBaseMeal/offbasemeal.query";
 import { changeMealDemand } from "utils/OffBase/changeMealDemand";
@@ -42,7 +42,7 @@ const OutGoing = () => {
   const [room, setRoom] = useRecoilState(PointSelectRoom);
 
   const { handleOffBasePass, patchApprovals, patchCancel, offbaseInfo } = useOffBasePass();
-  const { data: offBasePass } = useGetOffBasePassQuery(uploadDate);
+  const { data: offBasePass } = useGetOutGoingQuery(uploadDate);
   const { data: mealDemand } = useGetMealDemandQuery(uploadDate);
 
   return (
@@ -133,7 +133,7 @@ const OutGoing = () => {
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
 
-      <TableAttribute constant={OFFBASE_PASS_ITEMS} thStyle={{ width: "14%" }}>
+      <TableAttribute constant={OUT_GOING_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>외출한 학생을 불러오지 못했습니다.</>}>
           <Suspense fallback={<SkeletonComponent height={60} />}>
             <OffBasePassItem

@@ -4,7 +4,7 @@ import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "../queryKey";
 
-export const useGetOffBasePassQuery = (
+export const useGetOutGoingQuery = (
   date: string,
   options?: UseQueryOptions<
     OffBaseResponse,
@@ -14,7 +14,7 @@ export const useGetOffBasePassQuery = (
   >
 ) =>
   useQuery(
-    QUERY_KEYS.offbasepass.getOffBasePass(date),
+    QUERY_KEYS.outgoing.getOutGOing(date),
     () => offbasepassRepositoryImpl.getOffBasePass(date),
     {
       enabled: !!date,

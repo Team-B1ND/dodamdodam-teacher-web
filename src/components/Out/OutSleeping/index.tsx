@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import { LeaveSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom } from "stores/OffBase/offbase.store";
 import TableAttribute from "components/common/TableAttribute";
 import ErrorBoundary from "components/common/ErrorBoundary";
-import { OFFBASE_LEAVE_ITEMS } from "constants/Out/offbase.constant";
+import { OUT_SLEEPING_ITEMS } from "constants/Out/offbase.constant";
 import OffBaseLeaveItem from "./OutSleepingItem";
 import { changeApproval } from "utils/OffBase/changeApproval";
 import { changeGrade } from "utils/Member/changeGrade";
@@ -14,7 +14,7 @@ import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
 import { PointSelectRoom } from "stores/Point/point.store";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
-import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { useGetOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
 import { Flex } from "components/common/Flex/Flex";
 import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 
@@ -28,7 +28,7 @@ const OutSleeping = () => {
   const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
   const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel } = useOffBaseLeave();
 
-  const { data: offBaseLeave } = useGetOffBaseLeaveQuery(uploadDate);
+  const { data: offBaseLeave } = useGetOutSleepingQuery(uploadDate);
 
   return (
     <>
@@ -86,7 +86,7 @@ const OutSleeping = () => {
           />
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
-      <TableAttribute constant={OFFBASE_LEAVE_ITEMS} thStyle={{ width: "14%" }}>
+      <TableAttribute constant={OUT_SLEEPING_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>외박한 학생을 불러오지 못했습니다.</>}>
           <Suspense fallback={<>로딩중...</>}>
             <OffBaseLeaveItem

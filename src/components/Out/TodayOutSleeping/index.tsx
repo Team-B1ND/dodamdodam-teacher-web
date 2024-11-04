@@ -3,7 +3,7 @@ import { Suspense, useState } from "react";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import TableAttribute from "components/common/TableAttribute";
 import TodayOffBaseItem from "./TodayOutSleepingItem";
-import { OFFBASE_LEAVE_ITEMS } from "constants/Out/offbase.constant";
+import { OUT_SLEEPING_ITEMS } from "constants/Out/offbase.constant";
 import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { useRecoilState } from "recoil";
 import { SelectApprovalAtom, SelectGradeAtom } from "stores/OffBase/offbase.store";
@@ -16,7 +16,7 @@ import CsvButton from "components/common/ExtractCsvData";
 import dayjs from "dayjs";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 import { PointSelectRoom } from "stores/Point/point.store";
-import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { useGetTodayOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
 import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 
@@ -28,7 +28,7 @@ const TodayOutSleeping = () => {
 
   const { leaveStudentList } = useOffBaseLeave();
 
-  const { data: todayOffBaseLeave } = useGetTodayLeaveQuery();
+  const { data: todayOffBaseLeave } = useGetTodayOutSleepingQuery();
 
   return (
     <>
@@ -57,7 +57,7 @@ const TodayOutSleeping = () => {
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
 
-      <TableAttribute constant={OFFBASE_LEAVE_ITEMS} thStyle={{ width: "14%" }}>
+      <TableAttribute constant={OUT_SLEEPING_ITEMS} thStyle={{ width: "14%" }}>
         <ErrorBoundary fallback={<>오늘의 외박자를 불러오지 못했습니다.</>}>
           <Suspense fallback={<>로딩중...</>}>
             <TodayOffBaseItem

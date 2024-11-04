@@ -3,7 +3,7 @@ import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "assets/profileImg.svg";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 import convertDateTime from "utils/Time/ConvertDateTime";
-import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
+import { useGetOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
 import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
 import { useRecoilState } from "recoil";
 import { LeaveSelectIdAtom } from "stores/OffBase/offbase.store";
@@ -30,7 +30,7 @@ const OutSleepingItem = ({
   selectRoom,
   setUploadData,
 }: OffBaseLeaveProps) => {
-  const { data: offBaseLeave } = useGetOffBaseLeaveQuery(uploadDate, {
+  const { data: offBaseLeave } = useGetOutSleepingQuery(uploadDate, {
     suspense: true,
   });
   const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
