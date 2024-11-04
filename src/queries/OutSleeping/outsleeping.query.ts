@@ -1,5 +1,5 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import offbaseleaveRepositroy from "repositories/OffBaseLeave/offbaseleave.repositroy";
+import offbaseleaveRepositroy from "repositories/OutSleeping/outsleeping.repositoryImpl";
 import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
 import { AxiosError } from "axios";
 import { QUERY_KEYS } from "queries/queryKey";
@@ -15,7 +15,7 @@ export const useGetOutSleepingQuery = (
 ) =>
   useQuery(
     QUERY_KEYS.outsleeping.getOutSleeping(date),
-    () => offbaseleaveRepositroy.getOffBaseLeave(date),
+    () => offbaseleaveRepositroy.getOutSleeping(date),
     {
       enabled: !!date,
       staleTime: 1000 * 60 * 60,
@@ -34,7 +34,7 @@ export const useGetTodayOutSleepingQuery = (
 ) =>
   useQuery(
     QUERY_KEYS.outsleeping.getTodayOutSleeping,
-    () => offbaseleaveRepositroy.getTodayLeave(),
+    () => offbaseleaveRepositroy.getTodayOutSleeping(),
     {
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
@@ -44,21 +44,21 @@ export const useGetTodayOutSleepingQuery = (
 
 export const usePatchSleepingApproval = () => {
   const mutation = useMutation((id: number) =>
-    offbaseleaveRepositroy.patchLeaveApproval(id)
+    offbaseleaveRepositroy.patchSleepingApproval(id)
   );
   return mutation;
 };
 
 export const usePatchSleepingCancel = () => {
   const mutation = useMutation((id: number) =>
-    offbaseleaveRepositroy.patchLeaveCancel(id)
+    offbaseleaveRepositroy.patchSleepingCancel(id)
   );
   return mutation;
 };
 
 export const usePatchSleepingApprovalCancel = () => {
   const mutation = useMutation((id: number) =>
-    offbaseleaveRepositroy.patchLeaveApprovalCancel(id)
+    offbaseleaveRepositroy.patchSleepingApprovalCancel(id)
   );
   return mutation;
 };

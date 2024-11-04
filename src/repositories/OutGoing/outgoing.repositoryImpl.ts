@@ -1,9 +1,9 @@
 import { dodamAxios } from "libs/Axios/customAxios";
 import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
-import { OffBasePassRepository } from "./offbasepass.repository";
+import { OutGoingRepository } from "./outgoing.repository";
 
-class OffBasePassRepositoryImpl implements OffBasePassRepository {
-  public async getOffBasePass(date: string): Promise<OffBaseResponse> {
+class OffBasePassRepositoryImpl implements OutGoingRepository {
+  public async getOutGoing(date: string): Promise<OffBaseResponse> {
     const { data } = await dodamAxios.get(`/out-going?date=${date}`);
     return data;
   }
