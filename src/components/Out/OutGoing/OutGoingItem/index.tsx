@@ -4,13 +4,13 @@ import { Button, TBody, TD } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "assets/profileImg.svg";
 import useOffBasePass from "hooks/Out/OutGoing/useOutGoing";
 import { useRecoilState } from "recoil";
-import { PassSelectIdAtom } from "stores/OffBase/offbase.store";
+import { OutGoingSelectIdAtom } from "stores/Out/out.store";
 import convertDateTime from "utils/Time/ConvertDateTime";
-import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
+import { outGoingDataFilter } from "utils/Out/outGoingDataFilter";
 import { truncateText } from "utils/common/truncate";
 import OffBaseModal from "components/Out/OutSleeping/OutSleepingModal";
 import { useState } from "react";
-import { OutListType } from "types/OffBasePass/offbasepass.type";
+import { OutListType } from "types/Out/out.type";
 
 interface OffBasePassProps {
   studentName: string;
@@ -33,7 +33,7 @@ const OutGoingItem = ({
     suspense: true,
   });
 
-  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(PassSelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(OutGoingSelectIdAtom);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [passData, setPassData] = useState<OutListType>();
 
@@ -44,7 +44,7 @@ const OutGoingItem = ({
   const { handleOffBasePass, patchApprovalCancel, patchApprovals, patchCancel } = useOffBasePass();
 
   const selectComponent = (Id: number) => {
-    const component = offBaseDataFilter(
+    const component = outGoingDataFilter(
       offBasePass,
       studentName,
       selectGrade,
@@ -96,14 +96,14 @@ const OutGoingItem = ({
 
   return (
     <>
-      {!offBaseDataFilter ||
-      offBaseDataFilter(offBasePass, studentName, selectGrade, selectApproval, selectMealDemand, selectRoom)?.length ===
+      {!outGoingDataFilter ||
+      outGoingDataFilter(offBasePass, studentName, selectGrade, selectApproval, selectMealDemand, selectRoom)?.length ===
         0 ? (
         <S.NoneTile>현재 외출 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <>
           <div>
-            {offBaseDataFilter(
+            {outGoingDataFilter(
               offBasePass,
               studentName,
               selectGrade,

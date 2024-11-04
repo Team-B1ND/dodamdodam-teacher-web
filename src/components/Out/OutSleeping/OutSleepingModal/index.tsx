@@ -1,7 +1,7 @@
 import { Portal } from "components/common/Portal";
 import React from "react";
 import * as S from "./style";
-import { OutListType } from "types/OffBasePass/offbasepass.type";
+import { OutListType } from "types/Out/out.type";
 import { TD, TH, THead, TR, Table } from "@b1nd/b1nd-dodamdodam-ui";
 import { OFFBASELEAVE_MODAL_ITEMS } from "./constant";
 import convertDateTime from "utils/Time/ConvertDateTime";
@@ -23,7 +23,10 @@ const OffBaseModal = ({ isOpen, data, where, handleModalClick }: Props) => {
           <S.ModalWrap onClick={(e) => e.stopPropagation()}>
             <S.TitleContainer>
               <S.ModalTitle>
-                <img src={where === "PASS" ? OffBasePassIcon : OffBaseLeaveIcon} alt={where === "PASS" ? "외출 아이콘" : "외박 아이콘"} />
+                <img
+                  src={where === "PASS" ? OffBasePassIcon : OffBaseLeaveIcon}
+                  alt={where === "PASS" ? "외출 아이콘" : "외박 아이콘"}
+                />
                 {where === "PASS" ? "외출 상세보기" : "외박 상세보기"}
               </S.ModalTitle>
               <S.CloseIcon size={32} onClick={handleModalClick} />

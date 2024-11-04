@@ -3,12 +3,12 @@ import * as S from "./style";
 import { Suspense, useEffect, useState } from "react";
 import Calendars from "components/common/Calendars";
 import { useRecoilState } from "recoil";
-import { LeaveSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom } from "stores/OffBase/offbase.store";
+import { OutSleepingSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom } from "stores/Out/out.store";
 import TableAttribute from "components/common/TableAttribute";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import { OUT_SLEEPING_ITEMS } from "constants/Out/offbase.constant";
 import OffBaseLeaveItem from "./OutSleepingItem";
-import { changeApproval } from "utils/OffBase/changeApproval";
+import { changeApproval } from "utils/Out/changeApproval";
 import { changeGrade } from "utils/Member/changeGrade";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
@@ -16,7 +16,7 @@ import { PointSelectRoom } from "stores/Point/point.store";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 import { useGetOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
 import { Flex } from "components/common/Flex/Flex";
-import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
+import { offBaseMemberCalc } from "utils/Out/offbaseMemberCalc";
 
 const OutSleeping = () => {
   const [studentName, setStudentName] = useState("");
@@ -25,7 +25,7 @@ const OutSleeping = () => {
   const [room, setRoom] = useRecoilState(PointSelectRoom);
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] = useRecoilState(SelectApprovalAtom);
-  const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
+  const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(OutSleepingSelectIdAtom);
   const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel } = useOffBaseLeave();
 
   const { data: offBaseLeave } = useGetOutSleepingQuery(uploadDate);

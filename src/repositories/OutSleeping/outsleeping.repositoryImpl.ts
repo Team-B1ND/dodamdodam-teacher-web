@@ -1,9 +1,9 @@
-import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
+import { OutResponse } from "types/Out/out.type";
 import { dodamAxios } from "libs/Axios/customAxios";
 import { OutSleepingRepository } from "./outsleeping.respository";
 
 class OffBaseLeaveRepositoryImpl implements OutSleepingRepository {
-  public async getOutSleeping(endAt: string): Promise<OffBaseResponse> {
+  public async getOutSleeping(endAt: string): Promise<OutResponse> {
     const { data } = await dodamAxios.get(`/out-sleeping?endAt=${endAt}`);
     return data;
   }
@@ -19,7 +19,7 @@ class OffBaseLeaveRepositoryImpl implements OutSleepingRepository {
     await dodamAxios.patch(`/out-sleeping/${id}/revert`);
   }
 
-  public async getTodayOutSleeping(): Promise<OffBaseResponse> {
+  public async getTodayOutSleeping(): Promise<OutResponse> {
     const { data } = await dodamAxios.get("/out-sleeping/valid");
     return data;
   }

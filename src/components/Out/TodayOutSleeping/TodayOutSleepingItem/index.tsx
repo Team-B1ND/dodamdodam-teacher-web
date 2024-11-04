@@ -3,14 +3,14 @@ import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import profileImg from "assets/profileImg.svg";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 
-import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
+import { outSleepingDataFilter } from "utils/Out/outSleepingDataFilter";
 import { useGetTodayOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
 
 import ConvertDateTime from "utils/Time/ConvertDateTime";
 import { truncateText } from "utils/common/truncate";
 import OffBaseLeaveModal from "components/Out/OutSleeping/OutSleepingModal";
 import { useState } from "react";
-import { OutListType } from "types/OffBasePass/offbasepass.type";
+import { OutListType } from "types/Out/out.type";
 
 interface OffBasePassProps {
   studentName: string;
@@ -31,13 +31,13 @@ const TodayOutSleepingItem = ({ selectApproval, selectGrade, studentName, select
 
   return (
     <>
-      {!offBaseLeaveDataFilter ||
-      offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.length === 0 ? (
+      {!outSleepingDataFilter ||
+      outSleepingDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.length === 0 ? (
         <S.NoneTile>현재 외박 중인 학생이 없습니다.</S.NoneTile>
       ) : (
         <>
           <TBody customStyle={S.OffBaseTBody}>
-            {offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
+            {outSleepingDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
               (todayleave) =>
                 todayleave.status === "ALLOWED" ? (
                   <TR customStyle={S.OffBaseTR}>

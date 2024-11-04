@@ -4,13 +4,13 @@ import profileImg from "assets/profileImg.svg";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 import convertDateTime from "utils/Time/ConvertDateTime";
 import { useGetOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
-import { offBaseLeaveDataFilter } from "utils/OffBase/offbaseLeaveDataFilter";
+import { outSleepingDataFilter } from "utils/Out/outSleepingDataFilter";
 import { useRecoilState } from "recoil";
-import { LeaveSelectIdAtom } from "stores/OffBase/offbase.store";
+import { OutSleepingSelectIdAtom } from "stores/Out/out.store";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { truncateText } from "utils/common/truncate";
-import { OutListType } from "types/OffBasePass/offbasepass.type";
+import { OutListType } from "types/Out/out.type";
 import OffBaseModal from "../OutSleepingModal";
 
 interface OffBaseLeaveProps {
@@ -33,7 +33,7 @@ const OutSleepingItem = ({
   const { data: offBaseLeave } = useGetOutSleepingQuery(uploadDate, {
     suspense: true,
   });
-  const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(LeaveSelectIdAtom);
+  const [leaveSelectedIds, setLeaveSelectedIds] = useRecoilState<number[]>(OutSleepingSelectIdAtom);
   const { handleOffBaseLeave, patchLeaveApproval, patchLeaveApprovalCancel, patchLeaveCancel } = useOffBaseLeave();
   const [isOPen, setIsOpen] = useState<boolean>(false);
   const [leaveData, setLeaveData] = useState<OutListType>();
@@ -47,7 +47,7 @@ const OutSleepingItem = ({
   }, [setUploadData]);
 
   const selectComponent = (Id: number) => {
-    const component = offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.find(
+    const component = outSleepingDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.find(
       (key) => key.id === Id,
     )?.status;
 
@@ -85,13 +85,13 @@ const OutSleepingItem = ({
 
   return (
     <>
-      {!offBaseLeaveDataFilter ||
-      offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.length === 0 ? (
+      {!outSleepingDataFilter ||
+      outSleepingDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.length === 0 ? (
         <S.NoneTile>현재 외박 신청한 학생이 없습니다.</S.NoneTile>
       ) : (
         <>
           <TBody customStyle={S.OffBaseTBody}>
-            {offBaseLeaveDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
+            {outSleepingDataFilter(offBaseLeave, studentName, selectGrade, selectApproval, selectRoom)?.map(
               (offbaseleave, key) => (
                 <S.OffBaseTR
                   onClick={() => {

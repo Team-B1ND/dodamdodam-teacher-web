@@ -1,4 +1,4 @@
-import { OutListType } from "types/OffBasePass/offbasepass.type";
+import { OutListType } from "types/Out/out.type";
 
 export const offBaseMemberCalc = (data: OutListType[]) => {
   const allowedStudents =

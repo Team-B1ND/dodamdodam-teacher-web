@@ -8,9 +8,9 @@ import {
 import { useQueryClient } from "react-query";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useRecoilState } from "recoil";
-import { UploadDateAtom } from "stores/OffBase/offbase.store";
+import { UploadDateAtom } from "stores/Out/out.store";
 import { useEffect, useState } from "react";
-import { OutListType } from "types/OffBasePass/offbasepass.type";
+import { OutListType } from "types/Out/out.type";
 import ConvertDateTime from "utils/Time/ConvertDateTime";
 
 const useOutGoing = () => {

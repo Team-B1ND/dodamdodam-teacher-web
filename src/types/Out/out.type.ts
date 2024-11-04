@@ -1,4 +1,4 @@
-export interface OffBaseResponse extends Response {
+export interface OutResponse extends Response {
   data: OutListType[];
 }
 

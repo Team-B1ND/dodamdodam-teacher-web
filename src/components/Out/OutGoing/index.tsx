@@ -6,16 +6,16 @@ import { useRecoilState } from "recoil";
 import {
   SelectApprovalAtom,
   SelectGradeAtom,
-  PassSelectIdAtom,
+  OutGoingSelectIdAtom,
   UploadDateAtom,
   SelectMealDemand,
-} from "stores/OffBase/offbase.store";
+} from "stores/Out/out.store";
 import TableAttribute from "components/common/TableAttribute";
 import { OUT_GOING_ITEMS } from "constants/Out/offbase.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import OffBasePassItem from "./OutGoingItem";
 import { changeGrade } from "utils/Member/changeGrade";
-import { changeApproval } from "utils/OffBase/changeApproval";
+import { changeApproval } from "utils/Out/changeApproval";
 import useOffBasePass from "hooks/Out/OutGoing/useOutGoing";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
@@ -26,15 +26,15 @@ import dayjs from "dayjs";
 import { PointSelectRoom } from "stores/Point/point.store";
 import { Flex } from "components/common/Flex/Flex";
 import { useGetOutGoingQuery } from "queries/OutGoing/outgoing.query";
-import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
+import { offBaseMemberCalc } from "utils/Out/offbaseMemberCalc";
 import { useGetMealDemandQuery } from "queries/OffBaseMeal/offbasemeal.query";
-import { changeMealDemand } from "utils/OffBase/changeMealDemand";
+import { changeMealDemand } from "utils/Out/changeMealDemand";
 
 const OutGoing = () => {
   const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
-  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(PassSelectIdAtom);
+  const [selectedIds, setSelectedIds] = useRecoilState<number[]>(OutGoingSelectIdAtom);
 
   const [selectGrade, setSelectGrade] = useRecoilState(SelectGradeAtom);
   const [selectApproval, setSelectApproval] = useRecoilState(SelectApprovalAtom);

@@ -6,8 +6,8 @@ import TodayOffBaseItem from "./TodayOutSleepingItem";
 import { OUT_SLEEPING_ITEMS } from "constants/Out/offbase.constant";
 import { SearchBar, Select } from "@b1nd/b1nd-dodamdodam-ui";
 import { useRecoilState } from "recoil";
-import { SelectApprovalAtom, SelectGradeAtom } from "stores/OffBase/offbase.store";
-import { changeApproval } from "utils/OffBase/changeApproval";
+import { SelectApprovalAtom, SelectGradeAtom } from "stores/Out/out.store";
+import { changeApproval } from "utils/Out/changeApproval";
 import { changeGrade } from "utils/Member/changeGrade";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
@@ -17,8 +17,7 @@ import dayjs from "dayjs";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 import { PointSelectRoom } from "stores/Point/point.store";
 import { useGetTodayOutSleepingQuery } from "queries/OutSleeping/outsleeping.query";
-import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
-import { OffBaseResponse } from "types/OffBasePass/offbasepass.type";
+import { offBaseMemberCalc } from "utils/Out/offbaseMemberCalc";
 
 const TodayOutSleeping = () => {
   const [studentName, setStudentName] = useState("");
