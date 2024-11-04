@@ -12,7 +12,7 @@ import { UploadDateAtom } from "stores/OffBase/offbase.store";
 import { useEffect, useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
 
-const useOffBaseLeave = () => {
+const useOutSleeping = () => {
   const queryClient = useQueryClient();
   const patchLeaveApproval = usePatchLeaveApproval();
   const patchLeaveCancel = usePatchLeaveCancel();
@@ -71,4 +71,4 @@ const useOffBaseLeave = () => {
     leaveStudentList,
   };
 };
-export default useOffBaseLeave;
+export default useOutSleeping;

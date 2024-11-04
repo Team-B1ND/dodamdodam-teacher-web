@@ -11,12 +11,12 @@ import {
   SelectMealDemand,
 } from "stores/OffBase/offbase.store";
 import TableAttribute from "components/common/TableAttribute";
-import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
+import { OFFBASE_PASS_ITEMS } from "constants/Out/offbase.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import OffBasePassItem from "./OutGoingItem";
 import { changeGrade } from "utils/Member/changeGrade";
 import { changeApproval } from "utils/OffBase/changeApproval";
-import useOffBasePass from "hooks/OffBase/OffBasePass/useOffBasePass";
+import useOffBasePass from "hooks/Out/OutGoing/useOutGoing";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
 import SkeletonComponent from "components/common/Skeleton";

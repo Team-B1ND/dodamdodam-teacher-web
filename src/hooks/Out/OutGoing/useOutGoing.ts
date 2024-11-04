@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
 import ConvertDateTime from "utils/Time/ConvertDateTime";
 
-const useOffBasePass = () => {
+const useOutGoing = () => {
   const queryClient = useQueryClient();
   const patchApprovals = usePatchApproval();
   const patchApprovalCancel = usePatchApprovalCancel();
@@ -87,4 +87,4 @@ const useOffBasePass = () => {
   };
 };
 
-export default useOffBasePass;
+export default useOutGoing;
