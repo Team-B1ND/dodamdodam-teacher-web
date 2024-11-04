@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { useSignup } from "hooks/auth/useSignup";
 import { SIGNUP_SECTION_NAME } from "constants/Signup/signup.constant";
 import Id from "./Id";
@@ -30,9 +24,8 @@ const Signup = ({ setIsSignin }: SignupProps) => {
     setPolicy,
   } = useSignup();
   const { handlePasswordView, passwordType } = useSignin();
-  const [prevSection, setPrevSection] = useState(section);
-  // WHAT IS THIS?
-  // WHAT IS THIS?
+  const [, setPrevSection] = useState(section);
+  
   const AuthComponents: ReactNode[] = [
     <Id
       signupData={signupData}
