@@ -1,4 +1,4 @@
-import OffBasePass from "components/OffBase/OffBasePass";
+import OffBasePass from "components/Out/OutGoing";
 import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 const OffBasePassPage = () => {

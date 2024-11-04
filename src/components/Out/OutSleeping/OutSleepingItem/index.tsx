@@ -11,7 +11,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { truncateText } from "utils/common/truncate";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
-import OffBaseModal from "../OffBaseLeaveModal";
+import OffBaseModal from "../OutSleepingModal";
 
 interface OffBaseLeaveProps {
   studentName: string;
@@ -22,7 +22,7 @@ interface OffBaseLeaveProps {
   selectRoom: string;
 }
 
-const OffBaseLeaveItem = ({
+const OutSleepingItem = ({
   selectApproval,
   selectGrade,
   studentName,
@@ -130,10 +130,14 @@ const OffBaseLeaveItem = ({
                   </TD>
                   <TD customStyle={S.OffBaseTD}>
                     <S.Reason>
-                      <div onClick={() => {
-                        handleModalClick();
-                        setLeaveData(offbaseleave);
-                      }}>{truncateText(offbaseleave.reason, 7)}</div>
+                      <div
+                        onClick={() => {
+                          handleModalClick();
+                          setLeaveData(offbaseleave);
+                        }}
+                      >
+                        {truncateText(offbaseleave.reason, 7)}
+                      </div>
                     </S.Reason>
                   </TD>
                   <TD customStyle={S.ButtonContainerStyle}>{selectComponent(offbaseleave.id)}</TD>
@@ -141,11 +145,11 @@ const OffBaseLeaveItem = ({
               ),
             )}
           </TBody>
-          <OffBaseModal isOpen={isOPen} data={leaveData} handleModalClick={handleModalClick} where="LEAVE"/>
+          <OffBaseModal isOpen={isOPen} data={leaveData} handleModalClick={handleModalClick} where="LEAVE" />
         </>
       )}
     </>
   );
 };
 
-export default OffBaseLeaveItem;
+export default OutSleepingItem;

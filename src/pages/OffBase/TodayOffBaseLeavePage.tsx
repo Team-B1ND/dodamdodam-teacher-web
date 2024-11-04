@@ -1,4 +1,4 @@
-import TodayOffBase from "components/OffBase/TodayOffBase";
+import TodayOffBase from "components/Out/TodayOffBase";
 import SectionHeaderProvider from "components/common/SectionHeaderProvider";
 
 const TodayOffBaseLeavePage = () => {

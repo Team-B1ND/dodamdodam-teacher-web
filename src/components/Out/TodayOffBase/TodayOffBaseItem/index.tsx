@@ -8,7 +8,7 @@ import { useGetTodayLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query";
 
 import ConvertDateTime from "utils/Time/ConvertDateTime";
 import { truncateText } from "utils/common/truncate";
-import OffBaseLeaveModal from "components/OffBase/OffBaseLeave/OffBaseLeaveModal";
+import OffBaseLeaveModal from "components/Out/OutSleeping/OutSleepingModal";
 import { useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
 

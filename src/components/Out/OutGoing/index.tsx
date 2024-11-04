@@ -13,7 +13,7 @@ import {
 import TableAttribute from "components/common/TableAttribute";
 import { OFFBASE_PASS_ITEMS } from "constants/OffBase/offbase.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
-import OffBasePassItem from "./OffBasePassItem";
+import OffBasePassItem from "./OutGoingItem";
 import { changeGrade } from "utils/Member/changeGrade";
 import { changeApproval } from "utils/OffBase/changeApproval";
 import useOffBasePass from "hooks/OffBase/OffBasePass/useOffBasePass";
@@ -30,7 +30,7 @@ import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 import { useGetMealDemandQuery } from "queries/OffBaseMeal/offbasemeal.query";
 import { changeMealDemand } from "utils/OffBase/changeMealDemand";
 
-const OffBasePass = () => {
+const OutGoing = () => {
   const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
@@ -151,4 +151,4 @@ const OffBasePass = () => {
   );
 };
 
-export default OffBasePass;
+export default OutGoing;

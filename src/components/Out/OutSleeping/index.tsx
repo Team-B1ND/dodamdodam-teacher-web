@@ -7,7 +7,7 @@ import { LeaveSelectIdAtom, SelectApprovalAtom, SelectGradeAtom, UploadDateAtom 
 import TableAttribute from "components/common/TableAttribute";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import { OFFBASE_LEAVE_ITEMS } from "constants/OffBase/offbase.constant";
-import OffBaseLeaveItem from "./OffBaseLeaveItem";
+import OffBaseLeaveItem from "./OutSleepingItem";
 import { changeApproval } from "utils/OffBase/changeApproval";
 import { changeGrade } from "utils/Member/changeGrade";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
@@ -18,7 +18,7 @@ import { useGetOffBaseLeaveQuery } from "queries/OffBaseLeave/offbaseleave.query
 import { Flex } from "components/common/Flex/Flex";
 import { offBaseMemberCalc } from "utils/OffBase/offbaseMemberCalc";
 
-const OffBaseLeave = () => {
+const OutSleeping = () => {
   const [studentName, setStudentName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [uploadDate, setUploadDate] = useRecoilState<string>(UploadDateAtom);
@@ -103,4 +103,4 @@ const OffBaseLeave = () => {
     </>
   );
 };
-export default OffBaseLeave;
+export default OutSleeping;

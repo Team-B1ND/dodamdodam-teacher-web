@@ -8,7 +8,7 @@ import { PassSelectIdAtom } from "stores/OffBase/offbase.store";
 import convertDateTime from "utils/Time/ConvertDateTime";
 import { offBaseDataFilter } from "utils/OffBase/offBasePassDataFilter";
 import { truncateText } from "utils/common/truncate";
-import OffBaseModal from "components/OffBase/OffBaseLeave/OffBaseLeaveModal";
+import OffBaseModal from "components/Out/OutSleeping/OutSleepingModal";
 import { useState } from "react";
 import { OutListType } from "types/OffBasePass/offbasepass.type";
 
@@ -21,7 +21,7 @@ interface OffBasePassProps {
   selectRoom: string;
 }
 
-const OffBasePassItem = ({
+const OutGoingItem = ({
   studentName,
   uploadDate,
   selectGrade,
@@ -179,4 +179,4 @@ const OffBasePassItem = ({
   );
 };
 
-export default OffBasePassItem;
+export default OutGoingItem;
