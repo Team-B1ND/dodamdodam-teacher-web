@@ -1,8 +1,8 @@
-import { useGetNightStudyList } from "queries/NightStudy/nightstudy.query";
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { NightStudyDataAtom } from "stores/NightStudy/nightstudy.store";
-import { NightStudyType } from "types/NightStudy/nightstudy.type";
+import { useGetNightStudyList } from 'queries/NightStudy/nightstudy.query';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { NightStudyDataAtom } from 'stores/NightStudy/nightstudy.store';
+import { NightStudyType } from 'types/NightStudy/nightstudy.type';
 
 export const useNightStudyStudentList = () => {
   const { data: NightStudyToday } = useGetNightStudyList();
@@ -10,11 +10,11 @@ export const useNightStudyStudentList = () => {
   const NightStudyData = useRecoilValue(NightStudyDataAtom);
   const [NightStudyInfo, setNightStudyInfo] = useState([
     {
-      이름: "",
-      반번호: "",
-      심자체크: "",
-      복귀체크: "",
-      비고: "",
+      이름: '',
+      반번호: '',
+      심자체크: '',
+      복귀체크: '',
+      핸드폰여부: '',
     },
   ]);
 
@@ -23,9 +23,9 @@ export const useNightStudyStudentList = () => {
       const newData = NightStudyToday.data.map((data: NightStudyType) => ({
         이름: data.student.name,
         반번호: `${data.student.grade}학년 ${data.student.room}반 ${data.student.number}번`,
-        심자체크: "",
-        복귀체크: "",
-        비고: "",
+        심자체크: '',
+        복귀체크: '',
+        핸드폰여부: data.doNeedPhone ? 'O' : 'X',
       }));
       setNightStudyInfo(newData);
     }
