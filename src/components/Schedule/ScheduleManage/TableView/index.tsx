@@ -3,14 +3,13 @@ import { SCHEDULE_TABLE_ITEMS } from 'components/Schedule/constant';
 import TableAttribute from 'components/common/TableAttribute';
 import { useGetSchedulesByPeriodQuery } from 'queries/Schedule/schedule.query';
 import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
 import dataTransform from 'utils/Transform/dataTransform';
 import { TBodyStyle, TRStyle } from './style';
 import useDeleteSchedule from 'hooks/Schedule/useDeleteSchedule';
 import dayjs from 'dayjs';
 
 const TableView = () => {
-  const { ref, inView } = useInView();
+  const { ref } = useInView();
   const { onDeleteSchedule } = useDeleteSchedule();
   const { data: scheduleData } = useGetSchedulesByPeriodQuery({
     startAt: dayjs().format('YYYY-MM-DD'), // 오늘 날짜
