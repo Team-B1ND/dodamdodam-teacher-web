@@ -7,7 +7,6 @@ export interface ScheduleRepository {
     param: GetScheduleByPeriodParam
   ): Promise<ScheduleResponse>;
   getSchedulesByKeyword(keyword: string): Promise<ScheduleResponse>;
-  getSchedules({ page }: GetSchedulesParam): Promise<ScheduleResponse>;
   deleteSchedulesById(id: number): Promise<Response>;
 }
 

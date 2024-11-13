@@ -32,13 +32,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
     );
     return data;
   }
-
-  public async getSchedules({
-    page,
-  }: GetSchedulesParam): Promise<ScheduleResponse> {
-    const { data } = await dodamAxios.get(`/schedule?limit=${10}&page=${page}`);
-    return data;
-  }
+  
   public async deleteSchedulesById(id: number): Promise<Response> {
     const { data } = await dodamAxios.delete(`/schedule/${id}`);
     return data;

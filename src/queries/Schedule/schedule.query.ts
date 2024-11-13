@@ -11,26 +11,6 @@ import { GetScheduleByPeriodParam } from "repositories/Schedule/schedule.reposit
 import ScheduleRepositoryImpl from "repositories/Schedule/schedule.repositoryImpl";
 import { ScheduleResponse } from "types/Schedule/schedule.type";
 
-export const useGetSchedulesQuery = (
-  options?: UseInfiniteQueryOptions<
-    ScheduleResponse,
-    AxiosError,
-    ScheduleResponse,
-    ScheduleResponse,
-    string[]
-  >
-) =>
-  useInfiniteQuery(
-    QUERY_KEYS.schedule.getSchedules,
-    ({ pageParam = 1 }) =>
-      ScheduleRepositoryImpl.getSchedules({ page: pageParam }),
-    {
-      ...options,
-      cacheTime: 1000 * 60,
-      staleTime: 1000 * 60 * 60,
-      getNextPageParam: (nextPage) => nextPage.nextPage,
-    }
-  );
 
 export const useGetSchedulesByPeriodQuery = (
   { endAt, startAt }: GetScheduleByPeriodParam,
