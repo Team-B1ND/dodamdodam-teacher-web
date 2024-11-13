@@ -46,3 +46,4 @@ jobs:
               "package_manager_config_command": "npm config set registry=https://npm.pkg.github.com/Team-B1ND && npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GIT_ACCESS_TOKEN }} && npm config set //registry.npmjs.org/:_authToken=${{ secrets.GIT_ACCESS_TOKEN }}",
               "package_manager": "npm"
             }
+              
