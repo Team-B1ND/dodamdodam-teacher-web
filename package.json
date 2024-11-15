@@ -72,10 +72,5 @@
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",
     "eslint-plugin-unused-imports": "^4.1.4"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix --ignore-pattern 'node_modules/' --ext .ts ."
-    ]
   }
 }

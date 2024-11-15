@@ -1,12 +1,11 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-if npx lint-staged; then
+# 모든 TypeScript 파일을 검사하고, 사용하지 않는 임포트를 제거
+if npx eslint --fix --ignore-pattern 'node_modules/' --ext .ts .; then
   echo "검사 통과"
 else
   echo "에러 발생!"
-  echo "검사에 실패한 파일 및 코드 라인:"
-  # 실패한 파일과 라인 출력
-  npx eslint --quiet --format=compact --ext .ts .
+  # 오류 발생 시, 실패한 파일과 코드 라인만 출력
+  npx eslint --quiet --format=compact --ext .ts . | grep -E 'error|warn'
 fi
-

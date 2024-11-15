@@ -138,7 +138,7 @@ export const useRegistBus = () => {
   };
 
   const formatTimeRequired = () => {
-    let formatTime: string = "";
+    let formatTime = "";
 
     if (timeRequired.hour < 10) {
       formatTime = `0${timeRequired.hour}`;
@@ -181,7 +181,7 @@ export const useRegistBus = () => {
     e.preventDefault();
 
     if (checkAndFilterBusEssentialInfo()) {
-      let timeRequired = formatTimeRequired();
+      const timeRequired = formatTimeRequired();
 
       const param = {
         ...busContent,

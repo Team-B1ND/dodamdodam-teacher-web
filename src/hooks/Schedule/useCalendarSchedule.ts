@@ -15,7 +15,7 @@ const useCalendarSchedule = () => {
   });
 
   const loadCalendarSchedule = useCallback(() => {
-    let newSchedulesData = schedulesData!.data;
+    const newSchedulesData = schedulesData!.data;
     newSchedulesData!.forEach((schedule) =>
       setSchedules((prev) => {
         const newHandleCalendarSchedule = calendarScheduleTransform(schedule);

@@ -29,7 +29,7 @@ export const useBusPassenger = (closeModal: () => void) => {
       탑승버스: busPassengerData?.busName,
       비고: "",
     }));
-    setBusPassengerInfo(busPassengerCsvData!!);
+    setBusPassengerInfo(busPassengerCsvData!);
   }, [busPassengerData]);
 
   return {
