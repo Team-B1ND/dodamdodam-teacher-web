@@ -4,8 +4,10 @@
 # 모든 TypeScript 파일을 검사하고, 사용하지 않는 임포트를 제거
 if npx eslint --fix --ignore-pattern 'node_modules/' --ext .ts .; then
   echo "검사 통과"
+  exit 0
 else
   echo "에러 발생!"
-  # 오류 발생 시, 실패한 파일과 코드 라인만 출력
-  npx eslint --quiet --format=compact --ext .ts . | grep -E 'error|warn'
+  # 오류 발생 시, 실패한 파일과 코드 라인만 출력 (error만 필터링)
+  npx eslint --quiet --format=compact --ext .ts . | grep 'error'
+  exit 1
 fi
