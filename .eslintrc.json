@@ -5,8 +5,14 @@
     "sourceType": "module"
   },
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["unused-imports"],
   "rules": {
     "no-unused-vars": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ]
   }
 }

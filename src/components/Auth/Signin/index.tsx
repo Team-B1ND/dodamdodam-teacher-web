@@ -1,9 +1,11 @@
 import * as S from "./style";
 import AuthButton from "components/common/AuthButton";
 import TextField from "components/common/TextField";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useSignin } from "hooks/auth/useSignin";
 import { IoEyeSharp } from "react-icons/io5";
+import PointScoreHeader from "components/Point/PointScore/PointScoreHeader";
+import { PointDataToCsvData } from "utils/Transform/csvTransform";
 
 interface SigninProps {
   setIsSignin: Dispatch<SetStateAction<boolean>>;
