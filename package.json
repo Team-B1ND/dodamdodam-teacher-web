@@ -24,7 +24,10 @@
     "@types/react-dom": "^18.2.7",
     "axios": "^1.4.0",
     "dayjs": "^1.11.10",
+    "eslint": "^8.57.1",
+    "husky": "^9.1.6",
     "js-cookie": "^3.0.5",
+    "lint-staged": "^15.2.10",
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
     "react-csv": "^2.2.2",
@@ -68,5 +71,10 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --ignore-pattern 'node_modules/' --ext .ts ."
+    ]
   }
 }
