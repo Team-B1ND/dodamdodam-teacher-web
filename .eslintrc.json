@@ -9,11 +9,11 @@
   "rules": {
     "no-unused-vars": "off",
     "no-console": "off",
-    "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
       { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
     ],
-    "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "@typescript-eslint/no-extra-non-null-assertion": "off"
   }
 }
