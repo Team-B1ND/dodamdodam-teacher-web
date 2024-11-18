@@ -9,6 +9,7 @@
     "@b1nd/b1nd-styled-components-util": "^1.0.4",
     "@b1nd/b1nd-toastify": "^2.0.0",
     "@b1nd/b1nd-util": "^2.0.1",
+    "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@team-b1nd/dodamdodam_web_component_library": "^1.2.2",
@@ -46,8 +47,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .ts,.tsx"
@@ -75,4 +76,3 @@
     "eslint-plugin-unused-imports": "^4.1.4"
   }
 }
-
