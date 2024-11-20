@@ -1,7 +1,7 @@
-import MenuDropdownChild from "../../MenuDropdown/MenuDropdownChild";
-import MenuDropdownWrapper from "../../MenuDropdown/MenuDropdownWrapper";
-import MenuItem from "../../MenuItem";
-import { SideBarDropdownContainer } from "./style";
+import MenuDropdownChild from '../../MenuDropdown/MenuDropdownChild';
+import MenuDropdownWrapper from '../../MenuDropdown/MenuDropdownWrapper';
+import MenuItem from '../../MenuItem';
+import { SideBarDropdownContainer } from './style';
 
 const SideBarDropdown = () => {
   return (
@@ -15,6 +15,7 @@ const SideBarDropdown = () => {
         <MenuDropdownChild title="외출" redirectUrl="/offbase-pass" />
         <MenuDropdownChild title="외박" redirectUrl="/offbase-leave" />
         <MenuDropdownChild title="외박 중인 학생" redirectUrl="/offbase-leave-ing" />
+        <MenuDropdownChild title="현재 잔류 중인 학생" redirectUrl="/offbase-redisual" />
       </MenuDropdownWrapper>
       <MenuDropdownWrapper title="상벌점">
         <MenuDropdownChild title="기숙사 점수 관리" redirectUrl="/PointScore?type=DORMITORY" />

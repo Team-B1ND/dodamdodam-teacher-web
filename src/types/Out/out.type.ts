@@ -6,6 +6,7 @@ export interface OutListType {
   id: number;
   reason: string;
   status: string;
+  phone: string;
   student: StudentType;
   startAt: string;
   endAt: string;
