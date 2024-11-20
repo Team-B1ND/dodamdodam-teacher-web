@@ -1,16 +1,17 @@
-import { Routes, Route } from "react-router-dom";
-import MemberPage from "pages/MemberPage";
-import BusListPage from "pages/Bus/BusListPage";
-import BusDatePage from "pages/Bus/BusDatePage";
-import AuthPage from "pages/Auth/AuthPage";
-import OffBasePassPage from "pages/Out/OutGoingPage";
-import OffBaseLeavePage from "pages/Out/OutSleepingPage";
-import TodayOffBaseLeavePage from "pages/Out/TodayOutSleepingPage";
-import { NightStudyAllowPage } from "pages/NightStudy/NightStudyAllowPage";
-import { NightStudyTodayPage } from "pages/NightStudy/NightStudyTodayPage";
-import PointScore from "components/Point/PointScore";
-import PointReason from "components/Point/PointReason";
-import ScheduleManage from "components/Schedule/ScheduleManage";
+import { Routes, Route } from 'react-router-dom';
+import MemberPage from 'pages/MemberPage';
+import BusListPage from 'pages/Bus/BusListPage';
+import BusDatePage from 'pages/Bus/BusDatePage';
+import AuthPage from 'pages/Auth/AuthPage';
+import OffBasePassPage from 'pages/Out/OutGoingPage';
+import OffBaseLeavePage from 'pages/Out/OutSleepingPage';
+import TodayOffBaseLeavePage from 'pages/Out/TodayOutSleepingPage';
+import { NightStudyAllowPage } from 'pages/NightStudy/NightStudyAllowPage';
+import { NightStudyTodayPage } from 'pages/NightStudy/NightStudyTodayPage';
+import PointScore from 'components/Point/PointScore';
+import PointReason from 'components/Point/PointReason';
+import ScheduleManage from 'components/Schedule/ScheduleManage';
+import OffbaseRedisualPage from 'pages/Out/RedisualPage';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
       <Route path="/offbase-pass" element={<OffBasePassPage />} />
       <Route path="/offbase-leave" element={<OffBaseLeavePage />} />
       <Route path="/offbase-leave-ing" element={<TodayOffBaseLeavePage />} />
+      <Route path="/offbase-redisual" element={<OffbaseRedisualPage />} />
       <Route path="/nightStudy-allow" element={<NightStudyAllowPage />} />
       <Route path="/nightStudy-today" element={<NightStudyTodayPage />} />
       <Route path="/PointScore" element={<PointScore />} />
