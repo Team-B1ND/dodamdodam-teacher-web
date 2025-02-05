@@ -1,24 +1,47 @@
-import styled from "styled-components";
-import { AuthPartFadeh } from "../style";
+import { DodamLightTheme } from '@b1nd/dds-web';
+import styled, { css } from 'styled-components';
 
-export const AccountContainer = styled.div`
+export const SigninWrap = styled.div`
+  width: 50%;
+  height: 55%;
+
+  background-color: ${DodamLightTheme.backgroundNormal};
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  color: rgb(204, 204, 204);
-  font-size: 17px;
-  font-weight: 400;
+  border-radius: 12px;
+`;
 
-  margin-top: 30px;
+export const SigninImage = styled.img`
+  height: 95%;
+  padding-left: 10px;
+`;
 
-  cursor: pointer;
+export const InputWrap = styled.div`
+  width: 55%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const AccountContainer = styled.div`
+  width: 75%;
+  height: 5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: ${DodamLightTheme.labelAlternative};
 
   p {
-    font-size: 18px;
-
-    margin-left: 2%;
-    font-weight: 600;
-    color: rgb(0, 103, 188);
+    color: ${DodamLightTheme.labelNormal};
+    text-decoration: underline;
   }
 `;
 
@@ -39,6 +62,18 @@ export const PasswordViewBox = styled.div`
   user-select: none;
 `;
 
-export const SigninWrap = styled.div`
-  animation: ${AuthPartFadeh} 1s;
+export const ButtonStyle = css`
+  width: 350px;
+  margin-top: 10px;
+  background-color: ${DodamLightTheme.primaryNormal};
+  color: ${DodamLightTheme.staticWhite};
+`;
+
+export const NoneAccount = styled.div`
+  color: ${({ theme }) => theme.labelAssisitive};
+
+  p {
+    color: ${({ theme }) => theme.labelNormal};
+    text-decoration: underline;
+  }
 `;
