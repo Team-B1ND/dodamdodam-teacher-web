@@ -27,15 +27,20 @@ export const InputWrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  gap: 20px;
+
+  position: relative;
 `;
 
 export const AccountContainer = styled.div`
-  width: 75%;
+  width: 68%;
   height: 5%;
 
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-top: -10px;
 
   color: ${DodamLightTheme.labelAlternative};
 
@@ -43,30 +48,6 @@ export const AccountContainer = styled.div`
     color: ${DodamLightTheme.labelNormal};
     text-decoration: underline;
   }
-`;
-
-export const PasswordBox = styled.div`
-  display: flex;
-  align-items: center;
-`;
-export const PasswordViewBox = styled.div`
-  z-index: 10;
-
-  font-size: 20px;
-
-  margin-left: -16px;
-  margin-top: 45px;
-
-  color: gray;
-
-  user-select: none;
-`;
-
-export const ButtonStyle = css`
-  width: 350px;
-  margin-top: 10px;
-  background-color: ${DodamLightTheme.primaryNormal};
-  color: ${DodamLightTheme.staticWhite};
 `;
 
 export const NoneAccount = styled.div`
