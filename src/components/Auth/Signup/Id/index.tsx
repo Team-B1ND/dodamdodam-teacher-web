@@ -1,94 +1,103 @@
-import AuthButton from 'components/common/AuthButton';
-import TextField from 'components/common/TextField';
-import { IoIosArrowForward } from 'react-icons/io';
-// import { ButtonContainer } from "./style";
-import { AccountContainer } from '../style';
 import { Dispatch, SetStateAction } from 'react';
 import { MemberSignUpParam } from 'repositories/Member/MemberRepository';
 import { PasswordParm } from 'repositories/Auth/AuthRepository';
 import * as S from './style';
-import { useTheme } from 'styled-components';
-import { DodamFilledButton } from '@b1nd/dds-web';
+import { Checkmark, ChevronLeft, DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
 
 interface SignupIdProps {
+  error: MemberSignUpParam;
+  policy: boolean;
+  personalInfo: boolean;
   passwordType: PasswordParm;
   signupData: MemberSignUpParam;
+  setPolicy: Dispatch<SetStateAction<boolean>>;
+  setPersonalInfo: Dispatch<SetStateAction<boolean>>;
   setSection: Dispatch<SetStateAction<string>>;
   setIsSignin: Dispatch<SetStateAction<boolean>>;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handlePasswordView: () => void;
-  signupTypeCheck: () => void;
+  checkAllRequired: () => void;
+  submitSignup: () => void;
 }
 
 const Id = ({
-  setIsSignin,
   handleSignupChange,
-  handlePasswordView,
   passwordType,
-  signupTypeCheck,
   signupData,
+  error,
+  policy,
+  personalInfo,
+  checkAllRequired,
+  setPolicy,
+  setPersonalInfo,
+  submitSignup,
+  setSection,
 }: SignupIdProps) => {
   return (
-    // <div>
-    //   <TextField
-    //     id="id"
-    //     name="id"
-    //     onChange={handleSignupChange}
-    //     functions="pw"
-    //     value={signupData.id}
-    //   >
-    //     ID
-    //   </TextField>
-    //   <PasswordBox>
-    //     <TextField
-    //       id="pw"
-    //       name="pw"
-    //       onChange={handleSignupChange}
-    //       type={passwordType.type}
-    //       functions="position"
-    //       value={signupData.pw}
-    //     >
-    //       비밀번호
-    //     </TextField>
-    //     <PasswordViewBox onClick={() => handlePasswordView()}>
-    //       <IoEyeSharp />
-    //     </PasswordViewBox>
-    //   </PasswordBox>
-    //   <TextField
-    //     id="position"
-    //     name="position"
-    //     onChange={handleSignupChange}
-    //     functions="tel"
-    //     value={signupData.position}
-    //   >
-    //     직책 ex) 정보부장
-    //   </TextField>
-    //   <TextField
-    //     id="tel"
-    //     name="tel"
-    //     onChange={handleSignupChange}
-    //     value={signupData.tel}
-    //   >
-    //     내선번호 ex) 0532310000
-    //   </TextField>
-
-    //   <ButtonContainer>
-    //     <AuthButton
-    //       width={125}
-    //       top={55}
-    //       AuthButtonType="agree"
-    //       onClick={() => signupTypeCheck()}
-    //     >
-    //       다음
-    //       <IoIosArrowForward style={{ marginLeft: "10px", fontSize: "15px" }} />
-    //     </AuthButton>
-    //   </ButtonContainer>
-    //   <AccountContainer>
-    //     이미 계정이 있으신가요?<p onClick={() => setIsSignin(true)}>Sign In</p>
-    //   </AccountContainer>
-    // </div>
     <S.SignupWrap>
+      <div onClick={() => setSection('id')} style={{ cursor: 'pointer' }}>
+        <ChevronLeft size={16} color="#0083F0" />
+      </div>
       <S.SignUpTitle>회원가입</S.SignUpTitle>
+      <S.InputWrap>
+        <DodamTextField
+          onChange={handleSignupChange}
+          id="id"
+          name="id"
+          type="text"
+          value={signupData.id}
+          label="아이디"
+          width={400}
+          supportingText="아이디는 영문과 숫자로 5 ~ 20글자 이내여야 해요."
+        />
+        <DodamTextField
+          onChange={handleSignupChange}
+          id="pw"
+          name="pw"
+          type="password"
+          value={signupData.pw}
+          label="비밀번호"
+          width={400}
+        />
+        <DodamTextField
+          onChange={handleSignupChange}
+          id="pwCheck"
+          name="pwCheck"
+          type="password"
+          value={signupData.pw}
+          label="비밀번호 확인"
+          width={400}
+        />
+        <DodamFilledButton
+          // leftIcon={<Checkmark />}
+          backgroundColorType="Assisitive"
+          width={400}
+          onClick={checkAllRequired}
+          size="Large"
+          textTheme="labelNetural"
+          typography={['Body1', 'Bold']}
+          text="필수 항목 모두 체크하기"
+        />
+      </S.InputWrap>
+      <S.CheckWrap>
+        <S.CheckmarkWrap onClick={() => setPersonalInfo(!personalInfo)}>
+          <Checkmark size={16} color={personalInfo ? '#0083F0' : '#808080'} />
+          <p>[필수] 개인정보 수집 및 이용에 대한 안내 </p>
+          <span>보기</span>
+        </S.CheckmarkWrap>
+        <S.CheckmarkWrap onClick={() => setPolicy(!policy)}>
+          <Checkmark size={16} color={policy ? '#0083F0' : '#808080'} />
+          <p>[필수] 서비스 이용약관 </p>
+          <span>보기</span>
+        </S.CheckmarkWrap>
+      </S.CheckWrap>
+      <DodamFilledButton
+        backgroundColorType="Primary"
+        text="가입하기"
+        size="Large"
+        width={400}
+        typography={['Body1', 'Bold']}
+        onClick={submitSignup}
+      />
     </S.SignupWrap>
   );
 };

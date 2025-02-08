@@ -2,79 +2,60 @@ import { DodamLightTheme, DodamTypography } from '@b1nd/dds-web';
 import styled, { css } from 'styled-components';
 
 export const SignupWrap = styled.div`
-  width: 30%;
-  height: 65%;
+  width: 28%;
+  height: 63%;
 
   background-color: ${DodamLightTheme.backgroundNormal};
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 
   border-radius: 18px;
+
+  padding: 40px;
 `;
 
 export const SignUpTitle = styled.h1`
   ${DodamTypography.Title2.Bold};
   color: ${({ theme }) => theme.labelNormal};
+  height: fit-content;
 `;
 
 export const InputWrap = styled.div`
-  width: 55%;
-  height: 100%;
+  width: 100%;
+  height: 83%;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-evenly;
 `;
 
-export const AccountContainer = styled.div`
-  width: 75%;
-  height: 5%;
+export const CheckWrap = styled.div`
+  width: 100%;
+  height: 18%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
+export const CheckmarkWrap = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-
-  color: ${DodamLightTheme.labelAlternative};
-
-  p {
-    color: ${DodamLightTheme.labelNormal};
-    text-decoration: underline;
-  }
-`;
-
-export const PasswordBox = styled.div`
-  display: flex;
-  align-items: center;
-`;
-export const PasswordViewBox = styled.div`
-  z-index: 10;
-
-  font-size: 20px;
-
-  margin-left: -16px;
-  margin-top: 45px;
-
-  color: gray;
-
-  user-select: none;
-`;
-
-export const ButtonStyle = css`
-  width: 350px;
-  margin-top: 10px;
-  background-color: ${DodamLightTheme.primaryNormal};
-  color: ${DodamLightTheme.staticWhite};
-`;
-
-export const NoneAccount = styled.div`
-  color: ${({ theme }) => theme.labelAssisitive};
+  gap: 12px;
 
   p {
     color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Label.Regular};
+    width: 83%;
+  }
+  span {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Label.Medium};
+
     text-decoration: underline;
   }
 `;

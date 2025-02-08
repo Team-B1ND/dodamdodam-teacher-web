@@ -47,6 +47,7 @@ export const AccountContainer = styled.div`
   p {
     color: ${DodamLightTheme.labelNormal};
     text-decoration: underline;
+    cursor: pointer;
   }
 `;
 

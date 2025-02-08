@@ -33,7 +33,7 @@ const Signin = ({ setIsSignin }: SigninProps) => {
           width={330}
         />
         <S.AccountContainer>
-          비밀번호를 잊으셨나요?&nbsp;<p onClick={() => setIsSignin(false)}>비밀번호 재설정</p>
+          비밀번호를 잊으셨나요?&nbsp;<p>비밀번호 재설정</p>
         </S.AccountContainer>
         <DodamFilledButton
           backgroundColorType="Primary"

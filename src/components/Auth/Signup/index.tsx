@@ -22,25 +22,35 @@ const Signup = ({ setIsSignin }: SignupProps) => {
     policy,
     setPersonalInfo,
     setPolicy,
+    error,
+    checkAllRequired
   } = useSignup();
   const { handlePasswordView, passwordType } = useSignin();
   const [, setPrevSection] = useState(section);
 
   const AuthComponents: ReactNode[] = [
     <Id
+      error={error}
       signupData={signupData}
       passwordType={passwordType}
-      handlePasswordView={handlePasswordView}
       setIsSignin={setIsSignin}
       setSection={setSection}
       handleSignupChange={handleSignupChange}
-      signupTypeCheck={signupTypeCheck}
+      policy={policy}
+      personalInfo={personalInfo}
+      setPolicy={setPolicy}
+      setPersonalInfo={setPersonalInfo}
+      checkAllRequired={checkAllRequired}
+      submitSignup={submitSignup}
     />,
     <Email
+      error={error}
       personalInfo={personalInfo}
       policy={policy}
+      signupData={signupData}
       setPersonalInfo={setPersonalInfo}
       setPolicy={setPolicy}
+      signupTypeCheck={signupTypeCheck}
       onSignup={submitSignup}
       setIsSignin={setIsSignin}
       setSection={setSection}

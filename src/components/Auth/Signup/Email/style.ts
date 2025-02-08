@@ -1,32 +1,35 @@
-import { DodamLightTheme } from '@b1nd/dds-web';
+import { DodamLightTheme, DodamTypography } from '@b1nd/dds-web';
 import styled, { css } from 'styled-components';
 
-export const SigninWrap = styled.div`
-  width: 50%;
-  height: 55%;
+export const SignupWrap = styled.div`
+  width: 28%;
+  height: 63%;
 
   background-color: ${DodamLightTheme.backgroundNormal};
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
 
-  border-radius: 12px;
+  border-radius: 18px;
+
+  padding: 40px;
 `;
 
-export const SigninImage = styled.img`
-  height: 95%;
-  padding-left: 10px;
+export const SignUpTitle = styled.h1`
+  ${DodamTypography.Title2.Bold};
+  color: ${({ theme }) => theme.labelNormal};
 `;
 
 export const InputWrap = styled.div`
-  width: 55%;
-  height: 100%;
+  width: 100%;
+  height: 80%;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-evenly;
 `;
 
 export const AccountContainer = styled.div`
