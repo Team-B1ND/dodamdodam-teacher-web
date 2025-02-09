@@ -15,6 +15,16 @@ export const SignupWrap = styled.div`
   border-radius: 18px;
 
   padding: 40px;
+
+  @media (max-width: 1068px) {
+    width: 45%;
+    height: 60%;
+  }
+
+  @media (max-width: 568px) {
+    width: 80%;
+    height: 60%;
+  }
 `;
 
 export const SignUpTitle = styled.h1`

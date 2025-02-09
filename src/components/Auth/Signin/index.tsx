@@ -1,15 +1,11 @@
 import * as S from './style';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { useSignin } from 'hooks/auth/useSignin';
 import Pannel from 'assets/Auth/panel.svg';
-import { DodamFilledButton, DodamLightTheme, DodamTextField } from '@b1nd/dds-web';
+import { DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
 
-interface SigninProps {
-  setIsSignin: Dispatch<SetStateAction<boolean>>;
-}
-
-const Signin = ({ setIsSignin }: SigninProps) => {
-  const { handleSigninChange, submitSignin, handlePasswordView, passwordType, signinData } = useSignin();
+const Signin = () => {
+  const { handleSigninChange, submitSignin, signinData } = useSignin();
   return (
     <S.SigninWrap>
       <S.SigninImage src={Pannel} alt="AuthPannel" />

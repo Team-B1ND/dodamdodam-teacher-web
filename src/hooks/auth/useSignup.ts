@@ -17,9 +17,9 @@ export const useSignup = () => {
     phone: '',
     position: '',
     pw: '',
-    pwCheck: '',
     tel: '',
   });
+  const [pwCheck, setPwCheck] = useState<string>('');
 
   const [error, setError] = useState<MemberSignUpParam>({
     id: '',
@@ -28,7 +28,6 @@ export const useSignup = () => {
     phone: '',
     position: '',
     pw: '',
-    pwCheck: '',
     tel: '',
   });
 
@@ -73,12 +72,11 @@ export const useSignup = () => {
       return;
     }
 
-    if (signupData.pw !== signupData.pwCheck) {
+    if (signupData.pw !== pwCheck) {
       B1ndToast.showInfo('비밀번호가 일치하지 않습니다.');
       setError({
         ...error,
         pw: '비밀번호가 일치하지 않습니다.',
-        pwCheck: '비밀번호가 일치하지 않습니다.',
       });
       return;
     }
@@ -164,5 +162,7 @@ export const useSignup = () => {
     setPolicy,
     error,
     checkAllRequired,
+    setPwCheck,
+    pwCheck,
   };
 };

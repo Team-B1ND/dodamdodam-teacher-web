@@ -1,27 +1,17 @@
-import { Dispatch, SetStateAction, useState, useEffect } from 'react';
+import React from 'react';
 import * as S from './style';
-import { ArrowLeft, DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
+import { DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
 import { MemberSignUpParam } from 'repositories/Member/MemberRepository';
 
 interface SignupEmailProps {
   error: MemberSignUpParam;
-  policy: boolean;
-  personalInfo: boolean;
   signupData: MemberSignUpParam;
-  setPolicy: Dispatch<SetStateAction<boolean>>;
-  setPersonalInfo: Dispatch<SetStateAction<boolean>>;
-  setSection: Dispatch<SetStateAction<string>>;
-  setIsSignin: Dispatch<SetStateAction<boolean>>;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   signupTypeCheck: () => void;
-  onSignup: () => void;
 }
 
 const Email = ({
-  setSection,
-  setIsSignin,
   handleSignupChange,
-  onSignup,
   signupData,
   signupTypeCheck,
   error,
@@ -51,6 +41,17 @@ const Email = ({
           width={400}
           isError={error.position !== ''}
           supportingText={error.position}
+        />
+        <DodamTextField 
+          onChange={handleSignupChange}
+          id="phone"
+          name="phone"
+          type="text"
+          value={signupData.phone}
+          label="전화번호"
+          width={400}
+          isError={error.phone !== ''}
+          supportingText={error.phone}
         />
         <DodamTextField
           onChange={handleSignupChange}

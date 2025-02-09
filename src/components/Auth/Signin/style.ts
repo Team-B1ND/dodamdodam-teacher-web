@@ -1,5 +1,5 @@
 import { DodamLightTheme } from '@b1nd/dds-web';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const SigninWrap = styled.div`
   width: 50%;
@@ -12,11 +12,25 @@ export const SigninWrap = styled.div`
   justify-content: space-between;
 
   border-radius: 12px;
+
+  @media (max-width: 1068px) {
+    width: 40%;
+    height: 50%;
+  }
+
+  @media (max-width: 568px) {
+    width: 80%;
+    height: 50%;
+  }
 `;
 
 export const SigninImage = styled.img`
   height: 95%;
   padding-left: 10px;
+
+  @media (max-width: 1068px) {
+    display: none;
+  }
 `;
 
 export const InputWrap = styled.div`
@@ -31,6 +45,11 @@ export const InputWrap = styled.div`
   gap: 20px;
 
   position: relative;
+
+  @media (max-width: 1068px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const AccountContainer = styled.div`

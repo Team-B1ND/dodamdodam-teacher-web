@@ -23,7 +23,9 @@ const Signup = ({ setIsSignin }: SignupProps) => {
     setPersonalInfo,
     setPolicy,
     error,
-    checkAllRequired
+    checkAllRequired,
+    pwCheck,
+    setPwCheck,
   } = useSignup();
   const { handlePasswordView, passwordType } = useSignin();
   const [, setPrevSection] = useState(section);
@@ -42,18 +44,13 @@ const Signup = ({ setIsSignin }: SignupProps) => {
       setPersonalInfo={setPersonalInfo}
       checkAllRequired={checkAllRequired}
       submitSignup={submitSignup}
+      pwCheck={pwCheck}
+      setPwCheck={setPwCheck}
     />,
     <Email
       error={error}
-      personalInfo={personalInfo}
-      policy={policy}
       signupData={signupData}
-      setPersonalInfo={setPersonalInfo}
-      setPolicy={setPolicy}
       signupTypeCheck={signupTypeCheck}
-      onSignup={submitSignup}
-      setIsSignin={setIsSignin}
-      setSection={setSection}
       handleSignupChange={handleSignupChange}
     />,
   ];

@@ -7,7 +7,7 @@ const Auth = () => {
   const [isSignin, setIsSignin] = useState(true);
   return (
     <S.SignWrap>
-      {isSignin ? <Signin setIsSignin={setIsSignin} /> : <Signup setIsSignin={setIsSignin} />}
+      {isSignin ? <Signin /> : <Signup setIsSignin={setIsSignin} />}
       <S.ChangeAuthButton>
         <p>
           {isSignin ? '계정이 없으시다면?' : '이미 계정이 있으시다면?'}&nbsp;

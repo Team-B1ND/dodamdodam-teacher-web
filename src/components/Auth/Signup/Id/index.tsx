@@ -17,6 +17,8 @@ interface SignupIdProps {
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checkAllRequired: () => void;
   submitSignup: () => void;
+  pwCheck: string;
+  setPwCheck: Dispatch<SetStateAction<string>>;
 }
 
 const Id = ({
@@ -31,6 +33,8 @@ const Id = ({
   setPersonalInfo,
   submitSignup,
   setSection,
+  pwCheck,
+  setPwCheck,
 }: SignupIdProps) => {
   return (
     <S.SignupWrap>
@@ -59,11 +63,11 @@ const Id = ({
           width={400}
         />
         <DodamTextField
-          onChange={handleSignupChange}
+          onChange={(e) => setPwCheck(e.target.value)}
           id="pwCheck"
           name="pwCheck"
           type="password"
-          value={signupData.pw}
+          value={pwCheck}
           label="비밀번호 확인"
           width={400}
         />
