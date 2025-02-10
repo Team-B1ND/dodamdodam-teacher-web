@@ -27,6 +27,13 @@ export const SignupWrap = styled.div`
   }
 `;
 
+export const SignupButtonWrap = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const SignUpTitle = styled.h1`
   ${DodamTypography.Title2.Bold};
   color: ${({ theme }) => theme.labelNormal};

@@ -1,8 +1,8 @@
 export const SIGNUP_SECTION_NAME = [
   {
-    title: 'email',
+    title: 'SignupFirst',
   },
   {
-    title: 'id',
+    title: 'SignupSecond',
   },
 ];

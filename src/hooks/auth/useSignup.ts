@@ -6,7 +6,7 @@ import MemberRepositoryImpl from 'repositories/Member/MemberRepositoryImpl';
 import { MemberSignUpParam } from 'repositories/Member/MemberRepository';
 
 export const useSignup = () => {
-  const [section, setSection] = useState('id');
+  const [section, setSection] = useState('SignupFirst');
   const [policy, setPolicy] = useState<boolean>(false);
   const [personalInfo, setPersonalInfo] = useState(false);
 
@@ -17,6 +17,7 @@ export const useSignup = () => {
     phone: '',
     position: '',
     pw: '',
+    checkPw: '',
     tel: '',
   });
   const [pwCheck, setPwCheck] = useState<string>('');
@@ -28,6 +29,7 @@ export const useSignup = () => {
     phone: '',
     position: '',
     pw: '',
+    checkPw: '',
     tel: '',
   });
 
@@ -90,7 +92,7 @@ export const useSignup = () => {
       return;
     }
 
-    setSection('email');
+    setSection('SignupSecond');
   };
 
   const handleSignupChange = useCallback(
@@ -102,7 +104,7 @@ export const useSignup = () => {
   );
 
   const submitSignup = useCallback(async () => {
-    const { id, pw } = signupData;
+    const { id, pw, checkPw } = signupData;
 
     if (id === '' || pw === '') {
       B1ndToast.showInfo('형식이 비었습니다');
@@ -119,6 +121,11 @@ export const useSignup = () => {
       return;
     }
 
+    if (pw !== checkPw) {
+      B1ndToast.showInfo('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
     if (!policy) {
       B1ndToast.showInfo('운영정책에 동의해주세요');
       return;
@@ -129,9 +136,14 @@ export const useSignup = () => {
       return;
     }
 
-    const validSignupData: MemberSignUpParam = {
-      ...signupData,
+    const validSignupData: Omit<MemberSignUpParam, "checkPw"> = {
+      id,
+      email: signupData.email,
+      name: signupData.name,
+      phone: signupData.phone,
+      position: signupData.position,
       pw,
+      tel: signupData.tel,
     };
 
     try {
@@ -144,9 +156,8 @@ export const useSignup = () => {
   }, [signupData, policy, personalInfo]);
 
   const checkAllRequired = useCallback(() => {
-    setPolicy(true);
-    setPersonalInfo(true);
-    B1ndToast.showInfo('모든 필수 항목이 체크되었습니다.');
+    setPolicy((prev) => !prev);
+    setPersonalInfo((prev) => !prev);
   }, []);
 
   return {

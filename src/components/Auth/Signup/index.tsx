@@ -1,10 +1,10 @@
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 import { useSignup } from 'hooks/auth/useSignup';
 import { SIGNUP_SECTION_NAME } from 'constants/Signup/signup.constant';
-import Id from './Id';
-import Email from './Email';
 import { useSignin } from 'hooks/auth/useSignin';
 import * as S from './style';
+import SignupSecond from './SignupSecond';
+import SignupFirst from './SignupFirst';
 
 interface SignupProps {
   setIsSignin: Dispatch<SetStateAction<boolean>>;
@@ -31,10 +31,15 @@ const Signup = ({ setIsSignin }: SignupProps) => {
   const [, setPrevSection] = useState(section);
 
   const AuthComponents: ReactNode[] = [
-    <Id
+    <SignupFirst
       error={error}
       signupData={signupData}
-      passwordType={passwordType}
+      signupTypeCheck={signupTypeCheck}
+      handleSignupChange={handleSignupChange}
+    />,
+    <SignupSecond
+      error={error}
+      signupData={signupData}
       setIsSignin={setIsSignin}
       setSection={setSection}
       handleSignupChange={handleSignupChange}
@@ -44,15 +49,7 @@ const Signup = ({ setIsSignin }: SignupProps) => {
       setPersonalInfo={setPersonalInfo}
       checkAllRequired={checkAllRequired}
       submitSignup={submitSignup}
-      pwCheck={pwCheck}
-      setPwCheck={setPwCheck}
-    />,
-    <Email
-      error={error}
-      signupData={signupData}
-      signupTypeCheck={signupTypeCheck}
-      handleSignupChange={handleSignupChange}
-    />,
+      />,
   ];
 
   useEffect(() => {

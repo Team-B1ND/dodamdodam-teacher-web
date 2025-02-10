@@ -2,13 +2,12 @@ import { Dispatch, SetStateAction } from 'react';
 import { MemberSignUpParam } from 'repositories/Member/MemberRepository';
 import { PasswordParm } from 'repositories/Auth/AuthRepository';
 import * as S from './style';
-import { Checkmark, ChevronLeft, DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
+import { Checkmark, ChevronLeft, ChevronRight, DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
 
-interface SignupIdProps {
+interface SignupSecondProps {
   error: MemberSignUpParam;
   policy: boolean;
   personalInfo: boolean;
-  passwordType: PasswordParm;
   signupData: MemberSignUpParam;
   setPolicy: Dispatch<SetStateAction<boolean>>;
   setPersonalInfo: Dispatch<SetStateAction<boolean>>;
@@ -17,13 +16,10 @@ interface SignupIdProps {
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checkAllRequired: () => void;
   submitSignup: () => void;
-  pwCheck: string;
-  setPwCheck: Dispatch<SetStateAction<string>>;
 }
 
-const Id = ({
+const SignupSecond = ({
   handleSignupChange,
-  passwordType,
   signupData,
   error,
   policy,
@@ -33,15 +29,11 @@ const Id = ({
   setPersonalInfo,
   submitSignup,
   setSection,
-  pwCheck,
-  setPwCheck,
-}: SignupIdProps) => {
+}: SignupSecondProps) => {
   return (
     <S.SignupWrap>
-      <div onClick={() => setSection('id')} style={{ cursor: 'pointer' }}>
-        <ChevronLeft size={16} color="#0083F0" />
-      </div>
       <S.SignUpTitle>회원가입</S.SignUpTitle>
+
       <S.InputWrap>
         <DodamTextField
           onChange={handleSignupChange}
@@ -52,6 +44,7 @@ const Id = ({
           label="아이디"
           width={400}
           supportingText="아이디는 영문과 숫자로 5 ~ 20글자 이내여야 해요."
+          isError={error.id !== ''}
         />
         <DodamTextField
           onChange={handleSignupChange}
@@ -61,18 +54,21 @@ const Id = ({
           value={signupData.pw}
           label="비밀번호"
           width={400}
+          isError={error.pw !== ''}
         />
         <DodamTextField
-          onChange={(e) => setPwCheck(e.target.value)}
+          onChange={handleSignupChange}
           id="pwCheck"
           name="pwCheck"
           type="password"
-          value={pwCheck}
+          value={signupData.checkPw}
           label="비밀번호 확인"
           width={400}
+          isError={error.checkPw !== ''}
         />
         <DodamFilledButton
-          // leftIcon={<Checkmark />}
+          icon={<Checkmark size={20} color={personalInfo && policy ? '#0083F0' : '#808080'} />}
+          attendants="left"
           backgroundColorType="Assisitive"
           width={400}
           onClick={checkAllRequired}
@@ -94,16 +90,32 @@ const Id = ({
           <span>보기</span>
         </S.CheckmarkWrap>
       </S.CheckWrap>
-      <DodamFilledButton
-        backgroundColorType="Primary"
-        text="가입하기"
-        size="Large"
-        width={400}
-        typography={['Body1', 'Bold']}
-        onClick={submitSignup}
-      />
+      <S.SignupButtonWrap>
+        <DodamFilledButton
+          backgroundColorType="Assisitive"
+          text="이전"
+          size="Large"
+          width={150}
+          typography={['Body1', 'Bold']}
+          onClick={() => setSection('SignupFirst')}
+          icon={<ChevronLeft size={20} color="labelNetural" />}
+          attendants="left"
+          textTheme="labelNetural"
+        />
+        <DodamFilledButton
+          backgroundColorType="Primary"
+          text="회원가입"
+          size="Large"
+          width={150}
+          typography={['Body1', 'Bold']}
+          onClick={submitSignup}
+          icon={<ChevronRight size={20} color="staticWhite" />}
+          attendants="right"
+          textTheme="staticWhite"
+        />
+      </S.SignupButtonWrap>
     </S.SignupWrap>
   );
 };
 
-export default Id;
+export default SignupSecond;

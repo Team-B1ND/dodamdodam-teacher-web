@@ -10,7 +10,7 @@ class MemberRepositoryImpl implements MemberRepository {
     return data;
   }
 
-  public async postMemberJoinTeacher(param: MemberSignUpParam): Promise<void> {
+  public async postMemberJoinTeacher(param: Omit<MemberSignUpParam, "checkPw">): Promise<void> {
     await axios.post(`${CONFIG.SERVER}/member/join-teacher`, param);
   }
 

@@ -3,19 +3,14 @@ import * as S from './style';
 import { DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
 import { MemberSignUpParam } from 'repositories/Member/MemberRepository';
 
-interface SignupEmailProps {
+interface SignupFirstProps {
   error: MemberSignUpParam;
   signupData: MemberSignUpParam;
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   signupTypeCheck: () => void;
 }
 
-const Email = ({
-  handleSignupChange,
-  signupData,
-  signupTypeCheck,
-  error,
-}: SignupEmailProps) => {
+const SignupFirst = ({ handleSignupChange, signupData, signupTypeCheck, error }: SignupFirstProps) => {
   return (
     <S.SignupWrap>
       <S.SignUpTitle>회원가입</S.SignUpTitle>
@@ -42,7 +37,7 @@ const Email = ({
           isError={error.position !== ''}
           supportingText={error.position}
         />
-        <DodamTextField 
+        <DodamTextField
           onChange={handleSignupChange}
           id="phone"
           name="phone"
@@ -89,4 +84,4 @@ const Email = ({
   );
 };
 
-export default Email;
+export default SignupFirst;
