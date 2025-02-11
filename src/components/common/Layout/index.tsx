@@ -10,6 +10,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 export default Layout;
 
 const Container = styled.div<{ pathname: string }>`
+  background-color: ${({theme})=> theme.backgroundAlternative};
   padding-top: ${({ pathname }) => pathname !== "/" && "80px"};
   padding-left: ${({ pathname }) => pathname !== "/" && "208px"};
 `;

@@ -13,9 +13,9 @@ import PointReason from 'components/Point/PointReason';
 import ScheduleManage from 'components/Schedule/ScheduleManage';
 import OffbaseRedisualPage from 'pages/Out/RedisualPage';
 import NoticePageTemplate from 'components/common/NoticePageTemplate';
-import NoticePage from 'pages/Notice/noticePages';
-import NoticeWritePage from 'pages/Notice/noticeWritePages';
-import GroupPage from 'pages/Notice/groupPage';
+import NoticePage from 'pages/Notice/Main/noticePages';
+import NoticeWritePage from 'pages/Notice/Write/noticeWritePages';
+import GroupPage from 'pages/Notice/Group/groupPage';
 
 const Router = () => {
   return (
@@ -34,10 +34,10 @@ const Router = () => {
       <Route path="/PointReason" element={<PointReason />} />
       <Route path="/Schedule" element={<ScheduleManage />} />
 
-      <Route path="/notice" element={<NoticePageTemplate/>}>
-        <Route index element={<NoticePage/>} />
-        <Route path="/noticeWrite" element={<NoticeWritePage/>}/>
-        <Route path='/group' element={<GroupPage/>}/>
+      <Route path="/notice" element={<NoticePageTemplate />}>
+        <Route index element={<NoticePage />} />
+        <Route path="notice-write" element={<NoticeWritePage />} />
+        <Route path="group" element={<GroupPage />} /> 
       </Route>
     </Routes>
   );
