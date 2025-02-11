@@ -15,7 +15,8 @@ const BusList = () => {
     <>
       <TableAttribute constant={BUS_LIST_ITEMS} thStyle={{ width: "16.5%" }}>
         <ErrorBoundary
-          fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
+          text="데이터를 불러오지 못했습니다."
+          showButton={true}
         >
           <Suspense fallback={<SkeletonComponent height={80} />}>
             <BusListItem page={page} />

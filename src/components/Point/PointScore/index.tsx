@@ -14,12 +14,12 @@ const PointScore = () => {
       title={pointQueryParam === "DORMITORY" ? " 기숙사 상벌점" : "학교 상벌점"}
       subTitle="학생 상벌점 조회, 발급, 삭제가 가능합니다."
     >
-      <ErrorBoundary fallback={<>...loading</>}>
+      <ErrorBoundary text="포인트 헤더 에러" showButton={true}>
         <Suspense>
           <PointScoreHeader pointQueryParam={pointQueryParam!} />
         </Suspense>
       </ErrorBoundary>
-      <ErrorBoundary fallback={<>...loading</>}>
+      <ErrorBoundary text="포인트 조회 에러 " showButton={true}>
         <Suspense fallback={<>...loading</>}>
           <PointScoreTable pointQueryParam={pointQueryParam!} />
         </Suspense>
