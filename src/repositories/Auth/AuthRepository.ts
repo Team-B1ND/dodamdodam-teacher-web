@@ -16,6 +16,13 @@ export interface SignInParam {
   id: string;
   pw: string;
 }
+
+export interface FindPasswordParam {
+  id: string;
+  pw: string;
+  newPw: string;
+}
+
 export interface NewAccessTokenResponse extends Response {
   data: string;
 }

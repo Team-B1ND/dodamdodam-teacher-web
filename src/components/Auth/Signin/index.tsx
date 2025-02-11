@@ -1,48 +1,44 @@
-import * as S from './style';
-import React from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import Login from './Signin';
+import FindPassword from './FindPassword';
 import { useSignin } from 'hooks/auth/useSignin';
-import Pannel from 'assets/Auth/panel.svg';
-import { DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
+import { SIGNIN_SECTION_NAME } from 'constants/Auth/SIgnin/signin.constants';
 
 const Signin = () => {
-  const { handleSigninChange, submitSignin, signinData } = useSignin();
+  const {
+    section,
+    setSection,
+    findPasswordData,
+    handleFindPasswordChange,
+    submitSignin,
+    signinData,
+    handleSigninChange,
+  } = useSignin();
+  const [, setPrevSection] = useState(section);
+  const SigninComponents: ReactNode[] = [
+    <Login
+      setSection={setSection}
+      submitSignin={submitSignin}
+      signinData={signinData}
+      handleSigninChange={handleSigninChange}
+    />,
+    <FindPassword
+      setSection={setSection}
+      findPasswordData={findPasswordData}
+      handleFindPasswordChange={handleFindPasswordChange}
+    />,
+  ];
+
+  useEffect(() => {
+    setPrevSection(section);
+  }, [section]);
+
   return (
-    <S.SigninWrap>
-      <S.SigninImage src={Pannel} alt="AuthPannel" />
-      <S.InputWrap>
-        <DodamTextField
-          onChange={handleSigninChange}
-          id="id"
-          name="id"
-          type="text"
-          value={signinData.id}
-          label="아이디"
-          width={330}
-        />
-        <DodamTextField
-          onChange={handleSigninChange}
-          id="pw"
-          name="pw"
-          type="password"
-          value={signinData.pw}
-          label="비밀번호"
-          width={330}
-        />
-        <S.AccountContainer>
-          비밀번호를 잊으셨나요?&nbsp;<p>비밀번호 재설정</p>
-        </S.AccountContainer>
-        <DodamFilledButton
-          backgroundColorType="Primary"
-          text="로그인"
-          size="Large"
-          width={330}
-          typography={['Body1', 'Bold']}
-          enabled={true}
-          textTheme="staticWhite"
-          onClick={submitSignin}
-        />
-      </S.InputWrap>
-    </S.SigninWrap>
+    <>
+      {SigninComponents.map((component, idx) => {
+        return section === SIGNIN_SECTION_NAME[idx].title && component;
+      })}
+    </>
   );
 };
 

@@ -6,11 +6,12 @@ import {
   ACCESS_TOKEN_KEY,
 } from "constants/Token/Token.constant";
 import { useNavigate } from "react-router-dom";
-import { PasswordParm, SignInParam } from "repositories/Auth/AuthRepository";
+import { FindPasswordParam, PasswordParm, SignInParam } from "repositories/Auth/AuthRepository";
 import AuthRepositoryImpl from "repositories/Auth/AuthRepositoryImpl";
 
 export const useSignin = () => {
   const navigate = useNavigate();
+  const [section, setSection] = useState('Login');
   const [passwordType, setPasswordType] = useState<PasswordParm>({
     type: "password",
     visible: false,
@@ -18,6 +19,12 @@ export const useSignin = () => {
   const [signinData, setSigninData] = useState<SignInParam>({
     id: "",
     pw: "",
+  });
+
+  const [findPasswordData, setFindPasswordData] = useState<FindPasswordParam>({
+    id: "",
+    pw: "",
+    newPw: "",
   });
 
   const handleSigninChange = useCallback(
@@ -68,11 +75,23 @@ export const useSignin = () => {
       return { type: "password", visible: false };
     });
   };
+
+  const handleFindPasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setFindPasswordData((prev) => ({ ...prev, [name]: value }));
+  }, [setFindPasswordData]);
+  
+  
+
   return {
     signinData,
     submitSignin,
     handleSigninChange,
     handlePasswordView,
     passwordType,
+    section,
+    setSection,
+    findPasswordData,
+    handleFindPasswordChange,
   };
 };
