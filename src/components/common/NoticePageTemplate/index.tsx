@@ -21,4 +21,5 @@ export const NoticContainer = styled.div`
   height: 100%;
   padding: 1rem 2.5rem;
   white-space: nowrap;
+  background-color: ${({theme})=> theme.backgroundAlternative};
 `;
