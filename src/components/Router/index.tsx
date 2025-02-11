@@ -36,7 +36,7 @@ const Router = () => {
 
       <Route path="/notice" element={<NoticePageTemplate />}>
         <Route index element={<NoticePage />} />
-        <Route path="notice-write" element={<NoticeWritePage />} />
+        <Route path="write" element={<NoticeWritePage />} />
         <Route path="group" element={<GroupPage />} /> 
       </Route>
     </Routes>
