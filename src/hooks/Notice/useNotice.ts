@@ -1,11 +1,11 @@
-import { useRef } from "react";
-export const useNotice = () =>{
-    const searchRef = useRef<HTMLInputElement>(null);
-    const searchSubmit = () => {
-        console.log("검색어 post");   
-    }
-    return{
-        searchRef,
-        searchSubmit,
-    }
-}
+import { useRef } from 'react';
+export const useNotice = () => {
+  const searchRef = useRef<HTMLInputElement>(null);
+  const searchSubmit = () => {
+    console.log('검색어 post');
+  };
+  return {
+    searchRef,
+    searchSubmit,
+  };
+};
