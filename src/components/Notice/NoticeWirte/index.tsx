@@ -1,10 +1,10 @@
 import React from 'react';
 import * as S from './style';
 import { DodamFilledButton } from '@b1nd/dds-web';
-import useWrite from 'hooks/Notice/useWrite';
+import { useNotice } from 'hooks/Notice/useNotice';
 
 const NoticeWrite = () => {
-  const { writeData, handleWriteDataChange } = useWrite();
+  const { writeData, handleWriteDataChange } = useNotice();
   return (
     <S.NoticeWriteWrap>
       <S.WriteWrap>
