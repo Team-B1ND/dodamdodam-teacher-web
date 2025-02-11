@@ -69,6 +69,7 @@ export const useSignin = () => {
     });
   };
   return {
+    signinData,
     submitSignin,
     handleSigninChange,
     handlePasswordView,

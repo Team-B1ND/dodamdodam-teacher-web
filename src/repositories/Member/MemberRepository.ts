@@ -12,6 +12,7 @@ export interface MemberSignUpParam {
   name: string;
   phone: string;
   pw: string;
+  checkPw: string;
   position: string;
   tel: string;
 }

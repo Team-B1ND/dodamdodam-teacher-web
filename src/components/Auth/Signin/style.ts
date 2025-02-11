@@ -1,44 +1,80 @@
-import styled from "styled-components";
-import { AuthPartFadeh } from "../style";
+import { DodamLightTheme } from '@b1nd/dds-web';
+import styled from 'styled-components';
 
-export const AccountContainer = styled.div`
+export const SigninWrap = styled.div`
+  width: 50%;
+  height: 55%;
+
+  background-color: ${DodamLightTheme.backgroundNormal};
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  color: rgb(204, 204, 204);
-  font-size: 17px;
-  font-weight: 400;
+  border-radius: 12px;
 
-  margin-top: 30px;
+  @media (max-width: 1068px) {
+    width: 40%;
+    height: 50%;
+  }
 
-  cursor: pointer;
-
-  p {
-    font-size: 18px;
-
-    margin-left: 2%;
-    font-weight: 600;
-    color: rgb(0, 103, 188);
+  @media (max-width: 568px) {
+    width: 80%;
+    height: 50%;
   }
 `;
 
-export const PasswordBox = styled.div`
+export const SigninImage = styled.img`
+  height: 95%;
+  padding-left: 10px;
+
+  @media (max-width: 1068px) {
+    display: none;
+  }
+`;
+
+export const InputWrap = styled.div`
+  width: 55%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  position: relative;
+
+  @media (max-width: 1068px) {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const AccountContainer = styled.div`
+  width: 68%;
+  height: 5%;
+
   display: flex;
   align-items: center;
-`;
-export const PasswordViewBox = styled.div`
-  z-index: 10;
+  justify-content: flex-end;
+  margin-top: -10px;
 
-  font-size: 20px;
+  color: ${DodamLightTheme.labelAlternative};
 
-  margin-left: -16px;
-  margin-top: 45px;
-
-  color: gray;
-
-  user-select: none;
+  p {
+    color: ${DodamLightTheme.labelNormal};
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
-export const SigninWrap = styled.div`
-  animation: ${AuthPartFadeh} 1s;
+export const NoneAccount = styled.div`
+  color: ${({ theme }) => theme.labelAssisitive};
+
+  p {
+    color: ${({ theme }) => theme.labelNormal};
+    text-decoration: underline;
+  }
 `;
