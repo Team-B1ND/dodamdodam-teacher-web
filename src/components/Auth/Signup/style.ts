@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { AuthPartFadeh } from "../style";
+import styled from 'styled-components';
+// import { AuthPartFadeh } from "../style";
 
 export const AccountContainer = styled.div`
   display: flex;
@@ -24,5 +24,10 @@ export const AccountContainer = styled.div`
 `;
 
 export const SignupWrap = styled.div`
-  animation: ${AuthPartFadeh} 1s;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

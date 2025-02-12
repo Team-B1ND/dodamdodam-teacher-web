@@ -1,9 +1,9 @@
 import styled, {
   css,
   CSSObject,
-  FlattenSimpleInterpolation,
-} from "styled-components";
-import { ButtonType } from "./types";
+  // FlattenSimpleInterpolation,
+} from 'styled-components';
+import { ButtonType } from './types';
 
 export const ButtonContainer = styled.button<{
   customStyle?: CSSObject;
@@ -27,7 +27,7 @@ export const ButtonContainer = styled.button<{
   ${({ customStyle }) => customStyle}
 `;
 
-const getColor: Record<ButtonType, FlattenSimpleInterpolation> = {
+const getColor = {
   agree: css`
     color: #fff;
     background-color: rgba(0, 103, 188, 0.85);

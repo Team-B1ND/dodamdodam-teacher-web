@@ -85,7 +85,7 @@ const OutSleeping = () => {
         </S.SelectContainer>
       </S.OffBaseHeaderContainer>
       <TableAttribute constant={OUT_SLEEPING_ITEMS} thStyle={{ width: "14%" }}>
-        <ErrorBoundary fallback={<>외박한 학생을 불러오지 못했습니다.</>}>
+        <ErrorBoundary text="외박한 학생을 불러오지 못했습니다." showButton={true}>
           <Suspense fallback={<>로딩중...</>}>
             <OffBaseLeaveItem
               selectRoom={room}

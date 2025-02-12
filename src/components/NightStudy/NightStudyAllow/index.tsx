@@ -89,7 +89,8 @@ const NightStudyAllow = () => {
         thStyle={{ width: "14%" }}
       >
         <ErrorBoundary
-          fallback={<>심자 신청을 한 학생을 불러오지 못했습니다.</>}
+          text="심자 신청을 한 학생을 불러오지 못했습니다."
+          showButton={true}
         >
           <Suspense fallback={<>로딩중...</>}>
             <NightStudyAllowItem

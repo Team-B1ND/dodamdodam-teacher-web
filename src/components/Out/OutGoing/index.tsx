@@ -124,7 +124,7 @@ const OutGoing = () => {
       </S.OffBaseHeaderContainer>
 
       <TableAttribute constant={OUT_GOING_ITEMS} thStyle={{ width: '14%' }}>
-        <ErrorBoundary fallback={<>외출한 학생을 불러오지 못했습니다.</>}>
+        <ErrorBoundary text='외출한 학생을 불러오지 못했습니다.' showButton={true}>
           <Suspense fallback={<SkeletonComponent height={60} />}>
             <OffBasePassItem
               selectRoom={room}

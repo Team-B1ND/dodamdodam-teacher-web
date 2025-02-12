@@ -12,6 +12,10 @@ import PointScore from 'components/Point/PointScore';
 import PointReason from 'components/Point/PointReason';
 import ScheduleManage from 'components/Schedule/ScheduleManage';
 import OffbaseRedisualPage from 'pages/Out/RedisualPage';
+import NoticePageTemplate from 'components/common/NoticePageTemplate';
+import NoticePage from 'pages/Notice/Main/noticePages';
+import NoticeWritePage from 'pages/Notice/Write/noticeWritePages';
+import GroupPage from 'pages/Notice/Group/groupPage';
 
 const Router = () => {
   return (
@@ -29,6 +33,12 @@ const Router = () => {
       <Route path="/PointScore" element={<PointScore />} />
       <Route path="/PointReason" element={<PointReason />} />
       <Route path="/Schedule" element={<ScheduleManage />} />
+
+      <Route path="/notice" element={<NoticePageTemplate />}>
+        <Route index element={<NoticePage />} />
+        <Route path="write" element={<NoticeWritePage />} />
+        <Route path="group" element={<GroupPage />} /> 
+      </Route>
     </Routes>
   );
 };

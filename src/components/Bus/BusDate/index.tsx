@@ -3,7 +3,6 @@ import { useSelectBusDate } from "hooks/Bus/useSelectBusDate";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import SkeletonComponent from "components/common/Skeleton";
 import TableAttribute from "components/common/TableAttribute";
-import { NoneDataText } from "../style";
 import BusDateItem from "./BusDateItem";
 import * as S from "./style";
 import { Button } from "@b1nd/b1nd-dodamdodam-ui";
@@ -40,7 +39,7 @@ const BusDate = () => {
 
       <TableAttribute constant={BUS_DATE_ITEMS} thStyle={{ width: "16.5%" }}>
         <ErrorBoundary
-          fallback={<NoneDataText>데이터를 불러오지 못했습니다.</NoneDataText>}
+         text="데이터를 불러오지 못했습니다" showButton={true}
         >
           <Suspense fallback={<SkeletonComponent height={80} />}>
             <BusDateItem

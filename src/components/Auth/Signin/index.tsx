@@ -1,50 +1,47 @@
-import * as S from "./style";
-import AuthButton from "components/common/AuthButton";
-import TextField from "components/common/TextField";
-import React, { Dispatch, SetStateAction } from "react";
-import { useSignin } from "hooks/auth/useSignin";
-import { IoEyeSharp } from "react-icons/io5";
-import PointScoreHeader from "components/Point/PointScore/PointScoreHeader";
-import { PointDataToCsvData } from "utils/Transform/csvTransform";
+import * as S from './style';
+import React from 'react';
+import { useSignin } from 'hooks/auth/useSignin';
+import Pannel from 'assets/Auth/panel.svg';
+import { DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
 
-interface SigninProps {
-  setIsSignin: Dispatch<SetStateAction<boolean>>;
-}
-
-const Signin = ({ setIsSignin }: SigninProps) => {
-  const { handleSigninChange, submitSignin, handlePasswordView, passwordType } =
-    useSignin();
+const Signin = () => {
+  const { handleSigninChange, submitSignin, signinData } = useSignin();
   return (
     <S.SigninWrap>
-      <TextField onChange={handleSigninChange} id="id" name="id" functions="pw">
-        ID
-      </TextField>
-      <S.PasswordBox>
-        <TextField
+      <S.SigninImage src={Pannel} alt="AuthPannel" />
+      <S.InputWrap>
+        <DodamTextField
           onChange={handleSigninChange}
-          functions={submitSignin}
+          id="id"
+          name="id"
+          type="text"
+          value={signinData.id}
+          label="아이디"
+          width={330}
+        />
+        <DodamTextField
+          onChange={handleSigninChange}
           id="pw"
           name="pw"
-          type={passwordType.type}
-        >
-          비밀번호
-        </TextField>
-        <S.PasswordViewBox onClick={() => handlePasswordView()}>
-          <IoEyeSharp />
-        </S.PasswordViewBox>
-      </S.PasswordBox>
-
-      <AuthButton
-        width={350}
-        top={85}
-        AuthButtonType="agree"
-        onClick={submitSignin}
-      >
-        Sign In
-      </AuthButton>
-      <S.AccountContainer>
-        아직 계정이 없으신가요?<p onClick={() => setIsSignin(false)}>Sign Up</p>
-      </S.AccountContainer>
+          type="password"
+          value={signinData.pw}
+          label="비밀번호"
+          width={330}
+        />
+        <S.AccountContainer>
+          비밀번호를 잊으셨나요?&nbsp;<p>비밀번호 재설정</p>
+        </S.AccountContainer>
+        <DodamFilledButton
+          backgroundColorType="Primary"
+          text="로그인"
+          size="Large"
+          width={330}
+          typography={['Body1', 'Bold']}
+          enabled={true}
+          textTheme="staticWhite"
+          onClick={submitSignin}
+        />
+      </S.InputWrap>
     </S.SigninWrap>
   );
 };

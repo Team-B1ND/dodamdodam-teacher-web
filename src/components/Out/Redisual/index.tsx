@@ -55,7 +55,7 @@ const OffbaseRedisual = () => {
       </S.OffBaseHeaderContainer>
 
       <TableAttribute constant={REDISUAL_ITEMS} thStyle={{ width: '14%' }}>
-        <ErrorBoundary fallback={<>오늘의 외박 잔류자를 불러오지 못했습니다.</>}>
+        <ErrorBoundary text='오늘의 외박 잔류자를 불러오지 못했습니다.' showButton={true}>
           <Suspense fallback={<>로딩중...</>}>
             <TodayOffBaseItem
               selectRoom={room}
