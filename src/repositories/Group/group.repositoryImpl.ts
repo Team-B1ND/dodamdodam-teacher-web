@@ -20,6 +20,10 @@ class GroupRepositoryImpl implements GroupRepository {
     const { data } = await dodamAxios.get(`/divisions/${id}/members?status=${status}`);
     return data;
   }
+
+  public async patchGroupMemberStatus(status: GroupMemberStatus, id: number): Promise<void> {
+    await dodamAxios.patch(`/divisions/${id}/members/${id}`, { status });
+  }
 }
 
 const groupRepositroy = new GroupRepositoryImpl();

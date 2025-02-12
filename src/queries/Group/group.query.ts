@@ -28,14 +28,21 @@ export const useGetGroupDetailQuery = (
     ...options,
   });
 
-export const useGetGroupMemberQuery = (
-  status: GroupMemberStatus,
+export const useGetAllowedGroupMemberQuery = (
   id: number,
   options?: UseQueryOptions<GroupMemberResponse, AxiosError, GroupMemberResponse, (string | number)[]>
 ) =>
-  useQuery(QUERY_KEYS.group.getGroupMember(status, id), () => groupRepositroy.getGroupMember(status, id), {
-    enabled: !!status,
+  useQuery(QUERY_KEYS.group.getGroupMember('ALLOWED', id), () => groupRepositroy.getGroupMember('ALLOWED', id), {
+    enabled: !!id,
     staleTime: 1000 * 60 * 60,
     cacheTime: 1000 * 60 * 60,
+    ...options,
+  });
+
+export const useGetPendingGroupMemberQuery = (
+  id: number,
+  options?: UseQueryOptions<GroupMemberResponse, AxiosError, GroupMemberResponse, (string | number)[]>
+) =>
+  useQuery(QUERY_KEYS.group.getGroupMember('PENDING', id), () => groupRepositroy.getGroupMember('PENDING', id), {
     ...options,
   });

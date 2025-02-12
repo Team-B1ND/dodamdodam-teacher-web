@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './style';
 import { ArrowLeft, DodamDivider, Menu, Person } from '@b1nd/dds-web';
-import { useGetGroupDetailQuery, useGetGroupMemberQuery } from 'queries/Group/group.query';
+import {
+  useGetGroupDetailQuery,
+  useGetAllowedGroupMemberQuery,
+  useGetPendingGroupMemberQuery,
+} from 'queries/Group/group.query';
 import { GroupMember } from 'repositories/Group/group.repository';
 import { useParams } from 'react-router-dom';
+import GroupDetailModal from './Modal/groupDetailModal';
+import MemberInfoModal from './Modal/memberInfoModal';
 
 const GroupDetail = () => {
   const { id } = useParams();
   const { data } = useGetGroupDetailQuery(+id!);
-  const { data: memberData } = useGetGroupMemberQuery('ALLOWED', +id!);
+  const { data: memberData } = useGetAllowedGroupMemberQuery(+id!);
+  const { data: pendingData } = useGetPendingGroupMemberQuery(+id!);
 
   const adminMembers = memberData?.data.filter((member) => member.permission === 'ADMIN') || [];
   const writerMembers = memberData?.data.filter((member) => member.permission === 'WRITER') || [];
   const readerMembers = memberData?.data.filter((member) => member.permission === 'READER') || [];
 
+  const [selectedMember, setSelectedMember] = useState<GroupMember | null>(null);
+
   const renderMemberCell = (member: GroupMember) => (
-    <S.MemberCell key={member.id}>
+    <S.MemberCell
+      key={member.id}
+      onClick={() => {
+        setSelectedMember(member);
+        setMemberInfoModal(true);
+      }}
+    >
       <S.MemberInfo>
-        <Person size={24} />
+        {member.profileImage ? <img src={member.profileImage} /> : <Person size={24} />}
         <S.MemberName>{member.memberName}</S.MemberName>
       </S.MemberInfo>
       <S.MemberRole>
@@ -28,6 +43,8 @@ const GroupDetail = () => {
     </S.MemberCell>
   );
 
+  const [detailModal, setDetailModal] = useState(false);
+  const [memberInfoModal, setMemberInfoModal] = useState(false);
   return (
     <S.GroupDetailWrap>
       <S.GroupWrap>
@@ -37,7 +54,12 @@ const GroupDetail = () => {
         <S.GroupDetailHeader>
           <S.GroupDetailTitle>
             <h1>{data?.data.divisionName}</h1>
-            <Menu color={'labelAssisitive'} />
+            <div
+              style={{ width: 'fit-content', height: 'fit-content', cursor: 'pointer' }}
+              onClick={() => setDetailModal(true)}
+            >
+              <Menu color={'labelAssisitive'} />
+            </div>
           </S.GroupDetailTitle>
           <S.GroupDetailDescription>{data?.data.description}</S.GroupDetailDescription>
         </S.GroupDetailHeader>
@@ -63,6 +85,19 @@ const GroupDetail = () => {
           </S.MemberWrap>
         </S.GroupDetailMemberWrap>
       </S.GroupWrap>
+      <GroupDetailModal
+        isOpen={detailModal}
+        onClose={() => setDetailModal(false)}
+        pendingMembers={pendingData?.data.length!}
+      />
+      <MemberInfoModal
+        isOpen={memberInfoModal}
+        onClose={() => {
+          setMemberInfoModal(false);
+          setSelectedMember(null);
+        }}
+        member={selectedMember!}
+      />
     </S.GroupDetailWrap>
   );
 };

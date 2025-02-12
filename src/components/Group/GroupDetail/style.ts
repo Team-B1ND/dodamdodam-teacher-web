@@ -1,4 +1,4 @@
-import { DodamShape, DodamTypography } from '@b1nd/dds-web';
+import { DodamShadow, DodamShape, DodamTypography } from '@b1nd/dds-web';
 import styled from 'styled-components';
 
 export const GroupDetailWrap = styled.div`
@@ -156,6 +156,12 @@ export const MemberInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
 `;
 
 export const MemberName = styled.span`
@@ -177,5 +183,66 @@ export const MembersWrap = styled.div`
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
+  }
+`;
+
+export const GroupDetailModalWrap = styled.div`
+  display: flex;
+  width: 150px;
+  height: 100px;
+  padding: 10px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  ${DodamShape.ExtraSmall};
+  background-color: ${({ theme }) => theme.backgroundNormal};
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+export const ApplyMemberWrap = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  p {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Body1.Bold}
+  }
+`;
+
+export const MemberInfoModalWrap = styled.div`
+  display: flex;
+  width: 360px;
+  height: 216px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  ${DodamShape.Medium};
+  background-color: ${({ theme }) => theme.backgroundNormal};
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+export const MemberInfoModalHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+
+  h1 {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Headline.Bold}
+  }
+
+  span {
+    color: ${({ theme }) => theme.labelAssistive};
+
+    ${DodamTypography.Body1.Medium}
   }
 `;
