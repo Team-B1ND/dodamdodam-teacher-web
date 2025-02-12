@@ -5,6 +5,12 @@ export interface NoticeRepository {
 export interface NoticeWriteData {
   title: string;
   content: string;
-  image?: FormDataEntryValue;
-  file?: FormDataEntryValue;
+  files?: FileData[];
+  divisions: any[];
+}
+
+export interface FileData {
+  url: string;
+  name: string;
+  fileType: 'IMAGE' | 'FILE';
 }
