@@ -1,4 +1,5 @@
 import { BusDateParam } from 'repositories/Bus/BusRepository';
+import { GroupMemberStatus } from 'repositories/Group/group.repository';
 import { PointType } from 'types/Point/point.type';
 
 export const QUERY_KEYS = Object.freeze({
@@ -43,5 +44,9 @@ export const QUERY_KEYS = Object.freeze({
   },
   notice: {
     noticeWrite: '/notice',
+  },
+  group: {
+    getGroupDetail: (id: number) => ['/division', id],
+    getGroupMember: (status: GroupMemberStatus, id: number) => ['/division/members', status, id],
   },
 });
