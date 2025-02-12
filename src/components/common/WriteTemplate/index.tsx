@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './style';
 import { DodamFilledButton, Home } from '@b1nd/dds-web';
 import { NoticeWriteData } from 'repositories/Notice/NoticeRepository';
+import { GroupWriteData } from 'repositories/Group/group.repository';
 
 interface WriteTemplateProps {
   title: string;
@@ -15,7 +16,8 @@ interface WriteTemplateProps {
   handleImageClick?: () => void;
   handleImageChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   submitWrite?: () => void;
-  writeData: NoticeWriteData;
+  writeData?: NoticeWriteData;
+  groupWriteData?: GroupWriteData;
   fileIcon?: React.ReactNode;
   photoIcon?: React.ReactNode;
   buttonText: string;
@@ -37,6 +39,7 @@ const WriteTemplate = ({
   fileIcon,
   photoIcon,
   buttonText,
+  groupWriteData,
 }: WriteTemplateProps) => {
   return (
     <S.WriteWrap>
@@ -45,14 +48,14 @@ const WriteTemplate = ({
         <input
           type="text"
           placeholder={titlePlaceholder}
-          name="title"
-          value={writeData.title}
+          name={writeData ? 'title' : 'name'}
+          value={writeData ? writeData.title : groupWriteData?.name}
           onChange={handleWriteDataChange}
         />
         <textarea
           placeholder={contentPlaceholder}
-          name="content"
-          value={writeData.content}
+          name={writeData ? 'content' : 'description'}
+          value={writeData ? writeData.content : groupWriteData?.description}
           onChange={handleWriteDataChange}
         ></textarea>
       </S.WriteInputWrap>
@@ -68,7 +71,7 @@ const WriteTemplate = ({
           </div>
         </S.IconButtonWrap>
         <DodamFilledButton
-          text="공지 작성"
+          text={buttonText}
           size="Large"
           onClick={submitWrite}
           backgroundColorType="Primary"

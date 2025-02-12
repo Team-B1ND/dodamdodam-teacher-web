@@ -1,8 +1,10 @@
-import { dodamAxios } from "libs/Axios/customAxios";
+import { dodamAxios } from 'libs/Axios/customAxios';
+import { GroupRepository, GroupWriteData } from './group.repository';
 
-
-class GroupRepositoryImpl  {
-  
+class GroupRepositoryImpl implements GroupRepository {
+  public async createGroup(group: GroupWriteData): Promise<void> {
+    await dodamAxios.post('/group', group);
+  }
 }
 
 const groupRepositroy = new GroupRepositoryImpl();

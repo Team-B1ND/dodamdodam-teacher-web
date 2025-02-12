@@ -1,9 +1,10 @@
+import AddGroup from 'components/Group/AddGroup';
 
 const GroupPage = () => {
-    return(
-        <>
-        
-        </>
-    )
-}
+  return (
+    <>
+      <AddGroup />
+    </>
+  );
+};
 export default GroupPage;
