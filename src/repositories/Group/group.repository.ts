@@ -1,4 +1,5 @@
 import { Group } from "types/Group/group.type";
+import { Role } from "types/Member/member.type";
 export interface GroupRepository {
   createGroup: (group: GroupWriteData) => Promise<void>;
   getGroup: (pageParam:number) => Promise<GroupResponse>;
@@ -37,7 +38,7 @@ export interface GroupMember {
   grade: number;
   room: number;
   number: number;
-  role: 'TEACHER' | 'STUDENT' | 'ADMIN';
+  role: Role;
 }
 
 export interface GroupMemberResponse {

@@ -1,10 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import * as S from './style';
 import { ArrowLeft, DodamDivider, DodamFilledButton, DodamSegmentedButton, Person } from '@b1nd/dds-web';
 import { useGetPendingGroupMemberQuery } from 'queries/Group/group.query';
-import { useGroup } from 'hooks/Group/useGroup';
 import { GroupNameAtom } from 'stores/Notice/Group/group.store';
 import { useRecoilValue } from 'recoil';
+import { Role } from 'types/Member/member.type';
+import { roleTransform } from 'utils/Transform/roleTransform';
 
 interface WaitingMemberProps {
   groupId: number;
@@ -14,6 +15,22 @@ interface WaitingMemberProps {
 const WaitingMember = ({ groupId, setSection }: WaitingMemberProps) => {
   const { data } = useGetPendingGroupMemberQuery(groupId!);
   const groupName = useRecoilValue(GroupNameAtom);
+  const [selectedRole, setSelectedRole] = React.useState<Role>('STUDENT');
+
+  const roleMapping = {
+    학생: 'STUDENT',
+    학부모: 'ADMIN',
+    선생님: 'TEACHER',
+  } as const;
+
+  const filteredMembers = React.useMemo(() => {
+    return data?.data.filter((member) => member.role === selectedRole) ?? [];
+  }, [data?.data, selectedRole]);
+
+  useEffect(() => {
+    setSelectedRole(selectedRole);
+  }, [selectedRole]);
+
   return (
     <S.WaitingMemberContainer>
       <S.WaitingMemberWrap>
@@ -33,15 +50,19 @@ const WaitingMember = ({ groupId, setSection }: WaitingMemberProps) => {
             num={3}
             type="inline"
             data={[
-              { text: '학생', isAtv: true },
-              { text: '학부모', isAtv: false },
-              { text: '선생님', isAtv: false },
+              { text: '학생', isAtv: selectedRole === 'STUDENT' },
+              { text: '학부모', isAtv: selectedRole === 'ADMIN' },
+              { text: '선생님', isAtv: selectedRole === 'TEACHER' },
             ]}
+            onClick={() => {
+              const nextRole = selectedRole === 'STUDENT' ? 'ADMIN' : selectedRole === 'ADMIN' ? 'TEACHER' : 'STUDENT';
+              setSelectedRole(nextRole);
+            }}
           />
           <S.ListWrap>
-            <p>학생</p>
+            <p>{Object.entries(roleMapping).find(([_, value]) => value === selectedRole)?.[0]}</p>
             <S.ListItemWrap>
-              {data?.data.map((member) => (
+              {filteredMembers.map((member) => (
                 <S.MemberCell key={member.id}>
                   <S.MemberInfo>
                     <S.MemberInfoWrap>
@@ -51,7 +72,7 @@ const WaitingMember = ({ groupId, setSection }: WaitingMemberProps) => {
                         {member.grade}학년 {member.room}반 {member.number}번
                       </span>
                     </S.MemberInfoWrap>
-                    <S.MemberRole>{member.role}</S.MemberRole>
+                    <S.MemberRole>{roleTransform(member.role)}</S.MemberRole>
                   </S.MemberInfo>
                   <S.ButtonWrap>
                     <DodamFilledButton
