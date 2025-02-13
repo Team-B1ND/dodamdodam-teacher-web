@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { SelectCategoryAtom, SelectCategoryListAtom } from "stores/Division/division.store";
+import { useGetDivisionList } from "queries/Division/division.query";
 import { PageDataType } from "types/Notice/notice.type";
+import { DivisionType } from "types/Division/division.type";
 
 export const useNoticeSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [lastId, setLastId] = useState<number>(0);
+  const [keyword, setKeyword] = useState<string>("");
+  const { data: CategoryData } = useGetDivisionList(lastId, 20, keyword);
+  const [categoryList, setCategoryList] = useState<DivisionType[]>([]);
+
+  const [selectCategory, setSelectCategory] = useRecoilState<string>(SelectCategoryAtom);
+  const [selectCategoryList, setSelectCategoryList] = useRecoilState<string[]>(SelectCategoryListAtom);
   const [pageData, setPageData] = useState<PageDataType[]>([
     { text: "공지", isAtv: false },
     { text: "공지 작성", isAtv: false },
@@ -24,6 +35,35 @@ export const useNoticeSidebar = () => {
         break;
     }
   };
+
+  const handleChangeCategory = (isWrite: boolean, name: string) => {
+    if (isWrite) {
+      setSelectCategoryList((prev) =>
+        prev.includes(name)
+          ? prev.filter((item) => item !== name)
+          : [...prev, name]
+      );
+      setCategoryList((prev) =>
+        prev.map((item) => ({
+          ...item,
+          isAtv: item.name === name ? !item.isAtv : item.isAtv,
+        }))
+      );
+    } else {
+      setSelectCategory(name);
+      setCategoryList((prev) =>
+        prev.map((item) => ({ ...item, isAtv: item.name === name }))
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (CategoryData?.data) {
+      setCategoryList(
+        CategoryData.data.map((item) => ({ ...item, isAtv: false }))
+      );
+    }
+  }, [CategoryData]);
 
   useEffect(() => {
     setPageData((prevData) =>
@@ -46,5 +86,6 @@ export const useNoticeSidebar = () => {
     pageData,
     categoryList,
     handleClickPageButton,
+    handleChangeCategory,
   };
 };
