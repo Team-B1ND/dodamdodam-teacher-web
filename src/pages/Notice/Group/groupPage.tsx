@@ -23,7 +23,7 @@ const GroupPage = () => {
     ),
     createGroup: <AddGroup />,
     groupDetail: <GroupDetail setSection={group.setSection} id={group.groupId!} />,
-    waitingMember: <WaitingMember />,
+    waitingMember: <WaitingMember groupId={group.groupId!} setSection={group.setSection} />,
   };
   return <GroupContainer>{GroupComponents[group.section] || <GroupMain {...group} />}</GroupContainer>;
 };

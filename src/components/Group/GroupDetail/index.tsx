@@ -11,8 +11,10 @@ import { useParams } from 'react-router-dom';
 import GroupDetailModal from './Modal/groupDetailModal';
 import MemberInfoModal from './Modal/memberInfoModal';
 import { useGroup } from 'hooks/Group/useGroup';
+import { useSetRecoilState } from 'recoil';
+import { GroupNameAtom } from 'stores/Notice/Group/group.store';
 
-const GroupDetail = ({ id, setSection }: { id: number, setSection: Dispatch<SetStateAction<string>> }) => {
+const GroupDetail = ({ id, setSection }: { id: number; setSection: Dispatch<SetStateAction<string>> }) => {
   const { data } = useGetGroupDetailQuery(id);
   const { data: memberData } = useGetAllowedGroupMemberQuery(id);
   const { data: pendingData } = useGetPendingGroupMemberQuery(id);
@@ -46,7 +48,7 @@ const GroupDetail = ({ id, setSection }: { id: number, setSection: Dispatch<SetS
   const [detailModal, setDetailModal] = useState(false);
   const [memberInfoModal, setMemberInfoModal] = useState(false);
   const { patchGroupMemberStatus } = useGroup();
-
+  const setGroupName = useSetRecoilState(GroupNameAtom);
   return (
     <S.GroupDetailWrap>
       <S.GroupWrap>
@@ -58,7 +60,10 @@ const GroupDetail = ({ id, setSection }: { id: number, setSection: Dispatch<SetS
             <h1>{data?.data.divisionName}</h1>
             <div
               style={{ width: 'fit-content', height: 'fit-content', cursor: 'pointer' }}
-              onClick={() => setDetailModal(true)}
+              onClick={() => {
+                setDetailModal(true);
+                setGroupName(data?.data.divisionName!);
+              }}
             >
               <Menu color={'labelAssisitive'} />
             </div>

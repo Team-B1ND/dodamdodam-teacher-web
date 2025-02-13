@@ -14,7 +14,11 @@ const GroupDetailModal = ({ isOpen, onClose, pendingMembers, setSection }: Group
   return (
     <DodamModal isOpen={isOpen} close={onClose} customStyle={{ top: '-24%', left: '13%' }}>
       <S.GroupDetailModalWrap>
-        <S.ApplyMemberWrap onClick={() => setSection('waitingMember')}>
+        <S.ApplyMemberWrap
+          onClick={() => {
+            setSection('waitingMember');
+          }}
+        >
           <p>가입 신청</p>
           <DodamTag text={pendingMembers?.toString()} color="blue" />
         </S.ApplyMemberWrap>

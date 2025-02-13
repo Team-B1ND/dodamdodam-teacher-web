@@ -6,19 +6,20 @@ import { useQueryClient } from 'react-query';
 import { GroupMemberStatus, GroupWriteData } from 'repositories/Group/group.repository';
 
 export const useGroup = () => {
-  const [section, setSection] = useState("main");
+  const [section, setSection] = useState('main');
   const [groupId, setGroupId] = useState<number | null>(null);
+  const [groupName, setGroupName] = useState('');
   const [isAtv, setAtv] = useState(true);
   const [writeData, setWriteData] = useState<GroupWriteData>({
     name: '',
     description: '',
   });
-  
-    //검색
-    const searchRef = useRef<HTMLInputElement>(null);
-    const searchSubmit = () => {
-      console.log('검색어 post');
-    };
+
+  //검색
+  const searchRef = useRef<HTMLInputElement>(null);
+  const searchSubmit = () => {
+    console.log('검색어 post');
+  };
 
   const handleWriteDataChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -46,14 +47,14 @@ export const useGroup = () => {
   const patchGroupMemberStatus = (status: GroupMemberStatus, id: number, memberId: number[]) => {
     patchGroupMemberStatusMutation.mutate(
       {
-        status: 'REJECTED',
+        status: status,
         id: id,
         memberId: memberId,
       },
       {
         onSuccess: () => {
           B1ndToast.showSuccess('내보내기 성공');
-          queryClient.invalidateQueries(QUERY_KEYS.group.getGroupMember('ALLOWED', id));
+          queryClient.invalidateQueries(QUERY_KEYS.group.getGroupMember(status, id));
         },
         onError: () => {
           B1ndToast.showError('내보내기 실패');
@@ -68,7 +69,9 @@ export const useGroup = () => {
     section,
     isAtv,
     groupId,
+    groupName,
     setGroupId,
+    setGroupName,
     setAtv,
     searchSubmit,
     setSection,
