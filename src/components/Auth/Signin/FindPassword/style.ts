@@ -1,7 +1,7 @@
 import { DodamLightTheme, DodamTypography } from '@b1nd/dds-web';
 import styled, { css } from 'styled-components';
 
-export const SignupWrap = styled.div`
+export const FindPasswordWrap = styled.div`
   width: 25%;
   height: 50%;
 
@@ -27,7 +27,7 @@ export const SignupWrap = styled.div`
   }
 `;
 
-export const SignupButtonWrap = styled.div`
+export const FindPasswordButtonWrap = styled.div`
   width: 100%;
   display: flex;
   align-items: center;

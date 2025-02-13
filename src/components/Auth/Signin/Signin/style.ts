@@ -35,7 +35,8 @@ export const SigninImage = styled.img`
 `;
 
 export const InputWrap = styled.div`
-  width: 55%;
+  min-width: 55%;
+  /* width: 55%; */
   height: 100%;
 
   display: flex;

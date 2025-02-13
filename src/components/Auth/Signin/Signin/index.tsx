@@ -22,7 +22,7 @@ const Login = ({ setSection, submitSignin, signinData, handleSigninChange }: Log
           type="text"
           value={signinData.id}
           label="아이디"
-          width={330}
+          width={100}
         />
         <DodamTextField
           onChange={handleSigninChange}
@@ -31,7 +31,6 @@ const Login = ({ setSection, submitSignin, signinData, handleSigninChange }: Log
           type="password"
           value={signinData.pw}
           label="비밀번호"
-          width={330}
         />
         <S.AccountContainer>
           비밀번호를 잊으셨나요?&nbsp;<p onClick={() => setSection('FindPassword')}>비밀번호 재설정</p>

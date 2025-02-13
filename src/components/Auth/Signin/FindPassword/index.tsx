@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import * as S from './style';
-import { DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
+import { ChevronLeft, ChevronRight, DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
 import { FindPasswordParam } from 'repositories/Auth/AuthRepository';
 interface FindPasswordProps {
   setSection: Dispatch<SetStateAction<string>>;
@@ -10,12 +10,13 @@ interface FindPasswordProps {
 }
 
 const FindPassword = ({
+  setSection,
   findPasswordData,
   handleFindPasswordChange,
   handleFindPassword,
 }: FindPasswordProps) => {
   return (
-    <S.SignupWrap>
+    <S.FindPasswordWrap>
       <S.SignUpTitle>비밀번호 재설정</S.SignUpTitle>
       <S.InputWrap>
         <DodamTextField
@@ -46,16 +47,32 @@ const FindPassword = ({
           width={360}
         />
       </S.InputWrap>
-      <DodamFilledButton
-        text="비밀번호 재설정"
-        backgroundColorType="Primary"
-        size="Large"
-        width={360}
-        textTheme={'staticWhite'}
-        typography={['Body1', 'Bold']}
-        onClick={handleFindPassword}
-      />
-    </S.SignupWrap>
+      <S.FindPasswordButtonWrap>
+        <DodamFilledButton
+          text="뒤로가기"
+          backgroundColorType="Assistive"
+          size="Large"
+          width={135}
+          textTheme={'labelNetural'}
+          typography={['Body1', 'Bold']}
+          onClick={() => setSection('Login')}
+          icon={<ChevronLeft size={20} color="labelNetural" />}
+          attendants="left"
+        />
+        <DodamFilledButton
+          text="비밀번호 재설정"
+          backgroundColorType="Primary"
+          size="Large"
+          width={180}
+          textTheme={'staticWhite'}
+          typography={['Body1', 'Bold']}
+          onClick={handleFindPassword}
+          icon={<ChevronRight size={20} color="staticWhite" />}
+          attendants="right"
+          color="staticWhite"
+        />
+      </S.FindPasswordButtonWrap>
+    </S.FindPasswordWrap>
   );
 };
 
