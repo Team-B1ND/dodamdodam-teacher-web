@@ -17,7 +17,7 @@ import NoticePage from 'pages/Notice/Main/noticePages';
 import NoticeWritePage from 'pages/Notice/Write/noticeWritePages';
 import GroupPage from 'pages/Notice/Group/groupPage';
 import GroupDetail from 'components/Group/GroupDetail';
-import WaitingMember from 'components/Group/WaitingMember';
+// import WaitingMember from 'components/Group/WaitingMember';
 
 const Router = () => {
   return (

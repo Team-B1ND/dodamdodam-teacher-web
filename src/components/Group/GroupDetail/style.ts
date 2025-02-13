@@ -202,6 +202,7 @@ export const GroupDetailModalWrap = styled.div`
 `;
 
 export const ApplyMemberWrap = styled.div`
+  cursor: pointer;
   width: 100%;
   height: 50%;
   display: flex;
