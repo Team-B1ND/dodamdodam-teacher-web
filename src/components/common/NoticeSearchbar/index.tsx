@@ -3,12 +3,12 @@ import * as S from "./style";
 import { Magnifyingglass } from "@b1nd/dds-web";
 
 export interface SearchBarProps {
-  onKeyDown: KeyboardEventHandler<HTMLInputElement>;
   searchFn: ()=> void;
+  placeholder?:string;
 }
 
 const NoticeSearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
-  ({onKeyDown,searchFn} , ref) => {
+  ({searchFn,placeholder} , ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useImperativeHandle(ref, () => inputRef.current!);
@@ -18,10 +18,10 @@ const NoticeSearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
         
         <S.SearchBarInput
           ref={inputRef}
-          placeholder="검색할 공지를 입력하세요"
+          placeholder={placeholder ? placeholder : "검색할 공지를 입력하세요" }
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              onKeyDown(e);
+              searchFn();
             }
           }}
         />

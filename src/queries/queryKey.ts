@@ -46,6 +46,7 @@ export const QUERY_KEYS = Object.freeze({
     noticeWrite: '/notice',
   },
   group: {
+    getGroup: '/division',
     getGroupDetail: (id: number) => ['/division', id],
     getGroupMember: (status: GroupMemberStatus, id: number) => ['/division/members', status, id],
     patchGroupMemberStatus: (status: GroupMemberStatus, id: number) => ['/division/members', status, id],
