@@ -11,12 +11,12 @@ interface Props {
   searchRef: React.RefObject<HTMLInputElement>;
   searchSubmit: () => void;
   isAtv: boolean;
-  setAtv: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAtv: React.Dispatch<React.SetStateAction<boolean>>;
   setSection: Dispatch<SetStateAction<string>>;
   setGroupId: Dispatch<SetStateAction<number | null>>;
 }
 
-const GroupMain = ({ keyword, searchRef, searchSubmit, isAtv, setAtv, setSection, setGroupId }: Props) => {
+const GroupMain = ({ keyword, searchRef, searchSubmit, isAtv, setIsAtv, setSection, setGroupId }: Props) => {
   return (
     <S.GroupBox>
       <NoticeSearchBar searchFn={searchSubmit} ref={searchRef} placeholder="검색할 그룹을 입력하세요" />
@@ -31,7 +31,7 @@ const GroupMain = ({ keyword, searchRef, searchSubmit, isAtv, setAtv, setSection
           width={200}
           num={2}
           type="block"
-          onClick={() => setAtv((prev) => !prev)}
+          onClick={() => setIsAtv((prev) => !prev)}
           data={[
             { text: '내 그룹', isAtv: isAtv },
             { text: '전체', isAtv: !isAtv },

@@ -9,7 +9,7 @@ export interface GroupRepository {
   patchGroupMemberStatus: (status: GroupMemberStatus, id: number, memberId: number[]) => Promise<void>;
 }
 export interface GroupResponse {
-  data:Group[]
+  data: Group[]
 }
 
 export type GroupMemberStatus = 'PENDING' | 'ALLOWED' | 'REJECTED';

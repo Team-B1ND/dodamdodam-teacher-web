@@ -9,7 +9,7 @@ export const useGroup = () => {
   const [section, setSection] = useState('main');
   const [groupId, setGroupId] = useState<number | null>(null);
   const [groupName, setGroupName] = useState('');
-  const [isAtv, setAtv] = useState(true);
+  const [isAtv, setIsAtv] = useState(true);
   const [writeData, setWriteData] = useState<GroupWriteData>({
     name: '',
     description: '',
@@ -75,7 +75,7 @@ export const useGroup = () => {
     groupName,
     setGroupId,
     setGroupName,
-    setAtv,
+    setIsAtv,
     searchSubmit,
     setSection,
     handleWriteDataChange,

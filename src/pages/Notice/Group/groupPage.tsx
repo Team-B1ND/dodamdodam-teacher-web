@@ -17,7 +17,7 @@ const GroupPage = () => {
         searchRef={group.searchRef}
         searchSubmit={group.searchSubmit}
         isAtv={group.isAtv}
-        setAtv={group.setAtv}
+        setIsAtv={group.setIsAtv}
         setSection={group.setSection}
         setGroupId={group.setGroupId}
       />

@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { SelectCategoryAtom, SelectCategoryListAtom } from "stores/Division/division.store";
-import { useGetDivisionList } from "queries/Division/division.query";
+import { useGroup } from "queries/Group/group.query";
 import { PageDataType } from "types/Notice/notice.type";
-import { DivisionType } from "types/Division/division.type";
+import { Group } from "types/Group/group.type";
+
+interface GroupType extends Group {
+  isAtv: boolean;
+}
 
 export const useNoticeSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [lastId, setLastId] = useState<number>(0);
+  const [isAtv, setIsAtv] = useState(false);
   const [keyword, setKeyword] = useState<string>("");
-  const { data: CategoryData } = useGetDivisionList(lastId, 20, keyword);
-  const [categoryList, setCategoryList] = useState<DivisionType[]>([]);
+  const { data: CategoryData } = useGroup(isAtv, keyword);
+  const [categoryList, setCategoryList] = useState<GroupType[]>([]);
 
   const [selectCategory, setSelectCategory] = useRecoilState<number>(SelectCategoryAtom);
   const [selectCategoryList, setSelectCategoryList] = useRecoilState<number[]>(SelectCategoryListAtom);
@@ -21,6 +25,8 @@ export const useNoticeSidebar = () => {
     { text: "공지 작성", isAtv: false },
     { text: "그룹", isAtv: false },
   ]);
+
+  console.log(CategoryData)
 
   const handleClickPageButton = (text?: string) => {
     switch (text) {
@@ -62,12 +68,14 @@ export const useNoticeSidebar = () => {
   }
 
   useEffect(() => {
-    if (CategoryData?.data) {
-      setCategoryList(
-        CategoryData.data.map((item) => ({ ...item, isAtv: false }))
+    if (CategoryData?.pages) {
+      const newList = CategoryData.pages.flatMap((page) =>
+        page.data.map((item) => ({ ...item, isAtv: false }))
       );
+      setCategoryList(newList);
     }
   }, [CategoryData]);
+  
 
   useEffect(() => {
     setPageData((prevData) =>
