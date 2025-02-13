@@ -8,17 +8,22 @@ import {GroupContainer} from "./style";
 
 const GroupPage = () => {
     const {...group} = useGroup();
-    const GroupComponents: ReactNode[] =[
-        <GroupMain/>,
-        <AddGroup/>,
-        <GroupDetail/>,
+    
+    const GroupComponents: Record<string, ReactNode> ={
+        main: <GroupMain
+        searchRef={group.searchRef}
+        searchSubmit={group.searchSubmit}
+        isAtv={group.isAtv}
+        setAtv={group.setAtv}
+        setSection={group.setSection}
+        />,
+        createGroup: <AddGroup />,
+        groupDetail: <GroupDetail />,
 
-    ]
+    }
   return (
     <GroupContainer>
-     {GroupComponents.map((component, idx)=>{
-        return group.section === GROUP_SECTION_NAME[idx].title && component;
-     })}
+       {GroupComponents[group.section] || <GroupMain {...group} />}
     </GroupContainer>
   );
 };

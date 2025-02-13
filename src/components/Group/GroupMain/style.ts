@@ -30,6 +30,10 @@ export const GroupTitle = styled.div`
             color: ${({theme})=>theme.labelNormal};
         }
 `
+export const GroupIcon = styled.div`
+cursor: pointer;
+`
+
 
 export const GroupDataBox = styled.div`
     display: flex;
