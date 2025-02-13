@@ -7,6 +7,7 @@ import { GroupMemberStatus, GroupWriteData } from 'repositories/Group/group.repo
 
 export const useGroup = () => {
   const [section, setSection] = useState("main");
+  const [groupId, setGroupId] = useState<number | null>(null);
   const [isAtv, setAtv] = useState(true);
   const [writeData, setWriteData] = useState<GroupWriteData>({
     name: '',
@@ -66,6 +67,8 @@ export const useGroup = () => {
     writeData,
     section,
     isAtv,
+    groupId,
+    setGroupId,
     setAtv,
     searchSubmit,
     setSection,

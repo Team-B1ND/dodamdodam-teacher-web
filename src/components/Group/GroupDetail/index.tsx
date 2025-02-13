@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import * as S from './style';
 import { ArrowLeft, DodamDivider, Menu, Person } from '@b1nd/dds-web';
 import {
@@ -12,11 +12,10 @@ import GroupDetailModal from './Modal/groupDetailModal';
 import MemberInfoModal from './Modal/memberInfoModal';
 import { useGroup } from 'hooks/Group/useGroup';
 
-const GroupDetail = () => {
-  const { id } = useParams();
-  const { data } = useGetGroupDetailQuery(+id!);
-  const { data: memberData } = useGetAllowedGroupMemberQuery(+id!);
-  const { data: pendingData } = useGetPendingGroupMemberQuery(+id!);
+const GroupDetail = ({ id, setSection }: { id: number, setSection: Dispatch<SetStateAction<string>> }) => {
+  const { data } = useGetGroupDetailQuery(id);
+  const { data: memberData } = useGetAllowedGroupMemberQuery(id);
+  const { data: pendingData } = useGetPendingGroupMemberQuery(id);
 
   const adminMembers = memberData?.data.filter((member) => member.permission === 'ADMIN') || [];
   const writerMembers = memberData?.data.filter((member) => member.permission === 'WRITER') || [];
@@ -51,7 +50,7 @@ const GroupDetail = () => {
   return (
     <S.GroupDetailWrap>
       <S.GroupWrap>
-        <S.BackIconWrap>
+        <S.BackIconWrap onClick={() => setSection('main')}>
           <ArrowLeft size={24} />
         </S.BackIconWrap>
         <S.GroupDetailHeader>
@@ -92,6 +91,7 @@ const GroupDetail = () => {
         isOpen={detailModal}
         onClose={() => setDetailModal(false)}
         pendingMembers={pendingData?.data.length!}
+        setSection={setSection}
       />
       <MemberInfoModal
         isOpen={memberInfoModal}

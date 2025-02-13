@@ -11,7 +11,7 @@ export const GroupDetailWrap = styled.div`
 `;
 
 export const GroupWrap = styled.div`
-  width: 70%;
+  width: 100%;
   height: 100%;
   padding: 24px;
 

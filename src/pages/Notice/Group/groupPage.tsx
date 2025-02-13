@@ -4,27 +4,27 @@ import GroupDetail from 'components/Group/GroupDetail';
 import GroupMain from 'components/Group/GroupMain';
 import { useGroup } from 'hooks/Group/useGroup';
 import { GROUP_SECTION_NAME } from 'constants/Group/group.constants';
-import {GroupContainer} from "./style";
+import { GroupContainer } from './style';
+import WaitingMember from 'components/Group/WaitingMember';
 
 const GroupPage = () => {
-    const {...group} = useGroup();
-    
-    const GroupComponents: Record<string, ReactNode> ={
-        main: <GroupMain
+  const { ...group } = useGroup();
+
+  const GroupComponents: Record<string, ReactNode> = {
+    main: (
+      <GroupMain
         searchRef={group.searchRef}
         searchSubmit={group.searchSubmit}
         isAtv={group.isAtv}
         setAtv={group.setAtv}
         setSection={group.setSection}
-        />,
-        createGroup: <AddGroup />,
-        groupDetail: <GroupDetail />,
-
-    }
-  return (
-    <GroupContainer>
-       {GroupComponents[group.section] || <GroupMain {...group} />}
-    </GroupContainer>
-  );
+        setGroupId={group.setGroupId}
+      />
+    ),
+    createGroup: <AddGroup />,
+    groupDetail: <GroupDetail setSection={group.setSection} id={group.groupId!} />,
+    waitingMember: <WaitingMember />,
+  };
+  return <GroupContainer>{GroupComponents[group.section] || <GroupMain {...group} />}</GroupContainer>;
 };
 export default GroupPage;
