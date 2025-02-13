@@ -9,7 +9,6 @@ const NoticePage = () => {
         <S.NoticeBox>
             <NoticeSearchBar  
                 ref={notice.searchRef} 
-                onKeyDown={notice.searchSubmit}  
                 searchFn={notice.searchSubmit}
             />
             

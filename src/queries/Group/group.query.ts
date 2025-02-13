@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { QUERY_KEYS } from 'queries/queryKey';
-import { useMutation, useQuery, UseQueryOptions } from 'react-query';
+import { useMutation, useQuery, UseQueryOptions, useInfiniteQuery } from 'react-query';
 import {
   GroupDetail,
   GroupMemberResponse,
@@ -9,7 +9,25 @@ import {
 } from 'repositories/Group/group.repository';
 import groupRepositroy from 'repositories/Group/group.repositoryImpl';
 
-export const useGetGroup = () => {};
+
+
+export const useGroup = (isAtv: boolean) => {
+  return useInfiniteQuery(
+    [QUERY_KEYS.group.getGroup, isAtv],
+    ({ pageParam = 0 }) =>
+      isAtv ? groupRepositroy.getMyGroup(pageParam) : groupRepositroy.getGroup(pageParam),
+    {
+      getNextPageParam: (lastPage) => {
+        if (lastPage.data.length < 10) return undefined;
+        return lastPage.data[lastPage.data.length - 1].id;
+      },
+      suspense: true,
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
+};
+
 
 export const useCreateGroupMutation = () => {
   const mutation = useMutation((param: GroupWriteData) => groupRepositroy.createGroup(param));

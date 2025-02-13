@@ -1,15 +1,23 @@
 import { B1ndToast } from '@b1nd/b1nd-toastify';
 import { useCreateGroupMutation, usePatchGroupMemberStatusMutation } from 'queries/Group/group.query';
 import { QUERY_KEYS } from 'queries/queryKey';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useRef } from 'react';
 import { useQueryClient } from 'react-query';
 import { GroupMemberStatus, GroupWriteData } from 'repositories/Group/group.repository';
 
 export const useGroup = () => {
+  const [section, setSection] = useState("main");
+  const [isAtv, setAtv] = useState(true);
   const [writeData, setWriteData] = useState<GroupWriteData>({
     name: '',
     description: '',
   });
+  
+    //검색
+    const searchRef = useRef<HTMLInputElement>(null);
+    const searchSubmit = () => {
+      console.log('검색어 post');
+    };
 
   const handleWriteDataChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,7 +62,13 @@ export const useGroup = () => {
   };
 
   return {
+    searchRef,
     writeData,
+    section,
+    isAtv,
+    setAtv,
+    searchSubmit,
+    setSection,
     handleWriteDataChange,
     handleCreateGroup,
     patchGroupMemberStatus,
