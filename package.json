@@ -9,7 +9,7 @@
     "@b1nd/b1nd-styled-components-util": "^1.0.4",
     "@b1nd/b1nd-toastify": "^2.0.0",
     "@b1nd/b1nd-util": "^2.0.1",
-    "@b1nd/dds-web": "^0.1.18",
+    "@b1nd/dds-web": "^0.1.21",
     "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
