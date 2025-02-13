@@ -9,6 +9,7 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
     categoryList,
     handleClickPageButton,
     handleChangeCategory,
+    handleClickSubmit,
   } = useNoticeSidebar();
 
   return (
@@ -37,7 +38,7 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
             </S.CategoryTag>
           ))}
         </S.Category>
-        {isWrite && <S.Button>완료</S.Button>}
+        {isWrite && <S.Button onClick={handleClickSubmit}> 완료</S.Button>}
       </S.CategoryWrap>
     </S.NoticeSidebarWrap>
   );

@@ -2,7 +2,7 @@ import { UseQueryOptions, useQuery } from "react-query";
 import { AxiosError } from "axios";
 import { DivisionResponse } from "types/Division/division.type";
 import { QUERY_KEYS } from "queries/queryKey";
-import noticeRepositoryImpl from "repositories/Division/division.repositoryImpl";
+import divisionRepositoryImpl from "repositories/Division/division.repositoryImpl";
 
 export const useGetDivisionList = (
   lastId: number,
@@ -17,7 +17,7 @@ export const useGetDivisionList = (
 ) =>
   useQuery(
     QUERY_KEYS.division.getDivisionList(lastId, limit, keyword),
-    () => noticeRepositoryImpl.getDivisionList(lastId, limit, keyword),
+    () => divisionRepositoryImpl.getDivisionList(lastId, limit, keyword),
     {
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,

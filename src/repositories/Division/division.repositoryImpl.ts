@@ -1,8 +1,8 @@
 import { dodamAxios } from "libs/Axios/customAxios";
-import { NoticeRepository } from "./division.repository";
+import { DivisionRepository } from "./division.repository";
 import { DivisionResponse } from "types/Division/division.type";
 
-class NoticeRepositoryImpl implements NoticeRepository {
+class DivisionRepositoryImpl implements DivisionRepository {
   public async getDivisionList(lastId: number, limit: number, keyword: string): Promise<DivisionResponse> {
     const { data } = await dodamAxios.get("/divisions", {
       params: {
@@ -15,5 +15,5 @@ class NoticeRepositoryImpl implements NoticeRepository {
   }
 }
 
-const noticeRepositoryImpl = new NoticeRepositoryImpl();
-export default noticeRepositoryImpl;
+const divisionRepositoryImpl = new DivisionRepositoryImpl();
+export default divisionRepositoryImpl;

@@ -57,6 +57,10 @@ export const useNoticeSidebar = () => {
     }
   };
 
+  const handleClickSubmit = () => {
+    // 공지 생성 코드
+  }
+
   useEffect(() => {
     if (CategoryData?.data) {
       setCategoryList(
@@ -87,5 +91,6 @@ export const useNoticeSidebar = () => {
     categoryList,
     handleClickPageButton,
     handleChangeCategory,
+    handleClickSubmit,
   };
 };
