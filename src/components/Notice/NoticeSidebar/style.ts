@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DodamShape, DodamTypography } from "@b1nd/dds-web";
+import { DodamShape, DodamTypography, hexToRgba } from "@b1nd/dds-web";
 
 export const NoticeSidebarWrap = styled.div`
   width: auto;
@@ -45,22 +45,23 @@ export const Category = styled.div`
   gap: 8px;
 `;
 
-export const CategoryTag = styled.span`
+export const CategoryTag = styled.span<{ isAtv?: boolean }>`
   width: auto;
   height: auto;
 
-  color: ${({ theme }) => theme.labelNormal};
+  color: ${({ theme, isAtv }) => isAtv ? theme.staticWhite : theme.labelAlternative};
   ${DodamTypography.Label.Medium}
 
-  border: 1px solid ${({ theme }) => theme.lineAlternative};
+  border: 1px solid ${({ theme, isAtv }) => isAtv ? theme.primaryNormal : theme.lineAlternative};
   border-radius: 31px;
-  background-color: ${({ theme }) => theme.backgroundNormal};
+  background-color: ${({ theme, isAtv }) => isAtv ? theme.primaryNormal : theme.backgroundNormal};
 
   padding: 8px 18px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.fillNetural};
+    border: 1px solid ${({ theme, isAtv }) => isAtv ? hexToRgba(theme.primaryNormal, 0) : theme.lineAlternative};
+    background-color: ${({ theme, isAtv }) => isAtv ? hexToRgba(theme.primaryNormal, 0.75) : theme.fillNeutral};
   }
 `;
 
