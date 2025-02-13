@@ -10,6 +10,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
 export default Layout;
 
 const Container = styled.div<{ pathname: string }>`
+  width: 100%;
+  height: 100vh;
   padding-top: ${({ pathname }) => pathname !== "/" && "80px"};
   padding-left: ${({ pathname }) => pathname !== "/" && "208px"};
 `;

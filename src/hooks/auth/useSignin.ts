@@ -51,8 +51,8 @@ export const useSignin = () => {
     try {
       const { data } = await AuthRepositoryImpl.signIn(validSigninData);
 
-      if (data.member.role !== 'TEACHER' && data.member.role !== 'ADMIN') {
-        B1ndToast.showInfo('선셍님 계정으로 로그인 해주세요.');
+      if (data.member.role !== "TEACHER" && data.member.role !== "ADMIN") {
+        B1ndToast.showInfo("선생님 계정으로 로그인 해주세요.");
         return;
       }
 
