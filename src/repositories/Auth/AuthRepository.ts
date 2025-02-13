@@ -4,6 +4,7 @@ import { Response } from "types/util/response.type";
 export interface AuthRepository {
   signIn(param: SignInParam): Promise<SigninResponse>;
   refreshAccessToken(refreshToken: string): Promise<NewAccessTokenResponse>;
+  findPassword(password: string): Promise<void>;
 }
 
 export interface PasswordParm {
@@ -16,6 +17,13 @@ export interface SignInParam {
   id: string;
   pw: string;
 }
+
+export interface FindPasswordParam {
+  id: string;
+  pw: string;
+  newPw: string;
+}
+
 export interface NewAccessTokenResponse extends Response {
   data: string;
 }
