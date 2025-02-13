@@ -30,7 +30,7 @@ const GroupDetail = ({ id, setSection }: { id: number; setSection: Dispatch<SetS
       key={member.id}
       onClick={() => {
         setSelectedMember(member);
-        setMemberInfoModal(true);
+        setMemberInfoModal(member.permission !== 'ADMIN');
       }}
     >
       <S.MemberInfo>
