@@ -11,7 +11,6 @@ export const useNotice = () => {
     {
       url: '',
       name: '',
-      fileType: 'IMAGE',
     },
   ]);
 
@@ -47,6 +46,7 @@ export const useNotice = () => {
 
   const handleFileClick = () => {
     fileRef.current?.click();
+    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'FILE ' }]);
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {

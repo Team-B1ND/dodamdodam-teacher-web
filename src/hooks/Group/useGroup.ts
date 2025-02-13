@@ -55,11 +55,11 @@ export const useGroup = () => {
       },
       {
         onSuccess: () => {
-          B1ndToast.showSuccess('내보내기 성공');
+          B1ndToast.showSuccess('멤버 상태 변경 성공');
           queryClient.invalidateQueries(QUERY_KEYS.group.getGroupMember(status, id));
         },
         onError: () => {
-          B1ndToast.showError('내보내기 실패');
+          B1ndToast.showError('멤버 상태 변경 실패');
         },
       }
     );

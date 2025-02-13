@@ -32,8 +32,8 @@ const NoticeWrite = () => {
         handleImageChange={handleImageChange}
         submitWrite={submitWrite}
         writeData={writeData}
-        fileIcon={<File />}
-        photoIcon={<Photo />}
+        fileIcon={<File color="labelNormal" />}
+        photoIcon={<Photo color="labelNormal" />}
         buttonText="공지 작성"
       />
     </S.NoticeWriteWrap>

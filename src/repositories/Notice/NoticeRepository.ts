@@ -12,5 +12,5 @@ export interface NoticeWriteData {
 export interface FileData {
   url: string;
   name: string;
-  fileType: 'IMAGE' | 'FILE';
+  fileType?: 'IMAGE' | 'FILE ';
 }
