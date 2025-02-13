@@ -6,22 +6,18 @@ import { GroupNameAtom } from 'stores/Notice/Group/group.store';
 import { useRecoilValue } from 'recoil';
 import { Role } from 'types/Member/member.type';
 import { roleTransform } from 'utils/Transform/roleTransform';
+import { GroupMemberStatus } from 'repositories/Group/group.repository';
 
 interface WaitingMemberProps {
   groupId: number;
   setSection: Dispatch<SetStateAction<string>>;
+  patchGroupMemberStatus: (status: GroupMemberStatus, id: number, memberId: number[]) => void;
 }
 
-const WaitingMember = ({ groupId, setSection }: WaitingMemberProps) => {
+const WaitingMember = ({ groupId, setSection, patchGroupMemberStatus }: WaitingMemberProps) => {
   const { data } = useGetPendingGroupMemberQuery(groupId!);
   const groupName = useRecoilValue(GroupNameAtom);
   const [selectedRole, setSelectedRole] = React.useState<Role>('STUDENT');
-
-  const roleMapping = {
-    학생: 'STUDENT',
-    학부모: 'ADMIN',
-    선생님: 'TEACHER',
-  } as const;
 
   const filteredMembers = React.useMemo(() => {
     return data?.data.filter((member) => member.role === selectedRole) ?? [];
@@ -51,16 +47,17 @@ const WaitingMember = ({ groupId, setSection }: WaitingMemberProps) => {
             type="inline"
             data={[
               { text: '학생', isAtv: selectedRole === 'STUDENT' },
-              { text: '학부모', isAtv: selectedRole === 'ADMIN' },
+              { text: '학부모', isAtv: selectedRole === 'PARENT' },
               { text: '선생님', isAtv: selectedRole === 'TEACHER' },
             ]}
             onClick={() => {
-              const nextRole = selectedRole === 'STUDENT' ? 'ADMIN' : selectedRole === 'ADMIN' ? 'TEACHER' : 'STUDENT';
-              setSelectedRole(nextRole);
+              if (selectedRole === 'STUDENT') setSelectedRole('PARENT');
+              else if (selectedRole === 'PARENT') setSelectedRole('TEACHER');
+              else setSelectedRole('STUDENT');
             }}
           />
           <S.ListWrap>
-            <p>{Object.entries(roleMapping).find(([_, value]) => value === selectedRole)?.[0]}</p>
+            <p>{roleTransform(selectedRole)}</p>
             <S.ListItemWrap>
               {filteredMembers.map((member) => (
                 <S.MemberCell key={member.id}>
@@ -81,6 +78,7 @@ const WaitingMember = ({ groupId, setSection }: WaitingMemberProps) => {
                       typography={['Caption1', 'Bold']}
                       textTheme="labelNetural"
                       backgroundColorType="Assisitive"
+                      onClick={() => patchGroupMemberStatus('REJECTED', groupId, [member.id])}
                     />
                     <DodamFilledButton
                       text="승인"
@@ -88,6 +86,7 @@ const WaitingMember = ({ groupId, setSection }: WaitingMemberProps) => {
                       typography={['Caption1', 'Bold']}
                       textTheme="staticWhite"
                       backgroundColorType="Primary"
+                      onClick={() => patchGroupMemberStatus('ALLOWED', groupId, [member.id])}
                     />
                   </S.ButtonWrap>
                 </S.MemberCell>

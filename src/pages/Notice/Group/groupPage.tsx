@@ -3,7 +3,6 @@ import AddGroup from 'components/Group/AddGroup';
 import GroupDetail from 'components/Group/GroupDetail';
 import GroupMain from 'components/Group/GroupMain';
 import { useGroup } from 'hooks/Group/useGroup';
-import { GROUP_SECTION_NAME } from 'constants/Group/group.constants';
 import { GroupContainer } from './style';
 import WaitingMember from 'components/Group/WaitingMember';
 
@@ -23,7 +22,13 @@ const GroupPage = () => {
     ),
     createGroup: <AddGroup />,
     groupDetail: <GroupDetail setSection={group.setSection} id={group.groupId!} />,
-    waitingMember: <WaitingMember groupId={group.groupId!} setSection={group.setSection} />,
+    waitingMember: (
+      <WaitingMember
+        groupId={group.groupId!}
+        setSection={group.setSection}
+        patchGroupMemberStatus={group.patchGroupMemberStatus}
+      />
+    ),
   };
   return <GroupContainer>{GroupComponents[group.section] || <GroupMain {...group} />}</GroupContainer>;
 };
