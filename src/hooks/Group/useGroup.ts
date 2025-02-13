@@ -1,7 +1,9 @@
 import { B1ndToast } from '@b1nd/b1nd-toastify';
-import { useCreateGroupMutation } from 'queries/Group/group.query';
+import { useCreateGroupMutation, usePatchGroupMemberStatusMutation } from 'queries/Group/group.query';
+import { QUERY_KEYS } from 'queries/queryKey';
 import { useCallback, useState } from 'react';
-import { GroupWriteData } from 'repositories/Group/group.repository';
+import { useQueryClient } from 'react-query';
+import { GroupMemberStatus, GroupWriteData } from 'repositories/Group/group.repository';
 
 export const useGroup = () => {
   const [writeData, setWriteData] = useState<GroupWriteData>({
@@ -17,6 +19,8 @@ export const useGroup = () => {
     [setWriteData]
   );
 
+  const queryClient = useQueryClient();
+
   const createGroupMutation = useCreateGroupMutation();
   const handleCreateGroup = () => {
     createGroupMutation.mutate(writeData, {
@@ -29,9 +33,30 @@ export const useGroup = () => {
     });
   };
 
+  const patchGroupMemberStatusMutation = usePatchGroupMemberStatusMutation();
+  const patchGroupMemberStatus = (status: GroupMemberStatus, id: number, memberId: number[]) => {
+    patchGroupMemberStatusMutation.mutate(
+      {
+        status: 'REJECTED',
+        id: id,
+        memberId: memberId,
+      },
+      {
+        onSuccess: () => {
+          B1ndToast.showSuccess('내보내기 성공');
+          queryClient.invalidateQueries(QUERY_KEYS.group.getGroupMember('ALLOWED', id));
+        },
+        onError: () => {
+          B1ndToast.showError('내보내기 실패');
+        },
+      }
+    );
+  };
+
   return {
     writeData,
     handleWriteDataChange,
     handleCreateGroup,
+    patchGroupMemberStatus,
   };
 };

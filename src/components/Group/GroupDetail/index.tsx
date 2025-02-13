@@ -10,6 +10,7 @@ import { GroupMember } from 'repositories/Group/group.repository';
 import { useParams } from 'react-router-dom';
 import GroupDetailModal from './Modal/groupDetailModal';
 import MemberInfoModal from './Modal/memberInfoModal';
+import { useGroup } from 'hooks/Group/useGroup';
 
 const GroupDetail = () => {
   const { id } = useParams();
@@ -45,6 +46,8 @@ const GroupDetail = () => {
 
   const [detailModal, setDetailModal] = useState(false);
   const [memberInfoModal, setMemberInfoModal] = useState(false);
+  const { patchGroupMemberStatus } = useGroup();
+
   return (
     <S.GroupDetailWrap>
       <S.GroupWrap>
@@ -97,6 +100,7 @@ const GroupDetail = () => {
           setSelectedMember(null);
         }}
         member={selectedMember!}
+        patchGroupMemberStatus={() => patchGroupMemberStatus('REJECTED', +id!, [selectedMember!.id])}
       />
     </S.GroupDetailWrap>
   );
