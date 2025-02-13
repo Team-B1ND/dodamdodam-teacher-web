@@ -21,8 +21,8 @@ class GroupRepositoryImpl implements GroupRepository {
     return data;
   }
 
-  public async patchGroupMemberStatus(status: GroupMemberStatus, id: number): Promise<void> {
-    await dodamAxios.patch(`/divisions/${id}/members/${id}`, { status });
+  public async patchGroupMemberStatus(status: GroupMemberStatus, id: number, memberId: number[]): Promise<void> {
+    await dodamAxios.patch(`/divisions/${id}/members?idList=${memberId}&status=${status}`);
   }
 }
 

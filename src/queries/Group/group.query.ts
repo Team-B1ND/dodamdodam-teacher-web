@@ -46,3 +46,11 @@ export const useGetPendingGroupMemberQuery = (
   useQuery(QUERY_KEYS.group.getGroupMember('PENDING', id), () => groupRepositroy.getGroupMember('PENDING', id), {
     ...options,
   });
+
+export const usePatchGroupMemberStatusMutation = () => {
+  const muatation = useMutation((param: { status: GroupMemberStatus; id: number; memberId: number[] }) =>
+    groupRepositroy.patchGroupMemberStatus(param.status, param.id, param.memberId)
+  );
+
+  return muatation;
+};

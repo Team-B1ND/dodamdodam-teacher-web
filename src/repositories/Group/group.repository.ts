@@ -2,7 +2,7 @@ export interface GroupRepository {
   createGroup: (group: GroupWriteData) => Promise<void>;
   getGroupDetail: (id: number) => Promise<GroupDetail>;
   getGroupMember: (status: GroupMemberStatus, id: number) => Promise<GroupMemberResponse>;
-  patchGroupMemberStatus: (status: GroupMemberStatus, id: number) => Promise<void>;
+  patchGroupMemberStatus: (status: GroupMemberStatus, id: number, memberId: number[]) => Promise<void>;
 }
 
 export type GroupMemberStatus = 'PENDING' | 'ALLOWED' | 'REJECTED';
