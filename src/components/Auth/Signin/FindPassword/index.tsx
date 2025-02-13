@@ -6,9 +6,14 @@ interface FindPasswordProps {
   setSection: Dispatch<SetStateAction<string>>;
   findPasswordData: FindPasswordParam;
   handleFindPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleFindPassword: () => void;
 }
 
-const FindPassword = ({ findPasswordData, handleFindPasswordChange }: FindPasswordProps) => {
+const FindPassword = ({
+  findPasswordData,
+  handleFindPasswordChange,
+  handleFindPassword,
+}: FindPasswordProps) => {
   return (
     <S.SignupWrap>
       <S.SignUpTitle>비밀번호 재설정</S.SignUpTitle>
@@ -28,16 +33,16 @@ const FindPassword = ({ findPasswordData, handleFindPasswordChange }: FindPasswo
           name="pw"
           type="password"
           value={findPasswordData.pw}
-          label="비밀번호"
+          label="현재 비밀번호"
           width={360}
         />
         <DodamTextField
           onChange={handleFindPasswordChange}
-          id="pw"
-          name="pw"
+          id="newPw"
+          name="newPw"
           type="password"
-          value={findPasswordData.pw}
-          label="비밀번호 확인"
+          value={findPasswordData.newPw}
+          label="새로운 비밀번호"
           width={360}
         />
       </S.InputWrap>
@@ -48,6 +53,7 @@ const FindPassword = ({ findPasswordData, handleFindPasswordChange }: FindPasswo
         width={360}
         textTheme={'staticWhite'}
         typography={['Body1', 'Bold']}
+        onClick={handleFindPassword}
       />
     </S.SignupWrap>
   );

@@ -13,6 +13,7 @@ const Signin = () => {
     submitSignin,
     signinData,
     handleSigninChange,
+    handleFindPassword,
   } = useSignin();
   const [, setPrevSection] = useState(section);
   const SigninComponents: ReactNode[] = [
@@ -26,6 +27,7 @@ const Signin = () => {
       setSection={setSection}
       findPasswordData={findPasswordData}
       handleFindPasswordChange={handleFindPasswordChange}
+      handleFindPassword={handleFindPassword}
     />,
   ];
 
