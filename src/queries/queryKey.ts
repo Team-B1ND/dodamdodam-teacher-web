@@ -20,7 +20,7 @@ export const QUERY_KEYS = Object.freeze({
     getTodayOutSleeping: "/out-sleeping/valid",
   },
   offbasemeal: {
-    getMealDemand: (date: string) => ["/out-going/meal-demand", date]
+    getMealDemand: (date: string) => ["/out-going/meal-demand", date],
   },
   redisual: {
     getResidual: "/out-sleeping/redisual",
@@ -28,6 +28,9 @@ export const QUERY_KEYS = Object.freeze({
   nightstudy: {
     getPendingNightStudy: "/night-study/pending",
     getNightStudyList: "/night-study",
+  },
+  division: {
+    getDivisionList: (lastId: number, limit: number, keyword: string) => ["/division", lastId.toString(), limit.toString(), keyword],
   },
   schedule: {
     getSchedules: ["schedule/getSchedule"],
