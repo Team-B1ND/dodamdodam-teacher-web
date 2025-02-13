@@ -9,7 +9,6 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
     categoryList,
     handleClickPageButton,
     handleChangeCategory,
-    handleClickSubmit,
   } = useNoticeSidebar();
 
   return (
@@ -26,7 +25,7 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
         customBackbgroundWrapColor="staticWhite"
       />
       <S.CategoryWrap>
-        <S.Title>{isWrite ? <>공지를 보낼<br />카테고리를 선택해주세요</> : title}
+        <S.Title>{isWrite ? <>공지를 보낼<br />그룹을 선택해주세요</> : title}
         </S.Title>
         <S.Category>
           {categoryList?.map((item) => (
@@ -38,7 +37,6 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
             </S.CategoryTag>
           ))}
         </S.Category>
-        {isWrite && <S.Button onClick={handleClickSubmit}> 완료</S.Button>}
       </S.CategoryWrap>
     </S.NoticeSidebarWrap>
   );

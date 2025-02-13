@@ -26,8 +26,6 @@ export const useNoticeSidebar = () => {
     { text: "그룹", isAtv: false },
   ]);
 
-  console.log(CategoryData)
-
   const handleClickPageButton = (text?: string) => {
     switch (text) {
       case "공지":
@@ -63,10 +61,6 @@ export const useNoticeSidebar = () => {
     }
   };
 
-  const handleClickSubmit = () => {
-    // 공지 생성 코드
-  }
-
   useEffect(() => {
     if (CategoryData?.pages) {
       const newList = CategoryData.pages.flatMap((page) =>
@@ -99,6 +93,5 @@ export const useNoticeSidebar = () => {
     categoryList,
     handleClickPageButton,
     handleChangeCategory,
-    handleClickSubmit,
   };
 };

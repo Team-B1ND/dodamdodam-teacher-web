@@ -64,18 +64,3 @@ export const CategoryTag = styled.span<{ isAtv?: boolean }>`
     background-color: ${({ theme, isAtv }) => isAtv ? hexToRgba(theme.primaryNormal, 0.75) : theme.fillNeutral};
   }
 `;
-
-export const Button = styled.button`
-  width: auto;
-  height: auto;
-
-  color: ${({ theme }) => theme.staticWhite};
-  ${DodamTypography.Body1.Bold}
-
-  border: none;
-  ${DodamShape.Medium}
-  background-color: ${({ theme }) => theme.primaryNormal};
-
-  cursor: pointer;
-  padding: 13px 28px;
-`;
