@@ -8,4 +8,5 @@ export interface CreateNoticeParam {
   title: string;
   content: string;
   files: FileType[];
+  divisions: number[];
 }

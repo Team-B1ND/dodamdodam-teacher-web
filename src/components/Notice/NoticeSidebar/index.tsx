@@ -33,7 +33,7 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
             <S.CategoryTag
               key={item.id}
               isAtv={item.isAtv}
-              onClick={() => handleChangeCategory(isWrite, item.name)}>
+              onClick={() => handleChangeCategory(isWrite, item.id)}>
               {item.name}
             </S.CategoryTag>
           ))}

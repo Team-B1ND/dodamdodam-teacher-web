@@ -14,8 +14,8 @@ export const useNoticeSidebar = () => {
   const { data: CategoryData } = useGetDivisionList(lastId, 20, keyword);
   const [categoryList, setCategoryList] = useState<DivisionType[]>([]);
 
-  const [selectCategory, setSelectCategory] = useRecoilState<string>(SelectCategoryAtom);
-  const [selectCategoryList, setSelectCategoryList] = useRecoilState<string[]>(SelectCategoryListAtom);
+  const [selectCategory, setSelectCategory] = useRecoilState<number>(SelectCategoryAtom);
+  const [selectCategoryList, setSelectCategoryList] = useRecoilState<number[]>(SelectCategoryListAtom);
   const [pageData, setPageData] = useState<PageDataType[]>([
     { text: "공지", isAtv: false },
     { text: "공지 작성", isAtv: false },
@@ -36,23 +36,23 @@ export const useNoticeSidebar = () => {
     }
   };
 
-  const handleChangeCategory = (isWrite: boolean, name: string) => {
+  const handleChangeCategory = (isWrite: boolean, id: number) => {
     if (isWrite) {
       setSelectCategoryList((prev) =>
-        prev.includes(name)
-          ? prev.filter((item) => item !== name)
-          : [...prev, name]
+        prev.includes(id)
+          ? prev.filter((item) => item !== id)
+          : [...prev, id]
       );
       setCategoryList((prev) =>
         prev.map((item) => ({
           ...item,
-          isAtv: item.name === name ? !item.isAtv : item.isAtv,
+          isAtv: item.id === id ? !item.isAtv : item.isAtv,
         }))
       );
     } else {
-      setSelectCategory(name);
+      setSelectCategory(id);
       setCategoryList((prev) =>
-        prev.map((item) => ({ ...item, isAtv: item.name === name }))
+        prev.map((item) => ({ ...item, isAtv: item.id === id }))
       );
     }
   };
