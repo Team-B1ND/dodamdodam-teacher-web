@@ -6,15 +6,17 @@ import SkeletonComponent from 'components/common/Skeleton';
 import { Dispatch, SetStateAction } from 'react';
 
 const GroupItem = ({
+  keyword,
   isAtv,
   setSection,
   setGroupId,
 }: {
+  keyword: string;
   isAtv: boolean;
   setSection: Dispatch<SetStateAction<string>>;
   setGroupId: Dispatch<SetStateAction<number | null>>;
 }) => {
-  const { data, fetchNextPage, hasNextPage } = useGroup(isAtv);
+  const { data, fetchNextPage, hasNextPage } = useGroup(isAtv, keyword);
 
   return (
     <InfiniteScroll

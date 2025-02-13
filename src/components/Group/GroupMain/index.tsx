@@ -7,6 +7,7 @@ import SkeletonComponent from 'components/common/Skeleton';
 import GroupItem from './GroupItem';
 
 interface Props {
+  keyword: string;
   searchRef: React.RefObject<HTMLInputElement>;
   searchSubmit: () => void;
   isAtv: boolean;
@@ -15,7 +16,7 @@ interface Props {
   setGroupId: Dispatch<SetStateAction<number | null>>;
 }
 
-const GroupMain = ({ searchRef, searchSubmit, isAtv, setAtv, setSection, setGroupId }: Props) => {
+const GroupMain = ({ keyword, searchRef, searchSubmit, isAtv, setAtv, setSection, setGroupId }: Props) => {
   return (
     <S.GroupBox>
       <NoticeSearchBar searchFn={searchSubmit} ref={searchRef} placeholder="검색할 그룹을 입력하세요" />
@@ -39,7 +40,7 @@ const GroupMain = ({ searchRef, searchSubmit, isAtv, setAtv, setSection, setGrou
         <S.GroupDataBox>
           <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
             <Suspense fallback={<SkeletonComponent height={48} customStyle={{ borderRadius: '8px' }} />}>
-              <GroupItem isAtv={isAtv} setSection={setSection} setGroupId={setGroupId} />
+              <GroupItem keyword={keyword} isAtv={isAtv} setSection={setSection} setGroupId={setGroupId} />
             </Suspense>
           </ErrorBoundary>
         </S.GroupDataBox>

@@ -12,6 +12,7 @@ const GroupPage = () => {
   const GroupComponents: Record<string, ReactNode> = {
     main: (
       <GroupMain
+        keyword={group.keyword}
         searchRef={group.searchRef}
         searchSubmit={group.searchSubmit}
         isAtv={group.isAtv}

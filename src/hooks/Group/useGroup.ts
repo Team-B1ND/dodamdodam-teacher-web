@@ -14,11 +14,13 @@ export const useGroup = () => {
     name: '',
     description: '',
   });
+  const [keyword, setKeyword] = useState('');
 
   //검색
   const searchRef = useRef<HTMLInputElement>(null);
   const searchSubmit = () => {
-    console.log('검색어 post');
+    const searchValue = searchRef.current?.value || '';
+    setKeyword(searchValue);
   };
 
   const handleWriteDataChange = useCallback(
@@ -64,6 +66,7 @@ export const useGroup = () => {
   };
 
   return {
+    keyword,
     searchRef,
     writeData,
     section,
