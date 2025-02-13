@@ -11,7 +11,7 @@ export const useNoticeWriteMutation = () => {
 export const useInfiniteNotices = () => {
   return useInfiniteQuery({
     queryKey: ["notices"],
-    queryFn: ({ pageParam = 0 }) => noticeRepositoryImpl.getNotice({ pageParam }), // ✅ 함수 호출 추가
+    queryFn: ({ pageParam = 0 }) => noticeRepositoryImpl.getNotice(pageParam ),
     getNextPageParam: (lastPage) => lastPage.nextLastId ?? undefined, 
   });
 };

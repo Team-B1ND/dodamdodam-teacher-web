@@ -4,6 +4,7 @@ import NoticeSearchBar from "components/common/NoticeSearchbar";
 import { useNotice } from "hooks/Notice/useNotice";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import NoticeItem from "components/Notice/NoticeItem";
+import SkeletonComponent from "components/common/Skeleton";
 
 
 const NoticePage = () => {
@@ -18,7 +19,7 @@ const NoticePage = () => {
             />
             <S.NoticeSection>
                 <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
-                    <Suspense>
+                    <Suspense fallback={<SkeletonComponent length={5} height={115}/>}>
                         <NoticeItem/>
                     </Suspense>
                 </ErrorBoundary>

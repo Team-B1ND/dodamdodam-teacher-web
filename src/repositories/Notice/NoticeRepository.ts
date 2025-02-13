@@ -1,5 +1,8 @@
+import { NoticeResponse } from "types/Notice/notice.type";
+
 export interface NoticeRepository {
   writeNotice: (data: NoticeWriteData) => Promise<void>;
+  getNotice: (pageParam:number) => Promise<NoticeResponse>;
 }
 
 export interface NoticeWriteData {
