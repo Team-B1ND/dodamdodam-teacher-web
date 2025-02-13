@@ -1,10 +1,17 @@
-import { useInfiniteQuery } from "react-query";
-import NoticeRepository from "repositories/Notice/noticeRepositoryImpl";
+import { useMutation,useInfiniteQuery } from 'react-query';
+import { NoticeWriteData } from 'repositories/Notice/NoticeRepository';
+import noticeRepositoryImpl from 'repositories/Notice/NoticeRepositoryImpl';
+
+export const useNoticeWriteMutation = () => {
+  const mutation = useMutation((param: NoticeWriteData) => noticeRepositoryImpl.writeNotice(param));
+
+  return mutation;
+};
 
 export const useInfiniteNotices = () => {
-    return useInfiniteQuery({
-      queryKey: ["notices"],
-      queryFn: ({ pageParam = 0 }) => NoticeRepository.getNotice({ pageParam }), // ✅ 함수 호출 추가
-      getNextPageParam: (lastPage) => lastPage.nextLastId ?? undefined, 
-    });
+  return useInfiniteQuery({
+    queryKey: ["notices"],
+    queryFn: ({ pageParam = 0 }) => noticeRepositoryImpl.getNotice({ pageParam }), // ✅ 함수 호출 추가
+    getNextPageParam: (lastPage) => lastPage.nextLastId ?? undefined, 
+  });
 };

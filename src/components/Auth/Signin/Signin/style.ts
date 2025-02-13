@@ -13,7 +13,7 @@ export const SigninWrap = styled.div`
 
   border-radius: 12px;
 
-  @media (max-width: 1068px) {
+  @media (max-width: 1308px) {
     width: 40%;
     height: 50%;
   }
@@ -27,14 +27,16 @@ export const SigninWrap = styled.div`
 export const SigninImage = styled.img`
   height: 95%;
   padding-left: 10px;
+  width: 50%;
 
-  @media (max-width: 1068px) {
+  @media (max-width: 1308px) {
     display: none;
   }
 `;
 
 export const InputWrap = styled.div`
-  width: 55%;
+  min-width: 55%;
+  /* width: 55%; */
   height: 100%;
 
   display: flex;
@@ -46,7 +48,7 @@ export const InputWrap = styled.div`
 
   position: relative;
 
-  @media (max-width: 1068px) {
+  @media (max-width: 1308px) {
     width: 100%;
     height: 100%;
   }
