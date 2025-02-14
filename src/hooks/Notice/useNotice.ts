@@ -7,9 +7,7 @@ import { SelectCategoryListAtom } from 'stores/Division/division.store';
 
 export const useNotice = () => {
   const searchRef = useRef<HTMLInputElement>(null);
-  const searchSubmit = () => {
-    console.log('검색어 post');
-  };
+
 
   const navigate = useNavigate();
   const [files, setFiles] = useState<FileData[]>([
@@ -124,7 +122,6 @@ export const useNotice = () => {
 
   return {
     searchRef,
-    searchSubmit,
     writeData,
     handleWriteDataChange,
     imageRef,
