@@ -11,6 +11,10 @@ class NoticeRepositoryImpl implements NoticeRepository {
     });
     return data;
   }
+  public async getDivisionNotice(pageParam: number = 0, selectCategory?:number):Promise<NoticeResponse> {
+    const { data } = await dodamAxios.get(`/notice/${selectCategory}/division?id=${selectCategory}&lastId=${pageParam}&limit=10`)
+    return data;
+  }
 
 }
 

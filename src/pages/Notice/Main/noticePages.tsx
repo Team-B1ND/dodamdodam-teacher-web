@@ -8,7 +8,7 @@ import SkeletonComponent from "components/common/Skeleton";
 import { useInfiniteNotices } from "queries/Notice/notice.query";
 
 const NoticePage = () => {
-  const { searchRef } = useNotice();
+  const { searchRef, selectCategory } = useNotice();
   const [keyword, setKeyword] = useState("");
   const { refetch } = useInfiniteNotices(keyword); 
 
@@ -28,7 +28,7 @@ const NoticePage = () => {
       <S.NoticeSection>
         <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
           <Suspense fallback={<SkeletonComponent length={5} height={115} />}>
-            <NoticeItem keyword={keyword} />
+            <NoticeItem selectCategory={selectCategory} keyword={keyword} />
           </Suspense>
         </ErrorBoundary>
       </S.NoticeSection>

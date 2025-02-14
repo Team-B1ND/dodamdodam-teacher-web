@@ -14,7 +14,7 @@ export const NoticeSection = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100%-50px);
+    height: 70vh;
     overflow-y: scroll;
     &::-webkit-scrollbar{
         display: none;

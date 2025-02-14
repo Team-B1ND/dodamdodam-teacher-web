@@ -6,6 +6,7 @@ import styled from "styled-components";
 export const NoticeItem = styled.div`
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     gap: 8px;
     width: 100%;
     min-height: 115px;
@@ -29,9 +30,9 @@ export const NoticeTitle = styled.div`
 `
 export const NoticeContent = styled.div`
     width: 100%;
+    height: 100%;
     ${DodamTypography.Label.Regular};
     color: ${({theme})=>theme.labelNormal};
+     white-space: pre-wrap; 
 `
-export const NoticeImg = styled.img`
-    
-`
+

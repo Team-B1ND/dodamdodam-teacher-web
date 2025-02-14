@@ -3,12 +3,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { FileData, NoticeWriteData } from 'repositories/Notice/NoticeRepository';
-import { SelectCategoryListAtom } from 'stores/Division/division.store';
+import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
 
 export const useNotice = () => {
   const searchRef = useRef<HTMLInputElement>(null);
 
-
+  const selectCategory = useRecoilValue(SelectCategoryAtom);
+  
   const navigate = useNavigate();
   const [files, setFiles] = useState<FileData[]>([
     {
@@ -121,6 +122,7 @@ export const useNotice = () => {
   };
 
   return {
+    selectCategory,
     searchRef,
     writeData,
     handleWriteDataChange,
