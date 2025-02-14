@@ -69,7 +69,7 @@ export const AddMemberItemBox = styled.div`
         color: ${({theme})=>theme.labelNormal};
     }
     &:hover{
-        background-color: ${({theme})=>theme.fillNetural}; 
+        background-color: ${({theme})=>theme.fillNeutral}; 
     }
 `
 

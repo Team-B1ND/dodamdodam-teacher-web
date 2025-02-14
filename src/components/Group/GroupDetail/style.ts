@@ -1,4 +1,4 @@
-import { DodamShadow, DodamShape, DodamTypography } from '@b1nd/dds-web';
+import { DodamShape, DodamTypography } from '@b1nd/dds-web';
 import styled from 'styled-components';
 
 export const GroupDetailWrap = styled.div`
@@ -30,6 +30,8 @@ export const BackIconWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
 `;
 
 export const GroupDetailHeader = styled.div`
@@ -139,9 +141,11 @@ export const MemberCell = styled.div`
   background-color: ${({ theme }) => theme.backgroundElevated};
   border-radius: 8px;
   transition: background-color 0.2s ease;
+  
+  cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.fillNetural};
+    background-color: ${({ theme }) => theme.fillNeutral};
   }
 `;
 
