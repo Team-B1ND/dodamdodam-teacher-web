@@ -1,3 +1,13 @@
+export interface NoticeSidebarType {
+  title: string;
+  isWrite: boolean;
+}
+
+export interface PageDataType {
+  text: string;
+  isAtv: boolean;
+}
+
 export interface Notice {
     id: number,
     title: string,
@@ -26,3 +36,4 @@ export interface NoticeResponse extends Notice{
     data:Notice[]
     nextLastId?: number;
 }
+

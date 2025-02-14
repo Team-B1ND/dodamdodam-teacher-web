@@ -1,15 +1,19 @@
 import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { FileData, NoticeWriteData } from 'repositories/Notice/NoticeRepository';
+import { SelectCategoryListAtom } from 'stores/Division/division.store';
+
 export const useNotice = () => {
   const searchRef = useRef<HTMLInputElement>(null);
 
 
+  const navigate = useNavigate();
   const [files, setFiles] = useState<FileData[]>([
     {
       url: '',
       name: '',
-      fileType: 'IMAGE',
     },
   ]);
 
@@ -19,13 +23,15 @@ export const useNotice = () => {
     files: files,
     divisions: [],
   });
+  const selectedCategoryList = useRecoilValue(SelectCategoryListAtom);
 
   useEffect(() => {
     setWriteData({
       ...writeData,
       files: files,
+      divisions: selectedCategoryList,
     });
-  }, [files]);
+  }, [files, selectedCategoryList]);
 
   const handleWriteDataChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,6 +51,7 @@ export const useNotice = () => {
 
   const handleFileClick = () => {
     fileRef.current?.click();
+    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'FILE ' }]);
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,14 +101,23 @@ export const useNotice = () => {
 
   const noticeWriteMutation = useNoticeWriteMutation();
   const submitWrite = () => {
-    noticeWriteMutation.mutate(writeData, {
-      onSuccess: () => {
-        alert('공지사항 작성 완료');
+    noticeWriteMutation.mutate(
+      {
+        title: writeData.title,
+        content: writeData.content,
+        ...(files[0].url !== '' && files),
+        divisions: selectedCategoryList,
       },
-      onError: () => {
-        alert('공지사항 작성 실패');
-      },
-    });
+      {
+        onSuccess: () => {
+          alert('공지사항 작성 완료');
+          navigate('/notice');
+        },
+        onError: () => {
+          alert('공지사항 작성 실패');
+        },
+      }
+    );
   };
 
   return {

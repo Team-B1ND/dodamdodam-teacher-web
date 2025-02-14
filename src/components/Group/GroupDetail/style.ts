@@ -11,7 +11,7 @@ export const GroupDetailWrap = styled.div`
 `;
 
 export const GroupWrap = styled.div`
-  width: 70%;
+  width: 100%;
   height: 100%;
   padding: 24px;
 
@@ -202,6 +202,7 @@ export const GroupDetailModalWrap = styled.div`
 `;
 
 export const ApplyMemberWrap = styled.div`
+  cursor: pointer;
   width: 100%;
   height: 50%;
   display: flex;

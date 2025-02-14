@@ -12,12 +12,12 @@ class GroupRepositoryImpl implements GroupRepository {
   public async createGroup(group: GroupWriteData): Promise<void> {
     await dodamAxios.post('/divisions', group);
   }
-  public async getGroup(pageParam: number = 0): Promise<GroupResponse> {
-    const { data } = await dodamAxios.get(`/divisions?lastId=${pageParam}&limit=10`);
+  public async getGroup(pageParam: number = 0, keyword: string): Promise<GroupResponse> {
+    const { data } = await dodamAxios.get(`/divisions?lastId=${pageParam}&limit=10&keyword=${keyword}`);
     return data;
   }
-  public async getMyGroup(pageParam: number = 0):Promise<GroupResponse> {
-    const { data } = await dodamAxios.get(`/divisions/my?lastId=${pageParam}&limit=10`)
+  public async getMyGroup(pageParam: number = 0, keyword: string): Promise<GroupResponse> {
+    const { data } = await dodamAxios.get(`/divisions/my?lastId=${pageParam}&limit=10&keyword=${keyword}`);
     return data;
   }
   public async getGroupDetail(id: number): Promise<GroupDetail> {

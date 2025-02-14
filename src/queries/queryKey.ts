@@ -30,6 +30,9 @@ export const QUERY_KEYS = Object.freeze({
     getPendingNightStudy: '/night-study/pending',
     getNightStudyList: '/night-study',
   },
+  division: {
+    getDivisionList: (lastId: number, limit: number, keyword: string) => ["/division", lastId.toString(), limit.toString(), keyword],
+  },
   schedule: {
     getSchedules: ['schedule/getSchedule'],
     getSchedulesByPeriod: (startDate: string, endDate: string) => [
