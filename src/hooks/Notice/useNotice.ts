@@ -1,16 +1,17 @@
 import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { FileData, NoticeWriteData } from 'repositories/Notice/NoticeRepository';
 import { SelectCategoryListAtom } from 'stores/Division/division.store';
+
 export const useNotice = () => {
   const searchRef = useRef<HTMLInputElement>(null);
   const searchSubmit = () => {
     console.log('검색어 post');
   };
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const [files, setFiles] = useState<FileData[]>([
     {
       url: '',
@@ -112,7 +113,7 @@ export const useNotice = () => {
       {
         onSuccess: () => {
           alert('공지사항 작성 완료');
-          navigate('/notice/group');
+          navigate('/notice');
         },
         onError: () => {
           alert('공지사항 작성 실패');

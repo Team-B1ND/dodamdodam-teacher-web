@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import * as S from './style';
 import { Photo, File } from '@b1nd/dds-web';
 import { useNotice } from 'hooks/Notice/useNotice';

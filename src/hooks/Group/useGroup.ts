@@ -3,10 +3,10 @@ import { useCreateGroupMutation, usePatchGroupMemberStatusMutation } from 'queri
 import { QUERY_KEYS } from 'queries/queryKey';
 import { useCallback, useState, useRef } from 'react';
 import { useQueryClient } from 'react-query';
+import { useRecoilState } from 'recoil';
 import { GroupMemberStatus, GroupWriteData } from 'repositories/Group/group.repository';
 
 export const useGroup = () => {
-  const [section, setSection] = useState('main');
   const [groupId, setGroupId] = useState<number | null>(null);
   const [groupName, setGroupName] = useState('');
   const [isAtv, setIsAtv] = useState(true);
@@ -15,7 +15,7 @@ export const useGroup = () => {
     description: '',
   });
   const [keyword, setKeyword] = useState('');
-
+  const [section, setSection] = useState('main');
   //검색
   const searchRef = useRef<HTMLInputElement>(null);
   const searchSubmit = () => {
@@ -38,7 +38,7 @@ export const useGroup = () => {
     createGroupMutation.mutate(writeData, {
       onSuccess: () => {
         B1ndToast.showSuccess('그룹 생성 성공');
-        window.location.reload();
+        setSection('main');
       },
       onError: () => {
         B1ndToast.showError('그룹 생성 실패');
@@ -72,15 +72,15 @@ export const useGroup = () => {
     keyword,
     searchRef,
     writeData,
-    section,
     isAtv,
     groupId,
     groupName,
+    section,
     setGroupId,
     setGroupName,
     setIsAtv,
-    searchSubmit,
     setSection,
+    searchSubmit,
     handleWriteDataChange,
     handleCreateGroup,
     patchGroupMemberStatus,

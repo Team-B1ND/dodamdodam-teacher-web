@@ -31,8 +31,8 @@ const GroupPage = () => {
         patchGroupMemberStatus={group.patchGroupMemberStatus}
       />
     ),
-    addMember: <AddMember groupId={group.groupId!} setSection={group.setSection}/>
+    addMember: <AddMember groupId={group.groupId!} setSection={group.setSection} />,
   };
-  return <GroupContainer>{GroupComponents[group.section] || <GroupMain {...group} />}</GroupContainer>;
+  return <GroupContainer>{GroupComponents[group.section!] || <GroupMain {...group} />}</GroupContainer>;
 };
 export default GroupPage;
