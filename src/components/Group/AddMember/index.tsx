@@ -21,20 +21,21 @@ const AddMember = ({ groupId, setSection }: GroupProps) => {
         searchFn={addMember.searchSubmit}
       />
       <S.AddMemberBox>
-        <S.AddMemberTitle>
+        <S.AddMemberTitle onClick={() => setSection("groupDetail")}>
           <ChevronLeft color="labelNormal" $svgStyle={{ cursor: "pointer" }} />
           <p>멤버추가</p>
         </S.AddMemberTitle>
         <S.AddMemberDataBox>
           <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
             <Suspense>
-              <AddMemberItem id={groupId} />
+              <AddMemberItem id={groupId} selectGroupId={addMember.groupId} groupMemberData={addMember.GroupMemberData!} handleClickGroup={addMember.handleClickGroup} />
             </Suspense>
           </ErrorBoundary>
         </S.AddMemberDataBox>
         <S.AddMemberButton>
           <DodamFilledButton
             backgroundColorType="Assisitive"
+            customStyle={{ cursor: "pointer" }}
             text="전체취소"
             size="Large"
             width={100}
@@ -44,6 +45,7 @@ const AddMember = ({ groupId, setSection }: GroupProps) => {
           />
           <DodamFilledButton
             backgroundColorType="Primary"
+            customStyle={{ cursor: "pointer" }}
             text="추가"
             size="Large"
             width={100}
