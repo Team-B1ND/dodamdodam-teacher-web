@@ -38,6 +38,7 @@ export const useGroup = () => {
     createGroupMutation.mutate(writeData, {
       onSuccess: () => {
         B1ndToast.showSuccess('그룹 생성 성공');
+        window.location.reload();
       },
       onError: () => {
         B1ndToast.showError('그룹 생성 실패');
@@ -56,7 +57,9 @@ export const useGroup = () => {
       {
         onSuccess: () => {
           B1ndToast.showSuccess('멤버 상태 변경 성공');
-          queryClient.invalidateQueries(QUERY_KEYS.group.getGroupMember(status, id));
+          queryClient.invalidateQueries(
+            QUERY_KEYS.group.getGroupMember(status === 'PENDING' ? 'PENDING' : 'ALLOWED', id)
+          );
         },
         onError: () => {
           B1ndToast.showError('멤버 상태 변경 실패');

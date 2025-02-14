@@ -66,7 +66,7 @@ const WaitingMember = ({ groupId, setSection, patchGroupMemberStatus }: WaitingM
                       <Person size={28} />
                       <p>{member.memberName}</p>
                       <span>
-                        {member.grade}학년 {member.room}반 {member.number}번
+                        {member.role === 'STUDENT' && `${member.grade}학년 ${member.room}반 ${member.number}번`}
                       </span>
                     </S.MemberInfoWrap>
                     <S.MemberRole>{roleTransform(member.role)}</S.MemberRole>

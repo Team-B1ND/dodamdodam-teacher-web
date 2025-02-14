@@ -6,7 +6,7 @@ export interface NoticeWriteData {
   title: string;
   content: string;
   files?: FileData[];
-  divisions: any[];
+  divisions: number[];
 }
 
 export interface FileData {
