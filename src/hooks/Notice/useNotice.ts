@@ -2,7 +2,7 @@ import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepositorys';
+import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
 import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
 
 export const useNotice = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 import { DodamFilledButton, Home } from '@b1nd/dds-web';
-import { NoticeWriteData } from 'repositories/Notice/noticeRepositorys';
+import { NoticeWriteData } from 'repositories/Notice/noticeRepository';
 import { GroupWriteData } from 'repositories/Group/group.repository';
 
 interface WriteTemplateProps {
