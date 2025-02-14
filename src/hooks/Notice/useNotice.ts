@@ -1,7 +1,7 @@
 import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { FileData, NoticeWriteData } from 'repositories/Notice/NoticeRepository';
 import { SelectCategoryListAtom } from 'stores/Division/division.store';
 
@@ -12,12 +12,7 @@ export const useNotice = () => {
   };
 
   const navigate = useNavigate();
-  const [files, setFiles] = useState<FileData[]>([
-    {
-      url: '',
-      name: '',
-    },
-  ]);
+  const [files, setFiles] = useState<FileData[]>([]);
 
   const [writeData, setWriteData] = useState<NoticeWriteData>({
     title: '',
@@ -48,12 +43,20 @@ export const useNotice = () => {
 
   const handleImageClick = () => {
     imageRef.current?.click();
-    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'IMAGE' }]);
   };
 
   const handleFileClick = () => {
     fileRef.current?.click();
-    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'FILE ' }]);
+  };
+
+  const blobToBase64 = (blob: Blob) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result as String);
+      };
+      reader.readAsDataURL(blob);
+    });
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,11 +66,14 @@ export const useNotice = () => {
     const fileArray: File[] = Array.from(files);
     const newFiles = await Promise.all(
       fileArray.map(async (file) => ({
-        url: URL.createObjectURL(file),
+        url: await blobToBase64(file),
         name: file.name,
         fileType: 'IMAGE',
       }))
     );
+
+    const formData = new FormData();
+    formData.append('files', JSON.stringify(newFiles));
 
     setFiles((prev) => [...prev, ...newFiles] as FileData[]);
   };
@@ -107,7 +113,7 @@ export const useNotice = () => {
       {
         title: writeData.title,
         content: writeData.content,
-        ...(files[0].url !== '' && files),
+        files: files, // 서버로 전송할 파일 데이터
         divisions: selectedCategoryList,
       },
       {
