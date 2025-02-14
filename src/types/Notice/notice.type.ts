@@ -23,6 +23,6 @@ export interface Notice {
 }
 
 export interface NoticeResponse extends Notice{
-    notices:Notice[]
+    data:Notice[]
     nextLastId?: number;
 }

@@ -3,9 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FileData, NoticeWriteData } from 'repositories/Notice/NoticeRepository';
 export const useNotice = () => {
   const searchRef = useRef<HTMLInputElement>(null);
-  const searchSubmit = () => {
-    console.log('검색어 post');
-  };
+
 
   const [files, setFiles] = useState<FileData[]>([
     {
@@ -108,7 +106,6 @@ export const useNotice = () => {
 
   return {
     searchRef,
-    searchSubmit,
     writeData,
     handleWriteDataChange,
     imageRef,

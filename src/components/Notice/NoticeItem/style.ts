@@ -1,6 +1,8 @@
 import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
+
+
 export const NoticeItem = styled.div`
     display: flex;
     flex-direction: column;
@@ -14,6 +16,7 @@ export const NoticeItem = styled.div`
 
 export const NoticeHeader = styled.div`
     display: flex;
+    gap: 3px;
     width: 100%;
     ${DodamTypography.Label.Regular};
     color: ${({theme})=>theme.labelAssisitive};
