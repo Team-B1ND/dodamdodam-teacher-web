@@ -1,12 +1,16 @@
 import * as S from "./style";
+import InfiniteScroll from "react-infinite-scroller";
 import { NoticeSidebarType } from "types/Notice/notice.type";
 import { DodamSegmentedButton } from "@b1nd/dds-web";
 import { useNoticeSidebar } from "hooks/Notice/useNoticeSidebar";
+import SkeletonComponent from "components/common/Skeleton";
 
 const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
   const {
     pageData,
     categoryList,
+    fetchNextPage,
+    hasNextPage,
     handleClickPageButton,
     handleChangeCategory,
   } = useNoticeSidebar();
@@ -25,18 +29,32 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
         customBackbgroundWrapColor="staticWhite"
       />
       <S.CategoryWrap>
-        <S.Title>{isWrite ? <>공지를 보낼<br />그룹을 선택해주세요</> : title}
+        <S.Title>
+          {isWrite ? (
+            <>
+              공지를 보낼
+              <br />
+              그룹을 선택해주세요
+            </>
+          ) : (
+            title
+          )}
         </S.Title>
-        <S.Category>
-          {categoryList?.map((item) => (
-            <S.CategoryTag
-              key={item.id}
-              isAtv={item.isAtv}
-              onClick={() => handleChangeCategory(isWrite, item.id)}>
-              {item.name}
-            </S.CategoryTag>
-          ))}
-        </S.Category>
+        <InfiniteScroll
+          loadMore={() => fetchNextPage()}
+          hasMore={hasNextPage}
+          loader={<SkeletonComponent length={5} height={48} />}>
+          <S.Category>
+            {categoryList?.map((item) => (
+              <S.CategoryTag
+                key={item.id}
+                isAtv={item.isAtv}
+                onClick={() => handleChangeCategory(isWrite, item.id)}>
+                {item.name}
+              </S.CategoryTag>
+            ))}
+          </S.Category>
+        </InfiniteScroll>
       </S.CategoryWrap>
     </S.NoticeSidebarWrap>
   );

@@ -13,9 +13,8 @@ interface GroupType extends Group {
 export const useNoticeSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [isAtv, setIsAtv] = useState(false);
   const [keyword, setKeyword] = useState<string>("");
-  const { data: CategoryData } = useGroup(isAtv, keyword);
+  const { data: CategoryData, fetchNextPage, hasNextPage } = useGroup(false, keyword);
   const [categoryList, setCategoryList] = useState<GroupType[]>([]);
 
   const [selectCategory, setSelectCategory] = useRecoilState<number>(SelectCategoryAtom);
@@ -91,6 +90,8 @@ export const useNoticeSidebar = () => {
   return {
     pageData,
     categoryList,
+    fetchNextPage,
+    hasNextPage,
     handleClickPageButton,
     handleChangeCategory,
   };
