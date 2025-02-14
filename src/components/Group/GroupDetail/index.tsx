@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import * as S from './style';
 import { ArrowLeft, DodamDivider, Menu, Person } from '@b1nd/dds-web';
 import {
@@ -11,12 +11,13 @@ import { useParams } from 'react-router-dom';
 import GroupDetailModal from './Modal/groupDetailModal';
 import MemberInfoModal from './Modal/memberInfoModal';
 import { useGroup } from 'hooks/Group/useGroup';
+import { useSetRecoilState } from 'recoil';
+import { GroupNameAtom } from 'stores/Notice/Group/group.store';
 
-const GroupDetail = () => {
-  const { id } = useParams();
-  const { data } = useGetGroupDetailQuery(+id!);
-  const { data: memberData } = useGetAllowedGroupMemberQuery(+id!);
-  const { data: pendingData } = useGetPendingGroupMemberQuery(+id!);
+const GroupDetail = ({ id, setSection }: { id: number; setSection: Dispatch<SetStateAction<string>> }) => {
+  const { data } = useGetGroupDetailQuery(id);
+  const { data: memberData } = useGetAllowedGroupMemberQuery(id);
+  const { data: pendingData } = useGetPendingGroupMemberQuery(id);
 
   const adminMembers = memberData?.data.filter((member) => member.permission === 'ADMIN') || [];
   const writerMembers = memberData?.data.filter((member) => member.permission === 'WRITER') || [];
@@ -29,7 +30,7 @@ const GroupDetail = () => {
       key={member.id}
       onClick={() => {
         setSelectedMember(member);
-        setMemberInfoModal(true);
+        setMemberInfoModal(member.permission !== 'ADMIN');
       }}
     >
       <S.MemberInfo>
@@ -47,11 +48,11 @@ const GroupDetail = () => {
   const [detailModal, setDetailModal] = useState(false);
   const [memberInfoModal, setMemberInfoModal] = useState(false);
   const { patchGroupMemberStatus } = useGroup();
-
+  const setGroupName = useSetRecoilState(GroupNameAtom);
   return (
     <S.GroupDetailWrap>
       <S.GroupWrap>
-        <S.BackIconWrap>
+        <S.BackIconWrap onClick={() => setSection('main')}>
           <ArrowLeft size={24} />
         </S.BackIconWrap>
         <S.GroupDetailHeader>
@@ -59,7 +60,10 @@ const GroupDetail = () => {
             <h1>{data?.data.divisionName}</h1>
             <div
               style={{ width: 'fit-content', height: 'fit-content', cursor: 'pointer' }}
-              onClick={() => setDetailModal(true)}
+              onClick={() => {
+                setDetailModal(true);
+                setGroupName(data?.data.divisionName!);
+              }}
             >
               <Menu color={'labelAssisitive'} />
             </div>
@@ -92,6 +96,7 @@ const GroupDetail = () => {
         isOpen={detailModal}
         onClose={() => setDetailModal(false)}
         pendingMembers={pendingData?.data.length!}
+        setSection={setSection}
       />
       <MemberInfoModal
         isOpen={memberInfoModal}

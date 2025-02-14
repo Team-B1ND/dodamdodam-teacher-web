@@ -3,21 +3,25 @@ import { useCreateGroupMutation, usePatchGroupMemberStatusMutation } from 'queri
 import { QUERY_KEYS } from 'queries/queryKey';
 import { useCallback, useState, useRef } from 'react';
 import { useQueryClient } from 'react-query';
+import { useRecoilState } from 'recoil';
 import { GroupMemberStatus, GroupWriteData } from 'repositories/Group/group.repository';
 
 export const useGroup = () => {
-  const [section, setSection] = useState("main");
-  const [isAtv, setAtv] = useState(true);
+  const [groupId, setGroupId] = useState<number | null>(null);
+  const [groupName, setGroupName] = useState('');
+  const [isAtv, setIsAtv] = useState(true);
   const [writeData, setWriteData] = useState<GroupWriteData>({
     name: '',
     description: '',
   });
-  
-    //검색
-    const searchRef = useRef<HTMLInputElement>(null);
-    const searchSubmit = () => {
-      console.log('검색어 post');
-    };
+  const [keyword, setKeyword] = useState('');
+  const [section, setSection] = useState('main');
+  //검색
+  const searchRef = useRef<HTMLInputElement>(null);
+  const searchSubmit = () => {
+    const searchValue = searchRef.current?.value || '';
+    setKeyword(searchValue);
+  };
 
   const handleWriteDataChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -34,6 +38,7 @@ export const useGroup = () => {
     createGroupMutation.mutate(writeData, {
       onSuccess: () => {
         B1ndToast.showSuccess('그룹 생성 성공');
+        setSection('main');
       },
       onError: () => {
         B1ndToast.showError('그룹 생성 실패');
@@ -45,30 +50,37 @@ export const useGroup = () => {
   const patchGroupMemberStatus = (status: GroupMemberStatus, id: number, memberId: number[]) => {
     patchGroupMemberStatusMutation.mutate(
       {
-        status: 'REJECTED',
+        status: status,
         id: id,
         memberId: memberId,
       },
       {
         onSuccess: () => {
-          B1ndToast.showSuccess('내보내기 성공');
-          queryClient.invalidateQueries(QUERY_KEYS.group.getGroupMember('ALLOWED', id));
+          B1ndToast.showSuccess('멤버 상태 변경 성공');
+          queryClient.invalidateQueries(
+            QUERY_KEYS.group.getGroupMember(status === 'PENDING' ? 'PENDING' : 'ALLOWED', id)
+          );
         },
         onError: () => {
-          B1ndToast.showError('내보내기 실패');
+          B1ndToast.showError('멤버 상태 변경 실패');
         },
       }
     );
   };
 
   return {
+    keyword,
     searchRef,
     writeData,
-    section,
     isAtv,
-    setAtv,
-    searchSubmit,
+    groupId,
+    groupName,
+    section,
+    setGroupId,
+    setGroupName,
+    setIsAtv,
     setSection,
+    searchSubmit,
     handleWriteDataChange,
     handleCreateGroup,
     patchGroupMemberStatus,

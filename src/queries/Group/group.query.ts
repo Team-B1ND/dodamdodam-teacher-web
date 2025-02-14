@@ -9,13 +9,10 @@ import {
 } from 'repositories/Group/group.repository';
 import groupRepositroy from 'repositories/Group/group.repositoryImpl';
 
-
-
-export const useGroup = (isAtv: boolean) => {
+export const useGroup = (isAtv: boolean, keyword?: string) => {
   return useInfiniteQuery(
-    [QUERY_KEYS.group.getGroup, isAtv],
-    ({ pageParam = 0 }) =>
-      isAtv ? groupRepositroy.getMyGroup(pageParam) : groupRepositroy.getGroup(pageParam),
+    [QUERY_KEYS.group.getGroup, isAtv, keyword],
+    ({ pageParam = 0 }) => (isAtv ? groupRepositroy.getMyGroup(pageParam, keyword!) : groupRepositroy.getGroup(pageParam, keyword!)),
     {
       getNextPageParam: (lastPage) => {
         if (lastPage.data.length < 10) return undefined;
@@ -27,7 +24,6 @@ export const useGroup = (isAtv: boolean) => {
     }
   );
 };
-
 
 export const useCreateGroupMutation = () => {
   const mutation = useMutation((param: GroupWriteData) => groupRepositroy.createGroup(param));

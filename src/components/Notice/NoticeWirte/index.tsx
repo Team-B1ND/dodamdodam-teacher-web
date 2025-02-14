@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import * as S from './style';
 import { Photo, File } from '@b1nd/dds-web';
 import { useNotice } from 'hooks/Notice/useNotice';
@@ -32,8 +32,8 @@ const NoticeWrite = () => {
         handleImageChange={handleImageChange}
         submitWrite={submitWrite}
         writeData={writeData}
-        fileIcon={<File />}
-        photoIcon={<Photo />}
+        fileIcon={<File color="labelAssisitive" />}
+        photoIcon={<Photo color="labelAssisitive" />}
         buttonText="공지 작성"
       />
     </S.NoticeWriteWrap>

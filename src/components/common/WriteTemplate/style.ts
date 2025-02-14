@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { DodamShape, DodamTypography } from '@b1nd/dds-web';
 
 export const WriteWrap = styled.div`
-  width: 65%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 
   background-color: ${({ theme }) => theme.backgroundNormal};
   ${DodamShape.ExtraSmall};

@@ -17,6 +17,7 @@ import NoticePage from 'pages/Notice/Main/noticePages';
 import NoticeWritePage from 'pages/Notice/Write/noticeWritePages';
 import GroupPage from 'pages/Notice/Group/groupPage';
 import GroupDetail from 'components/Group/GroupDetail';
+// import WaitingMember from 'components/Group/WaitingMember';
 
 const Router = () => {
   return (
@@ -39,7 +40,7 @@ const Router = () => {
         <Route index element={<NoticePage />} />
         <Route path="write" element={<NoticeWritePage />} />
         <Route path="group" element={<GroupPage />} />
-        <Route path="group/:id" element={<GroupDetail />} />
+        {/* <Route path="group/:id" element={<GroupDetail />} /> */}
       </Route>
     </Routes>
   );

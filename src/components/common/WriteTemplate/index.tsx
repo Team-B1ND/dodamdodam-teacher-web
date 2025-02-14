@@ -61,13 +61,25 @@ const WriteTemplate = ({
       </S.WriteInputWrap>
       <S.WriteFooter>
         <S.IconButtonWrap>
-          <div ref={fileRef} onClick={handleFileClick}>
+          <div onClick={handleFileClick}>
             {fileIcon}
-            <input style={{ display: 'none' }} type="file" ref={fileRef} onChange={handleFileChange} />
+            <input
+              style={{ display: 'none' }}
+              type="file"
+              ref={fileRef}
+              onChange={handleFileChange}
+              accept=".hwp, hwpx, .doc, .docx, .pdf, .xls, .xlsx, .ppt, .pptx"
+            />
           </div>
-          <div ref={imageRef} onClick={handleImageClick}>
+          <div onClick={handleImageClick}>
             {photoIcon}
-            <input style={{ display: 'none' }} type="file" ref={imageRef} onChange={handleImageChange} />
+            <input
+              style={{ display: 'none' }}
+              type="file"
+              ref={imageRef}
+              onChange={handleImageChange}
+              accept=".jpg, .png, .jpeg, .gif, .bmp, .tiff, .ico, .webp"
+            />
           </div>
         </S.IconButtonWrap>
         <DodamFilledButton
