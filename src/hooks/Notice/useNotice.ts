@@ -4,8 +4,23 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
 import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
+import { Notice } from 'types/Notice/notice.type';
 
 export const useNotice = () => {
+  //detail과 main이동 hook  
+  const [section, setSection] = useState<"main" | "detail">("main");
+  const [selectedNotice, setSelectedNotice] = useState<Notice | null>(null);
+
+  const openDetail = (notice: Notice) => {
+    setSelectedNotice(notice);
+    setSection("detail");
+  };
+
+  const goBackToMain = () => {
+    setSelectedNotice(null);
+    setSection("main");
+  };
+
   const searchRef = useRef<HTMLInputElement>(null);
 
   const selectCategory = useRecoilValue(SelectCategoryAtom);
@@ -122,9 +137,13 @@ export const useNotice = () => {
   };
 
   return {
+    selectedNotice,
+    section,
     selectCategory,
     searchRef,
     writeData,
+    openDetail,
+    goBackToMain,
     handleWriteDataChange,
     imageRef,
     handleImageClick,

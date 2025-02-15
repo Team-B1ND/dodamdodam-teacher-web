@@ -1,39 +1,18 @@
-import { startTransition, Suspense, useState } from "react";
-import * as S from "./style";
-import NoticeSearchBar from "components/common/NoticeSearchbar";
+import { ReactNode } from "react";
+import NoticeMain from "components/Notice/NoticeMain";
+import NoticeDetail from "components/Notice/NoticeDetail/index";
 import { useNotice } from "hooks/Notice/useNotice";
-import ErrorBoundary from "components/common/ErrorBoundary";
-import NoticeItem from "components/Notice/NoticeItem";
-import SkeletonComponent from "components/common/Skeleton";
-import { useInfiniteNotices } from "queries/Notice/notice.query";
+import { NoticeContainer } from "./style";
 
 const NoticePage = () => {
-  const { searchRef, selectCategory } = useNotice();
-  const [keyword, setKeyword] = useState("");
-  const { refetch } = useInfiniteNotices(keyword); 
+  const { section, openDetail, goBackToMain, selectedNotice } = useNotice();
 
-  const handleSearch = () => {
-    if (searchRef.current) {
-        const newKeyword = searchRef.current.value;
-        startTransition(() => {
-          setKeyword(newKeyword);
-          refetch(); 
-        });
-    }
+  const NoticeComponents: Record<string, ReactNode> = {
+    main: <NoticeMain openDetail={openDetail} />,
+    detail: <NoticeDetail notice={selectedNotice} goBackToMain={goBackToMain} />,
   };
 
-  return (
-    <S.NoticeBox>
-      <NoticeSearchBar ref={searchRef} searchFn={handleSearch} />
-      <S.NoticeSection>
-        <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
-          <Suspense fallback={<SkeletonComponent length={5} height={115} />}>
-            <NoticeItem selectCategory={selectCategory} keyword={keyword} />
-          </Suspense>
-        </ErrorBoundary>
-      </S.NoticeSection>
-    </S.NoticeBox>
-  );
+  return <NoticeContainer>{NoticeComponents[section] || <NoticeMain openDetail={openDetail} />}</NoticeContainer>;
 };
 
 export default NoticePage;
