@@ -82,27 +82,17 @@ export const useNotice = () => {
     const files: FileList | null = e.target.files;
     if (!files) return;
 
-    // 파일이 하나인 경우
-    if (files.length === 1) {
-      const file = files[0];
-      const newFile = {
-        url: URL.createObjectURL(file),
-        name: file.name,
-        fileType: 'FILE',
-      };
-      setFiles([newFile] as FileData[]);
-      return;
-    }
-
-    // 여러 파일인 경우
     const fileArray: File[] = Array.from(files);
     const newFiles = await Promise.all(
       fileArray.map(async (file) => ({
-        url: URL.createObjectURL(file),
+        url: await blobToBase64(file),
         name: file.name,
         fileType: 'FILE',
       }))
     );
+
+    const formData = new FormData();
+    formData.append('files', JSON.stringify(newFiles));
 
     setFiles((prev) => [...prev, ...newFiles] as FileData[]);
   };
