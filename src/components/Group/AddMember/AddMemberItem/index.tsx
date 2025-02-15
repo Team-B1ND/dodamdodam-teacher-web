@@ -1,10 +1,10 @@
-import InfiniteScroll from "react-infinite-scroller";
+import { useState } from "react";
 import * as S from "../style";
+import InfiniteScroll from "react-infinite-scroller";
 import { CheckmarkCircle, ChevronDown, ChevronUp, Person } from "@b1nd/dds-web";
 import { useGroup } from "queries/Group/group.query";
 import SkeletonComponent from "components/common/Skeleton";
 import { GroupMemberType } from "repositories/Group/group.repository";
-import { useState } from "react";
 
 interface AddMemberItemProps {
   id: number;
@@ -64,12 +64,7 @@ const AddMemberItem = ({
                 <S.MemberAllSelectButton onClick={handleClickAllMember}>
                   <CheckmarkCircle
                     size={24}
-                    color={
-                      groupMemberList.every((item) => item.isAtv)
-                        ? "primaryNormal"
-                        : "lineNormal"
-                    }
-                  />
+                    color={groupMemberList.every((item) => item.isAtv) ? "primaryNormal" : "lineNormal"}/>
                   <p>전체</p>
                 </S.MemberAllSelectButton>
 

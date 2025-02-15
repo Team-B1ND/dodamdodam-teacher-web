@@ -6,6 +6,7 @@ import {
   GroupMemberResponse,
   GroupMemberStatus,
   GroupWriteData,
+  AddMemberData,
 } from 'repositories/Group/group.repository';
 import groupRepositroy from 'repositories/Group/group.repositoryImpl';
 
@@ -30,6 +31,12 @@ export const useCreateGroupMutation = () => {
 
   return mutation;
 };
+
+export const useCreateAddMemberMutation = () => {
+  const mutation = useMutation((param: AddMemberData) => groupRepositroy.addMember(param))
+
+  return mutation;
+}
 
 export const useGetGroupDetailQuery = (
   id: number,

@@ -56,7 +56,7 @@ const AddMember = ({ groupId, setSection }: GroupProps) => {
             size="Large"
             width={100}
             typography={["Body1", "Bold"]}
-            onClick={() => console.log("")}
+            onClick={() => addMember.handleAddMember(setSection)}
             textTheme="staticWhite"
           />
         </S.AddMemberButton>

@@ -1,6 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { useGetAllowedGroupMemberQuery } from "queries/Group/group.query";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import {
+  useCreateAddMemberMutation,
+  useGetAllowedGroupMemberQuery,
+} from "queries/Group/group.query";
 import { GroupMemberType } from "repositories/Group/group.repository";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 
 export const useAddMember = (id: number) => {
   const [groupId, setGroupId] = useState<number>(0);
@@ -12,8 +16,22 @@ export const useAddMember = (id: number) => {
   const searchSubmit = () => {
     console.log("검색어 post");
   };
-  
-  console.log("dfsasfad", CurrentGroupData?.data)
+
+  const createAddMemberMutation = useCreateAddMemberMutation();
+  const handleAddMember = (setSection: Dispatch<SetStateAction<string>>) => {
+    createAddMemberMutation.mutate(
+      { id, memberIdList },
+      {
+        onSuccess: () => {
+          B1ndToast.showSuccess("멤버 추가 성공");
+          setSection("groupDetail");
+        },
+        onError: () => {
+          B1ndToast.showError("멤버 추가 실패");
+        },
+      }
+    );
+  };
 
   const handleClickGroup = (id: number) => {
     setGroupId(id);
@@ -29,7 +47,9 @@ export const useAddMember = (id: number) => {
     } else {
       setMemberIdList((prevId) => {
         const remainMemberList = groupMemberList
-          .filter((group) => !memberIdList.some((id) => id === group.id.toString()))
+          .filter(
+            (group) => !memberIdList.some((id) => id === group.id.toString())
+          )
           .map((group) => group.id.toString());
 
         return [...prevId, ...remainMemberList];
@@ -38,7 +58,6 @@ export const useAddMember = (id: number) => {
   };
 
   const handleClickMember = (memberId: number) => {
-    console.log(memberId);
     setGroupMemberList((prev) => {
       const updateList = prev.map((item) => ({
         ...item,
@@ -68,13 +87,18 @@ export const useAddMember = (id: number) => {
     if (!data || !memberIdList) return;
 
     setGroupMemberList(() => {
-      const GroupData = data.data.filter((group) => !CurrentGroupData?.data.some((currentGroup) => group.id === currentGroup.id))
+      const GroupData = data.data.filter(
+        (group) =>
+          !CurrentGroupData?.data.some(
+            (currentGroup) => group.id === currentGroup.id
+          )
+      );
 
       return GroupData.map((item) => ({
         ...item,
         isAtv: memberIdList.includes(item.id.toString()),
-      }))
-  });
+      }));
+    });
   }, [data, memberIdList]);
 
   return {
@@ -82,6 +106,7 @@ export const useAddMember = (id: number) => {
     searchRef,
     setMemberIdList,
     searchSubmit,
+    handleAddMember,
     handleClickGroup,
     handleClickAllMember,
     handleClickMember,

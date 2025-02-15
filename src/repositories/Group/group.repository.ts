@@ -2,6 +2,7 @@ import { Group } from "types/Group/group.type";
 import { Role } from "types/Member/member.type";
 export interface GroupRepository {
   createGroup: (group: GroupWriteData) => Promise<void>;
+  addMember: ({ id, memberIdList }: AddMemberData) => Promise<void>;
   getGroup: (pageParam: number, keyword: string) => Promise<GroupResponse>;
   getMyGroup: (pageParam: number, keyword: string) => Promise<GroupResponse>;
   getGroupDetail: (id: number) => Promise<GroupDetail>;
@@ -24,6 +25,11 @@ export type GroupMemberStatus = "PENDING" | "ALLOWED" | "REJECTED";
 export interface GroupWriteData {
   name: string;
   description: string;
+}
+
+export interface AddMemberData {
+  id: number;
+  memberIdList: string[];
 }
 
 export interface GroupDetail {
