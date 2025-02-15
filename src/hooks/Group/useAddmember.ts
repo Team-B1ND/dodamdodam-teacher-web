@@ -1,16 +1,19 @@
-import { useGetAllowedGroupMemberQuery } from "queries/Group/group.query";
 import { useEffect, useRef, useState } from "react";
+import { useGetAllowedGroupMemberQuery } from "queries/Group/group.query";
 import { GroupMemberType } from "repositories/Group/group.repository";
 
-export const useAddMember = () => {
+export const useAddMember = (id: number) => {
   const [groupId, setGroupId] = useState<number>(0);
   const { data } = useGetAllowedGroupMemberQuery(groupId);
+  const { data: CurrentGroupData } = useGetAllowedGroupMemberQuery(id);
   const [groupMemberList, setGroupMemberList] = useState<GroupMemberType[]>([]);
   const [memberIdList, setMemberIdList] = useState<string[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
   const searchSubmit = () => {
     console.log("검색어 post");
   };
+  
+  console.log("dfsasfad", CurrentGroupData?.data)
 
   const handleClickGroup = (id: number) => {
     setGroupId(id);
@@ -64,12 +67,14 @@ export const useAddMember = () => {
   useEffect(() => {
     if (!data || !memberIdList) return;
 
-    setGroupMemberList(
-      data.data.map((item) => ({
+    setGroupMemberList(() => {
+      const GroupData = data.data.filter((group) => !CurrentGroupData?.data.some((currentGroup) => group.id === currentGroup.id))
+
+      return GroupData.map((item) => ({
         ...item,
         isAtv: memberIdList.includes(item.id.toString()),
       }))
-    );
+  });
   }, [data, memberIdList]);
 
   return {

@@ -13,7 +13,7 @@ interface GroupProps {
 }
 
 const AddMember = ({ groupId, setSection }: GroupProps) => {
-  const { ...addMember } = useAddMember();
+  const { ...addMember } = useAddMember(groupId);
   return (
     <S.AddMemberContainer>
       <NoticeSearchBar
