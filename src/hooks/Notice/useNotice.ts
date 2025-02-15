@@ -49,6 +49,7 @@ export const useNotice = () => {
     fileRef.current?.click();
   };
 
+  // local file url trnasformer
   const blobToBase64 = (blob: Blob) => {
     return new Promise((resolve) => {
       const reader = new FileReader();
@@ -103,7 +104,7 @@ export const useNotice = () => {
       {
         title: writeData.title,
         content: writeData.content,
-        files: files, // 서버로 전송할 파일 데이터
+        files: files,
         divisions: selectedCategoryList,
       },
       {

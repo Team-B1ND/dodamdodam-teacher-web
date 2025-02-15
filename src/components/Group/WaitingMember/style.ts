@@ -31,6 +31,8 @@ export const BackIconWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
 `;
 
 export const WaitingMemberHeader = styled.div`
