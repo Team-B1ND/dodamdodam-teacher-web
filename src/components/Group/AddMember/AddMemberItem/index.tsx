@@ -11,7 +11,7 @@ interface AddMemberItemProps {
   groupMemberList: GroupMemberType[];
   handleClickGroup: (id: number) => void;
   handleClickAllMember: () => void;
-  handleClickMember: (id: number) => void;
+  handleClickMember: (id: string) => void;
 }
 
 const AddMemberItem = ({
@@ -59,7 +59,7 @@ const AddMemberItem = ({
               )}
             </S.AddMemberItemBox>
 
-            {group.isAtv && (
+            {group.isAtv && groupMemberList.length !== 0 && (
               <S.AddMemberItem>
                 <S.MemberAllSelectButton onClick={handleClickAllMember}>
                   <CheckmarkCircle
@@ -71,7 +71,7 @@ const AddMemberItem = ({
                 {groupMemberList?.map((item) => (
                   <S.AddMember
                     key={item.id}
-                    onClick={() => handleClickMember(item.id)}>
+                    onClick={() => handleClickMember(item.memberId)}>
                     <S.AddMemberInfo>
                       {item.profileImage ? (
                         <img src={item.profileImage} />

@@ -5,6 +5,8 @@ import {
 } from "queries/Group/group.query";
 import { GroupMemberType } from "repositories/Group/group.repository";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { useQueryClient } from "react-query";
+import { QUERY_KEYS } from "queries/queryKey";
 
 export const useAddMember = (id: number) => {
   const [groupId, setGroupId] = useState<number>(0);
@@ -17,6 +19,9 @@ export const useAddMember = (id: number) => {
     console.log("검색어 post");
   };
 
+  console.log(memberIdList)
+
+  const queryClient = useQueryClient();
   const createAddMemberMutation = useCreateAddMemberMutation();
   const handleAddMember = (setSection: Dispatch<SetStateAction<string>>) => {
     createAddMemberMutation.mutate(
@@ -24,6 +29,7 @@ export const useAddMember = (id: number) => {
       {
         onSuccess: () => {
           B1ndToast.showSuccess("멤버 추가 성공");
+          queryClient.invalidateQueries(QUERY_KEYS.group.getGroupMember('ALLOWED', id));
           setSection("groupDetail");
         },
         onError: () => {
@@ -41,38 +47,38 @@ export const useAddMember = (id: number) => {
     if (groupMemberList.every((group) => group.isAtv)) {
       setMemberIdList((prevId) =>
         prevId.filter(
-          (id) => !groupMemberList.some((group) => id === group.id.toString())
+          (id) => !groupMemberList.some((group) => id === group.memberId)
         )
       );
     } else {
       setMemberIdList((prevId) => {
         const remainMemberList = groupMemberList
           .filter(
-            (group) => !memberIdList.some((id) => id === group.id.toString())
+            (group) => !memberIdList.some((id) => id === group.memberId)
           )
-          .map((group) => group.id.toString());
+          .map((group) => group.memberId);
 
         return [...prevId, ...remainMemberList];
       });
     }
   };
 
-  const handleClickMember = (memberId: number) => {
+  const handleClickMember = (memberId: string) => {
     setGroupMemberList((prev) => {
       const updateList = prev.map((item) => ({
         ...item,
-        isAtv: item.id === memberId ? !item.isAtv : item.isAtv,
+        isAtv: item.memberId === memberId ? !item.isAtv : item.isAtv,
       }));
 
       setMemberIdList((prevId) => {
         // isAtv가 true인 멤버만 가져옴
         const activeMembers = updateList
           .filter((item) => item.isAtv)
-          .map((item) => item.id.toString());
+          .map((item) => item.memberId);
 
         // 현재 선택한 memberId가 activeMembers에 없으면 제거
-        if (!activeMembers.includes(memberId.toString())) {
-          return prevId.filter((id) => id !== memberId.toString());
+        if (!activeMembers.includes(memberId)) {
+          return prevId.filter((id) => id !== memberId);
         }
 
         // 새로운 멤버 추가 (중복 제거)
@@ -90,13 +96,13 @@ export const useAddMember = (id: number) => {
       const GroupData = data.data.filter(
         (group) =>
           !CurrentGroupData?.data.some(
-            (currentGroup) => group.id === currentGroup.id
+            (currentGroup) => group.memberId === currentGroup.memberId
           )
       );
 
       return GroupData.map((item) => ({
         ...item,
-        isAtv: memberIdList.includes(item.id.toString()),
+        isAtv: memberIdList.includes(item.memberId),
       }));
     });
   }, [data, memberIdList]);

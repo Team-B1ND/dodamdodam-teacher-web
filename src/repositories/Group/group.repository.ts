@@ -45,6 +45,7 @@ export type Permission = "READER" | "WRITER" | "ADMIN";
 
 export interface GroupMember {
   id: number;
+  memberId: string;
   memberName: string;
   profileImage: string;
   permission: Permission;
