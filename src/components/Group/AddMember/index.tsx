@@ -28,7 +28,7 @@ const AddMember = ({ groupId, setSection }: GroupProps) => {
         <S.AddMemberDataBox>
           <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
             <Suspense>
-              <AddMemberItem id={groupId} selectGroupId={addMember.groupId} groupMemberData={addMember.GroupMemberData!} handleClickGroup={addMember.handleClickGroup} />
+              <AddMemberItem id={groupId} groupMemberData={addMember.GroupMemberData!} handleClickGroup={addMember.handleClickGroup} />
             </Suspense>
           </ErrorBoundary>
         </S.AddMemberDataBox>
