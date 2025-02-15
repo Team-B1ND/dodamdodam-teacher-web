@@ -68,7 +68,8 @@ const WriteTemplate = ({
               type="file"
               ref={fileRef}
               onChange={handleFileChange}
-              accept=".hwp, hwpx, .doc, .docx, .pdf, .xls, .xlsx, .ppt, .pptx"
+              multiple
+              accept='.hwp, hwpx, .doc, .docx, .pdf, .xls, .xlsx, .ppt, .pptx'
             />
           </div>
           <div onClick={handleImageClick}>
@@ -78,6 +79,7 @@ const WriteTemplate = ({
               type="file"
               ref={imageRef}
               onChange={handleImageChange}
+              multiple
               accept=".jpg, .png, .jpeg, .gif, .bmp, .tiff, .ico, .webp"
             />
           </div>

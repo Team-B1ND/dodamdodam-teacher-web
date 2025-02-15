@@ -1,10 +1,11 @@
 import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
 import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
 import { Notice } from 'types/Notice/notice.type';
+
 
 export const useNotice = () => {
   //detail과 main이동 hook  
@@ -26,12 +27,7 @@ export const useNotice = () => {
   const selectCategory = useRecoilValue(SelectCategoryAtom);
 
   const navigate = useNavigate();
-  const [files, setFiles] = useState<FileData[]>([
-    {
-      url: '',
-      name: '',
-    },
-  ]);
+  const [files, setFiles] = useState<FileData[]>([]);
 
   const [writeData, setWriteData] = useState<NoticeWriteData>({
     title: '',
@@ -62,12 +58,21 @@ export const useNotice = () => {
 
   const handleImageClick = () => {
     imageRef.current?.click();
-    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'IMAGE' }]);
   };
 
   const handleFileClick = () => {
     fileRef.current?.click();
-    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'FILE ' }]);
+  };
+
+  // local file url trnasformer
+  const blobToBase64 = (blob: Blob) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result as String);
+      };
+      reader.readAsDataURL(blob);
+    });
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,11 +82,14 @@ export const useNotice = () => {
     const fileArray: File[] = Array.from(files);
     const newFiles = await Promise.all(
       fileArray.map(async (file) => ({
-        url: URL.createObjectURL(file),
+        url: await blobToBase64(file),
         name: file.name,
         fileType: 'IMAGE',
       }))
     );
+
+    const formData = new FormData();
+    formData.append('files', JSON.stringify(newFiles));
 
     setFiles((prev) => [...prev, ...newFiles] as FileData[]);
   };
@@ -90,27 +98,17 @@ export const useNotice = () => {
     const files: FileList | null = e.target.files;
     if (!files) return;
 
-    // 파일이 하나인 경우
-    if (files.length === 1) {
-      const file = files[0];
-      const newFile = {
-        url: URL.createObjectURL(file),
-        name: file.name,
-        fileType: 'FILE',
-      };
-      setFiles([newFile] as FileData[]);
-      return;
-    }
-
-    // 여러 파일인 경우
     const fileArray: File[] = Array.from(files);
     const newFiles = await Promise.all(
       fileArray.map(async (file) => ({
-        url: URL.createObjectURL(file),
+        url: await blobToBase64(file),
         name: file.name,
         fileType: 'FILE',
       }))
     );
+
+    const formData = new FormData();
+    formData.append('files', JSON.stringify(newFiles));
 
     setFiles((prev) => [...prev, ...newFiles] as FileData[]);
   };
@@ -121,7 +119,7 @@ export const useNotice = () => {
       {
         title: writeData.title,
         content: writeData.content,
-        ...(files[0].url !== '' && files),
+        files: files,
         divisions: selectedCategoryList,
       },
       {
