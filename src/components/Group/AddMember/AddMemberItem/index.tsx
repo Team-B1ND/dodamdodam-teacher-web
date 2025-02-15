@@ -3,19 +3,23 @@ import * as S from "../style";
 import { CheckmarkCircle, ChevronDown, ChevronUp, Person } from "@b1nd/dds-web";
 import { useGroup } from "queries/Group/group.query";
 import SkeletonComponent from "components/common/Skeleton";
-import { GroupMemberResponse } from "repositories/Group/group.repository";
-import { Suspense, useState } from "react";
+import { GroupMemberType } from "repositories/Group/group.repository";
+import { useState } from "react";
 
 interface AddMemberItemProps {
   id: number;
+  groupMemberList: GroupMemberType[];
   handleClickGroup: (id: number) => void;
-  groupMemberData: GroupMemberResponse;
+  handleClickAllMember: () => void;
+  handleClickMember: (id: number) => void;
 }
 
 const AddMemberItem = ({
   id,
-  groupMemberData,
+  groupMemberList,
   handleClickGroup,
+  handleClickAllMember,
+  handleClickMember,
 }: AddMemberItemProps) => {
   const { data, fetchNextPage, hasNextPage } = useGroup(false, "");
   const [filteredGroups, setFilteredGroups] = useState(
@@ -33,8 +37,6 @@ const AddMemberItem = ({
       }))
     );
   };
-
-  console.log(filteredGroups)
 
   return (
     <InfiniteScroll
@@ -59,13 +61,22 @@ const AddMemberItem = ({
 
             {group.isAtv && (
               <S.AddMemberItem>
-                <S.MemberAllSelectButton>
-                  <CheckmarkCircle size={24} color="primaryNormal" />
+                <S.MemberAllSelectButton onClick={handleClickAllMember}>
+                  <CheckmarkCircle
+                    size={24}
+                    color={
+                      groupMemberList.every((item) => item.isAtv)
+                        ? "primaryNormal"
+                        : "lineNormal"
+                    }
+                  />
                   <p>전체</p>
                 </S.MemberAllSelectButton>
 
-                {groupMemberData?.data.map((item) => (
-                  <S.AddMember key={item.id}>
+                {groupMemberList?.map((item) => (
+                  <S.AddMember
+                    key={item.id}
+                    onClick={() => handleClickMember(item.id)}>
                     <S.AddMemberInfo>
                       {item.profileImage ? (
                         <img src={item.profileImage} />
@@ -78,7 +89,7 @@ const AddMemberItem = ({
                     </S.AddMemberInfo>
                     <CheckmarkCircle
                       size={24}
-                      color="primaryNormal"
+                      color={item.isAtv ? "primaryNormal" : "lineNormal"}
                       $svgStyle={{ margin: "4px" }}
                     />
                   </S.AddMember>

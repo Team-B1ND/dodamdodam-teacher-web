@@ -28,7 +28,13 @@ const AddMember = ({ groupId, setSection }: GroupProps) => {
         <S.AddMemberDataBox>
           <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
             <Suspense>
-              <AddMemberItem id={groupId} groupMemberData={addMember.GroupMemberData!} handleClickGroup={addMember.handleClickGroup} />
+              <AddMemberItem
+                id={groupId}
+                groupMemberList={addMember.groupMemberList}
+                handleClickGroup={addMember.handleClickGroup}
+                handleClickAllMember={addMember.handleClickAllMember}
+                handleClickMember={addMember.handleClickMember}
+              />
             </Suspense>
           </ErrorBoundary>
         </S.AddMemberDataBox>
@@ -40,7 +46,7 @@ const AddMember = ({ groupId, setSection }: GroupProps) => {
             size="Large"
             width={100}
             typography={["Body1", "Medium"]}
-            onClick={() => console.log("")}
+            onClick={() => addMember.setMemberIdList([])}
             textTheme="labelNetural"
           />
           <DodamFilledButton
