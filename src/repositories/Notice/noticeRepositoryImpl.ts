@@ -15,6 +15,10 @@ class NoticeRepositoryImpl implements NoticeRepository {
     const { data } = await dodamAxios.get(`/notice/${selectCategory}/division?id=${selectCategory}&lastId=${pageParam}&limit=10`)
     return data;
   }
+  public async upload(params: FormDataEntryValue): Promise<{ data: { data: string } }> {
+    const { data } = await dodamAxios.post('/upload', params);
+    return data;
+  }
 
 }
 
