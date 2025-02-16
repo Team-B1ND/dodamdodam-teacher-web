@@ -9,3 +9,8 @@ export const MemberSelectGrade = atom<string>({
   key: "memberSelectGradeAtom",
   default: "전체보기",
 });
+
+export const MyMemberInfoId = atom<string>({
+  key: "myMemberInfoId",
+  default: "",
+});

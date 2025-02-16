@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, Suspense } from 'react';
 import * as S from './style';
-import NoticeSearchBar from 'components/common/NoticeSearchbar';
+import NoticeSearchBar from 'components/common/Notice/NoticeSearchbar';
 import { Plus, DodamSegmentedButton } from '@b1nd/dds-web';
 import ErrorBoundary from 'components/common/ErrorBoundary';
 import SkeletonComponent from 'components/common/Skeleton';

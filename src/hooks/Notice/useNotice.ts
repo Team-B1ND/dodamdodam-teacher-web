@@ -1,13 +1,18 @@
-import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { B1ndToast } from '@b1nd/b1nd-toastify';
+import { DodamDialog } from '@b1nd/dds-web';
+import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
 import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
 import { Notice } from 'types/Notice/notice.type';
+import { useQueryClient } from "react-query";
+import { QUERY_KEYS } from 'queries/queryKey';
 
 
 export const useNotice = () => {
+  const queryClient = useQueryClient();
   //detail과 main이동 hook  
   const [section, setSection] = useState<"main" | "detail">("main");
   const [selectedNotice, setSelectedNotice] = useState<Notice | null>(null);
@@ -21,6 +26,8 @@ export const useNotice = () => {
     setSelectedNotice(null);
     setSection("main");
   };
+
+  //
 
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -115,6 +122,11 @@ export const useNotice = () => {
 
   const noticeWriteMutation = useNoticeWriteMutation();
   const submitWrite = () => {
+    if(selectedCategoryList.length < 0) {
+      B1ndToast.showInfo("카테고리를 정해주세요");
+      return;
+    }
+
     noticeWriteMutation.mutate(
       {
         title: writeData.title,
@@ -124,11 +136,13 @@ export const useNotice = () => {
       },
       {
         onSuccess: () => {
-          alert('공지사항 작성 완료');
+          
+          queryClient.invalidateQueries(QUERY_KEYS.notice.notice);
           navigate('/notice');
+          DodamDialog.alert('공지사항 작성 완료');
         },
         onError: () => {
-          alert('공지사항 작성 실패');
+          DodamDialog.alert('공지사항 작성 실패');
         },
       }
     );

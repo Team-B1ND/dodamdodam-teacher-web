@@ -1,6 +1,6 @@
-import { startTransition, Suspense, useState } from "react";
+import { startTransition, Suspense, useEffect, useState } from "react";
 import * as S from "./style";
-import NoticeSearchBar from "components/common/NoticeSearchbar";
+import NoticeSearchBar from "components/common/Notice/NoticeSearchbar";
 import { useNotice } from "hooks/Notice/useNotice";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import NoticeItem from "./NoticeItem";
@@ -17,13 +17,16 @@ const NoticeMain = ({ openDetail }: NoticeMainProps) => {
   const [keyword, setKeyword] = useState("");
   const { refetch } = useInfiniteNotices(keyword); 
 
+  useEffect(() => {
+    refetch();
+  }, [keyword, refetch]);
+
   const handleSearch = () => {
     if (searchRef.current) {
-        const newKeyword = searchRef.current.value;
-        startTransition(() => {
-          setKeyword(newKeyword);
-          refetch(); 
-        });
+      const newKeyword = searchRef.current.value;
+      startTransition(() => {
+        setKeyword(newKeyword);
+      });
     }
   };
 
@@ -33,7 +36,7 @@ const NoticeMain = ({ openDetail }: NoticeMainProps) => {
       <S.NoticeSection>
         <ErrorBoundary text="데이터를 불러오지 못했습니다." showButton={true}>
           <Suspense fallback={<SkeletonComponent length={10} height={115} />}>
-            <NoticeItem selectCategory={selectCategory} keyword={keyword} openDetail={openDetail}/>
+            <NoticeItem selectCategory={selectCategory} keyword={keyword} openDetail={openDetail} />
           </Suspense>
         </ErrorBoundary>
       </S.NoticeSection>

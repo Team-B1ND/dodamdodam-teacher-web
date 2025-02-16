@@ -18,11 +18,12 @@ export const NoticeItem = styled.div`
 
 export const NoticeHeader = styled.div`
     display: flex;
+    align-items: center;
     gap: 3px;
     width: 100%;
     span{
     ${DodamTypography.Label.Regular};
-    color: ${({theme})=>theme.labelAssisitive};
+    color: ${({theme})=>theme.labelAssistive};
     }
     
 `
@@ -40,23 +41,45 @@ export const NoticeContent = styled.div`
      white-space: pre-wrap; 
 `
 
-export const NoticeImg = styled.img`
+export const NoticeImg = styled.div<{ imageCount: number }>`
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: ${({ imageCount }) => (imageCount === 1 ? "flex-start" : "space-around")};
+    gap: 8px;
+    margin-top: 8px;
+  
+    img {
+        width: 23vw;
+        height: 23vw;
+        object-fit: cover;
+        border-radius: 8px;
+        ${DodamShape.Medium}
+    }
+`;
+
+export const ImageWrapper = styled.div`
+    position: relative;
+`;
+
+export const ImageOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    img{
-        ${DodamShape.Medium}
-        min-width: 300px;
-        height: 100%;
-    }
-`
-export const AdditionalImages = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 4px 8px;
-  font-size: 14px;
-  border-radius: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    ${DodamTypography.Title1.Regular}
 `;
+
+export const NoticeFiles = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 5px;
+`
