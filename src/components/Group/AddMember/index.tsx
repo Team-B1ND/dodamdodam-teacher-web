@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import NoticeSearchBar from "components/common/NoticeSearchbar";
+import NoticeSearchBar from "components/common/Notice/NoticeSearchbar";
 import * as  S from "./style";
 import { useAddMember } from "hooks/Group/useAddmember";
 import { ChevronLeft, DodamFilledButton } from "@b1nd/dds-web";

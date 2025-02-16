@@ -13,6 +13,7 @@ import MemberInfoModal from './Modal/memberInfoModal';
 import { useGroup } from 'hooks/Group/useGroup';
 import { useSetRecoilState } from 'recoil';
 import { GroupNameAtom } from 'stores/Notice/Group/group.store';
+import { B1ndToast } from '@b1nd/b1nd-toastify';
 
 const GroupDetail = ({ id, setSection }: { id: number; setSection: Dispatch<SetStateAction<string>> }) => {
   const { data } = useGetGroupDetailQuery(id);
@@ -30,7 +31,7 @@ const GroupDetail = ({ id, setSection }: { id: number; setSection: Dispatch<SetS
       key={member.id}
       onClick={() => {
         setSelectedMember(member);
-        setMemberInfoModal(member.permission !== 'ADMIN');
+        setMemberInfoModal((prev) => !prev);
       }}
     >
       <S.MemberInfo>

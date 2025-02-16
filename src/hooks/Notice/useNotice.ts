@@ -1,21 +1,44 @@
-import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
+import { B1ndToast } from '@b1nd/b1nd-toastify';
+import { useFileUploadMutation, useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { B1ndToast } from '@b1nd/b1nd-toastify';
+import { DodamDialog } from '@b1nd/dds-web';
+import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { FileData, NoticeWriteData } from 'repositories/Notice/NoticeRepository';
-import { SelectCategoryListAtom } from 'stores/Division/division.store';
+import { useRecoilValue } from 'recoil';
+import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
+import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
+import { Notice } from 'types/Notice/notice.type';
+import { useQueryClient } from "react-query";
+import { QUERY_KEYS } from 'queries/queryKey';
+
 
 export const useNotice = () => {
+  const queryClient = useQueryClient();
+  //detail과 main이동 hook  
+  const [section, setSection] = useState<"main" | "detail">("main");
+  const [selectedNotice, setSelectedNotice] = useState<Notice | null>(null);
+
+  const openDetail = (notice: Notice) => {
+    setSelectedNotice(notice);
+    setSection("detail");
+  };
+
+  const goBackToMain = () => {
+    setSelectedNotice(null);
+    setSection("main");
+  };
+
+  //
+
   const searchRef = useRef<HTMLInputElement>(null);
 
+  const selectCategory = useRecoilValue(SelectCategoryAtom);
 
   const navigate = useNavigate();
-  const [files, setFiles] = useState<FileData[]>([
-    {
-      url: '',
-      name: '',
-    },
-  ]);
+  const [files, setFiles] = useState<FileData[]>([]);
+  const [image, setImage] = useState<string[]>([]);
+  const [imageLink, setImageLink] = useState<string>('');
 
   const [writeData, setWriteData] = useState<NoticeWriteData>({
     title: '',
@@ -46,12 +69,21 @@ export const useNotice = () => {
 
   const handleImageClick = () => {
     imageRef.current?.click();
-    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'IMAGE' }]);
   };
 
   const handleFileClick = () => {
     fileRef.current?.click();
-    setFiles((prev) => [...prev, { url: '', name: '', fileType: 'FILE ' }]);
+  };
+
+  // local file url trnasformer
+  const blobToBase64 = (blob: Blob) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result as String);
+      };
+      reader.readAsDataURL(blob);
+    });
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,70 +91,87 @@ export const useNotice = () => {
     if (!files) return;
 
     const fileArray: File[] = Array.from(files);
-    const newFiles = await Promise.all(
-      fileArray.map(async (file) => ({
-        url: URL.createObjectURL(file),
-        name: file.name,
-        fileType: 'IMAGE',
-      }))
-    );
+    const fileUrls: string[] = [];
 
-    setFiles((prev) => [...prev, ...newFiles] as FileData[]);
+    for (let i = 0; i < fileArray.length; i++) {
+      const currentFile = fileArray[i];
+      const imageUrl = URL.createObjectURL(currentFile);
+      fileUrls.push(imageUrl);
+    }
+
+    setImage((prev) => [...prev, ...fileUrls]);
+
+    const formData = new FormData();
+    fileArray.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    const fileUploadMutation = useFileUploadMutation();
+    fileUploadMutation.mutate(formData.get('files')!, {
+      onSuccess: (data) => {
+        setImageLink(data.data.data);
+      },
+      onError: () => {
+        B1ndToast.showError('이미지 업로드 실패!');
+      },
+    });
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files: FileList | null = e.target.files;
     if (!files) return;
 
-    // 파일이 하나인 경우
-    if (files.length === 1) {
-      const file = files[0];
-      const newFile = {
-        url: URL.createObjectURL(file),
-        name: file.name,
-        fileType: 'FILE',
-      };
-      setFiles([newFile] as FileData[]);
-      return;
-    }
-
-    // 여러 파일인 경우
     const fileArray: File[] = Array.from(files);
     const newFiles = await Promise.all(
       fileArray.map(async (file) => ({
-        url: URL.createObjectURL(file),
+        url: await blobToBase64(file),
         name: file.name,
         fileType: 'FILE',
       }))
     );
+
+    const formData = new FormData();
+    formData.append('files', JSON.stringify(newFiles));
 
     setFiles((prev) => [...prev, ...newFiles] as FileData[]);
   };
 
   const noticeWriteMutation = useNoticeWriteMutation();
   const submitWrite = () => {
+    if(selectedCategoryList.length < 0) {
+      B1ndToast.showInfo("카테고리를 정해주세요");
+      return;
+    }
+
     noticeWriteMutation.mutate(
       {
         title: writeData.title,
         content: writeData.content,
-        ...(files[0].url !== '' && files),
+        files: files,
         divisions: selectedCategoryList,
       },
       {
         onSuccess: () => {
-          alert('공지사항 작성 완료');
+          
+          queryClient.invalidateQueries(QUERY_KEYS.notice.notice);
           navigate('/notice');
+          DodamDialog.alert('공지사항 작성 완료');
         },
         onError: () => {
-          alert('공지사항 작성 실패');
+          DodamDialog.alert('공지사항 작성 실패');
         },
       }
     );
   };
 
   return {
+    selectedNotice,
+    section,
+    selectCategory,
     searchRef,
     writeData,
+    openDetail,
+    goBackToMain,
     handleWriteDataChange,
     imageRef,
     handleImageClick,

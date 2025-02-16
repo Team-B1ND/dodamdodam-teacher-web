@@ -30,6 +30,8 @@ export const BackIconWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
 `;
 
 export const GroupDetailHeader = styled.div`
@@ -143,6 +145,8 @@ export const MemberCell = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.fillNetural};
   }
+
+  cursor: pointer;
 `;
 
 export const MemberList = styled.div`

@@ -8,13 +8,18 @@ export interface PageDataType {
   isAtv: boolean;
 }
 
+export interface NoticeFile  {
+  fileUrl: string
+  fileName: string,
+  fileType: "IMAGE" | "FILE"
+}
+
 export interface Notice {
     id: number,
     title: string,
     content: string,
-    fileUrl: string,
-    fileType: string, //IMAGE, FILE
     readonly noticeStatus: "CREATED" | "DRAFT" | "DELETED", 
+    noticeFileRes:NoticeFile[],
     memberInfoRes: {
         id: string,
         name: string,
