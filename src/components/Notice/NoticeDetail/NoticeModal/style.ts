@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { DodamShadow, DodamShape } from "@b1nd/dds-web";
+import { DodamShadow, DodamShape, DodamTypography } from "@b1nd/dds-web";
 
-export const NoticeModal = styled.div`
+export const NoticeModalBox = styled.div`
   display: flex;
   width: 150px;
   height: 100px;
@@ -13,5 +13,15 @@ export const NoticeModal = styled.div`
 
   ${DodamShape.ExtraSmall};
   background-color: ${({ theme }) => theme.backgroundNormal};
-  ${DodamShadow.Normal};
-`
+  ${DodamShadow.Strong};
+
+  span {
+    cursor: pointer;
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Body1.Bold};
+  }
+
+  span:nth-child(3) {
+    color: ${({ theme }) => theme.statusNegative};
+  }
+`;

@@ -1,5 +1,5 @@
 import { dodamAxios } from 'libs/Axios/customAxios';
-import { NoticeRepository, NoticeWriteData } from './noticeRepositorys';
+import { NoticeRepository, NoticeWriteData } from './noticeRepository';
 import { NoticeResponse } from 'types/Notice/notice.type';
 
 class NoticeRepositoryImpl implements NoticeRepository {

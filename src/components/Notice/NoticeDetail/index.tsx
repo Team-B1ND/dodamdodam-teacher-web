@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { useRecoilState } from "recoil";
 import { MyMemberInfoId } from "stores/Member/member.store"; 
 import { useNotice } from "hooks/Notice/useNotice";
+import NoticeModal from "./NoticeModal";
 
 
 interface NoticeDetailProps {
@@ -31,6 +32,7 @@ const NoticeDetail = ({ notice, goBackToMain }: NoticeDetailProps) => {
     : [];
 
   return (
+    <>
     <S.NoticeDetailBox>
       <S.NoticeBackButton onClick={goBackToMain}>
         <ChevronLeft color="labelNormal"/>
@@ -42,7 +44,7 @@ const NoticeDetail = ({ notice, goBackToMain }: NoticeDetailProps) => {
             <span>{convertDateTime.getDayOfWeek(dayjs(notice?.createdAt).toDate()) ?? "날짜 없음"}</span>
         </div>
         {notice?.memberInfoRes?.id === myMemberInfoId ?
-        <div style={{cursor:"pointer"}}>
+        <div style={{cursor:"pointer"}} onClick={notices.detailModal}>
             <Menu color="labelNormal"/>
         </div>
         : ""}
@@ -85,6 +87,11 @@ const NoticeDetail = ({ notice, goBackToMain }: NoticeDetailProps) => {
 
       
     </S.NoticeDetailBox>
+      <NoticeModal 
+        isOpen={notices.isNotice}
+        onClose={notices.detailModal}
+      />
+    </>
   );
 };
 

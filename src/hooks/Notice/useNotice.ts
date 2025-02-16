@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { DodamDialog } from '@b1nd/dds-web';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepositorys';
+import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
 import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
 import { Notice } from 'types/Notice/notice.type';
 import { useQueryClient } from "react-query";
@@ -28,6 +28,10 @@ export const useNotice = () => {
   };
 
   //
+  const [isNotice,setNotice] = useState(false);
+  const detailModal = () => {
+    setNotice((prev)=>!prev)
+  }
 
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -168,6 +172,8 @@ export const useNotice = () => {
     selectCategory,
     searchRef,
     writeData,
+    isNotice,
+    detailModal,
     openDetail,
     goBackToMain,
     handleWriteDataChange,
