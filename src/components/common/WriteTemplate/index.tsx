@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 import { DodamFilledButton, Home } from '@b1nd/dds-web';
-import { NoticeWriteData } from 'repositories/Notice/NoticeRepository';
+import { NoticeWriteData } from 'repositories/Notice/noticeRepository';
 import { GroupWriteData } from 'repositories/Group/group.repository';
 
 interface WriteTemplateProps {
@@ -68,7 +68,8 @@ const WriteTemplate = ({
               type="file"
               ref={fileRef}
               onChange={handleFileChange}
-              accept=".hwp, hwpx, .doc, .docx, .pdf, .xls, .xlsx, .ppt, .pptx"
+              multiple
+              accept='.hwp, hwpx, .doc, .docx, .pdf, .xls, .xlsx, .ppt, .pptx'
             />
           </div>
           <div onClick={handleImageClick}>
@@ -78,6 +79,7 @@ const WriteTemplate = ({
               type="file"
               ref={imageRef}
               onChange={handleImageChange}
+              multiple
               accept=".jpg, .png, .jpeg, .gif, .bmp, .tiff, .ico, .webp"
             />
           </div>

@@ -1,11 +1,21 @@
+import React,{useEffect} from "react";
 import * as S from "./style";
 import dgsw from "assets/dgsw.svg";
 import { useLogout } from "hooks/auth/useLogout";
 import { useGetMyMemberQuery } from "queries/Member/member.query";
+import { useRecoilState } from "recoil";
+import { MyMemberInfoId } from "stores/Member/member.store"; 
 
 const Header = () => {
   const { handleLogoutClick } = useLogout();
   const { data: myInfo } = useGetMyMemberQuery();
+  const [, setMyMemberInfoId] = useRecoilState(MyMemberInfoId);
+
+  useEffect(() => {
+    if (myInfo?.data?.id) {
+      setMyMemberInfoId(myInfo.data.id);
+    }
+  }, [myInfo, setMyMemberInfoId]);
 
   return (
     <S.HeaderContainer>

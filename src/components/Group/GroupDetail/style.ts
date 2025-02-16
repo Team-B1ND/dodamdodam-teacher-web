@@ -147,6 +147,8 @@ export const MemberCell = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.fillNeutral};
   }
+
+  cursor: pointer;
 `;
 
 export const MemberList = styled.div`

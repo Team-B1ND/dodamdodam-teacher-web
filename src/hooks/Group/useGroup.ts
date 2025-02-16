@@ -47,7 +47,12 @@ export const useGroup = () => {
   };
 
   const patchGroupMemberStatusMutation = usePatchGroupMemberStatusMutation();
-  const patchGroupMemberStatus = (status: GroupMemberStatus, id: number, memberId: number[]) => {
+  const patchGroupMemberStatus = (status: GroupMemberStatus, id: number, memberId: number[], isAdmin?: boolean) => {
+    if (isAdmin) {
+      B1ndToast.showInfo('관리자는 내보낼 수 없습니다');
+      return;
+    }
+
     patchGroupMemberStatusMutation.mutate(
       {
         status: status,

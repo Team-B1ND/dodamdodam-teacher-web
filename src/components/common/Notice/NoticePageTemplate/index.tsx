@@ -1,4 +1,4 @@
-import NoticeSidebar from "../../Notice/NoticeSidebar/index";
+import NoticeSidebar from "components/Notice/NoticeSidebar";
 import { Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
 

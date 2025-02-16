@@ -1,4 +1,7 @@
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
+
+dayjs.locale("ko");
 
 class ConvertDateTime {
   public getDateTime = (date: Date, dateType: "date" | "time" | "both") => {
@@ -36,6 +39,10 @@ class ConvertDateTime {
   public splitConvertDateFormat = (selectedDate: string) => {
     const [year, month, day] = selectedDate.split("-").map(Number);
     return { year, month, day };
+  };
+  
+  public getDayOfWeek = (date: Date | string) => {
+    return dayjs(date).format("M월 D일 dddd");
   };
 }
 

@@ -46,6 +46,7 @@ export const QUERY_KEYS = Object.freeze({
     getPointScoreByStudentId: (studentId: number) => ['point/getPointScoreByStudnetId', studentId],
   },
   notice: {
+    notice: '/notice',
     noticeWrite: '/notice',
   },
   group: {
