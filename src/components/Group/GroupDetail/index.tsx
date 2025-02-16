@@ -7,13 +7,11 @@ import {
   useGetPendingGroupMemberQuery,
 } from 'queries/Group/group.query';
 import { GroupMember } from 'repositories/Group/group.repository';
-import { useParams } from 'react-router-dom';
 import GroupDetailModal from './Modal/groupDetailModal';
 import MemberInfoModal from './Modal/memberInfoModal';
 import { useGroup } from 'hooks/Group/useGroup';
 import { useSetRecoilState } from 'recoil';
 import { GroupNameAtom } from 'stores/Notice/Group/group.store';
-import { B1ndToast } from '@b1nd/b1nd-toastify';
 
 const GroupDetail = ({ id, setSection }: { id: number; setSection: Dispatch<SetStateAction<string>> }) => {
   const { data } = useGetGroupDetailQuery(id);
@@ -66,7 +64,7 @@ const GroupDetail = ({ id, setSection }: { id: number; setSection: Dispatch<SetS
                 setGroupName(data?.data.divisionName!);
               }}
             >
-              <Menu color={'labelAssisitive'} />
+              <Menu color='labelAssistive' />
             </div>
           </S.GroupDetailTitle>
           <S.GroupDetailDescription>{data?.data.description}</S.GroupDetailDescription>

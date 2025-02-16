@@ -5,6 +5,7 @@ export interface NoticeRepository {
   getNotice: (pageParam: number, keyword?: string) => Promise<NoticeResponse>;
   getDivisionNotice: (pageParam: number, selectCategory?:number) => Promise<NoticeResponse>;
   upload: (params: FormDataEntryValue) => Promise<{ data: { data: string } }>;
+  
 }
 
 export interface NoticeWriteData {

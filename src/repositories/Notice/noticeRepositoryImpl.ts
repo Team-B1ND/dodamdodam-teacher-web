@@ -19,6 +19,9 @@ class NoticeRepositoryImpl implements NoticeRepository {
     const { data } = await dodamAxios.post('/upload', params);
     return data;
   }
+  // public async deleteNotice(id:string):Promise<void> {
+  //   await dodamAxios.delete(`/notice/${id}`);
+  // }
 
 }
 
