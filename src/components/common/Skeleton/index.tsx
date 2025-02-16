@@ -10,7 +10,7 @@ interface SkeletonProps {
 const SkeletonComponent = ({ length=15, height, customStyle }: SkeletonProps) => {
   return (
     <S.BusSkeletonContainer>
-      {Array.from({ length }).map((item, idx) => (
+      {Array.from({ length }).map((_, idx) => (
         <S.BusSkeletonItem height={height} key={idx} customStyle={customStyle!} />
       ))}
     </S.BusSkeletonContainer>

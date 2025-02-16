@@ -1,12 +1,19 @@
-import * as S from './style';
-import { NoticeSidebarType } from 'types/Notice/notice.type';
-import { DodamSegmentedButton } from '@b1nd/dds-web';
-import { useNoticeSidebar } from 'hooks/Notice/useNoticeSidebar';
-import { Suspense } from 'react';
-import ErrorBoundary from 'components/common/ErrorBoundary';
+import * as S from "./style";
+import InfiniteScroll from "react-infinite-scroller";
+import { NoticeSidebarType } from "types/Notice/notice.type";
+import { DodamSegmentedButton } from "@b1nd/dds-web";
+import { useNoticeSidebar } from "hooks/Notice/useNoticeSidebar";
+import SkeletonComponent from "components/common/Skeleton";
 
 const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
-  const { pageData, categoryList, handleClickPageButton, handleChangeCategory } = useNoticeSidebar();
+  const {
+    pageData,
+    categoryList,
+    fetchNextPage,
+    hasNextPage,
+    handleClickPageButton,
+    handleChangeCategory,
+  } = useNoticeSidebar();
 
   return (
     <S.NoticeSidebarWrap>
@@ -33,17 +40,21 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
             title
           )}
         </S.Title>
-        <S.Category>
-          <ErrorBoundary text="카테고리 데이터 불러오기 실패" showButton={false}>
-            <Suspense>
-              {categoryList?.map((item) => (
-                <S.CategoryTag key={item.id} isAtv={item.isAtv} onClick={() => handleChangeCategory(isWrite, item.id)}>
-                  {item.name}
-                </S.CategoryTag>
-              ))}
-            </Suspense>
-          </ErrorBoundary>
-        </S.Category>
+        <InfiniteScroll
+          loadMore={() => fetchNextPage()}
+          hasMore={hasNextPage}
+          loader={<SkeletonComponent length={5} height={48} />}>
+          <S.Category>
+            {categoryList?.map((item) => (
+              <S.CategoryTag
+                key={item.id}
+                isAtv={item.isAtv}
+                onClick={() => handleChangeCategory(isWrite, item.id)}>
+                {item.name}
+              </S.CategoryTag>
+            ))}
+          </S.Category>
+        </InfiniteScroll>
       </S.CategoryWrap>
     </S.NoticeSidebarWrap>
   );

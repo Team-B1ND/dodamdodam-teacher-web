@@ -6,11 +6,15 @@ import {
   GroupMemberStatus,
   GroupMemberResponse,
   GroupResponse,
+  AddMemberData,
 } from './group.repository';
 
 class GroupRepositoryImpl implements GroupRepository {
   public async createGroup(group: GroupWriteData): Promise<void> {
     await dodamAxios.post('/divisions', group);
+  }
+  public async addMember({ id, memberIdList }: AddMemberData) : Promise<void> {
+    await dodamAxios.post(`/divisions/${id}/members?memberIdList=${memberIdList}`)
   }
   public async getGroup(pageParam: number = 0, keyword: string): Promise<GroupResponse> {
     const { data } = await dodamAxios.get(`/divisions?lastId=${pageParam}&limit=10&keyword=${keyword}`);
