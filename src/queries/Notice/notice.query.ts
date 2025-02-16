@@ -7,3 +7,9 @@ export const useNoticeWriteMutation = () => {
 
   return mutation;
 };
+
+export const useFileUploadMutation = () => {
+  const mutation = useMutation((params: FormDataEntryValue) => noticeRepositoryImpl.upload(params));
+
+  return mutation;
+};

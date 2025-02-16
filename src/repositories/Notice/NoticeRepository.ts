@@ -1,5 +1,6 @@
 export interface NoticeRepository {
   writeNotice: (data: NoticeWriteData) => Promise<void>;
+  upload: (params: FormDataEntryValue) => Promise<{ data: { data: string } }>;
 }
 
 export interface NoticeWriteData {
