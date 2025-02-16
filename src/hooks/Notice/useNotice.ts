@@ -1,3 +1,5 @@
+import { B1ndToast } from '@b1nd/b1nd-toastify';
+import { useFileUploadMutation, useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { B1ndToast } from '@b1nd/b1nd-toastify';
 import { DodamDialog } from '@b1nd/dds-web';
@@ -35,6 +37,8 @@ export const useNotice = () => {
 
   const navigate = useNavigate();
   const [files, setFiles] = useState<FileData[]>([]);
+  const [image, setImage] = useState<string[]>([]);
+  const [imageLink, setImageLink] = useState<string>('');
 
   const [writeData, setWriteData] = useState<NoticeWriteData>({
     title: '',
@@ -87,18 +91,30 @@ export const useNotice = () => {
     if (!files) return;
 
     const fileArray: File[] = Array.from(files);
-    const newFiles = await Promise.all(
-      fileArray.map(async (file) => ({
-        url: await blobToBase64(file),
-        name: file.name,
-        fileType: 'IMAGE',
-      }))
-    );
+    const fileUrls: string[] = [];
+
+    for (let i = 0; i < fileArray.length; i++) {
+      const currentFile = fileArray[i];
+      const imageUrl = URL.createObjectURL(currentFile);
+      fileUrls.push(imageUrl);
+    }
+
+    setImage((prev) => [...prev, ...fileUrls]);
 
     const formData = new FormData();
-    formData.append('files', JSON.stringify(newFiles));
+    fileArray.forEach((file) => {
+      formData.append('files', file);
+    });
 
-    setFiles((prev) => [...prev, ...newFiles] as FileData[]);
+    const fileUploadMutation = useFileUploadMutation();
+    fileUploadMutation.mutate(formData.get('files')!, {
+      onSuccess: (data) => {
+        setImageLink(data.data.data);
+      },
+      onError: () => {
+        B1ndToast.showError('이미지 업로드 실패!');
+      },
+    });
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {

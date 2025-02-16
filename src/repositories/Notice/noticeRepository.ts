@@ -3,6 +3,7 @@ import { NoticeResponse } from "types/Notice/notice.type";
 export interface NoticeRepository {
   writeNotice: (data: NoticeWriteData) => Promise<void>;
   getNotice: (pageParam: number, keyword?: string) => Promise<NoticeResponse>;
+  upload: (params: FormDataEntryValue) => Promise<{ data: { data: string } }>;
 }
 
 export interface NoticeWriteData {
