@@ -1,4 +1,3 @@
-import { Portal } from 'components/common/Portal';
 import React, { Dispatch, SetStateAction } from 'react';
 import * as S from '../style';
 import { DodamDivider, DodamModal, DodamTag } from '@b1nd/dds-web';
