@@ -12,7 +12,7 @@ import PointScore from 'components/Point/PointScore';
 import PointReason from 'components/Point/PointReason';
 import ScheduleManage from 'components/Schedule/ScheduleManage';
 import OffbaseRedisualPage from 'pages/Out/RedisualPage';
-import NoticePageTemplate from 'components/common/Notice/NoticePageTemplate';
+import NoticePageTemplate from 'components/common/NoticePageTemplate';
 import NoticePage from 'pages/Notice/Main/noticePages';
 import NoticeWritePage from 'pages/Notice/Write/noticeWritePages';
 import GroupPage from 'pages/Notice/Group/groupPage';

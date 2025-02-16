@@ -1,12 +1,10 @@
 import { B1ndToast } from '@b1nd/b1nd-toastify';
 import { useFileUploadMutation, useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { B1ndToast } from '@b1nd/b1nd-toastify';
 import { DodamDialog } from '@b1nd/dds-web';
-import { useNoticeWriteMutation } from 'queries/Notice/notice.query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
+import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepositorys';
 import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
 import { Notice } from 'types/Notice/notice.type';
 import { useQueryClient } from "react-query";
@@ -80,7 +78,7 @@ export const useNotice = () => {
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onloadend = () => {
-        resolve(reader.result as String);
+        resolve(reader.result as string);
       };
       reader.readAsDataURL(blob);
     });

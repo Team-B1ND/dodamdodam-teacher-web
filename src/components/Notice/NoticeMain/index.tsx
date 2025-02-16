@@ -1,6 +1,6 @@
 import { startTransition, Suspense, useEffect, useState } from "react";
 import * as S from "./style";
-import NoticeSearchBar from "components/common/Notice/NoticeSearchbar";
+import NoticeSearchBar from "components/common/NoticeSearchbar";
 import { useNotice } from "hooks/Notice/useNotice";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import NoticeItem from "./NoticeItem";

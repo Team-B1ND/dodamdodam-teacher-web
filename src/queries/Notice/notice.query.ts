@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from 'queries/queryKey';
 import { useMutation,useInfiniteQuery } from 'react-query';
-import { NoticeWriteData } from 'repositories/Notice/noticeRepository';
-import noticeRepositoryImpl from 'repositories/Notice/noticeRepositoryImpl';
+import { NoticeWriteData } from 'repositories/Notice/noticeRepositorys';
+import noticeRepositoryImpl from 'repositories/Notice/noticeRepositoryImpls';
 
 
 export const useNoticeWriteMutation = () => {
