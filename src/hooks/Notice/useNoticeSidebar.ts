@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { SelectCategoryAtom, SelectCategoryListAtom } from "stores/Division/division.store";
+import {
+  SelectCategoryAtom,
+  SelectCategoryListAtom,
+} from "stores/Notice/Group/division.store";
 import { useGroup } from "queries/Group/group.query";
 import { PageDataType } from "types/Notice/notice.type";
 import { Group } from "types/Group/group.type";
@@ -14,16 +17,26 @@ export const useNoticeSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [keyword, setKeyword] = useState<string>("");
-  const { data: CategoryData, fetchNextPage, hasNextPage } = useGroup(false, keyword);
+  const {
+    data: CategoryData,
+    fetchNextPage,
+    hasNextPage,
+  } = useGroup(false, keyword);
   const [categoryList, setCategoryList] = useState<GroupType[]>([]);
 
-  const [selectCategory, setSelectCategory] = useRecoilState<number>(SelectCategoryAtom);
-  const [selectCategoryList, setSelectCategoryList] = useRecoilState<number[]>(SelectCategoryListAtom);
+  const [selectCategory, setSelectCategory] =
+    useRecoilState<number>(SelectCategoryAtom);
+  const [selectCategoryList, setSelectCategoryList] = useRecoilState<number[]>(
+    SelectCategoryListAtom
+  );
   const [pageData, setPageData] = useState<PageDataType[]>([
     { text: "공지", isAtv: false },
     { text: "공지 작성", isAtv: false },
     { text: "그룹", isAtv: false },
   ]);
+
+  console.log(selectCategory);
+  console.log(selectCategoryList);
 
   const handleClickPageButton = (text?: string) => {
     switch (text) {
@@ -42,9 +55,7 @@ export const useNoticeSidebar = () => {
   const handleChangeCategory = (isWrite: boolean, id: number) => {
     if (isWrite) {
       setSelectCategoryList((prev) =>
-        prev.includes(id)
-          ? prev.filter((item) => item !== id)
-          : [...prev, id]
+        prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
       );
       setCategoryList((prev) =>
         prev.map((item) => ({
@@ -62,15 +73,29 @@ export const useNoticeSidebar = () => {
 
   useEffect(() => {
     if (CategoryData?.pages) {
-      const allList = [{ id: 0, name: "전체", isAtv: true}]
+      const allList = [{ id: 0, name: "전체", isAtv: true }];
       const newList = CategoryData.pages.flatMap((page) =>
         page.data.map((item) => ({ ...item, isAtv: false }))
       );
 
-      setCategoryList([...allList, ...newList]);
+      const getUpdateList = () => {
+        if (pathname === "/notice/write") {
+          return [...allList, ...newList].map((item) => ({
+            ...item,
+            isAtv: selectCategoryList.some((id) => item.id === id),
+          }));
+        } else {
+          return [...allList, ...newList].map((item) => ({
+            ...item,
+            isAtv: item.id === selectCategory,
+          }));
+        }
+      };
+
+      const list = getUpdateList();
+      setCategoryList(list);
     }
-  }, [CategoryData]);
-  
+  }, [CategoryData, pathname]);
 
   useEffect(() => {
     setPageData((prevData) =>

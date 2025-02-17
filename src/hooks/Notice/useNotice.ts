@@ -1,19 +1,27 @@
-import { B1ndToast } from '@b1nd/b1nd-toastify';
-import { useFileUploadMutation, useNoticeWriteMutation } from 'queries/Notice/notice.query';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { DodamDialog } from '@b1nd/dds-web';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository';
-import { SelectCategoryListAtom,SelectCategoryAtom } from 'stores/Division/division.store';
-import { Notice } from 'types/Notice/notice.type';
+import { B1ndToast } from "@b1nd/b1nd-toastify";
+import {
+  useFileUploadMutation,
+  useNoticeWriteMutation,
+} from "queries/Notice/notice.query";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { DodamDialog } from "@b1nd/dds-web";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import {
+  FileData,
+  NoticeWriteData,
+} from "repositories/Notice/noticeRepository";
+import {
+  SelectCategoryListAtom,
+  SelectCategoryAtom,
+} from "stores/Notice/Group/division.store";
+import { Notice } from "types/Notice/notice.type";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from 'queries/queryKey';
-
+import { QUERY_KEYS } from "queries/queryKey";
 
 export const useNotice = () => {
   const queryClient = useQueryClient();
-  //detail과 main이동 hook  
+  //detail과 main이동 hook
   const [section, setSection] = useState<"main" | "detail">("main");
   const [selectedNotice, setSelectedNotice] = useState<Notice | null>(null);
 
@@ -28,10 +36,10 @@ export const useNotice = () => {
   };
 
   //
-  const [isNotice,setNotice] = useState(false);
+  const [isNotice, setNotice] = useState(false);
   const detailModal = () => {
-    setNotice((prev)=>!prev)
-  }
+    setNotice((prev) => !prev);
+  };
 
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -40,11 +48,11 @@ export const useNotice = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState<FileData[]>([]);
   const [image, setImage] = useState<string[]>([]);
-  const [imageLink, setImageLink] = useState<string>('');
+  const [imageLink, setImageLink] = useState<string>("");
 
   const [writeData, setWriteData] = useState<NoticeWriteData>({
-    title: '',
-    content: '',
+    title: "",
+    content: "",
     files: files,
     divisions: [],
   });
@@ -59,7 +67,11 @@ export const useNotice = () => {
   }, [files, selectedCategoryList]);
 
   const handleWriteDataChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    (
+      e:
+        | React.ChangeEvent<HTMLInputElement>
+        | React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
       const { name, value } = e.target;
       setWriteData((prev) => ({ ...prev, [name]: value }));
     },
@@ -105,16 +117,16 @@ export const useNotice = () => {
 
     const formData = new FormData();
     fileArray.forEach((file) => {
-      formData.append('files', file);
+      formData.append("files", file);
     });
 
     const fileUploadMutation = useFileUploadMutation();
-    fileUploadMutation.mutate(formData.get('files')!, {
+    fileUploadMutation.mutate(formData.get("files")!, {
       onSuccess: (data) => {
         setImageLink(data.data.data);
       },
       onError: () => {
-        B1ndToast.showError('이미지 업로드 실패!');
+        B1ndToast.showError("이미지 업로드 실패!");
       },
     });
   };
@@ -128,19 +140,19 @@ export const useNotice = () => {
       fileArray.map(async (file) => ({
         url: await blobToBase64(file),
         name: file.name,
-        fileType: 'FILE',
+        fileType: "FILE",
       }))
     );
 
     const formData = new FormData();
-    formData.append('files', JSON.stringify(newFiles));
+    formData.append("files", JSON.stringify(newFiles));
 
     setFiles((prev) => [...prev, ...newFiles] as FileData[]);
   };
 
   const noticeWriteMutation = useNoticeWriteMutation();
   const submitWrite = () => {
-    if(selectedCategoryList.length < 0) {
+    if (selectedCategoryList.length < 0) {
       B1ndToast.showInfo("카테고리를 정해주세요");
       return;
     }
@@ -154,13 +166,12 @@ export const useNotice = () => {
       },
       {
         onSuccess: () => {
-          
           queryClient.invalidateQueries(QUERY_KEYS.notice.notice);
-          navigate('/notice');
-          DodamDialog.alert('공지사항 작성 완료');
+          navigate("/notice");
+          DodamDialog.alert("공지사항 작성 완료");
         },
         onError: () => {
-          DodamDialog.alert('공지사항 작성 실패');
+          DodamDialog.alert("공지사항 작성 실패");
         },
       }
     );
