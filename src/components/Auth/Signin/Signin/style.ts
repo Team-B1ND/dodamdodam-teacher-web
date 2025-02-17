@@ -2,6 +2,7 @@ import { DodamLightTheme } from '@b1nd/dds-web';
 import styled from 'styled-components';
 
 export const SigninWrap = styled.div`
+  min-width: 340px; //일단 대충 340px까지 줄어 들게 했습니다.
   width: 50%;
   height: 55%;
 
@@ -34,11 +35,11 @@ export const SigninImage = styled.img`
   }
 `;
 
-export const InputWrap = styled.div`
+export const SignBox = styled.div`
   min-width: 55%;
   /* width: 55%; */
   height: 100%;
-
+  padding: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,9 +55,15 @@ export const InputWrap = styled.div`
   }
 `;
 
+export const InputBox = styled.div`
+   display: flex;
+    flex-direction: column;
+    gap: 15px;
+`
+
 export const AccountContainer = styled.div`
-  width: 68%;
-  height: 5%;
+  width: 100%;
+  height: 20px;
 
   display: flex;
   align-items: center;

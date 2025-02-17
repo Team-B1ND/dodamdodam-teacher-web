@@ -5,7 +5,7 @@ export const SignWrap = styled.div`
   width: 100%;
   height: 100vh;
 
-  background-color: ${({ theme }) => theme.backgroundNetural};
+  background-color: ${({ theme }) => theme.backgroundNeutral};
 
   display: flex;
   flex-direction: column;

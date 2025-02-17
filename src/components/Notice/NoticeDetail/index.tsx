@@ -69,6 +69,7 @@ const NoticeDetail = ({ notice, goBackToMain }: NoticeDetailProps) => {
             filename={file.fileName} 
             onClick={()=>console.log()}
             customStyle={{border:"1px solid #0083F0 ",gap:"5px"}}
+          
             />
           ))}
         </S.NoticeImagesFile>
