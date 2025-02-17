@@ -8,13 +8,14 @@ export const NoticeSidebarWrap = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 12px 10px;
+  padding: 12px 10px 0;
   gap: 10px;
 `;
 
 export const CategoryWrap = styled.div`
   width: 404px;
   height: auto;
+  max-height: 80vh;
 
   display: flex;
   flex-direction: column;
@@ -31,12 +32,15 @@ export const Title = styled.span`
   ${DodamTypography.Heading1.Bold}
 `;
 
-export const Category = styled.div`
+export const Category = styled.div<{ isWrite: boolean }>`
   width: auto;
   height: auto;
+  max-height: ${({ isWrite }) => isWrite ? "524px" : "553px"};
 
   display: flex;
   flex-wrap: wrap;
+
+  overflow-y: auto;
 
   ${DodamShape.ExtraSmall}
   background-color: ${({ theme }) => theme.fillNormal};
@@ -49,18 +53,24 @@ export const CategoryTag = styled.span<{ isAtv?: boolean }>`
   width: auto;
   height: auto;
 
-  color: ${({ theme, isAtv }) => isAtv ? theme.staticWhite : theme.labelAlternative};
+  color: ${({ theme, isAtv }) =>
+    isAtv ? theme.staticWhite : theme.labelAlternative};
   ${DodamTypography.Label.Medium}
 
-  border: 1px solid ${({ theme, isAtv }) => isAtv ? theme.primaryNormal : theme.lineAlternative};
+  border: 1px solid ${({ theme, isAtv }) =>
+    isAtv ? theme.primaryNormal : theme.lineAlternative};
   border-radius: 31px;
-  background-color: ${({ theme, isAtv }) => isAtv ? theme.primaryNormal : theme.backgroundNormal};
+  background-color: ${({ theme, isAtv }) =>
+    isAtv ? theme.primaryNormal : theme.backgroundNormal};
 
   padding: 8px 18px;
   cursor: pointer;
 
   &:hover {
-    border: 1px solid ${({ theme, isAtv }) => isAtv ? hexToRgba(theme.primaryNormal, 0) : theme.lineAlternative};
-    background-color: ${({ theme, isAtv }) => isAtv ? hexToRgba(theme.primaryNormal, 0.75) : theme.fillNeutral};
+    border: 1px solid
+      ${({ theme, isAtv }) =>
+        isAtv ? hexToRgba(theme.primaryNormal, 0) : theme.lineAlternative};
+    background-color: ${({ theme, isAtv }) =>
+      isAtv ? hexToRgba(theme.primaryNormal, 0.75) : theme.fillNeutral};
   }
 `;

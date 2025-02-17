@@ -44,7 +44,7 @@ const NoticeSidebar = ({ title, isWrite }: NoticeSidebarType) => {
           loadMore={() => fetchNextPage()}
           hasMore={hasNextPage}
           loader={<SkeletonComponent length={5} height={48} />}>
-          <S.Category>
+          <S.Category isWrite={isWrite}>
             {categoryList?.map((item) => (
               <S.CategoryTag
                 key={item.id}

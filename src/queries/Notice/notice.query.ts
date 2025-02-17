@@ -17,7 +17,7 @@ export const useInfiniteNotices = (keyword: string, selectCategory?: number) => 
       if (keyword) {
         return noticeRepositoryImpl.getNotice(pageParam, keyword);
       }
-      if (selectCategory) {
+      if (selectCategory && selectCategory !== 0) {
         return noticeRepositoryImpl.getDivisionNotice(pageParam, selectCategory);
       }
       // 기본적으로 전체를 불러옴

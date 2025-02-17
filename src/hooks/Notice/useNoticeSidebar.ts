@@ -62,10 +62,12 @@ export const useNoticeSidebar = () => {
 
   useEffect(() => {
     if (CategoryData?.pages) {
+      const allList = [{ id: 0, name: "전체", isAtv: true}]
       const newList = CategoryData.pages.flatMap((page) =>
         page.data.map((item) => ({ ...item, isAtv: false }))
       );
-      setCategoryList(newList);
+
+      setCategoryList([...allList, ...newList]);
     }
   }, [CategoryData]);
   
