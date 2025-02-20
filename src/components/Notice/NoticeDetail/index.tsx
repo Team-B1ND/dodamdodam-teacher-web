@@ -103,7 +103,7 @@ const NoticeDetail = ({ notice, goBackToMain }: NoticeDetailProps) => {
           </S.NoticeImagesFile>
         )}
       </S.NoticeDetailBox>
-      <NoticeModal isOpen={notices.isNotice} onClose={notices.detailModal} />
+      <NoticeModal isOpen={notices.isNotice} onClose={notices.detailModal} noticeId={notice.id.toString()} />
     </>
   )
 }

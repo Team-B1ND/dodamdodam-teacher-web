@@ -32,13 +32,22 @@ class NoticeRepositoryImpl implements NoticeRepository {
 
   public async upload(
     params: FormDataEntryValue
-  ): Promise<{ data: { data: string } }> {
-    const { data } = await dodamAxios.post('/upload', params)
+  ): Promise<{data: string}> {
+    const { data } = await dodamAxios.post(
+      `/upload`,
+      { file: params },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
     return data
   }
-  // public async deleteNotice(id:string):Promise<void> {
-  //   await dodamAxios.delete(`/notice/${id}`);
-  // }
+
+  public async delete(id: string): Promise<void> {
+    await dodamAxios.delete(`/notice/${id}`)
+  }
 }
 
 const noticeRepositoryImpl = new NoticeRepositoryImpl()

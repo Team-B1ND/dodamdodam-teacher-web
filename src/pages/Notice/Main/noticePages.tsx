@@ -9,7 +9,7 @@ const NoticePage = () => {
 
   const NoticeComponents: Record<string, ReactNode> = {
     main: <NoticeMain openDetail={openDetail} />,
-    detail: <NoticeDetail notice={selectedNotice} goBackToMain={goBackToMain} />,
+    detail: <NoticeDetail notice={selectedNotice} goBackToMain={goBackToMain}/>,
   };
 
   return <NoticeContainer>{NoticeComponents[section] || <NoticeMain openDetail={openDetail} />}</NoticeContainer>;
