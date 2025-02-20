@@ -11,7 +11,6 @@ export interface NoticeRepository {
 export interface NoticeWriteData {
   title: string;
   content: string;
-  files?: FileData[];
   divisions: number[];
 }
 

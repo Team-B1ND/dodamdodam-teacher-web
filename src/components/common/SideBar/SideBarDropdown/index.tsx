@@ -29,7 +29,6 @@ const SideBarDropdown = () => {
         <MenuDropdownChild title="심자중인 학생" redirectUrl="/nightStudy-today" />
       </MenuDropdownWrapper>
       <MenuDropdownChild title="학사일정 관리" redirectUrl="/schedule" />
-      <MenuDropdownChild title="공지" redirectUrl="notice" />
       <MenuItem title="채용공고" redirectUrl="/cms" />
     </SideBarDropdownContainer>
   );

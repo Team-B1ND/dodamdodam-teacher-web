@@ -53,9 +53,9 @@ const AddMemberItem = ({
               }}>
               <p>{group.name}</p>
               {group.isAtv ? (
-                <ChevronUp size={18} color="labelAssisitive" />
+                <ChevronUp size={18} color="labelAssistive" />
               ) : (
-                <ChevronDown size={18} color="labelAssisitive" />
+                <ChevronDown size={18} color="labelAssistive" />
               )}
             </S.AddMemberItemBox>
 

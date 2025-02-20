@@ -1,7 +1,7 @@
-import Providers from "./components/common/Provider";
+import Providers from './components/common/Provider'
 
 function App() {
-  return <Providers />;
+  return <Providers />
 }
 
-export default App;
+export default App

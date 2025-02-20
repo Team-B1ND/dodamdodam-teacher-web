@@ -5,7 +5,7 @@ import {
 } from 'queries/Notice/notice.query'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { DodamDialog } from '@b1nd/dds-web'
-import { useNavigate } from 'react-router-dom'
+import { Form, useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { FileData, NoticeWriteData } from 'repositories/Notice/noticeRepository'
 import {
@@ -43,14 +43,14 @@ export const useNotice = () => {
   const selectCategory = useRecoilValue(SelectCategoryAtom)
 
   const navigate = useNavigate()
-  const [files, setFiles] = useState<FileData[]>([])
+  const [files, setFiles] = useState<string[]>([])
   const [image, setImage] = useState<string[]>([])
-  const [imageLink, setImageLink] = useState<string>('')
+  const [, setImageLink] = useState<string>('');
+  const [, setFileLink] = useState<string>('');
 
   const [writeData, setWriteData] = useState<NoticeWriteData>({
     title: '',
     content: '',
-    files: files,
     divisions: [],
   })
   const selectedCategoryList = useRecoilValue(SelectCategoryListAtom)
@@ -58,7 +58,6 @@ export const useNotice = () => {
   useEffect(() => {
     setWriteData({
       ...writeData,
-      files: files,
       divisions: selectedCategoryList,
     })
   }, [files, selectedCategoryList])
@@ -97,6 +96,9 @@ export const useNotice = () => {
     })
   }
 
+  const formData = new FormData()
+  const fileUploadMutation = useFileUploadMutation()
+
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files: FileList | null = e.target.files
     if (!files) return
@@ -112,12 +114,10 @@ export const useNotice = () => {
 
     setImage((prev) => [...prev, ...fileUrls])
 
-    const formData = new FormData()
     fileArray.forEach((file) => {
       formData.append('files', file)
     })
 
-    const fileUploadMutation = useFileUploadMutation()
     fileUploadMutation.mutate(formData.get('files')!, {
       onSuccess: (data) => {
         setImageLink(data.data.data)
@@ -133,21 +133,32 @@ export const useNotice = () => {
     if (!files) return
 
     const fileArray: File[] = Array.from(files)
-    const newFiles = await Promise.all(
-      fileArray.map(async (file) => ({
-        url: await blobToBase64(file),
-        name: file.name,
-        fileType: 'FILE',
-      }))
-    )
+    const fileUrls: string[] = []
 
-    const formData = new FormData()
-    formData.append('files', JSON.stringify(newFiles))
+    for (let i = 0; i < fileArray.length; i++) {
+      const currentFile = fileArray[i]
+      const fileUrl = URL.createObjectURL(currentFile)
+      fileUrls.push(fileUrl)
+    }
 
-    setFiles((prev) => [...prev, ...newFiles] as FileData[])
+    setFiles((prev) => [...prev, ...fileUrls])
+
+    fileArray.forEach((file) => {
+      formData.append('files', file)
+    })
+
+    fileUploadMutation.mutate(formData.get('files')!, {
+      onSuccess: (data) => {
+        setFiles((prev) => [...prev, data.data.data])
+      },
+      onError: () => {
+        B1ndToast.showError('파일 업로드 실패!')
+      },
+    })
   }
 
   const downloadFile = (url: string, fileName: string) => {
+    // axios는 blob을 지원하지 않아 fetch로 대체
     fetch(url, { method: 'GET' })
       .then((res) => {
         return res.blob()
@@ -180,7 +191,6 @@ export const useNotice = () => {
       {
         title: writeData.title,
         content: writeData.content,
-        files: files,
         divisions: selectedCategoryList,
       },
       {
@@ -215,6 +225,6 @@ export const useNotice = () => {
     handleFileChange,
     files,
     submitWrite,
-    downloadFile
+    downloadFile,
   }
 }
