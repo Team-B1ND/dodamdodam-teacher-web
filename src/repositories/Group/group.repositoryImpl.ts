@@ -16,11 +16,11 @@ class GroupRepositoryImpl implements GroupRepository {
   public async addMember({ id, memberIdList }: AddMemberData) : Promise<void> {
     await dodamAxios.post(`/divisions/${id}/members?memberIdList=${memberIdList}`)
   }
-  public async getGroup(pageParam: number = 0, keyword: string): Promise<GroupResponse> {
+  public async getGroup(pageParam: number, keyword: string): Promise<GroupResponse> {
     const { data } = await dodamAxios.get(`/divisions?lastId=${pageParam}&limit=10&keyword=${keyword}`);
     return data;
   }
-  public async getMyGroup(pageParam: number = 0, keyword: string): Promise<GroupResponse> {
+  public async getMyGroup(pageParam: number, keyword: string): Promise<GroupResponse> {
     const { data } = await dodamAxios.get(`/divisions/my?lastId=${pageParam}&limit=10&keyword=${keyword}`);
     return data;
   }
