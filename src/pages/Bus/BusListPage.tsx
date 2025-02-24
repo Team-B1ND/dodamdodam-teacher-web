@@ -1,15 +1,22 @@
-import BusList from "components/Bus/BusList";
-import SectionHeaderProvider from "components/common/SectionHeaderProvider";
+import BusList from 'components/Bus/BusList'
+import SectionHeaderProvider from 'components/common/SectionHeaderProvider'
+import styled from 'styled-components'
 
 const BusListPage = () => {
   return (
-    <SectionHeaderProvider
-      title="버스 전체 기록 조회"
-      subTitle="버스 전체 기록을 조회할 수 있습니다."
-    >
+    <BusContainer>
       <BusList />
-    </SectionHeaderProvider>
-  );
-};
+    </BusContainer>
+  )
+}
 
-export default BusListPage;
+export default BusListPage
+
+const BusContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  
+  padding: 1rem 2.5rem;
+  background-color: ${({ theme }) => theme.backgroundAlternative};
+`

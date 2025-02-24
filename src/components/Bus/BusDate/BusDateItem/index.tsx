@@ -30,7 +30,8 @@ const BusDateItem = ({ busParamFormat }: BusDateItemProps) => {
 
   return (
     <TBody customStyle={CommonBusTBody}>
-      {dateBusData?.length! > 0 ? (
+      a
+      {/* {dateBusData?.length! > 0 ? (
         dateBusData?.map((item) => (
           <TR customStyle={CommonBusTR}>
             <TD customStyle={S.BusTD}>{item.bus.busName}</TD>
@@ -116,7 +117,7 @@ const BusDateItem = ({ busParamFormat }: BusDateItemProps) => {
         <NoneDataText>
           선택하신 날짜에 해당하는 버스정보가 없습니다.
         </NoneDataText>
-      )}
+      )} */}
     </TBody>
   );
 };
