@@ -2,10 +2,11 @@ import { DodamShape, DodamTypography } from '@b1nd/dds-web'
 import styled from 'styled-components'
 
 export const BusContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 65%;
   height: 100%;
+
+  display: flex;
+
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -13,7 +14,6 @@ export const BusContainer = styled.div`
   }
 
   padding: 12px 16px 0 16px;
-  gap: 12px;
 `
 
 export const BusListWrap = styled.div`

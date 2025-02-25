@@ -14,9 +14,9 @@ import busRepositoryImpl from 'repositories/Bus/BusRepositoryImpl'
 import { BusDateAndListResponse } from 'types/Bus/bus.type'
 import { QUERY_KEYS } from '../queryKey'
 
-export const useGetAllBusListQuery = (isAtv: boolean, keyword?: string) => {
+export const useGetAllBusListQuery = (isAtv: boolean) => {
   return useInfiniteQuery(
-    [QUERY_KEYS.bus.busList, isAtv, keyword],
+    [QUERY_KEYS.bus.busList, isAtv],
     ({ pageParam = 0 }) =>
       isAtv
         ? busRepositoryImpl.getAllBusList(pageParam)

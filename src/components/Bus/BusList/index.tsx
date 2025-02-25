@@ -7,15 +7,12 @@ import NoticeSearchBar from 'components/common/NoticeSearchbar'
 import { DodamSegmentedButton, Plus } from '@b1nd/dds-web'
 import { useRecoilState } from 'recoil'
 import { BusListPageAtom } from 'stores/Bus/bus.store'
+import BusInfo from '../BusInfo'
 
 const BusList = () => {
   const [page, setPage] = useRecoilState(BusListPageAtom)
   return (
     <S.BusContainer>
-      <NoticeSearchBar
-        searchFn={() => {}}
-        placeholder='검색할 버스의 종착역을 입력해주세요.'
-      />
       <S.BusListWrap>
         <S.BusListHeader>
           <p>버스</p>

@@ -14,9 +14,12 @@ const BusListItem = ({ page }: { page: number }) => {
       loader={<SkeletonComponent length={5} height={48} />}
     >
       {data?.pages.map((page) =>
-        page.data.map((bus) => <S.ItemBox key={bus.id}>
-          <p>{bus.busName}</p>
-        </S.ItemBox>)
+        page.data.map((bus) => (
+          <S.ItemBox key={bus.id}>
+            <p>{bus.busName}</p>
+            <ChevronRight size={16} color='labelAssistive' />
+          </S.ItemBox>
+        ))
       )}
     </InfiniteScroll>
   )
