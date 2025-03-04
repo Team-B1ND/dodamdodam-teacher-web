@@ -165,7 +165,7 @@ export const useRegistBus = () => {
     );
 
     queryClient.invalidateQueries(
-      QUERY_KEYS.bus.busDate(convertDateTime.splitConvertDateFormat(parseDate))
+      QUERY_KEYS.bus.busDate
     );
 
     // 버스 등록일로 신청, 수정된 버스리스트를 볼 수 있게 한다.

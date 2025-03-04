@@ -11,7 +11,6 @@ import { changeApproval } from "utils/Out/changeApproval";
 import { changeGrade } from "utils/Member/changeGrade";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
-import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
 import CsvButton from "components/common/ExtractCsvData";
 import dayjs from "dayjs";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
@@ -42,9 +41,9 @@ const TodayOutSleeping = () => {
         </div>
 
         <S.SelectContainer>
-          <CsvButtonContainer>
+          <S.CsvButtonContainer>
             <CsvButton csvData={leaveStudentList} fileName={dayjs().format("YYYY-MM-DD") + "외박 중인 학생"} />
-          </CsvButtonContainer>
+          </S.CsvButtonContainer>
           <Select items={APPROVAL_ITEMS} value={selectApproval} onChange={setSelectApproval} zIndex={2} />
           <Select items={GRADE_ITEMS} value={selectGrade} onChange={setSelectGrade} zIndex={2} />
           <Select
@@ -57,7 +56,7 @@ const TodayOutSleeping = () => {
       </S.OffBaseHeaderContainer>
 
       <TableAttribute constant={OUT_SLEEPING_ITEMS} thStyle={{ width: "14%" }}>
-        <ErrorBoundary fallback={<>오늘의 외박자를 불러오지 못했습니다.</>}>
+        <ErrorBoundary text="오늘의 외박자를 불러오지 못했습니다." showButton={true}>
           <Suspense fallback={<>로딩중...</>}>
             <TodayOffBaseItem
               selectRoom={room}

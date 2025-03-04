@@ -1,76 +1,51 @@
-import { Button, TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { useOpenBusModal } from "hooks/Bus/useOpenBusModal";
-import { useGetAllBusListQuery } from "queries/Bus/bus.query";
-import convertDateTime from "utils/Time/ConvertDateTime";
+import * as S from './style'
+import InfiniteScroll from 'react-infinite-scroller'
+import SkeletonComponent from 'components/common/Skeleton'
+import { ChevronRight } from '@b1nd/dds-web'
+import { Dispatch, SetStateAction } from 'react'
+import { BusDateAndListResponse } from 'types/Bus/bus.type'
 import {
-  CommonBusPassengerStyle,
-  CommonBusTBody,
-  CommonBusTR,
-  NoneDataText,
-} from "../../style";
-import * as S from "./style";
+  FetchNextPageOptions,
+  InfiniteData,
+  InfiniteQueryObserverResult,
+} from 'react-query'
+import { useSetRecoilState } from 'recoil'
+import { SelectBusDataAtom } from 'stores/Bus/bus.store'
 
-const BusListItem = ({ page }: { page: number }) => {
-  const busData = useGetAllBusListQuery(page, { suspense: true }).data?.data;
-  const { handleOpenPassengerModal } = useOpenBusModal();
+interface BusListItemProps {
+  page: number
+  setSection: Dispatch<SetStateAction<string>>
+  data: InfiniteData<BusDateAndListResponse>
+  hasNextPage?: boolean
+  fetchNextPage: (
+    options?: FetchNextPageOptions
+  ) => Promise<InfiniteQueryObserverResult<BusDateAndListResponse, unknown>>
+}
+
+const BusListItem = ({ page, setSection, data, hasNextPage, fetchNextPage }: BusListItemProps) => {
+  const setBusData = useSetRecoilState(SelectBusDataAtom)
 
   return (
-    <TBody customStyle={CommonBusTBody}>
-      {busData?.length! > 0 ? (
-        busData?.map((item) => (
-          <TR customStyle={CommonBusTR}>
-            <TD customStyle={S.BusTD}>{item.bus.busName}</TD>
-
-            <TD customStyle={S.BusTD}>{item.bus.description}</TD>
-
-            <TD customStyle={S.BusLeaveTime}>
-              <p>
-                {convertDateTime.getDateTime(
-                  new Date(item.bus.leaveTime),
-                  "date"
-                )}
-              </p>
-              <p>
-                {convertDateTime.getDateTime(
-                  new Date(item.bus.leaveTime),
-                  "time"
-                )}
-              </p>
-            </TD>
-
-            <TD customStyle={S.BusTD}>
-              {convertDateTime.getTimeRequired(item.bus.timeRequired)}
-            </TD>
-
-            <TD customStyle={S.BusTD}>
-              {item.members.length} / {item.bus.peopleLimit}명
-            </TD>
-
-            <TD customStyle={S.BusTD}>
-              <Button
-                ButtonType="agree"
-                style={CommonBusPassengerStyle}
-                onClick={() =>
-                  handleOpenPassengerModal(
-                    `${convertDateTime.getDateTime(
-                      new Date(item.bus.leaveTime),
-                      "date"
-                    )}
-                ${item.bus.busName}`,
-                    item.members
-                  )
-                }
-              >
-                탑승자
-              </Button>
-            </TD>
-          </TR>
+    <InfiniteScroll
+      loadMore={() => fetchNextPage()}
+      hasMore={hasNextPage}
+      loader={<SkeletonComponent length={5} height={48} />}
+    >
+      {data?.pages.map((page) =>
+        page.data.map((bus) => (
+          <S.ItemBox
+            key={bus.id}
+            onClick={() => {
+              setBusData({ bus })
+              setSection('info')
+            }}
+          >
+            <p>{bus.busName}</p>
+            <ChevronRight size={16} color='labelAssistive' />
+          </S.ItemBox>
         ))
-      ) : (
-        <NoneDataText>조회할 버스정보가 없습니다</NoneDataText>
       )}
-    </TBody>
-  );
-};
-
-export default BusListItem;
+    </InfiniteScroll>
+  )
+}
+export default BusListItem
