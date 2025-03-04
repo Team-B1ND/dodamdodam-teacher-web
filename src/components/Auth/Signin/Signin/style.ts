@@ -36,15 +36,13 @@ export const SigninImage = styled.img`
 `
 
 export const SignBox = styled.div`
-  min-width: 55%;
-  /* width: 55%; */
+  width: 55%;
   height: 100%;
   display: flex;
-  padding: 36px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  padding: 30px;
   gap: 20px;
 
   position: relative;
@@ -56,6 +54,7 @@ export const SignBox = styled.div`
 `
 
 export const InputBox = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;

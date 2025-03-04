@@ -29,9 +29,23 @@ const NoticeItem = ({
   if (
     !Notice ||
     Notice.pages.length === 0 ||
-    Notice.pages.every((page) => page.data.length === 0)
+    Notice.pages.every((page) => page.data.length === 0) ||
+    Notice.pages.every((page) =>
+      page.data.every((notice) => notice.noticeStatus === 'DELETED')
+    )
   ) {
-    return <div>공지가 없습니다</div>
+    return (
+      <div
+        style={{
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        공지사항이 없습니다
+      </div>
+    )
   }
 
   return (
