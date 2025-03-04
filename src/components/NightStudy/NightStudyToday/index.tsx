@@ -9,7 +9,6 @@ import { NIGHTSTUDY_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import NightStudyTodayItem from "./NightStudyTodayItem";
 import { changeGrade } from "utils/Member/changeGrade";
-import { CsvButtonContainer } from "components/Bus/BusModal/BusPassenger/style";
 import CsvButton from "components/common/ExtractCsvData";
 import { useNightStudyStudentList } from "hooks/NightStudy/useNightStudyStudentList";
 import dayjs from "dayjs";
@@ -43,12 +42,12 @@ const NightStudyToday = () => {
             onChange={setRoom}
             zIndex={2}
           />
-          <CsvButtonContainer>
+          <S.CsvButtonContainer>
             <CsvButton
               csvData={NightStudyInfo}
               fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}
             />
-          </CsvButtonContainer>
+          </S.CsvButtonContainer>
         </S.SelectContainer>
       </S.NightStudyHeaderContainer>
       <TableAttribute

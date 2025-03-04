@@ -6,7 +6,7 @@ export const QUERY_KEYS = Object.freeze({
   bus: {
     registeredBus: '/bus',
     busList: (page: number) => ['/bus/list', page],
-    busDate: (param: BusDateParam) => ['/bus/date', param],
+    busDate: "/bus/date",
   },
   member: {
     getAllMember: '/members',

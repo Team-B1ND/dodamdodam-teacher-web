@@ -1,14 +1,20 @@
-import { CSSObject } from "styled-components";
+import { DodamShape, DodamTypography } from "@b1nd/dds-web";
+import { styled } from "styled-components";
 
-export const BusTD: CSSObject = {
-  width: "17%",
-  fontSize: "16px",
-  lineHeight: "20px",
-};
-
-export const BusLeaveTime: CSSObject = {
-  width: "17%",
-  fontSize: "16px",
-  lineHeight: "20px",
-  whiteSpace: "nowrap",
-};
+export const ItemBox = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48px;
+  padding: 0 10px 0 10px;
+  ${DodamShape.ExtraSmall}
+  p {
+    ${DodamTypography.Body1.Medium};
+    color: ${({ theme }) => theme.labelNormal};
+  }
+  &:hover {
+    background-color: ${({ theme }) => theme.fillNeutral};
+  }
+`

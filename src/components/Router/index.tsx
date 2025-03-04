@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import MemberPage from 'pages/MemberPage'
 import BusListPage from 'pages/Bus/BusListPage'
-import BusDatePage from 'pages/Bus/BusDatePage'
 import AuthPage from 'pages/Auth/AuthPage'
 import OffBasePassPage from 'pages/Out/OutGoingPage'
 import OffBaseLeavePage from 'pages/Out/OutSleepingPage'
@@ -18,6 +17,7 @@ import NoticeWritePage from 'pages/Notice/Write/noticeWritePages'
 import GroupPage from 'pages/Notice/Group/groupPage'
 import GroupDetail from 'components/Group/GroupDetail'
 import { Suspense } from 'react'
+import BusInfo from 'components/Bus/BusInfo'
 // import WaitingMember from 'components/Group/WaitingMember';
 
 const Router = () => {
@@ -25,8 +25,7 @@ const Router = () => {
     <Routes>
       <Route path='/' element={<AuthPage />} />
       <Route path='/member' element={<MemberPage />} />
-      <Route path='/bus-list' element={<BusListPage />} />
-      <Route path='/bus-date' element={<BusDatePage />} />
+      {/* <Route path='/bus' element={<BusListPage />} /> */}
       <Route path='/offbase-pass' element={<OffBasePassPage />} />
       <Route path='/offbase-leave' element={<OffBaseLeavePage />} />
       <Route path='/offbase-leave-ing' element={<TodayOffBaseLeavePage />} />

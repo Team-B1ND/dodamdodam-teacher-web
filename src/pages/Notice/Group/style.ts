@@ -6,5 +6,4 @@ export const GroupContainer = styled.div`
     width: 65%;
     height: 100%;
     padding: 12px 16px 0 16px;
-
 `
