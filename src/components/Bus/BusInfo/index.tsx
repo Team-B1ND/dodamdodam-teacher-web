@@ -1,70 +1,71 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import * as S from './style'
+import {
+  ArrowLeft,
+  Dialog,
+  DodamDialog,
+  DodamSegmentedButton,
+  Person,
+  Trash,
+} from '@b1nd/dds-web'
+import { useDeleteBus } from 'hooks/Bus/useDeleteBus'
+import { BusDateAndListResponse } from 'types/Bus/bus.type'
+import { useRecoilState } from 'recoil'
+import { SelectBusDataAtom } from 'stores/Bus/bus.store'
 
-const BusInfo = () => {
-  const seats = [
-    [false, true, false, false],
-    [false, false, false, false],
-    [true, true, false, false],
-    [true, true, false, false],
-    [true, true, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false, false], // 마지막 행
-  ]
+interface BusInfoProps {
+  setSection: Dispatch<SetStateAction<string>>
+}
 
+const BusInfo = ({ setSection }: BusInfoProps) => {
+  const busData = useRecoilState(SelectBusDataAtom)
+
+  const { handleDeleteBusClick } = useDeleteBus({ setSection })
   return (
-    <S.BusInfoWrap>
-      <S.BusInfoHeader>
-        '동대구역 1호차’
-        <br /> 버스 이용 현황
-      </S.BusInfoHeader>
-      <S.Bus>
-        {seats.map((row, rowIndex) => (
-          <S.SeatRow key={rowIndex}>
-            {/* 마지막 행인지 확인 */}
-            {rowIndex < seats.length - 1 ? (
-              <>
-                {row.map((occupied, seatIndex) => {
-                  // 좌석 번호 계산
-                  const seatNumber = rowIndex * 4 + seatIndex + 1
-                  if (seatIndex % 2 === 0) {
-                    return (
-                      <div key={seatIndex} style={{ display: 'flex', gap: 15 }}>
-                        <S.Seat key={seatIndex} occupied={occupied}>
-                          {seatNumber}
-                        </S.Seat>
-                        {seatIndex + 1 < row.length && (
-                          <S.Seat
-                            key={seatIndex + 1}
-                            occupied={row[seatIndex + 1]}
-                          >
-                            {seatNumber + 1}
-                          </S.Seat>
-                        )}
-                      </div>
-                    )
-                  }
-                })}
-              </>
-            ) : (
-              // 마지막 행은 원래대로 표시
-              row.map((occupied, seatIndex) => {
-                const seatNumber = rowIndex * 4 + seatIndex + 1
-                return (
-                  <S.Seat key={seatIndex} occupied={occupied}>
-                    {seatNumber}
-                  </S.Seat>
-                )
-              })
-            )}
-          </S.SeatRow>
-        ))}
-      </S.Bus>
-    </S.BusInfoWrap>
+    <S.WaitingMemberContainer>
+      <S.WaitingMemberWrap>
+        <S.WaitingMemberHeader>
+          <S.BackIconWrap onClick={() => setSection('main')}>
+            <ArrowLeft size={24} color='labelNormal' />
+          </S.BackIconWrap>
+          <S.WaitingMemberTitle>
+            <h1>{busData[0].bus.busName}</h1>
+            <S.BackIconWrap
+              onClick={() => handleDeleteBusClick(busData[0].bus.id)}
+            >
+              <Trash size={24} color='labelNormal' />
+            </S.BackIconWrap>
+          </S.WaitingMemberTitle>
+        </S.WaitingMemberHeader>
+        <S.WaitingMemberList>
+          <DodamSegmentedButton
+            width={220}
+            num={2}
+            type='inline'
+            data={[
+              { text: '탑승', isAtv: true },
+              { text: '미탑승', isAtv: false },
+            ]}
+          />
+          <S.ListWrap>
+            <p>학생</p>
+            <S.ListItemWrap>
+              {/* <S.MemberCell>
+                <S.MemberInfo>
+                  <S.MemberInfoWrap>
+                    <Person size={28} />
+                    <p>박병준</p>
+                    <span>1학년 2반 13번</span>
+                  </S.MemberInfoWrap>
+                  <S.MemberRole>학생</S.MemberRole>
+                </S.MemberInfo>
+              </S.MemberCell> */}
+              
+            </S.ListItemWrap>
+          </S.ListWrap>
+        </S.WaitingMemberList>
+      </S.WaitingMemberWrap>
+    </S.WaitingMemberContainer>
   )
 }
 

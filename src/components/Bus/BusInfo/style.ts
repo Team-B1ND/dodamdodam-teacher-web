@@ -1,71 +1,147 @@
 import { DodamShape, DodamTypography } from '@b1nd/dds-web'
 import styled from 'styled-components'
-import bus from 'assets/bus.svg'
 
-export const BusInfoWrap = styled.div`
+export const WaitingMemberContainer = styled.div`
+  width: 65%;
+  height: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 12px 16px 0 16px;
+`
+
+export const WaitingMemberWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
-  width: 35%;
-  height: 100%;
-  padding: 1.5rem 2rem 1rem 2rem;
-
   background-color: ${({ theme }) => theme.backgroundNormal};
-  ${DodamShape.Medium};
+  ${DodamShape.Large};
+  gap: 10px;
 `
 
-export const BusInfoHeader = styled.h1`
-  height: fit-content;
-  color: ${({ theme }) => theme.labelNormal};
-  ${DodamTypography.Title3.Bold};
+export const BackIconWrap = styled.div`
+  width: 48px;
+  height: 48px;
 
-  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
 `
 
-export const Bus = styled.div`
+export const WaitingMemberHeader = styled.div`
   width: 100%;
-  height: 100%;
-  padding-bottom: 1rem;
-
-  background: url(${bus});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  height: 15%;
+  padding: 8px 16px;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  justify-self: stretch;
-  gap: 13px;
-
-  position: relative;
+  align-items: flex-start;
+  gap: 7px;
 `
 
-export const SeatRow = styled.div`
-  width: 65%;
+export const WaitingMemberTitle = styled.div`
+  width: 100%;
+  height: max-content;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h1 {
+    padding-left: 16px;
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Heading1.Bold}
+  }
+`
+
+export const WaitingMemberList = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  padding: 20px 16px 8px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+`
+
+export const ListWrap = styled.div`
+  width: 100%;
+  height: 85%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+
+  p {
+    color: ${({ theme }) => theme.labelAlternative};
+    ${DodamTypography.Body2.Medium}
+  }
+`
+
+export const ListItemWrap = styled.div`
+  width: 100%;
+  height: 90%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
+
+export const MemberCell = styled.div`
+  width: 100%;
+  height: 13%;
+
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 `
 
-export const Seat = styled.button<{ occupied: boolean }>`
-  width: 45px;
-  height: 45px;
+export const MemberInfo = styled.div`
+  width: 100%;
+  height: 100%;
 
-  border: none;
-  background-color: ${({ theme, occupied }) =>
-    occupied ? theme.primaryNormal : theme.backgroundNormal};
-  border-radius: 5px;
-  color: ${({ occupied }) => (occupied ? '#FFFFFF' : '#000000')};
-  font-size: 16px;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
 
-  &:hover {
-    opacity: 0.8;
+export const MemberInfoWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  p {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Body1.Medium}
   }
 
-  &:focus {
-    outline: none;
+  span {
+    color: ${({ theme }) => theme.labelAssisitive};
+    ${DodamTypography.Body1.Medium}
   }
+`
+
+export const MemberRole = styled.span`
+  color: ${({ theme }) => theme.labelAlternative};
+  ${DodamTypography.Body2.Medium}
+`
+
+export const ButtonWrap = styled.div`
+  width: 20%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
 `

@@ -1,13 +1,26 @@
-import BusInfo from 'components/Bus/BusInfo'
+import BusSeatInfo from 'components/Bus/BusSeatInfo'
 import BusList from 'components/Bus/BusList'
-import SectionHeaderProvider from 'components/common/SectionHeaderProvider'
 import styled from 'styled-components'
+import BusInfo from 'components/Bus/BusInfo'
+import { ReactNode, useState } from 'react'
+import { useGetAllBusListQuery } from 'queries/Bus/bus.query'
+
 
 const BusListPage = () => {
+  const [section, setSection] = useState<string>('main')
+
+  const BusComponents: Record<string, ReactNode> = {
+    main: (
+      <BusList
+        setSection={setSection}
+      />
+    ),
+    info: <BusInfo setSection={setSection} />,
+  }
   return (
     <BusContainer>
-      <BusList />
-      <BusInfo />
+      {BusComponents[section] || <BusList setSection={setSection} />}
+      <BusSeatInfo />
     </BusContainer>
   )
 }

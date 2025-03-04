@@ -1,16 +1,22 @@
-import { Suspense } from 'react'
+import { Dispatch, SetStateAction, Suspense } from 'react'
 import ErrorBoundary from 'components/common/ErrorBoundary'
 import SkeletonComponent from 'components/common/Skeleton'
 import BusListItem from './BusListItem'
 import * as S from './style'
-import NoticeSearchBar from 'components/common/NoticeSearchbar'
 import { DodamSegmentedButton, Plus } from '@b1nd/dds-web'
 import { useRecoilState } from 'recoil'
 import { BusListPageAtom } from 'stores/Bus/bus.store'
-import BusInfo from '../BusInfo'
+import { BusDateAndListResponse } from 'types/Bus/bus.type'
+import { InfiniteData } from 'react-query'
+import { useGetAllBusListQuery } from 'queries/Bus/bus.query'
 
-const BusList = () => {
+interface BusListProps {
+  setSection: Dispatch<SetStateAction<string>>
+}
+
+const BusList = ({ setSection }: BusListProps) => {
   const [page, setPage] = useRecoilState(BusListPageAtom)
+  const { data, hasNextPage, fetchNextPage } = useGetAllBusListQuery(true)
   return (
     <S.BusContainer>
       <S.BusListWrap>
@@ -40,7 +46,13 @@ const BusList = () => {
                 />
               }
             >
-              <BusListItem page={page} />
+              <BusListItem
+                page={page}
+                setSection={setSection}
+                data={data!}
+                hasNextPage={hasNextPage}
+                fetchNextPage={fetchNextPage}
+              />
             </Suspense>
           </ErrorBoundary>
         </S.BusList>

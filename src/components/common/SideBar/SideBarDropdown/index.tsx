@@ -7,10 +7,10 @@ const SideBarDropdown = () => {
   return (
     <SideBarDropdownContainer>
       <MenuItem title="구성원" redirectUrl="/member" />
-      <MenuDropdownWrapper title="버스">
+      {/* <MenuDropdownWrapper title="버스">
         <MenuDropdownChild title="날짜별 버스 조회" redirectUrl="/bus-date" />
         <MenuDropdownChild title="버스 전체기록 조회" redirectUrl="/bus-list" />
-      </MenuDropdownWrapper>
+      </MenuDropdownWrapper> */}
       <MenuItem title="공지" redirectUrl="notice" />
       <MenuDropdownWrapper title="외출 / 외박">
         <MenuDropdownChild title="외출" redirectUrl="/offbase-pass" />

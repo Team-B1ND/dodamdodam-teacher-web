@@ -23,7 +23,7 @@ export const useGetAllBusListQuery = (isAtv: boolean) => {
         : busRepositoryImpl.getAllBusList(pageParam),
     {
       getNextPageParam: (lastPage) => {
-        return lastPage.data[lastPage.data.length - 1].id;
+        return lastPage.data[lastPage.data.length - 1].id
       },
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
@@ -37,19 +37,15 @@ export const useGetBusDateQuery = (
     BusDateAndListResponse,
     AxiosError,
     BusDateAndListResponse,
-    (string | BusDateParam)[]
+    string
   >
 ) =>
-  useQuery(
-    QUERY_KEYS.bus.busDate(param),
-    () => busRepositoryImpl.getBusDate(param),
-    {
-      enabled: !!param,
-      staleTime: 1000 * 60 * 60,
-      cacheTime: 1000 * 60 * 60,
-      ...options,
-    }
-  )
+  useQuery(QUERY_KEYS.bus.busDate, () => busRepositoryImpl.getBusDate(param), {
+    enabled: !!param,
+    staleTime: 1000 * 60 * 60,
+    cacheTime: 1000 * 60 * 60,
+    ...options,
+  })
 
 export const useCreateBusMutation = () => {
   const mutation = useMutation((param: BusUpdateParam) =>
