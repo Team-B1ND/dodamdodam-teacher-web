@@ -1,23 +1,24 @@
-import { Routes, Route } from 'react-router-dom';
-import MemberPage from 'pages/MemberPage';
-import BusListPage from 'pages/Bus/BusListPage';
-import BusDatePage from 'pages/Bus/BusDatePage';
-import AuthPage from 'pages/Auth/AuthPage';
-import OffBasePassPage from 'pages/Out/OutGoingPage';
-import OffBaseLeavePage from 'pages/Out/OutSleepingPage';
-import TodayOffBaseLeavePage from 'pages/Out/TodayOutSleepingPage';
-import { NightStudyAllowPage } from 'pages/NightStudy/NightStudyAllowPage';
-import { NightStudyTodayPage } from 'pages/NightStudy/NightStudyTodayPage';
-import PointScore from 'components/Point/PointScore';
-import PointReason from 'components/Point/PointReason';
-import ScheduleManage from 'components/Schedule/ScheduleManage';
-import OffbaseRedisualPage from 'pages/Out/RedisualPage';
-import NoticePageTemplate from 'components/common/NoticePageTemplate';
-import NoticePage from 'pages/Notice/Main/noticePages';
-import NoticeWritePage from 'pages/Notice/Write/noticeWritePages';
-import GroupPage from 'pages/Notice/Group/groupPage';
-import GroupDetail from 'components/Group/GroupDetail';
+import { Routes, Route } from "react-router-dom";
+import MemberPage from "pages/MemberPage";
+import BusListPage from "pages/Bus/BusListPage";
+import BusDatePage from "pages/Bus/BusDatePage";
+import AuthPage from "pages/Auth/AuthPage";
+import OffBasePassPage from "pages/Out/OutGoingPage";
+import OffBaseLeavePage from "pages/Out/OutSleepingPage";
+import TodayOffBaseLeavePage from "pages/Out/TodayOutSleepingPage";
+import { NightStudyAllowPage } from "pages/NightStudy/NightStudyAllowPage";
+import { NightStudyTodayPage } from "pages/NightStudy/NightStudyTodayPage";
+import PointScore from "components/Point/PointScore";
+import PointReason from "components/Point/PointReason";
+import ScheduleManage from "components/Schedule/ScheduleManage";
+import OffbaseRedisualPage from "pages/Out/RedisualPage";
+import NoticePageTemplate from "components/common/NoticePageTemplate";
+import NoticePage from "pages/Notice/Main/noticePages";
+import NoticeWritePage from "pages/Notice/Write/noticeWritePages";
+import GroupPage from "pages/Notice/Group/groupPage";
+import GroupDetail from "components/Group/GroupDetail";
 // import WaitingMember from 'components/Group/WaitingMember';
+import ClubManagePage from "pages/Club/ClubManagePage";
 
 const Router = () => {
   return (
@@ -42,6 +43,8 @@ const Router = () => {
         <Route path="group" element={<GroupPage />} />
         {/* <Route path="group/:id" element={<GroupDetail />} /> */}
       </Route>
+
+      <Route path="/club" element={<ClubManagePage/>}></Route>
     </Routes>
   );
 };
