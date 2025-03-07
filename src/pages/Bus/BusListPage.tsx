@@ -4,23 +4,21 @@ import styled from 'styled-components'
 import BusInfo from 'components/Bus/BusInfo'
 import { ReactNode, useState } from 'react'
 import { useGetAllBusListQuery } from 'queries/Bus/bus.query'
-
+import BusPreset from 'components/Bus/BusPreset'
+import BusAdd from 'components/Bus/BusAdd'
 
 const BusListPage = () => {
   const [section, setSection] = useState<string>('main')
 
   const BusComponents: Record<string, ReactNode> = {
-    main: (
-      <BusList
-        setSection={setSection}
-      />
-    ),
+    main: <BusList setSection={setSection} />,
+    add: <BusAdd setSection={setSection} />,
     info: <BusInfo setSection={setSection} />,
   }
   return (
     <BusContainer>
       {BusComponents[section] || <BusList setSection={setSection} />}
-      <BusSeatInfo />
+      <BusPreset />
     </BusContainer>
   )
 }

@@ -25,7 +25,7 @@ const Router = () => {
     <Routes>
       <Route path='/' element={<AuthPage />} />
       <Route path='/member' element={<MemberPage />} />
-      {/* <Route path='/bus' element={<BusListPage />} /> */}
+      <Route path='/bus' element={<BusListPage />} />
       <Route path='/offbase-pass' element={<OffBasePassPage />} />
       <Route path='/offbase-leave' element={<OffBaseLeavePage />} />
       <Route path='/offbase-leave-ing' element={<TodayOffBaseLeavePage />} />

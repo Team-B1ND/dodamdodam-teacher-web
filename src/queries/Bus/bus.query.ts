@@ -54,6 +54,14 @@ export const useCreateBusMutation = () => {
   return mutation
 }
 
+export const useCreateBusPresetMutation = () => {
+  const mutation = useMutation((param: BusUpdateParam) =>
+    busRepositoryImpl.createBusPreset(param)
+  )
+
+  return mutation;
+}
+
 export const useModifyBusMutation = () => {
   const mutation = useMutation(({ busId, param }: BusModifyParam) =>
     busRepositoryImpl.modifyBus({ busId, param })

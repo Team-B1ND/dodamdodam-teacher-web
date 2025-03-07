@@ -22,7 +22,13 @@ interface BusListItemProps {
   ) => Promise<InfiniteQueryObserverResult<BusDateAndListResponse, unknown>>
 }
 
-const BusListItem = ({ page, setSection, data, hasNextPage, fetchNextPage }: BusListItemProps) => {
+const BusListItem = ({
+  page,
+  setSection,
+  data,
+  hasNextPage,
+  fetchNextPage,
+}: BusListItemProps) => {
   const setBusData = useSetRecoilState(SelectBusDataAtom)
 
   return (
@@ -31,7 +37,7 @@ const BusListItem = ({ page, setSection, data, hasNextPage, fetchNextPage }: Bus
       hasMore={hasNextPage}
       loader={<SkeletonComponent length={5} height={48} />}
     >
-      {data?.pages.map((page) =>
+      {/* {data?.pages.map((page) =>
         page.data.map((bus) => (
           <S.ItemBox
             key={bus.id}
@@ -44,7 +50,15 @@ const BusListItem = ({ page, setSection, data, hasNextPage, fetchNextPage }: Bus
             <ChevronRight size={16} color='labelAssistive' />
           </S.ItemBox>
         ))
-      )}
+      )} */}
+      <S.ItemBox
+        onClick={() => {
+          setSection('info')
+        }}
+      >
+        <p>동대구역 1호차</p>
+        <ChevronRight size={16} color='labelAssistive' />
+      </S.ItemBox>
     </InfiniteScroll>
   )
 }

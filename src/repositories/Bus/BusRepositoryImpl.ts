@@ -27,6 +27,10 @@ class BusRepositoryImpl implements BusRepository {
     await dodamAxios.post('/bus', param)
   }
 
+  public async createBusPreset(param: BusUpdateParam): Promise<void> {
+    await dodamAxios.post('/bus/preset', param)
+  }
+
   public async modifyBus({ busId, param }: BusModifyParam): Promise<void> {
     await dodamAxios.patch(`/bus/${busId}`, param)
   }

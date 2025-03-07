@@ -4,6 +4,7 @@ export interface BusRepository {
   getAllBusList(page: number): Promise<BusDateAndListResponse>;
   getBusDate(date: BusDateParam): Promise<BusDateAndListResponse>;
   createBus(param: BusUpdateParam): Promise<void>;
+  createBusPreset(param: BusUpdateParam): Promise<void>;
   modifyBus({ busId, param }: BusModifyParam): Promise<void>;
   deleteBus(id: number): Promise<void>;
 }

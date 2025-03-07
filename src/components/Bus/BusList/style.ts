@@ -42,6 +42,12 @@ export const BusPlusIcon = styled.div`
   cursor: pointer;
 `
 
+export const BusListTitle = styled.h1`
+  color: ${({ theme }) => theme.labelNormal};
+  ${DodamTypography.Headline.Bold}
+  margin-top: 16px;
+`
+
 export const BusList = styled.div`
   display: flex;
   flex-direction: column;
