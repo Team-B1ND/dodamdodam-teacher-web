@@ -1,6 +1,6 @@
 
 
-export interface ClubResponse {
+export interface Club {
   id: number;
   name: string;
   shortDescription: string;
@@ -12,8 +12,12 @@ export interface ClubResponse {
   state: "ALLOWED" | "PENDING" | "REJECTED" | "WAITING" | "DELETED";
 }
 
+export interface ClubResponse {
+  data:Club[]
+}
+
 export interface ClubProps {
-  value: ClubResponse;
+  value: Club;
 }
 
 export interface ClubMember{

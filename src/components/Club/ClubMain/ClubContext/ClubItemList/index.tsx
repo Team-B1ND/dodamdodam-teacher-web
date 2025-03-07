@@ -1,20 +1,22 @@
-import { ClubResponse } from "types/Club/club.type";
+import SkeletonComponent from "components/common/Skeleton";
 import ClubItem from "./ClubItem";
-import useFetchClubs from "hooks/Club/useFetchClubs";
 import { useState } from "react";
 import * as S from "./style";
-import { DodamCheckBox } from "@b1nd/dds-web";
+import { DodamCheckBox, DodamErrorBoundary } from "@b1nd/dds-web";
+import { useGetClubDateQuery } from "queries/Club/club.query";
 import { ClubLine } from "./ClubItem/style";
 
 const ClubItemList = (props: { item: string }) => {
-  const { clubs } = useFetchClubs();
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
   };
+  const { data,isLoading } = useGetClubDateQuery();
+  
+    console.log(data);
 
   return (
-    <div>
+    <>
       <S.ClubItemWrap>
         <S.WrapCheckBox>
           <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
@@ -27,16 +29,26 @@ const ClubItemList = (props: { item: string }) => {
         <S.DetailClubContext>상태</S.DetailClubContext>
       </S.ClubItemWrap>
       <ClubLine/>
+      <DodamErrorBoundary text="에러 발생" showButton={true}>
+      { isLoading ? (
+  <SkeletonComponent length={10} height={48} />
+) : (
+  data && data.data && Array.isArray(data.data) && data.data.length > 0 ? (
+    data.data.map(value => 
+      value.type === props.item ? (
+        <ClubItem key={value.id} value={value} />
+      ) : null
+    )
+  ) : (
+    <p style={{width:"100%",height:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
+      데이터가 없습니다  {/* 이건 나중에 따로 Style에서 색깔이랑 폰트 지정하세요*/}
+      </p>
+  )
+)}
 
-      {clubs &&
-        clubs?.map((item: ClubResponse, index: number) =>
-          item.type === props.item ? (
-            <ClubItem key={item.id} value={item} />
-          ) : (
-            <></>
-          )
-        )}
-    </div>
+      </DodamErrorBoundary>
+    
+    </>
   );
 };
 
