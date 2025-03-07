@@ -29,6 +29,8 @@ export const WrapClubName = styled.div`
 export const ClubName = styled.div`
   ${DodamTypography.Headline.Bold}
   font-size: 18px;
+  cursor: pointer;
+  text-overflow: ellipsis;
 `;
 
 export const DetailClubContext = styled.div`
@@ -49,6 +51,7 @@ export const ShortDescription = styled(DetailClubContext)`
   padding: 0 8px;
   gap: 10px;
   display: flex;
+  text-overflow: ellipsis;
 `;
 
 export const WhoClubLeader = styled(DetailClubContext)`

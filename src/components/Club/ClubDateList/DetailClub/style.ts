@@ -20,7 +20,7 @@ export const ClubMiddleContainer = styled.div`
   gap: 20px;
   display: flex;
   justify-content: center;
-`
+`;
 export const ClubDescriptionWrap = styled.div`
   display: flex;
   width: 852px;
@@ -82,17 +82,26 @@ export const ExplainClubBox = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  padding-bottom: 20px;
 `;
 
 export const ClubLeader = styled.span`
   margin-bottom: 16px;
   text-align: end;
-`
+`;
 
 export const Member = styled.div`
   padding-bottom: 10px;
-`
+`;
 
 export const ExplainClubWrap = styled.div`
   width: 100%;
-`
+`;
+
+export const MarkDownWrapBox = styled.div`
+  padding: 20px;
+`;
+
+export const ClubName = styled.div`
+  cursor: pointer;
+`;

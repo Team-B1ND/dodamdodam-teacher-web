@@ -15,6 +15,7 @@ const useFetchClubs = () => {
           const clubData = response || []; 
   
           setClubs(clubData);
+          console.log(clubData)
         } catch (err) {
           console.log(err);
         }

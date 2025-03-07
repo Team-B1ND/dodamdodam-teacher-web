@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ClubRepositoryImpl from "repositories/Club/ClubRepositoryImpl";
 import { ClubMember } from "types/Club/club.type";
-import useFetchClubs from "./useFetchClubs";
+
 
 
 const useMemberLeader = (clubId : number) => {
@@ -14,12 +14,12 @@ const useMemberLeader = (clubId : number) => {
 
             const clubLeaderData = response || []
             setMemberLeader(clubLeaderData)
+            // console.log("member:", memberLeader)
           }
           catch(err){
             console.log(err)
           }
         }
-
         fetchClubMemberLeader()
     }, [])
 

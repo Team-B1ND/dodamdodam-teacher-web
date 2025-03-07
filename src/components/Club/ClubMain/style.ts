@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const ClubMainContainer = styled.div`
   width: 924px;
-  height: 705px;
+  /* height: 705px; */
+  height: fit-content;
+  min-height: 705px;
   border-radius: 18px;
   padding: 24px;
   margin-left: 16px;
@@ -33,4 +35,4 @@ export const MainClubListContainer = styled.div`
 
 export const WrapSegmentedButton = styled.div`
   z-index: 1;
-`
+`;

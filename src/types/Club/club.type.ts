@@ -27,3 +27,9 @@ export interface ClubMember{
   number: number;
   profileImage: null;
 }
+
+export interface ClubState {
+  clubIds: number[];
+  state : 'ALLOWED' | 'PENDING' | 'REJECTED' | 'DELETED';
+  reason : string;
+}

@@ -1,42 +1,53 @@
 import { useState } from "react";
-import ClubMember from "./ClubMember";
+import ClubMemberItem from "./ClubMemberItem";
 import * as S from "./style";
 import {
   DodamFilledButton,
   ExclamationmarkCircle,
   Close,
   DodamModal,
+  CheckmarkCircleFilled,
 } from "@b1nd/dds-web";
 import JoinConfirm from "./JoinConfirm";
-import Member from "components/Member";
-
+import useFetchClub from "hooks/Club/useFetchClub";
+import useMemberLeader from "hooks/Club/useMemberLeader";
+import MDEditor from "@uiw/react-md-editor";
+import useMembers from "hooks/Club/useMembers";
+import ClubItem from "components/Club/ClubMain/ClubContext/ClubItemList/ClubItem";
 
 interface DetailClubProps {
   close: () => void;
 }
 
-const DetailClub = ({ close }: DetailClubProps) => {
+const DetailClub = (props: { item: number; close: boolean }) => {
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
-
-  console.log(close)
+  const { club } = useFetchClub(props.item);
+  const { memberLeader } = useMemberLeader(props.item);
+  const { members } = useMembers(props.item);
 
   return (
     <S.ClubModalContainer>
       <S.ClubMiddleContainer>
         <div>
-          {/* Ensure onClick is directly on the Close component */}
           <div onClick={close}>
             <Close $svgStyle={{ cursor: "pointer" }} />
           </div>
           <S.ClubDescriptionWrap>
             <div>
-              <S.ClubTypeName>자율 • 디자인</S.ClubTypeName>
+              <S.ClubTypeName>
+                {club?.type == "CREATIVE_ACTIVITY_CLUB" ? "창체 • " : "자율 • "}
+                {club?.subject}
+              </S.ClubTypeName>
               <S.ClubNameWrap>
-                <div>InD</div>
-                <ExclamationmarkCircle color={"#FBD300"} size={32} />
+                <S.ClubName>{club?.name}</S.ClubName>
+                {club?.state === "ALLOWED" ? (
+                  <CheckmarkCircleFilled color="#00C265" size={32} />
+                ) : (
+                  <ExclamationmarkCircle color={"#FBD300"} size={32} />
+                )}
               </S.ClubNameWrap>
               <S.ClubShortDescription>
-                디자인 자율동아리 인디입니다!
+                {club?.shortDescription}
               </S.ClubShortDescription>
             </div>
             <S.ClubApprovalContainer>
@@ -61,7 +72,7 @@ const DetailClub = ({ close }: DetailClubProps) => {
                     backgroundColor: "#FF4242",
                   }}
                   onClick={() => {
-                    setIsRejectModalOpen(true);
+                    setIsRejectModalOpen(false);
                   }}
                 />
                 <DodamModal isOpen={isRejectModalOpen} background={true}>
@@ -69,7 +80,12 @@ const DetailClub = ({ close }: DetailClubProps) => {
                 </DodamModal>
               </S.WrapButton>
               <S.ClubLeader>
-                부장 : 1101신지윤
+                부장 : {memberLeader?.grade}
+                {memberLeader?.room}
+                {(memberLeader?.number as number) < 10
+                  ? "0" + memberLeader?.number
+                  : memberLeader?.number}{" "}
+                {memberLeader?.name}
               </S.ClubLeader>
             </S.ClubApprovalContainer>
           </S.ClubDescriptionWrap>
@@ -77,14 +93,18 @@ const DetailClub = ({ close }: DetailClubProps) => {
           <S.ClubInfoDetail>
             <div>
               <S.Member>멤버</S.Member>
-              <ClubMember />
+              {members.map((member)=>(<ClubMemberItem name={member.name} room={member.room} number={member.number}></ClubMemberItem>))}
+              <ClubMemberItem name="김하나" room={2} number={3}></ClubMemberItem>
             </div>
-
             <S.ExplainClubWrap>
               <div>설명</div>
               <S.ExplainClubBox>
-                <div></div>
-                {/* 마크다운 뷰어 <- 서버 연동시 추가 예정 */}
+                <S.MarkDownWrapBox>
+                  <MDEditor.Markdown
+                    source={club?.description}
+                    style={{ backgroundColor: "#fff", color: "#000" }}
+                  />
+                </S.MarkDownWrapBox>
               </S.ExplainClubBox>
             </S.ExplainClubWrap>
           </S.ClubInfoDetail>

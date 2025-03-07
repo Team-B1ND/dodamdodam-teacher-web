@@ -19,13 +19,9 @@ const ClubItemList = (props: { item: string }) => {
         <S.WrapCheckBox>
           <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
         </S.WrapCheckBox>
-
         <S.WrapClubName>동아리명</S.WrapClubName>
-
         <S.SubjectClub>주제</S.SubjectClub>
-
         <S.ShortDescription>설명</S.ShortDescription>
-
         <S.WhoClubLeader>부장</S.WhoClubLeader>
         <S.StateClub />
         <S.DetailClubContext>상태</S.DetailClubContext>

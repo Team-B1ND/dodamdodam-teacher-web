@@ -56,8 +56,8 @@ const ClubItem = ({ value }: ClubProps) => {
         close={handleCloseModal}
         background={true}
       >
-        <DetailClub close={handleCloseModal} />
-      </DodamModal>
+      <DetailClub item={value.id} close={isModalOpen}/>
+    </DodamModal>
     </div>
   );
 };
