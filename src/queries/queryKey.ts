@@ -55,4 +55,7 @@ export const QUERY_KEYS = Object.freeze({
     getGroupMember: (status: GroupMemberStatus, id: number) => ['/division/members', status, id],
     patchGroupMemberStatus: (status: GroupMemberStatus, id: number) => ['/division/members', status, id],
   },
+  club: {
+    getClubs: '/clubs',
+  }
 });

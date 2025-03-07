@@ -4,9 +4,9 @@ import { dodamAxios } from "libs/Axios/customAxios";
 import { Response } from "types/util/response.type";
 
 class ClubRepositoryImpl implements ClubRepository {
-    public async getClubs(): Promise<ClubResponse[]> {
+    public async getClubs(): Promise<ClubResponse> {
         const { data } = await dodamAxios.get("/clubs"); 
-        return data.data;
+        return data;
     } 
 
     public async getMember(id: number): Promise<ClubMember> {
@@ -20,4 +20,5 @@ class ClubRepositoryImpl implements ClubRepository {
       }
 }
 
-export default ClubRepositoryImpl;
+const clubRepositoryImpl = new ClubRepositoryImpl();
+export default clubRepositoryImpl;
