@@ -1,5 +1,5 @@
-import { DodamLightTheme } from '@b1nd/dds-web';
-import styled from 'styled-components';
+import { DodamLightTheme } from '@b1nd/dds-web'
+import styled from 'styled-components'
 
 export const SigninWrap = styled.div`
   min-width: 340px; //일단 대충 340px까지 줄어 들게 했습니다.
@@ -23,7 +23,7 @@ export const SigninWrap = styled.div`
     width: 80%;
     height: 50%;
   }
-`;
+`
 
 export const SigninImage = styled.img`
   height: 95%;
@@ -33,18 +33,16 @@ export const SigninImage = styled.img`
   @media (max-width: 1308px) {
     display: none;
   }
-`;
+`
 
 export const SignBox = styled.div`
-  min-width: 55%;
-  /* width: 55%; */
+  width: 55%;
   height: 100%;
-  padding: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  padding: 30px;
   gap: 20px;
 
   position: relative;
@@ -53,12 +51,13 @@ export const SignBox = styled.div`
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 export const InputBox = styled.div`
-   display: flex;
-    flex-direction: column;
-    gap: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `
 
 export const AccountContainer = styled.div`
@@ -77,7 +76,7 @@ export const AccountContainer = styled.div`
     text-decoration: underline;
     cursor: pointer;
   }
-`;
+`
 
 export const NoneAccount = styled.div`
   color: ${({ theme }) => theme.labelAssisitive};
@@ -86,4 +85,4 @@ export const NoneAccount = styled.div`
     color: ${({ theme }) => theme.labelNormal};
     text-decoration: underline;
   }
-`;
+`

@@ -22,7 +22,7 @@ const AddMember = ({ groupId, setSection }: GroupProps) => {
       />
       <S.AddMemberBox>
         <S.AddMemberTitle onClick={() => setSection("groupDetail")}>
-          <ChevronLeft color="labelNormal" $svgStyle={{ cursor: "pointer" }} />
+          <ChevronLeft color={"labelNormal"} $svgStyle={{ cursor: "pointer" }} />
           <p>멤버추가</p>
         </S.AddMemberTitle>
         <S.AddMemberDataBox>

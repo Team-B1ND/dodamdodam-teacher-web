@@ -1,45 +1,57 @@
-import styled, { css } from "styled-components";
-import { palette } from "styles/palette";
+import { DodamShape, DodamTypography } from '@b1nd/dds-web'
+import styled from 'styled-components'
 
-export const PrevNextButtonWrap = styled.div`
-  width: 100%;
-  padding-top: 15px;
+export const BusContainer = styled.div`
+  width: 65%;
+  height: 100%;
 
   display: flex;
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  padding: 12px 16px 0 16px;
+`
+
+export const BusListWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+
+  background-color: ${({ theme }) => theme.backgroundNormal};
+  ${DodamShape.ExtraSmall}
+`
+
+export const BusListHeader = styled.div`
+  display: flex;
   align-items: center;
-  justify-content: center;
-  column-gap: 5px;
-
-  button {
-    width: 80px;
-    height: 40px;
-
-    border-radius: 7px;
-    outline: none;
-    border: 1px solid #ddd;
-
-    font-size: 16px;
-    cursor: pointer;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  p {
+    ${DodamTypography.Heading1.Bold};
+    color: ${({ theme }) => theme.labelNormal};
   }
-`;
+`
 
-const ButtonHover = css`
-  transition: all 0.15s ease-in;
-  &:hover {
-    background-color: ${palette.main};
-    color: #fff;
+export const BusPlusIcon = styled.div`
+  cursor: pointer;
+`
+
+export const BusList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 10px 0 10px 0;
+  width: 100%;
+  height: 500px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
   }
-`;
-
-export const PrevButton = styled.button<{ page: number }>`
-  ${({ page }) =>
-    page === 1
-      ? css`
-          opacity: 0.6;
-        `
-      : ButtonHover}
-`;
-
-export const NextButton = styled.button`
-  ${ButtonHover}
-`;
+`

@@ -19,7 +19,6 @@ export const useGroup = (isAtv: boolean, keyword?: string) => {
         if (lastPage.data.length < 10) return undefined;
         return lastPage.data[lastPage.data.length - 1].id;
       },
-      suspense: true,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
     }

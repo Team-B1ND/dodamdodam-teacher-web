@@ -17,6 +17,8 @@ import NoticePage from 'pages/Notice/Main/noticePages'
 import NoticeWritePage from 'pages/Notice/Write/noticeWritePages'
 import GroupPage from 'pages/Notice/Group/groupPage'
 import GroupDetail from 'components/Group/GroupDetail'
+import { Suspense } from 'react'
+import BusInfo from 'components/Bus/BusInfo'
 // import WaitingMember from 'components/Group/WaitingMember';
 import ClubManagePage from 'pages/Club/ClubManagePage'
 
@@ -25,8 +27,7 @@ const Router = () => {
     <Routes>
       <Route path='/' element={<AuthPage />} />
       <Route path='/member' element={<MemberPage />} />
-      <Route path='/bus-list' element={<BusListPage />} />
-      <Route path='/bus-date' element={<BusDatePage />} />
+      <Route path='/bus' element={<BusListPage />} />
       <Route path='/offbase-pass' element={<OffBasePassPage />} />
       <Route path='/offbase-leave' element={<OffBaseLeavePage />} />
       <Route path='/offbase-leave-ing' element={<TodayOffBaseLeavePage />} />

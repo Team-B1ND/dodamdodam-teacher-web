@@ -19,6 +19,7 @@ export const ButtonContainer = styled.div`
 
   margin-left: 25px;
 `;
+
 export const EditStyle: CSSObject = {
   width: "5rem",
   height: "2rem",

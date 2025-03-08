@@ -15,6 +15,7 @@ const NoticeWrite = () => {
     handleImageChange,
     handleFileChange,
     files,
+    image,
     submitWrite,
   } = useNotice();
   return (
@@ -35,6 +36,8 @@ const NoticeWrite = () => {
         fileIcon={<File color="labelAssistive" />}
         photoIcon={<Photo color="labelAssistive" />}
         buttonText="공지 작성"
+        isViewImage={true}
+        images={image}
       />
     </S.NoticeWriteWrap>
   );
