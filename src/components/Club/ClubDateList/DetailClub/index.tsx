@@ -13,6 +13,7 @@ import MDEditor from "@uiw/react-md-editor";
 import {
   useGetClubDetailQuery,
   useGetClubMembersQuery,
+  useGetTimeQuery,
 } from "queries/Club/club.query";
 import SkeletonComponent from "components/common/Skeleton";
 import { ClubMember } from "types/Club/club.type";
@@ -31,8 +32,11 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
   const { data: members, isLoading: memberIsLoading } = useGetClubMembersQuery({
     id: item,
   });
+  const { data:timeData, isLoading:timeIsLoading } = useGetTimeQuery()
+  const date = new Date
+  const today = date.toLocaleDateString().replace(/. /g, '-0').replace('.', '')
 
-  if (clubIsLoading || !club) {
+  if (clubIsLoading || !club || memberIsLoading) {
     return <div>스켈레톤 ui</div>; 
     // 후에 스켈레톤 ui 추가예정
   }
@@ -55,7 +59,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
               </S.ClubTypeName>
               <S.ClubNameWrap>
                 <S.ClubName>{club.data.name}</S.ClubName>
-                {club.data.state === "ALLOWED" ? (
+                {timeData!.createEnd > today && club.data.state === "ALLOWED" ? (
                   <CheckmarkCircleFilled color="#00C265" size={32} />
                 ) : (
                   <ExclamationmarkCircle color={"#FBD300"} size={32} />
@@ -66,33 +70,36 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
               </S.ClubShortDescription>
             </div>
             <S.ClubApprovalContainer>
-              <S.WrapButton>
-                <DodamFilledButton
-                  size="Small"
-                  width={97}
-                  text="개설 승인"
-                  textTheme={"staticWhite"}
-                  typography={["Body2", "Medium"]}
-                  customStyle={{ minHeight: "38px", marginLeft: "11px" }}
-                  onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
-                />
-                <DodamFilledButton
-                  size="Small"
-                  width={97}
-                  text="개설 거절"
-                  textTheme={"staticWhite"}
-                  typography={["Body2", "Medium"]}
-                  customStyle={{
-                    minHeight: "38px",
-                    marginLeft: "11px",
-                    backgroundColor: "#FF4242",
-                  }}
-                  onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
-                />
-                <DodamModal isOpen={isRejectModalOpen} background={true}>
-                  <JoinConfirm />
-                </DodamModal>
-              </S.WrapButton>
+              {timeData!.createEnd > today
+              && (
+                <S.WrapButton>
+                  <DodamFilledButton
+                    size="Small"
+                    width={97}
+                    text="개설 승인"
+                    textTheme={"staticWhite"}
+                    typography={["Body2", "Medium"]}
+                    customStyle={{ minHeight: "38px", marginLeft: "11px" }}
+                    onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
+                  />
+                  <DodamFilledButton
+                    size="Small"
+                    width={97}
+                    text="개설 거절"
+                    textTheme={"staticWhite"}
+                    typography={["Body2", "Medium"]}
+                    customStyle={{
+                      minHeight: "38px",
+                      marginLeft: "11px",
+                      backgroundColor: "#FF4242",
+                    }}
+                    onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
+                  />
+                  <DodamModal isOpen={isRejectModalOpen} background={true}>
+                    <JoinConfirm />
+                  </DodamModal>
+                </S.WrapButton>
+              )}
               <S.ClubLeader>
                 부장 : {leader?.grade}
                 {leader?.room}

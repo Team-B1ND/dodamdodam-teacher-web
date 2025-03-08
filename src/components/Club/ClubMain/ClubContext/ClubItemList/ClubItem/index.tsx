@@ -9,10 +9,11 @@ import {
 import DetailClub from "components/Club/ClubDateList/DetailClub";
 import { ClubProps } from "types/Club/club.type";
 
-const ClubItem = ({ value }: ClubProps) => {
+const ClubItem = ({ value, isEnded }: ClubProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [clubIds, setClubIds] = useState<number[]>([]);
+  
 
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
@@ -27,9 +28,12 @@ const ClubItem = ({ value }: ClubProps) => {
   return (
     <>
       <S.ClubItemWrap key={value.id}>
-        <S.WrapCheckBox>
-          <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
-        </S.WrapCheckBox>
+        {isEnded
+        && (
+          <S.WrapCheckBox>
+            <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
+          </S.WrapCheckBox>
+        )}
 
         <S.WrapClubName>
           <S.ClubName onClick={() => setIsModalOpen(true)}>
@@ -49,11 +53,19 @@ const ClubItem = ({ value }: ClubProps) => {
           {value.leader?.name}
         </S.WhoClubLeader>
         <S.StateClub />
-        {value.state === "ALLOWED" ? (
-          <CheckmarkCircleFilled color="#00C265" />
-        ) : (
-          <Clock />
-        )}
+        {isEnded
+        ? (
+          value.state === "ALLOWED" ? (
+            <CheckmarkCircleFilled color="#00C265" />
+          ) : (
+            <Clock />
+          )
+        )
+        : (
+          <div>{value.teacher.name || '미정'}</div>
+        ) 
+        }
+          
       </S.ClubItemWrap>
       <DodamModal isOpen={isModalOpen} background>
         <DetailClub

@@ -6,7 +6,11 @@ export interface Club {
   subject: string;
   image: string;
   type: "CREATIVE_ACTIVITY_CLUB" | "SELF_DIRECT_ACTIVITY_CLUB";
-  teacher: string;
+  teacher: {
+    name: string
+    tel: string
+    position: string
+  }
   state: "ALLOWED" | "PENDING" | "REJECTED" | "WAITING" | "DELETED";
   leader: ClubMember;
 }
@@ -17,6 +21,7 @@ export interface ClubResponse {
 
 export interface ClubProps {
   value: Club;
+  isEnded: boolean;
 }
 
 export interface ClubMember {
@@ -51,4 +56,11 @@ export interface BaseResponse<T> {
 
 export interface Member {
   students: ClubMember[];
+}
+
+export interface ClubTime {
+  createStart: string;
+  createEnd: string;
+  applicantStart: string;
+  applicantEnd: string;
 }

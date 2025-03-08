@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import MemberPage from 'pages/MemberPage'
 import BusListPage from 'pages/Bus/BusListPage'
-import BusDatePage from 'pages/Bus/BusDatePage'
 import AuthPage from 'pages/Auth/AuthPage'
 import OffBasePassPage from 'pages/Out/OutGoingPage'
 import OffBaseLeavePage from 'pages/Out/OutSleepingPage'
@@ -21,6 +20,8 @@ import { Suspense } from 'react'
 import BusInfo from 'components/Bus/BusInfo'
 // import WaitingMember from 'components/Group/WaitingMember';
 import ClubManagePage from 'pages/Club/ClubManagePage'
+import ApplicateTeacher from 'components/Club/ApplicateTeacher'
+import ApplicateTeacherPage from 'pages/Club/ApplicateTeacherPage'
 
 const Router = () => {
   return (
@@ -45,7 +46,8 @@ const Router = () => {
         {/* <Route path="group/:id" element={<GroupDetail />} /> */}
       </Route>
 
-      <Route path='/club' element={<ClubManagePage />}></Route>
+      <Route path='/club/manage' element={<ClubManagePage />} />
+      <Route path='/club/applicate' element={<ApplicateTeacherPage />} />
     </Routes>
   )
 }
