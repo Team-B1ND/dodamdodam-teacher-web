@@ -42,7 +42,7 @@ const ClubItemList = (props: { item: string, isEnded: boolean }) => {
 ) : (
   data && data.data && Array.isArray(data.data) && data.data.length > 0 ? (
     data.data.map(value => 
-      value.type === props.item ? (
+      value?.type === props.item ? (
         <ClubItem key={value.id} value={value} isEnded={props.isEnded} />
       ) : null
     )
