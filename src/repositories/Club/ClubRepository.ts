@@ -12,6 +12,7 @@ export interface ClubRepository {
   getMembers(id: number): Promise<BaseResponse<Member>>
   patchClubState(data: ClubState): Promise<void>
   postClubPeriod(param: ClubPeriodParam): Promise<void>
+  postApplicateTeacher(clubId: number, teacherName: string): Promise<void>
 }
 
 export type ClubPeriodType = 'CLUB_CREATED' | 'CLUB_APPLICANT'

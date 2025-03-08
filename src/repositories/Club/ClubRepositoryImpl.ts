@@ -37,6 +37,13 @@ class ClubRepositoryImpl implements ClubRepository {
     const { data } = await dodamAxios.get<BaseResponse<ClubTime>>(`/clubs/time`)
     return data.data 
   }
+  
+  public async postApplicateTeacher(
+    clubId: number,
+    teacherName: string
+  ): Promise<void> {
+    await dodamAxios.post(`/clubs/${clubId}/teacher?name=${teacherName}`)
+  }
 }
 
 const clubRepositoryImpl = new ClubRepositoryImpl()

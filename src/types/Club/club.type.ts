@@ -6,7 +6,11 @@ export interface Club {
   subject: string;
   image: string;
   type: "CREATIVE_ACTIVITY_CLUB" | "SELF_DIRECT_ACTIVITY_CLUB";
-  teacher: string;
+  teacher: {
+    name: string
+    tel: string
+    position: string
+  }
   state: "ALLOWED" | "PENDING" | "REJECTED" | "WAITING" | "DELETED";
   leader: ClubMember;
 }

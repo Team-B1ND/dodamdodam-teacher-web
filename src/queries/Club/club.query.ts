@@ -95,3 +95,12 @@ export const useGetTimeQuery = (
     ...options,
     }
 );
+
+export const useApplicateTeacherMutation = () => {
+  const mutation = useMutation(
+    (param: { clubId: number; teacherName: string }) =>
+      clubRepositoryImpl.postApplicateTeacher(param.clubId, param.teacherName)
+  )
+
+  return mutation
+}

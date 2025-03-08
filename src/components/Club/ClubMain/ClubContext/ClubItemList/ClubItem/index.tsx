@@ -62,7 +62,7 @@ const ClubItem = ({ value, isEnded }: ClubProps) => {
           )
         )
         : (
-          <div>{value.teacher || '미정'}</div>
+          <div>{value.teacher.name || '미정'}</div>
         ) 
         }
           
