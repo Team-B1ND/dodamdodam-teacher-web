@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { DodamTypography } from "@b1nd/dds-web";
+import styled from 'styled-components'
+import { DodamTypography } from '@b1nd/dds-web'
 
 export const ClubItemWrap = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const ClubItemWrap = styled.div`
   height: 48px;
   align-items: center;
   background-color: ${({ theme }) => theme.backgroundNormal};
-`;
+`
 
 export const WrapCheckBox = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const WrapCheckBox = styled.div`
   width: 40px;
   height: 40px;
   padding: 0 8px;
-`;
+`
 
 export const WrapClubName = styled.div`
   display: flex;
@@ -24,19 +24,17 @@ export const WrapClubName = styled.div`
   width: 160px;
   height: 27px;
   padding: 0 8px;
-`;
+`
 
 export const ClubName = styled.div`
   ${DodamTypography.Headline.Bold}
-  font-size: 18px;
   cursor: pointer;
   text-overflow: ellipsis;
-`;
+`
 
 export const DetailClubContext = styled.div`
   ${DodamTypography.Body1.Medium}
-  font-size: 16px;
-`;
+`
 
 export const SubjectClub = styled(DetailClubContext)`
   width: 84px;
@@ -44,7 +42,7 @@ export const SubjectClub = styled(DetailClubContext)`
   padding: 0 8px;
   gap: 10px;
   display: flex;
-`;
+`
 export const ShortDescription = styled(DetailClubContext)`
   width: 240px;
   height: 24px;
@@ -52,7 +50,7 @@ export const ShortDescription = styled(DetailClubContext)`
   gap: 10px;
   display: flex;
   text-overflow: ellipsis;
-`;
+`
 
 export const WhoClubLeader = styled(DetailClubContext)`
   width: 100px;
@@ -60,20 +58,20 @@ export const WhoClubLeader = styled(DetailClubContext)`
   padding: 0 8px;
   gap: 10px;
   display: flex;
-`;
+`
 export const StateClub = styled.div`
   width: 204px;
   height: 10px;
-`;
+`
 export const CircleStateButoonContainer = styled.div`
   width: 40px;
   height: 10px;
   padding: 0 8px;
   gap: 8px;
   display: flex;
-`;
+`
 
 export const ClubLine = styled.div`
   width: 100%;
-  border-bottom: 1px solid #c4c5c6;
-`;
+  border-bottom: 1px solid ${({ theme }) => theme.lineNormal};
+`

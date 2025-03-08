@@ -18,7 +18,6 @@ export const WrapCheckBox = styled.div`
 `;
 export const DetailClubContext = styled.div`
   ${DodamTypography.Body1.Medium}
-  font-size: 16px;
 `;
 export const WrapClubName = styled(DetailClubContext)`
   display: flex;
