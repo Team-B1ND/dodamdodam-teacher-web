@@ -1,26 +1,31 @@
-import { ClubMember, ClubResponse, ClubState } from "types/Club/club.type";
+import {
+  BaseResponse,
+  ClubDetailResponse,
+  Member,
+  ClubResponse,
+  ClubState,
+} from "types/Club/club.type";
 import { ClubRepository } from "./ClubRepository";
 import { dodamAxios } from "libs/Axios/customAxios";
 
 class ClubRepositoryImpl implements ClubRepository {
-    public async getClubs(): Promise<ClubResponse> {
-        const { data } = await dodamAxios.get("/clubs"); 
-        return data;
-    } 
-
-  public async getMember(id: number): Promise<ClubMember> {
-    const { data } = await dodamAxios.get(`/clubs/${id}/leader`);
-    return data.data.data;
+  public async getClubs(): Promise<ClubResponse> {
+    const { data } = await dodamAxios.get("/clubs/leaders");
+    return data;
   }
 
-  public async getClub(id: number): Promise<ClubResponse> {
+  public async getClub(id: number): Promise<ClubDetailResponse> {
     const { data } = await dodamAxios.get(`/clubs/${id}`);
-    return data.data.data;
+    return data;
   }
 
-  public async getMembers(id: number): Promise<ClubMember> {
+  public async getMembers(id: number): Promise<BaseResponse<Member>> {
     const { data } = await dodamAxios.get(`/clubs/${id}/members`);
-    return data.data;
+    return data;
+  }
+
+  public async patchClubState(data: ClubState) {
+    await dodamAxios.patch(`/clubs/state`, data);
   }
 }
 

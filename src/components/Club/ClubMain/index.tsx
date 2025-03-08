@@ -20,8 +20,8 @@ const ClubMain = () => {
             num={1}
             type="inline"
             data={[
-              { text: "창체 동아리", isAtv: isActive },
-              { text: "자율 동아리", isAtv: !isActive },
+              { text: "창체 동아리", isAtv: isActive},
+              { text: "자율 동아리", isAtv: !isActive},
             ]}
             width={204}
             height={44}

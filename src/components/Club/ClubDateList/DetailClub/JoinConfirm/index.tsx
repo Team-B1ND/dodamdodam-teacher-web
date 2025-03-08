@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import * as S from "./style";
 import { DodamTextField, DodamFilledButton } from "@b1nd/dds-web";
-import { dodamAxios } from "libs/Axios/customAxios";
 
 const JoinConfirm = () => {
   const [rejectReason, setRejectReason] = useState<string>("");

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import * as S from "./style";
 import { DodamDatePicker, DodamFilledButton } from "@b1nd/dds-web";
-import dateTransform from "utils/Transform/dateTransform";
 
 type ClubPeriodType = "create" | "applicant";
 

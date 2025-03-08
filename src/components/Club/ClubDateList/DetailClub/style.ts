@@ -74,14 +74,11 @@ export const BetweenLine = styled.div`
 
 export const ExplainClubBox = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 250px;
   border: 1px solid #e6e6e7;
   border-radius: 10px;
   margin-top: 10px;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   padding-bottom: 20px;
 `;
 

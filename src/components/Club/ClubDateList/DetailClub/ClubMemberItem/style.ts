@@ -5,9 +5,7 @@ export const ParentsClubMember = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  height: 300px;
   padding-top: 10px;
-
   &::-webkit-scrollbar {
     display: none;
   }
@@ -19,6 +17,13 @@ export const WrapClubMember = styled.div`
   padding: 12px 0;
   gap: 8px;
   align-items: center;
+`;
+
+export const ProfileImage = styled.div<{ img: string }>`
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  background-image: ${(props) => props.img};
 `;
 
 export const StudentName = styled.div`
