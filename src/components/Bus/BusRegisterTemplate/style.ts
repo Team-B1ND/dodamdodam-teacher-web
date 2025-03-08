@@ -46,11 +46,43 @@ export const BusDateWrap = styled.div`
   height: fit-content;
 
   display: flex;
+  flex-direction: column;
 
   padding: 8px 0px;
 
   justify-content: space-between;
-  align-items: center;
+
+  div {
+    width: 100%;
+
+    display: flex;
+
+    gap: 10px;
+  }
+
+  p {
+    color: ${({ theme }) => theme.labelAlternative};
+    ${DodamTypography.Headline.Medium}
+  }
+
+  input[type='time'] {
+    border: none;
+
+    color: ${({ theme }) => theme.primaryNormal};
+
+    ${DodamTypography.Headline.Regular}
+  }
+`
+
+export const BusTimeWrap = styled.div`
+  width: 97%;
+  height: fit-content;
+
+  display: flex;
+
+  padding: 8px 0px;
+
+  justify-content: space-between;
 
   p {
     color: ${({ theme }) => theme.labelAlternative};
@@ -71,7 +103,6 @@ export const BusButtonWrap = styled.div`
   height: fit-content;
   display: flex;
 
-  
   justify-content: flex-end;
 
   gap: 10px;
