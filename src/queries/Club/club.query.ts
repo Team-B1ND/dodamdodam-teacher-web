@@ -6,6 +6,7 @@ import {
   useQuery,
   useQueryClient,
   UseQueryOptions,
+  UseQueryResult,
 } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import ClubRepositoryImpl from 'repositories/Club/ClubRepositoryImpl'
@@ -15,6 +16,7 @@ import {
   Member,
   BaseResponse,
   ClubState,
+  ClubTime,
 } from 'types/Club/club.type'
 import { B1ndToast } from '@b1nd/b1nd-toastify'
 import clubRepositoryImpl from 'repositories/Club/ClubRepositoryImpl'
@@ -77,3 +79,19 @@ export const useClubPeriodMutation = () => {
 
   return mutation
 }
+
+export const useGetTimeQuery = (
+  options?: UseQueryOptions<
+    ClubTime, 
+    AxiosError
+  >
+): UseQueryResult<ClubTime, AxiosError> =>
+  useQuery<ClubTime, AxiosError>(
+    QUERY_KEYS.club.getTime,
+    () => clubRepositoryImpl.getClubPeriod(),
+    {
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 10,
+    ...options,
+    }
+);

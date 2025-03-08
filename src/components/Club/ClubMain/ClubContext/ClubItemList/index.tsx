@@ -6,27 +6,34 @@ import { DodamCheckBox, DodamErrorBoundary } from "@b1nd/dds-web";
 import { useGetClubDateQuery } from "queries/Club/club.query";
 import { ClubLine } from "./ClubItem/style";
 
-const ClubItemList = (props: { item: string }) => {
+const ClubItemList = (props: { item: string, isEnded: boolean }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
   };
   const { data,isLoading } = useGetClubDateQuery();
   
-    console.log(data);
-
   return (
     <>
       <S.ClubItemWrap>
-        <S.WrapCheckBox>
-          <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
-        </S.WrapCheckBox>
+        {props.isEnded
+        && (
+          <S.WrapCheckBox>
+            <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
+          </S.WrapCheckBox>
+        )}
         <S.WrapClubName>동아리명</S.WrapClubName>
         <S.SubjectClub>주제</S.SubjectClub>
         <S.ShortDescription>설명</S.ShortDescription>
         <S.WhoClubLeader>부장</S.WhoClubLeader>
         <S.StateClub />
-        <S.DetailClubContext>상태</S.DetailClubContext>
+        {props.isEnded
+        ? (
+          <S.DetailClubContext>상태</S.DetailClubContext>
+        )
+        : (
+          <S.DetailClubContext>담당자</S.DetailClubContext>
+        )}
       </S.ClubItemWrap>
       <ClubLine/>
       <DodamErrorBoundary text="에러 발생" showButton={true}>
@@ -36,7 +43,7 @@ const ClubItemList = (props: { item: string }) => {
   data && data.data && Array.isArray(data.data) && data.data.length > 0 ? (
     data.data.map(value => 
       value.type === props.item ? (
-        <ClubItem key={value.id} value={value} />
+        <ClubItem key={value.id} value={value} isEnded={props.isEnded} />
       ) : null
     )
   ) : (

@@ -17,6 +17,7 @@ export interface ClubResponse {
 
 export interface ClubProps {
   value: Club;
+  isEnded: boolean;
 }
 
 export interface ClubMember {
@@ -51,4 +52,11 @@ export interface BaseResponse<T> {
 
 export interface Member {
   students: ClubMember[];
+}
+
+export interface ClubTime {
+  createStart: string;
+  createEnd: string;
+  applicantStart: string;
+  applicantEnd: string;
 }

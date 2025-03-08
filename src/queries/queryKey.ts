@@ -75,6 +75,7 @@ export const QUERY_KEYS = Object.freeze({
     getClubs: "/clubs",
     getClub: "/detailClub",
     getMembers: "/getMembers",
-    patchClubsState: "/patchClub"
+    patchClubsState: "/patchClub",
+    getTime:"/clubTime"
   },
 });
