@@ -18,6 +18,7 @@ const SideBarDropdown = () => {
         <MenuDropdownChild title="외박 중인 학생" redirectUrl="/offbase-leave-ing" />
         <MenuDropdownChild title="현재 잔류 중인 학생" redirectUrl="/offbase-redisual" />
       </MenuDropdownWrapper>
+      <MenuItem title='동아리' redirectUrl='/club'/>
       <MenuDropdownWrapper title="상벌점">
         <MenuDropdownChild title="기숙사 점수 관리" redirectUrl="/PointScore?type=DORMITORY" />
         <MenuDropdownChild title="기숙사 상벌점 사유" redirectUrl="/PointReason?type=DORMITORY" />
