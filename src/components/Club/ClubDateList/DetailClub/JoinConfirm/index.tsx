@@ -1,10 +1,12 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useContext } from "react";
 import * as S from "./style";
 import { DodamTextField, DodamFilledButton } from "@b1nd/dds-web";
+interface JoinConfirmProps {
+  onClose: () => void;
+}
 
-const JoinConfirm = () => {
+const JoinConfirm = ({ onClose }: JoinConfirmProps) => {
   const [rejectReason, setRejectReason] = useState<string>("");
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setRejectReason(event.target.value);
     console.log(rejectReason)
@@ -32,6 +34,7 @@ const JoinConfirm = () => {
           text="취소"
           typography={["Body1", "Medium"]}
           style={{ backgroundColor: "#F5F5F5" }}
+          onClick={onClose} // 모달 닫기 기능 추가
         />
         <DodamFilledButton
           size={"Large"}

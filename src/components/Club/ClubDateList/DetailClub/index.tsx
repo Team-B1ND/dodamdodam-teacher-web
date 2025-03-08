@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import ClubMemberItem from './ClubMemberItem'
-import * as S from './style'
+import { useState } from "react";
+import ClubMemberItem from "./ClubMemberItem";
+import * as S from "./style";
 import {
   DodamFilledButton,
   ExclamationmarkCircle,
@@ -8,37 +8,37 @@ import {
   DodamModal,
   CheckmarkCircleFilled,
   DodamDivider,
-} from '@b1nd/dds-web'
-import JoinConfirm from './JoinConfirm'
-import MDEditor from '@uiw/react-md-editor'
+} from "@b1nd/dds-web";
+import JoinConfirm from "./JoinConfirm";
+import MDEditor from "@uiw/react-md-editor";
 import {
   useGetClubDetailQuery,
   useGetClubMembersQuery,
   useGetTimeQuery,
-} from 'queries/Club/club.query'
-import SkeletonComponent from 'components/common/Skeleton'
-import { ClubMember } from 'types/Club/club.type'
+} from "queries/Club/club.query";
+import SkeletonComponent from "components/common/Skeleton";
+import { ClubMember } from "types/Club/club.type";
 
 interface DetailClubProps {
-  item: number
-  close: () => void
-  leader: ClubMember
+  item: number;
+  close: () => void;
+  leader: ClubMember;
 }
 
 const DetailClub = ({ item, close, leader }: DetailClubProps) => {
-  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false)
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const { data: club, isLoading: clubIsLoading } = useGetClubDetailQuery({
     id: item,
-  })
+  });
   const { data: members, isLoading: memberIsLoading } = useGetClubMembersQuery({
     id: item,
-  })
-  const { data: timeData, isLoading: timeIsLoading } = useGetTimeQuery()
-  const date = new Date()
-  const today = date.toLocaleDateString().replace(/. /g, '-0').replace('.', '')
+  });
+  const { data: timeData, isLoading: timeIsLoading } = useGetTimeQuery();
+  const date = new Date();
+  const today = date.toLocaleDateString().replace(/. /g, "-0").replace(".", "");
 
   if (clubIsLoading || !club || memberIsLoading) {
-    return <div>스켈레톤 ui</div>
+    return <div>스켈레톤 ui</div>;
     // 후에 스켈레톤 ui 추가예정
   }
 
@@ -47,23 +47,23 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
       <S.ClubMiddleContainer>
         <div>
           <div onClick={close}>
-            <Close $svgStyle={{ cursor: 'pointer' }} />
+            <Close $svgStyle={{ cursor: "pointer" }} />
           </div>
           <S.ClubDescriptionWrap>
             <div>
               <S.ClubTypeName>
-                {club.data.type === 'CREATIVE_ACTIVITY_CLUB'
-                  ? '창체 • '
-                  : '자율 • '}
+                {club.data.type === "CREATIVE_ACTIVITY_CLUB"
+                  ? "창체 • "
+                  : "자율 • "}
                 {club.data.subject}
               </S.ClubTypeName>
               <S.ClubNameWrap>
                 <S.ClubName>{club.data.name}</S.ClubName>
                 {timeData!.createEnd > today &&
-                club.data.state === 'ALLOWED' ? (
-                  <CheckmarkCircleFilled color='#00C265' size={32} />
+                club.data.state === "ALLOWED" ? (
+                  <CheckmarkCircleFilled color="#00C265" size={32} />
                 ) : (
-                  <ExclamationmarkCircle color={'#FBD300'} size={32} />
+                  <ExclamationmarkCircle color={"#FBD300"} size={32} />
                 )}
               </S.ClubNameWrap>
               <S.ClubShortDescription>
@@ -74,29 +74,28 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
               {timeData!.createEnd > today && (
                 <S.WrapButton>
                   <DodamFilledButton
-                    size='Small'
+                    size="Small"
                     width={97}
-                    text='개설 승인'
-                    textTheme={'staticWhite'}
-                    typography={['Body2', 'Medium']}
-                    customStyle={{ minHeight: '38px', marginLeft: '11px' }}
-                    onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
+                    text="개설 승인"
+                    textTheme={"staticWhite"}
+                    typography={["Body2", "Medium"]}
+                    customStyle={{ minHeight: "38px", marginLeft: "11px" }}
                   />
                   <DodamFilledButton
-                    size='Small'
+                    size="Small"
                     width={97}
-                    text='개설 거절'
-                    textTheme={'staticWhite'}
-                    typography={['Body2', 'Medium']}
+                    text="개설 거절"
+                    textTheme={"staticWhite"}
+                    typography={["Body2", "Medium"]}
                     customStyle={{
-                      minHeight: '38px',
-                      marginLeft: '11px',
-                      backgroundColor: '#FF4242',
+                      minHeight: "38px",
+                      marginLeft: "11px",
+                      backgroundColor: "#FF4242",
                     }}
                     onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
                   />
                   <DodamModal isOpen={isRejectModalOpen} background={true}>
-                    <JoinConfirm />
+                    <JoinConfirm onClose={() => setIsRejectModalOpen(false)} />
                   </DodamModal>
                 </S.WrapButton>
               )}
@@ -121,7 +120,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
                     grade={item.grade}
                     room={item.room}
                   />
-                )
+                );
               })}
             </div>
             <S.ExplainClubWrap>
@@ -130,7 +129,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
                 <S.MarkDownWrapBox>
                   <MDEditor.Markdown
                     source={club.data.description}
-                    style={{ backgroundColor: '#fff', color: '#000' }}
+                    style={{ backgroundColor: "#fff", color: "#000" }}
                   />
                 </S.MarkDownWrapBox>
               </S.ExplainClubBox>
@@ -139,7 +138,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
         </div>
       </S.ClubMiddleContainer>
     </S.ClubModalContainer>
-  )
-}
+  );
+};
 
-export default DetailClub
+export default DetailClub;

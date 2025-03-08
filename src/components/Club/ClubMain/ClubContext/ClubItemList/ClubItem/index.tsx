@@ -8,12 +8,14 @@ import {
 } from "@b1nd/dds-web";
 import DetailClub from "components/Club/ClubDateList/DetailClub";
 import { ClubProps } from "types/Club/club.type";
+import { useClubMutation } from "queries/Club/club.query";
 
-const ClubItem = ({ value, isEnded }: ClubProps) => {
+const ClubItem = ({ value, isEnded }: any) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [clubIds, setClubIds] = useState<number[]>([]);
-  
+
+  // const { mutate } = useClubMutation();
 
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
@@ -24,14 +26,15 @@ const ClubItem = ({ value, isEnded }: ClubProps) => {
     setIsModalOpen(false);
   };
 
-
   return (
     <>
       <S.ClubItemWrap key={value.id}>
-        {isEnded
-        && (
+        {isEnded && (
           <S.WrapCheckBox>
-            <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
+            <DodamCheckBox
+              onClick={handleCheckboxClick}
+              isDisabled={isChecked}
+            />
           </S.WrapCheckBox>
         )}
 
@@ -53,24 +56,19 @@ const ClubItem = ({ value, isEnded }: ClubProps) => {
           {value.leader?.name}
         </S.WhoClubLeader>
         <S.StateClub />
-        {isEnded
-        ? (
+        {isEnded ? (
           value.state === "ALLOWED" ? (
             <CheckmarkCircleFilled color="#00C265" />
           ) : (
             <Clock />
           )
-        )
-        : (
-          <div>{value.teacher.name || '미정'}</div>
-        ) 
-        }
-          
+        ) : (
+          <div>{value.teacher.name || "미정"}</div>
+        )}
       </S.ClubItemWrap>
       <DodamModal isOpen={isModalOpen} background>
         <DetailClub
           close={() => {
-            console.log("test");
             handleCloseModal();
           }}
           item={value.id}
