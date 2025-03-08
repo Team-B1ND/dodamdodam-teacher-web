@@ -24,7 +24,7 @@ const ApplicateClubList = ({ data }: ClubResponse) => {
                 textAlign: 'left',
               }}
             >
-              {club.type === 'CREATIVE_ACTIVITY_CLUB' ? '전공' : '자율'}
+              {club?.type === 'CREATIVE_ACTIVITY_CLUB' ? '전공' : '자율'}
             </TD>
             <TD
               customStyle={{

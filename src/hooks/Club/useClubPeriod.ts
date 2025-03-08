@@ -16,17 +16,10 @@ export const useClubPeriod = () => {
   const today = dayjs().format('YYYY-MM-DD')
 
   const handleDateChange = useCallback((date: Date, scope: 'start' | 'end') => {
-    if (scope === 'start') {
-      setCreateDate((prev) => ({
-        ...prev,
-        start: dayjs(date).format('YYYY-MM-DD'),
-      }))
-    } else {
-      setCreateDate((prev) => ({
-        ...prev,
-        end: dayjs(date).format('YYYY-MM-DD'),
-      }))
-    }
+    setCreateDate((prev) => ({
+      ...prev,
+      [scope]: dayjs(date).format('YYYY-MM-DD'),
+    }))
   }, [])
 
   const clubPeriodMutataion = useClubPeriodMutation()

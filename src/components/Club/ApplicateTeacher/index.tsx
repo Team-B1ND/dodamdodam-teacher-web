@@ -14,8 +14,8 @@ const ApplicateTeacher = () => {
   // 동아리 타입에 따라 필터링
   const filteredClubs = data?.data.filter((club) => {
     return selectedType === 'CREATIVE_ACTIVITY_CLUB'
-      ? club.type === 'CREATIVE_ACTIVITY_CLUB'
-      : club.type === 'SELF_DIRECT_ACTIVITY_CLUB'
+      ? club?.type === 'CREATIVE_ACTIVITY_CLUB'
+      : club?.type === 'SELF_DIRECT_ACTIVITY_CLUB'
   })
 
   return (

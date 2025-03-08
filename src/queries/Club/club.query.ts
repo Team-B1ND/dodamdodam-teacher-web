@@ -81,20 +81,17 @@ export const useClubPeriodMutation = () => {
 }
 
 export const useGetTimeQuery = (
-  options?: UseQueryOptions<
-    ClubTime, 
-    AxiosError
-  >
+  options?: UseQueryOptions<ClubTime, AxiosError>
 ): UseQueryResult<ClubTime, AxiosError> =>
   useQuery<ClubTime, AxiosError>(
     QUERY_KEYS.club.getTime,
     () => clubRepositoryImpl.getClubPeriod(),
     {
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 10,
-    ...options,
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 10,
+      ...options,
     }
-);
+  )
 
 export const useApplicateTeacherMutation = () => {
   const mutation = useMutation(

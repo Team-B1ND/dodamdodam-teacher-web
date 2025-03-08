@@ -2,6 +2,8 @@ import { useState } from 'react'
 import * as S from './style'
 import { DodamDatePicker, DodamFilledButton } from '@b1nd/dds-web'
 import { useClubPeriod } from 'hooks/Club/useClubPeriod'
+import { useGetTimeQuery } from 'queries/Club/club.query'
+import dateTransform from 'utils/Transform/dateTransform'
 
 type ClubPeriodType = 'create' | 'applicant'
 
@@ -15,6 +17,8 @@ export const ClubDateItem: React.FC<ClubDateProps> = ({ clubPeriodType }) => {
   const { createDate, today, handleDateChange, submitClubPeriod } =
     useClubPeriod()
 
+  const { data } = useGetTimeQuery()
+
   return (
     <S.ClubDateWrapBox>
       <S.ClubTitle>{title}</S.ClubTitle>
@@ -24,7 +28,11 @@ export const ClubDateItem: React.FC<ClubDateProps> = ({ clubPeriodType }) => {
           <DodamDatePicker
             itemKey='club'
             onChange={(e) => handleDateChange(e, 'start')}
-            value={createDate.start || today}
+            value={
+              clubPeriodType === "create"
+                ? dateTransform.hyphen(data?.createStart!)
+                : dateTransform.hyphen(data?.applicantStart!)
+            }
             title='시작일'
             customStyle={{ marginRight: '20px' }}
           />
@@ -34,7 +42,11 @@ export const ClubDateItem: React.FC<ClubDateProps> = ({ clubPeriodType }) => {
           <DodamDatePicker
             itemKey='club'
             onChange={(e) => handleDateChange(e, 'end')}
-            value={createDate.end || today}
+            value={
+              clubPeriodType === 'applicant'
+                ? dateTransform.hyphen(data?.applicantEnd!)
+                : dateTransform.hyphen(data?.createEnd!)
+            }
             title='마감일'
             customStyle={{ marginRight: '20px' }}
           />

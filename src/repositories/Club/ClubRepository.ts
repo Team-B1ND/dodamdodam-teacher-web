@@ -4,6 +4,7 @@ import {
   Member,
   ClubResponse,
   ClubState,
+  ClubTime,
 } from 'types/Club/club.type'
 
 export interface ClubRepository {
