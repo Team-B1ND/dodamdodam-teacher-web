@@ -9,8 +9,7 @@ const ClubMemberItem = (props: {
   return (
     <S.ParentsClubMember>
       <S.WrapClubMember>
-        {/* {props.profileImage != "" ? <Avatar size="large" /> : <S.ProfileImage img={props.profileImage}/>} */}
-        <Avatar size="large" />
+        <Avatar size="large"/>
         <div>
           <S.StudentName>{props.name}</S.StudentName>
           <S.StudentClass>

@@ -1,25 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import * as S from "./style";
 import {
   DodamCheckBox,
   CheckmarkCircleFilled,
   Clock,
   DodamModal,
+  DodamColor,
 } from "@b1nd/dds-web";
-import DetailClub from "components/Club/ClubDateList/DetailClub";
-import { ClubProps } from "types/Club/club.type";
-import { useClubMutation } from "queries/Club/club.query";
+import DetailClub from "../../DetailClub";
+import { Club } from "types/Club/club.type";
 
-const ClubItem = ({ value, isEnded }: any) => {
+interface ClubItemProps {
+  value: Club;
+  isEnded: boolean;
+  selectedClubIds: number[];
+  setSelectedClubIds: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
+const ClubItem = ({
+  value,
+  isEnded,
+  selectedClubIds,
+  setSelectedClubIds,
+}: ClubItemProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [clubIds, setClubIds] = useState<number[]>([]);
 
-  // const { mutate } = useClubMutation();
+  useEffect(() => {
+    setIsChecked(selectedClubIds.includes(value.id));
+  }, [selectedClubIds, value.id]);
 
   const handleCheckboxClick = () => {
-    setIsChecked(!isChecked);
-    setClubIds((prevIds) => [...prevIds, value.id]);
+    const newCheckedState = !isChecked;
+    setIsChecked(newCheckedState);
+
+    if (newCheckedState) {
+      if (!selectedClubIds.includes(value.id)) {
+        setSelectedClubIds((prev) => [...prev, value.id]);
+      }
+    } else {
+      setSelectedClubIds((prev) => prev.filter((id) => id !== value.id));
+    }
   };
 
   const handleCloseModal = () => {
@@ -58,12 +79,12 @@ const ClubItem = ({ value, isEnded }: any) => {
         <S.StateClub />
         {isEnded ? (
           value.state === "ALLOWED" ? (
-            <CheckmarkCircleFilled color="#00C265" />
+            <CheckmarkCircleFilled color={DodamColor.green50} />
           ) : (
             <Clock />
           )
         ) : (
-          <div>{value.teacher.name || "미정"}</div>
+          <div>{value.name || "미정"}</div>
         )}
       </S.ClubItemWrap>
       <DodamModal isOpen={isModalOpen} background>

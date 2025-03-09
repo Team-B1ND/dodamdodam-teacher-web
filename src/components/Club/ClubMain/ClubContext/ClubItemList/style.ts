@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { DodamTypography } from "@b1nd/dds-web";
+import exp from "constants";
 
 export const ClubItemWrap = styled.div`
   display: flex;
@@ -59,4 +60,13 @@ export const CircleStateButoonContainer = styled.div`
   padding: 0 8px;
   gap: 8px;
   display: flex;
+`;
+
+export const NotRequestClubStyle = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${DodamTypography.Heading1.Bold}
 `;

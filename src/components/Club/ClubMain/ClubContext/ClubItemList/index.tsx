@@ -3,7 +3,7 @@ import ClubItem from "./ClubItem";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import * as S from "./style";
 import { DodamCheckBox, DodamErrorBoundary } from "@b1nd/dds-web";
-import { useClubMutation, useGetClubDateQuery } from "queries/Club/club.query";
+import { useGetClubDateQuery } from "queries/Club/club.query";
 import { ClubLine } from "./ClubItem/style";
 
 interface ClubItemListProps {
@@ -12,7 +12,7 @@ interface ClubItemListProps {
   setSelectedClubIds: Dispatch<SetStateAction<number[]>>;
   isClicked: boolean;
   setIsClicked: Dispatch<SetStateAction<boolean>>;
-  isEnded : boolean
+  isEnded: boolean;
 }
 
 const ClubItemList = ({
@@ -23,65 +23,80 @@ const ClubItemList = ({
   setIsClicked,
   isEnded,
 }: ClubItemListProps) => {
-  const { data,isLoading } = useGetClubDateQuery();
-  const validClubs = data?.data?.filter((club) => club !== null && club !== undefined) || [];
+  const { data, isLoading } = useGetClubDateQuery();
+
+  const validClubs =
+    data?.data?.filter((club) => club !== null && club !== undefined) || [];
+  const filteredClubs = validClubs.filter((club) => club.type === itemType);
+
+  useEffect(() => {
+    const currentTypeClubIds = filteredClubs.map((club) => club.id);
+    const selectedCurrentTypeClubs = selectedClubIds.filter((id) =>
+      currentTypeClubIds.includes(id)
+    );
+    const allSelected =
+      selectedCurrentTypeClubs.length === currentTypeClubIds.length &&
+      currentTypeClubIds.length > 0;
+    setIsClicked(allSelected);
+  }, [selectedClubIds, filteredClubs]);
 
   const allClickedButton = () => {
-    setIsClicked((prev) => {
-      const newIsClicked = !prev;
-      setSelectedClubIds(newIsClicked
-        ? validClubs.filter(club => club.type === itemType).map(club => club.id)
-        : []
+    const newIsClicked = !isClicked;
+    if (newIsClicked) {
+      const currentTypeClubIds = filteredClubs.map((club) => club.id);
+      setSelectedClubIds((prev) => [
+        ...prev.filter((id) => !currentTypeClubIds.includes(id)),
+        ...currentTypeClubIds,
+      ]);
+    } else {
+      const currentTypeClubIds = filteredClubs.map((club) => club.id);
+      setSelectedClubIds((prev) =>
+        prev.filter((id) => !currentTypeClubIds.includes(id))
       );
-      return newIsClicked;
-    });
+    }
+    setIsClicked(newIsClicked);
   };
-
   return (
     <>
       <S.ClubItemWrap>
         {isEnded && (
-            <S.WrapCheckBox>
-              <DodamCheckBox onClick={allClickedButton} isDisabled={isClicked} />
-            </S.WrapCheckBox>
+          <S.WrapCheckBox>
+            <DodamCheckBox onClick={allClickedButton} isDisabled={isClicked} />
+          </S.WrapCheckBox>
         )}
         <S.WrapClubName>동아리명</S.WrapClubName>
         <S.SubjectClub>주제</S.SubjectClub>
         <S.ShortDescription>설명</S.ShortDescription>
         <S.WhoClubLeader>부장</S.WhoClubLeader>
         <S.StateClub />
-        {isEnded
-        ? (
+        {isEnded ? (
           <S.DetailClubContext>상태</S.DetailClubContext>
-        )
-        : (
+        ) : (
           <S.DetailClubContext>담당자</S.DetailClubContext>
         )}
       </S.ClubItemWrap>
       <ClubLine />
       <DodamErrorBoundary text="에러 발생" showButton={true}>
-      { isLoading ? (
-        <SkeletonComponent length={10} height={48} />
-        ) : validClubs.length > 0 ? (
-              validClubs.map((value) =>
-                value?.type === itemType ? (
-              <ClubItem key={value.id} value={value} isEnded={isEnded}/>
-        ) : null
-      )
-    ) : (
-        <p
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        >
-      데이터가 없습니다
-    </p>
-  )}
-</DodamErrorBoundary>
+        {isLoading ? (
+          <SkeletonComponent length={10} height={48} />
+        ) : validClubs?.some((value) => value?.type === itemType) ? (
+          validClubs.map((value) =>
+            value?.type === itemType ? (
+              <ClubItem
+                key={value.id}
+                value={value}
+                isEnded={isEnded}
+                selectedClubIds={selectedClubIds}
+                setSelectedClubIds={setSelectedClubIds}
+              />
+            ) : null
+          )
+        ) : (
+          <S.NotRequestClubStyle>
+            아직 동아리 개설 신청이 들어오지 않았어요!
+          </S.NotRequestClubStyle>
+        )}
+      </DodamErrorBoundary>
     </>
   );
 };

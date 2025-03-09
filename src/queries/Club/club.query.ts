@@ -1,15 +1,15 @@
-import { AxiosError } from 'axios'
-import { dodamAxios } from 'libs/Axios/customAxios'
-import { QUERY_KEYS } from 'queries/queryKey'
+import { AxiosError } from "axios";
+import { dodamAxios } from "libs/Axios/customAxios";
+import { QUERY_KEYS } from "queries/queryKey";
 import {
   useMutation,
   useQuery,
   useQueryClient,
   UseQueryOptions,
   UseQueryResult,
-} from 'react-query'
-import { useNavigate } from 'react-router-dom'
-import ClubRepositoryImpl from 'repositories/Club/ClubRepositoryImpl'
+} from "react-query";
+import { useNavigate } from "react-router-dom";
+import ClubRepositoryImpl from "repositories/Club/ClubRepositoryImpl";
 import {
   ClubResponse,
   ClubDetailResponse,
@@ -17,10 +17,10 @@ import {
   BaseResponse,
   ClubState,
   ClubTime,
-} from 'types/Club/club.type'
-import { B1ndToast } from '@b1nd/b1nd-toastify'
-import clubRepositoryImpl from 'repositories/Club/ClubRepositoryImpl'
-import { ClubPeriodParam } from 'repositories/Club/ClubRepository'
+} from "types/Club/club.type";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
+import clubRepositoryImpl from "repositories/Club/ClubRepositoryImpl";
+import { ClubPeriodParam } from "repositories/Club/ClubRepository";
 
 export const useGetClubDateQuery = (
   options?: UseQueryOptions<ClubResponse, AxiosError, ClubResponse, string>
@@ -29,7 +29,7 @@ export const useGetClubDateQuery = (
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 10,
     ...options,
-  })
+  });
 
 export const useGetClubDetailQuery = (
   { id }: { id: number },
@@ -43,7 +43,7 @@ export const useGetClubDetailQuery = (
       cacheTime: 1000 * 60 * 10,
       ...options,
     }
-  )
+  );
 
 export const useGetClubMembersQuery = (
   { id }: { id: number },
@@ -57,28 +57,29 @@ export const useGetClubMembersQuery = (
       cacheTime: 1000 * 60 * 10,
       ...(options ?? {}),
     }
-  )
+  );
 
 export const useClubMutation = () => {
   return useMutation({
     mutationFn: clubRepositoryImpl.patchClubState,
     onSuccess: () => {
-      alert('클럽 상태 변경 완료!')
+      B1ndToast.showSuccess("동아리 개설이 허락되었습니다.");
+      window.location.reload();
     },
     onError: (error) => {
-      console.error('클럽 상태 변경 실패:', error)
-      alert('오류 발생! 다시 시도해주세요.')
+      console.error("클럽 상태 변경 실패:", error);
+      B1ndToast.showError("동아리 개설에 실패했습니다.");
     },
-  })
-}
+  });
+};
 
 export const useClubPeriodMutation = () => {
   const mutation = useMutation((param: ClubPeriodParam) =>
     clubRepositoryImpl.postClubPeriod(param)
-  )
+  );
 
-  return mutation
-}
+  return mutation;
+};
 
 export const useGetTimeQuery = (
   options?: UseQueryOptions<ClubTime, AxiosError>
@@ -91,13 +92,13 @@ export const useGetTimeQuery = (
       cacheTime: 1000 * 60 * 10,
       ...options,
     }
-  )
+  );
 
 export const useApplicateTeacherMutation = () => {
   const mutation = useMutation(
     (param: { clubId: number; teacherName: string }) =>
       clubRepositoryImpl.postApplicateTeacher(param.clubId, param.teacherName)
-  )
+  );
 
-  return mutation
-}
+  return mutation;
+};

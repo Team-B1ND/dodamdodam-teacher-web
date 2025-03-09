@@ -24,7 +24,6 @@ const ClubMain = () => {
   };
 
   const handleBulkAllowButton = () => {
-    console.log({status : "ALLOWED", clubIds: selectedClubIds})
     mutate({ status: "ALLOWED", clubIds: selectedClubIds });
   };
   const date = new Date
