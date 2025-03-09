@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ClubMemberItem from "./ClubMemberItem";
-import * as S from "./style";
+import { useState } from 'react'
+import ClubMemberItem from './ClubMemberItem'
+import * as S from './style'
 import {
   DodamFilledButton,
   Close,
@@ -8,30 +8,30 @@ import {
   CheckmarkCircleFilled,
   XmarkCircle,
   Clock,
-} from "@b1nd/dds-web";
-import JoinConfirm from "./JoinConfirm";
-import MDEditor from "@uiw/react-md-editor";
-import ClubDetailSkeleton from "./ClubDetailSkeleton";
-import { ClubMember } from "types/Club/club.type";
-import { useTheme } from "styled-components";
-import { useClubDetail, useClubTime } from "hooks/Club/useClubData";
-import { useClubActions } from "hooks/Club/useClubActions";
+} from '@b1nd/dds-web'
+import JoinConfirm from './JoinConfirm'
+import MDEditor from '@uiw/react-md-editor'
+import ClubDetailSkeleton from './ClubDetailSkeleton'
+import { ClubMember } from 'types/Club/club.type'
+import { useTheme } from 'styled-components'
+import { useClubDetail, useClubTime } from 'hooks/Club/useClubData'
+import { useClubActions } from 'hooks/Club/useClubActions'
 
 interface DetailClubProps {
-  item: number;
-  close: () => void;
-  leader: ClubMember;
+  item: number
+  close: () => void
+  leader: ClubMember
 }
 
 const DetailClub = ({ item, close, leader }: DetailClubProps) => {
-  const theme = useTheme();
-  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
-  const { club, members, isLoading } = useClubDetail(item);
-  const { timeData, isLoading: timeIsLoading } = useClubTime();
-  const { approveClub } = useClubActions(); 
+  const theme = useTheme()
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false)
+  const { club, members, isLoading } = useClubDetail(item)
+  const { timeData, isLoading: timeIsLoading } = useClubTime()
+  const { approveClub } = useClubActions({ close })
 
-  const date = new Date();
-  const today = date.toLocaleDateString().replace(/. /g, "-0").replace(".", "");
+  const date = new Date()
+  const today = date.toLocaleDateString().replace(/. /g, '-0').replace('.', '')
 
   return isLoading || timeIsLoading ? (
     <S.WrapSkeleton>
@@ -44,23 +44,23 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
       <S.ClubMiddleContainer>
         <div>
           <div onClick={close}>
-            <Close $svgStyle={{ cursor: "pointer" }} />
+            <Close $svgStyle={{ cursor: 'pointer' }} />
           </div>
           <S.ClubDescriptionWrap>
             <div>
               <S.ClubTypeName>
-                {club.data.type === "CREATIVE_ACTIVITY_CLUB"
-                  ? "창체 • "
-                  : "자율 • "}
+                {club.data.type === 'CREATIVE_ACTIVITY_CLUB'
+                  ? '창체 • '
+                  : '자율 • '}
                 {club.data.subject}
               </S.ClubTypeName>
               <S.ClubNameWrap>
                 <S.ClubName>{club.data.name}</S.ClubName>
                 {timeData!.createEnd > today &&
-                club.data.state === "ALLOWED" ? (
-                  <CheckmarkCircleFilled color={"statusPositive"} size={32} />
-                ) : club.data.state === "REJECTED" ? (
-                  <XmarkCircle color={"statusNegative"} size={32} />
+                club.data.state === 'ALLOWED' ? (
+                  <CheckmarkCircleFilled color={'statusPositive'} size={32} />
+                ) : club.data.state === 'REJECTED' ? (
+                  <XmarkCircle color={'statusNegative'} size={32} />
                 ) : (
                   <Clock size={32} />
                 )}
@@ -73,22 +73,22 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
               {timeData!.createEnd > today && (
                 <S.WrapButton>
                   <DodamFilledButton
-                    size="Small"
+                    size='Small'
                     width={97}
-                    text="개설 승인"
-                    textTheme={"staticWhite"}
-                    typography={["Body2", "Medium"]}
-                    customStyle={{ minHeight: "38px", marginLeft: "11px" }}
-                    onClick={() => approveClub(item)} 
+                    text='개설 승인'
+                    textTheme={'staticWhite'}
+                    typography={['Body2', 'Medium']}
+                    customStyle={{ minHeight: '38px', marginLeft: '11px' }}
+                    onClick={() => approveClub(item)}
                   />
                   <DodamFilledButton
-                    size="Small"
+                    size='Small'
                     width={97}
-                    text="개설 거절"
-                    textTheme={"staticWhite"}
-                    typography={["Body2", "Medium"]}
-                    customStyle={{ minHeight: "38px", marginLeft: "11px" }}
-                    backgroundColorType={"Negative"}
+                    text='개설 거절'
+                    textTheme={'staticWhite'}
+                    typography={['Body2', 'Medium']}
+                    customStyle={{ minHeight: '38px', marginLeft: '11px' }}
+                    backgroundColorType={'Negative'}
                     onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
                   />
                   <DodamModal isOpen={isRejectModalOpen} background={true}>
@@ -140,7 +140,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
         </div>
       </S.ClubMiddleContainer>
     </S.ClubModalContainer>
-  );
-};
+  )
+}
 
-export default DetailClub;
+export default DetailClub

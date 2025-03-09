@@ -12,7 +12,7 @@ const ClubMain = () => {
   const [isClickedSelfDirect, setIsClickedSelfDirect] = useState(false);
   
   const { data, isLoading } = useGetTimeQuery();
-  const { bulkApproveClubs } = useClubActions();
+  const { bulkApproveClubs } = useClubActions({});
 
   const changeClubPage = () => {
     setIsActive((prev) => !prev);

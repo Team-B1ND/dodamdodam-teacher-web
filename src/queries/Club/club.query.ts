@@ -65,7 +65,7 @@ export const useClubMutation = () => {
     mutationFn: clubRepositoryImpl.patchClubState,
     onSuccess: () => {
       B1ndToast.showSuccess("성공적으로 업데이트 되었습니다");
-      queryClient.invalidateQueries("getClubs");
+      queryClient.invalidateQueries(QUERY_KEYS.club.getClubs);
     },
     onError: (error) => {
       console.error("클럽 상태 변경 실패:", error);
