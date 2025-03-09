@@ -39,7 +39,7 @@ const ClubItem = ({ value, isEnded, selectedClubIds, setSelectedClubIds }: ClubI
 
         <S.WrapClubName>
           <S.ClubName onClick={() => setIsModalOpen(true)}>
-            {value.name}
+            {value?.name}
           </S.ClubName>
         </S.WrapClubName>
 
@@ -63,9 +63,11 @@ const ClubItem = ({ value, isEnded, selectedClubIds, setSelectedClubIds }: ClubI
           ) : (
             <Clock />
           )
-        ) : (
-          <div>{value?.teacher.name || "미정"}</div>
-        )}
+        )
+        : (
+          <div>{value.teacher?.name || '미정'}</div>
+        ) 
+        }
       </S.ClubItemWrap>
       <DodamModal isOpen={isModalOpen} background>
         <DetailClub
