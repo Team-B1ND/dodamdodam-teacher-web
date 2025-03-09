@@ -1,7 +1,9 @@
-import React, { useState, ChangeEvent, useContext } from "react";
+import React, { useState, ChangeEvent } from "react";
 import * as S from "./style";
 import { DodamTextField, DodamFilledButton } from "@b1nd/dds-web";
-import { useClubMutation } from "queries/Club/club.query";
+import { useClubDetail } from "hooks/Club/useClubData";
+import { useClubActions } from "hooks/Club/useClubActions";
+
 interface JoinConfirmProps {
   onClose: () => void;
   clubId: number;
@@ -9,15 +11,23 @@ interface JoinConfirmProps {
 
 const JoinConfirm = ({ onClose, clubId }: JoinConfirmProps) => {
   const [rejectReason, setRejectReason] = useState<string>("");
+  const { rejectClub } = useClubActions();
+  const { club, isLoading } = useClubDetail(clubId);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setRejectReason(event.target.value);
   };
 
-  const { mutate } = useClubMutation();
-
   const handleRejectButton = () => {
-    mutate({ clubIds: [clubId], status: "REJECTED", reason: rejectReason });
+    if (!rejectReason.trim()) {
+      alert("거절 사유를 입력해주세요."); 
+      return;
+    }
+    rejectClub(clubId, rejectReason); 
+    onClose();
   };
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <S.ClubJoinContainer>
@@ -40,12 +50,12 @@ const JoinConfirm = ({ onClose, clubId }: JoinConfirmProps) => {
           enabled={true}
           text="취소"
           typography={["Body1", "Medium"]}
-          backgroundColorType={"Normal"}
+          backgroundColorType={"Assisitive"}
           onClick={onClose}
         />
         <DodamFilledButton
           size={"Large"}
-          enabled={true}
+          enabled={rejectReason.trim().length > 0} 
           text="확인"
           textTheme={"staticWhite"}
           typography={["Body1", "Medium"]}

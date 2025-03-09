@@ -3,32 +3,27 @@ import ClubItemList from "./ClubContext/ClubItemList";
 import * as S from "./style";
 import { DodamSegmentedButton, DodamFilledButton } from "@b1nd/dds-web";
 import { useGetTimeQuery } from "queries/Club/club.query";
-import { useClubMutation } from "queries/Club/club.query";
-
-
-
+import { useClubActions } from "hooks/Club/useClubActions";
 
 const ClubMain = () => {
   const [isActive, setIsActive] = useState(true);
-  const { mutate } = useClubMutation();
   const [selectedClubIds, setSelectedClubIds] = useState<number[]>([]);
-  const [isClickedCreative, setIsClickedCreative] = useState(false); 
-  const [isClickedSelfDirect, setIsClickedSelfDirect] = useState(false); 
-  const { data, isLoading } = useGetTimeQuery()
-
+  const [isClickedCreative, setIsClickedCreative] = useState(false);
+  const [isClickedSelfDirect, setIsClickedSelfDirect] = useState(false);
+  
+  const { data, isLoading } = useGetTimeQuery();
+  const { bulkApproveClubs } = useClubActions();
 
   const changeClubPage = () => {
     setIsActive((prev) => !prev);
-    setIsClickedCreative(false); 
+    setIsClickedCreative(false);
     setIsClickedSelfDirect(false);
   };
 
-  const handleBulkAllowButton = () => {
-    mutate({ status: "ALLOWED", clubIds: selectedClubIds });
-  };
-  const date = new Date
-  const today = date.toLocaleDateString().replace(/. /g, '-0').replace('.', '')
-  if(isLoading) return <div>Loading..</div>
+  const date = new Date();
+  const today = date.toLocaleDateString().replace(/. /g, "-0").replace(".", "");
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <S.ClubMainContainer>
@@ -47,8 +42,8 @@ const ClubMain = () => {
             onClick={changeClubPage}
           />
         </S.WrapSegmentedButton>
-        {data!.createEnd > today
-        && (
+
+        {data!.createEnd > today && (
           <DodamFilledButton
             text="일괄 승인"
             textTheme={"staticWhite"}
@@ -57,9 +52,11 @@ const ClubMain = () => {
             enabled={selectedClubIds.length > 0}
             width={97}
             customStyle={{ height: "38px" }}
-            onClick={handleBulkAllowButton}/>
+            onClick={() => bulkApproveClubs(selectedClubIds)}
+          />
         )}
       </S.ClubMenuButtonContainer>
+
       <S.MainClubListContainer>
         {isActive ? (
           <ClubItemList
@@ -85,5 +82,5 @@ const ClubMain = () => {
   );
 };
 
-
 export default ClubMain;
+

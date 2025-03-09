@@ -3,26 +3,19 @@ import ClubMemberItem from "./ClubMemberItem";
 import * as S from "./style";
 import {
   DodamFilledButton,
-  ExclamationmarkCircle,
   Close,
   DodamModal,
   CheckmarkCircleFilled,
-  DodamDivider,
-  DodamColor,
+  XmarkCircle,
+  Clock,
 } from "@b1nd/dds-web";
 import JoinConfirm from "./JoinConfirm";
 import MDEditor from "@uiw/react-md-editor";
-import {
-  useClubMutation,
-  useGetClubDetailQuery,
-  useGetClubMembersQuery,
-  useGetTimeQuery,
-} from "queries/Club/club.query";
-import SkeletonComponent from "components/common/Skeleton";
-import { ClubMember } from "types/Club/club.type";
-import { useMutation } from "react-query";
-import { useTheme } from "styled-components";
 import ClubDetailSkeleton from "./ClubDetailSkeleton";
+import { ClubMember } from "types/Club/club.type";
+import { useTheme } from "styled-components";
+import { useClubDetail, useClubTime } from "hooks/Club/useClubData";
+import { useClubActions } from "hooks/Club/useClubActions";
 
 interface DetailClubProps {
   item: number;
@@ -33,22 +26,14 @@ interface DetailClubProps {
 const DetailClub = ({ item, close, leader }: DetailClubProps) => {
   const theme = useTheme();
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
-  const { data: club, isLoading: clubIsLoading } = useGetClubDetailQuery({
-    id: item,
-  });
-  const { data: members, isLoading: memberIsLoading } = useGetClubMembersQuery({
-    id: item,
-  });
-  const { data: timeData, isLoading: timeIsLoading } = useGetTimeQuery();
+  const { club, members, isLoading } = useClubDetail(item);
+  const { timeData, isLoading: timeIsLoading } = useClubTime();
+  const { approveClub } = useClubActions(); 
+
   const date = new Date();
   const today = date.toLocaleDateString().replace(/. /g, "-0").replace(".", "");
 
-  const { mutate } = useClubMutation();
-  const handleClickAllowButton = () => {
-    mutate({ clubIds: [item], status: "ALLOWED" });
-  };
-
-  return clubIsLoading || memberIsLoading || timeIsLoading ? (
+  return isLoading || timeIsLoading ? (
     <S.WrapSkeleton>
       <ClubDetailSkeleton />
     </S.WrapSkeleton>
@@ -73,12 +58,11 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
                 <S.ClubName>{club.data.name}</S.ClubName>
                 {timeData!.createEnd > today &&
                 club.data.state === "ALLOWED" ? (
-                  <CheckmarkCircleFilled color={DodamColor.green50} size={32} />
+                  <CheckmarkCircleFilled color={"statusPositive"} size={32} />
+                ) : club.data.state === "REJECTED" ? (
+                  <XmarkCircle color={"statusNegative"} size={32} />
                 ) : (
-                  <ExclamationmarkCircle
-                    color={DodamColor.yellow50}
-                    size={32}
-                  />
+                  <Clock size={32} />
                 )}
               </S.ClubNameWrap>
               <S.ClubShortDescription>
@@ -95,7 +79,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
                     textTheme={"staticWhite"}
                     typography={["Body2", "Medium"]}
                     customStyle={{ minHeight: "38px", marginLeft: "11px" }}
-                    onClick={handleClickAllowButton}
+                    onClick={() => approveClub(item)} 
                   />
                   <DodamFilledButton
                     size="Small"
@@ -131,7 +115,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
               <S.Member>멤버</S.Member>
               {members?.data.students?.map((item) => (
                 <ClubMemberItem
-                  key={item.name} 
+                  key={item.name}
                   name={item.name}
                   grade={item.grade}
                   room={item.room}

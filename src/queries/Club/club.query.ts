@@ -60,15 +60,16 @@ export const useGetClubMembersQuery = (
   );
 
 export const useClubMutation = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: clubRepositoryImpl.patchClubState,
     onSuccess: () => {
-      B1ndToast.showSuccess("동아리 개설이 허락되었습니다.");
-      window.location.reload();
+      B1ndToast.showSuccess("성공적으로 업데이트 되었습니다");
+      queryClient.invalidateQueries("getClubs");
     },
     onError: (error) => {
       console.error("클럽 상태 변경 실패:", error);
-      B1ndToast.showError("동아리 개설에 실패했습니다.");
+      B1ndToast.showError("동아리 상태 변경에 실패했습니다.");
     },
   });
 };
