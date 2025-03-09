@@ -5,11 +5,17 @@ const ClubMemberItem = (props: {
   name: string;
   room: number;
   grade: number;
+  profileImage: string | null;
 }) => {
   return (
     <S.ParentsClubMember>
       <S.WrapClubMember>
-        <Avatar size="large"/>
+        {props.profileImage ? (
+          <S.ProfileImageStudent src={props.profileImage} />)
+        :(
+          <Avatar size="large" />
+        )}
+
         <div>
           <S.StudentName>{props.name}</S.StudentName>
           <S.StudentClass>

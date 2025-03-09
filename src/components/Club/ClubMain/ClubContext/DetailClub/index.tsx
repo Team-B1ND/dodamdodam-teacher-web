@@ -119,6 +119,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
                   name={item.name}
                   grade={item.grade}
                   room={item.room}
+                  profileImage={item.profileImage || null}
                 />
               ))}
             </div>
