@@ -62,11 +62,4 @@ export const CircleStateButoonContainer = styled.div`
   display: flex;
 `;
 
-export const NotRequestClubStyle = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  ${DodamTypography.Heading1.Bold}
-`;
+

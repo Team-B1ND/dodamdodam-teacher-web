@@ -131,7 +131,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
               <S.Member>멤버</S.Member>
               {members?.data.students?.map((item) => (
                 <ClubMemberItem
-                  key={item.name} // key 추가 (React 최적화)
+                  key={item.name} 
                   name={item.name}
                   grade={item.grade}
                   room={item.room}

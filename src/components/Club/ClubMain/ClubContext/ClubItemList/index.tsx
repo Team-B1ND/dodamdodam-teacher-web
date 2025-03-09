@@ -5,6 +5,7 @@ import * as S from "./style";
 import { DodamCheckBox, DodamErrorBoundary } from "@b1nd/dds-web";
 import { useGetClubDateQuery } from "queries/Club/club.query";
 import { ClubLine } from "./ClubItem/style";
+import NoClub from "../NoClub";
 
 interface ClubItemListProps {
   itemType: "CREATIVE_ACTIVITY_CLUB" | "SELF_DIRECT_ACTIVITY_CLUB";
@@ -92,9 +93,7 @@ const ClubItemList = ({
             ) : null
           )
         ) : (
-          <S.NotRequestClubStyle>
-            아직 동아리 개설 신청이 들어오지 않았어요!
-          </S.NotRequestClubStyle>
+          <NoClub/>
         )}
       </DodamErrorBoundary>
     </>
