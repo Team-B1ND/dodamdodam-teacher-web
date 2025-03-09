@@ -1,37 +1,39 @@
-import { useEffect, useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import * as S from "./style";
 import {
   DodamCheckBox,
   CheckmarkCircleFilled,
   Clock,
   DodamModal,
+  XmarkCircle,
 } from "@b1nd/dds-web";
-import DetailClub from "components/Club/ClubDateList/DetailClub";
-import { ClubProps } from "types/Club/club.type";
+import DetailClub from "../../DetailClub";
+import { Club } from "types/Club/club.type";
+import useClubSelection from "hooks/Club/useClubSelection";
 
-const ClubItem = ({ value, isEnded }: ClubProps) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+interface ClubItemProps {
+  value: Club;
+  isEnded: boolean;
+  selectedClubIds: number[];
+  setSelectedClubIds: Dispatch<SetStateAction<number[]>>;
+}
+
+const ClubItem = ({ value, isEnded, selectedClubIds, setSelectedClubIds }: ClubItemProps) => {
+  const { isChecked, toggleSelection } = useClubSelection(selectedClubIds, setSelectedClubIds, value.id);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [clubIds, setClubIds] = useState<number[]>([]);
-  
-
-  const handleCheckboxClick = () => {
-    setIsChecked(!isChecked);
-    setClubIds((prevIds) => [...prevIds, value.id]);
-  };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-
   return (
     <>
       <S.ClubItemWrap key={value.id}>
-        {isEnded
-        && (
+        {isEnded && (
           <S.WrapCheckBox>
-            <DodamCheckBox onClick={handleCheckboxClick} isDisabled={isChecked} />
+            <DodamCheckBox
+              onClick={toggleSelection}
+              isDisabled={isChecked}
+            />
           </S.WrapCheckBox>
         )}
 
@@ -53,10 +55,11 @@ const ClubItem = ({ value, isEnded }: ClubProps) => {
           {value.leader?.name}
         </S.WhoClubLeader>
         <S.StateClub />
-        {isEnded
-        ? (
+        {isEnded ? (
           value.state === "ALLOWED" ? (
-            <CheckmarkCircleFilled color="#00C265" />
+            <CheckmarkCircleFilled color={"statusPositive"} />
+          ) : value.state === "REJECTED" ? (
+            <XmarkCircle color={"statusNegative"} />
           ) : (
             <Clock />
           )
@@ -65,12 +68,10 @@ const ClubItem = ({ value, isEnded }: ClubProps) => {
           <div>{value.teacher?.name || '미정'}</div>
         ) 
         }
-          
       </S.ClubItemWrap>
       <DodamModal isOpen={isModalOpen} background>
         <DetailClub
           close={() => {
-            console.log("test");
             handleCloseModal();
           }}
           item={value.id}

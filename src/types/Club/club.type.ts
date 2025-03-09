@@ -38,8 +38,8 @@ export interface ClubMember {
 
 export interface ClubState {
   clubIds: number[];
-  state: "ALLOWED" | "PENDING" | "REJECTED" | "DELETED";
-  reason: string;
+  status: "ALLOWED" | "PENDING" | "REJECTED" | "DELETED";
+  reason?: string;
 }
 
 export interface ClubDetailResponse {
