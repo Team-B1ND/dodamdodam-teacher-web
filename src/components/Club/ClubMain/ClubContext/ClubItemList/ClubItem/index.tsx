@@ -37,7 +37,7 @@ const ClubItem = ({ value, isEnded }: ClubProps) => {
 
         <S.WrapClubName>
           <S.ClubName onClick={() => setIsModalOpen(true)}>
-            {value.name}
+            {value?.name}
           </S.ClubName>
         </S.WrapClubName>
 
@@ -62,7 +62,7 @@ const ClubItem = ({ value, isEnded }: ClubProps) => {
           )
         )
         : (
-          <div>{value.teacher.name || '미정'}</div>
+          <div>{value.teacher?.name || '미정'}</div>
         ) 
         }
           
