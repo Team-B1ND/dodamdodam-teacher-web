@@ -1,8 +1,8 @@
-import { ReactNode, useEffect, useState } from 'react';
-import Login from './Signin';
-import FindPassword from './FindPassword';
-import { useSignin } from 'hooks/auth/useSignin';
-import { SIGNIN_SECTION_NAME } from 'constants/Auth/SIgnin/signin.constants';
+import { ReactNode, useEffect, useState } from 'react'
+import Login from './Signin'
+import FindPassword from './FindPassword'
+import { useSignin } from 'hooks/auth/useSignin'
+import { SIGNIN_SECTION_NAME } from 'constants/Auth/SIgnin/signin.constants'
 
 const Signin = () => {
   const {
@@ -14,34 +14,38 @@ const Signin = () => {
     signinData,
     handleSigninChange,
     handleFindPassword,
-  } = useSignin();
-  const [, setPrevSection] = useState(section);
+    clearSignupField,
+    clearFindPasswordField,
+  } = useSignin()
+  const [, setPrevSection] = useState(section)
   const SigninComponents: ReactNode[] = [
     <Login
       setSection={setSection}
       submitSignin={submitSignin}
       signinData={signinData}
       handleSigninChange={handleSigninChange}
+      clearSigninField={clearSignupField}
     />,
     <FindPassword
       setSection={setSection}
       findPasswordData={findPasswordData}
       handleFindPasswordChange={handleFindPasswordChange}
       handleFindPassword={handleFindPassword}
+      clearFindPasswordField={clearFindPasswordField}
     />,
-  ];
+  ]
 
   useEffect(() => {
-    setPrevSection(section);
-  }, [section]);
+    setPrevSection(section)
+  }, [section])
 
   return (
     <>
       {SigninComponents.map((component, idx) => {
-        return section === SIGNIN_SECTION_NAME[idx].title && component;
+        return section === SIGNIN_SECTION_NAME[idx].title && component
       })}
     </>
-  );
-};
+  )
+}
 
-export default Signin;
+export default Signin

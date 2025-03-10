@@ -40,3 +40,9 @@ export interface MemberResponse extends Response {
 export interface MyMemberResponse extends Response {
   data: StudentAndTeacher;
 }
+
+
+export interface SignUpModal {
+  email: boolean;
+  phone: boolean
+}

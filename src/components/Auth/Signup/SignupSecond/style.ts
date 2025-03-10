@@ -1,5 +1,5 @@
-import { DodamLightTheme, DodamTypography } from '@b1nd/dds-web';
-import styled, { css } from 'styled-components';
+import { DodamLightTheme, DodamTypography } from '@b1nd/dds-web'
+import styled, { css } from 'styled-components'
 
 export const SignupWrap = styled.div`
   width: 28%;
@@ -25,20 +25,20 @@ export const SignupWrap = styled.div`
     width: 85%;
     height: 63%;
   }
-`;
+`
 
 export const SignupButtonWrap = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
+`
 
 export const SignUpTitle = styled.h1`
   ${DodamTypography.Title2.Bold};
   color: ${({ theme }) => theme.labelNormal};
   height: fit-content;
-`;
+`
 
 export const InputWrap = styled.div`
   width: 100%;
@@ -46,9 +46,9 @@ export const InputWrap = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-evenly;
-`;
+`
 
 export const CheckWrap = styled.div`
   width: 100%;
@@ -56,7 +56,7 @@ export const CheckWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-`;
+`
 
 export const CheckmarkWrap = styled.div`
   width: 100%;
@@ -75,4 +75,4 @@ export const CheckmarkWrap = styled.div`
 
     text-decoration: underline;
   }
-`;
+`

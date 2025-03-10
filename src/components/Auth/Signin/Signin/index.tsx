@@ -8,6 +8,7 @@ interface LoginProps {
   submitSignin: () => void
   signinData: SignInParam
   handleSigninChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  clearSigninField: (field: keyof SignInParam) => void
 }
 
 const Login = ({
@@ -15,6 +16,7 @@ const Login = ({
   submitSignin,
   signinData,
   handleSigninChange,
+  clearSigninField,
 }: LoginProps) => {
   return (
     <S.SigninWrap>
@@ -29,6 +31,7 @@ const Login = ({
             value={signinData.id}
             label='아이디'
             onKeyDown={submitSignin}
+            onRemoveClick={() => clearSigninField('id')}
           />
           <DodamTextField
             onChange={handleSigninChange}

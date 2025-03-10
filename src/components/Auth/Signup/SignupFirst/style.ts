@@ -1,5 +1,5 @@
-import { DodamLightTheme, DodamTypography } from '@b1nd/dds-web';
-import styled, { css } from 'styled-components';
+import { DodamLightTheme, DodamTypography } from '@b1nd/dds-web'
+import styled, { css } from 'styled-components'
 
 export const SignupWrap = styled.div`
   width: 28%;
@@ -25,12 +25,12 @@ export const SignupWrap = styled.div`
     width: 80%;
     height: 60%;
   }
-`;
+`
 
 export const SignUpTitle = styled.h1`
   ${DodamTypography.Title2.Bold};
   color: ${({ theme }) => theme.labelNormal};
-`;
+`
 
 export const InputWrap = styled.div`
   width: 100%;
@@ -38,9 +38,9 @@ export const InputWrap = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-evenly;
-`;
+`
 
 export const AccountContainer = styled.div`
   width: 75%;
@@ -56,12 +56,12 @@ export const AccountContainer = styled.div`
     color: ${DodamLightTheme.labelNormal};
     text-decoration: underline;
   }
-`;
+`
 
 export const PasswordBox = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 export const PasswordViewBox = styled.div`
   z-index: 10;
 
@@ -73,14 +73,14 @@ export const PasswordViewBox = styled.div`
   color: gray;
 
   user-select: none;
-`;
+`
 
 export const ButtonStyle = css`
   width: 350px;
   margin-top: 10px;
   background-color: ${DodamLightTheme.primaryNormal};
   color: ${DodamLightTheme.staticWhite};
-`;
+`
 
 export const NoneAccount = styled.div`
   color: ${({ theme }) => theme.labelAssisitive};
@@ -89,4 +89,4 @@ export const NoneAccount = styled.div`
     color: ${({ theme }) => theme.labelNormal};
     text-decoration: underline;
   }
-`;
+`
