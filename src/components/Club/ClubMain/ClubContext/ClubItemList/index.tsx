@@ -80,7 +80,7 @@ const ClubItemList = ({
       <DodamErrorBoundary text="에러 발생" showButton={true}>
         {isLoading ? (
           <SkeletonComponent length={10} height={48} />
-        ) : validClubs?.some((value) => value?.type === itemType) ? (
+        ) : validClubs?.some((value) => value?.type === itemType && value.state === "ALLOWED" || value.state == "PENDING") ? (
           validClubs.map((value) =>
             value?.type === itemType ? (
               <ClubItem
@@ -94,7 +94,7 @@ const ClubItemList = ({
           )
         ) : (
           <NoClub/>
-        )}
+                )}
       </DodamErrorBoundary>
     </>
   );

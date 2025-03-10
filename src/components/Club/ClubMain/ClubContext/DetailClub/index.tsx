@@ -113,6 +113,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
           <S.ClubInfoDetail>
             <div>
               <S.Member>멤버</S.Member>
+              <S.WrapClubMemberContainer>
               {members?.data.students?.map((item) => (
                 <ClubMemberItem
                   key={item.name}
@@ -122,6 +123,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
                   profileImage={item.profileImage || null}
                 />
               ))}
+              </S.WrapClubMemberContainer>
             </div>
             <S.ExplainClubWrap>
               <div>설명</div>
