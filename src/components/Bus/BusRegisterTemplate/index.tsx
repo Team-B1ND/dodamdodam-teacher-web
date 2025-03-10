@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import * as S from './style'
 import {
   DodamDatePicker,
@@ -77,13 +77,13 @@ const BusRegisterTemplate = ({
       <S.BusButtonWrap>
         <DodamFilledButton
           size='Large'
-          text={section === 'presetAdd' ? '프리셋 등록' : '버스 등록'}
+          text={section === 'presetAdd' ? '버스 등록' : '프리셋'}
           textTheme='staticBlack'
           typography={['Body1', 'Bold']}
           backgroundColorType='Assistive'
           width={section === 'presetAdd' ? 100 : 120}
           onClick={() =>
-            setSection(section === 'presetAdd' ? 'presetAdd' : 'add')
+            setSection(section === 'presetAdd' ? 'add' : 'presetAdd')
           }
         />
         <DodamFilledButton

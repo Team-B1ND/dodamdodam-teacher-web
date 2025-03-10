@@ -7,7 +7,7 @@ export const BusInfoWrap = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  width: 35%;
+  width: 30%;
   height: 100%;
   padding: 1.5rem 2rem 1rem 2rem;
 

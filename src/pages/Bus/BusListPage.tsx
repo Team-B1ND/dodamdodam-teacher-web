@@ -7,6 +7,7 @@ import { useGetAllBusListQuery } from 'queries/Bus/bus.query'
 import BusPreset from 'components/Bus/BusPreset'
 import BusAdd from 'components/Bus/BusAdd'
 import BusPresetAdd from 'components/Bus/BusPresetAdd'
+import BusPresetInfo from 'components/Bus/BusPreset/BusPresetInfo'
 
 const BusListPage = () => {
   const [section, setSection] = useState<string>('main')
@@ -14,13 +15,20 @@ const BusListPage = () => {
   const BusComponents: Record<string, ReactNode> = {
     main: <BusList setSection={setSection} />,
     add: <BusAdd setSection={setSection} />,
-    presetAdd: <BusPresetAdd setSection={setSection}/>,
+    presetAdd: <BusPresetAdd setSection={setSection} />,
+    presetInfo: <BusPresetInfo setSection={setSection} />,
     info: <BusInfo setSection={setSection} />,
   }
   return (
     <BusContainer>
       {BusComponents[section] || <BusList setSection={setSection} />}
-      <BusPreset />
+      {section === 'main' ||
+      section === 'presetInfo' ||
+      section === 'presetAdd' ? (
+        <BusPreset setSection={setSection} />
+      ) : (
+        <BusSeatInfo />
+      )}
     </BusContainer>
   )
 }
