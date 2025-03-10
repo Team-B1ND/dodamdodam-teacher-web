@@ -7,6 +7,7 @@ interface FindPasswordProps {
   findPasswordData: FindPasswordParam;
   handleFindPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleFindPassword: () => void;
+  clearFindPasswordField: (field: keyof FindPasswordParam) => void;
 }
 
 const FindPassword = ({
@@ -14,6 +15,7 @@ const FindPassword = ({
   findPasswordData,
   handleFindPasswordChange,
   handleFindPassword,
+  clearFindPasswordField,
 }: FindPasswordProps) => {
   return (
     <S.FindPasswordWrap>
@@ -26,7 +28,7 @@ const FindPassword = ({
           type="text"
           value={findPasswordData.id}
           label="아이디"
-          width={360}
+          onRemoveClick={() => clearFindPasswordField('id')}
         />
         <DodamTextField
           onChange={handleFindPasswordChange}
@@ -35,7 +37,7 @@ const FindPassword = ({
           type="password"
           value={findPasswordData.pw}
           label="현재 비밀번호"
-          width={360}
+          onRemoveClick={() => clearFindPasswordField('pw')}
         />
         <DodamTextField
           onChange={handleFindPasswordChange}
@@ -44,7 +46,7 @@ const FindPassword = ({
           type="password"
           value={findPasswordData.newPw}
           label="새로운 비밀번호"
-          width={360}
+          onRemoveClick={() => clearFindPasswordField('newPw')}
         />
       </S.InputWrap>
       <S.FindPasswordButtonWrap>

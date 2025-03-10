@@ -33,7 +33,8 @@ const Signup = ({ setIsSignin }: SignupProps) => {
     setAuthCode,
     setModal,
     isEmailVerified,
-    isPhoneVerified
+    isPhoneVerified,
+    clearSignupField,
   } = useSignup()
   const { handlePasswordView, passwordType } = useSignin()
   const [, setPrevSection] = useState(section)
@@ -54,6 +55,7 @@ const Signup = ({ setIsSignin }: SignupProps) => {
       setAuthCode={setAuthCode}
       isEmailVerified={isEmailVerified}
       isPhoneVerified={isPhoneVerified}
+      clearSignupField={clearSignupField}
     />,
     <SignupSecond
       error={error}
@@ -67,6 +69,7 @@ const Signup = ({ setIsSignin }: SignupProps) => {
       setPersonalInfo={setPersonalInfo}
       checkAllRequired={checkAllRequired}
       submitSignup={submitSignup}
+      clearSignupField={clearSignupField}
     />,
   ]
 

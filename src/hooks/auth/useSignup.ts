@@ -119,6 +119,10 @@ export const useSignup = () => {
     setSection('SignupSecond')
   }
 
+  const clearSignupField = (field: keyof MemberSignUpParam) => {
+    setSignupData((prev) => ({ ...prev, [field]: '' }))
+  }
+
   const handleSignupChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value, name } = e.target
@@ -298,5 +302,6 @@ export const useSignup = () => {
     isPhoneVerified,
     sendPhoneVerification,
     sendEmailVerification,
+    clearSignupField
   }
 }

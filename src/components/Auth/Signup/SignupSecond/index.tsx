@@ -22,6 +22,7 @@ interface SignupSecondProps {
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   checkAllRequired: () => void
   submitSignup: () => void
+  clearSignupField: (field: keyof MemberSignUpParam) => void
 }
 
 const SignupSecond = ({
@@ -35,6 +36,7 @@ const SignupSecond = ({
   setPersonalInfo,
   submitSignup,
   setSection,
+  clearSignupField
 }: SignupSecondProps) => {
   return (
     <S.SignupWrap>
@@ -50,6 +52,7 @@ const SignupSecond = ({
           label='아이디'
           supportingText='아이디는 영문과 숫자로 5 ~ 20글자 이내여야 해요.'
           isError={error.id !== ''}
+          onRemoveClick={() => clearSignupField('id')}
         />
         <DodamTextField
           onChange={handleSignupChange}
@@ -59,6 +62,7 @@ const SignupSecond = ({
           value={signupData.pw}
           label='비밀번호'
           isError={error.pw !== ''}
+          onRemoveClick={() => clearSignupField('pw')}
         />
         <DodamTextField
           onChange={handleSignupChange}
@@ -68,6 +72,7 @@ const SignupSecond = ({
           value={signupData.checkPw}
           label='비밀번호 확인'
           isError={error.checkPw !== ''}
+          onRemoveClick={() => clearSignupField('checkPw')}
         />
         <DodamFilledButton
           icon={

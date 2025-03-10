@@ -20,6 +20,7 @@ interface SignupFirstProps {
   phoneVerification: () => void
   isEmailVerified: boolean
   isPhoneVerified: boolean
+  clearSignupField: (field: keyof MemberSignUpParam) => void
 }
 
 const SignupFirst = ({
@@ -37,6 +38,7 @@ const SignupFirst = ({
   phoneVerification,
   isEmailVerified,
   isPhoneVerified,
+  clearSignupField,
 }: SignupFirstProps) => {
   const handleClose = (type: string) => {
     setModal((prev) => ({ ...prev, [type]: false }))
@@ -54,6 +56,7 @@ const SignupFirst = ({
           label='이메일'
           isError={error.email !== ''}
           supportingText={error.email}
+          onRemoveClick={() => clearSignupField('email')}
         />
         <DodamTextField
           onChange={handleSignupChange}
@@ -64,6 +67,7 @@ const SignupFirst = ({
           label='직책'
           isError={error.position !== ''}
           supportingText={error.position}
+          onRemoveClick={() => clearSignupField('position')}
         />
         <DodamTextField
           onChange={handleSignupChange}
@@ -74,6 +78,7 @@ const SignupFirst = ({
           label='전화번호'
           isError={error.phone !== ''}
           supportingText={error.phone}
+          onRemoveClick={() => clearSignupField('phone')}
         />
         <DodamTextField
           onChange={handleSignupChange}
@@ -84,6 +89,7 @@ const SignupFirst = ({
           label='내선 전화번호'
           isError={error.tel !== ''}
           supportingText={error.tel}
+          onRemoveClick={() => clearSignupField('tel')}
         />
         <DodamTextField
           onChange={handleSignupChange}
@@ -94,6 +100,7 @@ const SignupFirst = ({
           label='이름'
           isError={error.name !== ''}
           supportingText={error.name}
+          onRemoveClick={() => clearSignupField('name')}
         />
       </S.InputWrap>
       <DodamFilledButton
