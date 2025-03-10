@@ -103,5 +103,12 @@ export const ClubName = styled.div`
 export const WrapSkeleton = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;;
-`
+  align-items: center;
+`;
+
+export const WrapClubMemberContainer = styled.div`
+  width: fit-content;
+  height: 300px;
+  padding-bottom: 25px;
+  overflow-y: scroll;
+`;
