@@ -105,21 +105,13 @@ const SignupFirst = ({
       </S.InputWrap>
       <DodamFilledButton
         backgroundColorType='Primary'
-        text={
-          isEmailVerified && isPhoneVerified
-            ? '다음'
-            : isEmailVerified
-            ? isPhoneVerified
-              ? '다음'
-              : '전화번호 인증'
-            : '이메일 인증'
-        }
+        text={isPhoneVerified ? '다음' : '전화번호 인증'}
         size='Large'
         typography={['Body1', 'Bold']}
         textTheme='staticWhite'
         onClick={() => signupTypeCheck()}
       />
-      {isModal.email && (
+      {/* {isModal.email && (
         <VerifieModal
           isOpen={isModal.email}
           handleClose={() => handleClose('email')}
@@ -129,7 +121,7 @@ const SignupFirst = ({
           sendLoading={false}
           reqLoading={false}
         />
-      )}
+      )} */}
       {isModal.phone && (
         <VerifieModal
           isOpen={isModal.phone}

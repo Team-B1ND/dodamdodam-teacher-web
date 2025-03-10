@@ -49,10 +49,12 @@ export const useSignup = () => {
   const signupTypeCheck = () => {
     const { email, position, tel, name } = signupData
 
-    if (!isEmailVerified) {
-      sendEmailVerification()
-      return
-    } else if (!isPhoneVerified) {
+    // if (!isEmailVerified) {
+    //   sendEmailVerification()
+    //   return
+    // } else
+    //
+    if (!isPhoneVerified) {
       sendPhoneVerification()
       return
     }
@@ -302,6 +304,6 @@ export const useSignup = () => {
     isPhoneVerified,
     sendPhoneVerification,
     sendEmailVerification,
-    clearSignupField
+    clearSignupField,
   }
 }
