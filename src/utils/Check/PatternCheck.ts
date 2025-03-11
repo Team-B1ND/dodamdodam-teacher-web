@@ -38,12 +38,12 @@ class PatternCheck {
     return false;
   }
 
-  public phoneCheck(value: string): boolean {
-    if (/^\d{3}\d{4}\d{4}$/.test(value)) {
-      return true;
-    }
-    return false;
-  }
+  // public phoneCheck(value: string): boolean {
+  //   if (/^\d{3}\d{4}\d{4}$/.test(value)) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   public nameCheck(value: string): boolean {
     if (/^[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]{2,12}$/.test(value)) {

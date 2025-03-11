@@ -91,14 +91,14 @@ export const useSignup = () => {
       return
     }
 
-    if (!PatternCheck.phoneCheck(tel)) {
-      B1ndToast.showInfo('전화번호 : 숫자만 사용')
-      setError({
-        ...error,
-        phone: '숫자만 사용',
-      })
-      return
-    }
+    // if (!PatternCheck.phoneCheck(tel)) {
+    //   B1ndToast.showInfo('전화번호 : 숫자만 사용')
+    //   setError({
+    //     ...error,
+    //     phone: '숫자만 사용',
+    //   })
+    //   return
+    // }
 
     if (signupData.pw !== pwCheck) {
       B1ndToast.showInfo('비밀번호가 일치하지 않습니다.')
