@@ -10,17 +10,15 @@ interface SignupFirstProps {
   signupData: MemberSignUpParam
   handleSignupChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   signupTypeCheck: () => void
-  verifyCode: string
-  setVerifyCode: Dispatch<SetStateAction<string>>
   isModal: SignUpModal
   setModal: Dispatch<SetStateAction<SignUpModal>>
   isAuthCode: string
   setAuthCode: Dispatch<SetStateAction<string>>
-  emailVerification: () => void
   phoneVerification: () => void
-  isEmailVerified: boolean
   isPhoneVerified: boolean
   clearSignupField: (field: keyof MemberSignUpParam) => void
+  sendLoading: boolean
+  reqLoading: boolean
 }
 
 const SignupFirst = ({
@@ -28,17 +26,15 @@ const SignupFirst = ({
   signupData,
   signupTypeCheck,
   error,
-  verifyCode,
-  setVerifyCode,
   isModal,
   setModal,
   isAuthCode,
   setAuthCode,
-  emailVerification,
   phoneVerification,
-  isEmailVerified,
   isPhoneVerified,
   clearSignupField,
+  sendLoading,
+  reqLoading
 }: SignupFirstProps) => {
   const handleClose = (type: string) => {
     setModal((prev) => ({ ...prev, [type]: false }))
@@ -111,17 +107,6 @@ const SignupFirst = ({
         textTheme='staticWhite'
         onClick={() => signupTypeCheck()}
       />
-      {/* {isModal.email && (
-        <VerifieModal
-          isOpen={isModal.email}
-          handleClose={() => handleClose('email')}
-          isAuthCode={isAuthCode}
-          setAuthCode={setAuthCode}
-          onSubmit={emailVerification}
-          sendLoading={false}
-          reqLoading={false}
-        />
-      )} */}
       {isModal.phone && (
         <VerifieModal
           isOpen={isModal.phone}
@@ -129,8 +114,8 @@ const SignupFirst = ({
           isAuthCode={isAuthCode}
           setAuthCode={setAuthCode}
           onSubmit={phoneVerification}
-          sendLoading={false}
-          reqLoading={false}
+          sendLoading={sendLoading}
+          reqLoading={reqLoading}
         />
       )}
     </S.SignupWrap>

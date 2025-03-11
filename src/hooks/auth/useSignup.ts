@@ -305,5 +305,7 @@ export const useSignup = () => {
     sendPhoneVerification,
     sendEmailVerification,
     clearSignupField,
+    reqLoading,
+    sendLoading,
   }
 }

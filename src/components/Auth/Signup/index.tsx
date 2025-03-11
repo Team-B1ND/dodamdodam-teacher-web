@@ -24,8 +24,6 @@ const Signup = ({ setIsSignin }: SignupProps) => {
     setPolicy,
     error,
     checkAllRequired,
-    pwCheck,
-    setPwCheck,
     isModal,
     emailVerification,
     phoneVerification,
@@ -35,8 +33,9 @@ const Signup = ({ setIsSignin }: SignupProps) => {
     isEmailVerified,
     isPhoneVerified,
     clearSignupField,
+    sendLoading,
+    reqLoading,
   } = useSignup()
-  const { handlePasswordView, passwordType } = useSignin()
   const [, setPrevSection] = useState(section)
 
   const AuthComponents: ReactNode[] = [
@@ -47,15 +46,13 @@ const Signup = ({ setIsSignin }: SignupProps) => {
       handleSignupChange={handleSignupChange}
       isModal={isModal}
       setModal={setModal}
-      verifyCode={isAuthCode}
-      setVerifyCode={setAuthCode}
-      emailVerification={emailVerification}
       phoneVerification={phoneVerification}
       isAuthCode={isAuthCode}
       setAuthCode={setAuthCode}
-      isEmailVerified={isEmailVerified}
       isPhoneVerified={isPhoneVerified}
       clearSignupField={clearSignupField}
+      sendLoading={sendLoading}
+      reqLoading={reqLoading}
     />,
     <SignupSecond
       error={error}
