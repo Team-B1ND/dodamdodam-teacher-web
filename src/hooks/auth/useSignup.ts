@@ -47,7 +47,7 @@ export const useSignup = () => {
   })
 
   const signupTypeCheck = () => {
-    const { email, position, tel, name } = signupData
+    const { email, position, name, phone } = signupData
 
     // if (!isEmailVerified) {
     //   sendEmailVerification()
@@ -59,7 +59,7 @@ export const useSignup = () => {
       return
     }
 
-    if (email === '' || position === '' || tel === '' || name === '') {
+    if (email === '' || position === '' || phone === '' || name === '') {
       B1ndToast.showInfo('형식이 비었습니다')
       setError({
         ...error,
@@ -91,14 +91,14 @@ export const useSignup = () => {
       return
     }
 
-    // if (!PatternCheck.phoneCheck(tel)) {
-    //   B1ndToast.showInfo('전화번호 : 숫자만 사용')
-    //   setError({
-    //     ...error,
-    //     phone: '숫자만 사용',
-    //   })
-    //   return
-    // }
+    if (!PatternCheck.phoneCheck(phone)) {
+      B1ndToast.showInfo('전화번호 : 유효한 전화번호 형식을 지켜주세요')
+      setError({
+        ...error,
+        phone: '유효한 전화번호 형식을 지켜주세요',
+      })
+      return
+    }
 
     if (signupData.pw !== pwCheck) {
       B1ndToast.showInfo('비밀번호가 일치하지 않습니다.')
