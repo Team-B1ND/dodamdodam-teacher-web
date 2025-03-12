@@ -29,7 +29,7 @@ const DivisionItem = ({
           <ItemBox
             key={division.id}
             onClick={() => {
-              setSection('groupDetail')
+              setSection('divisionDetail')
               setDivisionId(division.id)
             }}
           >

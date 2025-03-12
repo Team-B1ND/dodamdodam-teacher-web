@@ -1,5 +1,5 @@
-import { DodamShape, DodamTypography } from '@b1nd/dds-web';
-import styled from 'styled-components';
+import { DodamShape, DodamTypography } from '@b1nd/dds-web'
+import styled from 'styled-components'
 
 export const DivisionDetailWrap = styled.div`
   width: 100%;
@@ -8,7 +8,7 @@ export const DivisionDetailWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-`;
+`
 
 export const DivisionWrap = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ export const DivisionWrap = styled.div`
 
   background-color: ${({ theme }) => theme.backgroundNormal};
   ${DodamShape.Large};
-`;
+`
 
 export const BackIconWrap = styled.div`
   width: 48px;
@@ -32,7 +32,7 @@ export const BackIconWrap = styled.div`
   justify-content: center;
 
   cursor: pointer;
-`;
+`
 
 export const DivisionDetailHeader = styled.div`
   width: 100%;
@@ -43,7 +43,7 @@ export const DivisionDetailHeader = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 7px;
-`;
+`
 
 export const DivisionDetailTitle = styled.div`
   width: 100%;
@@ -60,7 +60,7 @@ export const DivisionDetailTitle = styled.div`
   svg {
     cursor: pointer;
   }
-`;
+`
 
 export const DivisionDetailDescription = styled.span`
   width: 100%;
@@ -68,7 +68,7 @@ export const DivisionDetailDescription = styled.span`
   ${DodamTypography.Body1.Medium}
   line-height: 1.5;
   overflow-wrap: break-word;
-`;
+`
 
 export const DivisionDetailMemberWrap = styled.div`
   width: 100%;
@@ -80,7 +80,7 @@ export const DivisionDetailMemberWrap = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-`;
+`
 
 export const MemberWrap = styled.div`
   width: 100%;
@@ -93,7 +93,7 @@ export const MemberWrap = styled.div`
     flex-direction: column;
     gap: 24px;
   }
-`;
+`
 
 export const LeftSection = styled.div`
   width: 40%;
@@ -101,11 +101,11 @@ export const LeftSection = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
+`
 
 export const RightSection = styled.div`
   width: 40%;
-`;
+`
 
 export const AdminMembersWrap = styled.div`
   width: 100%;
@@ -113,7 +113,7 @@ export const AdminMembersWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-`;
+`
 
 export const AdimWrap = styled.div`
   width: 100%;
@@ -123,12 +123,12 @@ export const AdimWrap = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-`;
+`
 
 export const MemberWrapTitle = styled.p`
   color: ${({ theme }) => theme.labelAlternative};
   ${DodamTypography.Body2.Medium}
-`;
+`
 
 export const MemberCell = styled.div`
   width: 100%;
@@ -141,7 +141,7 @@ export const MemberCell = styled.div`
   background-color: ${({ theme }) => theme.backgroundElevated};
   border-radius: 8px;
   transition: background-color 0.2s ease;
-  
+
   cursor: pointer;
 
   &:hover {
@@ -149,14 +149,14 @@ export const MemberCell = styled.div`
   }
 
   cursor: pointer;
-`;
+`
 
 export const MemberList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 8px;
-`;
+`
 
 export const MemberInfo = styled.div`
   display: flex;
@@ -168,17 +168,17 @@ export const MemberInfo = styled.div`
     height: 24px;
     border-radius: 50%;
   }
-`;
+`
 
 export const MemberName = styled.span`
   ${DodamTypography.Body2.Medium}
   color: ${({ theme }) => theme.labelPrimary};
-`;
+`
 
 export const MemberRole = styled.span`
   ${DodamTypography.Caption1.Regular}
   color: ${({ theme }) => theme.labelSecondary};
-`;
+`
 
 export const MembersWrap = styled.div`
   width: 100%;
@@ -190,12 +190,12 @@ export const MembersWrap = styled.div`
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
   }
-`;
+`
 
 export const DivisionDetailModalWrap = styled.div`
   display: flex;
   width: 150px;
-  height: 100px;
+  height: 150px;
   padding: 10px 16px;
   flex-direction: column;
   justify-content: center;
@@ -205,7 +205,7 @@ export const DivisionDetailModalWrap = styled.div`
   ${DodamShape.ExtraSmall};
   background-color: ${({ theme }) => theme.backgroundNormal};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-`;
+`
 
 export const ApplyMemberWrap = styled.div`
   cursor: pointer;
@@ -220,7 +220,7 @@ export const ApplyMemberWrap = styled.div`
     color: ${({ theme }) => theme.labelNormal};
     ${DodamTypography.Body1.Bold}
   }
-`;
+`
 
 export const MemberInfoModalWrap = styled.div`
   display: flex;
@@ -234,7 +234,7 @@ export const MemberInfoModalWrap = styled.div`
   ${DodamShape.Medium};
   background-color: ${({ theme }) => theme.backgroundNormal};
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-`;
+`
 
 export const MemberInfoModalHeader = styled.div`
   display: flex;
@@ -252,4 +252,4 @@ export const MemberInfoModalHeader = styled.div`
 
     ${DodamTypography.Body1.Medium}
   }
-`;
+`

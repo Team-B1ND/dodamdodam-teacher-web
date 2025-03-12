@@ -21,7 +21,7 @@ const AddMember = ({ divisionId, setSection }: DivisionProps) => {
         searchFn={addMember.searchSubmit}
       />
       <S.AddMemberBox>
-        <S.AddMemberTitle onClick={() => setSection('groupDetail')}>
+        <S.AddMemberTitle onClick={() => setSection('divisionDetail')}>
           <ChevronLeft
             color={'labelNormal'}
             $svgStyle={{ cursor: 'pointer' }}

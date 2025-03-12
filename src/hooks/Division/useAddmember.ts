@@ -34,7 +34,7 @@ export const useAddMember = (id: number) => {
           queryClient.invalidateQueries(
             QUERY_KEYS.division.getDivisionMember('ALLOWED', id)
           )
-          setSection('groupDetail')
+          setSection('divisionDetail')
         },
         onError: () => {
           B1ndToast.showError('멤버 추가 실패')
