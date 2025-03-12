@@ -14,13 +14,8 @@ import OffbaseRedisualPage from 'pages/Out/RedisualPage'
 import NoticePageTemplate from 'components/common/NoticePageTemplate'
 import NoticePage from 'pages/Notice/Main/noticePages'
 import NoticeWritePage from 'pages/Notice/Write/noticeWritePages'
-import GroupPage from 'pages/Notice/Group/groupPage'
-import GroupDetail from 'components/Group/GroupDetail'
-import { Suspense } from 'react'
-import BusInfo from 'components/Bus/BusInfo'
-// import WaitingMember from 'components/Group/WaitingMember';
+import DivisionPage from 'pages/Notice/Division/divisionPage'
 import ClubManagePage from 'pages/Club/ClubManagePage'
-import ApplicateTeacher from 'components/Club/ApplicateTeacher'
 import ApplicateTeacherPage from 'pages/Club/ApplicateTeacherPage'
 
 const Router = () => {
@@ -42,7 +37,7 @@ const Router = () => {
       <Route path='/notice' element={<NoticePageTemplate />}>
         <Route index element={<NoticePage />} />
         <Route path='write' element={<NoticeWritePage />} />
-        <Route path='group' element={<GroupPage />} />
+        <Route path='division' element={<DivisionPage />} />
         {/* <Route path="group/:id" element={<GroupDetail />} /> */}
       </Route>
 

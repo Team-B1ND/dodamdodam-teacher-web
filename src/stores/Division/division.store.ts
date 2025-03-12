@@ -1,11 +1,16 @@
-import { atom } from "recoil";
+import { atom } from 'recoil'
 
 export const SelectCategoryAtom = atom<number>({
-  key: "selectCategoryAtom",
+  key: 'selectCategoryAtom',
   default: 0,
-});
+})
 
 export const SelectCategoryListAtom = atom<number[]>({
-  key: "selectCategoryListAtom",
+  key: 'selectCategoryListAtom',
   default: [],
-});
+})
+
+export const DivisionNameAtom = atom<string>({
+  key: 'DivisionNameAtom',
+  default: '',
+})

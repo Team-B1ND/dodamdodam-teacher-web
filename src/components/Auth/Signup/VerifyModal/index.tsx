@@ -40,6 +40,7 @@ const VerifieModal = ({
           placeholder='인증코드를 입력하세요'
           onChange={handleChange}
           showIcon={false}
+          
         />
         <ButtonBox>
           <DodamFilledButton

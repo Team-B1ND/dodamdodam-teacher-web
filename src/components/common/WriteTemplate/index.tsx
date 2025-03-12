@@ -2,7 +2,7 @@ import React from 'react'
 import * as S from './style'
 import { DodamFilledButton } from '@b1nd/dds-web'
 import { NoticeWriteData } from 'repositories/Notice/noticeRepository'
-import { GroupWriteData } from 'repositories/Group/group.repository'
+import { DivisionWriteData } from 'repositories/Division/division.repository'
 
 interface WriteTemplateProps {
   title: string
@@ -22,7 +22,7 @@ interface WriteTemplateProps {
   submitWrite?: () => void
   handleDeleteImage?: (index: number) => void
   writeData?: NoticeWriteData
-  groupWriteData?: GroupWriteData
+  divisionWriteData?: DivisionWriteData
   fileIcon?: React.ReactNode
   photoIcon?: React.ReactNode
   buttonText: string
@@ -46,7 +46,7 @@ const WriteTemplate = ({
   fileIcon,
   photoIcon,
   buttonText,
-  groupWriteData,
+  divisionWriteData,
   isViewImage,
   images,
 }: WriteTemplateProps) => {
@@ -58,7 +58,7 @@ const WriteTemplate = ({
           type='text'
           placeholder={titlePlaceholder}
           name={writeData ? 'title' : 'name'}
-          value={writeData ? writeData.title : groupWriteData?.name}
+          value={writeData ? writeData.title : divisionWriteData?.name}
           onChange={handleWriteDataChange}
         />
         {isViewImage && (
@@ -77,7 +77,7 @@ const WriteTemplate = ({
         <textarea
           placeholder={contentPlaceholder}
           name={writeData ? 'content' : 'description'}
-          value={writeData ? writeData.content : groupWriteData?.description}
+          value={writeData ? writeData.content : divisionWriteData?.description}
           onChange={handleWriteDataChange}
         ></textarea>
       </S.WriteInputWrap>
