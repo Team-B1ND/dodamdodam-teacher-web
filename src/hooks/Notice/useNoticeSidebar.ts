@@ -5,11 +5,11 @@ import {
   SelectCategoryAtom,
   SelectCategoryListAtom,
 } from 'stores/Division/division.store'
-import { useGroup } from 'queries/Group/group.query'
+import { useDivision } from 'queries/Division/division.query'
 import { PageDataType } from 'types/Notice/notice.type'
-import { Group } from 'types/Group/group.type'
+import { Division } from 'types/Division/division.type'
 
-interface GroupType extends Group {
+interface DivisionType extends Division {
   isAtv: boolean
 }
 
@@ -21,13 +21,12 @@ export const useNoticeSidebar = () => {
     data: CategoryData,
     fetchNextPage,
     hasNextPage,
-    isLoading
-  } = useGroup(false, keyword)
-  const [categoryList, setCategoryList] = useState<GroupType[]>([])
+    isLoading,
+  } = useDivision(false, keyword)
+  const [categoryList, setCategoryList] = useState<DivisionType[]>([])
 
-  const [selectCategory, setSelectCategory] =
-    useRecoilState<number>(SelectCategoryAtom)
-  const [selectCategoryList, setSelectCategoryList] = useRecoilState<number[]>(
+  const [, setSelectCategory] = useRecoilState<number>(SelectCategoryAtom)
+  const [, setSelectCategoryList] = useRecoilState<number[]>(
     SelectCategoryListAtom
   )
   const [pageData, setPageData] = useState<PageDataType[]>([
@@ -45,7 +44,7 @@ export const useNoticeSidebar = () => {
         navigate('/notice/write')
         break
       case '그룹':
-        navigate('/notice/group')
+        navigate('/notice/division')
         break
     }
   }
