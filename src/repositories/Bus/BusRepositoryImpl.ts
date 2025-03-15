@@ -1,14 +1,19 @@
-import { BusDateAndListResponse } from 'types/Bus/bus.type'
+import {
+  BusDateAndListResponse,
+  BusPeriodResponse,
+  BusPresetResponse,
+} from 'types/Bus/bus.type'
 import {
   BusDateParam,
   BusModifyParam,
   BusRepository,
   BusUpdateParam,
+  CreateBusPeriodParam,
 } from './BusRepository'
 import { dodamAxios } from 'libs/Axios/customAxios'
 
 class BusRepositoryImpl implements BusRepository {
-  public async getAllBusList(page: number): Promise<BusDateAndListResponse> {
+  public async getAllBusList(): Promise<BusDateAndListResponse> {
     const { data } = await dodamAxios.get(`/bus`)
     return data
   }
@@ -23,6 +28,20 @@ class BusRepositoryImpl implements BusRepository {
     return data
   }
 
+  public async getBusPeriod(): Promise<BusPeriodResponse> {
+    const { data } = await dodamAxios.get('/bus/time')
+    return data
+  }
+
+  public async getBusPreset(): Promise<BusPresetResponse> {
+    const { data } = await dodamAxios.get('/bus/preset')
+    return data
+  }
+
+  public async createBusPeriod(param: CreateBusPeriodParam): Promise<void> {
+    await dodamAxios.post('/bus/time', param)
+  }
+  
   public async createBus(param: BusUpdateParam): Promise<void> {
     await dodamAxios.post('/bus', param)
   }

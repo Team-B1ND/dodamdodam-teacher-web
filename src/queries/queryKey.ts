@@ -5,7 +5,8 @@ import { PointType } from 'types/Point/point.type';
 export const QUERY_KEYS = Object.freeze({
   bus: {
     registeredBus: '/bus',
-    registerdBusPreset: "/bus/preset",
+    busPreset: "/bus/preset",
+    busPeriod: "/bus/time",
     busList: (page: number) => ['/bus/list', page],
     busDate: "/bus/date",
   },
