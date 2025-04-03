@@ -36,6 +36,8 @@ export const IconWrap = styled.div`
   height: 48px;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 `
 
 export const PageDescription = styled.span`

@@ -1,14 +1,18 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import * as S from './style'
-import { DodamFilledButton } from '@b1nd/dds-web'
+import { ChevronRight, DodamFilledButton } from '@b1nd/dds-web'
 import {
   BusDateAndList,
   BusDateAndListResponse,
+  BusListByPeriod,
   BusListByPeriodResponse,
+  BusListMember,
 } from 'types/Bus/bus.type'
 import { CreateBusPeriodParam } from 'repositories/Bus/BusRepository'
-import { start } from 'repl'
 import BusAdd from '../SelectBus/BusAdd'
+import SkeletonComponent from 'components/common/Skeleton'
+import BusPeriodListTemplate from './ListTemplate/BusPeriodListTemplate'
+import BusListDataTemplate from './ListTemplate/BusListDataTemplate'
 
 interface BusListTemplateProps {
   setSection: Dispatch<SetStateAction<string>>
@@ -22,6 +26,10 @@ interface BusListTemplateProps {
   endAt?: string
   startAt?: string
   isAdd?: boolean
+  setBusId?: Dispatch<SetStateAction<number>>
+  setBusMember?: Dispatch<SetStateAction<BusListMember[]>>
+  setBusData?: Dispatch<SetStateAction<BusListByPeriod>>
+  isLoading?: boolean
 }
 
 const BusListTemplate = ({
@@ -36,42 +44,35 @@ const BusListTemplate = ({
   endAt,
   startAt,
   isAdd,
+  setBusId,
+  setBusMember,
+  setBusData,
+  isLoading,
 }: BusListTemplateProps) => {
   return (
     <>
       <S.SelectBusWrap>
         <S.SelectBusTitle>{title}</S.SelectBusTitle>
         <S.ListWrap>
-          {title === '버스 등록'
-            ? busListData?.data.map((bus) => (
-                <S.BusCell key={bus.id}>
-                  <span>{bus.busName}</span>
-                  <DodamFilledButton
-                    text='선택'
-                    size='Small'
-                    textTheme='staticWhite'
-                    backgroundColorType='Primary'
-                    typography={['Body2', 'Regular']}
-                    width={65}
-                    onClick={() => handleBusIds?.(bus.id)}
-                  />
-                </S.BusCell>
-              ))
-            : busPeriodListData?.data.map((bus) => (
-                <S.BusCell key={bus.bus.id}>
-                  <span>{bus.bus.busName}</span>
-                  <DodamFilledButton
-                    text='선택'
-                    size='Small'
-                    textTheme='staticWhite'
-                    backgroundColorType='Primary'
-                    typography={['Body2', 'Regular']}
-                    width={65}
-                  />
-                </S.BusCell>
-              ))}
+          {isLoading ? (
+            <SkeletonComponent length={5} height={48} />
+          ) : title === '버스 등록' ? (
+            <BusListDataTemplate
+              setBusId={setBusId!}
+              busListData={busListData!}
+              handleBusIds={handleBusIds!}
+            />
+          ) : (
+            <BusPeriodListTemplate
+              busPeriodListData={busPeriodListData!}
+              setBusData={setBusData!}
+              setBusId={setBusId!}
+              setBusMember={setBusMember!}
+              setSection={setSection}
+            />
+          )}
         </S.ListWrap>
-        {title === '버스 등록' && (
+        {title === '버스 등록' ? (
           <S.ButtonWrap>
             <DodamFilledButton
               size='Large'
@@ -103,6 +104,17 @@ const BusListTemplate = ({
                 }
                 createBusPeriod?.(param)
               }}
+              width={120}
+            />
+          </S.ButtonWrap>
+        ) : (
+          <S.ButtonWrap>
+            <DodamFilledButton
+              size='Large'
+              text='뒤로가기'
+              backgroundColorType='Assistive'
+              textTheme='labelNormal'
+              onClick={() => setSection('main')}
               width={120}
             />
           </S.ButtonWrap>

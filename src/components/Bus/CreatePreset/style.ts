@@ -1,7 +1,7 @@
 import { DodamShape, DodamTypography } from '@b1nd/dds-web'
 import styled from 'styled-components'
 
-export const CreatePeriodContainer = styled.div`
+export const CreateBusPresetWrap = styled.div`
   width: 65%;
   height: 100%;
   padding: 24px;
@@ -9,53 +9,50 @@ export const CreatePeriodContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 12px;
-
-  ${DodamShape.ExtraSmall}
   background-color: ${({ theme }) => theme.backgroundNormal};
+  ${DodamShape.ExtraSmall}
 `
 
-export const CreatePeriodTitle = styled.h1`
-  display: flex;
-  align-self: flex-start;
+export const CreateBusPresetTitle = styled.h1`
+  width: fit-content;
+  height: fit-content;
 
   ${DodamTypography.Heading1.Bold}
   color: ${({ theme }) => theme.labelNormal};
 `
 
-export const CreatePeriodWrap = styled.div`
+export const CreateBusPresetInputWrap = styled.div`
   width: 100%;
   height: fit-content;
 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
+
+  margin-top: 25px;
 `
 
-export const DateWrap = styled.div`
+export const CreateBusPresetDateWrap = styled.div`
   width: 100%;
   height: fit-content;
-
-  padding: 8px 0px 8px 0px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  div {
-    display: flex;
-  }
-
   h1 {
     color: ${({ theme }) => theme.labelAlternative};
+    ${DodamTypography.Headline.Medium}
   }
 
   input[type='time'] {
     border: none;
     color: ${({ theme }) => theme.primaryNormal};
-    ${DodamTypography.Body1.Medium}
+    ${DodamTypography.Headline.Regular}
 
-    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
   }
 `
 
@@ -64,10 +61,9 @@ export const ButtonWrap = styled.div`
   height: fit-content;
 
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
   gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
 
   margin-top: auto;
 `

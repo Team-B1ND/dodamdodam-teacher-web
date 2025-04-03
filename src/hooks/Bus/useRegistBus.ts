@@ -9,14 +9,18 @@ import {
 import { QUERY_KEYS } from 'queries/queryKey'
 import {
   ChangeEvent,
+  ChangeEventHandler,
   Dispatch,
   SetStateAction,
   useCallback,
   useState,
 } from 'react'
 import { useQueryClient } from 'react-query'
-import { CreateBusPeriodParam } from 'repositories/Bus/BusRepository'
-import { BusBasicInfoType, BusCreateType } from 'types/Bus/bus.type'
+import {
+  BusUpdateParam,
+  CreateBusPeriodParam,
+} from 'repositories/Bus/BusRepository'
+import { BusBasicInfoType, BusCreateType, BusPreset } from 'types/Bus/bus.type'
 import dateTransform from 'utils/Transform/dateTransform'
 
 export const useRegistBus = ({
@@ -32,6 +36,13 @@ export const useRegistBus = ({
     leaveTime: dayjs().format('HH:mm'),
     leaveAt: dateTransform.hyphen(),
     timeRequired: '00:00',
+  })
+  const [busPreset, setBusPreset] = useState<Omit<BusBasicInfoType, 'id'>>({
+    busName: '',
+    description: '',
+    peopleLimit: 0,
+    leaveTime: '',
+    timeRequired: '',
   })
 
   const [registerBusData, setRegisterBusData] = useState<{
@@ -57,6 +68,14 @@ export const useRegistBus = ({
       }))
     },
     [setRegisterBusData]
+  )
+
+  const handleBusPresetData = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target
+      setBusPreset((prev) => ({ ...prev, [name]: value }))
+    },
+    [setBusPreset]
   )
 
   const handleBusData = useCallback(
@@ -85,25 +104,9 @@ export const useRegistBus = ({
     })
   }
 
-const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
   const registerBusMutatation = useCreateBusMutation()
-  const submitRegistBus = () => {
-    const {
-      busName,
-      description,
-      leaveAt,
-      leaveTime,
-      timeRequired,
-      peopleLimit,
-    } = busData
-    const param = {
-      busName,
-      description,
-      leaveAt,
-      leaveTime,
-      timeRequired,
-      peopleLimit
-    }
+  const submitRegistBus = (param: BusUpdateParam) => {
     registerBusMutatation.mutate(param, {
       onSuccess: () => {
         B1ndToast.showSuccess('버스 생성 성공')
@@ -117,19 +120,35 @@ const queryClient = useQueryClient()
 
   const createBusPresetMutation = useCreateBusPresetMutation()
   const createBusPreset = () => {
-    createBusPresetMutation.mutate(busData, {
-      onSuccess: () => {
-        B1ndToast.showSuccess('버스프리셋 등록 성공')
+    createBusPresetMutation.mutate(
+      {
+        ...busPreset,
+        leaveTime: dateTransform.time(busPreset.leaveTime, 'leaveTime'),
+        timeRequired: dateTransform.time(
+          busPreset.timeRequired,
+          'timeRequired'
+        ),
       },
-      onError: (error) => {
-        B1ndToast.showError((error as AxiosError as AxiosError).message)
-      },
-    })
+      {
+        onSuccess: () => {
+          B1ndToast.showSuccess('버스프리셋 등록 성공')
+          queryClient.invalidateQueries(QUERY_KEYS.bus.busPreset)
+          queryClient.invalidateQueries(QUERY_KEYS.bus.registeredBus)
+          setSection('main')
+        },
+        onError: (error) => {
+          B1ndToast.showError((error as AxiosError as AxiosError).message)
+        },
+      }
+    )
   }
+
   return {
     busData,
     registerBusData,
+    busPreset,
     handleRegisterBusData,
+    handleBusPresetData,
     handleBusData,
     handleLeaveDataDate,
     submitRegistBus,

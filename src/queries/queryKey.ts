@@ -1,14 +1,18 @@
-import { BusDateParam } from 'repositories/Bus/BusRepository';
-import { GroupMemberStatus } from 'repositories/Group/group.repository';
-import { PointType } from 'types/Point/point.type';
+import { BusDateParam } from 'repositories/Bus/BusRepository'
+import { GroupMemberStatus } from 'repositories/Group/group.repository'
+import { PointType } from 'types/Point/point.type'
 
 export const QUERY_KEYS = Object.freeze({
   bus: {
     registeredBus: '/bus',
-    busPreset: "/bus/preset",
-    busPeriod: "/bus/time",
+    busPreset: '/bus/preset',
+    busPresetById: (id: number) => ['/bus/preset', id],
+    busPeriod: '/bus/time',
+    busListByPeriod: (timeId: number) => ['/bus/time', timeId],
     busList: (page: number) => ['/bus/list', page],
-    busDate: "/bus/date",
+    busDate: '/bus/date',
+    studentByBusId: (id: number) => [`/bus/${id}/student/ACTIVE`, id],
+    busSeats: (id: number) => [`/bus/${id}/seats`, id],
   },
   member: {
     getAllMember: '/members',
@@ -33,7 +37,12 @@ export const QUERY_KEYS = Object.freeze({
     getNightStudyList: '/night-study',
   },
   division: {
-    getDivisionList: (lastId: number, limit: number, keyword: string) => ["/division", lastId.toString(), limit.toString(), keyword],
+    getDivisionList: (lastId: number, limit: number, keyword: string) => [
+      '/division',
+      lastId.toString(),
+      limit.toString(),
+      keyword,
+    ],
   },
   schedule: {
     getSchedules: ['schedule/getSchedule'],
@@ -45,7 +54,10 @@ export const QUERY_KEYS = Object.freeze({
   point: {
     getAllMemberPoint: (type: string) => ['point/getAllMemberPoint', type],
     getReasons: (type: PointType) => ['point/getPointReasons', type],
-    getPointScoreByStudentId: (studentId: number) => ['point/getPointScoreByStudnetId', studentId],
+    getPointScoreByStudentId: (studentId: number) => [
+      'point/getPointScoreByStudnetId',
+      studentId,
+    ],
   },
   notice: {
     notice: '/notice',
@@ -54,7 +66,15 @@ export const QUERY_KEYS = Object.freeze({
   group: {
     getGroup: '/division',
     getGroupDetail: (id: number) => ['/division', id],
-    getGroupMember: (status: GroupMemberStatus, id: number) => ['/division/members', status, id],
-    patchGroupMemberStatus: (status: GroupMemberStatus, id: number) => ['/division/members', status, id],
+    getGroupMember: (status: GroupMemberStatus, id: number) => [
+      '/division/members',
+      status,
+      id,
+    ],
+    patchGroupMemberStatus: (status: GroupMemberStatus, id: number) => [
+      '/division/members',
+      status,
+      id,
+    ],
   },
-});
+})

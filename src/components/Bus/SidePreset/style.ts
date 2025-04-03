@@ -9,6 +9,8 @@ export const SidePresetContainer = styled.div`
   background: ${({ theme }) => theme.backgroundNormal};
 
   padding: 24px;
+
+  overflow-y: auto;
 `
 
 export const SidePresetTitleWrap = styled.div`
@@ -46,7 +48,7 @@ export const ListWrap = styled.div`
   gap: 5px;
   align-items: center;
 
-  overflow: auto;
+  overflow-y: scroll;
 `
 
 export const BusCell = styled.div`

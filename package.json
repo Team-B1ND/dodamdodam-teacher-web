@@ -44,6 +44,7 @@
     "react-scripts": "5.0.1",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
+    "rsuite": "^5.78.1",
     "styled-components": "^6.1.15",
     "styled-reset": "^4.5.1",
     "tui-calendar": "^1.15.3",

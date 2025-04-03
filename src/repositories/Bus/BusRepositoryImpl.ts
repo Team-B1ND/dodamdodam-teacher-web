@@ -1,7 +1,13 @@
 import {
+  BusBasicInfoType,
+  BusDateAndList,
   BusDateAndListResponse,
+  BusListByPeriodResponse,
   BusPeriodResponse,
+  BusPreset,
   BusPresetResponse,
+  BusSeatResponse,
+  StudentByBusResponse,
 } from 'types/Bus/bus.type'
 import {
   BusDateParam,
@@ -38,15 +44,39 @@ class BusRepositoryImpl implements BusRepository {
     return data
   }
 
+  public async getBusListByPeriod(
+    timeId: number
+  ): Promise<BusListByPeriodResponse> {
+    const { data } = await dodamAxios.get(`/bus/time/${timeId}`)
+    return data
+  }
+
+  public async getBusSeats(id: number): Promise<BusSeatResponse> {
+    const { data } = await dodamAxios.get(`/bus/${id}/seats`)
+    return data
+  }
+
+  public async getStudentByBusId(id: number): Promise<StudentByBusResponse> {
+    const { data } = await dodamAxios.get(`/bus/${id}/student/ACTIVE`)
+    return data
+  }
+
+  public async getPresetById(id: number): Promise<BusPreset> {
+    const { data } = await dodamAxios.get(`/bus/preset/${id}`)
+    return data
+  }
+
   public async createBusPeriod(param: CreateBusPeriodParam): Promise<void> {
     await dodamAxios.post('/bus/time', param)
   }
-  
+
   public async createBus(param: BusUpdateParam): Promise<void> {
     await dodamAxios.post('/bus', param)
   }
 
-  public async createBusPreset(param: BusUpdateParam): Promise<void> {
+  public async createBusPreset(
+    param: Omit<BusBasicInfoType, 'id'>
+  ): Promise<void> {
     await dodamAxios.post('/bus/preset', param)
   }
 

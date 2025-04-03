@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import 'dayjs/locale/ko'
 
 class DateTransform {
   public hyphen(date?: string): string {
@@ -21,6 +22,14 @@ class DateTransform {
     return `${dayjs(startAt).format('M월 D일')} ~ ${dayjs(endAt).format(
       'M월 D일'
     )}`
+  }
+
+  public time(time: string, kind: 'leaveTime' | 'timeRequired'): string {
+    if (kind === 'leaveTime') {
+      return time.length > 1 ? `${time}:00` : `0${time}:00`
+    } else {
+      return time.length > 1 ? `${time}:00:00` : `0${time}:00:00`
+    }
   }
 }
 

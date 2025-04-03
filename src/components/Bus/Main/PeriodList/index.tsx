@@ -7,9 +7,10 @@ import { ChevronRight } from '@b1nd/dds-web'
 interface BusPeriodListProps {
   data: BusPeriodResponse
   setSection: Dispatch<SetStateAction<string>>
+  setTimeId: Dispatch<SetStateAction<number>>
 }
 
-const BusPeriodList = ({ data, setSection }: BusPeriodListProps) => {
+const BusPeriodList = ({ data, setSection, setTimeId }: BusPeriodListProps) => {
   return (
     <S.ListWrap>
       {data?.data.map((period) => (
@@ -17,7 +18,12 @@ const BusPeriodList = ({ data, setSection }: BusPeriodListProps) => {
           <span>
             {dateTransform.startAtToEndAt(period.startAt, period.endAt)}
           </span>
-          <S.IconWrap onClick={() => setSection('bus-list')}>
+          <S.IconWrap
+            onClick={() => {
+              setTimeId(period.busTimeId)
+              setSection('busList')
+            }}
+          >
             <ChevronRight color='labelAlternative' size={20} />
           </S.IconWrap>
         </S.BusPeriodCell>

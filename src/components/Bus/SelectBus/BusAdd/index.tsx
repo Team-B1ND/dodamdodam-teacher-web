@@ -13,7 +13,8 @@ interface BusAddProps {
 }
 
 const BusAdd = ({ isOpen, close }: BusAddProps) => {
-  const { busData, handleBusData, handleLeaveDataDate, submitRegistBus } = useRegistBus({ setSection: () => {} })
+  const { busData, handleBusData, handleLeaveDataDate, submitRegistBus } =
+    useRegistBus({ setSection: () => {} })
   return (
     <>
       {isOpen && (
@@ -50,7 +51,12 @@ const BusAdd = ({ isOpen, close }: BusAddProps) => {
                   color='primaryNormal'
                   typography={['Headline', 'Regular']}
                 />
-                <input name='leaveTime' type='time' value={busData.leaveTime} onChange={handleBusData} />
+                <input
+                  name='leaveTime'
+                  type='time'
+                  value={busData.leaveTime}
+                  onChange={handleBusData}
+                />
               </div>
             </S.DateWrap>
             <S.DateWrap>
@@ -86,7 +92,16 @@ const BusAdd = ({ isOpen, close }: BusAddProps) => {
               text='버스 추가'
               textTheme='staticWhite'
               backgroundColorType='Primary'
-              onClick={submitRegistBus}
+              onClick={() =>
+                submitRegistBus({
+                  busName: busData.busName,
+                  description: busData.description,
+                  leaveTime: busData.leaveTime,
+                  leaveAt: busData.leaveAt,
+                  peopleLimit: +busData.peopleLimit,
+                  timeRequired: busData.timeRequired,
+                })
+              }
               width={120}
             />
           </S.ButtonWrap>

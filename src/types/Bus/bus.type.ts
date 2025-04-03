@@ -7,9 +7,9 @@ export interface BusDateAndList {
   description: string
   peopleLimit: number
   applyCount: number
-  leaveAt: Date
-  leaveTime: Date
-  requiredTime: string
+  leaveAt: string
+  leaveTime: string
+  timeRequired: string
 }
 
 export interface BusDateAndListResponse extends Response {
@@ -17,6 +17,29 @@ export interface BusDateAndListResponse extends Response {
 }
 
 export type BusListByPeriodStatusType = 'ACTIVATE' | 'DEACTIVATE'
+
+export interface BusListMember {
+  memberId: number
+  name: string
+  email: string
+  phone: string
+  seatNumber: string
+}
+
+export interface BusListByPeriod {
+  bus: {
+    id: number
+    busName: string
+    description: string
+    peopleLimit: number
+    status: BusListByPeriodStatusType
+    applyCount: number
+    leaveAt: string
+    leaveTime: string
+    timeRequired: string
+  }
+  members: BusListMember[]
+}
 
 export interface BusListByPeriodResponse extends Response {
   data: {
@@ -31,7 +54,7 @@ export interface BusListByPeriodResponse extends Response {
       leaveTime: string
       timeRequired: string
     }
-    members: Student[]
+    members: BusListMember[]
   }[]
 }
 
@@ -41,6 +64,17 @@ export interface BusPeriodResponse extends Response {
     startAt: string
     endAt: string
   }[]
+}
+
+export interface BusPreset {
+  data: {
+    id: number
+    name: string
+    description: string
+    peopleLimit: number
+    leaveTime: string
+    timeRequired: string
+  }
 }
 
 export interface BusPresetResponse extends Response {
@@ -83,4 +117,20 @@ export interface BusCreateType {
   leaveTime: string
   leaveAt: string
   timeRequired: string
+}
+
+export interface BusSeatResponse extends Response {
+  data: {
+    busSeat: number[]
+  }
+}
+
+export interface StudentByBusResponse extends Response {
+  data: {
+    memberId: number
+    name: string
+    email: string
+    phone: string
+    seatNumber: string
+  }[]
 }

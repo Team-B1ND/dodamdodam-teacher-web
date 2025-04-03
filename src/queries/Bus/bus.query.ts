@@ -13,9 +13,15 @@ import {
 } from 'repositories/Bus/BusRepository'
 import busRepositoryImpl from 'repositories/Bus/BusRepositoryImpl'
 import {
+  BusBasicInfoType,
+  BusDateAndList,
   BusDateAndListResponse,
+  BusListByPeriodResponse,
   BusPeriodResponse,
+  BusPreset,
   BusPresetResponse,
+  BusSeatResponse,
+  StudentByBusResponse,
 } from 'types/Bus/bus.type'
 import { QUERY_KEYS } from '../queryKey'
 
@@ -81,6 +87,78 @@ export const useGetBusPresetQuery = (
     ...options,
   })
 
+export const useGetBusListByPeriodQuery = (
+  timeId: number,
+  options?: UseQueryOptions<
+    BusListByPeriodResponse,
+    AxiosError,
+    BusListByPeriodResponse,
+    (string | number)[]
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.bus.busListByPeriod(timeId),
+    () => busRepositoryImpl.getBusListByPeriod(timeId),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  )
+
+export const useGetBusSeatsQuery = (
+  id: number,
+  options?: UseQueryOptions<
+    BusSeatResponse,
+    AxiosError,
+    BusSeatResponse,
+    (string | number)[]
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.bus.busSeats(id),
+    () => busRepositoryImpl.getBusSeats(id),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  )
+
+export const useGetStudentByBusIdQuery = (
+  id: number,
+  options?: UseQueryOptions<
+    StudentByBusResponse,
+    AxiosError,
+    StudentByBusResponse,
+    (string | number)[]
+  >
+) =>
+  useQuery(QUERY_KEYS.bus.studentByBusId(id), {
+    staleTime: 1000 * 60 * 60,
+    cacheTime: 1000 * 60 * 60,
+    ...options,
+  })
+
+export const useGetPresetByIdQuery = (
+  id: number,
+  options?: UseQueryOptions<
+    BusPreset,
+    AxiosError,
+    BusPreset,
+    (string | number)[]
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.bus.busPresetById(id),
+    () => busRepositoryImpl.getPresetById(id),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  )
+
 export const useCreateBusPeriodMutation = () => {
   const mutation = useMutation((param: CreateBusPeriodParam) =>
     busRepositoryImpl.createBusPeriod(param)
@@ -96,7 +174,7 @@ export const useCreateBusMutation = () => {
 }
 
 export const useCreateBusPresetMutation = () => {
-  const mutation = useMutation((param: BusUpdateParam) =>
+  const mutation = useMutation((param: Omit<BusBasicInfoType, 'id'>) =>
     busRepositoryImpl.createBusPreset(param)
   )
 

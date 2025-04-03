@@ -1,19 +1,17 @@
 import React, { Dispatch, SetStateAction, Suspense } from 'react'
 import * as S from './style'
-import { ChevronRight, DodamErrorBoundary, Plus } from '@b1nd/dds-web'
-import { useGetBusPeriodQuery } from 'queries/Bus/bus.query'
-import dateTransform from 'utils/Transform/dateTransform'
+import { DodamErrorBoundary, Plus } from '@b1nd/dds-web'
 import BusPeriodList from './PeriodList'
 import SkeletonComponent from 'components/common/Skeleton'
 import { BusPeriodResponse } from 'types/Bus/bus.type'
-import { start } from 'repl'
 
 interface BusMainProps {
   setSection: Dispatch<SetStateAction<string>>
   data: BusPeriodResponse
+  setTimeId: Dispatch<SetStateAction<number>>
 }
 
-const BusMain = ({ setSection, data }: BusMainProps) => {
+const BusMain = ({ setSection, data, setTimeId }: BusMainProps) => {
   return (
     <S.BusMainWrap>
       <S.TitleWrap>
@@ -28,7 +26,11 @@ const BusMain = ({ setSection, data }: BusMainProps) => {
         showButton={true}
       >
         <Suspense fallback={<SkeletonComponent height={48} length={5} />}>
-          <BusPeriodList data={data!} setSection={setSection} />
+          <BusPeriodList
+            data={data!}
+            setSection={setSection}
+            setTimeId={setTimeId}
+          />
         </Suspense>
       </DodamErrorBoundary>
     </S.BusMainWrap>
