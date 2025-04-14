@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import { dodamAxios } from "libs/Axios/customAxios";
 import { QUERY_KEYS } from "queries/queryKey";
 import {
   useMutation,
@@ -8,14 +7,12 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { useNavigate } from "react-router-dom";
 import ClubRepositoryImpl from "repositories/Club/ClubRepositoryImpl";
 import {
   ClubResponse,
   ClubDetailResponse,
   Member,
   BaseResponse,
-  ClubState,
   ClubTime,
 } from "types/Club/club.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";

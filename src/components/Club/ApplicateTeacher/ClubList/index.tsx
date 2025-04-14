@@ -1,5 +1,4 @@
 import { TBody, TD, TR } from '@b1nd/b1nd-dodamdodam-ui'
-import React from 'react'
 import { ClubResponse } from 'types/Club/club.type'
 import * as S from '../style'
 import { DodamColor } from '@b1nd/dds-web'

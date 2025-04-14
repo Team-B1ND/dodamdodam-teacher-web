@@ -1,6 +1,6 @@
 import SkeletonComponent from "components/common/Skeleton";
 import ClubItem from "./ClubItem";
-import { useState, Dispatch, SetStateAction, useEffect } from "react";
+import {Dispatch, SetStateAction, useEffect } from "react";
 import * as S from "./style";
 import { DodamCheckBox, DodamErrorBoundary } from "@b1nd/dds-web";
 import { useGetClubDateQuery } from "queries/Club/club.query";

@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 import * as S from './style'
 import { DodamTextField, DodamFilledButton } from '@b1nd/dds-web'
 import { useClubDetail } from 'hooks/Club/useClubData'

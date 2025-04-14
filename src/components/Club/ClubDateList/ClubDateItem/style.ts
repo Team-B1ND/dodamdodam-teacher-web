@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { DodamShape, DodamTheme, DodamTypography } from '@b1nd/dds-web'
+import { DodamShape, DodamTypography } from '@b1nd/dds-web'
 
 export const ClubDateWrapBox = styled.div`
   width: 265px;

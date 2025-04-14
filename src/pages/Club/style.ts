@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { DodamLightTheme } from "@b1nd/dds-web";
 
 export const BackgroundClubManage = styled.div`
-  background-color: #f5f5f5;
+  background-color: ${DodamLightTheme.backgroundNeutral};
   height: 100%;
   padding-top: 23px;
   display: flex;

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import * as S from './style'
 import { DodamDatePicker, DodamFilledButton } from '@b1nd/dds-web'
 import { useClubPeriod } from 'hooks/Club/useClubPeriod'

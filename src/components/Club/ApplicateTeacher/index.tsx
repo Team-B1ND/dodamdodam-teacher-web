@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import * as S from './style'
 import { DodamSegmentedButton } from '@b1nd/dds-web'
 import TableAttribute from 'components/common/TableAttribute'
 import { APPLICATE_TEACHER_TABLE_ITEMS } from './constants'
-import { TBody } from '@b1nd/b1nd-dodamdodam-ui'
 import { useGetClubDateQuery } from 'queries/Club/club.query'
 import ApplicateClubList from './ClubList'
 

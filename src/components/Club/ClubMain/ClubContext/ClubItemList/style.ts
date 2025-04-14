@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { DodamTypography } from "@b1nd/dds-web";
-import exp from "constants";
 
 export const ClubItemWrap = styled.div`
   display: flex;
