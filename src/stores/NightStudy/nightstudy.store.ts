@@ -25,3 +25,8 @@ export const NightStudySelectGradeAtom = atom<string>({
   key: "NightStudySelectGradeAtom",
   default: "전체보기",
 });
+
+export const NightStudySelectBanAtom = atom<string>({
+  key: "NightStudySelectBanAtom",
+  default: "정지여부",
+});

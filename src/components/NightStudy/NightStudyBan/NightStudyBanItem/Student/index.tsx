@@ -1,8 +1,10 @@
 import {StudentAndTeacher} from "types/Member/member.type";
 import {sortAndFilterStudents} from "utils/Member/SortAndFilterStudents";
 import {TD, TR} from "@b1nd/b1nd-dodamdodam-ui";
-import {MemberItemTR, MemberTD} from "components/Member/MemberItem/style";
-import {addPhoneHyphen} from "../../../../../utils/common/addPhoneHyphen";
+import {MemberItemTR} from "components/Member/MemberItem/style";
+import {addPhoneHyphen} from "utils/common/addPhoneHyphen";
+import NightStudyBanButton from "../NightStudyBanButton";
+import {StudentTD} from "../style";
 
 interface StudentProps {
   studentsInfo: StudentAndTeacher[];
@@ -17,12 +19,15 @@ const Student = ({ studentsInfo, searchValue, selectGrade }: StudentProps) => {
         (item) =>
           item.role === "STUDENT" && (
             <TR key={item.id} customStyle={MemberItemTR}>
-              <TD customStyle={MemberTD}>{item.name}</TD>
-              <TD customStyle={MemberTD}>
+              <TD customStyle={StudentTD}>{item.name}</TD>
+              <TD customStyle={StudentTD}>
                 {item.student?.grade}학년 {item.student?.room}반{" "}
                 {item.student?.number}번
               </TD>
-              <TD customStyle={MemberTD}>{addPhoneHyphen(item.phone)}</TD>
+              <TD customStyle={StudentTD}>{addPhoneHyphen(item.phone)}</TD>
+              <TD customStyle={StudentTD}>
+                <NightStudyBanButton isDisabled={true}/>
+              </TD>
             </TR>
           )
       )}

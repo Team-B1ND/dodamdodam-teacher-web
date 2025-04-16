@@ -18,7 +18,7 @@ const NightStudyBan = () => {
       <NightStudyBanHeader/>
       <TableAttribute
         constant={NIGHTSTUDY_BAN_TABLE_ITEMS}
-        // thStyle={{ width: "100%" }}
+        thStyle={{width: "11%"}}
       >
         <ErrorBoundary text="학생들을 불러오지 못했습니다." showButton={true}>
           <Suspense fallback={<SkeletonComponent height={70} />}>

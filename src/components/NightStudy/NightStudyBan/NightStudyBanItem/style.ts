@@ -7,3 +7,7 @@ export const StudentTBody: CSSObject = {
   display: "flex",
   flexDirection: "column"
 }
+
+export const StudentTD: CSSObject = {
+  width: "11.5%",
+}
