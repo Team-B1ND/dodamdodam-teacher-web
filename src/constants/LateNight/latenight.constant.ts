@@ -9,3 +9,10 @@ export const NIGHTSTUDY_ALLOW_ITEMS = [
   "필요 이유",
   "승인여부",
 ];
+
+export const NIGHTSTUDY_BAN_TABLE_ITEMS = [
+  "이름",
+  "학반",
+  "전화번호",
+  "정지여부"
+]

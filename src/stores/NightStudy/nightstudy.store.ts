@@ -15,3 +15,13 @@ export const NightStudySelectIdAtom = atom<number[]>({
   key: "NightStudySelectIdAtom",
   default: [],
 });
+
+export const NightStudySearchAtom = atom<string>({
+  key: "NightStudySearchAtom",
+  default: "",
+})
+
+export const NightStudySelectGradeAtom = atom<string>({
+  key: "NightStudySelectGradeAtom",
+  default: "전체보기",
+});

@@ -7,6 +7,7 @@ import OffBaseLeavePage from 'pages/Out/OutSleepingPage'
 import TodayOffBaseLeavePage from 'pages/Out/TodayOutSleepingPage'
 import { NightStudyAllowPage } from 'pages/NightStudy/NightStudyAllowPage'
 import { NightStudyTodayPage } from 'pages/NightStudy/NightStudyTodayPage'
+import {NightStudyBanPage} from "pages/NightStudy/NightStudyBanPage";
 import PointScore from 'components/Point/PointScore'
 import PointReason from 'components/Point/PointReason'
 import ScheduleManage from 'components/Schedule/ScheduleManage'
@@ -29,6 +30,7 @@ const Router = () => {
       <Route path='/offbase-leave-ing' element={<TodayOffBaseLeavePage />} />
       <Route path='/offbase-redisual' element={<OffbaseRedisualPage />} />
       <Route path='/nightStudy-allow' element={<NightStudyAllowPage />} />
+      <Route path='/nightStudy-ban' element={<NightStudyBanPage />} />
       <Route path='/nightStudy-today' element={<NightStudyTodayPage />} />
       <Route path='/PointScore' element={<PointScore />} />
       <Route path='/PointReason' element={<PointReason />} />

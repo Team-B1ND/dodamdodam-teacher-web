@@ -33,6 +33,10 @@ export interface StudentAndTeacher extends Member {
   teacher: Teacher | null;
 }
 
+export interface StudentResponse extends Response {
+  data: Student[];
+}
+
 export interface MemberResponse extends Response {
   data: StudentAndTeacher[];
 }
