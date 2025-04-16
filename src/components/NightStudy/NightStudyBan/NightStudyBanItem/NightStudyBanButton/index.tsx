@@ -8,9 +8,9 @@ const NightStudyBanButton = ({isDisabled}: NightStudyBanButtonProps
 ) => {
 
   if (isDisabled) {
-    return <Button ButtonType="cancel" onChange={() => console.log("ad")}>취소</Button>
+    return <Button ButtonType="disagree" onChange={() => console.log("ad")}>취소</Button>
   } else {
-    return <Button ButtonType="agree" onChange={() => console.log("ad")}>정지</Button>
+    return <Button ButtonType="cancel" onChange={() => console.log("ad")}>정지</Button>
   }
 }
 
