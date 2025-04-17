@@ -7,11 +7,16 @@ import React, {Suspense} from "react";
 import SkeletonComponent from "components/common/Skeleton";
 import NightStudyBanItem from "./NightStudyBanItem";
 import {useRecoilValue} from "recoil";
-import {NightStudySearchAtom, NightStudySelectGradeAtom} from "stores/NightStudy/nightstudy.store";
+import {
+  NightStudySearchAtom,
+  NightStudySelectBanAtom,
+  NightStudySelectGradeAtom
+} from "stores/NightStudy/nightstudy.store";
 
 const NightStudyBan = () => {
   const searchValue = useRecoilValue(NightStudySearchAtom);
   const selectedGrade = useRecoilValue(NightStudySelectGradeAtom);
+  const selectedBan = useRecoilValue(NightStudySelectBanAtom);
 
   return (
     <S.NightStudyBanContainer>
@@ -25,6 +30,7 @@ const NightStudyBan = () => {
             <NightStudyBanItem
               searchValue={searchValue}
               selectedGrade={selectedGrade}
+              selectedBan={selectedBan}
             />
           </Suspense>
         </ErrorBoundary>

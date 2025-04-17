@@ -1,16 +1,31 @@
 import {Button} from "@b1nd/b1nd-dodamdodam-ui";
+import useNightStudyBanCancel from "hooks/NightStudy/NightStudyBan/UseNightStudyBanCancel";
 
 interface NightStudyBanButtonProps {
-  isDisabled: boolean
+  isBanned: boolean,
+  studentId: number
 }
 
-const NightStudyBanButton = ({isDisabled}: NightStudyBanButtonProps
+const NightStudyBanButton = ({isBanned, studentId}: NightStudyBanButtonProps
 ) => {
+  const {onDeleteNightStudyBan} = useNightStudyBanCancel()
 
-  if (isDisabled) {
-    return <Button ButtonType="disagree" onChange={() => console.log("ad")}>취소</Button>
+  if (isBanned) {
+    return (
+      <Button
+        ButtonType="cancel"
+        onClick={() => onDeleteNightStudyBan(studentId)}>
+        취소
+      </Button>
+    )
   } else {
-    return <Button ButtonType="cancel" onChange={() => console.log("ad")}>정지</Button>
+    return (
+      <Button
+        ButtonType="disagree"
+        onClick={() => console.log("ad")}>
+        정지
+      </Button>
+    )
   }
 }
 

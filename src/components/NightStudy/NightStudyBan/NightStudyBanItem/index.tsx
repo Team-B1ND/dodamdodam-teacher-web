@@ -1,19 +1,21 @@
 import * as S from './style';
-import {useGetAllMemberListQuery} from "queries/Member/member.query";
 import {changeGrade} from "utils/Member/changeGrade";
 import {TBody} from "@b1nd/b1nd-dodamdodam-ui";
 import Student from "./Student";
+import {useGetBannedNightMemberListQuery} from "queries/NightStudy/nightstudy.query";
 
 interface NightStudyBanProps {
   searchValue: string;
   selectedGrade: string;
+  selectedBan: string;
 }
 
 const NightStudyBanItem = ({
   searchValue,
   selectedGrade,
+  selectedBan,
 }: NightStudyBanProps) => {
-  const { data: studentsInfo } = useGetAllMemberListQuery({
+  const { data: studentsInfo } = useGetBannedNightMemberListQuery({
     suspense: true,
   });
 
@@ -23,6 +25,7 @@ const NightStudyBanItem = ({
         studentsInfo={studentsInfo?.data!!}
         searchValue={searchValue}
         selectGrade={changeGrade(selectedGrade)}
+        selectBan={selectedBan}
       />
     </TBody>
   )
