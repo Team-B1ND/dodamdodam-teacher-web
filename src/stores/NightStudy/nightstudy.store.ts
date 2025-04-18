@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { NightStudyType } from "types/NightStudy/nightstudy.type";
+import {NightStudyBanStatusType, NightStudyType} from "types/NightStudy/nightstudy.type";
 
 export const NightStudyGrade = atom<string>({
   key: "NightStudyGrade",
@@ -30,3 +30,8 @@ export const NightStudySelectBanAtom = atom<string>({
   key: "NightStudySelectBanAtom",
   default: "정지여부",
 });
+
+export const NightStudyModalAtom = atom<NightStudyBanStatusType>({
+  key: "NightStudyModalAtom",
+  default: {isOpened: false, student: 0},
+})

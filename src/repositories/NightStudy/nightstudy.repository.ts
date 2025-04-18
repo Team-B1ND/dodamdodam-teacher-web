@@ -8,3 +8,10 @@ export interface NightStudyRepository {
   deleteNightStudyAllow(id: number): Promise<void>;
   deleteNightStudyBan(id: number): Promise<void>;
 }
+
+
+export interface NightStudyBanParams {
+  student: number;
+  reason: string;
+  ended: string;
+}

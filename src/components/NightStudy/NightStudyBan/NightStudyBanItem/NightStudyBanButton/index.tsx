@@ -1,20 +1,23 @@
 import {Button} from "@b1nd/b1nd-dodamdodam-ui";
 import useNightStudyBanCancel from "hooks/NightStudy/NightStudyBan/UseNightStudyBanCancel";
+import {StudentBanType} from "types/NightStudy/nightstudy.type";
+import {useRecoilState} from "recoil";
+import {NightStudyModalAtom} from "stores/NightStudy/nightstudy.store";
 
 interface NightStudyBanButtonProps {
-  isBanned: boolean,
-  studentId: number
+  student: StudentBanType
 }
 
-const NightStudyBanButton = ({isBanned, studentId}: NightStudyBanButtonProps
+const NightStudyBanButton = ({student}: NightStudyBanButtonProps
 ) => {
   const {onDeleteNightStudyBan} = useNightStudyBanCancel()
+  const [, setIsOpen] = useRecoilState(NightStudyModalAtom)
 
-  if (isBanned) {
+  if (student.isBanned) {
     return (
       <Button
         ButtonType="cancel"
-        onClick={() => onDeleteNightStudyBan(studentId)}>
+        onClick={() => onDeleteNightStudyBan(student.id)}>
         취소
       </Button>
     )
@@ -22,7 +25,7 @@ const NightStudyBanButton = ({isBanned, studentId}: NightStudyBanButtonProps
     return (
       <Button
         ButtonType="disagree"
-        onClick={() => console.log("ad")}>
+        onClick={() => setIsOpen({isOpened: true, student: student.id})}>
         정지
       </Button>
     )

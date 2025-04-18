@@ -1,6 +1,6 @@
 import { dodamAxios } from "libs/Axios/customAxios";
 import { NightStudyBanResponse, NightStudyResponse } from "types/NightStudy/nightstudy.type";
-import { NightStudyRepository } from "./nightstudy.repository";
+import {NightStudyBanParams, NightStudyRepository} from "./nightstudy.repository";
 
 class NightStudyRepositoryImpl implements NightStudyRepository {
   public async getPendingNightStudy(): Promise<NightStudyResponse> {
@@ -30,6 +30,10 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
 
   public async deleteNightStudyBan(id: number): Promise<void> {
     await dodamAxios.delete('/night-study/ban', {params: {student: id}});
+  }
+
+  public async createNightStudyBan(param: NightStudyBanParams): Promise<void> {
+    await dodamAxios.post('/night-study/ban', param)
   }
 }
 

@@ -37,3 +37,8 @@ export interface StudentBanType {
   phone: string;
   isBanned: boolean;
 }
+
+export interface NightStudyBanStatusType {
+  isOpened: boolean;
+  student: number;
+}

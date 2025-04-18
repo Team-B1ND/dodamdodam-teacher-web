@@ -12,6 +12,7 @@ import {
   NightStudySelectBanAtom,
   NightStudySelectGradeAtom
 } from "stores/NightStudy/nightstudy.store";
+import NightStudyBanModal from "./NightStudyBanModal";
 
 const NightStudyBan = () => {
   const searchValue = useRecoilValue(NightStudySearchAtom);
@@ -33,6 +34,7 @@ const NightStudyBan = () => {
               selectedBan={selectedBan}
             />
           </Suspense>
+          <NightStudyBanModal/>
         </ErrorBoundary>
       </TableAttribute>
     </S.NightStudyBanContainer>

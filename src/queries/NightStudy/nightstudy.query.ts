@@ -1,7 +1,7 @@
-import { UseQueryOptions, useMutation, useQuery } from "react-query";
+import {useMutation, useQuery, UseQueryOptions} from "react-query";
 import {AxiosError} from "axios";
 import {NightStudyBanResponse, NightStudyResponse} from "types/NightStudy/nightstudy.type";
-import { QUERY_KEYS } from "../queryKey";
+import {QUERY_KEYS} from "../queryKey";
 import nightstudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
 import nightStudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
 
@@ -80,8 +80,11 @@ export const useDeleteNightStudyAllow = ()=>{
 }
 
 export const useDeleteNightStudyBan = () => {
-  const mutation = useMutation((id: number) =>
+  return useMutation((id: number) =>
     nightstudyRepositoryImpl.deleteNightStudyBan(id)
   )
-  return mutation
 }
+
+export const useCreatePointReasonMutation = () => {
+  return useMutation(nightstudyRepositoryImpl.createNightStudyBan);
+};

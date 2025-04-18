@@ -6,6 +6,7 @@ import NightStudyBanButton from "../NightStudyBanButton";
 import {StudentTD} from "../style";
 import {changeBanToBool} from "utils/NightStudy/NightStudyBan";
 import {StudentBanType} from "types/NightStudy/nightstudy.type";
+import React from "react";
 
 interface StudentProps {
   studentsInfo: StudentBanType[];
@@ -27,7 +28,7 @@ const Student = ({ studentsInfo, searchValue, selectGrade, selectBan }: StudentP
             </TD>
             <TD customStyle={StudentTD}>{addPhoneHyphen(item.phone)}</TD>
             <TD customStyle={StudentTD}>
-              <NightStudyBanButton isBanned={item.isBanned} studentId={item.id} />
+              <NightStudyBanButton student={item} />
             </TD>
           </TR>
       )}
