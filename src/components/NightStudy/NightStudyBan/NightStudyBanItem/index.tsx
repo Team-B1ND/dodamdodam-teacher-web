@@ -1,4 +1,3 @@
-import * as S from './style';
 import {changeGrade} from "utils/Member/changeGrade";
 import {TBody} from "@b1nd/b1nd-dodamdodam-ui";
 import Student from "./Student";
@@ -21,7 +20,11 @@ const NightStudyBanItem = ({
   });
 
   return (
-    <TBody customStyle={S.StudentTBody}>
+    <TBody customStyle={{
+      width: "100%",
+      display: "flex",
+      flexDirection: "column"
+    }}>
       <Student
         studentsInfo={studentsInfo?.data!!}
         searchValue={searchValue}

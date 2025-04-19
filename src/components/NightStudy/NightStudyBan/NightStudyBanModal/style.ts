@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {DodamBackgroundColor, DodamColor, DodamShape, DodamTypography} from "@b1nd/dds-web";
+import {DodamShape, DodamTypography} from "@b1nd/dds-web";
 
 export const NightStudyBanContainer = styled.div`
     width: 30%;
     height: 50%;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.backgroundNormal};
     padding: 20px;
     gap: 10px;
     display: flex;
@@ -38,13 +38,13 @@ export const BanedReasonWrap = styled.div`
 `
 
 export const BannedReasonTextArea = styled.textarea`
+    ${DodamShape.Medium}
     outline: none;
     resize: none;
     border: none;
     height: 100px;
-    background-color: #f5f5f5;
+    background-color: ${({ theme }) => theme.backgroundAlternative};
     padding: 12px;
-    ${DodamShape.Medium}
     &::placeholder {
         color: ${({ theme }) => theme.labelAlternative};
     }

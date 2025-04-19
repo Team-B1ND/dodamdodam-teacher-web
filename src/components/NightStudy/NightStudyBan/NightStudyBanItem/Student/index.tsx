@@ -3,7 +3,7 @@ import {sortAndFilterStudents} from "utils/NightStudy/SortAndFIlterStudents";
 import {MemberItemTR} from "components/Member/MemberItem/style";
 import {addPhoneHyphen} from "utils/common/addPhoneHyphen";
 import NightStudyBanButton from "../NightStudyBanButton";
-import {StudentTD} from "../style";
+import {StudentTD} from "./style";
 import {changeBanToBool} from "utils/NightStudy/NightStudyBan";
 import {StudentBanType} from "types/NightStudy/nightstudy.type";
 import React from "react";
