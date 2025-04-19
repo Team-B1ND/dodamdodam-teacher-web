@@ -6,8 +6,13 @@ import {NIGHTSTUDY_BAN_REASONS} from "constants/LateNight/latenight.constant";
 import {NightStudyModalAtom} from "stores/NightStudy/nightstudy.store";
 import useNightStudyBan from "hooks/NightStudy/NightStudyBan/useNightStudyBan";
 
-const NightStudyBanModal = () => {
-  const [modal, setModal] = useRecoilState(NightStudyModalAtom)
+interface NightStudyBanModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  student: number
+}
+
+const NightStudyBanModal = ({isOpen, onClose, student}: NightStudyBanModalProps) => {
 
   const {
     onCreateNightStudyBan,
@@ -18,9 +23,9 @@ const NightStudyBanModal = () => {
   } = useNightStudyBan();
 
   return (
-    <DodamModal isOpen={modal.isOpened} background>
+    <DodamModal isOpen={isOpen} background>
       <S.NightStudyBanContainer>
-        <div onClick={() => setModal(prev => ({...prev, isOpened: false}))}>
+        <div onClick={onClose}>
           <Close $svgStyle={{ cursor: 'pointer' }} />
         </div>
         <p>심자정지</p>
@@ -53,13 +58,15 @@ const NightStudyBanModal = () => {
         )}
         <S.BannedReasonButtonWrap>
           <DodamFilledButton
+            text="심자정지"
             size="Small"
             width={100}
-            textTheme={"staticWhite"}
-            onClick={() => onCreateNightStudyBan(modal.student)}
-          >
-            심자정지
-          </DodamFilledButton>
+            textTheme="staticWhite"
+            onClick={() => {
+              onCreateNightStudyBan(student);
+              onClose();
+            }}
+          />
         </S.BannedReasonButtonWrap>
       </S.NightStudyBanContainer>
     </DodamModal>

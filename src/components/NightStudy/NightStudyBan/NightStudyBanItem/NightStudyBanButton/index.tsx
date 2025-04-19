@@ -5,13 +5,14 @@ import {NightStudyModalAtom} from "stores/NightStudy/nightstudy.store";
 import {DodamFilledButton} from "@b1nd/dds-web";
 
 interface NightStudyBanButtonProps {
-  student: StudentBanType
+  student: StudentBanType,
+  openModal: () => void;
 }
 
-const NightStudyBanButton = ({student}: NightStudyBanButtonProps
+const NightStudyBanButton = ({student, openModal}: NightStudyBanButtonProps
 ) => {
   const {onDeleteNightStudyBan} = useNightStudyBanCancel()
-  const setIsOpen = useSetRecoilState(NightStudyModalAtom);
+  const setSelectedStudent = useSetRecoilState(NightStudyModalAtom);
 
   if (student.isBanned) {
     return (
@@ -33,7 +34,10 @@ const NightStudyBanButton = ({student}: NightStudyBanButtonProps
         textTheme="labelNetural"
         typography={['Body1', 'Medium']}
         backgroundColorType="Assisitive"
-        onClick={() => setIsOpen({isOpened: true, student: student.id})}
+        onClick={() => {
+          openModal();
+          setSelectedStudent(student.id)
+        }}
       />
     )
   }

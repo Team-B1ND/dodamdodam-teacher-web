@@ -31,7 +31,7 @@ export const NightStudySelectBanAtom = atom<string>({
   default: "정지여부",
 });
 
-export const NightStudyModalAtom = atom<NightStudyBanStatusType>({
+export const NightStudyModalAtom = atom<number>({
   key: "NightStudyModalAtom",
-  default: {isOpened: false, student: 0},
+  default: 0,
 })

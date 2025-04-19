@@ -11,11 +11,12 @@ import React from "react";
 interface StudentProps {
   studentsInfo: StudentBanType[];
   searchValue: string;
+  onSelectStudent: () => void;
   selectGrade: number;
   selectBan: string;
 }
 
-const Student = ({ studentsInfo, searchValue, selectGrade, selectBan }: StudentProps) => {
+const Student = ({ studentsInfo, searchValue, selectGrade, selectBan, onSelectStudent }: StudentProps) => {
   return (
     <>
       {sortAndFilterStudents(studentsInfo, searchValue, selectGrade, changeBanToBool(selectBan)).map(
@@ -28,7 +29,7 @@ const Student = ({ studentsInfo, searchValue, selectGrade, selectBan }: StudentP
             </TD>
             <TD customStyle={StudentTD}>{addPhoneHyphen(item.phone)}</TD>
             <TD customStyle={StudentTD}>
-              <NightStudyBanButton student={item} />
+              <NightStudyBanButton student={item} openModal={onSelectStudent} />
             </TD>
           </TR>
       )}

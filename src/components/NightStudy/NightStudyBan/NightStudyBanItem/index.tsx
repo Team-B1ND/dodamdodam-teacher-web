@@ -7,10 +7,12 @@ import React from "react";
 interface NightStudyBanProps {
   searchValue: string;
   selectedGrade: string;
+  onSelectStudent: () => void;
   selectedBan: string;
 }
 
 const NightStudyBanItem = ({
+  onSelectStudent,
   searchValue,
   selectedGrade,
   selectedBan,
@@ -30,6 +32,7 @@ const NightStudyBanItem = ({
         searchValue={searchValue}
         selectGrade={changeGrade(selectedGrade)}
         selectBan={selectedBan}
+        onSelectStudent={onSelectStudent}
       />
     </TBody>
   )
