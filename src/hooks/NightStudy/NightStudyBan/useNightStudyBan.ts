@@ -12,7 +12,7 @@ interface NightStudyBanState {
   reason: string
 }
 
-const UseNightStudyBan = ()=> {
+const useNightStudyBan = ()=> {
   const [ended, setEnded] = useState<string>(dayjs().format("YYYY-MM-DD"));
   const [reasonType, setReasonType] = useState<string>("");
   const [reason, setReason] = useState<string>("");
@@ -44,4 +44,4 @@ const UseNightStudyBan = ()=> {
   }
 }
 
-export default UseNightStudyBan;
+export default useNightStudyBan;

@@ -4,7 +4,7 @@ import * as S from './style';
 import {useRecoilState} from "recoil";
 import {NIGHTSTUDY_BAN_REASONS} from "constants/LateNight/latenight.constant";
 import {NightStudyModalAtom} from "stores/NightStudy/nightstudy.store";
-import UseNightStudyBan from "hooks/NightStudy/NightStudyBan/UseNightStudyBan";
+import useNightStudyBan from "hooks/NightStudy/NightStudyBan/useNightStudyBan";
 
 const NightStudyBanModal = () => {
   const [modal, setModal] = useRecoilState(NightStudyModalAtom)
@@ -15,7 +15,7 @@ const NightStudyBanModal = () => {
     setEnded,
     setReason,
     setReasonType
-  } = UseNightStudyBan();
+  } = useNightStudyBan();
 
   return (
     <DodamModal isOpen={modal.isOpened} background>

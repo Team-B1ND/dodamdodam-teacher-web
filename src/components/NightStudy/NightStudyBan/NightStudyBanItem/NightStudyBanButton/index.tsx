@@ -1,8 +1,8 @@
-import {Button} from "@b1nd/b1nd-dodamdodam-ui";
-import useNightStudyBanCancel from "hooks/NightStudy/NightStudyBan/UseNightStudyBanCancel";
+import useNightStudyBanCancel from "hooks/NightStudy/NightStudyBan/useNightStudyBanCancel";
 import {StudentBanType} from "types/NightStudy/nightstudy.type";
 import {useSetRecoilState} from "recoil";
 import {NightStudyModalAtom} from "stores/NightStudy/nightstudy.store";
+import {DodamFilledButton} from "@b1nd/dds-web";
 
 interface NightStudyBanButtonProps {
   student: StudentBanType
@@ -15,19 +15,26 @@ const NightStudyBanButton = ({student}: NightStudyBanButtonProps
 
   if (student.isBanned) {
     return (
-      <Button
-        ButtonType="cancel"
-        onClick={() => onDeleteNightStudyBan(student.id)}>
-        취소
-      </Button>
+      <DodamFilledButton
+          text="취소"
+          width={90}
+          size="Small"
+          textTheme="staticWhite"
+          backgroundColorType='Negative'
+          onClick={() => onDeleteNightStudyBan(student.id)}
+      />
     )
   } else {
     return (
-      <Button
-        ButtonType="disagree"
-        onClick={() => setIsOpen({isOpened: true, student: student.id})}>
-        정지
-      </Button>
+      <DodamFilledButton
+        text="정지"
+        width={90}
+        size="Small"
+        textTheme="labelNetural"
+        typography={['Body1', 'Medium']}
+        backgroundColorType="Assisitive"
+        onClick={() => setIsOpen({isOpened: true, student: student.id})}
+      />
     )
   }
 }

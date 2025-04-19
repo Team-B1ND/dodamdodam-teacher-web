@@ -4,7 +4,7 @@ import {QUERY_KEYS} from "queries/queryKey";
 import {B1ndToast} from "@b1nd/b1nd-toastify";
 import {AxiosError} from "axios";
 
-const UseNightStudyBanCancel = () => {
+const useNightStudyBanCancel = () => {
   const queryClient = useQueryClient();
   const deleteNightStudyBan = useDeleteNightStudyBan();
 
@@ -25,4 +25,4 @@ const UseNightStudyBanCancel = () => {
   return { onDeleteNightStudyBan };
 }
 
-export default UseNightStudyBanCancel;
+export default useNightStudyBanCancel;
