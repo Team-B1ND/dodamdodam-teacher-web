@@ -1,7 +1,7 @@
 import {Button} from "@b1nd/b1nd-dodamdodam-ui";
 import useNightStudyBanCancel from "hooks/NightStudy/NightStudyBan/UseNightStudyBanCancel";
 import {StudentBanType} from "types/NightStudy/nightstudy.type";
-import {useRecoilState} from "recoil";
+import {useSetRecoilState} from "recoil";
 import {NightStudyModalAtom} from "stores/NightStudy/nightstudy.store";
 
 interface NightStudyBanButtonProps {
@@ -11,7 +11,7 @@ interface NightStudyBanButtonProps {
 const NightStudyBanButton = ({student}: NightStudyBanButtonProps
 ) => {
   const {onDeleteNightStudyBan} = useNightStudyBanCancel()
-  const [, setIsOpen] = useRecoilState(NightStudyModalAtom)
+  const setIsOpen = useSetRecoilState(NightStudyModalAtom);
 
   if (student.isBanned) {
     return (

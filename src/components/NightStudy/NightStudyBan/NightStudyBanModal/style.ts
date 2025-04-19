@@ -46,7 +46,7 @@ export const BannedReasonTextArea = styled.textarea`
     padding: 12px;
     ${DodamShape.Medium}
     &::placeholder {
-        color: gray;
+        color: ${({ theme }) => theme.labelAlternative};
     }
 `
 

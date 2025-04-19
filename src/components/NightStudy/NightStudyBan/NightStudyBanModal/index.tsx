@@ -25,7 +25,7 @@ const NightStudyBanModal = () => {
         </div>
         <p>심자정지</p>
         <S.DateInfoBox>
-          <p>정지 만료일</p>
+          <p>정지 종료일</p>
           <DodamDatePicker
             itemKey="ended"
             value={state.ended}
