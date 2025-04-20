@@ -29,6 +29,7 @@ export const QUERY_KEYS = Object.freeze({
   nightstudy: {
     getPendingNightStudy: '/night-study/pending',
     getNightStudyList: '/night-study',
+    getNightStudyBanMember: '/night-study/members',
   },
   schedule: {
     getSchedules: ['schedule/getSchedule'],

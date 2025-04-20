@@ -10,10 +10,11 @@
 
 # production
 /build
-/config
+/src/config
 config.json
 
 # misc
+.idea
 .DS_Store
 .env.local
 .env.development.local

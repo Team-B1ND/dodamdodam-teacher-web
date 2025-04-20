@@ -1,9 +1,27 @@
-import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import { AxiosError } from "axios";
-import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
-import { QUERY_KEYS } from "../queryKey";
+import {useMutation, useQuery, UseQueryOptions} from "react-query";
+import {AxiosError} from "axios";
+import {NightStudyBanResponse, NightStudyResponse} from "types/NightStudy/nightstudy.type";
+import {QUERY_KEYS} from "../queryKey";
 import nightstudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
 import nightStudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
+
+export const useGetBannedNightMemberListQuery = (
+  options?: UseQueryOptions<
+    NightStudyBanResponse,
+    AxiosError,
+    NightStudyBanResponse,
+    string
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.nightstudy.getNightStudyBanMember,
+    () => nightstudyRepositoryImpl.getNightStudyBanMember(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  );
 
 export const useGetPendingNightStudy = (
   options?: UseQueryOptions<
@@ -60,3 +78,13 @@ export const useDeleteNightStudyAllow = ()=>{
   )
   return mutation
 }
+
+export const useDeleteNightStudyBan = () => {
+  return useMutation((id: number) =>
+    nightstudyRepositoryImpl.deleteNightStudyBan(id)
+  )
+}
+
+export const useCreatePointReasonMutation = () => {
+  return useMutation(nightstudyRepositoryImpl.createNightStudyBan);
+};
