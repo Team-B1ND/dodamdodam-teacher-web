@@ -80,6 +80,13 @@ export const useDeleteNightStudyAllow = ()=>{
   return mutation
 }
 
+export const usePatchNightStudyProjectAllow=()=>{
+  const mutation = useMutation((id:number)=>
+  nightstudyRepositoryImpl.patchNightStudyProjectAllow(id)
+  );
+  return mutation;
+}
+
 export const useGetPendingNightStudyProject = (options?:UseQueryOptions<ProjectNightStudyResponse, AxiosError,ProjectNightStudyResponse,string>) => {
   return useQuery(
     QUERY_KEYS.nightstudy.getPendingNightStudyProject,

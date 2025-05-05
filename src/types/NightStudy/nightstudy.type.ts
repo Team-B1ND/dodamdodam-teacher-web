@@ -12,7 +12,7 @@ export interface NightStudyType {
   status: string;
   doNeedPhone: boolean;
   reasonForPhone: string;
-  student: StudnetType;
+  student: StudentType;
   place: string;
   startAt: string;
   endAt: string;
@@ -20,7 +20,7 @@ export interface NightStudyType {
   modifiedAt: string;
 }
 
-export interface StudnetType {
+export interface StudentType {
   id: number;
   name: string;
   grade: number;
@@ -37,7 +37,8 @@ export interface ProjectStudyType {
   description: string;
   startAt: string;
   endAt: string;
-  leader: StudnetType;
+  leader: StudentType;
+  participants:StudentType[];
 }
 
 export interface ProjectNightStudyResponse extends Response {

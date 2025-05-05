@@ -9,55 +9,70 @@ interface ProjectModalProps {
 }
 
 const ProjectNightStudyModal = ({ close, project }: ProjectModalProps) => {
+  const formatParticipants = () => {
+    return project.participants.map((student, index) => (
+      <S.ParticipantItem key={index}>
+        {student.grade}학년 {student.room}반 {student.name}
+      </S.ParticipantItem>
+    ));
+  };
+
+  const getProjectTypeName = () => {
+    return project.type === "NIGHT_STUDY_PROJECT_1" ? "• 심자1" : "• 심자2";
+  };
+
   return (
     <S.ProjectModalWrap>
-      <div onClick={close}>
-        <Close $svgStyle={{ cursor: "pointer" }} />
-      </div>
+      <S.ModalHeader>
+        <S.IconContainer>
+          <img src={NightStudyIcon} alt="심야자습 아이콘" />
+        </S.IconContainer>
+        <S.CloseButton onClick={close}>
+          <Close $svgStyle={{ cursor: "pointer" }} />
+        </S.CloseButton>
+      </S.ModalHeader>
 
-      <div>
-        <img src={NightStudyIcon} alt="심야자습 아이콘" />
-      </div>
+      <S.ContentSection>
+        <S.TitleSection>
+          <S.NightStudyTitle>{project.name}</S.NightStudyTitle>
+          <S.ProjectTypeTag>{getProjectTypeName()}</S.ProjectTypeTag>
+        </S.TitleSection>
 
-      <S.NightStudyTitle>{project.name}</S.NightStudyTitle>
-      <S.NightStudyReason>
-        {project.description}
-      </S.NightStudyReason>
-      <DodamDivider type="Small" />
+        <S.NightStudyReason>{project.description}</S.NightStudyReason>
 
-      <S.NightStudyFlex>
-        <div style={{ marginRight: "50px" }}>
-          <div>
-            <S.NightStudyStartConatiner>
-              <S.NightStudyOption>시작일</S.NightStudyOption>
-              <S.NightStudyDate>{project.startAt}</S.NightStudyDate>
-            </S.NightStudyStartConatiner>
-            <S.NightStudyFlex>
-              <S.NightStudyOption>종료일</S.NightStudyOption>
-              <S.NightStudyDate>{project.endAt}</S.NightStudyDate>
-            </S.NightStudyFlex>
-            <S.NightStudyFlex>
-              <S.NightStudyOption>장소</S.NightStudyOption>
-              <S.NightStudyDate>{project.room}</S.NightStudyDate>
-            </S.NightStudyFlex>
-            <S.NightStudyFlex>
-              <S.NightStudyOption>심자시간</S.NightStudyOption>
-              <S.NightStudyDate>
-                {project.type === "NIGHT_STUDY_PROJECT_1" ? "심야자습 프로젝트 1" : "심야자습 프로젝트 2"}
-              </S.NightStudyDate>
-            </S.NightStudyFlex>
-          </div>
-        </div>
-        <S.NightStudyPeople>
-          <S.NightStudyOption>참여인원</S.NightStudyOption>
-          <S.NightStudyFlex>
-            <S.NightStudyOption>리더</S.NightStudyOption>
-            <S.NightStudyDate>
-              {project.leader.grade}학년 {project.leader.room}반 {project.leader.name}
-            </S.NightStudyDate>
-          </S.NightStudyFlex>
-        </S.NightStudyPeople>
-      </S.NightStudyFlex>
+        <DodamDivider type="Small" />
+
+        <S.DetailsContainer>
+          <S.DetailsColumn>
+            <S.DetailItem>
+              <S.DetailLabel>시작일</S.DetailLabel>
+              <S.DetailValue>{project.startAt}</S.DetailValue>
+            </S.DetailItem>
+
+            <S.DetailItem>
+              <S.DetailLabel>종료일</S.DetailLabel>
+              <S.DetailValue>{project.endAt}</S.DetailValue>
+            </S.DetailItem>
+
+            <S.DetailItem>
+              <S.DetailLabel>장소</S.DetailLabel>
+              <S.DetailValue>{project.room}</S.DetailValue>
+            </S.DetailItem>
+          </S.DetailsColumn>
+
+          <S.ParticipantsColumn>
+            <S.DetailLabel>참여인원</S.DetailLabel>
+            <S.MemberCount>({project.participants.length + 1}명)</S.MemberCount>
+            <S.ParticipantsList>
+              <S.ParticipantItem>
+                {project.leader.grade}학년 {project.leader.room}반{" "}
+                {project.leader.name}
+              </S.ParticipantItem>
+              {formatParticipants()}
+            </S.ParticipantsList>
+          </S.ParticipantsColumn>
+        </S.DetailsContainer>
+      </S.ContentSection>
     </S.ProjectModalWrap>
   );
 };

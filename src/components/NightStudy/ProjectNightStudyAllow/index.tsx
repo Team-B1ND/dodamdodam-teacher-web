@@ -27,7 +27,9 @@ const ProjectNightStudyAllow = () => {
           customStyle={{ height: "38px" }}
         />
       </S.NightStudyAllowHeader>
-      <TableAttribute constant={PROJECT_NIGHTSTUDY_ALLOW_ITEMS}>
+      <TableAttribute
+        constant={PROJECT_NIGHTSTUDY_ALLOW_ITEMS}
+      >
         <ProjectNightStudyList />
       </TableAttribute>
     </>

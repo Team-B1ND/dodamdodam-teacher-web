@@ -1,10 +1,10 @@
 import { TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
-import { WrapProject } from "./style";
 import { DodamModal } from "@b1nd/dds-web";
 import { useState } from "react";
 import * as S from "./style";
 import ProjectNightStudyModal from "components/NightStudy/ProjectNightStudyModal";
 import { ProjectStudyType } from "types/NightStudy/nightstudy.type";
+import NightStudyProjectButton from "./NightStudyProjectButton";
 
 interface ProjectNightStudyItemProps {
   project: ProjectStudyType;
@@ -17,22 +17,34 @@ const ProjectNightStudyItem = ({ project }: ProjectNightStudyItemProps) => {
     setIsProjectModalOpen(false);
   };
 
+  const projectType = project.type == "NIGHT_STUDY_PROJECT_1" ? '심자1': '심자2';
+
   return (
     <>
-      <TR customStyle={WrapProject}>
-        <TD>{project.name}</TD>
-        <div onClick={() => setIsProjectModalOpen(!isProjectModalOpen)}>
-          <TD>
-            <S.ProjectExplainWrap>
-              {project.description}
-            </S.ProjectExplainWrap>
-          </TD>
-        </div>
-        <TD>{project.leader.name}</TD>
-        <TD>{project.startAt}</TD>
-        <TD>{project.endAt}</TD>
-        <TD>{project.room}</TD>
-        {/* 버튼 승인-> 대기X 프로젝트 하고 잇는 사람들 거절-> 그냥 거절 / 프로젝트 하고잇는 사람들에서 Patch로 하고있는 사람들 승인 취소 할수 있음*/}
+      <TR customStyle={S.WrapProject}>
+        <TD customStyle={S.NameColumnStyle}>
+          {project.name}
+        </TD>
+        <TD customStyle={S.DescriptionColumnStyle} >
+          <S.ProjectExplainWrap onClick={() => setIsProjectModalOpen(!isProjectModalOpen)}>
+            {project.description}
+          </S.ProjectExplainWrap>
+        </TD>
+        <TD customStyle={S.TypeColumnStyle}>
+          {projectType}
+        </TD>
+        <TD customStyle={S.DateColumnStyle}>
+          {project.startAt}
+        </TD>
+        <TD customStyle={S.DateColumnStyle}>
+          {project.endAt}
+        </TD>
+        <TD customStyle={S.RoomColumnStyle}>
+          {project.room}
+        </TD>
+        <TD>
+            <NightStudyProjectButton />
+        </TD>
       </TR>
 
       <DodamModal isOpen={isProjectModalOpen} background>
