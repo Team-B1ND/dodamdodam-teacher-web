@@ -17,6 +17,7 @@ import NoticeWritePage from 'pages/Notice/Write/noticeWritePages'
 import DivisionPage from 'pages/Notice/Division/divisionPage'
 import ClubManagePage from 'pages/Club/ClubManagePage'
 import ApplicateTeacherPage from 'pages/Club/ApplicateTeacherPage'
+import ProjectNightStudyAllowPage from 'pages/NightStudy/ProjectNightStudyAllowPage'
 
 const Router = () => {
   return (
@@ -29,6 +30,7 @@ const Router = () => {
       <Route path='/offbase-leave-ing' element={<TodayOffBaseLeavePage />} />
       <Route path='/offbase-redisual' element={<OffbaseRedisualPage />} />
       <Route path='/nightStudy-allow' element={<NightStudyAllowPage />} />
+      <Route path='/nightStudy-project-allow' element={<ProjectNightStudyAllowPage />} />
       <Route path='/nightStudy-today' element={<NightStudyTodayPage />} />
       <Route path='/PointScore' element={<PointScore />} />
       <Route path='/PointReason' element={<PointReason />} />

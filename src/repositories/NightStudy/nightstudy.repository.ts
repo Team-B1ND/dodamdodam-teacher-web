@@ -1,4 +1,4 @@
-import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 
 export interface NightStudyRepository {
   getPendingNightStudy(): Promise<NightStudyResponse>;
@@ -6,4 +6,5 @@ export interface NightStudyRepository {
   patchNightStudyAllow(id: number): Promise<void>;
   patchNightStudyCancel(id: number): Promise<void>;
   deleteNightStudyAllow(id: number): Promise<void>;
+  getPendingNightStudyPending(): Promise<ProjectNightStudyResponse>;
 }

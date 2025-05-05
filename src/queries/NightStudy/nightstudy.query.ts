@@ -1,6 +1,6 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import { AxiosError } from "axios";
-import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { QUERY_KEYS } from "../queryKey";
 import nightstudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
 import nightStudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
@@ -59,4 +59,16 @@ export const useDeleteNightStudyAllow = ()=>{
     nightStudyRepositoryImpl.deleteNightStudyAllow(id)
   )
   return mutation
+}
+
+export const useGetPendingNightStudyProject = (options?:UseQueryOptions<ProjectNightStudyResponse, AxiosError,ProjectNightStudyResponse,string>) => {
+  return useQuery(
+    QUERY_KEYS.nightstudy.getPendingNightStudyProject,
+    ()=>nightstudyRepositoryImpl.getPendingNightStudyPending(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  )
 }

@@ -1,5 +1,5 @@
 import { dodamAxios } from "libs/Axios/customAxios";
-import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
 
 class NightStudyRepositoryImpl implements NightStudyRepository {
@@ -21,6 +21,10 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   }
   public async deleteNightStudyAllow(id: number):Promise<void>{
     await dodamAxios.patch(`/night-study/${id}/revert`);
+  }
+  public async getPendingNightStudyPending(): Promise<ProjectNightStudyResponse> {
+    const {data} = await dodamAxios.get("/night-study/project/pending");
+    return data;
   }
 }
 

@@ -23,3 +23,19 @@ export interface StudnetType {
   room: number;
   number: number;
 }
+
+export interface ProjectStudyType {
+  id: number;
+  type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";
+  status: string; 
+  room: string;
+  name: string;
+  description: string;
+  startAt: string;
+  endAt: string;
+  leader: StudnetType;
+}
+
+export interface ProjectNightStudyResponse extends Response {
+  data: ProjectStudyType[];
+}
