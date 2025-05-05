@@ -8,6 +8,7 @@ export interface NightStudyRepository {
   deleteNightStudyAllow(id: number): Promise<void>;
   getPendingNightStudyPending(): Promise<ProjectNightStudyResponse>;
   patchNightStudyProjectAllow(id : number): Promise<void>;
+  patchNightStudyProjectReject(id : number): Promise<void>;
   deleteNightStudyBan(id: number): Promise<void>;
 }
 

@@ -6,6 +6,10 @@ export interface NightStudyBanResponse extends Response {
   data: StudentBanType[];
 }
 
+export interface ProjectNightStudyResponse extends Response {
+  data: ProjectStudyType[];
+}
+
 export interface NightStudyType {
   id: number;
   content: string;
@@ -41,9 +45,6 @@ export interface ProjectStudyType {
   participants:StudentType[];
 }
 
-export interface ProjectNightStudyResponse extends Response {
-  data: ProjectStudyType[];
-}
 export interface StudentBanType {
   id: number;
   name: string;

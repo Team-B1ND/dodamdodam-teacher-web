@@ -61,8 +61,10 @@ const ProjectNightStudyModal = ({ close, project }: ProjectModalProps) => {
           </S.DetailsColumn>
 
           <S.ParticipantsColumn>
-            <S.DetailLabel>참여인원</S.DetailLabel>
-            <S.MemberCount>({project.participants.length + 1}명)</S.MemberCount>
+            <div style={{marginBottom:"5px"}}>
+              <S.DetailLabel>참여인원</S.DetailLabel>
+              <S.MemberCount>({project.participants.length + 1}명)</S.MemberCount>
+            </div>
             <S.ParticipantsList>
               <S.ParticipantItem>
                 {project.leader.grade}학년 {project.leader.room}반{" "}

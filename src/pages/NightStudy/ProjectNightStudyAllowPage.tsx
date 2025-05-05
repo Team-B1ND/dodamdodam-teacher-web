@@ -1,6 +1,5 @@
 import ProjectNightStudyAllow from "components/NightStudy/ProjectNightStudyAllow";
 import SectionHeaderProvider from "components/common/SectionHeaderProvider";
-import { DodamSegmentedButton } from "@b1nd/dds-web";
 
 const ProjectNightStudyAllowPage = () => {
   return (

@@ -3,8 +3,11 @@ import ProjectNightStudyList from "./ProjectNightStudyList";
 import TableAttribute from "components/common/TableAttribute";
 import { PROJECT_NIGHTSTUDY_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";
 import { DodamFilledButton } from "@b1nd/dds-web";
+import useProjectNightStudyAllApproval from "hooks/NightStudy/NightStudyProjectAllow/useProjectNightStudyAllApproval";
 
 const ProjectNightStudyAllow = () => {
+  const { allApproveProjects, allRejectProjects } = useProjectNightStudyAllApproval();
+
   return (
     <>
       <S.NightStudyAllowHeader>
@@ -16,6 +19,7 @@ const ProjectNightStudyAllow = () => {
           width={88}
           typography={["Body2", "Medium"]}
           customStyle={{ height: "38px", marginRight: "10px" }}
+          onClick={allApproveProjects}
         />
         <DodamFilledButton
           text="일괄 거절"
@@ -25,6 +29,7 @@ const ProjectNightStudyAllow = () => {
           width={88}
           typography={["Body2", "Medium"]}
           customStyle={{ height: "38px" }}
+          onClick={allRejectProjects}
         />
       </S.NightStudyAllowHeader>
       <TableAttribute

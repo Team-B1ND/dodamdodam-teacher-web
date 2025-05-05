@@ -43,7 +43,7 @@ const ProjectNightStudyItem = ({ project }: ProjectNightStudyItemProps) => {
           {project.room}
         </TD>
         <TD>
-            <NightStudyProjectButton />
+            <NightStudyProjectButton projectId={project.id}/>
         </TD>
       </TR>
 
