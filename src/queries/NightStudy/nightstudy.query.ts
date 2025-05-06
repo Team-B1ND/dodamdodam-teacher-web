@@ -105,6 +105,20 @@ export const useGetPendingNightStudyProject = (options?:UseQueryOptions<ProjectN
     }
   )
 }
+
+export const useGetNightStudyProjects = (options?:UseQueryOptions<ProjectNightStudyResponse, AxiosError,ProjectNightStudyResponse,string>) => {
+  return useQuery(
+    QUERY_KEYS.nightstudy.getNightStudyProjects,
+    ()=>nightstudyRepositoryImpl.getNightStudyProjects(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  )
+}
+
+
 export const useDeleteNightStudyBan = () => {
   return useMutation((id: number) =>
     nightstudyRepositoryImpl.deleteNightStudyBan(id)

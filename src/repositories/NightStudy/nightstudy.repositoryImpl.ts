@@ -43,6 +43,10 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   public async patchNightStudyProjectReject(id: number): Promise<void> {
     await dodamAxios.patch(`/night-study/project/${id}/reject`);
   }
+  public async getNightStudyProjects(): Promise<ProjectNightStudyResponse> {
+    const {data} = await dodamAxios.get("/night-study/projects");
+    return data;
+  }
   public async deleteNightStudyBan(id: number): Promise<void> {
     await dodamAxios.delete("/night-study/ban", { params: { student: id } });
   }

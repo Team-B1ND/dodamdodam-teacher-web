@@ -19,6 +19,7 @@ import DivisionPage from 'pages/Notice/Division/divisionPage'
 import ClubManagePage from 'pages/Club/ClubManagePage'
 import ApplicateTeacherPage from 'pages/Club/ApplicateTeacherPage'
 import ProjectNightStudyAllowPage from 'pages/NightStudy/ProjectNightStudyAllowPage'
+import ProjectNightStudyTodayPage from 'pages/NightStudy/ProjectNightStudyTodayPage'
 
 const Router = () => {
   return (
@@ -34,6 +35,7 @@ const Router = () => {
       <Route path='/nightStudy-project-allow' element={<ProjectNightStudyAllowPage />} />
       <Route path='/nightStudy-ban' element={<NightStudyBanPage />} />
       <Route path='/nightStudy-today' element={<NightStudyTodayPage />} />
+      <Route path='/nightStudy-project-today' element={<ProjectNightStudyTodayPage/>} />
       <Route path='/PointScore' element={<PointScore />} />
       <Route path='/PointReason' element={<PointReason />} />
       <Route path='/Schedule' element={<ScheduleManage />} />
