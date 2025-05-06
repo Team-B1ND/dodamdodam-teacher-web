@@ -7,45 +7,51 @@ interface NightStudyProjectButtonProps {
 }
 
 const NightStudyProjectButton = ({ projectId, projectStatus }: NightStudyProjectButtonProps) => {
-  const { approveProject, rejectProject } = useProjectNightStudyApproval();
+  const { approveProject, rejectProject, revertProject } = useProjectNightStudyApproval();
 
-  const isPending = projectStatus === "PENDING";
+  if (projectStatus === "PENDING") {
+    return (
+      <>
+        <DodamFilledButton
+          text="승인"
+          width={90}
+          size="Small"
+          textTheme="staticWhite"
+          backgroundColorType="Primary"
+          customStyle={{ minHeight: "24px" }}
+          typography={['Body1', 'Medium']}
+          onClick={() => approveProject(projectId)}
+        />
+        <div style={{ paddingBottom: "4px" }} />
+        <DodamFilledButton
+          text="거절"
+          width={90}
+          size="Small"
+          textTheme="staticWhite"
+          backgroundColorType="Negative"
+          customStyle={{ minHeight: "24px" }}
+          typography={['Body1', 'Medium']}
+          onClick={() => rejectProject(projectId)}
+        />
+      </>
+    );
+  }
 
-  return isPending ? (
-    <>
+  if (projectStatus === "ALLOWED") {
+    return (
       <DodamFilledButton
-        text="승인"
-        width={90}
-        size="Small"
-        textTheme="staticWhite"
-        backgroundColorType="Primary"
-        customStyle={{ minHeight: "24px" }}
-        typography={['Body1', 'Medium']}
-        onClick={() => approveProject(projectId)}
-      />
-      <div style={{ paddingBottom: "4px" }}/>
-      <DodamFilledButton
-        text="거절"
+        text="승인취소"
         width={90}
         size="Small"
         textTheme="staticWhite"
         backgroundColorType="Negative"
         customStyle={{ minHeight: "24px" }}
         typography={['Body1', 'Medium']}
-        onClick={() => rejectProject(projectId)}
+        onClick={() => revertProject(projectId)}
       />
-    </>
-  ) :(
-  <DodamFilledButton
-  text="승인취소"
-  width={90}
-  size="Small"
-  textTheme="staticWhite"
-  backgroundColorType="Negative"
-  customStyle={{ minHeight: "24px" }}
-  typography={['Body1', 'Medium']}
-/>
-  )
+    );
+  }
+  return null;
 };
 
 export default NightStudyProjectButton;

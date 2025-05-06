@@ -94,6 +94,13 @@ export const usePatchNightStudyProjectReject=()=>{
   return mutation;
 }
 
+export const usePatchNightStudyProjectRevert=()=>{
+  const mutation = useMutation((id:number)=>
+    nightStudyRepositoryImpl.patchNightStudyProjectRevert(id)
+  );
+  return mutation;
+}
+
 export const useGetPendingNightStudyProject = (options?:UseQueryOptions<ProjectNightStudyResponse, AxiosError,ProjectNightStudyResponse,string>) => {
   return useQuery(
     QUERY_KEYS.nightstudy.getPendingNightStudyProject,

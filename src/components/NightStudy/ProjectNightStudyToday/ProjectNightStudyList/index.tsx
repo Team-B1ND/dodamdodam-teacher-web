@@ -8,7 +8,7 @@ const ProjectNightStudyList = () =>{
     console.log(data)
     return(
         <>
-            <TBody customStyle={MemberTBody}>
+        <TBody customStyle={MemberTBody}>
         {data?.data?.map((project) => (
           <ProjectNightStudyItem key={project.id} project={project} />
         ))}
