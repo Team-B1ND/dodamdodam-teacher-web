@@ -113,10 +113,10 @@ export const useGetPendingNightStudyProject = (options?:UseQueryOptions<ProjectN
   )
 }
 
-export const useGetNightStudyProjects = (options?:UseQueryOptions<ProjectNightStudyResponse, AxiosError,ProjectNightStudyResponse,string>) => {
+export const useGetNightStudyAllowedProjects = (options?:UseQueryOptions<ProjectNightStudyResponse, AxiosError,ProjectNightStudyResponse,string>) => {
   return useQuery(
-    QUERY_KEYS.nightstudy.getNightStudyProjects,
-    ()=>nightstudyRepositoryImpl.getNightStudyProjects(),
+    QUERY_KEYS.nightstudy.getNightStudyAllowedProjects,
+    ()=>nightstudyRepositoryImpl.getNightStudyAllowedProjects(),
     {
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
