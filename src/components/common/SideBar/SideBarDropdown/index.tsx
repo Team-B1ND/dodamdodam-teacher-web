@@ -64,7 +64,7 @@ const SideBarDropdown = () => {
           redirectUrl='/nightStudy-today'
         />
         <MenuDropdownChild
-          title='프로젝트 중인 학생'
+          title='진행중인 프로젝트'
           redirectUrl='/nightStudy-project-today'
         />
       </MenuDropdownWrapper>

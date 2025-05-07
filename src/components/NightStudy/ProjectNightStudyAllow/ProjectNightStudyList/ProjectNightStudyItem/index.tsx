@@ -50,7 +50,7 @@ const ProjectNightStudyItem = ({ project }: ProjectNightStudyItemProps) => {
       <DodamModal isOpen={isProjectModalOpen} background>
         <ProjectNightStudyModal 
           close={handleCloseModal} 
-          project={project}
+          projectId={project.id}
         />
       </DodamModal>
     </>

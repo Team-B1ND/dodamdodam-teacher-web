@@ -35,14 +35,17 @@ export interface StudentType {
 export interface ProjectStudyType {
   id: number;
   type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";
-  status: string; 
+  status: string;
   room: string;
   name: string;
   description: string;
   startAt: string;
   endAt: string;
-  leader: StudentType;
-  participants:StudentType[];
+}
+
+export interface ProjectStudyDetailResponseType {
+  project : ProjectStudyType;
+  students : StudentType[];
 }
 
 export interface StudentBanType {

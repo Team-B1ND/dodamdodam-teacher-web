@@ -1,24 +1,27 @@
 import * as S from "./style";
 import { Close, DodamDivider } from "@b1nd/dds-web";
 import NightStudyIcon from "../../../assets/icons/NightStudy/LateNight.svg";
-import { ProjectStudyType } from "types/NightStudy/nightstudy.type";
+import { useGetNightStudyProjectDetail } from "queries/NightStudy/nightstudy.query";
+import ProjectNightStudySkeletonModal from "./ProjectNightStudySkeletonModal";
 
 interface ProjectModalProps {
   close: () => void;
-  project: ProjectStudyType;
+  projectId: number;
 }
 
-const ProjectNightStudyModal = ({ close, project }: ProjectModalProps) => {
+const ProjectNightStudyModal = ({ close, projectId }: ProjectModalProps) => {
+  const { data, isLoading } = useGetNightStudyProjectDetail({ id: projectId });
+
+  if (isLoading || !data) {
+    return <ProjectNightStudySkeletonModal close={close} />;
+  }
+
   const formatParticipants = () => {
-    return project.participants.map((student, index) => (
+    return data.students.map((student, index) => (
       <S.ParticipantItem key={index}>
         {student.grade}학년 {student.room}반 {student.name}
       </S.ParticipantItem>
     ));
-  };
-
-  const getProjectTypeName = () => {
-    return project.type === "NIGHT_STUDY_PROJECT_1" ? "• 심자1" : "• 심자2";
   };
 
   return (
@@ -34,11 +37,11 @@ const ProjectNightStudyModal = ({ close, project }: ProjectModalProps) => {
 
       <S.ContentSection>
         <S.TitleSection>
-          <S.NightStudyTitle>{project.name}</S.NightStudyTitle>
-          <S.ProjectTypeTag>{getProjectTypeName()}</S.ProjectTypeTag>
+          <S.NightStudyTitle>{data.project?.name}</S.NightStudyTitle>
+          <S.ProjectTypeTag></S.ProjectTypeTag>
         </S.TitleSection>
 
-        <S.NightStudyReason>{project.description}</S.NightStudyReason>
+        <S.NightStudyReason>{data.project?.description}</S.NightStudyReason>
 
         <DodamDivider type="Small" />
 
@@ -46,31 +49,29 @@ const ProjectNightStudyModal = ({ close, project }: ProjectModalProps) => {
           <S.DetailsColumn>
             <S.DetailItem>
               <S.DetailLabel>시작일</S.DetailLabel>
-              <S.DetailValue>{project.startAt}</S.DetailValue>
+              <S.DetailValue>{data.project?.startAt}</S.DetailValue>
             </S.DetailItem>
 
             <S.DetailItem>
               <S.DetailLabel>종료일</S.DetailLabel>
-              <S.DetailValue>{project.endAt}</S.DetailValue>
+              <S.DetailValue>{data.project?.endAt}</S.DetailValue>
             </S.DetailItem>
 
             <S.DetailItem>
               <S.DetailLabel>장소</S.DetailLabel>
-              <S.DetailValue>{project.room}</S.DetailValue>
+              <S.DetailValue>{data.project?.room}</S.DetailValue>
             </S.DetailItem>
           </S.DetailsColumn>
 
           <S.ParticipantsColumn>
-            <div style={{marginBottom:"5px"}}>
-              <S.DetailLabel>참여인원</S.DetailLabel>
-              <S.MemberCount>({project.participants.length + 1}명)</S.MemberCount>
-            </div>
+            <S.DetailLabel>참여인원</S.DetailLabel>
+            <S.MemberCount>({data.students?.length || 0}명)</S.MemberCount>
             <S.ParticipantsList>
-              <S.ParticipantItem>
-                {project.leader.grade}학년 {project.leader.room}반{" "}
-                {project.leader.name}
-              </S.ParticipantItem>
-              {formatParticipants()}
+              {data.students && data.students.length > 0 ? (
+                formatParticipants()
+              ) : (
+                <S.ParticipantItem>참여자가 없습니다</S.ParticipantItem>
+              )}
             </S.ParticipantsList>
           </S.ParticipantsColumn>
         </S.DetailsContainer>

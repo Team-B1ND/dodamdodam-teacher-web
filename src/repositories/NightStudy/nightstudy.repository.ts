@@ -1,4 +1,8 @@
-import { NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
+import {
+  NightStudyResponse,
+  ProjectNightStudyResponse,
+  ProjectStudyDetailResponseType
+} from "types/NightStudy/nightstudy.type";
 
 export interface NightStudyRepository {
   getPendingNightStudy(): Promise<NightStudyResponse>;
@@ -7,13 +11,13 @@ export interface NightStudyRepository {
   patchNightStudyCancel(id: number): Promise<void>;
   deleteNightStudyAllow(id: number): Promise<void>;
   getPendingNightStudyPending(): Promise<ProjectNightStudyResponse>;
-  patchNightStudyProjectAllow(id : number): Promise<void>;
-  patchNightStudyProjectReject(id : number): Promise<void>;
+  getNightStudyProjectDetail(id: number): Promise<ProjectStudyDetailResponseType>;
+  patchNightStudyProjectAllow(id: number): Promise<void>;
+  patchNightStudyProjectReject(id: number): Promise<void>;
   getNightStudyAllowedProjects(): Promise<ProjectNightStudyResponse>;
   patchNightStudyProjectRevert(id: number): Promise<void>;
   deleteNightStudyBan(id: number): Promise<void>;
 }
-
 
 export interface NightStudyBanParams {
   student: number;

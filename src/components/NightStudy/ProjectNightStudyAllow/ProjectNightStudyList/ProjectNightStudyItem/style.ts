@@ -27,13 +27,14 @@ export const TDClickable: CSSObject = {
 
 export const NameColumnStyle: CSSObject = {
   ...TDStyle,
-  width: "80px",
-  marginLeft: "10px",
+  width: "140px",
+  textAlign: "left",
 };
 
 export const DescriptionColumnStyle: CSSObject = {
   ...TDClickable,
-  width: "220px",
+  width: "160px",
+  textAlign: "left",
 };
 
 export const TypeColumnStyle: CSSObject = {

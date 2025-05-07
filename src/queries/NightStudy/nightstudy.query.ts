@@ -1,7 +1,7 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import {ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import {AxiosError} from "axios";
-import {NightStudyBanResponse, NightStudyResponse} from "types/NightStudy/nightstudy.type";
+import {NightStudyBanResponse, NightStudyResponse, ProjectStudyDetailResponseType} from "types/NightStudy/nightstudy.type";
 import {QUERY_KEYS} from "../queryKey";
 import nightstudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
 import nightStudyRepositoryImpl from "repositories/NightStudy/nightstudy.repositoryImpl";
@@ -125,6 +125,24 @@ export const useGetNightStudyAllowedProjects = (options?:UseQueryOptions<Project
   )
 }
 
+export const useGetNightStudyProjectDetail = (
+  { id }: { id: number },
+  options?: UseQueryOptions<
+    ProjectStudyDetailResponseType,
+    AxiosError,
+    ProjectStudyDetailResponseType
+  >
+) => {
+  return useQuery<ProjectStudyDetailResponseType, AxiosError>(
+    [QUERY_KEYS.nightstudy.getNightStudyDetail, id],
+    () => nightstudyRepositoryImpl.getNightStudyProjectDetail(id),
+    {
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 10,
+      ...options,
+    }
+  );
+};
 
 export const useDeleteNightStudyBan = () => {
   return useMutation((id: number) =>
