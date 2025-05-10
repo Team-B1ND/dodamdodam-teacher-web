@@ -1,6 +1,12 @@
 import { dodamAxios } from "libs/Axios/customAxios";
-import { NightStudyBanResponse, NightStudyResponse } from "types/NightStudy/nightstudy.type";
-import {NightStudyBanParams, NightStudyRepository} from "./nightstudy.repository";
+import {
+  NightStudyResponse,
+  ProjectNightStudyResponse,
+  ProjectStudyDetailResponseType,
+} from "types/NightStudy/nightstudy.type";
+import { NightStudyRepository } from "./nightstudy.repository";
+import { NightStudyBanResponse } from "types/NightStudy/nightstudy.type";
+import { NightStudyBanParams } from "./nightstudy.repository";
 
 class NightStudyRepositoryImpl implements NightStudyRepository {
   public async getPendingNightStudy(): Promise<NightStudyResponse> {
@@ -24,16 +30,37 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   public async patchNightStudyCancel(id: number): Promise<void> {
     await dodamAxios.patch(`/night-study/${id}/reject`);
   }
-  public async deleteNightStudyAllow(id: number):Promise<void>{
+  public async deleteNightStudyAllow(id: number): Promise<void> {
     await dodamAxios.patch(`/night-study/${id}/revert`);
   }
+  public async getPendingNightStudyPending(): Promise<ProjectNightStudyResponse> {
+    const { data } = await dodamAxios.get("/night-study/project/pending");
+    return data;
+  }
+  public async patchNightStudyProjectAllow(id: number): Promise<void> {
+    await dodamAxios.patch(`/night-study/project/${id}/allow`);
+  }
 
+  public async patchNightStudyProjectReject(id: number): Promise<void> {
+    await dodamAxios.patch(`/night-study/project/${id}/reject`);
+  }
+  public async getNightStudyAllowedProjects(): Promise<ProjectNightStudyResponse> {
+    const { data } = await dodamAxios.get("/night-study/project/allowed");
+    return data;
+  }
+  public async getNightStudyProjectDetail(id: number): Promise<ProjectStudyDetailResponseType> {
+    const { data } = await dodamAxios.get(`/night-study/project/${id}`);
+    return data.data;
+  }
+  public async patchNightStudyProjectRevert(id: number): Promise<void> {
+    await dodamAxios.patch(`/night-study/project/${id}/revert`);
+  }
   public async deleteNightStudyBan(id: number): Promise<void> {
-    await dodamAxios.delete('/night-study/ban', {params: {student: id}});
+    await dodamAxios.delete("/night-study/ban", { params: { student: id } });
   }
 
   public async createNightStudyBan(param: NightStudyBanParams): Promise<void> {
-    await dodamAxios.post('/night-study/ban', param)
+    await dodamAxios.post("/night-study/ban", param);
   }
 }
 
