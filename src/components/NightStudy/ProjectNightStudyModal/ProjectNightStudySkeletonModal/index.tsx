@@ -1,26 +1,14 @@
 import { Close, DodamDivider } from "@b1nd/dds-web";
-import NightStudyIcon from "../../../assets/icons/NightStudy/LateNight.svg";
-import styled, { keyframes } from "styled-components";
-import * as S from "../style"
+import styled from "styled-components";
+import * as S from "../style";
+import { skeletonAnimtaion } from "@b1nd/b1nd-styled-components-util";
 
 interface ProjectModalProps {
   close: () => void;
 }
 
-const skeletonGlow = keyframes`
-  0% {
-    background-color: rgba(211, 211, 211, 0.2);
-  }
-  50% {
-    background-color: rgba(211, 211, 211, 0.5);
-  }
-  100% {
-    background-color: rgba(211, 211, 211, 0.2);
-  }
-`;
-
 const SkeletonBase = styled.div`
-  animation: ${skeletonGlow} 1.5s ease-in-out infinite;
+  ${skeletonAnimtaion}
   border-radius: 4px;
 `;
 

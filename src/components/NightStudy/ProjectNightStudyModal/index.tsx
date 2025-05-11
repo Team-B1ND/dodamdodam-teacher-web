@@ -7,7 +7,7 @@ import ProjectNightStudySkeletonModal from "./ProjectNightStudySkeletonModal";
 interface ProjectModalProps {
   close: () => void;
   projectId: number;
-}
+} 
 
 const ProjectNightStudyModal = ({ close, projectId }: ProjectModalProps) => {
   const { data, isLoading } = useGetNightStudyProjectDetail({ id: projectId });
