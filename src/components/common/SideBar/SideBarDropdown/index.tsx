@@ -52,12 +52,20 @@ const SideBarDropdown = () => {
           redirectUrl='/nightStudy-allow'
         />
         <MenuDropdownChild
+          title='프로젝트 심자수락/거절'
+          redirectUrl='/nightStudy-project-allow'
+        />
+          <MenuDropdownChild
           title='심자신청 정지'
           redirectUrl='/nightStudy-ban'
         />
         <MenuDropdownChild
           title='심자중인 학생'
           redirectUrl='/nightStudy-today'
+        />
+        <MenuDropdownChild
+          title='진행중인 프로젝트'
+          redirectUrl='/nightStudy-project-today'
         />
       </MenuDropdownWrapper>
       <MenuDropdownChild title='학사일정 관리' redirectUrl='/schedule' />
