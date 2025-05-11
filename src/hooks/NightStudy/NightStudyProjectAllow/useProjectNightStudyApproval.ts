@@ -13,7 +13,11 @@ const useProjectNightStudyApproval = () => {
     patchAllow.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("프로젝트 심자 승인 완료");
-        queryClient.invalidateQueries(QUERY_KEYS.nightstudy.getPendingNightStudyProject);
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEYS.nightstudy.getPendingNightStudyProject,
+          refetchActive: true 
+        });
+        queryClient.invalidateQueries(QUERY_KEYS.nightstudy.getNightStudyAllowedProjects);
       },
       onError: () => {
         B1ndToast.showError("승인 중 오류 발생");
@@ -25,7 +29,10 @@ const useProjectNightStudyApproval = () => {
     patchReject.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("프로젝트 심자 거절 완료");
-        queryClient.invalidateQueries(QUERY_KEYS.nightstudy.getPendingNightStudyProject);
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEYS.nightstudy.getPendingNightStudyProject,
+          refetchActive: true  
+        });
       },
       onError: () => {
         B1ndToast.showError("거절 중 오류 발생");
@@ -37,6 +44,10 @@ const useProjectNightStudyApproval = () => {
     patchRevert.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("프로젝트 심자 승인 취소 완료");
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEYS.nightstudy.getNightStudyAllowedProjects,
+          refetchActive: true  
+        });
         queryClient.invalidateQueries(QUERY_KEYS.nightstudy.getPendingNightStudyProject);
       },
       onError: () => {
