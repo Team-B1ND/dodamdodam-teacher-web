@@ -14,7 +14,6 @@ import { useNightStudyStudentList } from "hooks/NightStudy/useNightStudyStudentL
 import dayjs from "dayjs";
 import { PointSelectRoom } from "stores/Point/point.store";
 import { DodamSegmentedButton } from "@b1nd/dds-web";
-import { useGetNightStudyProjectStudents } from "queries/NightStudy/nightstudy.query";
 import NightStudyProjectItem from "./NightStudyProjectToday";
 
 const NightStudyToday = () => {
@@ -23,7 +22,7 @@ const NightStudyToday = () => {
   const { NightStudyInfo } = useNightStudyStudentList();
   const [room, setRoom] = useRecoilState(PointSelectRoom);
   const [isActive, setIsActive] = useState(true);
-  
+
   return (
     <>
       <S.NightStudyHeaderContainer>
