@@ -1,4 +1,5 @@
 import styled, { CSSObject } from "styled-components";
+import { DodamTypography } from "@b1nd/dds-web";
 
 export const NightStudyHeaderContainer = styled.div`
   display: flex;
@@ -15,8 +16,8 @@ export const SelectContainer = styled.div`
   gap: 5px;
 `;
 export const InfoText = styled.p`
-  font-size: 12px;
-  color: red;
+  ${DodamTypography.Body2.Regular}
+  color: ${({ theme }) => theme.statusNegative};
 
   margin: 4px 0px 0px 10px;
 `;

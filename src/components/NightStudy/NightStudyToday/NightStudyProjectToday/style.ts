@@ -1,31 +1,31 @@
 import type { CSSObject } from "styled-components";
 
-const trWrapStyles: CSSObject = {
+const TRWrapStyles: CSSObject = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap"
 };
 
 export const TDProjectNameStyle: CSSObject = {
-  ...trWrapStyles,
+  ...TRWrapStyles,
   textAlign: "left",
   width: "180px"
 };
 
 export const TDNameStyle: CSSObject = {
-  ...trWrapStyles,
+  ...TRWrapStyles,
   textAlign: "left",
   width: "160px",
 };
 
 export const TDStudentStyle: CSSObject = {
-  ...trWrapStyles,
+  ...TRWrapStyles,
   textAlign: "left",
   width: "130px",
 };
 
 export const TDRoomStyle: CSSObject = {
-  ...trWrapStyles,
+  ...TRWrapStyles,
   textAlign:"center",
   width: "120px",
 };
