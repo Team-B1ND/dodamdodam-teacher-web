@@ -2,6 +2,7 @@ import { dodamAxios } from "libs/Axios/customAxios";
 import {
   NightStudyResponse,
   ProjectNightStudyResponse,
+  ProjectStudentsResponse,
   ProjectStudyDetailResponseType,
 } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
@@ -46,6 +47,11 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   }
   public async getNightStudyAllowedProjects(): Promise<ProjectNightStudyResponse> {
     const { data } = await dodamAxios.get("/night-study/project/allowed");
+    return data;
+  }
+
+  public async getNightStudyProjectStudents(): Promise<ProjectStudentsResponse> {
+    const {data} = await dodamAxios.get("/night-study/project/students")
     return data;
   }
   public async getNightStudyProjectDetail(id: number): Promise<ProjectStudyDetailResponseType> {

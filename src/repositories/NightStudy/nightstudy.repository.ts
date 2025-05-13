@@ -1,7 +1,8 @@
 import {
   NightStudyResponse,
   ProjectNightStudyResponse,
-  ProjectStudyDetailResponseType
+  ProjectStudyDetailResponseType,
+  ProjectStudentsResponse
 } from "types/NightStudy/nightstudy.type";
 
 export interface NightStudyRepository {
@@ -10,6 +11,7 @@ export interface NightStudyRepository {
   patchNightStudyAllow(id: number): Promise<void>;
   patchNightStudyCancel(id: number): Promise<void>;
   deleteNightStudyAllow(id: number): Promise<void>;
+  getNightStudyProjectStudents(): Promise<ProjectStudentsResponse>;
   getPendingNightStudyPending(): Promise<ProjectNightStudyResponse>;
   getNightStudyProjectDetail(id: number): Promise<ProjectStudyDetailResponseType>;
   patchNightStudyProjectAllow(id: number): Promise<void>;
