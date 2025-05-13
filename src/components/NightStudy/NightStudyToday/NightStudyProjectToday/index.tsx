@@ -2,14 +2,25 @@ import { TBody, TD, TR } from "@b1nd/b1nd-dodamdodam-ui";
 import { NightStudyTBody,NightStudyTR } from "../NightStudyTodayItem/style";
 import { useGetNightStudyProjectStudents } from "queries/NightStudy/nightstudy.query";
 import { TDNameStyle, TDProjectNameStyle, TDRoomStyle, TDStudentStyle } from "./style";
+import { NightStudyStudentFillter } from "utils/NightStudy/NightStudyStudentFillter";
 
-const NightStudyProjectItem = () => {
-  const { data } = useGetNightStudyProjectStudents({ suspense: true });
+interface NightStudyTodayProps {
+    studentName: string;
+    NightStudyGrade: number;
+    selectRoom: string;
+}
+
+const NightStudyProjectItem = ({
+    studentName,
+    NightStudyGrade,
+    selectRoom,
+  }: NightStudyTodayProps) => {
+  const { data:ProjectStudents } = useGetNightStudyProjectStudents({ suspense: true });
 
   return (
     <>
       <TBody customStyle={NightStudyTBody}>
-        {data?.data.map((project) => (
+        {NightStudyStudentFillter(ProjectStudents, studentName, NightStudyGrade, selectRoom)?.map((project) => (
           <TR key={project.id} customStyle={NightStudyTR}>
             <TD
               customStyle={TDProjectNameStyle}

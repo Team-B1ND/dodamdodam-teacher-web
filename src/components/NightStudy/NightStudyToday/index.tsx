@@ -91,7 +91,11 @@ const NightStudyToday = () => {
       <TableAttribute constant={PROJECT_NIGHTSTUDY_STUDENTS_ITEM}>
         <ErrorBoundary text="심자 중인 학생을 불러오지 못했습니다." showButton={true}>
           <Suspense fallback={<>로딩중...</>}>
-            <NightStudyProjectItem/>
+            <NightStudyProjectItem
+            selectRoom={room}
+            studentName={studentName}
+            NightStudyGrade={changeGrade(nightStudyGrade)}
+            />
           </Suspense>
         </ErrorBoundary>
       </TableAttribute>)}
