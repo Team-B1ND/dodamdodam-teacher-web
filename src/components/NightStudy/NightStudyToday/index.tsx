@@ -3,9 +3,12 @@ import * as S from "./style";
 import { Suspense, useState } from "react";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { useRecoilState } from "recoil";
-import { NightStudyGrade } from "stores/NightStudy/nightstudy.store";
+import { NightStudyGrade, NightStudyProjectSelectAtom } from "stores/NightStudy/nightstudy.store";
 import TableAttribute from "components/common/TableAttribute";
-import { NIGHTSTUDY_ALLOW_ITEMS, PROJECT_NIGHTSTUDY_STUDENTS_ITEM } from "constants/LateNight/latenight.constant";
+import {
+  NIGHTSTUDY_ALLOW_ITEMS,
+  PROJECT_NIGHTSTUDY_STUDENTS_ITEM,
+} from "constants/LateNight/latenight.constant";
 import ErrorBoundary from "components/common/ErrorBoundary";
 import NightStudyTodayItem from "./NightStudyTodayItem";
 import { changeGrade } from "utils/Member/changeGrade";
@@ -16,6 +19,8 @@ import { PointSelectRoom } from "stores/Point/point.store";
 import { DodamSegmentedButton } from "@b1nd/dds-web";
 import NightStudyProjectItem from "./NightStudyProjectToday";
 import { useNightStudyProjectStudentsList } from "hooks/NightStudy/useNightStudyProjectStudentsList";
+import { useGetNightStudyProjectStudents } from "queries/NightStudy/nightstudy.query";
+import { useMemo } from "react";
 
 const NightStudyToday = () => {
   const [studentName, setStudentName] = useState("");
@@ -23,7 +28,19 @@ const NightStudyToday = () => {
   const { NightStudyInfo } = useNightStudyStudentList();
   const [room, setRoom] = useRecoilState(PointSelectRoom);
   const [isActive, setIsActive] = useState(true);
-  const {NightStudyProjectInfo} = useNightStudyProjectStudentsList();
+  const { NightStudyProjectInfo } = useNightStudyProjectStudentsList();
+  const { data: projectData } = useGetNightStudyProjectStudents();
+
+  const projectNames = useMemo(() => {
+    if (!projectData?.data) return ["전체"];
+
+    const names = projectData.data.map((student) => student.projectName);
+    const unique = Array.from(new Set(names));
+    return ["전체", ...unique];
+  }, [projectData?.data]);
+
+
+  const [prname, setPrname] = useRecoilState(NightStudyProjectSelectAtom);
 
   return (
     <>
@@ -36,7 +53,9 @@ const NightStudyToday = () => {
             { text: "개인", isAtv: isActive },
             { text: "프로젝트", isAtv: !isActive },
           ]}
-          onClick={()=>{setIsActive(!isActive)}}
+          onClick={() => {
+            setIsActive(!isActive);
+          }}
         />
         <div
           style={{
@@ -59,16 +78,27 @@ const NightStudyToday = () => {
               onChange={setRoom}
               zIndex={2}
             />
+            {!isActive && (
+              <Select
+                items={projectNames}
+                value={prname}
+                onChange={setPrname}
+                zIndex={4}
+              />
+            )}
             <S.CsvButtonContainer>
-            {isActive ?
+              {isActive ? (
                 <CsvButton
                   csvData={NightStudyInfo}
-                  fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}/>
-                : 
+                  fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}
+                />
+              ) : (
                 <CsvButton
-                csvData={NightStudyProjectInfo}
-                fileName={dayjs().format("YYYY-MM-DD") + "프로젝트 심자 중인 학생"}/>
-            }
+                  csvData={NightStudyProjectInfo}
+                  fileName={
+                    dayjs().format("YYYY-MM-DD") + "프로젝트 심자 중인 학생"}
+                />
+              )}
             </S.CsvButtonContainer>
           </S.SelectContainer>
         </div>
@@ -77,35 +107,40 @@ const NightStudyToday = () => {
         <span>*</span>심자 사유를 눌러 상세보기가 가능합니다.
       </S.InfoText>
       {isActive ? (
-      <TableAttribute
-        constant={NIGHTSTUDY_ALLOW_ITEMS}
-        thStyle={{ width: "14%" }}
-      >
-        <ErrorBoundary
-          text="심자 중인 학생을 불러오지 못했습니다."
-          showButton={true}
+        <TableAttribute
+          constant={NIGHTSTUDY_ALLOW_ITEMS}
+          thStyle={{ width: "14%" }}
         >
-          <Suspense fallback={<>로딩중...</>}>
-            <NightStudyTodayItem
-              selectRoom={room}
-              studentName={studentName}
-              NightStudyGrade={changeGrade(nightStudyGrade)}
-            />
-          </Suspense>
-        </ErrorBoundary>
-      </TableAttribute>
-      ):(
-      <TableAttribute constant={PROJECT_NIGHTSTUDY_STUDENTS_ITEM}>
-        <ErrorBoundary text="심자 중인 학생을 불러오지 못했습니다." showButton={true}>
-          <Suspense fallback={<>로딩중...</>}>
-            <NightStudyProjectItem
-            selectRoom={room}
-            studentName={studentName}
-            NightStudyGrade={changeGrade(nightStudyGrade)}
-            />
-          </Suspense>
-        </ErrorBoundary>
-      </TableAttribute>)}
+          <ErrorBoundary
+            text="심자 중인 학생을 불러오지 못했습니다."
+            showButton={true}
+          >
+            <Suspense fallback={<>로딩중...</>}>
+              <NightStudyTodayItem
+                selectRoom={room}
+                studentName={studentName}
+                NightStudyGrade={changeGrade(nightStudyGrade)}
+              />
+            </Suspense>
+          </ErrorBoundary>
+        </TableAttribute>
+      ) : (
+        <TableAttribute constant={PROJECT_NIGHTSTUDY_STUDENTS_ITEM}>
+          <ErrorBoundary
+            text="심자 중인 학생을 불러오지 못했습니다."
+            showButton={true}
+          >
+            <Suspense fallback={<>로딩중...</>}>
+              <NightStudyProjectItem
+                selectRoom={room}
+                studentName={studentName}
+                NightStudyGrade={changeGrade(nightStudyGrade)}
+                projectName={prname}
+              />
+            </Suspense>
+          </ErrorBoundary>
+        </TableAttribute>
+      )}
     </>
   );
 };

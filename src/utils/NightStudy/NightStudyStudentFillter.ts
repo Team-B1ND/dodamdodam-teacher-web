@@ -5,7 +5,8 @@ export const NightStudyStudentFillter = (
   NightStudyStudents: ProjectStudentsResponse| undefined,
   studentName: string,
   NightStudyGrade: number,
-  selectRoom: string
+  selectRoom: string,
+  selectedProject : string,
 ) => {
   return NightStudyStudents?.data
     .filter((data) => data.name.includes(studentName))
@@ -17,7 +18,10 @@ export const NightStudyStudentFillter = (
       (data) =>
         data.room === changeRoom(selectRoom) ||
         changeRoom(selectRoom) === 0
-    )
+    ) .filter(
+        (data) =>
+          selectedProject === "전체" || data.projectName === selectedProject
+      )
     .sort((a, b) => {
       if (a.grade === b.grade) {
         if (a.room === b.room) {

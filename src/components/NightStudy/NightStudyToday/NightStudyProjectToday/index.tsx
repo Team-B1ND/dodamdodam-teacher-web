@@ -8,19 +8,21 @@ interface NightStudyTodayProps {
     studentName: string;
     NightStudyGrade: number;
     selectRoom: string;
+    projectName : string;
 }
 
 const NightStudyProjectItem = ({
     studentName,
     NightStudyGrade,
     selectRoom,
+    projectName
   }: NightStudyTodayProps) => {
   const { data:ProjectStudents } = useGetNightStudyProjectStudents({ suspense: true });
 
   return (
     <>
       <TBody customStyle={NightStudyTBody}>
-        {NightStudyStudentFillter(ProjectStudents, studentName, NightStudyGrade, selectRoom)?.map((project) => (
+        {NightStudyStudentFillter(ProjectStudents, studentName, NightStudyGrade, selectRoom, projectName)?.map((project) => (
           <TR key={project.id} customStyle={NightStudyTR}>
             <TD
               customStyle={TDProjectNameStyle}

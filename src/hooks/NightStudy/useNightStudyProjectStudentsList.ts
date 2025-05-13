@@ -4,7 +4,6 @@ import { ProjectStudentType } from "types/NightStudy/nightstudy.type";
 
 export const useNightStudyProjectStudentsList = () =>{
     const {data : ProjectStudents} = useGetNightStudyProjectStudents();
-
     const [NightStudyProjectInfo, setNightStudyProjectInfo] = useState([
         {
             이름 : "",
