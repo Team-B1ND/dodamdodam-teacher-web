@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import { PointSelectRoom } from "stores/Point/point.store";
 import { DodamSegmentedButton } from "@b1nd/dds-web";
 import NightStudyProjectItem from "./NightStudyProjectToday";
+import { useNightStudyProjectStudentsList } from "hooks/NightStudy/useNightStudyProjectStudentsList";
 
 const NightStudyToday = () => {
   const [studentName, setStudentName] = useState("");
@@ -22,6 +23,7 @@ const NightStudyToday = () => {
   const { NightStudyInfo } = useNightStudyStudentList();
   const [room, setRoom] = useRecoilState(PointSelectRoom);
   const [isActive, setIsActive] = useState(true);
+  const {NightStudyProjectInfo} = useNightStudyProjectStudentsList();
 
   return (
     <>
@@ -58,10 +60,15 @@ const NightStudyToday = () => {
               zIndex={2}
             />
             <S.CsvButtonContainer>
-              <CsvButton
-                csvData={NightStudyInfo}
-                fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}
-              />
+            {isActive ?
+                <CsvButton
+                  csvData={NightStudyInfo}
+                  fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}/>
+                : 
+                <CsvButton
+                csvData={NightStudyProjectInfo}
+                fileName={dayjs().format("YYYY-MM-DD") + "프로젝트 심자 중인 학생"}/>
+            }
             </S.CsvButtonContainer>
           </S.SelectContainer>
         </div>
