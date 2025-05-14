@@ -1,5 +1,5 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import {ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
+import {ProjectNightStudyResponse, ProjectStudentsResponse } from "types/NightStudy/nightstudy.type";
 import {AxiosError} from "axios";
 import {NightStudyBanResponse, NightStudyResponse, ProjectStudyDetailResponseType} from "types/NightStudy/nightstudy.type";
 import {QUERY_KEYS} from "../queryKey";
@@ -144,6 +144,17 @@ export const useGetNightStudyProjectDetail = (
   );
 };
 
+export const useGetNightStudyProjectStudents = (options?:UseQueryOptions<ProjectStudentsResponse, AxiosError,ProjectStudentsResponse,string>) => {
+  return useQuery(
+    QUERY_KEYS.nightstudy.getNightStudyProjectStudents,
+    ()=>nightstudyRepositoryImpl.getNightStudyProjectStudents(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  )
+}
 export const useDeleteNightStudyBan = () => {
   return useMutation((id: number) =>
     nightstudyRepositoryImpl.deleteNightStudyBan(id)

@@ -10,6 +10,10 @@ export interface ProjectNightStudyResponse extends Response {
   data: ProjectStudyType[];
 }
 
+export interface ProjectStudentsResponse extends Response {
+  data : ProjectStudentType[];
+}
+
 export interface NightStudyType {
   id: number;
   content: string;
@@ -30,6 +34,16 @@ export interface StudentType {
   grade: number;
   room: number;
   number: number;
+}
+
+export interface ProjectStudentType {
+  id: number;
+  name: string;
+  grade: number;
+  room: number;
+  number: number;
+  projectName: string;
+  projectRoom: string;
 }
 
 export interface ProjectStudyType {

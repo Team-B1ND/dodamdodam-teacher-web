@@ -20,6 +20,12 @@ export const PROJECT_NIGHTSTUDY_ALLOW_ITEMS = [
   "승인여부"
 ];
 
+export const PROJECT_NIGHTSTUDY_STUDENTS_ITEM = [
+  "프로젝트명",
+  "이름",
+  "학반",
+  "프로젝트 장소",
+]
 
 export const NIGHTSTUDY_BAN_TABLE_ITEMS = [
   "이름",

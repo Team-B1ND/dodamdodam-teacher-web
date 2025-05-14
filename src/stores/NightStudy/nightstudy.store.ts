@@ -35,3 +35,8 @@ export const NightStudyModalAtom = atom<number>({
   key: "NightStudyModalAtom",
   default: 0,
 })
+
+export const NightStudyProjectSelectAtom = atom<string>({
+  key : "NightStudyProjectSelectAtom",
+  default : "전체",
+})
