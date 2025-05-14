@@ -21,6 +21,7 @@ import NightStudyProjectItem from "./NightStudyProjectToday";
 import { useNightStudyProjectStudentsList } from "hooks/NightStudy/useNightStudyProjectStudentsList";
 import { useGetNightStudyProjectStudents } from "queries/NightStudy/nightstudy.query";
 import { useMemo } from "react";
+import SkeletonComponent from "components/common/Skeleton";
 
 const NightStudyToday = () => {
   const [studentName, setStudentName] = useState("");
@@ -115,7 +116,7 @@ const NightStudyToday = () => {
             text="심자 중인 학생을 불러오지 못했습니다."
             showButton={true}
           >
-            <Suspense fallback={<>로딩중...</>}>
+            <Suspense fallback={<SkeletonComponent height={80}/>}>
               <NightStudyTodayItem
                 selectRoom={room}
                 studentName={studentName}
@@ -130,7 +131,7 @@ const NightStudyToday = () => {
             text="심자 중인 학생을 불러오지 못했습니다."
             showButton={true}
           >
-            <Suspense fallback={<>로딩중...</>}>
+            <Suspense fallback={<SkeletonComponent height={80}/>}>
               <NightStudyProjectItem
                 selectRoom={room}
                 studentName={studentName}
