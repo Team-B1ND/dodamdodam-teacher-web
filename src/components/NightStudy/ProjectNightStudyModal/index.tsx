@@ -60,11 +60,6 @@ const ProjectNightStudyModal = ({ close, projectId }: ProjectModalProps) => {
               <S.ModalLabel>종료일</S.ModalLabel>
               <span>{data.project?.endAt}</span>
             </S.DetailItem>
-
-            <S.DetailItem>
-              <S.ModalLabel>장소</S.ModalLabel>
-              <span>{data.project?.room}</span>
-            </S.DetailItem>
           </S.DetailsColumn>
 
           <S.ParticipantsColumn>

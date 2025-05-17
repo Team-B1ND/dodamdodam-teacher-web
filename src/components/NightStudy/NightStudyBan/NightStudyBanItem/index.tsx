@@ -2,7 +2,7 @@ import {changeGrade} from "utils/Member/changeGrade";
 import {TBody} from "@b1nd/b1nd-dodamdodam-ui";
 import Student from "./Student";
 import {useGetBannedNightMemberListQuery} from "queries/NightStudy/nightstudy.query";
-import React from "react";
+
 
 interface NightStudyBanProps {
   searchValue: string;

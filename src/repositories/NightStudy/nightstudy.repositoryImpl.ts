@@ -4,6 +4,7 @@ import {
   ProjectNightStudyResponse,
   ProjectStudentsResponse,
   ProjectStudyDetailResponseType,
+  ProjectUseingLabResponse,
 } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
 import { NightStudyBanResponse } from "types/NightStudy/nightstudy.type";
@@ -38,12 +39,19 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
     const { data } = await dodamAxios.get("/night-study/project/pending");
     return data;
   }
-  public async patchNightStudyProjectAllow(id: number): Promise<void> {
-    await dodamAxios.patch(`/night-study/project/${id}/allow`);
+  public async getProjectUsingLab(): Promise<ProjectUseingLabResponse> {
+    const { data } = await dodamAxios.get("night-study/project/rooms");
+    return data;
+  }
+  public async patchNightStudyProjectAllow(
+    id: number,
+    room: string
+  ): Promise<void> {
+    await dodamAxios.patch(`/night-study/project/${id}/allow/${room}`);
   }
 
-  public async patchNightStudyProjectReject(id: number): Promise<void> {
-    await dodamAxios.patch(`/night-study/project/${id}/reject`);
+  public async patchNightStudyProjectReject(id: number, rejectReason: string): Promise<void> {
+    await dodamAxios.patch(`/night-study/project/${id}/reject`, {rejectReason});
   }
   public async getNightStudyAllowedProjects(): Promise<ProjectNightStudyResponse> {
     const { data } = await dodamAxios.get("/night-study/project/allowed");
@@ -51,10 +59,12 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   }
 
   public async getNightStudyProjectStudents(): Promise<ProjectStudentsResponse> {
-    const {data} = await dodamAxios.get("/night-study/project/students")
+    const { data } = await dodamAxios.get("/night-study/project/students");
     return data;
   }
-  public async getNightStudyProjectDetail(id: number): Promise<ProjectStudyDetailResponseType> {
+  public async getNightStudyProjectDetail(
+    id: number
+  ): Promise<ProjectStudyDetailResponseType> {
     const { data } = await dodamAxios.get(`/night-study/project/${id}`);
     return data.data;
   }
