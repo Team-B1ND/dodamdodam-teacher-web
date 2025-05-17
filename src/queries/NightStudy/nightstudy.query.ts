@@ -88,12 +88,14 @@ export const usePatchNightStudyProjectAllow = () => {
   return mutation;
 };
 
-export const usePatchNightStudyProjectReject=()=>{
-  const mutation = useMutation((id:number)=>
-    nightStudyRepositoryImpl.patchNightStudyProjectReject(id)
+export const usePatchNightStudyProjectReject = () => {
+  const mutation = useMutation(
+    ({ id, rejectReason }: { id: number; rejectReason: string }) =>
+      nightStudyRepositoryImpl.patchNightStudyProjectReject(id, rejectReason)
   );
+
   return mutation;
-}
+};
 
 export const usePatchNightStudyProjectRevert=()=>{
   const mutation = useMutation((id:number)=>
