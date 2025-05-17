@@ -19,6 +19,7 @@ export const WrapRoomTagAndExplain = styled.div`
 
   p {
     ${DodamTypography.Caption2.Bold}
+    color: ${({ theme }) => theme.primaryNormal};
     margin-left: 22px;
   }
 `;
@@ -42,7 +43,7 @@ export const RoomLabel = styled.span<{ isAvailable: boolean; isSelected: boolean
 export const StatusText = styled.p<{ isAvailable: boolean }>`
   ${DodamTypography.Caption2.Bold}
   color: ${(props) => 
-    props.isAvailable ? props.theme.primaryNormal : props.theme.labelDisabled
+    props.isAvailable ? props.theme.primaryNormal : props.theme. labelDisabled
   };
   margin-left: 22px;
 `;

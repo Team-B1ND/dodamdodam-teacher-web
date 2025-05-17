@@ -1,6 +1,6 @@
 import { DodamFilledButton, DodamModal } from "@b1nd/dds-web";
 import ProjectNightStudyAllowModal from "components/NightStudy/ProjectNightStudyModal/ProjectNightStudyAllowModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ProjectStudyType } from "types/NightStudy/nightstudy.type";
 import useRevertProjectNightStudy from "hooks/NightStudy/NightStudyProjectAllow/useRevertProjectNightStudy";
 import ProjectNightRejectModal from "components/NightStudy/ProjectNightStudyModal/ProjectNightStudyRejectModal";

@@ -3,7 +3,7 @@ import { useGetProjectUsingLab } from "queries/NightStudy/nightstudy.query";
 
 export const useAvailableProjectLabs = (targetType: string) => {
   const { data } = useGetProjectUsingLab();
-  console.log(data)
+
   const result = useMemo(() => {
     const usedRooms = data?.data?.filter(lab => lab.type === targetType) || [];
 

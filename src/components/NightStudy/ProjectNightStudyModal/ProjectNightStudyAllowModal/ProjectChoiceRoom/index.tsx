@@ -1,6 +1,5 @@
 import * as S from "./style";
 import { DodamCheckBox } from "@b1nd/dds-web";
-import { useEffect } from "react";
 import { PROJECT_LAB_ROOMS, PROJECT_LAB_ROOM_MAP } from "./constant";
 import { useAvailableProjectLabs } from "hooks/NightStudy/NightStudyProjectAllow/useAvailableProjectLabs";
 
@@ -33,10 +32,6 @@ const ProjectChoiceRoom = ({
 
     return `${format(startDate)} ~ ${format(endDate)}`;
   };
-
-  useEffect(() => {
-    console.log(selectedRoom);
-  }, [selectedRoom]);
 
   return (
     <S.RoomsContainer>
