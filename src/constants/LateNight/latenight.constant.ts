@@ -16,7 +16,6 @@ export const PROJECT_NIGHTSTUDY_ALLOW_ITEMS = [
   "진행시간",
   "시작일",
   "종료일",
-  "장소",
   "승인여부"
 ];
 

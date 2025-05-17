@@ -4,6 +4,7 @@ import {
   ProjectNightStudyResponse,
   ProjectStudentsResponse,
   ProjectStudyDetailResponseType,
+  ProjectUseingLabResponse,
 } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
 import { NightStudyBanResponse } from "types/NightStudy/nightstudy.type";
@@ -36,6 +37,10 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   }
   public async getPendingNightStudyPending(): Promise<ProjectNightStudyResponse> {
     const { data } = await dodamAxios.get("/night-study/project/pending");
+    return data;
+  }
+  public async getProjectUsingLab(): Promise<ProjectUseingLabResponse> {
+    const {data} = await dodamAxios.get("night-study/project/rooms")
     return data;
   }
   public async patchNightStudyProjectAllow(id: number): Promise<void> {

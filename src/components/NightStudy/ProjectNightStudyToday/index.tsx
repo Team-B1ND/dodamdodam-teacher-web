@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import TableAttribute from "components/common/TableAttribute";
 import ProjectNightStudyList from "./ProjectNightStudyList";
 import { PROJECT_NIGHTSTUDY_ALLOW_ITEMS } from "constants/LateNight/latenight.constant";

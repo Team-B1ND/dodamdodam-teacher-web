@@ -14,6 +14,9 @@ export interface ProjectStudentsResponse extends Response {
   data : ProjectStudentType[];
 }
 
+export interface ProjectUseingLabResponse extends Response{
+  data : ProjectUseingLabType[];
+}
 export interface NightStudyType {
   id: number;
   content: string;
@@ -55,6 +58,14 @@ export interface ProjectStudyType {
   description: string;
   startAt: string;
   endAt: string;
+}
+
+export interface ProjectUseingLabType{
+  room: "LAB_12" | "LAB_13" | "LAB_14" | "LAB_15",
+  type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2",
+  project: string,
+  startAt: string,
+  endAt: string
 }
 
 export interface ProjectStudyDetailResponseType {
