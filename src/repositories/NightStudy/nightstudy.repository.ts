@@ -16,7 +16,7 @@ export interface NightStudyRepository {
   getPendingNightStudyPending(): Promise<ProjectNightStudyResponse>;
   getNightStudyProjectDetail(id: number): Promise<ProjectStudyDetailResponseType>;
   getProjectUsingLab(): Promise<ProjectUseingLabResponse>;
-  patchNightStudyProjectAllow(id: number): Promise<void>;
+  patchNightStudyProjectAllow(id: number, room : string): Promise<void>;
   patchNightStudyProjectReject(id: number): Promise<void>;
   getNightStudyAllowedProjects(): Promise<ProjectNightStudyResponse>;
   patchNightStudyProjectRevert(id: number): Promise<void>;

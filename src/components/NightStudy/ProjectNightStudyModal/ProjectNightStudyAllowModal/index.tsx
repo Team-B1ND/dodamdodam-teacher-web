@@ -3,7 +3,8 @@ import { Close, DodamFilledButton } from "@b1nd/dds-web";
 import { ProjectStudyType } from "types/NightStudy/nightstudy.type";
 import convertDateTime from "utils/Time/ConvertDateTime";
 import ProjectChoiceRoom from "./ProjectChoiceRoom";
-import { useGetProjectUsingLab } from "queries/NightStudy/nightstudy.query";
+import { useState } from "react";
+import { useApproveProjectNightStudy } from "hooks/NightStudy/NightStudyProjectAllow/useApproveProjectNightStudy";
 
 interface ProjectAllowModalProps {
   close: () => void;
@@ -14,6 +15,9 @@ const ProjectNightStudyAllowModal = ({
   close,
   project,
 }: ProjectAllowModalProps) => {
+  const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
+  const {approve} = useApproveProjectNightStudy();
+
   return (
     <S.WrapModal>
       <div onClick={close} style={{ marginBottom: "5px" }}>
@@ -56,7 +60,11 @@ const ProjectNightStudyAllowModal = ({
           <S.ExplainRoomTxt>한곳만 선택해주세요.</S.ExplainRoomTxt>
         </S.WrapExplainRoom>
 
-        <ProjectChoiceRoom projectType={project.type} />
+        <ProjectChoiceRoom
+          projectType={project.type}
+          selectedRoom={selectedRoom}
+          setSelectedRoom={setSelectedRoom}
+        />
       </S.WrapModalContent>
 
       <div style={{ display: "flex", justifyContent: "end" }}>
@@ -68,6 +76,7 @@ const ProjectNightStudyAllowModal = ({
           textTheme="staticWhite"
           typography={["Body2", "Bold"]}
           customStyle={{ padding: "0", marginTop: "20px" }}
+          onClick={()=>{approve({ id: project.id, room: selectedRoom! });}}
         />
       </div>
     </S.WrapModal>

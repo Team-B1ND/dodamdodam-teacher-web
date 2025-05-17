@@ -80,12 +80,13 @@ export const useDeleteNightStudyAllow = ()=>{
   return mutation
 }
 
-export const usePatchNightStudyProjectAllow=()=>{
-  const mutation = useMutation((id:number)=>
-  nightstudyRepositoryImpl.patchNightStudyProjectAllow(id)
+export const usePatchNightStudyProjectAllow = () => {
+  const mutation = useMutation(
+    ({ id, room }: { id: number; room: string }) =>
+      nightstudyRepositoryImpl.patchNightStudyProjectAllow(id, room)
   );
   return mutation;
-}
+};
 
 export const usePatchNightStudyProjectReject=()=>{
   const mutation = useMutation((id:number)=>

@@ -1,20 +1,28 @@
 import * as S from "./style";
 import { DodamCheckBox } from "@b1nd/dds-web";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { PROJECT_LAB_ROOMS, PROJECT_LAB_ROOM_MAP } from "./constant";
 import { useAvailableProjectLabs } from "hooks/NightStudy/NightStudyProjectAllow/useAvailableProjectLabs";
 
+
 interface ProjectChoiceProps {
   projectType: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";
+  selectedRoom: string | null;
+  setSelectedRoom: (room: string | null) => void;
 }
 
-const ProjectChoiceRoom = ({ projectType }: ProjectChoiceProps) => {
-  const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
+const ProjectChoiceRoom = ({
+  projectType,
+  selectedRoom,
+  setSelectedRoom,
+}: ProjectChoiceProps) => {
+  const { isRoomAvailable, getRoomDateRange } =
+    useAvailableProjectLabs(projectType);
 
-  const { isRoomAvailable, getRoomDateRange } = useAvailableProjectLabs(projectType);
-
-  const handleCheck = (room: string) => {
-    setSelectedRoom((prev) => (prev === room ? null : room));
+  const handleCheck = (room: string, state : boolean) => {
+    if(state){
+      setSelectedRoom(selectedRoom === room ? null : room);
+    }
   };
 
   const formatDateRange = (start: string, end: string): string => {
@@ -26,9 +34,10 @@ const ProjectChoiceRoom = ({ projectType }: ProjectChoiceProps) => {
     return `${format(startDate)} ~ ${format(endDate)}`;
   };
 
-  useEffect(()=>{
-    console.log(selectedRoom)
-  },[selectedRoom])
+  useEffect(() => {
+    console.log(selectedRoom);
+  }, [selectedRoom]);
+
   return (
     <S.RoomsContainer>
       {PROJECT_LAB_ROOMS.map((label) => {
@@ -39,17 +48,22 @@ const ProjectChoiceRoom = ({ projectType }: ProjectChoiceProps) => {
         return (
           <S.WrapRoomTagAndExplain key={code}>
             <S.WrapRoomTag>
-            <DodamCheckBox
-              isDisabled={selectedRoom === code}
-              onClick={() => handleCheck(code)} 
-            />
-              <span>{label}</span>
+              <DodamCheckBox
+                isDisabled={selectedRoom === code && isAvailable}
+                onClick={() => handleCheck(code, isAvailable)}
+              />
+              <S.RoomLabel
+                isAvailable={isAvailable}
+                isSelected={selectedRoom === code}
+              >
+                {label}
+              </S.RoomLabel>
             </S.WrapRoomTag>
-            <p>
+            <S.StatusText isAvailable={isAvailable}>
               {isAvailable
                 ? "실 지정 가능"
                 : `${formatDateRange(dateRange.start, dateRange.end)}`}
-            </p>
+            </S.StatusText>
           </S.WrapRoomTagAndExplain>
         );
       })}
