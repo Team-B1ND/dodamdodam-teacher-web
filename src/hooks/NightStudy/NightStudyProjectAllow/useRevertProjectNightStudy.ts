@@ -7,7 +7,7 @@ const useRevertProjectNightStudy = () => {
   const patchRevert = usePatchNightStudyProjectRevert();
   const queryClient = useQueryClient();
 
-  const revert = (id: number) => {
+  const onRevertProject = (id: number) => {
     patchRevert.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("승인 취소 완료");
@@ -21,7 +21,7 @@ const useRevertProjectNightStudy = () => {
     });
   };
 
-  return { revert };
+  return {onRevertProject};
 };
 
 export default useRevertProjectNightStudy;

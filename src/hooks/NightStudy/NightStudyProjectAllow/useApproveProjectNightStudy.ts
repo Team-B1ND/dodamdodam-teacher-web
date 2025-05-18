@@ -7,7 +7,7 @@ export const useApproveProjectNightStudy = () => {
     const patchAllow = usePatchNightStudyProjectAllow();
     const queryClient = useQueryClient();
   
-    const approve = ({ id, room }: { id: number; room: string }) => {
+    const onProjectApprove = ({ id, room }: { id: number; room: string }) => {
       patchAllow.mutate({ id, room }, {
         onSuccess: () => {
             queryClient.invalidateQueries(QUERY_KEYS.nightstudy.getPendingNightStudyProject);
@@ -18,6 +18,6 @@ export const useApproveProjectNightStudy = () => {
       });
     };
   
-    return { approve };
+    return { onProjectApprove };
   };
 

@@ -7,7 +7,7 @@ export const useRejectProjectNightStudy = () => {
     const patchReject = usePatchNightStudyProjectReject();
     const queryClient = useQueryClient();
   
-    const reject = (
+    const onRejectProject = (
       { id, rejectReason }: { id: number; rejectReason: string },
     ) => {
       patchReject.mutate(
@@ -24,5 +24,5 @@ export const useRejectProjectNightStudy = () => {
       );
     };
   
-    return { reject };
+    return { onRejectProject };
   };

@@ -12,7 +12,7 @@ const ProjectNightRejectModal = ({
   projectId,
 }: ProjectRejectProps) => {
   const [rejectReason, setRejectReason] = useState<string>("");
-  const { reject } = useRejectProjectNightStudy();
+  const { onRejectProject } = useRejectProjectNightStudy();
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setRejectReason(event.target.value);
   };
@@ -22,7 +22,7 @@ const ProjectNightRejectModal = ({
       alert("거절 사유를 입력해주세요.");
       return;
     }
-    reject({ id: projectId, rejectReason },)
+    onRejectProject({ id: projectId, rejectReason },)
   };
 
   return (

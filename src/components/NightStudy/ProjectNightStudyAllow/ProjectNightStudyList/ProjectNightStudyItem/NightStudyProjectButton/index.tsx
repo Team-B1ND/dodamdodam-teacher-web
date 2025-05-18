@@ -16,7 +16,7 @@ const NightStudyProjectButton = ({
   project,
   projectStatus,
 }: NightStudyProjectButtonProps) => {
-  const { revert } = useRevertProjectNightStudy();
+  const { onRevertProject } = useRevertProjectNightStudy();
 
   const [isModalOpen, setIsOpenModal] = useState(false);
   const [isRejectModalOpen, setIsRejctModalOpen] = useState(false);
@@ -75,7 +75,7 @@ const NightStudyProjectButton = ({
         backgroundColorType="Negative"
         customStyle={{ minHeight: "24px" }}
         typography={["Body1", "Medium"]}
-        onClick={() => revert(projectId)}
+        onClick={() => onRevertProject(projectId)}
       />
     );
   }

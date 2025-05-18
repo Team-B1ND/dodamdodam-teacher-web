@@ -16,7 +16,7 @@ const ProjectNightStudyAllowModal = ({
   project,
 }: ProjectAllowModalProps) => {
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
-  const {approve} = useApproveProjectNightStudy();
+  const {onProjectApprove} = useApproveProjectNightStudy();
 
   return (
     <S.WrapModal>
@@ -76,7 +76,7 @@ const ProjectNightStudyAllowModal = ({
           textTheme="staticWhite"
           typography={["Body2", "Bold"]}
           customStyle={{ padding: "0", marginTop: "20px" }}
-          onClick={()=>{approve({ id: project.id, room: selectedRoom! });}}
+          onClick={()=>{onProjectApprove({ id: project.id, room: selectedRoom! });}}
         />
       </div>
     </S.WrapModal>
