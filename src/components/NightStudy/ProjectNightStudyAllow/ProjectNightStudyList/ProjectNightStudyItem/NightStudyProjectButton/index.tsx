@@ -1,13 +1,34 @@
-import useProjectNightStudyApproval from "hooks/NightStudy/NightStudyProjectAllow/useProjectNightStudyApproval";
-import { DodamFilledButton } from "@b1nd/dds-web";
+import { DodamFilledButton, DodamModal } from "@b1nd/dds-web";
+import ProjectNightStudyAllowModal from "components/NightStudy/ProjectNightStudyModal/ProjectNightStudyAllowModal";
+import { useState } from "react";
+import { ProjectStudyType } from "types/NightStudy/nightstudy.type";
+import useRevertProjectNightStudy from "hooks/NightStudy/NightStudyProjectAllow/useRevertProjectNightStudy";
+import ProjectNightRejectModal from "components/NightStudy/ProjectNightStudyModal/ProjectNightStudyRejectModal";
 
 interface NightStudyProjectButtonProps {
   projectId: number;
   projectStatus: string;
+  project : ProjectStudyType;
 }
 
-const NightStudyProjectButton = ({ projectId, projectStatus }: NightStudyProjectButtonProps) => {
-  const { approveProject, rejectProject, revertProject } = useProjectNightStudyApproval();
+const NightStudyProjectButton = ({
+  projectId,
+  project,
+  projectStatus,
+}: NightStudyProjectButtonProps) => {
+  const { onRevertProject } = useRevertProjectNightStudy();
+
+  const [isModalOpen, setIsOpenModal] = useState(false);
+  const [isRejectModalOpen, setIsRejctModalOpen] = useState(false);
+
+  const handleCloseModal = () =>{
+    if(isModalOpen){
+      setIsOpenModal(!isModalOpen)
+    }else{
+      setIsRejctModalOpen(!isRejectModalOpen)
+    }
+  }
+
 
   if (projectStatus === "PENDING") {
     return (
@@ -19,8 +40,8 @@ const NightStudyProjectButton = ({ projectId, projectStatus }: NightStudyProject
           textTheme="staticWhite"
           backgroundColorType="Primary"
           customStyle={{ minHeight: "24px" }}
-          typography={['Body1', 'Medium']}
-          onClick={() => approveProject(projectId)}
+          typography={["Body1", "Medium"]}
+          onClick={() => setIsOpenModal(!isModalOpen)}
         />
         <div style={{ paddingBottom: "4px" }} />
         <DodamFilledButton
@@ -30,9 +51,16 @@ const NightStudyProjectButton = ({ projectId, projectStatus }: NightStudyProject
           textTheme="staticWhite"
           backgroundColorType="Negative"
           customStyle={{ minHeight: "24px" }}
-          typography={['Body1', 'Medium']}
-          onClick={() => rejectProject(projectId)}
+          typography={["Body1", "Medium"]}
+          onClick={()=> setIsRejctModalOpen(!isRejectModalOpen)}
         />
+          <DodamModal isOpen={isModalOpen} background={true}>
+            <ProjectNightStudyAllowModal close={handleCloseModal} project={project}/>
+          </DodamModal>
+
+          <DodamModal isOpen={isRejectModalOpen} background>
+            <ProjectNightRejectModal onClose={handleCloseModal} projectId={project.id}/>
+          </DodamModal>
       </>
     );
   }
@@ -46,11 +74,12 @@ const NightStudyProjectButton = ({ projectId, projectStatus }: NightStudyProject
         textTheme="staticWhite"
         backgroundColorType="Negative"
         customStyle={{ minHeight: "24px" }}
-        typography={['Body1', 'Medium']}
-        onClick={() => revertProject(projectId)}
+        typography={["Body1", "Medium"]}
+        onClick={() => onRevertProject(projectId)}
       />
     );
   }
+
   return null;
 };
 

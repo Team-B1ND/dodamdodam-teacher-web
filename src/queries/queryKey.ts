@@ -33,7 +33,8 @@ export const QUERY_KEYS = Object.freeze({
     getNightStudyProjectStudents: '/night-study/project/students',
     getNightStudyBanMember: '/night-study/members',
     getNightStudyAllowedProjects : '/night-study/project/allowed',
-    getNightStudyDetail : '/night-study/project/detail'
+    getNightStudyDetail : '/night-study/project/detail',
+    getProjectUsingLab : '/night-study/project/rooms'
   },
   schedule: {
     getSchedules: ['schedule/getSchedule'],

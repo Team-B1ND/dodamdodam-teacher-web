@@ -39,11 +39,13 @@ const ProjectNightStudyItem = ({ project }: ProjectNightStudyItemProps) => {
         <TD customStyle={S.DateColumnStyle}>
           {project.endAt}
         </TD>
-        <TD customStyle={S.RoomColumnStyle}>
-          {project.room}
-        </TD>
+        {project.status == "ALLOWED" && (
+          <TD customStyle={S.RoomColumnStyle}>
+            {project.room}
+          </TD>
+        )}
         <TD>
-            <NightStudyProjectButton projectId={project.id} projectStatus={project.status}/>
+            <NightStudyProjectButton projectId={project.id} projectStatus={project.status} project={project}/>
         </TD>
       </TR>
 

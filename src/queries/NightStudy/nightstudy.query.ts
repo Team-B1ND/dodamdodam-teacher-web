@@ -1,5 +1,5 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import {ProjectNightStudyResponse, ProjectStudentsResponse } from "types/NightStudy/nightstudy.type";
+import {ProjectNightStudyResponse, ProjectStudentsResponse, ProjectUseingLabResponse } from "types/NightStudy/nightstudy.type";
 import {AxiosError} from "axios";
 import {NightStudyBanResponse, NightStudyResponse, ProjectStudyDetailResponseType} from "types/NightStudy/nightstudy.type";
 import {QUERY_KEYS} from "../queryKey";
@@ -80,19 +80,22 @@ export const useDeleteNightStudyAllow = ()=>{
   return mutation
 }
 
-export const usePatchNightStudyProjectAllow=()=>{
-  const mutation = useMutation((id:number)=>
-  nightstudyRepositoryImpl.patchNightStudyProjectAllow(id)
+export const usePatchNightStudyProjectAllow = () => {
+  const mutation = useMutation(
+    ({ id, room }: { id: number; room: string }) =>
+      nightstudyRepositoryImpl.patchNightStudyProjectAllow(id, room)
   );
   return mutation;
-}
+};
 
-export const usePatchNightStudyProjectReject=()=>{
-  const mutation = useMutation((id:number)=>
-    nightStudyRepositoryImpl.patchNightStudyProjectReject(id)
+export const usePatchNightStudyProjectReject = () => {
+  const mutation = useMutation(
+    ({ id, rejectReason }: { id: number; rejectReason: string }) =>
+      nightStudyRepositoryImpl.patchNightStudyProjectReject(id, rejectReason)
   );
+
   return mutation;
-}
+};
 
 export const usePatchNightStudyProjectRevert=()=>{
   const mutation = useMutation((id:number)=>
@@ -155,6 +158,19 @@ export const useGetNightStudyProjectStudents = (options?:UseQueryOptions<Project
     }
   )
 }
+
+export const useGetProjectUsingLab = (options?:UseQueryOptions<ProjectUseingLabResponse, AxiosError,ProjectUseingLabResponse,string>) => {
+  return useQuery(
+    QUERY_KEYS.nightstudy.getProjectUsingLab,
+    ()=>nightstudyRepositoryImpl.getProjectUsingLab(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+      ...options,
+    }
+  )
+};
+
 export const useDeleteNightStudyBan = () => {
   return useMutation((id: number) =>
     nightstudyRepositoryImpl.deleteNightStudyBan(id)

@@ -10,7 +10,16 @@ export const NIGHTSTUDY_ALLOW_ITEMS = [
   "승인여부",
 ];
 
-export const PROJECT_NIGHTSTUDY_ALLOW_ITEMS = [
+export const PROJECT_NIGHTSTUDY_ALLOW_ITEMS  = [
+  "프로젝트명",
+  "프로젝트 개요",
+  "진행시간",
+  "시작일",
+  "종료일",
+  "승인여부"
+];
+
+export const PROJECT_NIHGTSTUDY_ITEM = [
   "프로젝트명",
   "프로젝트 개요",
   "진행시간",
@@ -18,8 +27,7 @@ export const PROJECT_NIGHTSTUDY_ALLOW_ITEMS = [
   "종료일",
   "장소",
   "승인여부"
-];
-
+]
 export const PROJECT_NIGHTSTUDY_STUDENTS_ITEM = [
   "프로젝트명",
   "이름",
