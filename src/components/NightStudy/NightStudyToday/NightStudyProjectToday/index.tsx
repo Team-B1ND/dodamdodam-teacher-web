@@ -39,7 +39,7 @@ const NightStudyProjectItem = ({
             >
               {project.grade}
               {project.room}
-              {project.number > 10 ? project.number : `0${project.number}`}
+              {project.number >= 10 ? project.number : `0${project.number}`}
             </TD>
             <TD
               customStyle={TDRoomStyle}
