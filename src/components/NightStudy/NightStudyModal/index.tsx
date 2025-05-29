@@ -54,7 +54,7 @@ const NightStudyModal = ({
                   <TD>
                     {convertDateTime.getDateTime(new Date(data?.endAt), "date")}
                   </TD>
-                  <TD>{data.place}</TD>
+                  {/* <TD>{data.place}</TD> */}
                   <TD>
                     <S.PhoneItem>{data.doNeedPhone ? "O" : "X"}</S.PhoneItem>
                   </TD>

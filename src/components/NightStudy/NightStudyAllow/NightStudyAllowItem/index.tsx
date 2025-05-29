@@ -93,9 +93,9 @@ const NightStudyAllowItem = ({
                 )}
               </div>
             </TD>
-            <TD customStyle={S.NightStudytTD}>
+            {/* <TD customStyle={S.NightStudytTD}>
               <div style={{ marginLeft: "-5px" }}>{nightstudy.place}</div>
-            </TD>
+            </TD> */}
             <TD customStyle={S.NightStudytTD}>
               <div style={{ marginLeft: "5px" }}>
                 {nightstudy.doNeedPhone === true ? "O" : "X"}
