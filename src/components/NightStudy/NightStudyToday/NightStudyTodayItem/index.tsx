@@ -23,7 +23,7 @@ const NightStudyTodayItem = ({
   const { data: NightStudyToday } = useGetNightStudyList({ suspense: true });
   const [isOpen, setIsOpen] = useState(false);
   const [studyData, setStudyData] = useState<NightStudyType>();
-  const {handleDeleteNightStudyAllow}= useNightStudyAllow();
+  const { handleDeleteNightStudyAllow } = useNightStudyAllow();
 
   const handleModalClick = () => {
     setIsOpen(!isOpen);
@@ -69,9 +69,9 @@ const NightStudyTodayItem = ({
                 )}
               </div>
             </TD>
-            <TD customStyle={S.NightStudyTD}>
+            {/* <TD customStyle={S.NightStudyTD}>
               <div style={{ marginLeft: "-5px" }}>{nightstudy.place}</div>
-            </TD>
+            </TD> */}
             <TD customStyle={S.NightStudyTD}>
               <div style={{ marginLeft: "9px" }}>
                 {nightstudy.doNeedPhone === true ? "O" : "X"}
@@ -81,7 +81,10 @@ const NightStudyTodayItem = ({
               {truncateText(nightstudy.reasonForPhone, 5)}
             </TD>
             <TD customStyle={S.NightStudyTD}>
-              <S.NightStudyBox style={{ marginLeft: "-14px" }} onClick={()=>handleDeleteNightStudyAllow(nightstudy.id)}>
+              <S.NightStudyBox
+                style={{ marginLeft: "-14px" }}
+                onClick={() => handleDeleteNightStudyAllow(nightstudy.id)}
+              >
                 승인취소
               </S.NightStudyBox>
             </TD>
