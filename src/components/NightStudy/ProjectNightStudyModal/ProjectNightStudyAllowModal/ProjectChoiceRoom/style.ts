@@ -26,14 +26,16 @@ export const WrapRoomTagAndExplain = styled.div`
 
 export const RoomsContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
-  width: 248px;
+  width: fit-content;
   height: 100px;
 `;
 
-
-export const RoomLabel = styled.span<{ isAvailable: boolean; isSelected: boolean }>`
+export const RoomLabel = styled.span<{
+  isAvailable: boolean;
+  isSelected: boolean;
+}>`
   ${DodamTypography.Caption1.Bold}
   color: ${(props) => {
     if (!props.isAvailable) return props.theme.labelDisabled;
@@ -42,8 +44,7 @@ export const RoomLabel = styled.span<{ isAvailable: boolean; isSelected: boolean
 
 export const StatusText = styled.p<{ isAvailable: boolean }>`
   ${DodamTypography.Caption2.Bold}
-  color: ${(props) => 
-    props.isAvailable ? props.theme.primaryNormal : props.theme. labelDisabled
-  };
+  color: ${(props) =>
+    props.isAvailable ? props.theme.primaryNormal : props.theme.labelDisabled};
   margin-left: 22px;
 `;

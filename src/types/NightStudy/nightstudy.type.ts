@@ -61,7 +61,7 @@ export interface ProjectStudyType {
 }
 
 export interface ProjectUseingLabType{
-  room: "LAB_12" | "LAB_13" | "LAB_14" | "LAB_15",
+  room: "LAB_12" | "LAB_13" | "LAB_14" | "LAB_15" | "LAB_16",
   type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2",
   project: string,
   startAt: string,
