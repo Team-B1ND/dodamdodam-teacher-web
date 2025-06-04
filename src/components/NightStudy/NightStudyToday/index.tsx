@@ -3,7 +3,10 @@ import * as S from "./style";
 import { Suspense, useState } from "react";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { useRecoilState } from "recoil";
-import { NightStudyGrade, NightStudyProjectSelectAtom } from "stores/NightStudy/nightstudy.store";
+import {
+  NightStudyGrade,
+  NightStudyProjectSelectAtom,
+} from "stores/NightStudy/nightstudy.store";
 import TableAttribute from "components/common/TableAttribute";
 import {
   NIGHTSTUDY_ALLOW_ITEMS,
@@ -12,7 +15,7 @@ import {
 import ErrorBoundary from "components/common/ErrorBoundary";
 import NightStudyTodayItem from "./NightStudyTodayItem";
 import { changeGrade } from "utils/Member/changeGrade";
-import CsvButton from "components/common/ExtractCsvData";
+import ExcelButton from "components/common/ExtractExcelData";
 import { useNightStudyStudentList } from "hooks/NightStudy/useNightStudyStudentList";
 import dayjs from "dayjs";
 import { PointSelectRoom } from "stores/Point/point.store";
@@ -39,7 +42,6 @@ const NightStudyToday = () => {
     const unique = Array.from(new Set(names));
     return ["전체", ...unique];
   }, [projectData?.data]);
-
 
   const [prname, setPrname] = useRecoilState(NightStudyProjectSelectAtom);
 
@@ -89,15 +91,19 @@ const NightStudyToday = () => {
             )}
             <S.CsvButtonContainer>
               {isActive ? (
-                <CsvButton
-                  csvData={NightStudyInfo}
+                <ExcelButton
+                  excelData={NightStudyInfo}
                   fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}
+                  sheetName="심자 학생 목록"
+                  separateByGrade={true}
                 />
               ) : (
-                <CsvButton
-                  csvData={NightStudyProjectInfo}
+                <ExcelButton
+                  excelData={NightStudyProjectInfo}
                   fileName={
-                    dayjs().format("YYYY-MM-DD") + "프로젝트 심자 중인 학생"}
+                    dayjs().format("YYYY-MM-DD") + "프로젝트 심자 중인 학생"
+                  }
+                  sheetName="프로젝트 심자 목록"
                 />
               )}
             </S.CsvButtonContainer>
@@ -116,7 +122,7 @@ const NightStudyToday = () => {
             text="심자 중인 학생을 불러오지 못했습니다."
             showButton={true}
           >
-            <Suspense fallback={<SkeletonComponent height={80}/>}>
+            <Suspense fallback={<SkeletonComponent height={80} />}>
               <NightStudyTodayItem
                 selectRoom={room}
                 studentName={studentName}
@@ -131,7 +137,7 @@ const NightStudyToday = () => {
             text="심자 중인 학생을 불러오지 못했습니다."
             showButton={true}
           >
-            <Suspense fallback={<SkeletonComponent height={80}/>}>
+            <Suspense fallback={<SkeletonComponent height={80} />}>
               <NightStudyProjectItem
                 selectRoom={room}
                 studentName={studentName}

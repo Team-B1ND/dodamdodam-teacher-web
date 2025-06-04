@@ -4,18 +4,19 @@ export const NIGHTSTUDY_ALLOW_ITEMS = [
   "심자 사유",
   "시작일",
   "종료일",
+  "심자 시간",
   "휴대폰",
   "필요 이유",
   "승인여부",
 ];
 
-export const PROJECT_NIGHTSTUDY_ALLOW_ITEMS  = [
+export const PROJECT_NIGHTSTUDY_ALLOW_ITEMS = [
   "프로젝트명",
   "프로젝트 개요",
   "진행시간",
   "시작일",
   "종료일",
-  "승인여부"
+  "승인여부",
 ];
 
 export const PROJECT_NIHGTSTUDY_ITEM = [
@@ -25,21 +26,21 @@ export const PROJECT_NIHGTSTUDY_ITEM = [
   "시작일",
   "종료일",
   "장소",
-  "승인여부"
-]
+  "승인여부",
+];
 export const PROJECT_NIGHTSTUDY_STUDENTS_ITEM = [
   "프로젝트명",
   "이름",
   "학반",
   "프로젝트 장소",
-]
+];
 
 export const NIGHTSTUDY_BAN_TABLE_ITEMS = [
   "이름",
   "학반",
   "전화번호",
-  "정지여부"
-]
+  "정지여부",
+];
 
 export const NIGHTSTUDY_BAN_REASONS = [
   "허가 없는 휴대폰 사용",
@@ -47,5 +48,5 @@ export const NIGHTSTUDY_BAN_REASONS = [
   "신청 후 불참",
   "심자 무단 이탈",
   "타인 방해 (소란 등)",
-  "기타"
-]
+  "기타",
+];

@@ -1,7 +1,6 @@
 import { Student } from "types/Member/member.type";
 import { Response } from "types/util/response.type";
 
-//type
 
 export type PointValueEnglishType = "BONUS" | "MINUS" | "OFFSET";
 

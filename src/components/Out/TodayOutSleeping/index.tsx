@@ -11,7 +11,6 @@ import { changeApproval } from "utils/Out/changeApproval";
 import { changeGrade } from "utils/Member/changeGrade";
 import { GRADE_ITEMS } from "constants/Grade/grade.constant";
 import { APPROVAL_ITEMS } from "constants/Approval/approval.constant";
-import CsvButton from "components/common/ExtractCsvData";
 import dayjs from "dayjs";
 import useOffBaseLeave from "hooks/Out/OutSleeping/useOutsleeping";
 import { PointSelectRoom } from "stores/Point/point.store";
@@ -42,7 +41,7 @@ const TodayOutSleeping = () => {
 
         <S.SelectContainer>
           <S.CsvButtonContainer>
-            <CsvButton csvData={leaveStudentList} fileName={dayjs().format("YYYY-MM-DD") + "외박 중인 학생"} />
+            {/* <CsvButton csvData={leaveStudentList} fileName={dayjs().format("YYYY-MM-DD") + "외박 중인 학생"} /> */}
           </S.CsvButtonContainer>
           <Select items={APPROVAL_ITEMS} value={selectApproval} onChange={setSelectApproval} zIndex={2} />
           <Select items={GRADE_ITEMS} value={selectGrade} onChange={setSelectGrade} zIndex={2} />
