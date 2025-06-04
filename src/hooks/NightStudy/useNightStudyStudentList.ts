@@ -15,9 +15,8 @@ export const useNightStudyStudentList = () => {
       학번: "",
       심자1 : "",
       심자2 : "",
-      심자3 : "",
-      심자체크: "",
-      복귀체크: "",
+      연장 : "",
+      복귀 : "",
       핸드폰여부: "",
     },
   ]);
@@ -31,11 +30,10 @@ export const useNightStudyStudentList = () => {
           data.student.number < 10
             ? `${data.student.grade}${data.student.room}0${data.student.number}`
             : `${data.student.grade}${data.student.room}${data.student.number}`,
-        심자1 : "O",
-        심자2 : (data.type === "NIGHT_STUDY_2" || data.type === "NIGHT_STUDY_3") ? "O" : "",
-        심자3 : data.type === "NIGHT_STUDY_3" ? "O": "",
-        심자체크: "",
-        복귀체크: "",
+        심자1 : "□",
+        심자2 : "□",
+        연장 : "□",
+        복귀 : "",
         핸드폰여부: data.doNeedPhone ? "O" : "X",
       }));
       setNightStudyInfo(newData);
