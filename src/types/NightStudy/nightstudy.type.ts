@@ -11,11 +11,11 @@ export interface ProjectNightStudyResponse extends Response {
 }
 
 export interface ProjectStudentsResponse extends Response {
-  data : ProjectStudentType[];
+  data: ProjectStudentType[];
 }
 
-export interface ProjectUseingLabResponse extends Response{
-  data : ProjectUseingLabType[];
+export interface ProjectUseingLabResponse extends Response {
+  data: ProjectUseingLabType[];
 }
 export interface NightStudyType {
   id: number;
@@ -29,6 +29,7 @@ export interface NightStudyType {
   endAt: string;
   createdAt: string;
   modifiedAt: string;
+  type: "NIGHT_STUDY_1" | "NIGHT_STUDY_2" | "NIGHT_STUDY_3";
 }
 
 export interface StudentType {
@@ -60,17 +61,17 @@ export interface ProjectStudyType {
   endAt: string;
 }
 
-export interface ProjectUseingLabType{
-  room: "LAB_12" | "LAB_13" | "LAB_14" | "LAB_15" | "LAB_16",
-  type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2",
-  project: string,
-  startAt: string,
-  endAt: string
+export interface ProjectUseingLabType {
+  room: "LAB_12" | "LAB_13" | "LAB_14" | "LAB_15" | "LAB_16";
+  type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";
+  project: string;
+  startAt: string;
+  endAt: string;
 }
 
 export interface ProjectStudyDetailResponseType {
-  project : ProjectStudyType;
-  students : StudentType[];
+  project: ProjectStudyType;
+  students: StudentType[];
 }
 
 export interface StudentBanType {

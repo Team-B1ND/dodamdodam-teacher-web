@@ -7,7 +7,7 @@ import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAl
 import NightStudyModal from "components/NightStudy/NightStudyModal";
 import { useState } from "react";
 import { NightStudyType } from "types/NightStudy/nightstudy.type";
-
+import { convertNightStudyType } from "utils/NightStudy/ConvertNightStudyType";
 import convertDateTime from "utils/Time/ConvertDateTime";
 import { useRecoilState } from "recoil";
 import { NightStudySelectIdAtom } from "stores/NightStudy/nightstudy.store";
@@ -93,9 +93,9 @@ const NightStudyAllowItem = ({
                 )}
               </div>
             </TD>
-            {/* <TD customStyle={S.NightStudytTD}>
-              <div style={{ marginLeft: "-5px" }}>{nightstudy.place}</div>
-            </TD> */}
+            <TD customStyle={S.NightStudytTD}>
+              <div style={{ marginLeft: "-5px" }}>{convertNightStudyType(nightstudy.type)}</div>
+            </TD>
             <TD customStyle={S.NightStudytTD}>
               <div style={{ marginLeft: "5px" }}>
                 {nightstudy.doNeedPhone === true ? "O" : "X"}

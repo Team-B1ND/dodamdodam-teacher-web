@@ -8,6 +8,7 @@ import { NightStudyAllowFilter } from "utils/NightStudy/NightStudyAllow";
 import convertDateTime from "utils/Time/ConvertDateTime";
 import { truncateText } from "utils/common/truncate";
 import useNightStudyAllow from "hooks/NightStudy/NightStudyAllow/useNightStudyAllow";
+import { convertNightStudyType } from "utils/NightStudy/ConvertNightStudyType";
 
 interface NightStudyTodayProps {
   studentName: string;
@@ -25,6 +26,7 @@ const NightStudyTodayItem = ({
   const [studyData, setStudyData] = useState<NightStudyType>();
   const { handleDeleteNightStudyAllow } = useNightStudyAllow();
 
+  console.log(NightStudyToday)
   const handleModalClick = () => {
     setIsOpen(!isOpen);
   };
@@ -69,9 +71,9 @@ const NightStudyTodayItem = ({
                 )}
               </div>
             </TD>
-            {/* <TD customStyle={S.NightStudyTD}>
-              <div style={{ marginLeft: "-5px" }}>{nightstudy.place}</div>
-            </TD> */}
+            <TD customStyle={S.NightStudyTD}>
+              <div style={{ marginLeft: "-5px" }}>{convertNightStudyType(nightstudy.type)}</div>
+            </TD>
             <TD customStyle={S.NightStudyTD}>
               <div style={{ marginLeft: "9px" }}>
                 {nightstudy.doNeedPhone === true ? "O" : "X"}
