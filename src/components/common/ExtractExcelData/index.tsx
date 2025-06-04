@@ -23,7 +23,7 @@ const ExtractExcelData = ({
     if (classNumber.length >= 1) {
       return classNumber.charAt(0);
     }
-    return "";
+    return "미분류";
   };
 
   //학년별로 데이터를 그룹화
