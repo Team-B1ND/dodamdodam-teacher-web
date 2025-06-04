@@ -33,7 +33,7 @@ export const useNightStudyStudentList = () => {
         심자1 : "□",
         심자2 : "□",
         연장 : "□",
-        복귀 : "",
+        복귀 : "□",
         핸드폰여부: data.doNeedPhone ? "O" : "X",
       }));
       setNightStudyInfo(newData);
