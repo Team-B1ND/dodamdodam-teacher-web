@@ -10,6 +10,7 @@ export const useNightStudyStudentList = () => {
   const NightStudyData = useRecoilValue(NightStudyDataAtom);
   const [NightStudyInfo, setNightStudyInfo] = useState([
     {
+      번호 : 0,
       이름: "",
       반번호: "",
       심자체크: "",
@@ -20,7 +21,8 @@ export const useNightStudyStudentList = () => {
 
   useEffect(() => {
     if (NightStudyToday?.data) {
-      const newData = NightStudyToday.data.map((data: NightStudyType) => ({
+      const newData = NightStudyToday.data.map((data: NightStudyType, index : number) => ({
+        번호 : index + 1,
         이름: data.student.name,
         반번호:
           data.student.number < 10

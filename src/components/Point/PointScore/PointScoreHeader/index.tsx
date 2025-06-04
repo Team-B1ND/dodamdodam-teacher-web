@@ -13,7 +13,7 @@ import {
 import { useOpenStudentPointInfoModal } from "hooks/Point/useOpenStudentPointModal";
 import { PointType } from "types/Point/point.type";
 import styled from "styled-components";
-import CsvButton from "components/common/ExtractCsvData";
+// import CsvButton from "components/common/ExtractCsvData";
 import { Suspense } from "react";
 import { PointDataToCsvData } from "utils/Transform/csvTransform";
 
@@ -82,7 +82,7 @@ const PointScoreHeader = ({ pointQueryParam }: Props) => {
           </Button>
         </Flex>
         <CsvButtonContainer>
-          <CsvButton csvData={csvData} fileName="상벌점 목록" />
+          {/* <CsvButton csvData={csvData} fileName="상벌점 목록" /> */}
         </CsvButtonContainer>
       </Container>
     </Suspense>

@@ -26,7 +26,6 @@ const NightStudyTodayItem = ({
   const [studyData, setStudyData] = useState<NightStudyType>();
   const { handleDeleteNightStudyAllow } = useNightStudyAllow();
 
-  console.log(NightStudyToday)
   const handleModalClick = () => {
     setIsOpen(!isOpen);
   };

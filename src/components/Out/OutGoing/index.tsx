@@ -20,7 +20,7 @@ import useOffBasePass from 'hooks/Out/OutGoing/useOutGoing';
 import { GRADE_ITEMS } from 'constants/Grade/grade.constant';
 import { APPROVAL_ITEMS } from 'constants/Approval/approval.constant';
 import SkeletonComponent from 'components/common/Skeleton';
-import CsvButton from 'components/common/ExtractCsvData';
+// import CsvButton from 'components/common/ExtractCsvData';
 import dayjs from 'dayjs';
 import { PointSelectRoom } from 'stores/Point/point.store';
 import { Flex } from 'components/common/Flex/Flex';
@@ -103,7 +103,7 @@ const OutGoing = () => {
 
         <S.SelectContainer>
           <S.CsvButtonContainer>
-            <CsvButton csvData={[...offbaseInfo.data]} fileName={dayjs().format('YYYY-MM-DD') + '외출 중인 학생'} />
+            {/* <CsvButton csvData={[...offbaseInfo.data]} fileName={dayjs().format('YYYY-MM-DD') + '외출 중인 학생'} /> */}
           </S.CsvButtonContainer>
           <Select
             items={['석식희망여부', '석식 희망', '석식 비희망']}

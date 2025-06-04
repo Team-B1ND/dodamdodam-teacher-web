@@ -6,6 +6,7 @@ export const useNightStudyProjectStudentsList = () =>{
     const {data : ProjectStudents} = useGetNightStudyProjectStudents();
     const [NightStudyProjectInfo, setNightStudyProjectInfo] = useState([
         {
+            번호 : 0,
             이름 : "",
             반번호 : "",
             프로젝트명 : "",
@@ -17,7 +18,8 @@ export const useNightStudyProjectStudentsList = () =>{
 
     useEffect(()=>{
         if(ProjectStudents?.data){
-            const newData = ProjectStudents.data.map((data : ProjectStudentType)=>({
+            const newData = ProjectStudents.data.map((data : ProjectStudentType, index : number)=>({
+                번호 : index +1,
                 이름 : data.name,
                 반번호 : data.number < 10
                 ? `${data.grade}${data.room}0${data.number}`
