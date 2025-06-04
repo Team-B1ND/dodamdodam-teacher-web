@@ -96,6 +96,7 @@ const NightStudyToday = () => {
                   excelData={NightStudyInfo}
                   fileName={dayjs().format("YYYY-MM-DD") + "심자 중인 학생"}
                   sheetName="심자 학생 목록"
+                  separateByGrade={true}
                 />
               ) : (
                 <ExcelButton
