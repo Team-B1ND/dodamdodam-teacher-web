@@ -31,12 +31,12 @@ export const useNightStudyStudentList = () => {
             data.student.number < 10
               ? `${data.student.grade}${data.student.room}0${data.student.number}`
               : `${data.student.grade}${data.student.room}${data.student.number}`,
-          심자1: "■",
+          심자1: "□",
           심자2:
             data.type === "NIGHT_STUDY_2" || data.type === "NIGHT_STUDY_3"
-              ? "■"
-              : "□",
-          연장: data.type === "NIGHT_STUDY_3" ? "■" : "□",
+              ? "□"
+              : "X",
+          연장: data.type === "NIGHT_STUDY_3" ? "□" : "X",
           복귀: "□",
           핸드폰여부: data.doNeedPhone ? "O" : "X",
         })
