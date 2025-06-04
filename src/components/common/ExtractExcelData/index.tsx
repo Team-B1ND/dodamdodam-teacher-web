@@ -19,7 +19,7 @@ const ExtractExcelData = ({
 }: ExtractExcelDataProps) => {
   //학년 정보 추출
   const extractGrade = (item: ExcelRowData): string => {
-    const classNumber = String(item["반번호"] || "");
+    const classNumber = String(item["학번"] || "");
     if (classNumber.length >= 1) {
       return classNumber.charAt(0);
     }
