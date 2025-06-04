@@ -12,7 +12,7 @@ export const useNightStudyStudentList = () => {
     {
       번호 : 0,
       이름: "",
-      반번호: "",
+      학번: "",
       심자1 : "",
       심자2 : "",
       심자3 : "",
@@ -27,13 +27,13 @@ export const useNightStudyStudentList = () => {
       const newData = NightStudyToday.data.map((data: NightStudyType, index : number) => ({
         번호 : index + 1,
         이름: data.student.name,
-        반번호:
+        학번:
           data.student.number < 10
             ? `${data.student.grade}${data.student.room}0${data.student.number}`
             : `${data.student.grade}${data.student.room}${data.student.number}`,
         심자1 : "O",
-        심자2 : (data.type === "NIGHT_STUDY_2" || data.type === "NIGHT_STUDY_3") ? "O" : "X",
-        심자3 : data.type === "NIGHT_STUDY_3" ? "O": "X",
+        심자2 : (data.type === "NIGHT_STUDY_2" || data.type === "NIGHT_STUDY_3") ? "O" : "",
+        심자3 : data.type === "NIGHT_STUDY_3" ? "O": "",
         심자체크: "",
         복귀체크: "",
         핸드폰여부: data.doNeedPhone ? "O" : "X",

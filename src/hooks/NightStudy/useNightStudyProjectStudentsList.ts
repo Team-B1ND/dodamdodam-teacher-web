@@ -8,7 +8,7 @@ export const useNightStudyProjectStudentsList = () =>{
         {
             번호 : 0,
             이름 : "",
-            반번호 : "",
+            학번 : "",
             프로젝트명 : "",
             장소 : "",
             심자체크 : "",
@@ -21,7 +21,7 @@ export const useNightStudyProjectStudentsList = () =>{
             const newData = ProjectStudents.data.map((data : ProjectStudentType, index : number)=>({
                 번호 : index +1,
                 이름 : data.name,
-                반번호 : data.number < 10
+                학번 : data.number < 10
                 ? `${data.grade}${data.room}0${data.number}`
                 : `${data.grade}${data.room}${data.number}`,
                 프로젝트명 : data.projectName,
