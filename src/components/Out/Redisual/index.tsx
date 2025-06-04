@@ -10,7 +10,6 @@ import { SelectApprovalAtom, SelectGradeAtom } from 'stores/Out/out.store';
 import { changeApproval } from 'utils/Out/changeApproval';
 import { changeGrade } from 'utils/Member/changeGrade';
 import { GRADE_ITEMS } from 'constants/Grade/grade.constant';
-// import CsvButton from 'components/common/ExtractCsvData';
 import dayjs from 'dayjs';
 import useOffBaseLeave from 'hooks/Out/OutSleeping/useOutsleeping';
 import { PointSelectRoom } from 'stores/Point/point.store';

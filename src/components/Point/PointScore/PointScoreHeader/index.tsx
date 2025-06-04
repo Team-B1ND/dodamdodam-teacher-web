@@ -13,7 +13,6 @@ import {
 import { useOpenStudentPointInfoModal } from "hooks/Point/useOpenStudentPointModal";
 import { PointType } from "types/Point/point.type";
 import styled from "styled-components";
-// import CsvButton from "components/common/ExtractCsvData";
 import { Suspense } from "react";
 import { PointDataToCsvData } from "utils/Transform/csvTransform";
 
