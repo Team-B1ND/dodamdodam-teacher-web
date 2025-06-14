@@ -3,7 +3,7 @@ import {
   NightStudyResponse,
   ProjectNightStudyResponse,
   ProjectStudentsResponse,
-  ProjectStudyDetailResponseType,
+  ProjectStudyType,
   ProjectUseingLabResponse,
 } from "types/NightStudy/nightstudy.type";
 import { NightStudyRepository } from "./nightstudy.repository";
@@ -64,7 +64,7 @@ class NightStudyRepositoryImpl implements NightStudyRepository {
   }
   public async getNightStudyProjectDetail(
     id: number
-  ): Promise<ProjectStudyDetailResponseType> {
+  ): Promise<ProjectStudyType> {
     const { data } = await dodamAxios.get(`/night-study/project/${id}`);
     return data.data;
   }
