@@ -50,6 +50,16 @@ export interface ProjectStudentType {
   projectRoom: string;
 }
 
+export interface ProjectNightStudyMembers {
+  id: number;
+  name: string;
+  grade: number;
+  room: number;
+  number: number;
+  profileImage: string;
+  role: "LEADER" | "MEMBER";
+}
+
 export interface ProjectStudyType {
   id: number;
   type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";
@@ -59,6 +69,7 @@ export interface ProjectStudyType {
   description: string;
   startAt: string;
   endAt: string;
+  members: ProjectNightStudyMembers[]; 
 }
 
 export interface ProjectUseingLabType {
@@ -69,9 +80,15 @@ export interface ProjectUseingLabType {
   endAt: string;
 }
 
-export interface ProjectStudyDetailResponseType {
-  project: ProjectStudyType;
-  students: StudentType[];
+
+export interface ProjectNightStudyMembers {
+  id: number;
+  name: string;
+  grade: number;
+  room: number;
+  number: number;
+  profileImage: string;
+  role: "LEADER" | "MEMBER";
 }
 
 export interface StudentBanType {

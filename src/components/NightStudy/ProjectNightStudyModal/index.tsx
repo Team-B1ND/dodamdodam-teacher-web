@@ -12,12 +12,12 @@ interface ProjectModalProps {
 const ProjectNightStudyModal = ({ close, projectId }: ProjectModalProps) => {
   const { data, isLoading } = useGetNightStudyProjectDetail({ id: projectId });
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <ProjectNightStudySkeletonModal close={close} />;
   }
 
   const formatParticipants = () => {
-    return data.students.map((student) => (
+    return data?.members.map((student) => (
       <S.ModalParticipant>
         {student.grade}학년 {student.room}반 {student.name}
       </S.ModalParticipant>
@@ -37,15 +37,15 @@ const ProjectNightStudyModal = ({ close, projectId }: ProjectModalProps) => {
 
       <S.ContentSection>
         <S.TitleSection>
-          <h2>{data.project?.name}</h2>
+          <h2>{data?.name}</h2>
           <S.ModalTag>
-            {data.project?.type === "NIGHT_STUDY_PROJECT_1"
+            {data?.type === "NIGHT_STUDY_PROJECT_1"
               ? "· 심자1"
               : "· 심자2"}
           </S.ModalTag>
         </S.TitleSection>
 
-        <p>{data.project?.description}</p>
+        <p>{data?.description}</p>
 
         <DodamDivider type="Small" />
 
@@ -53,18 +53,18 @@ const ProjectNightStudyModal = ({ close, projectId }: ProjectModalProps) => {
           <S.DetailsColumn>
             <S.DetailItem>
               <S.ModalLabel>시작일</S.ModalLabel>
-              <span>{data.project?.startAt}</span>
+              <span>{data?.startAt}</span>
             </S.DetailItem>
 
             <S.DetailItem>
               <S.ModalLabel>종료일</S.ModalLabel>
-              <span>{data.project?.endAt}</span>
+              <span>{data?.endAt}</span>
             </S.DetailItem>
           </S.DetailsColumn>
 
           <S.ParticipantsColumn>
             <S.ModalLabel>참여인원</S.ModalLabel>
-            <span>({data.students?.length || 0}명)</span>
+            <span>({data?.members.length || 0}명)</span>
             <S.ParticipantsList>{formatParticipants()}</S.ParticipantsList>
           </S.ParticipantsColumn>
         </S.DetailsContainer>
