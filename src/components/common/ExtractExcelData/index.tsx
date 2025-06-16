@@ -66,7 +66,7 @@ const ExtractExcelData = ({
 
     //헤더 스타일링
     const headerRow = worksheet.getRow(1);
-    headerRow.eachCell((cell) => {
+    headerRow.eachCell((cell:any) => {
       cell.fill = {
         type: "pattern",
         pattern: "solid",
@@ -109,7 +109,7 @@ const ExtractExcelData = ({
     }
 
     //칼럼 너비 자동 조정
-    worksheet.columns.forEach((column, index) => {
+    worksheet.columns.forEach((column:any, index:any) => {
       const header = headers[index];
       let maxLength = header.length;
 
