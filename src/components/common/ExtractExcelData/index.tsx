@@ -31,7 +31,7 @@ const ExtractExcelData = ({
     const grouped: Record<string, ExcelRowData[]> = {};
 
     data.forEach((item) => {
-      const grade = extractGrade(item);
+      const grade = extractGrade(item) === "3" ? "2" : extractGrade(item);
       if (!grouped[grade]) {
         grouped[grade] = [];
       }
@@ -109,7 +109,7 @@ const ExtractExcelData = ({
     }
 
     //칼럼 너비 자동 조정
-    worksheet.columns.forEach((column:any, index:any) => {
+    worksheet.columns.forEach((column:any, index:number) => {
       const header = headers[index];
       let maxLength = header.length;
 
@@ -150,10 +150,9 @@ const ExtractExcelData = ({
         //각 학년별로 시트 생성
         grades.forEach((grade) => {
           const gradeData = groupedData[grade];
-          const worksheetName = `${grade}학년`;
+          const worksheetName = `${grade === "2" ? "2, 3" : "1"}학년`;
           createStyledWorksheet(workbook, gradeData, worksheetName);
         });
-        createStyledWorksheet(workbook, excelData, "전체");
       } else {
         createStyledWorksheet(workbook, excelData, sheetName);
       }
