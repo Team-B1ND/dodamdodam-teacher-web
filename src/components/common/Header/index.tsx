@@ -29,7 +29,7 @@ const Header = () => {
           <S.HeaderText>Teacher</S.HeaderText>
         </S.HeaderLogo>
         <S.HeaderLogoutContainer>
-          <p>{myInfo?.data.name} 님</p>
+          <p>{myInfo?.data.name || ""} 님</p>
           <button onClick={handleLogoutClick}>로그아웃</button>
         </S.HeaderLogoutContainer>
       </S.HeaderMain>

@@ -14,8 +14,8 @@ const NoticeModal = ({ isOpen, onClose, noticeId }: NoticeModal) => {
     <DodamModal
       isOpen={isOpen}
       close={onClose}
-      background={false}
       customStyle={{ top: '-25%', left: '13%' }}
+      $background={true}
     >
       <NoticeModalBox>
         <span>수정</span>

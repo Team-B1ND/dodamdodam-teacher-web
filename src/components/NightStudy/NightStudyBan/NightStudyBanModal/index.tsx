@@ -23,7 +23,7 @@ const NightStudyBanModal = ({isOpen, onClose, student}: NightStudyBanModalProps)
   } = useNightStudyBan();
 
   return (
-    <DodamModal isOpen={isOpen} background>
+    <DodamModal isOpen={isOpen} $background={true}>
       <S.NightStudyBanContainer>
         <div onClick={onClose}>
           <Close $svgStyle={{ cursor: 'pointer' }} />

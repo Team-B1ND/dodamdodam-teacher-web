@@ -18,7 +18,7 @@ const MemberInfoModal = ({
   patchDivisionMemberStatus,
 }: MemberInfoModalProps) => {
   return (
-    <DodamModal isOpen={isOpen} close={onClose} customStyle={{ top: '-1%' }}>
+    <DodamModal isOpen={isOpen} close={onClose} customStyle={{ top: '-1%' }} $background={true}>
       <S.MemberInfoModalWrap>
         <S.MemberInfoModalHeader>
           <h1>{member?.memberName}</h1>

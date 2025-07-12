@@ -69,7 +69,7 @@ const ClubItem = ({ value, isEnded, selectedClubIds, setSelectedClubIds }: ClubI
         ) 
         }
       </S.ClubItemWrap>
-      <DodamModal isOpen={isModalOpen} background>
+      <DodamModal isOpen={isModalOpen} $background={true}>
         <DetailClub
           close={() => {
             handleCloseModal();
