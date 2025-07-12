@@ -1,34 +1,43 @@
-import { Response } from 'types/util/response.type'
-
-export interface BusDateAndListResponse extends Response {
-  data: {
-    id: number;
-    busName: string;
-    description: string;
-    peopleLimit: number;
-    applyCount: number;
-    leaveTime: Date;
-    requiredTime: string;
-  }[]
+export interface BusDateAndListResponse {
+    message: string,
+    status: 0
+    data: [
+      {
+        id: number,
+        name: string
+      },
+    ]
 }
 
 export interface BusMemberType {
-  memberId: string
-  name: string
-  email: string
-  phone: string
+  boardingType: "BOARDED" | "UNBOARDED" | "BEFORE_BOARDING";
+  seat: number;
+  student: {
+    id: number;
+    name: string;
+    grade: number;
+    room: number;
+    number: number;
+    code: string;
+  };
+}
+
+export interface BusDetailResponse {
+  id: number;
+  name: string;
+  users: BusMemberType[]; 
 }
 
 export interface BusPassengerType {
-  busName: string
-  busMember: BusMemberType[]
+  busName: string;
+  busMember: BusMemberType[];
 }
 
 export interface BusBasicInfoType {
-  id: number
-  busName: string
-  description: string
-  peopleLimit: number
-  leaveTime: string
-  timeRequired: string
+  id: number;
+  busName: string;
+  description: string;
+  peopleLimit: number;
+  leaveTime: string;
+  timeRequired: string;
 }

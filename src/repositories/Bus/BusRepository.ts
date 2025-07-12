@@ -1,28 +1,21 @@
-import { BusDateAndListResponse } from "types/Bus/bus.type";
+import { BusDateAndListResponse, BusDetailResponse } from "types/Bus/bus.type";
 
 export interface BusRepository {
-  getAllBusList(page: number): Promise<BusDateAndListResponse>;
-  getBusDate(date: BusDateParam): Promise<BusDateAndListResponse>;
-  createBus(param: BusUpdateParam): Promise<void>;
-  modifyBus({ busId, param }: BusModifyParam): Promise<void>;
+  getAllBusList(): Promise<BusDateAndListResponse>;
+  getDetailBus(id: number): Promise<BusDetailResponse>;
+  createBus(name: string): Promise<void>;
+  modifyBus({ busId, name }: BusUpdateParam): Promise<void>;
   deleteBus(id: number): Promise<void>;
+  createBusBoard({studentId, busId} : BusStudentParam): Promise<void>;
 }
 
-export interface BusDateParam {
-  year: number;
-  month: number;
-  day: number;
-}
 
 export interface BusUpdateParam {
-  busName: string;
-  description: string;
-  leaveTime: string;
-  peopleLimit: number;
-  timeRequired: string;
+  busId: number;
+  name: string;
 }
 
-export interface BusModifyParam {
-  busId: number;
-  param: BusUpdateParam;
+export interface BusStudentParam {
+  studentId : number[];
+  busId : number;
 }
