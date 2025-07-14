@@ -21,16 +21,16 @@ export const useBusPassenger = (closeModal: () => void) => {
   ]);
 
   // csv에 보여질 데이터 값 담기
-  useEffect(() => {
-    const busPassengerCsvData = busPassengerData?.busMember.map((item) => ({
-      이름: item.name,
-      아이디: item.memberId,
-      전화번호: addPhoneHyphen(item.phone),
-      탑승버스: busPassengerData?.busName,
-      비고: "",
-    }));
-    setBusPassengerInfo(busPassengerCsvData!);
-  }, [busPassengerData]);
+  // useEffect(() => {
+  //   const busPassengerCsvData = busPassengerData?.busMember.map((item) => ({
+  //     이름: item.name,
+  //     아이디: item.memberId,
+  //     전화번호: addPhoneHyphen(item.phone),
+  //     탑승버스: busPassengerData?.busName,
+  //     비고: "",
+  //   }));
+  //   setBusPassengerInfo(busPassengerCsvData!);
+  // }, [busPassengerData]);
 
   return {
     busPassengerData,

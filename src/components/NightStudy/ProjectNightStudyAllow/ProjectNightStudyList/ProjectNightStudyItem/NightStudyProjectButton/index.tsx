@@ -54,11 +54,11 @@ const NightStudyProjectButton = ({
           typography={["Body1", "Medium"]}
           onClick={()=> setIsRejctModalOpen(!isRejectModalOpen)}
         />
-          <DodamModal isOpen={isModalOpen} background={true}>
+          <DodamModal isOpen={isModalOpen} $background={true}>
             <ProjectNightStudyAllowModal close={handleCloseModal} project={project}/>
           </DodamModal>
 
-          <DodamModal isOpen={isRejectModalOpen} background>
+          <DodamModal isOpen={isRejectModalOpen} $background={true}>
             <ProjectNightRejectModal onClose={handleCloseModal} projectId={project.id}/>
           </DodamModal>
       </>

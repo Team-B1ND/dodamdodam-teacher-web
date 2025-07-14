@@ -1,31 +1,35 @@
-import BusSeatInfo from 'components/Bus/BusSeatInfo'
-import BusList from 'components/Bus/BusList'
-import styled from 'styled-components'
-import BusInfo from 'components/Bus/BusInfo'
-import { ReactNode, useState } from 'react'
-import { useGetAllBusListQuery } from 'queries/Bus/bus.query'
-
+import BusSeatInfo from "components/Bus/BusSeatInfo";
+import BusList from "components/Bus/BusList";
+import styled from "styled-components";
+import BusInfo from "components/Bus/BusInfo";
+import { ReactNode, useState } from "react";
+import CreateBus from "components/Bus/CreateBus";
 
 const BusListPage = () => {
-  const [section, setSection] = useState<string>('main')
-
+  const [section, setSection] = useState<string>("main");
+  
   const BusComponents: Record<string, ReactNode> = {
     main: (
-      <BusList
-        setSection={setSection}
-      />
+      <>
+        <BusList setSection={setSection} />
+        <CreateBus />
+      </>
     ),
-    info: <BusInfo setSection={setSection} />,
-  }
+    info:(
+      <>
+      <BusInfo setSection={setSection} />,
+      <BusSeatInfo />
+      </> 
+    )
+  };
   return (
     <BusContainer>
       {BusComponents[section] || <BusList setSection={setSection} />}
-      <BusSeatInfo />
     </BusContainer>
-  )
-}
+  );
+};
 
-export default BusListPage
+export default BusListPage;
 
 const BusContainer = styled.div`
   display: flex;
@@ -36,4 +40,4 @@ const BusContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundAlternative};
 
   justify-content: space-between;
-`
+`;

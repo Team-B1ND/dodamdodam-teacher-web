@@ -21,6 +21,7 @@ const DivisionDetailModal = ({
       isOpen={isOpen}
       close={onClose}
       customStyle={{ top: '-24%', left: '13%' }}
+      $background={true}
     >
       <S.DivisionDetailModalWrap>
         <S.ApplyMemberWrap onClick={() => setSection('waitingMember')}>

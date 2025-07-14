@@ -91,7 +91,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
                     backgroundColorType={'Negative'}
                     onClick={() => setIsRejectModalOpen(!isRejectModalOpen)}
                   />
-                  <DodamModal isOpen={isRejectModalOpen} background={true}>
+                  <DodamModal isOpen={isRejectModalOpen} $background={true}>
                     <JoinConfirm
                       onClose={() => setIsRejectModalOpen(false)}
                       clubId={item}
