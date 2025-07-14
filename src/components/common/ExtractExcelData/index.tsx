@@ -31,7 +31,7 @@ const ExtractExcelData = ({
     const grouped: Record<string, ExcelRowData[]> = {};
 
     data.forEach((item) => {
-      const grade = extractGrade(item) === "3" ? "2" : extractGrade(item);
+      const grade = (extractGrade(item) === "3" ? "2" : extractGrade(item));
       if (!grouped[grade]) {
         grouped[grade] = [];
       }
@@ -150,7 +150,7 @@ const ExtractExcelData = ({
         //각 학년별로 시트 생성
         grades.forEach((grade) => {
           const gradeData = groupedData[grade];
-          const worksheetName = `${grade === "2" ? "2, 3" : "1"}학년`;
+          const worksheetName = `${grade === "2" ? "2, 3학년" : grade === "1" ? "1학년" : "학년 미확인"}`;
           createStyledWorksheet(workbook, gradeData, worksheetName);
         });
       } else {
