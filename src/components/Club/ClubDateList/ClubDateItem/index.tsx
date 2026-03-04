@@ -35,6 +35,7 @@ export const ClubDateItem: React.FC<ClubDateProps> = ({ clubPeriodType }) => {
             }
             title='시작일'
             customStyle={{ marginRight: '20px' }}
+            type="entire"
           />
         </S.WrapDatePicker>
         <S.WrapDatePicker>
@@ -49,6 +50,7 @@ export const ClubDateItem: React.FC<ClubDateProps> = ({ clubPeriodType }) => {
             }
             title='마감일'
             customStyle={{ marginRight: '20px' }}
+            type="entire"
           />
         </S.WrapDatePicker>
       </S.ClubContainer>
