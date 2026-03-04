@@ -25,7 +25,7 @@ const ClubItemList = ({
   isEnded,
 }: ClubItemListProps) => {
   const { data, isLoading } = useGetClubDateQuery();
-
+  console.log(data)
   const validClubs =
     data?.data?.filter((club) => club !== null && club !== undefined) || [];
   const filteredClubs = validClubs.filter((club) => club.type === itemType);
@@ -80,7 +80,7 @@ const ClubItemList = ({
       <DodamErrorBoundary text="에러 발생" showButton={true}>
         {isLoading ? (
           <SkeletonComponent length={10} height={48} />
-        ) : validClubs?.some((value) => value?.type === itemType && value.state === "ALLOWED" || value.state == "PENDING") ? (
+        ) : validClubs?.some((value) => value?.type === itemType) ? (
           validClubs.map((value) =>
             value?.type === itemType ? (
               <ClubItem

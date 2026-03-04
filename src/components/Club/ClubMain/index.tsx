@@ -69,7 +69,7 @@ const ClubMain = () => {
           />
         ) : (
           <ClubItemList
-            itemType="SELF_DIRECT_ACTIVITY_CLUB"
+            itemType="SELF_DIRECT_ACTIVITY_CLUB" 
             selectedClubIds={selectedClubIds}
             setSelectedClubIds={setSelectedClubIds}
             isClicked={isClickedSelfDirect}
