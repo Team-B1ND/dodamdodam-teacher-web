@@ -5,6 +5,7 @@ import {
   ClubResponse,
   ClubState,
   ClubTime,
+  ClubJoinRequest,
 } from 'types/Club/club.type'
 import { ClubPeriodParam, ClubRepository } from './ClubRepository'
 import { dodamAxios } from 'libs/Axios/customAxios'
@@ -43,6 +44,13 @@ class ClubRepositoryImpl implements ClubRepository {
     teacherName: string
   ): Promise<void> {
     await dodamAxios.post(`/clubs/${clubId}/teacher?name=${teacherName}`)
+  }
+
+  public async getClubJoinRequests(clubId: number): Promise<ClubJoinRequest[]> {
+    const { data } = await dodamAxios.get<BaseResponse<ClubJoinRequest[]>>(
+      `clubs/${clubId}/join-requests`,
+    );
+    return data.data
   }
 }
 

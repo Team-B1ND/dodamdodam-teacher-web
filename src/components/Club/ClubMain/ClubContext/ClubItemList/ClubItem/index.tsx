@@ -1,7 +1,6 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import * as S from "./style";
 import {
-  DodamCheckBox,
   CheckmarkCircleFilled,
   Clock,
   DodamModal,
@@ -9,17 +8,13 @@ import {
 } from "@b1nd/dds-web";
 import DetailClub from "../../DetailClub";
 import { Club } from "types/Club/club.type";
-import useClubSelection from "hooks/Club/useClubSelection";
 
 interface ClubItemProps {
   value: Club;
   isEnded: boolean;
-  selectedClubIds: number[];
-  setSelectedClubIds: Dispatch<SetStateAction<number[]>>;
 }
 
-const ClubItem = ({ value, isEnded, selectedClubIds, setSelectedClubIds }: ClubItemProps) => {
-  const { isChecked, toggleSelection } = useClubSelection(selectedClubIds, setSelectedClubIds, value.id);
+const ClubItem = ({ value, isEnded }: ClubItemProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -28,15 +23,6 @@ const ClubItem = ({ value, isEnded, selectedClubIds, setSelectedClubIds }: ClubI
   return (
     <>
       <S.ClubItemWrap key={value.id}>
-        {isEnded && (
-          <S.WrapCheckBox>
-            <DodamCheckBox
-              onClick={toggleSelection}
-              isDisabled={isChecked}
-            />
-          </S.WrapCheckBox>
-        )}
-
         <S.WrapClubName>
           <S.ClubName onClick={() => setIsModalOpen(true)}>
             {value?.name}

@@ -5,7 +5,6 @@ import exp from "constants";
 export const ClubItemWrap = styled.div`
   display: flex;
   flex-direction: row;
-  width: 876px;
   height: 48px;
   align-items: center;
   background-color: ${({ theme }) => theme.backgroundNormal};
@@ -23,7 +22,7 @@ export const DetailClubContext = styled.div`
 export const WrapClubName = styled(DetailClubContext)`
   display: flex;
   align-items: center;
-  width: 160px;
+  width: 240px;
   height: 27px;
   padding: 0 8px;
 `;

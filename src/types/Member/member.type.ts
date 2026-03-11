@@ -20,6 +20,10 @@ export interface Student {
   grade: number;
   room: number;
   number: number;
+  code: string;
+  profileImage?: string;
+  status?: string;
+  studentId: number;
 }
 
 export interface Teacher {

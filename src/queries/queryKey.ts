@@ -1,4 +1,3 @@
-import { BusDateParam } from 'repositories/Bus/BusRepository'
 import { DivisionMemberStatus } from 'repositories/Division/division.repository'
 import { PointType } from 'types/Point/point.type'
 
@@ -81,5 +80,6 @@ export const QUERY_KEYS = Object.freeze({
     getMembers: '/getMembers',
     patchClubsState: '/patchClub',
     getTime: '/clubTime',
+    getClubJoinRequest: '/getClubJoinRequest'
   },
 })

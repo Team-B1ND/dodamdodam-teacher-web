@@ -6,9 +6,10 @@ const ClubMemberItem = (props: {
   room: number;
   grade: number;
   profileImage: string | null;
+  onClick?: () => void;
 }) => {
   return (
-    <S.ParentsClubMember>
+    <S.ParentsClubMember onClick={props.onClick}>
       <S.WrapClubMember>
         {props.profileImage ? (
           <S.ProfileImageStudent src={props.profileImage} />)

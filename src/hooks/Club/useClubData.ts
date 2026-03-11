@@ -1,4 +1,4 @@
-import { useGetClubDateQuery, useGetClubDetailQuery, useGetClubMembersQuery, useGetTimeQuery } from "queries/Club/club.query";
+import { useGetClubDateQuery, useGetClubDetailQuery, useGetClubJoinRequestsMemberQuery, useGetClubMembersQuery, useGetTimeQuery } from "queries/Club/club.query";
 
 export const useClubList = () => {
   const { data, isLoading, error } = useGetClubDateQuery();
@@ -9,7 +9,8 @@ export const useClubList = () => {
 export const useClubDetail = (clubId: number) => {
   const { data: club, isLoading: clubIsLoading } = useGetClubDetailQuery({ id: clubId });
   const { data: members, isLoading: memberIsLoading } = useGetClubMembersQuery({ id: clubId });
-  return { club, members, isLoading: clubIsLoading || memberIsLoading };
+  const { data: clubApplyMembers, isLoading: clubApplyMembersIsLoading } = useGetClubJoinRequestsMemberQuery({ id: clubId })
+  return { club, members, clubApplyMembers, isLoading: clubIsLoading || memberIsLoading || clubApplyMembersIsLoading };
 };
 
 export const useClubTime = () => {

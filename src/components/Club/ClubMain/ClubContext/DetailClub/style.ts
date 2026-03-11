@@ -10,28 +10,22 @@ export const ClubModalContainer = styled.div`
   display: flex;
   justify-content: center;
   z-index: 2;
-  margin-top: 15px;
+  padding: 20px 0;
 `;
 
 export const ClubMiddleContainer = styled.div`
   width: 852px;
-  height: 946px;
-  padding: 20px;
+  flex-grow: 1;
   gap: 20px;
   display: flex;
   justify-content: center;
 `;
+
 export const ClubDescriptionWrap = styled.div`
   display: flex;
   width: 852px;
-  height: 111px;
   justify-content: space-between;
   padding-top: 20px;
-`;
-
-export const ClubTypeName = styled.div`
-  ${DodamTypography.Headline.Medium}
-  color: ${({ theme }) => theme.labelAlternative}
 `;
 
 export const ClubNameWrap = styled.div`
@@ -54,19 +48,22 @@ export const ClubInfoDetail = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
-  height: calc(100% - 146px);
   overflow: hidden;
+  flex-shrink: 0;
 `;
 
-export const WrapButton = styled.div`
+export const ClubMemberLists = styled.div`
   display: flex;
-  flex-direction: row;
-`;
+  flex-direction: column;
+  gap: 20px;
+  overflow: scroll;
+  height: 320px;
+`
 
 export const BetweenLine = styled.div`
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.lineNormal};
-  margin: 35px 0;
+  margin: 20px 0;
 `;
 
 export const ExplainClubBox = styled.div`
@@ -74,14 +71,14 @@ export const ExplainClubBox = styled.div`
   height: 250px;
   border: 1px solid ${({ theme }) => theme.lineAlternative};
   ${DodamShape.Small}
-  margin-top: 10px;
   overflow-y: scroll;
   padding-bottom: 20px;
+  padding: 20px;
 `;
 
 export const ClubLeader = styled.span`
-  margin-bottom: 16px;
-  text-align: end;
+  display: flex;
+  justify-content: end;
 `;
 
 export const Member = styled.div`
@@ -89,15 +86,7 @@ export const Member = styled.div`
 `;
 
 export const ExplainClubWrap = styled.div`
-  width: 100%;
-`;
-
-export const MarkDownWrapBox = styled.div`
-  padding: 20px;
-`;
-
-export const ClubName = styled.div`
-  cursor: pointer;
+  flex-grow: 1;
 `;
 
 export const WrapSkeleton = styled.div`
@@ -108,7 +97,5 @@ export const WrapSkeleton = styled.div`
 
 export const WrapClubMemberContainer = styled.div`
   width: fit-content;
-  height: 300px;
-  padding-bottom: 25px;
   overflow-y: scroll;
 `;

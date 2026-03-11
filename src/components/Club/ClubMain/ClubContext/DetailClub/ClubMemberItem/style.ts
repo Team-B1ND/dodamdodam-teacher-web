@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { DodamTypography } from "@b1nd/dds-web";
 
-export const ParentsClubMember = styled.div`
+export const ParentsClubMember = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -32,6 +36,7 @@ export const StudentName = styled.div`
 export const StudentClass = styled.div`
   ${DodamTypography.Caption2.Medium}
   color: ${({ theme }) => theme.labelAlternative};
+  text-align: start;
 `;
 export const ProfileImageStudent = styled.img`
   width: 36px;
