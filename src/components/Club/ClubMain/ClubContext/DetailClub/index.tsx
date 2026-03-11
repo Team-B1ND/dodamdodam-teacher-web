@@ -55,7 +55,10 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
           <S.ClubInfoDetail>
             <S.ClubMemberLists>
               <div>
-                <S.Member>입부 희망자</S.Member>
+                <S.Member>
+                  입부 희망자
+                  <p>{clubApplyMembers?.length}</p>
+                </S.Member>
                 <S.WrapClubMemberContainer>
                 {clubApplyMembers?.map((item) => (
                   <ClubMemberItem

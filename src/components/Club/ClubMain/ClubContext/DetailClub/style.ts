@@ -83,7 +83,12 @@ export const ClubLeader = styled.span`
 `;
 
 export const Member = styled.div`
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 10px;
+  > p {
+    color: ${({ theme }) => theme.labelAlternative};
+  }
 `;
 
 export const ExplainClubWrap = styled.div`
