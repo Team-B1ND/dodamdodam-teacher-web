@@ -35,7 +35,7 @@ export const SubjectClub = styled(DetailClubContext)`
   display: flex;
 `;
 export const ShortDescription = styled(DetailClubContext)`
-  width: 240px;
+  width: 600px;
   height: 24px;
   padding: 0 8px;
   gap: 10px;

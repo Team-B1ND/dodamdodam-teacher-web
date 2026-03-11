@@ -58,6 +58,7 @@ export const ClubMemberLists = styled.div`
   gap: 20px;
   overflow: scroll;
   height: 320px;
+  min-width: 160px;
 `
 
 export const BetweenLine = styled.div`
