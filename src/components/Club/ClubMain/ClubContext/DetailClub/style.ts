@@ -10,17 +10,17 @@ export const ClubModalContainer = styled.div`
   display: flex;
   justify-content: center;
   z-index: 2;
-  margin-top: 15px;
+  padding: 20px 0;
 `;
 
 export const ClubMiddleContainer = styled.div`
   width: 852px;
-  height: 946px;
-  padding: 20px;
+  flex-grow: 1;
   gap: 20px;
   display: flex;
   justify-content: center;
 `;
+
 export const ClubDescriptionWrap = styled.div`
   display: flex;
   width: 852px;
@@ -48,14 +48,22 @@ export const ClubInfoDetail = styled.div`
   display: flex;
   width: 100%;
   gap: 20px;
-  height: calc(100% - 146px);
   overflow: hidden;
+  flex-shrink: 0;
 `;
+
+export const ClubMemberLists = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: scroll;
+  height: 320px;
+`
 
 export const BetweenLine = styled.div`
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.lineNormal};
-  margin: 35px 0;
+  margin: 20px 0;
 `;
 
 export const ExplainClubBox = styled.div`
@@ -78,7 +86,7 @@ export const Member = styled.div`
 `;
 
 export const ExplainClubWrap = styled.div`
-  width: 100%;
+  flex-grow: 1;
 `;
 
 export const WrapSkeleton = styled.div`
@@ -89,7 +97,5 @@ export const WrapSkeleton = styled.div`
 
 export const WrapClubMemberContainer = styled.div`
   width: fit-content;
-  height: 300px;
-  padding-bottom: 25px;
   overflow-y: scroll;
 `;

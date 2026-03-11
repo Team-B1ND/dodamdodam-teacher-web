@@ -15,7 +15,7 @@ interface DetailClubProps {
 }
 
 const DetailClub = ({ item, close, leader }: DetailClubProps) => {
-  const { club, clubApplyMembers, isLoading } = useClubDetail(item)
+  const { club, clubApplyMembers, members, isLoading } = useClubDetail(item)
   const [selectedMember, setSelectedMember] = useState(0);
 
   return isLoading ? (
@@ -53,21 +53,37 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
           </S.ClubDescriptionWrap>
           <S.BetweenLine />
           <S.ClubInfoDetail>
-            <div>
-              <S.Member>입부 희망자</S.Member>
-              <S.WrapClubMemberContainer>
-              {clubApplyMembers?.map((item) => (
-                <ClubMemberItem
-                  key={item.student.name}
-                  name={item.student.name + `${item.student.id === selectedMember ? "(선택됨)" : ""}`}
-                  grade={item.student.grade}
-                  room={item.student.room}
-                  profileImage={item.student.profileImage || null}
-                  onClick={() => setSelectedMember(item.student.id)}
-                />
-              ))}
-              </S.WrapClubMemberContainer>
-            </div>
+            <S.ClubMemberLists>
+              <div>
+                <S.Member>입부 희망자</S.Member>
+                <S.WrapClubMemberContainer>
+                {clubApplyMembers?.map((item) => (
+                  <ClubMemberItem
+                    key={item.student.name}
+                    name={item.student.name + `${item.student.id === selectedMember ? "(선택됨)" : ""}`}
+                    grade={item.student.grade}
+                    room={item.student.room}
+                    profileImage={item.student.profileImage || null}
+                    onClick={() => setSelectedMember(item.student.id)}
+                  />
+                ))}
+                </S.WrapClubMemberContainer>
+              </div>
+              <div>
+                <S.Member>정식 부원</S.Member>
+                <S.WrapClubMemberContainer>
+                {members?.data.students?.map((item) => (
+                  <ClubMemberItem
+                    key={item.name}
+                    name={item.name}
+                    grade={item.grade}
+                    room={item.room}
+                    profileImage={item.profileImage || null}
+                  />
+                ))}
+                </S.WrapClubMemberContainer>
+              </div>
+            </S.ClubMemberLists>
             <S.ExplainClubWrap>
               <div>자기소개</div>
               <S.ExplainClubBox>
