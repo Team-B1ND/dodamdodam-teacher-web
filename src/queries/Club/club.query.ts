@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-import { dodamAxios } from "libs/Axios/customAxios";
 import { QUERY_KEYS } from "queries/queryKey";
 import {
   useMutation,
@@ -8,15 +7,14 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { useNavigate } from "react-router-dom";
 import ClubRepositoryImpl from "repositories/Club/ClubRepositoryImpl";
 import {
   ClubResponse,
   ClubDetailResponse,
   Member,
   BaseResponse,
-  ClubState,
   ClubTime,
+  ClubJoinRequest,
 } from "types/Club/club.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import clubRepositoryImpl from "repositories/Club/ClubRepositoryImpl";
@@ -57,6 +55,20 @@ export const useGetClubMembersQuery = (
       cacheTime: 1000 * 60 * 10,
       ...(options ?? {}),
     }
+  );
+
+export const useGetClubJoinRequestsMemberQuery = (
+  { id }: { id: number },
+  options?: UseQueryOptions<ClubJoinRequest[], AxiosError>,
+): UseQueryResult<ClubJoinRequest[], AxiosError> =>
+  useQuery<ClubJoinRequest[], AxiosError>(
+    [QUERY_KEYS.club.getClubJoinRequest, id],
+    () => ClubRepositoryImpl.getClubJoinRequests(id),
+    {
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 10,
+      ...options,
+    },
   );
 
 export const useClubMutation = () => {

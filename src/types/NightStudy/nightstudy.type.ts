@@ -99,6 +99,10 @@ export interface StudentBanType {
   number: number;
   phone: string;
   isBanned: boolean;
+  code: string;
+  profileImage?: string;
+  status?: string;
+  studentId: number;
 }
 
 export interface NightStudyBanStatusType {

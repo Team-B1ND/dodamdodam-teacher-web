@@ -1,3 +1,5 @@
+import { Student } from "types/Member/member.type";
+
 export interface Club {
   id: number;
   name: string;
@@ -63,4 +65,9 @@ export interface ClubTime {
   createEnd: string;
   applicantStart: string;
   applicantEnd: string;
+}
+
+export interface ClubJoinRequest {
+  student: Student;
+  introduce: string;
 }

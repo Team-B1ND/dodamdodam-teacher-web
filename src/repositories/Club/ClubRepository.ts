@@ -4,7 +4,7 @@ import {
   Member,
   ClubResponse,
   ClubState,
-  ClubTime,
+  ClubJoinRequest,
 } from 'types/Club/club.type'
 
 export interface ClubRepository {
@@ -14,6 +14,7 @@ export interface ClubRepository {
   patchClubState(data: ClubState): Promise<void>
   postClubPeriod(param: ClubPeriodParam): Promise<void>
   postApplicateTeacher(clubId: number, teacherName: string): Promise<void>
+  getClubJoinRequests(clubId: number): Promise<ClubJoinRequest[]>
 }
 
 export type ClubPeriodType = 'CLUB_CREATED' | 'CLUB_APPLICANT'
