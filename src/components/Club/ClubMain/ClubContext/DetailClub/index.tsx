@@ -87,6 +87,7 @@ const DetailClub = ({ item, close, leader }: DetailClubProps) => {
             <S.ExplainClubWrap>
               <div>자기소개</div>
               <S.ExplainClubBox>
+                {selectedMember ? "" : "입부 희망자 선택 시 자기소개 확인 가능"}
                 {clubApplyMembers?.find(item => item.student.id === selectedMember)?.introduce}
               </S.ExplainClubBox>
             </S.ExplainClubWrap>
