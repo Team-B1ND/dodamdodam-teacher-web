@@ -24,14 +24,8 @@ export const ClubMiddleContainer = styled.div`
 export const ClubDescriptionWrap = styled.div`
   display: flex;
   width: 852px;
-  height: 111px;
   justify-content: space-between;
   padding-top: 20px;
-`;
-
-export const ClubTypeName = styled.div`
-  ${DodamTypography.Headline.Medium}
-  color: ${({ theme }) => theme.labelAlternative}
 `;
 
 export const ClubNameWrap = styled.div`
@@ -58,11 +52,6 @@ export const ClubInfoDetail = styled.div`
   overflow: hidden;
 `;
 
-export const WrapButton = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 export const BetweenLine = styled.div`
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.lineNormal};
@@ -74,14 +63,14 @@ export const ExplainClubBox = styled.div`
   height: 250px;
   border: 1px solid ${({ theme }) => theme.lineAlternative};
   ${DodamShape.Small}
-  margin-top: 10px;
   overflow-y: scroll;
   padding-bottom: 20px;
+  padding: 20px;
 `;
 
 export const ClubLeader = styled.span`
-  margin-bottom: 16px;
-  text-align: end;
+  display: flex;
+  justify-content: end;
 `;
 
 export const Member = styled.div`
@@ -90,14 +79,6 @@ export const Member = styled.div`
 
 export const ExplainClubWrap = styled.div`
   width: 100%;
-`;
-
-export const MarkDownWrapBox = styled.div`
-  padding: 20px;
-`;
-
-export const ClubName = styled.div`
-  cursor: pointer;
 `;
 
 export const WrapSkeleton = styled.div`
